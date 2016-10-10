@@ -8,30 +8,77 @@
 
 #import "RPGMainViewController.h"
 
+#import "RPGBattleViewController.h"
+#import "RPGSettingsViewController.h"
+
+NSString *const kRPGMainViewControllerBattleNibName = @"RPGBattleViewController";
+NSString *const kRPGMainViewControllerSettingsNibName = @"RPGSettingsViewController";
+//NSString *const kRPGMainViewControllerShopNibName =
+//NSString *const kRPGMainViewControllerMyQuestsNibName =
+//NSString *const kRPGMainViewControllerCharNibName =
+
 @interface RPGMainViewController ()
 
 @end
 
 @implementation RPGMainViewController
 
-- (void)viewDidLoad {
+#pragma mark - EventHandling
+
+- (IBAction)segueToQuests
+{
+    
+}
+
+- (IBAction)segueToShop
+{
+    
+}
+
+- (IBAction)segueToChar
+{
+    
+}
+
+- (IBAction)segueToPlay
+{
+    
+}
+
+- (IBAction)segueToAdventures
+{
+    RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithNibName:kRPGMainViewControllerBattleNibName bundle:nil];
+    [self presentViewController:battleViewController animated:YES completion:nil];
+}
+
+
+- (IBAction)segueToArena
+{
+    
+}
+
+- (IBAction)segueToSettings
+{
+    RPGSettingsViewController *settingsViewController = [[RPGSettingsViewController alloc] initWithNibName:kRPGMainViewControllerSettingsNibName bundle:nil];
+    [self presentViewController:settingsViewController animated:YES completion:nil];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)dealloc
+{
+    [super dealloc];
 }
-*/
-
 @end

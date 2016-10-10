@@ -20,7 +20,7 @@
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
     // create an instance of the view controller you want to be displayed first
-  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:@"MainView"
+  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:@"RPGMainView"
                                                                                       bundle:nil];
   self.mainViewController = mainViewController;
     // set it as the root view controller of the application's window

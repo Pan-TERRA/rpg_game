@@ -1,5 +1,5 @@
 //
-//  RPGMyQuestsViewController.h
+//  RPGBattleViewController.h
 //  RPG Game
 //
 //  Created by Владислав Крут on 10/10/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RPGMyQuestsViewController : UITableViewController
+@interface RPGBattleViewController : UIViewController
 
 @end
