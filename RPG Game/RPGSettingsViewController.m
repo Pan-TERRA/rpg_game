@@ -15,11 +15,11 @@
 @property (nonatomic) NSUInteger sounds;
 
 
-@property (retain, nonatomic) IBOutlet UILabel *musicLabel;
-@property (retain, nonatomic) IBOutlet UILabel *soundsLabel;
+@property (assign, nonatomic) IBOutlet UILabel *musicLabel;
+@property (assign, nonatomic) IBOutlet UILabel *soundsLabel;
 
-@property (retain, nonatomic) IBOutlet UIStepper *musicStepper;
-@property (retain, nonatomic) IBOutlet UIStepper *soundsStepper;
+@property (assign, nonatomic) IBOutlet UIStepper *musicStepper;
+@property (assign, nonatomic) IBOutlet UIStepper *soundsStepper;
 
 
 @end
@@ -68,10 +68,6 @@
 
 - (void)dealloc
 {
-    [_musicLabel release];
-    [_soundsLabel release];
-    [_musicStepper release];
-    [_soundsStepper release];
     [super dealloc];
 }
 @end

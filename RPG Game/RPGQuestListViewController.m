@@ -10,7 +10,7 @@
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
 
-static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestListTableViewCell";
+#import "NibNames.h"
 
 @interface RPGQuestListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -57,11 +57,11 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRPGMyQuestsViewControllerTableViewCellId];
+  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCell];
   
   if (cell == nil)
   {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGMyQuestsViewControllerTableViewCellId owner:self options:nil];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCell owner:self options:nil];
     cell = [nib objectAtIndex:0];
   }
   
@@ -80,7 +80,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  RPGQuestViewController *questViewController = [[RPGQuestViewController alloc] initWithNibName:NSStringFromClass([RPGQuestViewController class]) bundle:nil];
+  RPGQuestViewController *questViewController = [[RPGQuestViewController alloc] initWithNibName:kRPGQuestViewController bundle:nil];
   questViewController.state = self.buttonControl.selectedSegmentIndex;
   [self presentViewController:questViewController animated:YES completion:nil];
 }

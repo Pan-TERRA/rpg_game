@@ -12,9 +12,7 @@
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 
-NSString *const kRPGMainViewControllerBattleNibName = @"RPGBattleViewController";
-NSString *const kRPGMainViewControllerSettingsNibName = @"RPGSettingsViewController";
-NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewController";
+#import "NibNames.h"
 
 @interface RPGMainViewController ()
 
@@ -26,7 +24,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToQuests
 {
-    RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] initWithNibName:kRPGMainViewControllerQuestListNibName bundle:nil] autorelease];
+    RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] initWithNibName:kRPGQuestListViewController bundle:nil] autorelease];
     [self presentViewController:questListViewController animated:YES completion:nil];
 }
 
@@ -47,7 +45,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToAdventures
 {
-    RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithNibName:kRPGMainViewControllerBattleNibName bundle:nil] autorelease];
+    RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithNibName:kRPGBattleViewController bundle:nil] autorelease];
     [self presentViewController:battleViewController animated:YES completion:nil];
 }
 
@@ -59,7 +57,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToSettings
 {
-    RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] initWithNibName:kRPGMainViewControllerSettingsNibName bundle:nil] autorelease];
+    RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] initWithNibName:kRPGSettingsViewController bundle:nil] autorelease];
     [self presentViewController:settingsViewController animated:YES completion:nil];
 }
 
@@ -77,8 +75,4 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
     
 }
 
-- (void)dealloc
-{
-    [super dealloc];
-}
 @end

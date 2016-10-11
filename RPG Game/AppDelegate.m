@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RPGMainViewController.h"
+#import "NibNames.h"
 
 @interface AppDelegate ()
 
@@ -16,14 +17,14 @@
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
   
-    // create an instance of the view controller you want to be displayed first
-  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:@"RPGMainView"
-                                                                                      bundle:nil];
+  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu bundle:nil];
+  
   self.mainViewController = mainViewController;
-    // set it as the root view controller of the application's window
+  
   [self.window setRootViewController:mainViewController];
   
   self.window.backgroundColor = [UIColor whiteColor];
