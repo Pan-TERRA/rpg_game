@@ -20,6 +20,7 @@
 {
   [_mainViewController release];
   [_loginViewController release];
+  [_window release];
   [super dealloc];
 }
 
@@ -28,7 +29,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+  self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
   
 //  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:@"RPGMainView"
 //                                                                                      bundle:nil];
