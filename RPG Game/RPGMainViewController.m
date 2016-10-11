@@ -10,11 +10,12 @@
 
 #import "RPGBattleViewController.h"
 #import "RPGSettingsViewController.h"
+#import "RPGQuestListViewController.h"
 
 NSString *const kRPGMainViewControllerBattleNibName = @"RPGBattleViewController";
 NSString *const kRPGMainViewControllerSettingsNibName = @"RPGSettingsViewController";
 //NSString *const kRPGMainViewControllerShopNibName =
-//NSString *const kRPGMainViewControllerMyQuestsNibName =
+NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewController";
 //NSString *const kRPGMainViewControllerCharNibName =
 
 @interface RPGMainViewController ()
@@ -27,7 +28,8 @@ NSString *const kRPGMainViewControllerSettingsNibName = @"RPGSettingsViewControl
 
 - (IBAction)segueToQuests
 {
-    
+    RPGQuestListViewController *questListViewController = [[RPGQuestListViewController alloc] initWithNibName:kRPGMainViewControllerQuestListNibName bundle:nil];
+    [self presentViewController:questListViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToShop
