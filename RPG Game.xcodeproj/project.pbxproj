@@ -14,9 +14,6 @@
 		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
 		288E85F31DABDA8A00321F4D /* RPG_GameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */; };
 		288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E86011DABDADB00321F4D /* RPGMainViewController.m */; };
-		28A756AC1DAD1E2700B821B1 /* RPGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A756AB1DAD1E2700B821B1 /* RPGNetworkManager.m */; };
-		28A756B01DAD1E5C00B821B1 /* RPGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A756AF1DAD1E5C00B821B1 /* RPGRequest.m */; };
-		28A756B31DAD1E6B00B821B1 /* RPGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A756B21DAD1E6B00B821B1 /* RPGResponse.m */; };
 		AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */; };
 		AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */; };
 		AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5711DACD641007ED1B8 /* RPGMainView.xib */; };
@@ -63,12 +60,6 @@
 		288E85F41DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E86001DABDADB00321F4D /* RPGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGMainViewController.h; sourceTree = "<group>"; };
 		288E86011DABDADB00321F4D /* RPGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMainViewController.m; sourceTree = "<group>"; };
-		28A756AA1DAD1E2700B821B1 /* RPGNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGNetworkManager.h; sourceTree = "<group>"; };
-		28A756AB1DAD1E2700B821B1 /* RPGNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNetworkManager.m; sourceTree = "<group>"; };
-		28A756AE1DAD1E5C00B821B1 /* RPGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRequest.h; sourceTree = "<group>"; };
-		28A756AF1DAD1E5C00B821B1 /* RPGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRequest.m; sourceTree = "<group>"; };
-		28A756B11DAD1E6B00B821B1 /* RPGResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGResponse.h; sourceTree = "<group>"; };
-		28A756B21DAD1E6B00B821B1 /* RPGResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGResponse.m; sourceTree = "<group>"; };
 		AED6F56E1DACD641007ED1B8 /* RPGBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleViewController.h; sourceTree = "<group>"; };
 		AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleViewController.m; sourceTree = "<group>"; };
 		AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGBattleViewController.xib; sourceTree = "<group>"; };
@@ -144,8 +135,6 @@
 				AED6F5721DACD641007ED1B8 /* RPGSettingsViewController.h */,
 				AED6F5731DACD641007ED1B8 /* RPGSettingsViewController.m */,
 				AED6F5741DACD641007ED1B8 /* RPGSettingsViewController.xib */,
-				28A756A91DAD1E0900B821B1 /* Network Manager */,
-				28A756A81DAD1DFE00B821B1 /* Entities */,
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E86001DABDADB00321F4D /* RPGMainViewController.h */,
@@ -181,34 +170,6 @@
 				288E85F41DABDA8A00321F4D /* Info.plist */,
 			);
 			path = "RPG GameUITests";
-			sourceTree = "<group>";
-		};
-		28A756A81DAD1DFE00B821B1 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Entities;
-			sourceTree = "<group>";
-		};
-		28A756A91DAD1E0900B821B1 /* Network Manager */ = {
-			isa = PBXGroup;
-			children = (
-				28A756AD1DAD1E4800B821B1 /* Entities */,
-				28A756AA1DAD1E2700B821B1 /* RPGNetworkManager.h */,
-				28A756AB1DAD1E2700B821B1 /* RPGNetworkManager.m */,
-			);
-			name = "Network Manager";
-			sourceTree = "<group>";
-		};
-		28A756AD1DAD1E4800B821B1 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				28A756AE1DAD1E5C00B821B1 /* RPGRequest.h */,
-				28A756AF1DAD1E5C00B821B1 /* RPGRequest.m */,
-				28A756B11DAD1E6B00B821B1 /* RPGResponse.h */,
-				28A756B21DAD1E6B00B821B1 /* RPGResponse.m */,
-			);
-			name = Entities;
 			sourceTree = "<group>";
 		};
 		AED6F57A1DACD89F007ED1B8 /* Quests */ = {
@@ -366,14 +327,11 @@
 				AED6F5781DACD641007ED1B8 /* RPGSettingsViewController.m in Sources */,
 				AED6F57E1DACD8D8007ED1B8 /* RPGQuestListViewController.m in Sources */,
 				AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */,
-				28A756B31DAD1E6B00B821B1 /* RPGResponse.m in Sources */,
 				288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */,
-				28A756AC1DAD1E2700B821B1 /* RPGNetworkManager.m in Sources */,
 				288E85CF1DABDA8A00321F4D /* main.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
-				28A756B01DAD1E5C00B821B1 /* RPGRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
