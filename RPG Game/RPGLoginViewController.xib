@@ -20,39 +20,39 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3F-Yz-Zgp">
-                    <rect key="frame" x="167" y="148" width="42" height="21"/>
+                    <rect key="frame" x="166.5" y="148" width="42" height="20.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
-                    <rect key="frame" x="86" y="189" width="203" height="30"/>
+                    <rect key="frame" x="86" y="188.5" width="203" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
-                    <rect key="frame" x="86" y="234" width="203" height="30"/>
+                    <rect key="frame" x="86" y="233.5" width="203" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICW-A7-Q3E">
-                    <rect key="frame" x="247" y="279" width="42" height="30"/>
+                    <rect key="frame" x="247" y="278.5" width="42" height="30"/>
                     <state key="normal" title="Log in"/>
                     <connections>
                         <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="vhi-91-fjM"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-GY-RsC">
-                    <rect key="frame" x="86" y="279" width="123" height="30"/>
+                    <rect key="frame" x="86" y="278.5" width="123" height="30"/>
                     <state key="normal" title="Forgot password?"/>
                     <connections>
                         <action selector="forgotPasswordAction:" destination="-1" eventType="touchUpInside" id="8bu-GM-GSy"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Login or password are incorrect. Please check them or use &quot;Forgot password&quot; feature." lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iQP-Zd-j7F">
-                    <rect key="frame" x="86" y="323" width="203" height="50"/>
+                    <rect key="frame" x="86" y="322.5" width="203" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="jiC-Bg-KSP"/>
                     </constraints>
