@@ -39,9 +39,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (IBAction)buttonControlOnClick:(UISegmentedControl *)sender
 {
-  [self.tableView beginUpdates];
   [self.tableView reloadData];
-  [self.tableView endUpdates];
   [self.tableView setContentOffset:CGPointZero animated:YES];
 }
 
@@ -52,7 +50,8 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  return 5;
+  NSUInteger result = 0;
+  return result;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,9 +65,9 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   }
   
   cell.titleLabel.text = @"Title";
-  cell.descriptionTextView.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-  cell.proofTypeImage.image = [[UIImage alloc] init];
-  cell.rewardTypeImage.image = [[UIImage alloc] init];
+  cell.descriptionLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+//  cell.proofTypeImage.image = [[UIImage alloc] init];
+//  cell.rewardTypeImage.image = [[UIImage alloc] init];
   
   return cell;
 }
@@ -80,14 +79,33 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  RPGQuestViewController *questViewController = [[RPGQuestViewController alloc] initWithNibName:NSStringFromClass([RPGQuestViewController class]) bundle:nil];
-  questViewController.state = self.buttonControl.selectedSegmentIndex;
+  [self showQuestViewWithState:self.buttonControl.selectedSegmentIndex];
+}
+
+- (void)showQuestViewWithState:(RPGQuestListViewState)state
+{
+  RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc] initWithNibName:NSStringFromClass([RPGQuestViewController class]) bundle:nil] autorelease];
+  questViewController.state = state;
   [self presentViewController:questViewController animated:YES completion:nil];
 }
 
 - (void)dealloc
 {
   [super dealloc];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  return YES;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+  if (editingStyle == UITableViewCellEditingStyleDelete)
+  {
+    //delete here
+    [tableView reloadData];
+  }
 }
 
 @end
