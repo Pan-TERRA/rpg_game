@@ -11,7 +11,7 @@
 @interface RPGQuestListTableViewCell : UITableViewCell
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UITextView *descriptionTextView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImage;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImage;
 
