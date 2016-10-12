@@ -17,6 +17,10 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 @property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *buttonControl;
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
 
+@property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
+@property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
+@property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
+
 @end
 
 @implementation RPGQuestListViewController
@@ -24,6 +28,9 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  self.takeQuestsMutableArray = [[NSMutableArray alloc] init];
+  self.inProgressQuestsMutableArray = [[NSMutableArray alloc] init];
+  self.doneQuestsMutableArray = [[NSMutableArray alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -39,8 +46,27 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (IBAction)buttonControlOnClick:(UISegmentedControl *)sender
 {
-  [self.tableView reloadData];
-  [self.tableView setContentOffset:CGPointZero animated:YES];
+  RPGQuestListViewState state = sender.selectedSegmentIndex;
+  switch (state)
+  {
+    case kRPGQuestListViewTakeQuest:
+      //upload from server self.takeQuestsMutableArray
+      break;
+    case kRPGQuestListViewInProgressQuest:
+      //upload from server self.inProgressQuestsMutableArray
+      break;
+    case kRPGQuestListViewDoneQuest:
+      //upload from server self.doneQuestsMutableArray
+      break;
+    case kRPGQuestListViewCheckQuest:
+      [self showQuestViewWithState:state];
+      break;
+  }
+  if (state != kRPGQuestListViewCheckQuest)
+  {
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+  }
 }
 
 - (IBAction)backButtonOnClicked:(UIButton *)sender
@@ -51,6 +77,18 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
   NSUInteger result = 0;
+  switch (self.buttonControl.selectedSegmentIndex)
+  {
+    case kRPGQuestListViewTakeQuest:
+      result = [self.takeQuestsMutableArray count];
+      break;
+    case kRPGQuestListViewInProgressQuest:
+      result = [self.inProgressQuestsMutableArray count];
+      break;
+    case kRPGQuestListViewDoneQuest:
+      result = [self.doneQuestsMutableArray count];
+      break;
+  }
   return result;
 }
 
@@ -91,6 +129,9 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (void)dealloc
 {
+  [self.takeQuestsMutableArray release];
+  [self.inProgressQuestsMutableArray release];
+  [self.doneQuestsMutableArray release];
   [super dealloc];
 }
 
@@ -103,7 +144,18 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 {
   if (editingStyle == UITableViewCellEditingStyleDelete)
   {
-    //delete here
+    switch (self.buttonControl.selectedSegmentIndex)
+    {
+      case kRPGQuestListViewTakeQuest:
+        [self.takeQuestsMutableArray removeObjectAtIndex:indexPath.row];
+        break;
+      case kRPGQuestListViewInProgressQuest:
+        [self.inProgressQuestsMutableArray removeObjectAtIndex:indexPath.row];
+        break;
+      case kRPGQuestListViewDoneQuest:
+        [self.doneQuestsMutableArray removeObjectAtIndex:indexPath.row];
+        break;
+    }
     [tableView reloadData];
   }
 }
