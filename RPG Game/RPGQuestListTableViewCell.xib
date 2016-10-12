@@ -75,8 +75,21 @@
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U96-7T-hV6">
+                        <rect key="frame" x="171" y="8" width="45" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="not checked" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-6c-CCw">
+                        <rect key="frame" x="224" y="8" width="95" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="b4J-6c-CCw" firstAttribute="leading" secondItem="U96-7T-hV6" secondAttribute="trailing" constant="8" id="1rx-aY-ak8"/>
                     <constraint firstItem="LsY-Pd-cWq" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="7Qi-Fj-0Du"/>
                     <constraint firstAttribute="bottomMargin" secondItem="Fg4-fJ-cnO" secondAttribute="bottom" id="BTc-rR-7K2"/>
                     <constraint firstItem="Fg4-fJ-cnO" firstAttribute="top" secondItem="rPD-g9-VjK" secondAttribute="bottom" constant="5" id="CNE-1U-7Rr"/>
@@ -84,6 +97,7 @@
                     <constraint firstItem="8Qv-8M-6vn" firstAttribute="leading" secondItem="fvF-qf-f38" secondAttribute="trailing" constant="5" id="DqG-2K-2oK"/>
                     <constraint firstItem="fvF-qf-f38" firstAttribute="leading" secondItem="KYq-at-Nob" secondAttribute="trailing" constant="5" id="Hrp-aM-0ob"/>
                     <constraint firstItem="KYq-at-Nob" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="top" id="PKq-78-Ojc"/>
+                    <constraint firstItem="U96-7T-hV6" firstAttribute="leading" secondItem="LsY-Pd-cWq" secondAttribute="trailing" constant="10" id="PSz-mT-cx4"/>
                     <constraint firstAttribute="trailingMargin" secondItem="8Qv-8M-6vn" secondAttribute="trailing" id="RAM-pj-oEw"/>
                     <constraint firstAttribute="trailingMargin" secondItem="Fg4-fJ-cnO" secondAttribute="trailing" id="RKk-du-OW7"/>
                     <constraint firstItem="Fg4-fJ-cnO" firstAttribute="leading" secondItem="mHY-ie-G9Z" secondAttribute="leading" id="Y6D-GN-SBe"/>
@@ -92,13 +106,18 @@
                     <constraint firstItem="fvF-qf-f38" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="top" id="gR5-pv-S6K"/>
                     <constraint firstItem="rPD-g9-VjK" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="bottom" constant="10" id="iHV-O8-laT"/>
                     <constraint firstItem="8Qv-8M-6vn" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="top" id="qcj-KP-nJW"/>
+                    <constraint firstItem="U96-7T-hV6" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="top" id="vH0-wF-1Xz"/>
+                    <constraint firstItem="b4J-6c-CCw" firstAttribute="top" secondItem="mHY-ie-G9Z" secondAttribute="top" id="vMF-yW-OQ0"/>
                     <constraint firstItem="LsY-Pd-cWq" firstAttribute="leading" secondItem="mHY-ie-G9Z" secondAttribute="trailing" constant="10" id="vsu-zd-0IZ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="Fg4-fJ-cnO" id="Fu4-06-gSS"/>
                 <outlet property="proofTypeImage" destination="LsY-Pd-cWq" id="RGs-fg-woZ"/>
+                <outlet property="rewardLabel" destination="8Qv-8M-6vn" id="8J6-Ry-6yq"/>
                 <outlet property="rewardTypeImage" destination="fvF-qf-f38" id="Vy0-bz-xAy"/>
+                <outlet property="stateLabel" destination="b4J-6c-CCw" id="vID-Xc-6AJ"/>
+                <outlet property="stateTitleLabel" destination="U96-7T-hV6" id="zcS-75-oeX"/>
                 <outlet property="titleLabel" destination="rPD-g9-VjK" id="yeL-4Y-mlA"/>
             </connections>
             <point key="canvasLocation" x="430.5" y="479.5"/>

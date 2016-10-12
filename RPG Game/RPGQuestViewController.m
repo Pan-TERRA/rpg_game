@@ -39,7 +39,7 @@
     case kRPGQuestListViewDoneQuest:
       [self setForDoneQuest];
       break;
-    case kRPGQuestListViewCheckQuest:
+    case kRPGQuestListViewReviewQuest:
       [self setForCheckQuest];
       break;
     default:
@@ -94,7 +94,7 @@
   {
     //send to server that quest should be in progress
   }
-  else if (self.state == kRPGQuestListViewCheckQuest)
+  else if (self.state == kRPGQuestListViewReviewQuest)
   {
     //send to server that quest was done
   }

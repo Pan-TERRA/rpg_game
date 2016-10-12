@@ -59,11 +59,11 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
     case kRPGQuestListViewDoneQuest:
       //upload from server self.doneQuestsMutableArray
       break;
-    case kRPGQuestListViewCheckQuest:
+    case kRPGQuestListViewReviewQuest:
       [self showQuestViewWithState:state];
       break;
   }
-  if (state != kRPGQuestListViewCheckQuest)
+  if (state != kRPGQuestListViewReviewQuest)
   {
     self.buttonLastState = state;
     [self.tableView reloadData];
@@ -104,10 +104,18 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
     cell = [nib objectAtIndex:0];
   }
   
-  cell.titleLabel.text = @"Title";
-  cell.descriptionLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
-//  cell.proofTypeImage.image = [[UIImage alloc] init];
-//  cell.rewardTypeImage.image = [[UIImage alloc] init];
+  switch (self.buttonControl.selectedSegmentIndex)
+  {
+    case kRPGQuestListViewTakeQuest:
+      [cell setCellContent:[self.takeQuestsMutableArray objectAtIndex:indexPath.row]];
+      break;
+    case kRPGQuestListViewInProgressQuest:
+      [cell setCellContent:[self.inProgressQuestsMutableArray objectAtIndex:indexPath.row]];
+      break;
+    case kRPGQuestListViewDoneQuest:
+      [cell setCellContent:[self.doneQuestsMutableArray objectAtIndex:indexPath.row]];
+      break;
+  }
   
   return cell;
 }

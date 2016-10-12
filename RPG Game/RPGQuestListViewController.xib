@@ -23,7 +23,7 @@
                         <segment title="Take quest"/>
                         <segment title="In progress"/>
                         <segment title="Done quests"/>
-                        <segment title="Check quests"/>
+                        <segment title="Review quests"/>
                     </segments>
                     <connections>
                         <action selector="buttonControlOnClick:" destination="-1" eventType="valueChanged" id="JKS-Qp-sDm"/>

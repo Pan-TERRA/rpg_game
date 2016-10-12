@@ -8,12 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, RPGQuestListViewState)
+typedef NS_ENUM(NSUInteger, RPGQuestListViewState)
 {
   kRPGQuestListViewTakeQuest,
   kRPGQuestListViewInProgressQuest,
   kRPGQuestListViewDoneQuest,
-  kRPGQuestListViewCheckQuest
+  kRPGQuestListViewReviewQuest
+};
+
+typedef NS_ENUM(NSUInteger, RPGQuestState)
+{
+  kRPGQuestStateCanTake,
+  kRPGQuestStateInProgress,
+  kRPGQuestStateDone,
+  kRPGQuestStateReviewedFalse,
+  kRPGQuestStateReviewedTrue,
+  kRPGQuestStateHide
 };
 
 @interface RPGQuestListViewController : UIViewController
