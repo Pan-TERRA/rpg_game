@@ -16,7 +16,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 @property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *buttonControl;
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
-
+@property (nonatomic, assign, readwrite) RPGQuestListViewState buttonLastState;
 @property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
@@ -37,6 +37,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 {
   [super viewWillAppear:animated];
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
+  [self.buttonControl setSelectedSegmentIndex:self.buttonLastState];
 }
 
 - (void)didReceiveMemoryWarning
@@ -64,6 +65,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   }
   if (state != kRPGQuestListViewCheckQuest)
   {
+    self.buttonLastState = state;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
   }
