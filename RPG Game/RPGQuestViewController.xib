@@ -81,31 +81,24 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
-                    <rect key="frame" x="529" y="364" width="49" height="30"/>
+                    <rect key="frame" x="489" y="364" width="69" height="30"/>
                     <state key="normal" title="Accept"/>
                     <connections>
                         <action selector="acceptButtonOnClick:" destination="-1" eventType="touchUpInside" id="ADi-0P-27P"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
-                    <rect key="frame" x="598" y="364" width="49" height="30"/>
+                    <rect key="frame" x="568" y="364" width="69" height="30"/>
                     <state key="normal" title="Deny"/>
                     <connections>
                         <action selector="denyButtonOnClick:" destination="-1" eventType="touchUpInside" id="3G5-ad-ppS"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grH-jv-bBd">
-                    <rect key="frame" x="667" y="364" width="49" height="30"/>
+                    <rect key="frame" x="647" y="364" width="69" height="30"/>
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="backButtonOnClick:" destination="-1" eventType="touchUpInside" id="K5J-Kt-XQB"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
-                    <rect key="frame" x="578" y="364" width="69" height="30"/>
-                    <state key="normal" title="Add proof"/>
-                    <connections>
-                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C41-1L-poL">
@@ -125,42 +118,56 @@
                         <constraint firstAttribute="height" constant="140" id="V2M-LY-Vto"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
+                    <rect key="frame" x="568" y="364" width="69" height="30"/>
+                    <state key="normal" title="Add proof"/>
+                    <connections>
+                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="69p-AY-G8D" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="0WS-3m-wvl"/>
                 <constraint firstItem="O6q-D1-anK" firstAttribute="top" secondItem="69p-AY-G8D" secondAttribute="top" id="2m7-5W-v1f"/>
                 <constraint firstAttribute="trailing" secondItem="Z2k-nD-V9D" secondAttribute="trailing" constant="20" id="4DJ-9E-4RR"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="width" id="4kb-d8-2qA"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="width" id="9Ao-sF-Soz"/>
                 <constraint firstItem="Bpj-c4-GjR" firstAttribute="top" secondItem="0Cf-4K-WWr" secondAttribute="top" id="9ro-ab-ZFF"/>
                 <constraint firstItem="yV0-a7-DQG" firstAttribute="leading" secondItem="yLr-nN-ITn" secondAttribute="leading" id="ARO-W5-m6U"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Bpj-c4-GjR" secondAttribute="top" id="ASw-IK-WuM"/>
                 <constraint firstItem="C41-1L-poL" firstAttribute="top" secondItem="yLr-nN-ITn" secondAttribute="bottom" constant="10" id="DVN-sD-Bsr"/>
                 <constraint firstItem="Z2k-nD-V9D" firstAttribute="top" secondItem="69p-AY-G8D" secondAttribute="top" id="HAk-ty-cMk"/>
                 <constraint firstItem="C41-1L-poL" firstAttribute="leading" secondItem="yLr-nN-ITn" secondAttribute="leading" id="HOK-Q6-ZcN"/>
-                <constraint firstItem="Bpj-c4-GjR" firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="width" id="IIg-Vq-4h1"/>
                 <constraint firstAttribute="bottom" secondItem="grH-jv-bBd" secondAttribute="bottom" constant="20" id="ILV-Nh-Cww"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="20" id="Nbx-KC-qg7"/>
                 <constraint firstItem="yLr-nN-ITn" firstAttribute="leading" secondItem="69p-AY-G8D" secondAttribute="leading" id="OvW-pQ-WHW"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Lld-Ax-hOC" secondAttribute="top" id="SZR-cV-otT"/>
                 <constraint firstItem="O6q-D1-anK" firstAttribute="leading" secondItem="kzP-qn-1PP" secondAttribute="trailing" constant="5" id="TQ4-LY-H9X"/>
                 <constraint firstItem="3Oe-Ql-hSn" firstAttribute="leading" secondItem="69p-AY-G8D" secondAttribute="leading" id="WNL-ej-TmU"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="20" id="Ya9-yP-B3o"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="10" id="Ya9-yP-B3o"/>
                 <constraint firstItem="Z2k-nD-V9D" firstAttribute="trailing" secondItem="yLr-nN-ITn" secondAttribute="trailing" id="ZhS-aL-UTj"/>
                 <constraint firstItem="3Oe-Ql-hSn" firstAttribute="top" secondItem="69p-AY-G8D" secondAttribute="bottom" constant="10" id="a8t-is-MNz"/>
                 <constraint firstItem="Z2k-nD-V9D" firstAttribute="leading" secondItem="O6q-D1-anK" secondAttribute="trailing" constant="5" id="gYw-X1-LgM"/>
                 <constraint firstItem="Ng0-uW-vW6" firstAttribute="leading" secondItem="69p-AY-G8D" secondAttribute="trailing" constant="10" id="jxz-cb-he5"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Lld-Ax-hOC" secondAttribute="top" id="mZZ-vR-7BG"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="trailing" secondItem="yLr-nN-ITn" secondAttribute="trailing" id="mc2-9v-9XT"/>
                 <constraint firstItem="yV0-a7-DQG" firstAttribute="top" secondItem="C41-1L-poL" secondAttribute="bottom" constant="10" id="ml8-R1-LLv"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="p8V-Ev-tcr"/>
                 <constraint firstItem="Ng0-uW-vW6" firstAttribute="top" secondItem="69p-AY-G8D" secondAttribute="top" id="pGU-Y2-uWV"/>
                 <constraint firstItem="yLr-nN-ITn" firstAttribute="top" secondItem="3Oe-Ql-hSn" secondAttribute="bottom" constant="5" id="scu-ZV-yui"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Bpj-c4-GjR" secondAttribute="width" id="sxr-LZ-CZR"/>
                 <constraint firstItem="kzP-qn-1PP" firstAttribute="top" secondItem="69p-AY-G8D" secondAttribute="top" id="thu-vN-YHP"/>
                 <constraint firstItem="69p-AY-G8D" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="tnb-Q5-DC0"/>
-                <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="trailing" constant="20" id="vi8-8u-fC5"/>
+                <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="trailing" constant="10" id="vi8-8u-fC5"/>
+                <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="wjJ-co-yvW"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="wjJ-co-yvW"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

@@ -28,7 +28,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  switch (self.state) {
+  switch (self.state)
+  {
     case kRPGQuestListViewTakeQuest:
       [self setForTakeQuest];
       break;
@@ -54,8 +55,8 @@
 - (void)setForTakeQuest
 {
   self.acceptButton.hidden = NO;
-  self.denyButton.hidden = NO;
-  self.addProofButton.hidden = YES;
+  self.denyButton.hidden = YES;
+  self.addProofButton.hidden = NO;
   self.proofLabel.hidden = YES;
   self.proofImageView.hidden = YES;
 }
@@ -89,37 +90,24 @@
 
 - (IBAction)acceptButtonOnClick:(UIButton *)sender
 {
-  switch (self.state) {
-    case kRPGQuestListViewTakeQuest:
-      //insert code here
-      break;
-    case kRPGQuestListViewCheckQuest:
-      //insert code here
-      break;
-    default:
-      break;
+  if (self.state == kRPGQuestListViewTakeQuest)
+  {
+    //send to server that quest should be in progress
   }
-  [self dismissViewControllerAnimated:YES completion:nil];
+  else if (self.state == kRPGQuestListViewCheckQuest)
+  {
+    //send to server that quest was done
+  }
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)sender
 {
-  switch (self.state) {
-    case kRPGQuestListViewTakeQuest:
-      //insert code here
-      break;
-    case kRPGQuestListViewCheckQuest:
-      //insert code here
-      break;
-    default:
-      break;
-  }
-  [self dismissViewControllerAnimated:YES completion:nil];
+  //send to server that quest wasn't done
 }
 
 - (IBAction)addProofButtonOnClick:(UIButton *)sender
 {
-  
+  //open camera to make photo
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)sender
@@ -127,8 +115,9 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)dealloc {
-  [_proofLabel release];
+- (void)dealloc
+{
   [super dealloc];
 }
+
 @end
