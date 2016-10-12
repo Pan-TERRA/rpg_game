@@ -35,6 +35,7 @@
 		AED6F5871DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */; };
 		AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */; };
 		AED6F58C1DACECBD007ED1B8 /* RPGQuestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */; };
+		D08ECC391DAE74080092F705 /* NibNames.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ECC381DAE74080092F705 /* NibNames.m */; };
 		D0B229131B6ECC8305E5F55A /* libPods-RPG GameTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */; };
 		E16485521798629D274B394A /* libPods-RPG GameUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */; };
 /* End PBXBuildFile section */
@@ -113,6 +114,8 @@
 		AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestViewController.h; sourceTree = "<group>"; };
 		AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestViewController.m; sourceTree = "<group>"; };
 		AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuestViewController.xib; sourceTree = "<group>"; };
+		D08ECC371DAE74080092F705 /* NibNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibNames.h; sourceTree = "<group>"; };
+		D08ECC381DAE74080092F705 /* NibNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibNames.m; sourceTree = "<group>"; };
 		D152597090E5403B60AB645B /* Pods-RPG GameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F6D4CAB61431492EB7A0347B /* Pods-RPG GameUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -275,6 +278,7 @@
 		288E85CD1DABDA8A00321F4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D08ECC361DAE73E90092F705 /* NibNames */,
 				288E85CE1DABDA8A00321F4D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -322,6 +326,15 @@
 				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
 			);
 			name = Quests;
+			sourceTree = "<group>";
+		};
+		D08ECC361DAE73E90092F705 /* NibNames */ = {
+			isa = PBXGroup;
+			children = (
+				D08ECC371DAE74080092F705 /* NibNames.h */,
+				D08ECC381DAE74080092F705 /* NibNames.m */,
+			);
+			name = NibNames;
 			sourceTree = "<group>";
 		};
 		E0FB3B1D4713C9AB3E8A6BD4 /* Pods */ = {
@@ -604,6 +617,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D08ECC391DAE74080092F705 /* NibNames.m in Sources */,
 				283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */,
 				AED6F5781DACD641007ED1B8 /* RPGSettingsViewController.m in Sources */,
 				281499E61DAE36E300C26881 /* RPGAuthorizationRequest+Serialization.m in Sources */,
