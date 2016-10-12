@@ -94,7 +94,36 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 - (void)loginWithRequest:(RPGAuthorizationRequest *)aRequest
 {
- 
+  NSString *requestString = [NSString stringWithFormat:@"%@", @"10.55.33.28:8000"];
+  
+  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
+                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                                          timeoutInterval:0];
+  
+  request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation] options:NSJSONWritingPrettyPrinted error:nil];
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // ???: YES or NO
+  configuration.allowsCellularAccess = NO;
+  configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
+  
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  
+  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                           completionHandler:^(NSData * _Nullable data,
+                                                               NSURLResponse * _Nullable response,
+                                                               NSError * _Nullable error)
+  {
+  
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+    NSLog(@"%@", responseDictionary);
+  
+   
+  }];
+                                
+  [task resume];
+  
+  [session finishTasksAndInvalidate];
 }
 
 - (void)logout
