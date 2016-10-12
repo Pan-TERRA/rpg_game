@@ -14,9 +14,7 @@
 
 NSString *const kRPGMainViewControllerBattleNibName = @"RPGBattleViewController";
 NSString *const kRPGMainViewControllerSettingsNibName = @"RPGSettingsViewController";
-//NSString *const kRPGMainViewControllerShopNibName =
 NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewController";
-//NSString *const kRPGMainViewControllerCharNibName =
 
 @interface RPGMainViewController ()
 
@@ -28,7 +26,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToQuests
 {
-    RPGQuestListViewController *questListViewController = [[RPGQuestListViewController alloc] initWithNibName:kRPGMainViewControllerQuestListNibName bundle:nil];
+    RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] initWithNibName:kRPGMainViewControllerQuestListNibName bundle:nil] autorelease];
     [self presentViewController:questListViewController animated:YES completion:nil];
 }
 
@@ -49,7 +47,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToAdventures
 {
-    RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithNibName:kRPGMainViewControllerBattleNibName bundle:nil];
+    RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithNibName:kRPGMainViewControllerBattleNibName bundle:nil] autorelease];
     [self presentViewController:battleViewController animated:YES completion:nil];
 }
 
@@ -61,7 +59,7 @@ NSString *const kRPGMainViewControllerQuestListNibName = @"RPGQuestListViewContr
 
 - (IBAction)segueToSettings
 {
-    RPGSettingsViewController *settingsViewController = [[RPGSettingsViewController alloc] initWithNibName:kRPGMainViewControllerSettingsNibName bundle:nil];
+    RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] initWithNibName:kRPGMainViewControllerSettingsNibName bundle:nil] autorelease];
     [self presentViewController:settingsViewController animated:YES completion:nil];
 }
 
