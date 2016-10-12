@@ -78,7 +78,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="50"/>
                     <state key="normal" title="LogOut"/>
                     <connections>
-                        <action selector="back:" destination="-1" eventType="touchUpInside" id="cfh-9a-ejh"/>
                         <action selector="logOut" destination="-1" eventType="touchUpInside" id="aRf-E8-Oz5"/>
                     </connections>
                 </button>
