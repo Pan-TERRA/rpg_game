@@ -7,6 +7,7 @@
 //
 
 #import "RPGNetworkManager.h"
+#import "RPGAuthorizationRequest+Serialization.h"
 
 static RPGNetworkManager *sharedNetworkManager = nil;
 
@@ -91,7 +92,12 @@ static RPGNetworkManager *sharedNetworkManager = nil;
   
 }
 
-- (void)loginWithEmail:(NSString *)aLogin withPassword:(NSString *)aPassword
+- (void)loginWithRequest:(RPGAuthorizationRequest *)aRequest
+{
+ 
+}
+
+- (void)logout
 {
   
 }
