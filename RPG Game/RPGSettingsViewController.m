@@ -45,6 +45,11 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)logOut
+{
+  
+}
+
 
 #pragma mark - UIViewController
 - (void)viewDidLoad
