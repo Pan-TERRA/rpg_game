@@ -31,6 +31,19 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   self.takeQuestsMutableArray = [[NSMutableArray alloc] init];
   self.inProgressQuestsMutableArray = [[NSMutableArray alloc] init];
   self.doneQuestsMutableArray = [[NSMutableArray alloc] init];
+  
+  NSDictionary *dict1 = @{@"title":@"Quest1 title", @"description":@"Quest description. You can take this quest.", @"reward":@"10", @"state":@"0"};
+  NSDictionary *dict2 = @{@"title":@"Quest2 title", @"description":@"Quest description. You have not done this quest yet.", @"reward":@"20", @"state":@"1"};
+  NSDictionary *dict3 = @{@"title":@"Quest3 title", @"description":@"Quest description. You have done this quest. But it has not been reviewed yet.", @"reward":@"30", @"state":@"2"};
+  NSDictionary *dict4 = @{@"title":@"Quest4 title", @"description":@"Quest description. You have done this quest. It has already been reviewed. But it has FALSE state.", @"reward":@"40", @"state":@"3"};
+  NSDictionary *dict5 = @{@"title":@"Quest5 title", @"description":@"Quest description. You have done this quest. It has already been reviewed. It has TRUE state.", @"reward":@"50", @"state":@"4"};
+  [self.takeQuestsMutableArray addObject:dict1];
+  [self.takeQuestsMutableArray addObject:dict1];
+  [self.inProgressQuestsMutableArray addObject:dict2];
+  [self.inProgressQuestsMutableArray addObject:dict3];
+  [self.inProgressQuestsMutableArray addObject:dict4];
+  [self.doneQuestsMutableArray addObject:dict5];
+  [self.doneQuestsMutableArray addObject:dict5];
 }
 
 - (void)viewWillAppear:(BOOL)animated
