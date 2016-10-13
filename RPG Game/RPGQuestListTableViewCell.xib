@@ -141,9 +141,9 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="descriptionLabel" destination="Fg4-fJ-cnO" id="Fu4-06-gSS"/>
-                <outlet property="proofTypeImage" destination="LsY-Pd-cWq" id="RGs-fg-woZ"/>
+                <outlet property="proofTypeImageView" destination="fvF-qf-f38" id="UVU-kt-ayH"/>
                 <outlet property="rewardLabel" destination="8Qv-8M-6vn" id="8J6-Ry-6yq"/>
-                <outlet property="rewardTypeImage" destination="fvF-qf-f38" id="Vy0-bz-xAy"/>
+                <outlet property="rewardTypeImageView" destination="LsY-Pd-cWq" id="5A4-cp-cBH"/>
                 <outlet property="stateLabel" destination="b4J-6c-CCw" id="vID-Xc-6AJ"/>
                 <outlet property="stateTitleLabel" destination="U96-7T-hV6" id="zcS-75-oeX"/>
                 <outlet property="titleLabel" destination="rPD-g9-VjK" id="yeL-4Y-mlA"/>
