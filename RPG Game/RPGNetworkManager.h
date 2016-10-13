@@ -8,6 +8,9 @@
   
 #import <Foundation/Foundation.h>
 
+@class RPGAuthorizationLoginRequest;
+@class RPGAuthorizationLoginResponse;
+
 /**
  *  Common network manager for HTTP requests. Provides authorization api, 
     static media download, auxiliary requests.
@@ -20,7 +23,8 @@
 
 #pragma mark - Authorization API
 
-- (void)login;
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
+                   block:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock;
 - (void)logout;
 - (void)registration;
 

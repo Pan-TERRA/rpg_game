@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "RPGMainViewController.h"
+#import "RPGNetworkManager.h"
 
 @interface AppDelegate ()
 
@@ -28,6 +29,7 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
+  
   return YES;
 }
 
