@@ -29,19 +29,28 @@
 
 @implementation RPGQuestViewController
 
+#pragma mark - UIViewController methods
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
 }
 
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+#pragma mark - set view state and content
+
 - (void)setViewContent:(NSDictionary *)viewContent
 {
-  [viewContent retain];
   self.titleLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestTitle];
   self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestDescription];
   self.rewardLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestReward];
   RPGQuestState state = [[viewContent objectForKey:kRPGQuestListViewControllerQuestState] integerValue];
-  switch (state) {
+  switch (state)
+  {
     case kRPGQuestStateCanTake:
       [self setStateTakeQuest];
       break;
@@ -66,12 +75,6 @@
     default:
       break;
   }
-  [viewContent release];
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
 }
 
 - (void)setStateTakeQuest
@@ -122,6 +125,8 @@
   self.stateLabel.hidden = flag;
 }
 
+#pragma mark - button actions handling
+
 - (IBAction)acceptButtonOnClick:(UIButton *)sender
 {
   if (self.state == kRPGQuestStateCanTake)
@@ -147,11 +152,6 @@
 - (IBAction)backButtonOnClick:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)dealloc
-{
-  [super dealloc];
 }
 
 @end

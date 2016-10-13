@@ -23,6 +23,8 @@
 
 @implementation RPGQuestListTableViewCell
 
+#pragma mark - UITableViewCell methods
+
 - (void)awakeFromNib
 {
   [super awakeFromNib];
@@ -33,10 +35,7 @@
   [super setSelected:selected animated:animated];
 }
 
-- (void)dealloc
-{
-  [super dealloc];
-}
+#pragma mark - set cell state and content
 
 - (void)setCellContent:(NSDictionary *)cellContent
 {
@@ -44,7 +43,8 @@
   self.descriptionLabel.text = [cellContent objectForKey:kRPGQuestListViewControllerQuestDescription];
   self.rewardLabel.text = [cellContent objectForKey:kRPGQuestListViewControllerQuestReward];
   RPGQuestState state = [[cellContent objectForKey:kRPGQuestListViewControllerQuestState] integerValue];
-  switch (state) {
+  switch (state)
+  {
     case kRPGQuestStateCanTake:
       [self setStateLabelHidden:YES];
       break;

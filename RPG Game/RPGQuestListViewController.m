@@ -29,6 +29,8 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 @synthesize inProgressQuestsMutableArray = _inProgressQuestsMutableArray;
 @synthesize doneQuestsMutableArray = _doneQuestsMutableArray;
 
+#pragma mark - init
+
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,6 +42,18 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   }
   return self;
 }
+
+#pragma mark - dealloc
+
+- (void)dealloc
+{
+  [_takeQuestsMutableArray release];
+  [_inProgressQuestsMutableArray release];
+  [_doneQuestsMutableArray release];
+  [super dealloc];
+}
+
+#pragma mark - UIViewController methods
 
 - (void)viewDidLoad
 {
@@ -70,6 +84,8 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 {
   [super didReceiveMemoryWarning];
 }
+
+#pragma mark - button actions handling
 
 - (IBAction)buttonControlOnClick:(UISegmentedControl *)sender
 {
@@ -105,6 +121,9 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+#pragma mark - UITableView DataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -155,6 +174,8 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   return 150;
 }
 
+#pragma mark - open quest view by clicking on cell
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   RPGQuestListViewState state = self.buttonControl.selectedSegmentIndex;
@@ -181,13 +202,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   [questViewController setViewContent:viewContent];
 }
 
-- (void)dealloc
-{
-  [_takeQuestsMutableArray release];
-  [_inProgressQuestsMutableArray release];
-  [_doneQuestsMutableArray release];
-  [super dealloc];
-}
+#pragma mark - delete from table by swiping
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
