@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "NibNames.h"
+#import "RPGRegistrationViewController.h"
 
 @interface AppDelegate ()
 
@@ -29,14 +30,19 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
- 
-  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
-                                                 initWithNibName:@"RPGLoginViewController"
-                                                          bundle:nil];
-  self.loginViewController = loginViewController;
-  [self.window setRootViewController:loginViewController];
   
-  [loginViewController release];
+  RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc]
+                                                                  init]
+                                                                  autorelease];
+  [self.window setRootViewController:registrationViewController];
+ 
+//  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
+//                                                 initWithNibName:@"RPGLoginViewController"
+//                                                          bundle:nil];
+//  self.loginViewController = loginViewController;
+//  [self.window setRootViewController:loginViewController];
+//  
+//  [loginViewController release];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
