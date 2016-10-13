@@ -45,10 +45,10 @@
 
 - (void)setViewContent:(NSDictionary *)viewContent
 {
-  self.titleLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestTitle];
-  self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestDescription];
-  self.rewardLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestReward];
-  RPGQuestState state = [[viewContent objectForKey:kRPGQuestListViewControllerQuestState] integerValue];
+  self.titleLabel.text = [viewContent objectForKey:kRPGQuestTitle];
+  self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestDescription];
+  self.rewardLabel.text = [viewContent objectForKey:kRPGQuestReward];
+  RPGQuestState state = [[viewContent objectForKey:kRPGQuestState] integerValue];
   switch (state)
   {
     case kRPGQuestStateCanTake:
@@ -56,15 +56,15 @@
       break;
     case kRPGQuestStateInProgress:
       [self setStateInProgressQuest];
-      self.stateLabel.text = @"In progress";
+      self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     case kRPGQuestStateDone:
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = @"Not reviewed";
+      self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
     case kRPGQuestStateReviewedFalse:
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = @"Reviewed false";
+      self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
     case kRPGQuestStateForReview:
       [self setStateForReviewQuest];
