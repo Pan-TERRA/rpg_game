@@ -9,18 +9,13 @@
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestListViewController.h"
 
-static NSString *const kRPGQuestListTableViewCellTitle = @"title";
-static NSString *const kRPGQuestListTableViewCellDescription = @"description";
-static NSString *const kRPGQuestListTableViewCellReward = @"reward";
-static NSString *const kRPGQuestListTableViewCellState = @"state";
-
 @interface RPGQuestListTableViewCell()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImage;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImage;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 
@@ -45,10 +40,10 @@ static NSString *const kRPGQuestListTableViewCellState = @"state";
 
 - (void)setCellContent:(NSDictionary *)cellContent
 {
-  self.titleLabel.text = [cellContent objectForKey:kRPGQuestListTableViewCellTitle];
-  self.descriptionLabel.text = [cellContent objectForKey:kRPGQuestListTableViewCellDescription];
-  self.rewardLabel.text = [cellContent objectForKey:kRPGQuestListTableViewCellReward];
-  RPGQuestState state = [[cellContent objectForKey:kRPGQuestListTableViewCellState] integerValue];
+  self.titleLabel.text = [cellContent objectForKey:kRPGQuestListViewControllerQuestTitle];
+  self.descriptionLabel.text = [cellContent objectForKey:kRPGQuestListViewControllerQuestDescription];
+  self.rewardLabel.text = [cellContent objectForKey:kRPGQuestListViewControllerQuestReward];
+  RPGQuestState state = [[cellContent objectForKey:kRPGQuestListViewControllerQuestState] integerValue];
   switch (state) {
     case kRPGQuestStateCanTake:
       [self setStateLabelHidden:YES];
@@ -71,7 +66,6 @@ static NSString *const kRPGQuestListTableViewCellState = @"state";
     default:
       break;
   }
-
 }
 
 - (void)setStateLabelHidden:(BOOL)flag

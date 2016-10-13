@@ -23,8 +23,14 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateDone,
   kRPGQuestStateReviewedFalse,
   kRPGQuestStateReviewedTrue,
-  kRPGQuestStateHide
+  kRPGQuestStateHide,
+  kRPGQuestStateForReview
 };
+
+static NSString *const kRPGQuestListViewControllerQuestTitle = @"title";
+static NSString *const kRPGQuestListViewControllerQuestDescription = @"description";
+static NSString *const kRPGQuestListViewControllerQuestReward = @"reward";
+static NSString *const kRPGQuestListViewControllerQuestState = @"state";
 
 @interface RPGQuestListViewController : UIViewController
 
