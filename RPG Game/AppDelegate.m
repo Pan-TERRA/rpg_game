@@ -7,7 +7,6 @@
 //
 
 #import "AppDelegate.h"
-#import "RPGMainViewController.h"
 #import "NibNames.h"
 
 @interface AppDelegate ()
@@ -20,7 +19,6 @@
 
 - (void)dealloc
 {
-  [_mainViewController release];
   [_loginViewController release];
   [_window release];
   [super dealloc];
@@ -31,12 +29,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  
-//  RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:@"RPGMainView"
-//                                                                                      bundle:nil];
-//  self.mainViewController = mainViewController;
-//  [self.window setRootViewController:mainViewController];
-//  
+ 
   RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
                                                  initWithNibName:@"RPGLoginViewController"
                                                           bundle:nil];
