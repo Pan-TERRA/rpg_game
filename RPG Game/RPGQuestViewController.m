@@ -7,6 +7,7 @@
 //
 
 #import "RPGQuestViewController.h"
+#import "RPGQuestListViewController.h"
 
 @interface RPGQuestViewController ()
 
@@ -15,6 +16,14 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
+@property (nonatomic, assign, readwrite) RPGQuestState state;
 
 @end
 
@@ -25,26 +34,39 @@
   [super viewDidLoad];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)setViewContent:(NSDictionary *)viewContent
 {
-  [super viewWillAppear:animated];
-  switch (self.state)
-  {
-    case kRPGQuestListViewTakeQuest:
-      [self setForTakeQuest];
+  [viewContent retain];
+  self.titleLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestTitle];
+  self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestDescription];
+  self.rewardLabel.text = [viewContent objectForKey:kRPGQuestListViewControllerQuestReward];
+  RPGQuestState state = [[viewContent objectForKey:kRPGQuestListViewControllerQuestState] integerValue];
+  switch (state) {
+    case kRPGQuestStateCanTake:
+      [self setStateTakeQuest];
       break;
-    case kRPGQuestListViewInProgressQuest:
-      [self setForInProgressQuest];
+    case kRPGQuestStateInProgress:
+      [self setStateInProgressQuest];
+      self.stateLabel.text = @"In progress";
       break;
-    case kRPGQuestListViewDoneQuest:
-      [self setForDoneQuest];
+    case kRPGQuestStateDone:
+      [self setStateReviewedQuest:NO];
+      self.stateLabel.text = @"Not reviewed";
       break;
-    case kRPGQuestListViewReviewQuest:
-      [self setForCheckQuest];
+    case kRPGQuestStateReviewedFalse:
+      [self setStateReviewedQuest:NO];
+      self.stateLabel.text = @"Reviewed false";
+      break;
+    case kRPGQuestStateForReview:
+      [self setStateForReviewQuest];
+      break;
+    case kRPGQuestStateReviewedTrue:
+      [self setStateReviewedQuest:YES];
       break;
     default:
       break;
   }
+  [viewContent release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -52,49 +74,61 @@
   [super didReceiveMemoryWarning];
 }
 
-- (void)setForTakeQuest
+- (void)setStateTakeQuest
 {
   self.acceptButton.hidden = NO;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = NO;
-  self.proofLabel.hidden = YES;
-  self.proofImageView.hidden = YES;
+  [self setProofItemsHidden:YES];
+  [self setStateItemsHidden:YES];
 }
 
-- (void)setForInProgressQuest
+- (void)setStateInProgressQuest
 {
   self.acceptButton.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = NO;
-  self.proofLabel.hidden = YES;
-  self.proofImageView.hidden = YES;
+  [self setProofItemsHidden:YES];
+  [self setStateItemsHidden:NO];
 }
 
-- (void)setForDoneQuest
+- (void)setStateReviewedQuest:(BOOL)flag
 {
   self.acceptButton.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = YES;
-  self.proofLabel.hidden = NO;
-  self.proofImageView.hidden = NO;
+  [self setProofItemsHidden:NO];
+  [self setStateItemsHidden:flag];
 }
 
-- (void)setForCheckQuest
+- (void)setStateForReviewQuest
 {
   self.acceptButton.hidden = NO;
   self.denyButton.hidden = NO;
   self.addProofButton.hidden = YES;
-  self.proofLabel.hidden = NO;
-  self.proofImageView.hidden = NO;
+  [self setProofItemsHidden:NO];
+  [self setStateItemsHidden:YES];
+}
+
+- (void)setProofItemsHidden:(BOOL)flag
+{
+  self.proofLabel.hidden = flag;
+  self.proofImageView.hidden = flag;
+}
+
+- (void)setStateItemsHidden:(BOOL)flag
+{
+  self.stateTitleLabel.hidden = flag;
+  self.stateLabel.hidden = flag;
 }
 
 - (IBAction)acceptButtonOnClick:(UIButton *)sender
 {
-  if (self.state == kRPGQuestListViewTakeQuest)
+  if (self.state == kRPGQuestStateCanTake)
   {
     //send to server that quest should be in progress
   }
-  else if (self.state == kRPGQuestListViewReviewQuest)
+  else if (self.state == kRPGQuestStateForReview)
   {
     //send to server that quest was done
   }
