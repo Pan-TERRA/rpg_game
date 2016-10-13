@@ -9,8 +9,11 @@
 #import "AppDelegate.h"
 #import "RPGMainViewController.h"
 #import "NibNames.h"
+#import "RPGBackgroundMusicController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, retain) RPGBackgroundMusicController *musicController;
 
 @end
 
@@ -29,6 +32,10 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
+    
+    RPGBackgroundMusicController *music = [[RPGBackgroundMusicController new] autorelease];
+    self.musicController = music;
+    
   return YES;
 }
 
@@ -52,6 +59,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)dealloc
+{
+    [_musicController release];
+    [super dealloc];
 }
 
 @end
