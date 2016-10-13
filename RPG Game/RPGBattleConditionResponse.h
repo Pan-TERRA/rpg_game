@@ -22,7 +22,6 @@
            spellsCondition:(NSDictionary *)aSpellsCondition
                     reward:(NSDictionary *)aReward NS_DESIGNATED_INITIALIZER;
 
-
 + (instancetype)battleConditionResponseWithHP:(int)aHP
                 opponentHP:(int)anOpponentHP
            spellsCondition:(NSDictionary *)aSpellsCondition
