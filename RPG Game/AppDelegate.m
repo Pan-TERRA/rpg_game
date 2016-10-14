@@ -13,8 +13,6 @@
 
 @interface AppDelegate ()
 
-@property (nonatomic, retain) RPGBackgroundMusicController *musicController;
-
 @end
 
 @implementation AppDelegate
@@ -33,8 +31,7 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
     
-    RPGBackgroundMusicController *music = [[RPGBackgroundMusicController new] autorelease];
-    self.musicController = music;
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:0.5];
     
   return YES;
 }
@@ -63,7 +60,6 @@
 
 - (void)dealloc
 {
-    [_musicController release];
     [super dealloc];
 }
 

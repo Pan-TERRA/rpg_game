@@ -7,6 +7,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGSettingsViewController">
             <connections>
+                <outlet property="musicSwitch" destination="zzj-YK-0Oa" id="kmb-jR-Yv0"/>
+                <outlet property="musicVolumeSlider" destination="lbO-xL-M1M" id="zCh-dm-aE1"/>
+                <outlet property="soundSwitch" destination="UxP-3D-1gF" id="TD6-oJ-svp"/>
+                <outlet property="soundVolumeSlider" destination="P1B-Zw-wVW" id="Whz-EF-5Si"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -38,9 +42,15 @@
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-xL-M1M">
                             <rect key="frame" x="257" y="21" width="421" height="31"/>
+                            <connections>
+                                <action selector="musicVolumeChange:" destination="-1" eventType="valueChanged" id="KIh-xa-2D3"/>
+                            </connections>
                         </slider>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UxP-3D-1gF">
                             <rect key="frame" x="20" y="119" width="51" height="31"/>
+                            <connections>
+                                <action selector="soundTurn:" destination="-1" eventType="valueChanged" id="sIO-25-MVs"/>
+                            </connections>
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Music:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3F-jD-dhS">
                             <rect key="frame" x="99" y="10" width="152" height="51"/>
@@ -50,9 +60,15 @@
                         </label>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-Zw-wVW">
                             <rect key="frame" x="257" y="120" width="421" height="31"/>
+                            <connections>
+                                <action selector="soundVolumeChange:" destination="-1" eventType="valueChanged" id="MM3-Sf-X3Z"/>
+                            </connections>
                         </slider>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-YK-0Oa">
                             <rect key="frame" x="20" y="20" width="51" height="31"/>
+                            <connections>
+                                <action selector="musicTurn:" destination="-1" eventType="valueChanged" id="oLy-C7-jpQ"/>
+                            </connections>
                         </switch>
                     </subviews>
                     <color key="backgroundColor" red="0.98431372549019602" green="1" blue="0.83137254901960789" alpha="1" colorSpace="calibratedRGB"/>

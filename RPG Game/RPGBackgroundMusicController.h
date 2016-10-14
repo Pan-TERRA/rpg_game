@@ -11,12 +11,13 @@
 
 @interface RPGBackgroundMusicController : NSObject <AVAudioPlayerDelegate, AVAudioSessionDelegate>
 
-@property (nonatomic, retain) NSTimer *updateTimer;
-@property (nonatomic, retain) AVAudioPlayer *player;
-
 + (instancetype)sharedBackgroundMusicController;
 
 - (void)switchToBattle;
 - (void)switchToPeace;
+
+- (void)changeVolume:(double)volume;
+
+- (void)toggle:(BOOL)state;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "RPGBattleViewController.h"
+#import "RPGBackgroundMusicController.h"
 
 @interface RPGBattleViewController ()
 
@@ -40,6 +41,7 @@
 
 - (IBAction)back:(id)sender
 {
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -47,6 +49,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
+    
 }
 
 - (void)didReceiveMemoryWarning

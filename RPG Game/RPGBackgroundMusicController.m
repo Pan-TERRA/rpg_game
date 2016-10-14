@@ -10,18 +10,55 @@
 
 static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
+@interface RPGBackgroundMusicController ()
+
+@property (nonatomic, retain) AVAudioPlayer *peacePlayer;
+@property (nonatomic, retain) AVAudioPlayer *battlePlayer;
+
+@property (nonatomic) BOOL state;
+
+@end
+
 @implementation RPGBackgroundMusicController
 
 #pragma mark - Music Changing
 
 - (void)switchToBattle
 {
-    NSLog(@"Switched to battle");
+    if (self.state)
+    {
+        [self.peacePlayer pause];
+        [self.battlePlayer play];
+    }
 }
 
 - (void)switchToPeace
 {
-    NSLog(@"Switched to peace");
+    if (self.state)
+    {
+        [self.battlePlayer pause];
+        [self.peacePlayer play];
+    }
+}
+
+- (void)changeVolume:(double)volume
+{
+    self.peacePlayer.volume = volume;
+    self.battlePlayer.volume = volume;
+}
+
+- (void)toggle:(BOOL)state
+{
+    self.state = state;
+    if (state)
+    {
+        [self switchToPeace];
+    }
+    else
+    {
+        [self.peacePlayer pause];
+        [self.battlePlayer pause];
+    }
 }
 
 #pragma mark - Init
@@ -32,23 +69,35 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
     
     if (self)
     {
-        NSURL *fileURL = [[[NSURL alloc] initFileURLWithPath: [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"m4a"]] autorelease];
-        _player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:nil];
+        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/PeaceMusic.mp3"]] autorelease];
+        _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
         
-        _player.numberOfLoops = 1;
-        _player.delegate = self;
+        _peacePlayer.numberOfLoops = -1;
+        _peacePlayer.delegate = self;
+        
+        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BattleMusic.mp3"]] autorelease];
+        _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
+        
+        _battlePlayer.numberOfLoops = -1;
+        _battlePlayer.delegate = self;
         
         [AVAudioSession sharedInstance];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interruption:) name:AVAudioSessionInterruptionNotification object:nil];
         
         NSError *setCategoryError = nil;
         
-        [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryAmbient error: &setCategoryError];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&setCategoryError];
         if (setCategoryError)
         {
             NSLog(@"Error setting category! %@", setCategoryError);
         }
-        [_player play];
+        
+        self.state = YES;
+        
+        if (self.state)
+        {
+            [_peacePlayer play];
+        }
     }
     return self;
 }
@@ -57,6 +106,8 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
 - (void)dealloc
 {
+    [_peacePlayer release];
+    [_battlePlayer release];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super dealloc];
 }

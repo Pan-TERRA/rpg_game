@@ -7,19 +7,15 @@
 //
 
 #import "RPGSettingsViewController.h"
-#import "RPGMainViewController.h"
+#import "RPGBackgroundMusicController.h"
 
 @interface RPGSettingsViewController ()
 
-@property (nonatomic) NSUInteger music;
-@property (nonatomic) NSUInteger sounds;
+@property (retain, nonatomic) IBOutlet UISwitch *musicSwitch;
+@property (retain, nonatomic) IBOutlet UISlider *musicVolumeSlider;
 
-
-@property (assign, nonatomic) IBOutlet UILabel *musicLabel;
-@property (assign, nonatomic) IBOutlet UILabel *soundsLabel;
-
-@property (assign, nonatomic) IBOutlet UIStepper *musicStepper;
-@property (assign, nonatomic) IBOutlet UIStepper *soundsStepper;
+@property (retain, nonatomic) IBOutlet UISwitch *soundSwitch;
+@property (retain, nonatomic) IBOutlet UISlider *soundVolumeSlider;
 
 
 @end
@@ -28,18 +24,6 @@
 
 #pragma mark - Event Handling
 
-- (IBAction)musicChanged:(id)sender
-{
-    self.music = self.musicStepper.value;
-    self.musicLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.musicStepper.value];
-}
-
-- (IBAction)soundsChanged:(id)sender
-{
-    self.sounds = self.soundsStepper.value;
-    self.soundsLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.soundsStepper.value];
-}
-
 - (IBAction)back:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -47,7 +31,27 @@
 
 - (IBAction)logOut
 {
-  
+    NSLog(@"LogOut");
+}
+
+- (IBAction)musicTurn:(UISwitch *)sender
+{
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] toggle:sender.on];
+}
+
+- (IBAction)musicVolumeChange:(UISlider *)sender
+{
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:sender.value];
+}
+
+- (IBAction)soundTurn:(UISwitch *)sender
+{
+    sender.state ? NSLog(@"Sound On") : NSLog(@"Sound Off");
+}
+
+- (IBAction)soundVolumeChange:(UISlider *)sender
+{
+    NSLog(@"Sound Volume = %f", sender.value);
 }
 
 
@@ -55,15 +59,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.music = 4;
-    self.sounds = 8;
-    
-    self.musicStepper.value = self.music;
-    self.soundsStepper.value = self.sounds;
-    
-    self.musicLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.musicStepper.value];
-    self.soundsLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.soundsStepper.value];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -73,6 +68,10 @@
 
 - (void)dealloc
 {
+    [_musicSwitch release];
+    [_musicVolumeSlider release];
+    [_soundSwitch release];
+    [_soundVolumeSlider release];
     [super dealloc];
 }
 @end
