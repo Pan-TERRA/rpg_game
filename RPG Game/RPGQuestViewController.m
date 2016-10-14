@@ -8,6 +8,8 @@
 
 #import "RPGQuestViewController.h"
 #import "RPGQuestListViewController.h"
+#import "RPGQuestProofImageViewController.h"
+#import "NibNames.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -29,11 +31,16 @@
 
 @implementation RPGQuestViewController
 
-#pragma mark - UIViewController methods
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
+  tapGesture.numberOfTapsRequired = 1;
+  [self.proofImageView setUserInteractionEnabled:YES];
+  [self.proofImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -158,6 +165,13 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)handleTapGesture
+{
+  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] initWithNibName:kRPGQuestProofImageViewController bundle:nil] autorelease];
+  [self presentViewController:questProofImageViewController animated:YES completion:nil];
+  [questProofImageViewController setImage:self.proofImageView.image];
+}
+
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
@@ -173,7 +187,6 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
   [picker dismissViewControllerAnimated:YES completion:NULL];
-  
 }
 
 @end
