@@ -19,7 +19,7 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken;
+- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
 + (instancetype)requestWithType:(NSString *)aType token:(NSString *)aToken;
 
 @end

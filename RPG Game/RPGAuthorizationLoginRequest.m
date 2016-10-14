@@ -1,23 +1,21 @@
 //
-//  RPGAuthorizationRequest.m
+//  RPGAuthorizationLoginRequest.m
 //  RPG Game
 //
-//  Created by Иван Дзюбенко on 10/12/16.
+//  Created by Иван Дзюбенко on 10/13/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAuthorizationRequest.h"
+#import "RPGAuthorizationLoginRequest.h"
 
-static NSString *const kRPGAuthorizationRequestType = @"USER_REQUEST";
-
-@interface RPGAuthorizationRequest ()
+@interface RPGAuthorizationLoginRequest ()
 
 @property (copy, nonatomic, readwrite) NSString *email;
 @property (copy, nonatomic, readwrite) NSString *password;
 
 @end
 
-@implementation RPGAuthorizationRequest
+@implementation RPGAuthorizationLoginRequest
 
 @synthesize password = _password;
 @synthesize email = _email;
@@ -27,7 +25,7 @@ static NSString *const kRPGAuthorizationRequestType = @"USER_REQUEST";
 - (instancetype)initWithEmail:(NSString *)anEmail
                      password:(NSString *)aPassword
 {
-  self = [super initWithType:kRPGAuthorizationRequestType token:@""];
+  self = [super init];
   
   if (self != nil)
   {
@@ -42,6 +40,11 @@ static NSString *const kRPGAuthorizationRequestType = @"USER_REQUEST";
                                      password:(NSString *)aPassword
 {
   return [[[self alloc] initWithEmail:anEmail password:aPassword] autorelease];
+}
+
+- (instancetype)init
+{
+  return nil;
 }
 
 #pragma mark - Dealloc

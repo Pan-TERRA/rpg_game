@@ -9,6 +9,7 @@
 #import "RPGResponse+Serialization.h"
 
 static NSString *const kRPGResponseSerializationType = @"type";
+static NSString *const kRPGResponseSerializationStatus = @"status";
 
 @implementation RPGResponse (Serialization)
 
@@ -17,13 +18,15 @@ static NSString *const kRPGResponseSerializationType = @"type";
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
   dictionaryRepresentation[kRPGResponseSerializationType] = self.type;
+  dictionaryRepresentation[kRPGResponseSerializationStatus] = @(self.status);
   
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithType:aDictionary[kRPGResponseSerializationType]];
+  return [self initWithType:aDictionary[kRPGResponseSerializationType]
+                     status:[aDictionary[kRPGResponseSerializationStatus] intValue]];
 }
 
 

@@ -11,22 +11,25 @@
 @interface RPGResponse ()
 
 @property (copy, readwrite, nonatomic) NSString *type;
+@property (readwrite, nonatomic) int status;
 
 @end
 
 @implementation RPGResponse
 
 @synthesize type = _type;
+@synthesize status = _status;
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType
+- (instancetype)initWithType:(NSString *)aType status:(int)aStatus
 {
   self = [super init];
   
   if (self != nil)
   {
     _type = [aType copy];
+    _status = aStatus;
   }
   
   return self;
@@ -37,9 +40,9 @@
   return nil;
 }
 
-+ (instancetype)requestWithType:(NSString *)aType
++ (instancetype)requestWithType:(NSString *)aType status:(int)aStatus
 {
-  return [[[RPGResponse alloc] initWithType:aType] autorelease];
+  return [[[self alloc] initWithType:aType status:aStatus] autorelease];
 }
 
 + (instancetype)request
