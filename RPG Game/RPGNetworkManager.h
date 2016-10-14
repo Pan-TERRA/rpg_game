@@ -8,6 +8,8 @@
   
 #import <Foundation/Foundation.h>
 
+
+
 @class RPGAuthorizationLoginRequest;
 @class RPGAuthorizationLoginResponse;
 
@@ -24,7 +26,7 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-                   block:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock;
+                   block:(void (^)(BOOL))callbackBlock;
 - (void)logout;
 - (void)registration;
 

@@ -90,24 +90,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 #pragma mark - Authorization API
 
-
-  // replace to login screen
-
-//- (void)login
-//{
-//  RPGAuthorizationRequest *request = [[RPGAuthorizationRequest alloc] initWithEmail:@"eleonoria@gmail.com" password:@"eleonoria"];
-//  
-//  [self  loginWithRequest:request block:^(RPGAuthorizationResponse *response)
-//  {
-//    
-//  }];
-//  
-//  [request release];
-//  
-//  
-//}
-
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest block:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest block:(void (^)(BOOL))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
@@ -131,15 +114,13 @@ static RPGNetworkManager *sharedNetworkManager = nil;
                                                                NSError * _Nullable error)
   {
   
-    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-    NSLog(@"%@", responseDictionary);
-    RPGAuthorizationLoginResponse *loginResponse = [[RPGAuthorizationLoginResponse alloc]
-                                               initWithDictionaryRepresentation:responseDictionary];
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:nil];
     
-  
-    callbackBlock(loginResponse);
-    
-    [loginResponse release];
+      // kostyan task add response object
+      // self.toke = token;
+    callbackBlock((BOOL)responseDictionary[@"status"]);
   }];
                                 
   [task resume];
@@ -168,7 +149,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 - (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest block:(void (^)(BOOL))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
+  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/singout"];
   
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
@@ -189,16 +170,14 @@ static RPGNetworkManager *sharedNetworkManager = nil;
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-    
+                                  
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:nil];
-    NSLog(@"%@", responseDictionary);
-    RPGAuthorizationLogoutResponse *logoutResponse = [[RPGAuthorizationLogoutResponse alloc] initWithDictionaryRepresentation:responseDictionary];
-    
-    callbackBlock(logoutResponse);
-    
-    [logoutResponse release];
+                                  
+    // kostyan task add response object
+                                  
+    callbackBlock((BOOL)responseDictionary[@"status"]);
   }];
   
   [task resume];
