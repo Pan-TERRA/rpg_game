@@ -55,8 +55,8 @@
   self.titleLabel.text = [viewContent objectForKey:kRPGQuestTitle];
   self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestDescription];
   self.rewardLabel.text = [viewContent objectForKey:kRPGQuestReward];
-  RPGQuestState state = [[viewContent objectForKey:kRPGQuestState] integerValue];
-  switch (state)
+  self.state = [[viewContent objectForKey:kRPGQuestState] integerValue];
+  switch (self.state)
   {
     case kRPGQuestStateCanTake:
       [self setStateTakeQuest];
@@ -78,6 +78,19 @@
       break;
     case kRPGQuestStateReviewedTrue:
       [self setStateReviewedQuest:YES];
+      break;
+    default:
+      break;
+  }
+  
+  switch (self.state)
+  {
+    case kRPGQuestStateDone:
+    case kRPGQuestStateReviewedFalse:
+    case kRPGQuestStateForReview:
+    case kRPGQuestStateReviewedTrue:
+      //upload image from server
+      //self.proofImageView.image = ...
       break;
     default:
       break;
@@ -157,7 +170,7 @@
   picker.delegate = self;
   picker.allowsEditing = YES;
   picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-  [self presentViewController:picker animated:YES completion:NULL];
+  [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)sender
@@ -176,10 +189,14 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-  UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+  // !!!: leak
   self.proofImageView.image = chosenImage;
+  
+  self.state = kRPGQuestStateDone;
   [self setStateReviewedQuest:NO];
   self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+  
   //send image to server
   [picker dismissViewControllerAnimated:YES completion:NULL];
 }
