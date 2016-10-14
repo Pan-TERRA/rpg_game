@@ -6,6 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
+#import "NibNames.h"
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
@@ -18,8 +19,6 @@ NSString * const kRPGQuestState = @"state";
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
 NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
-
-static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestListTableViewCell";
 
 @interface RPGQuestListViewController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -172,11 +171,14 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRPGMyQuestsViewControllerTableViewCellId];
+  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCell];
   
   if (cell == nil)
   {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGMyQuestsViewControllerTableViewCellId owner:self options:nil];
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCell
+                                                 owner:self
+                                               options:nil];
+    
     cell = [nib objectAtIndex:0];
   }
   
@@ -227,7 +229,9 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 - (void)showQuestViewWithQuest:(NSDictionary *)viewContent
 {
-  RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc] initWithNibName:NSStringFromClass([RPGQuestViewController class]) bundle:nil] autorelease];
+  RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc]
+                                                  initWithNibName:kRPGQuestViewController
+                                                  bundle:nil] autorelease];
   [self presentViewController:questViewController animated:YES completion:nil];
   [questViewController setViewContent:viewContent];
 }
