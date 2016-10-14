@@ -9,7 +9,7 @@
 #import "RPGQuestViewController.h"
 #import "RPGQuestListViewController.h"
 
-@interface RPGQuestViewController ()
+@interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
@@ -146,12 +146,34 @@
 
 - (IBAction)addProofButtonOnClick:(UIButton *)sender
 {
-  //open camera to make photo
+  UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+  picker.delegate = self;
+  picker.allowsEditing = YES;
+  picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+  [self presentViewController:picker animated:YES completion:NULL];
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  UIImage *chosenImage = info[UIImagePickerControllerOriginalImage];
+  self.proofImageView.image = chosenImage;
+  [self setStateReviewedQuest:NO];
+  self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+  //send image to server
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+  
 }
 
 @end
