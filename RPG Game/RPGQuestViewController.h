@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RPGQuestListViewController.h"
 
 @interface RPGQuestViewController : UIViewController
 
-@property (nonatomic, assign, readwrite) RPGQuestListViewState state;
+- (void)setViewContent:(NSDictionary *)viewContent;
 
 @end
