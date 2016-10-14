@@ -23,7 +23,7 @@
 
 @implementation RPGQuestListTableViewCell
 
-#pragma mark - UITableViewCell methods
+#pragma mark - UITableViewCell Methods
 
 - (void)awakeFromNib
 {
@@ -35,7 +35,7 @@
   [super setSelected:selected animated:animated];
 }
 
-#pragma mark - set cell state and content
+#pragma mark - Set cell state and content
 
 - (void)setCellContent:(NSDictionary *)cellContent
 {

@@ -10,6 +10,15 @@
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
 
+NSString * const kRPGQuestTitle = @"title";
+NSString * const kRPGQuestDescription = @"description";
+NSString * const kRPGQuestReward = @"reward";
+NSString * const kRPGQuestState = @"state";
+
+NSString * const kRPGQuestStringStateInProgress = @"In progress";
+NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
+NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
+
 static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestListTableViewCell";
 
 @interface RPGQuestListViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -25,11 +34,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 
 @implementation RPGQuestListViewController
 
-@synthesize takeQuestsMutableArray = _takeQuestsMutableArray;
-@synthesize inProgressQuestsMutableArray = _inProgressQuestsMutableArray;
-@synthesize doneQuestsMutableArray = _doneQuestsMutableArray;
-
-#pragma mark - init
+#pragma mark - Init
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -43,7 +48,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   return self;
 }
 
-#pragma mark - dealloc
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
@@ -53,17 +58,33 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   [super dealloc];
 }
 
-#pragma mark - UIViewController methods
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-  NSDictionary *dict1 = @{@"title":@"Quest1 title", @"description":@"Quest description. You can take this quest.", @"reward":@"10", @"state":@"0"};
-  NSDictionary *dict2 = @{@"title":@"Quest2 title", @"description":@"Quest description. You have not done this quest yet.", @"reward":@"20", @"state":@"1"};
-  NSDictionary *dict3 = @{@"title":@"Quest3 title", @"description":@"Quest description. You have done this quest. But it has not been reviewed yet.", @"reward":@"30", @"state":@"2"};
-  NSDictionary *dict4 = @{@"title":@"Quest4 title", @"description":@"Quest description. You have done this quest. It has already been reviewed. But it has FALSE state.", @"reward":@"40", @"state":@"3"};
-  NSDictionary *dict5 = @{@"title":@"Quest5 title", @"description":@"Quest description. You have done this quest. It has already been reviewed. It has TRUE state.", @"reward":@"50", @"state":@"4"};
+    // test data
+  NSDictionary *dict1 = @{@"title":@"Quest1 title",
+                          @"description":@"Quest description. You can take this quest.",
+                          @"reward":@"10", @"state":@"0"};
+  NSDictionary *dict2 = @{@"title":@"Quest2 title",
+                          @"description":@"Quest description. You have not done this quest yet.",
+                          @"reward":@"20",
+                          @"state":@"1"};
+  NSDictionary *dict3 = @{@"title":@"Quest3 title",
+                          @"description":@"Quest description. You have done this quest. But it has not been reviewed yet.",
+                          @"reward":@"30",
+                          @"state":@"2"};
+  NSDictionary *dict4 = @{@"title":@"Quest4 title",
+                          @"description":@"Quest description. You have done this quest. It has already been reviewed. But it has FALSE state.",
+                          @"reward":@"40",
+                          @"state":@"3"};
+  NSDictionary *dict5 = @{@"title":@"Quest5 title",
+                          @"description":@"Quest description. You have done this quest. It has already been reviewed. It has TRUE state.",
+                          @"reward":@"50",
+                          @"state":@"4"};
+  
   [self.takeQuestsMutableArray addObject:dict1];
   [self.takeQuestsMutableArray addObject:dict1];
   [self.inProgressQuestsMutableArray addObject:dict2];
@@ -85,11 +106,12 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - button actions handling
+#pragma mark - Event handling
 
 - (IBAction)buttonControlOnClick:(UISegmentedControl *)sender
 {
   RPGQuestListViewState state = sender.selectedSegmentIndex;
+  
   switch (state)
   {
     case kRPGQuestListViewTakeQuest:
@@ -103,9 +125,14 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
       break;
     case kRPGQuestListViewReviewQuest:
     {
+        // test data
       //upload random quest from server to check
-      NSDictionary *quest = @{@"title":@"Quest6 title", @"description":@"Quest description. You have to review this quest.", @"reward":@"60", @"state":@"6"};
-      [self showQuestViewWithQuest:quest state:state];
+      NSDictionary *quest = @{@"title":@"Quest6 title",
+                              @"description":@"Quest description. You have to review this quest.",
+                              @"reward":@"60",
+                              @"state":@"6"};
+      
+      [self showQuestViewWithQuest:quest];
       break;
     }
   }
@@ -123,7 +150,7 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
 }
 
 
-#pragma mark - UITableView DataSource methods
+#pragma mark - UITableViewDataSourceDelegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -169,40 +196,43 @@ static NSString *const kRPGMyQuestsViewControllerTableViewCellId = @"RPGQuestLis
   return cell;
 }
 
+#pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
   return 150;
 }
 
-#pragma mark - open quest view by clicking on cell
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
   RPGQuestListViewState state = self.buttonControl.selectedSegmentIndex;
+  
   switch (state)
   {
     case kRPGQuestListViewTakeQuest:
-      [self showQuestViewWithQuest:[self.takeQuestsMutableArray objectAtIndex:indexPath.row] state:state];
+      [self showQuestViewWithQuest:[self.takeQuestsMutableArray objectAtIndex:indexPath.row]];
       break;
     case kRPGQuestListViewInProgressQuest:
-      [self showQuestViewWithQuest:[self.inProgressQuestsMutableArray objectAtIndex:indexPath.row] state:state];
+      [self showQuestViewWithQuest:[self.inProgressQuestsMutableArray objectAtIndex:indexPath.row]];
       break;
     case kRPGQuestListViewDoneQuest:
-      [self showQuestViewWithQuest:[self.doneQuestsMutableArray objectAtIndex:indexPath.row] state:state];
+      [self showQuestViewWithQuest:[self.doneQuestsMutableArray objectAtIndex:indexPath.row]];
       break;
     default:
       break;
   }
 }
 
-- (void)showQuestViewWithQuest:(NSDictionary *)viewContent state:(RPGQuestListViewState)state
+#pragma mark - Quest View
+
+- (void)showQuestViewWithQuest:(NSDictionary *)viewContent
 {
   RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc] initWithNibName:NSStringFromClass([RPGQuestViewController class]) bundle:nil] autorelease];
   [self presentViewController:questViewController animated:YES completion:nil];
   [questViewController setViewContent:viewContent];
 }
 
-#pragma mark - delete from table by swiping
+#pragma mark - Swipe Delete
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {

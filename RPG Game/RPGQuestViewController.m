@@ -125,7 +125,7 @@
   self.stateLabel.hidden = flag;
 }
 
-#pragma mark - button actions handling
+#pragma mark - Event Handling
 
 - (IBAction)acceptButtonOnClick:(UIButton *)sender
 {
