@@ -17,6 +17,19 @@
 @property (nonatomic, readonly) NSInteger gold;
 @property (nonatomic, readonly) NSInteger crystals;
 
-@property (copy, nonatomic, readonly) NSDictionary *characters;
+@property (copy, nonatomic, readonly) NSArray *characters;
+
+- (instancetype)initWithUsername:(NSString *)aUsername
+                           token:(NSString *)aToken
+                          avatar:(NSString *)anAvatar
+                            gold:(NSInteger)aGold
+                        crystals:(NSInteger)aCrystals
+                      characters:(NSArray *)aCharacters;
++ (instancetype)responseWithUsername:(NSString *)aUsername
+                               token:(NSString *)aToken
+                              avatar:(NSString *)anAvatar
+                                gold:(NSInteger)aGold
+                            crystals:(NSInteger)aCrystals
+                          characters:(NSArray *)aCharacters;
 
 @end
