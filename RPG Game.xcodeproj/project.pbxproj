@@ -34,6 +34,10 @@
 		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
 		288E85F31DABDA8A00321F4D /* RPG_GameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */; };
 		288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E86011DABDADB00321F4D /* RPGMainViewController.m */; };
+		2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */; };
+		2A8D9BA21DB1587C0026A5AB /* RPGTimeResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9BA11DB1587C0026A5AB /* RPGTimeResponse+Serialization.m */; };
+		2A8D9BA61DB164520026A5AB /* RPGRegistrationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */; };
+		2A8D9BA91DB252170026A5AB /* RPGRegistrationRequest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9BA81DB252170026A5AB /* RPGRegistrationRequest+Serialization.m */; };
 		580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */; };
 		AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */; };
 		AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */; };
@@ -124,6 +128,14 @@
 		288E85F41DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E86001DABDADB00321F4D /* RPGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGMainViewController.h; sourceTree = "<group>"; };
 		288E86011DABDADB00321F4D /* RPGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMainViewController.m; sourceTree = "<group>"; };
+		2A8D9B9D1DB14B5A0026A5AB /* RPGTimeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGTimeResponse.h; sourceTree = "<group>"; };
+		2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGTimeResponse.m; sourceTree = "<group>"; };
+		2A8D9BA01DB1587C0026A5AB /* RPGTimeResponse+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGTimeResponse+Serialization.h"; sourceTree = "<group>"; };
+		2A8D9BA11DB1587C0026A5AB /* RPGTimeResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGTimeResponse+Serialization.m"; sourceTree = "<group>"; };
+		2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRegistrationRequest.h; sourceTree = "<group>"; };
+		2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRegistrationRequest.m; sourceTree = "<group>"; };
+		2A8D9BA71DB252170026A5AB /* RPGRegistrationRequest+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGRegistrationRequest+Serialization.h"; sourceTree = "<group>"; };
+		2A8D9BA81DB252170026A5AB /* RPGRegistrationRequest+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGRegistrationRequest+Serialization.m"; sourceTree = "<group>"; };
 		48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		810370191D8BD309214BF556 /* Pods-RPG GameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.release.xcconfig"; sourceTree = "<group>"; };
 		9864644C8038713EF8524DC8 /* Pods-RPG Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG Game.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +265,7 @@
 				283ADD071DAD46EC00BDC706 /* RPGResponse+Serialization.m */,
 				283ADD0C1DAD500E00BDC706 /* Battle Condition */,
 				283ADD001DAD3F9100BDC706 /* Battle Init */,
+				2A8D9B9C1DB14ACB0026A5AB /* Time */,
 				283ADCFF1DAD3F8600BDC706 /* Quest */,
 			);
 			name = Response;
@@ -369,6 +382,7 @@
 		283ADD041DAD454B00BDC706 /* Request */ = {
 			isa = PBXGroup;
 			children = (
+				2A8D9BA31DB163F20026A5AB /* Registration */,
 				281499E01DAE300600C26881 /* Authorization */,
 			);
 			name = Request;
@@ -459,6 +473,28 @@
 				288E85F41DABDA8A00321F4D /* Info.plist */,
 			);
 			path = "RPG GameUITests";
+			sourceTree = "<group>";
+		};
+		2A8D9B9C1DB14ACB0026A5AB /* Time */ = {
+			isa = PBXGroup;
+			children = (
+				2A8D9B9D1DB14B5A0026A5AB /* RPGTimeResponse.h */,
+				2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */,
+				2A8D9BA01DB1587C0026A5AB /* RPGTimeResponse+Serialization.h */,
+				2A8D9BA11DB1587C0026A5AB /* RPGTimeResponse+Serialization.m */,
+			);
+			name = Time;
+			sourceTree = "<group>";
+		};
+		2A8D9BA31DB163F20026A5AB /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */,
+				2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */,
+				2A8D9BA71DB252170026A5AB /* RPGRegistrationRequest+Serialization.h */,
+				2A8D9BA81DB252170026A5AB /* RPGRegistrationRequest+Serialization.m */,
+			);
+			name = Registration;
 			sourceTree = "<group>";
 		};
 		4BA921AB8CB063DE64593829 /* Frameworks */ = {
@@ -772,6 +808,7 @@
 				281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */,
 				283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */,
 				AED6F5781DACD641007ED1B8 /* RPGSettingsViewController.m in Sources */,
+				2A8D9BA91DB252170026A5AB /* RPGRegistrationRequest+Serialization.m in Sources */,
 				28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */,
 				28149A0D1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m in Sources */,
 				28149A041DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m in Sources */,
@@ -780,12 +817,15 @@
 				AED6F57E1DACD8D8007ED1B8 /* RPGQuestListViewController.m in Sources */,
 				28149A1C1DB1011300C26881 /* RPGRegistrationViewController.m in Sources */,
 				AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */,
+				2A8D9BA61DB164520026A5AB /* RPGRegistrationRequest.m in Sources */,
+				2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */,
 				283ADD0B1DAD48DA00BDC706 /* RPGBattleInitResponse.m in Sources */,
 				28149A0A1DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m in Sources */,
 				283ADCFB1DAD3CBA00BDC706 /* RPGResponse.m in Sources */,
 				288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */,
 				288E85CF1DABDA8A00321F4D /* main.m in Sources */,
 				283ADCFE1DAD3D1C00BDC706 /* RPGNetworkManager.m in Sources */,
+				2A8D9BA21DB1587C0026A5AB /* RPGTimeResponse+Serialization.m in Sources */,
 				283ADD031DAD454000BDC706 /* RPGRequest+Serialization.m in Sources */,
 				28149A011DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
@@ -932,6 +972,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				INFOPLIST_FILE = "RPG Game/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -945,6 +986,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				INFOPLIST_FILE = "RPG Game/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
