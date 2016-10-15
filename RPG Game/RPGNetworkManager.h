@@ -12,6 +12,7 @@
 
 @class RPGAuthorizationLoginRequest;
 @class RPGAuthorizationLoginResponse;
+@class RPGRegistrationRequest;
 
 /**
  *  Common network manager for HTTP requests. Provides authorization api, 
@@ -26,9 +27,10 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-                   block:(void (^)(BOOL))callbackBlock;
+       completionHandler:(void (^)(BOOL, RPGAuthorizationLoginResponse *))callbackBlock;
 - (void)logout;
-- (void)registration;
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
+          completionHandler:(void (^)(BOOL))callbackBlock;
 
 #pragma mark - Quest API
 
