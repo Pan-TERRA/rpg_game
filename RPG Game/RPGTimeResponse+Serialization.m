@@ -6,7 +6,6 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGTimeResponse.h"
 #import "RPGResponse+Serialization.h"
 
 static NSString *const kRPGTimeResponseSerializationTimestamp = @"time";
@@ -24,14 +23,7 @@ static NSString *const kRPGTimeResponseSerializationTimestamp = @"time";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  self = [super initWithDictionaryRepresentation:aDictionary];
-  
-  if (self != nil)
-  {
-    _timestamp = [NSDate dateWithTimeIntervalSince1970:[aDictionary[kRPGTimeResponseSerializationTimestamp] doubleValue]];
-  }
-  
-  return self;
+  return [self initWithUnixTimestamp:[aDictionary[kRPGTimeResponseSerializationTimestamp] intValue]];
 }
 
 @end

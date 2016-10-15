@@ -6,6 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
+#import "RPGTimeResponse.h"
+
 @interface RPGTimeResponse (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
