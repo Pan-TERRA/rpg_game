@@ -8,11 +8,9 @@
   
 #import <Foundation/Foundation.h>
 
-
-
+@class RPGRegistrationRequest;
 @class RPGAuthorizationLoginRequest;
 @class RPGAuthorizationLoginResponse;
-@class RPGRegistrationRequest;
 
 /**
  *  Common network manager for HTTP requests. Provides authorization api, 
@@ -27,10 +25,10 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(BOOL, RPGAuthorizationLoginResponse *))callbackBlock;
-- (void)logout;
+       completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock;
+- (void)logoutWithCompletionHandler:(void (^)(int))callbackBlock;
 - (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
-          completionHandler:(void (^)(BOOL))callbackBlock;
+          completionHandler:(void (^)(int))callbackBlock;
 
 #pragma mark - Quest API
 

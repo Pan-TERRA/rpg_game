@@ -91,8 +91,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 #pragma mark - Authorization API
 
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(BOOL, RPGAuthorizationLoginResponse *))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
@@ -120,9 +119,12 @@ static RPGNetworkManager *sharedNetworkManager = nil;
                                                                        options:0
                                                                          error:nil];
     
-    RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
-    dispatch_async(dispatch_get_main_queue(), ^{
-      callbackBlock([responseDictionary[@"status"] boolValue], responseObject);
+    RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc]
+                                                      initWithDictionaryRepresentation:responseDictionary]
+                                                     autorelease];
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock(responseObject);
     });
   }];
                                 
@@ -131,26 +133,16 @@ static RPGNetworkManager *sharedNetworkManager = nil;
   [session finishTasksAndInvalidate];
 }
 
-- (void)logout
+- (void)logoutWithCompletionHandler:(void (^)(int))callbackBlock
 {
   RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
   
-  [self logoutWithRequest:request block:^(BOOL status)
-  {
-    if (status == 0)
-    {
-        // send logoutstatus
-    }
-    else
-    {
-      // send logout error status
-    }
-  }];
+  [self logoutWithRequest:request completionHandler:callbackBlock];
   
   [request release];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest block:(void (^)(BOOL))callbackBlock
+- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/singout"];
   
@@ -178,10 +170,11 @@ static RPGNetworkManager *sharedNetworkManager = nil;
                                                                        options:0
                                                                          error:nil];
                                   
-    // add response object?
-
-    dispatch_async(dispatch_get_main_queue(), ^{
-      callbackBlock([responseDictionary[@"status"] boolValue]);
+    // add response object ?
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock([responseDictionary[@"status"] intValue]);
     });
   }];
   
@@ -190,9 +183,10 @@ static RPGNetworkManager *sharedNetworkManager = nil;
   [session finishTasksAndInvalidate];
 }
 
-- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(BOOL))callbackBlock
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/register"];
+  
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:0];
@@ -201,26 +195,30 @@ static RPGNetworkManager *sharedNetworkManager = nil;
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
+  
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
   
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
   
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                          completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                                          completionHandler:^(NSData *data,
+                                                              NSURLResponse *response,
+                                                              NSError *error)
   {
+    
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:nil];
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-      callbackBlock([responseDictionary[@"status"] boolValue]);
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock([responseDictionary[@"status"] intValue]);
     });
-    
   }];
-  
+                                
   [task resume];
-  
+
   [session finishTasksAndInvalidate];
 }
 

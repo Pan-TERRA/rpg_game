@@ -22,12 +22,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sbs-4b-dHg">
                     <rect key="frame" x="189" y="112" width="358" height="190"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sounds:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pc7-Un-zRO">
-                            <rect key="frame" x="20" y="119" width="152" height="51"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="42"/>
-                            <color key="textColor" red="0.36317123229999998" green="0.51012030050000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                         <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="642-5R-uJ4">
                             <rect key="frame" x="244" y="31" width="94" height="29"/>
                             <connections>
@@ -58,6 +52,12 @@
                             <color key="textColor" red="0.36317123229999998" green="0.51012030050000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sounds:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pc7-Un-zRO">
+                            <rect key="frame" x="20" y="119" width="152" height="51"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="42"/>
+                            <color key="textColor" red="0.36317123229999998" green="0.51012030050000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.98652204412314526" green="1" blue="0.83771622198777596" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -65,17 +65,17 @@
                         <constraint firstAttribute="height" constant="190" id="qVn-oL-2iW"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-i4-ViL">
-                    <rect key="frame" x="619" y="342" width="115" height="72"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-i4-ViL">
+                    <rect key="frame" x="668" y="366" width="66" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="eDl-wY-tgB"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CE3-67-Zgh">
-                    <rect key="frame" x="0.0" y="342" width="163" height="72"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                    <rect key="frame" x="0.0" y="366" width="99" height="48"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <state key="normal" title="LogOut"/>
                     <connections>
                         <action selector="logOut" destination="-1" eventType="touchUpInside" id="aRf-E8-Oz5"/>
@@ -84,9 +84,13 @@
             </subviews>
             <color key="backgroundColor" red="0.94268612490000003" green="1" blue="0.32916141329999998" alpha="0.21303879310000001" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="WnW-i4-ViL" secondAttribute="trailing" constant="2" id="JaH-eT-sRN"/>
+                <constraint firstAttribute="bottom" secondItem="WnW-i4-ViL" secondAttribute="bottom" id="SBj-h6-IHk"/>
                 <constraint firstItem="Sbs-4b-dHg" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="SCM-oM-Rxn"/>
                 <constraint firstItem="Sbs-4b-dHg" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="duZ-Le-ZkD"/>
                 <constraint firstAttribute="bottom" secondItem="CE3-67-Zgh" secondAttribute="bottom" id="fSC-Z0-P3I"/>
+                <constraint firstItem="CE3-67-Zgh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="h4L-d9-1lY"/>
+                <constraint firstAttribute="bottom" secondItem="CE3-67-Zgh" secondAttribute="bottom" id="oVK-ma-fzl"/>
                 <constraint firstItem="CE3-67-Zgh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="pw4-Xd-UGw"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
