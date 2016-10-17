@@ -8,6 +8,8 @@
 
 #import "RPGResponse.h"
 
+extern NSString * const kRPGResponseSerializationStatus;
+
 @interface RPGResponse (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
