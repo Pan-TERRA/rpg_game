@@ -69,13 +69,13 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
     
     if (self)
     {
-        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/PeaceMusic.mp3"]] autorelease];
+        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BackGround/PeaceMusic.mp3"]] autorelease];
         _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
         
         _peacePlayer.numberOfLoops = -1;
         _peacePlayer.delegate = self;
         
-        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BattleMusic.mp3"]] autorelease];
+        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BackGround/BattleMusic.mp3"]] autorelease];
         _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
         
         _battlePlayer.numberOfLoops = -1;

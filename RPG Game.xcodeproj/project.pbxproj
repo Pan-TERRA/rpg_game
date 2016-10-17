@@ -40,6 +40,12 @@
 		D08ECC461DAFCD240092F705 /* RPGBackgroundMusicController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08ECC451DAFCD240092F705 /* RPGBackgroundMusicController.m */; };
 		D0B229131B6ECC8305E5F55A /* libPods-RPG GameTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */; };
 		D0CFEE521DB1180600C61D0B /* Sounds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0CFEE511DB1180600C61D0B /* Sounds.bundle */; };
+		D0CFEE551DB13B2200C61D0B /* RPGSFXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE541DB13B2200C61D0B /* RPGSFXEngine.m */; };
+		D0CFEE571DB281A900C61D0B /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CFEE561DB281A900C61D0B /* AudioToolbox.framework */; };
+		D0CFEE601DB2946E00C61D0B /* AppleOpenALSupport.c in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE5B1DB2946E00C61D0B /* AppleOpenALSupport.c */; };
+		D0CFEE611DB2946E00C61D0B /* CMOpenALSound.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE5D1DB2946E00C61D0B /* CMOpenALSound.m */; };
+		D0CFEE621DB2946E00C61D0B /* CMOpenALSoundManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE5F1DB2946E00C61D0B /* CMOpenALSoundManager.m */; };
+		D0CFEE641DB2948000C61D0B /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0CFEE631DB2948000C61D0B /* OpenAL.framework */; };
 		E16485521798629D274B394A /* libPods-RPG GameUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +129,17 @@
 		D08ECC441DAFCD240092F705 /* RPGBackgroundMusicController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBackgroundMusicController.h; sourceTree = "<group>"; };
 		D08ECC451DAFCD240092F705 /* RPGBackgroundMusicController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBackgroundMusicController.m; sourceTree = "<group>"; };
 		D0CFEE511DB1180600C61D0B /* Sounds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sounds.bundle; sourceTree = "<group>"; };
+		D0CFEE531DB13B2200C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
+		D0CFEE541DB13B2200C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
+		D0CFEE561DB281A900C61D0B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		D0CFEE591DB2946E00C61D0B /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+		D0CFEE5A1DB2946E00C61D0B /* AppleOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleOpenALSupport.h; sourceTree = "<group>"; };
+		D0CFEE5B1DB2946E00C61D0B /* AppleOpenALSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AppleOpenALSupport.c; sourceTree = "<group>"; };
+		D0CFEE5C1DB2946E00C61D0B /* CMOpenALSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOpenALSound.h; sourceTree = "<group>"; };
+		D0CFEE5D1DB2946E00C61D0B /* CMOpenALSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMOpenALSound.m; sourceTree = "<group>"; };
+		D0CFEE5E1DB2946E00C61D0B /* CMOpenALSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOpenALSoundManager.h; sourceTree = "<group>"; };
+		D0CFEE5F1DB2946E00C61D0B /* CMOpenALSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMOpenALSoundManager.m; sourceTree = "<group>"; };
+		D0CFEE631DB2948000C61D0B /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		D152597090E5403B60AB645B /* Pods-RPG GameTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F6D4CAB61431492EB7A0347B /* Pods-RPG GameUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -132,6 +149,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0CFEE641DB2948000C61D0B /* OpenAL.framework in Frameworks */,
+				D0CFEE571DB281A900C61D0B /* AudioToolbox.framework in Frameworks */,
 				D08ECC431DAFCCE90092F705 /* AVFoundation.framework in Frameworks */,
 				580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */,
 			);
@@ -278,6 +297,9 @@
 				288E86011DABDADB00321F4D /* RPGMainViewController.m */,
 				AED6F5711DACD641007ED1B8 /* RPGMainView.xib */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
+				D0CFEE531DB13B2200C61D0B /* RPGSFXEngine.h */,
+				D0CFEE541DB13B2200C61D0B /* RPGSFXEngine.m */,
+				D0CFEE581DB2945C00C61D0B /* SFX Engine */,
 				D0CFEE511DB1180600C61D0B /* Sounds.bundle */,
 				D08ECC411DAFCB980092F705 /* BackGround Music */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
@@ -315,6 +337,8 @@
 		4BA921AB8CB063DE64593829 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0CFEE631DB2948000C61D0B /* OpenAL.framework */,
+				D0CFEE561DB281A900C61D0B /* AudioToolbox.framework */,
 				D08ECC421DAFCCE90092F705 /* AVFoundation.framework */,
 				9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */,
 				03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */,
@@ -357,6 +381,20 @@
 			name = "BackGround Music";
 			sourceTree = "<group>";
 		};
+		D0CFEE581DB2945C00C61D0B /* SFX Engine */ = {
+			isa = PBXGroup;
+			children = (
+				D0CFEE591DB2946E00C61D0B /* SynthesizeSingleton.h */,
+				D0CFEE5A1DB2946E00C61D0B /* AppleOpenALSupport.h */,
+				D0CFEE5B1DB2946E00C61D0B /* AppleOpenALSupport.c */,
+				D0CFEE5C1DB2946E00C61D0B /* CMOpenALSound.h */,
+				D0CFEE5D1DB2946E00C61D0B /* CMOpenALSound.m */,
+				D0CFEE5E1DB2946E00C61D0B /* CMOpenALSoundManager.h */,
+				D0CFEE5F1DB2946E00C61D0B /* CMOpenALSoundManager.m */,
+			);
+			name = "SFX Engine";
+			sourceTree = "<group>";
+		};
 		E0FB3B1D4713C9AB3E8A6BD4 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -377,12 +415,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 288E85F71DABDA8A00321F4D /* Build configuration list for PBXNativeTarget "RPG Game" */;
 			buildPhases = (
-				D6441C71AA7D7F4358A055AA /* 📦 Check Pods Manifest.lock */,
+				D6441C71AA7D7F4358A055AA /* [CP] Check Pods Manifest.lock */,
 				288E85C61DABDA8A00321F4D /* Sources */,
 				288E85C71DABDA8A00321F4D /* Frameworks */,
 				288E85C81DABDA8A00321F4D /* Resources */,
-				8B530ACAAEB6DFB82A0BB84E /* 📦 Embed Pods Frameworks */,
-				C7E41382EC6D294D4D0458BB /* 📦 Copy Pods Resources */,
+				8B530ACAAEB6DFB82A0BB84E /* [CP] Embed Pods Frameworks */,
+				C7E41382EC6D294D4D0458BB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -397,12 +435,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 288E85FA1DABDA8A00321F4D /* Build configuration list for PBXNativeTarget "RPG GameTests" */;
 			buildPhases = (
-				ED7179B799121BF053E9161F /* 📦 Check Pods Manifest.lock */,
+				ED7179B799121BF053E9161F /* [CP] Check Pods Manifest.lock */,
 				288E85DF1DABDA8A00321F4D /* Sources */,
 				288E85E01DABDA8A00321F4D /* Frameworks */,
 				288E85E11DABDA8A00321F4D /* Resources */,
-				520B73D55657C4B6218573A8 /* 📦 Embed Pods Frameworks */,
-				96E1935ACC3FAE91D6F02A10 /* 📦 Copy Pods Resources */,
+				520B73D55657C4B6218573A8 /* [CP] Embed Pods Frameworks */,
+				96E1935ACC3FAE91D6F02A10 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -418,11 +456,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 288E85FD1DABDA8A00321F4D /* Build configuration list for PBXNativeTarget "RPG GameUITests" */;
 			buildPhases = (
-				D4D23F35D90D259EBFD5D3B9 /* 📦 Check Pods Manifest.lock */,
+				D4D23F35D90D259EBFD5D3B9 /* [CP] Check Pods Manifest.lock */,
 				288E85EA1DABDA8A00321F4D /* Sources */,
 				288E85EB1DABDA8A00321F4D /* Frameworks */,
 				288E85EC1DABDA8A00321F4D /* Resources */,
-				BB4B8AE76E5C08D611384991 /* 📦 Copy Pods Resources */,
+				BB4B8AE76E5C08D611384991 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -511,14 +549,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		520B73D55657C4B6218573A8 /* 📦 Embed Pods Frameworks */ = {
+		520B73D55657C4B6218573A8 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,14 +564,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		8B530ACAAEB6DFB82A0BB84E /* 📦 Embed Pods Frameworks */ = {
+		8B530ACAAEB6DFB82A0BB84E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -541,14 +579,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		96E1935ACC3FAE91D6F02A10 /* 📦 Copy Pods Resources */ = {
+		96E1935ACC3FAE91D6F02A10 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,14 +594,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BB4B8AE76E5C08D611384991 /* 📦 Copy Pods Resources */ = {
+		BB4B8AE76E5C08D611384991 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -571,14 +609,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C7E41382EC6D294D4D0458BB /* 📦 Copy Pods Resources */ = {
+		C7E41382EC6D294D4D0458BB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,14 +624,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D4D23F35D90D259EBFD5D3B9 /* 📦 Check Pods Manifest.lock */ = {
+		D4D23F35D90D259EBFD5D3B9 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -601,14 +639,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D6441C71AA7D7F4358A055AA /* 📦 Check Pods Manifest.lock */ = {
+		D6441C71AA7D7F4358A055AA /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -616,14 +654,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		ED7179B799121BF053E9161F /* 📦 Check Pods Manifest.lock */ = {
+		ED7179B799121BF053E9161F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -639,6 +677,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D08ECC391DAE74080092F705 /* NibNames.m in Sources */,
+				D0CFEE551DB13B2200C61D0B /* RPGSFXEngine.m in Sources */,
 				283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */,
 				AED6F5781DACD641007ED1B8 /* RPGSettingsViewController.m in Sources */,
 				281499E61DAE36E300C26881 /* RPGAuthorizationRequest+Serialization.m in Sources */,
@@ -652,9 +691,12 @@
 				288E85CF1DABDA8A00321F4D /* main.m in Sources */,
 				283ADCFE1DAD3D1C00BDC706 /* RPGNetworkManager.m in Sources */,
 				283ADD031DAD454000BDC706 /* RPGRequest+Serialization.m in Sources */,
+				D0CFEE601DB2946E00C61D0B /* AppleOpenALSupport.c in Sources */,
+				D0CFEE611DB2946E00C61D0B /* CMOpenALSound.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,
 				283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */,
+				D0CFEE621DB2946E00C61D0B /* CMOpenALSoundManager.m in Sources */,
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
 			);
