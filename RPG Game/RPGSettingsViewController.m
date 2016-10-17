@@ -8,6 +8,7 @@
 
 #import "RPGSettingsViewController.h"
 #import "RPGMainViewController.h"
+#import "RPGNetworkManager.h"
 
 @interface RPGSettingsViewController ()
 
@@ -47,7 +48,13 @@
 
 - (IBAction)logOut
 {
-  
+  RPGNetworkManager *networkManager = [RPGNetworkManager sharedNetworkManager];
+  [networkManager logoutWithCompletionHandler:^(int status)
+  {
+    NSString *message = (status == 0 ? @"Ok" : @"Something went wrong. Try to delete your iOS and install a new one");
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Log out" message:message preferredStyle:UIAlertControllerStyleAlert];
+    [self presentViewController:alert animated:YES completion:nil];
+  }];
 }
 
 
