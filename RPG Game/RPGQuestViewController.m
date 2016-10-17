@@ -8,8 +8,10 @@
 
 #import "RPGQuestViewController.h"
 #import "RPGQuestListViewController.h"
+#import "RPGQuestProofImageViewController.h"
+#import "NibNames.h"
 
-@interface RPGQuestViewController ()
+@interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
@@ -29,11 +31,16 @@
 
 @implementation RPGQuestViewController
 
-#pragma mark - UIViewController methods
+#pragma mark - UIViewController Methods
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
+  tapGesture.numberOfTapsRequired = 1;
+  [self.proofImageView setUserInteractionEnabled:YES];
+  [self.proofImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,8 +55,8 @@
   self.titleLabel.text = [viewContent objectForKey:kRPGQuestTitle];
   self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestDescription];
   self.rewardLabel.text = [viewContent objectForKey:kRPGQuestReward];
-  RPGQuestState state = [[viewContent objectForKey:kRPGQuestState] integerValue];
-  switch (state)
+  self.state = [[viewContent objectForKey:kRPGQuestState] integerValue];
+  switch (self.state)
   {
     case kRPGQuestStateCanTake:
       [self setStateTakeQuest];
@@ -71,6 +78,19 @@
       break;
     case kRPGQuestStateReviewedTrue:
       [self setStateReviewedQuest:YES];
+      break;
+    default:
+      break;
+  }
+  
+  switch (self.state)
+  {
+    case kRPGQuestStateDone:
+    case kRPGQuestStateReviewedFalse:
+    case kRPGQuestStateForReview:
+    case kRPGQuestStateReviewedTrue:
+      //upload image from server
+      //self.proofImageView.image = ...
       break;
     default:
       break;
@@ -146,12 +166,44 @@
 
 - (IBAction)addProofButtonOnClick:(UIButton *)sender
 {
-  //open camera to make photo
+  UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+  picker.delegate = self;
+  picker.allowsEditing = YES;
+  picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+  [self presentViewController:picker animated:YES completion:nil];
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)handleTapGesture
+{
+  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] initWithNibName:kRPGQuestProofImageViewController bundle:nil] autorelease];
+  [self presentViewController:questProofImageViewController animated:YES completion:nil];
+  [questProofImageViewController setImage:self.proofImageView.image];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+  // !!!: leak
+  self.proofImageView.image = chosenImage;
+  
+  self.state = kRPGQuestStateDone;
+  [self setStateReviewedQuest:NO];
+  self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+  
+  //send image to server
+  [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+  [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end
