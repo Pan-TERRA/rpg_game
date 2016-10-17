@@ -28,6 +28,12 @@
 {
   self = [super init];
   
+  if (aCharacterType == -1)
+  {
+    [self release];
+    self = nil;
+  }
+  
   if (self != nil)
   {
     _email = [anEmail copy];
@@ -49,7 +55,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self initWithEmail:nil password:nil characterName:nil characterType:-1];
 }
 
 #pragma mark - Dealloc
