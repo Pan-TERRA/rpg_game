@@ -17,7 +17,7 @@
 @property (nonatomic, readwrite) NSInteger gold;
 @property (nonatomic, readwrite) NSInteger crystals;
 
-@property (copy, nonatomic, readwrite) NSDictionary *characters;
+@property (copy, nonatomic, readwrite) NSArray *characters;
 
 @end
 
@@ -30,25 +30,40 @@
 @synthesize gold = _gold;
 @synthesize crystals = _crystals;
 
-@synthesize characters = characters;
+@synthesize characters = _characters;
 
 #pragma mark - Init
 
-- (instancetype)initWithToken:(NSString *)aToken
+- (instancetype)initWithUsername:(NSString *)aUsername
+                           token:(NSString *)aToken
+                          avatar:(NSString *)anAvatar
+                            gold:(NSInteger)aGold
+                        crystals:(NSInteger)aCrystals
+                      characters:(NSArray *)aCharacters
 {
   self = [super init];
   
   if (self != nil)
   {
+    _username = [aUsername copy];
     _token = [aToken copy];
+    _avatar = [anAvatar copy];
+    _gold = aGold;
+    _crystals = aCrystals;
+    _characters = [aCharacters retain];
   }
   
   return self;
 }
 
-+ (instancetype)requestWithToken:(NSString *)aToken
++ (instancetype)responseWithUsername:(NSString *)aUsername
+                               token:(NSString *)aToken
+                              avatar:(NSString *)anAvatar
+                                gold:(NSInteger)aGold
+                            crystals:(NSInteger)aCrystals
+                          characters:(NSArray *)aCharacters
 {
-  return [[[self alloc] initWithToken:aToken] autorelease];
+  return [[[self alloc] initWithUsername:aUsername token:aToken avatar:anAvatar gold:aGold crystals:aCrystals characters:aCharacters] autorelease];
 }
 
 - (instancetype)init
@@ -60,7 +75,10 @@
 
 - (void)dealloc
 {
+  [_username release];
   [_token release];
+  [_avatar release];
+  [_characters release];
   
   [super dealloc];
 }

@@ -8,8 +8,8 @@
 
 #import "RPGResponse+Serialization.h"
 
-static NSString *const kRPGResponseSerializationType = @"type";
-static NSString *const kRPGResponseSerializationStatus = @"status";
+NSString * const kRPGResponseSerializationType = @"type";
+NSString * const kRPGResponseSerializationStatus = @"status";
 
 @implementation RPGResponse (Serialization)
 

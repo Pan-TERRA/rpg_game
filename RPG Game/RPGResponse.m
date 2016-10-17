@@ -26,6 +26,12 @@
 {
   self = [super init];
   
+  if (aStatus == -1)
+  {
+    [self release];
+    self = nil;
+  }
+
   if (self != nil)
   {
     _type = [aType copy];
@@ -37,7 +43,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self initWithType:nil status:-1];
 }
 
 + (instancetype)requestWithType:(NSString *)aType status:(int)aStatus
