@@ -193,15 +193,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		281499E01DAE300600C26881 /* Authorization */ = {
-			isa = PBXGroup;
-			children = (
-				281499F61DAFCC7E00C26881 /* Login */,
-				281499F71DAFCC8300C26881 /* Logout */,
-			);
-			name = Authorization;
-			sourceTree = "<group>";
-		};
 		281499E91DAFC93A00C26881 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -214,10 +205,8 @@
 		281499EA1DAFC94100C26881 /* Logout */ = {
 			isa = PBXGroup;
 			children = (
-				281499F31DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.h */,
-				281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */,
-				28149A0B1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.h */,
-				28149A0C1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m */,
+				281723561DB5204200F74403 /* Request */,
+				281723571DB5204900F74403 /* Response */,
 			);
 			name = Logout;
 			sourceTree = "<group>";
@@ -225,10 +214,8 @@
 		281499EB1DAFC95300C26881 /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				281499F01DAFCC6200C26881 /* RPGAuthorizationLoginResponse.h */,
-				281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */,
-				28149A081DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.h */,
-				28149A091DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m */,
+				281723541DB5203400F74403 /* Request */,
+				281723551DB5203C00F74403 /* Response */,
 			);
 			name = Login;
 			sourceTree = "<group>";
@@ -244,8 +231,11 @@
 		281499ED1DAFC96800C26881 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				281499EF1DAFC97300C26881 /* Response */,
-				281499EE1DAFC96E00C26881 /* Request */,
+				281723591DB5207500F74403 /* General */,
+				283ADCFF1DAD3F8600BDC706 /* Quest */,
+				2A8D9B9C1DB14ACB0026A5AB /* Time */,
+				283ADD001DAD3F9100BDC706 /* Battle Init */,
+				283ADD0C1DAD500E00BDC706 /* Battle Condition */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -268,34 +258,8 @@
 				283ADCFA1DAD3CBA00BDC706 /* RPGResponse.m */,
 				283ADD061DAD46EC00BDC706 /* RPGResponse+Serialization.h */,
 				283ADD071DAD46EC00BDC706 /* RPGResponse+Serialization.m */,
-				283ADD0C1DAD500E00BDC706 /* Battle Condition */,
-				283ADD001DAD3F9100BDC706 /* Battle Init */,
-				2A8D9B9C1DB14ACB0026A5AB /* Time */,
-				283ADCFF1DAD3F8600BDC706 /* Quest */,
 			);
 			name = Response;
-			sourceTree = "<group>";
-		};
-		281499F61DAFCC7E00C26881 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				281499FB1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.h */,
-				281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */,
-				281499FF1DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.h */,
-				28149A001DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.m */,
-			);
-			name = Login;
-			sourceTree = "<group>";
-		};
-		281499F71DAFCC8300C26881 /* Logout */ = {
-			isa = PBXGroup;
-			children = (
-				28149A021DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.h */,
-				28149A031DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m */,
-				28149A051DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.h */,
-				28149A061DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.m */,
-			);
-			name = Logout;
 			sourceTree = "<group>";
 		};
 		28149A111DB1008100C26881 /* Battle */ = {
@@ -349,6 +313,70 @@
 			name = Registration;
 			sourceTree = "<group>";
 		};
+		281723541DB5203400F74403 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				281499FB1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.h */,
+				281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */,
+				281499FF1DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.h */,
+				28149A001DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		281723551DB5203C00F74403 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				281499F01DAFCC6200C26881 /* RPGAuthorizationLoginResponse.h */,
+				281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */,
+				28149A081DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.h */,
+				28149A091DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		281723561DB5204200F74403 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				28149A021DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.h */,
+				28149A031DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m */,
+				28149A051DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.h */,
+				28149A061DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		281723571DB5204900F74403 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				281499F31DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.h */,
+				281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */,
+				28149A0B1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.h */,
+				28149A0C1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		281723581DB5205200F74403 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */,
+				2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */,
+				2A8D9BA71DB252170026A5AB /* RPGRegistrationRequest+Serialization.h */,
+				2A8D9BA81DB252170026A5AB /* RPGRegistrationRequest+Serialization.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		281723591DB5207500F74403 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				281499EE1DAFC96E00C26881 /* Request */,
+				281499EF1DAFC97300C26881 /* Response */,
+			);
+			name = General;
+			sourceTree = "<group>";
+		};
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {
 			isa = PBXGroup;
 			children = (
@@ -362,8 +390,8 @@
 		283ADCF51DAD3C8000BDC706 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				283ADD041DAD454B00BDC706 /* Request */,
-				283ADD051DAD463700BDC706 /* Response */,
+				2A8D9BA31DB163F20026A5AB /* Registration */,
+				281499E91DAFC93A00C26881 /* Authorization */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -382,23 +410,6 @@
 				283ADD0A1DAD48DA00BDC706 /* RPGBattleInitResponse.m */,
 			);
 			name = "Battle Init";
-			sourceTree = "<group>";
-		};
-		283ADD041DAD454B00BDC706 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				2A8D9BA31DB163F20026A5AB /* Registration */,
-				281499E01DAE300600C26881 /* Authorization */,
-			);
-			name = Request;
-			sourceTree = "<group>";
-		};
-		283ADD051DAD463700BDC706 /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				281499E91DAFC93A00C26881 /* Authorization */,
-			);
-			name = Response;
 			sourceTree = "<group>";
 		};
 		283ADD0C1DAD500E00BDC706 /* Battle Condition */ = {
@@ -494,10 +505,7 @@
 		2A8D9BA31DB163F20026A5AB /* Registration */ = {
 			isa = PBXGroup;
 			children = (
-				2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */,
-				2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */,
-				2A8D9BA71DB252170026A5AB /* RPGRegistrationRequest+Serialization.h */,
-				2A8D9BA81DB252170026A5AB /* RPGRegistrationRequest+Serialization.m */,
+				281723581DB5205200F74403 /* Request */,
 			);
 			name = Registration;
 			sourceTree = "<group>";
