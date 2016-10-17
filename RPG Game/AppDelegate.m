@@ -31,18 +31,18 @@
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
   
-  RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc]
-                                                                  init]
-                                                                  autorelease];
-  [self.window setRootViewController:registrationViewController];
+//  RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc]
+//                                                                  init]
+//                                                                  autorelease];
+//  [self.window setRootViewController:registrationViewController];
  
-//  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
-//                                                 initWithNibName:@"RPGLoginViewController"
-//                                                          bundle:nil];
-//  self.loginViewController = loginViewController;
-//  [self.window setRootViewController:loginViewController];
-//  
-//  [loginViewController release];
+  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
+                                                 initWithNibName:@"RPGLoginViewController"
+                                                          bundle:nil];
+  self.loginViewController = loginViewController;
+  [self.window setRootViewController:loginViewController];
+  
+  [loginViewController release];
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
