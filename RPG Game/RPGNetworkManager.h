@@ -8,8 +8,7 @@
   
 #import <Foundation/Foundation.h>
 
-
-
+@class RPGRegistrationRequest;
 @class RPGAuthorizationLoginRequest;
 @class RPGAuthorizationLoginResponse;
 
@@ -26,9 +25,10 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-                   block:(void (^)(BOOL))callbackBlock;
-- (void)logout;
-- (void)registration;
+       completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock;
+- (void)logoutWithCompletionHandler:(void (^)(int))callbackBlock;
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
+          completionHandler:(void (^)(int))callbackBlock;
 
 #pragma mark - Quest API
 
