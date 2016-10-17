@@ -8,7 +8,7 @@
 
 #import "RPGTimeResponse.h"
 
-static NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
+NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
 
 @interface RPGTimeResponse ()
 
@@ -20,9 +20,9 @@ static NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
 
 #pragma mark - Init
 
-- (instancetype)initWithTimestamp:(NSDate *)aTimestamp
+- (instancetype)initWithTimestamp:(NSDate *)aTimestamp status:(int)aStatus
 {
-  self = [super initWithType:kRPGTimeResponseType];
+  self = [super initWithType:kRPGTimeResponseType status:aStatus];
   
   if (self != nil)
   {
@@ -32,22 +32,22 @@ static NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
   return self;
 }
 
-- (instancetype)initWithUnixTimestamp:(int)aUnixTimestamp
+- (instancetype)initWithUnixTimestamp:(int)aUnixTimestamp status:(int)aStatus
 {
   //NSTimeInteval is typedef double
   NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)aUnixTimestamp];
   
-  return [self initWithTimestamp:timestamp];
+  return [self initWithTimestamp:timestamp status:aStatus];
 }
 
-+ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp
++ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp status:(int)aStatus
 {
-  return [[[self alloc] initWithTimestamp:aTimestamp] autorelease];
+  return [[[self alloc] initWithTimestamp:aTimestamp status:aStatus] autorelease];
 }
 
-+ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp
++ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp status:(int)aStatus
 {
-  return [[[self alloc] initWithUnixTimestamp:aTimestamp] autorelease];
+  return [[[self alloc] initWithUnixTimestamp:aTimestamp status:aStatus] autorelease];
 }
 
 #pragma mark - Dealloc

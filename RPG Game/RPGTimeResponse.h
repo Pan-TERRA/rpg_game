@@ -14,9 +14,9 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithTimestamp:(NSDate *)aTimestamp;
-+ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp;
-- (instancetype)initWithUnixTimestamp:(int)aTimestamp;
-+ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp;
+- (instancetype)initWithTimestamp:(NSDate *)aTimestamp status:(int)aStatus;
++ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp status:(int)aStatus;
+- (instancetype)initWithUnixTimestamp:(int)aTimestamp status:(int)aStatus;
++ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp status:(int)aStatus;
 
 @end
