@@ -9,6 +9,8 @@
 #import "RPGSettingsViewController.h"
 #import "RPGBackgroundMusicController.h"
 
+#import "RPGSFXEngine.h"
+
 @interface RPGSettingsViewController ()
 
 @property (retain, nonatomic) IBOutlet UISwitch *musicSwitch;
@@ -46,12 +48,12 @@
 
 - (IBAction)soundTurn:(UISwitch *)sender
 {
-    sender.state ? NSLog(@"Sound On") : NSLog(@"Sound Off");
+    [[RPGSFXEngine sharedSFXEngine] toggle:sender.on];
 }
 
 - (IBAction)soundVolumeChange:(UISlider *)sender
 {
-    NSLog(@"Sound Volume = %f", sender.value);
+    [[RPGSFXEngine sharedSFXEngine] changeVolume:sender.value];
 }
 
 
@@ -59,6 +61,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].state;
+    self.musicVolumeSlider.value = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
+    
+    self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].state;
+    self.soundVolumeSlider.value = [[RPGSFXEngine sharedSFXEngine] getVolume];
 }
 
 - (void)didReceiveMemoryWarning

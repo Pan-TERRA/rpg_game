@@ -20,10 +20,33 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 
 @implementation RPGSFXEngine
 
+- (void)changeVolume:(double)volume
+{
+    [self.soundManager setSoundEffectsVolume:volume];
+}
+
+- (void)toggle:(BOOL)state
+{
+    self.state = state;
+}
+
 - (void)playSFXNamed:(NSString *)name
 {
-    self.soundManager.soundFileNames = [NSArray arrayWithObject:@"Sounds.bundle/SFX/SPLAT_Crush01.wav"];
-    [self.soundManager playSoundWithID:0];
+    if (self.state)
+    {
+        self.soundManager.soundFileNames = [NSArray arrayWithObject:[NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name]];
+        [self.soundManager playSoundWithID:0];
+    }
+}
+
+- (void)playSFXWithSpellID:(NSUInteger)identifier
+{
+    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", identifier]];
+}
+
+- (double)getVolume
+{
+    return self.soundManager.soundEffectsVolume;
 }
 
 #pragma mark - Singleton
@@ -36,6 +59,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
         {
             sharedSFXEngine = [[super allocWithZone:NULL] init];
             sharedSFXEngine.soundManager = [[CMOpenALSoundManager new] autorelease];
+            sharedSFXEngine.state = YES;
         }
     }
     return sharedSFXEngine;

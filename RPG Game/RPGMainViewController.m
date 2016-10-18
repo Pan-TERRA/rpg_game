@@ -32,7 +32,7 @@
 
 - (IBAction)segueToShop
 {
-    [[RPGSFXEngine sharedSFXEngine] playSFXNamed:@""];
+
 }
 
 - (IBAction)segueToChar

@@ -6,38 +6,29 @@
 //
 //	Portions of this code are adapted from Apple's oalTouch example and
 //	http://www.gehacktes.net/2009/03/iphone-programming-part-6-multiple-sounds-with-openal/
-//
-//  This code is released under the creative commons attribution-share alike licence, meaning:
-//
-//	Attribution - You must attribute the work in the manner specified by the author or licensor 
-//	(but not in any way that suggests that they endorse you or your use of the work).
-//	In this case, simple credit somewhere in your app or documentation will suffice.
-//
-//	Share Alike - If you alter, transform, or build upon this work, you may distribute the resulting
-//	work only under the same, similar or a compatible license.
-//	Simply put, if you improve upon it, share!
-//
-//	http://creativecommons.org/licenses/by-sa/3.0/us/
+
 
 #import "CMOpenALSound.h"
 #import "AppleOpenALSupport.h"
 
 @interface CMOpenALSound()
+
 @property (nonatomic, retain) NSMutableArray *temporarySounds;
 @property (nonatomic, copy) NSString *sourceFileName;
--(BOOL) loadSoundFile:(NSString *)file doesLoop:(BOOL)loops;
+
+- (BOOL)loadSoundFile:(NSString *)file doesLoop:(BOOL)loops;
+
 @end
 
 @implementation CMOpenALSound
 @synthesize error, temporarySounds, duration, sourceFileName;
 
-#pragma mark -
-#pragma mark init/dealloc
-//initialize with a sound file...
-- (id) initWithSoundFile:(NSString *)file doesLoop:(BOOL)loops
+#pragma mark - Init/Dealloc
+
+- (instancetype)initWithSoundFile:(NSString *)file doesLoop:(BOOL)loops
 {
 	self = [super init];
-	if (self != nil) 
+	if (self)
 	{		
 		if(![self loadSoundFile:file doesLoop:loops])
 		{
@@ -70,7 +61,6 @@
 		//tmpSourceID is the source ID for the temporary sound
 		NSUInteger srcID = [tmpSourceID unsignedIntegerValue];
 		alDeleteSources(1, ((ALuint*)&srcID));
-        //????????????????????????????????????????  alDeleteSources(1, &srcID);
 	}
 	[temporarySounds release];
 	
@@ -88,9 +78,8 @@
 	[super dealloc];
 }
 
-#pragma mark -
-#pragma mark loading
--(BOOL) loadSoundFile:(NSString *)fileName doesLoop:(BOOL)loops
+#pragma mark - Loading
+- (BOOL)loadSoundFile:(NSString *)fileName doesLoop:(BOOL)loops
 {		
 	ALenum  format;
 	ALsizei size;
@@ -103,7 +92,10 @@
 	NSString *path = [bundle pathForResource:[fileName stringByDeletingPathExtension] 
 									  ofType:[fileName pathExtension]];
 	
-	if(!path) return NO;
+	if(!path)
+    {
+        return NO;
+    }
 	
 	CFURLRef fileURL = (CFURLRef)[[NSURL fileURLWithPath:path] retain];
 	
@@ -134,8 +126,9 @@
 	alSourcei(sourceID, AL_BUFFER, bufferID);
 	
 	if (loops)
+    {
 		alSourcei(sourceID, AL_LOOPING, AL_TRUE);
-	
+    }
 	
 	if((error = alGetError()) != AL_NO_ERROR) 
 	{
@@ -146,22 +139,20 @@
 	return YES;	
 }
 
-#pragma mark -
-#pragma mark playback
-- (void) deleteTemporarySource
+#pragma mark - Playback
+- (void)deleteTemporarySource
 {
 	//dequeue a sourceID from the temporary sound queue
 	NSUInteger tmpSourceID = [[temporarySounds objectAtIndex:0] unsignedIntegerValue];
 	[temporarySounds removeObjectAtIndex:0];
 	
-	NSLog(@"Deleting temporary source: sourceID: %u, [temporarySounds count]:%lu", (ALuint)tmpSourceID, (unsigned long)[temporarySounds count]);
+//	NSLog(@"Deleting temporary source: sourceID: %u, [temporarySounds count]:%lu", (ALuint)tmpSourceID, (unsigned long)[temporarySounds count]);
 	//and delete the source to make it available again for another sound.
-	//alDeleteSources(1, &tmpSourceID);
     alDeleteSources(1, (ALuint*)&tmpSourceID);
 
 }
 
-- (BOOL) play
+- (BOOL)play
 {
 	if([self isPlaying]) //see if the base source is busy...
 	{
@@ -190,26 +181,26 @@
 	return ((error = alGetError()) != AL_NO_ERROR);
 }
 
-- (BOOL) stop
+- (BOOL)stop
 {
 	alSourceStop(sourceID);
 	return ((error = alGetError()) != AL_NO_ERROR);
 }
 
-- (BOOL) pause
+- (BOOL)pause
 {
 	alSourcePause(sourceID);
 	return ((error = alGetError()) != AL_NO_ERROR);
 }
 
-- (BOOL) rewind
+- (BOOL)rewind
 {
 	alSourceRewind(sourceID);
 	return ((error = alGetError()) != AL_NO_ERROR);
 }
 
 // returns whether the BASE source is playing or not
-- (BOOL) isPlaying
+- (BOOL)isPlaying
 {	
 	ALenum state;	
     alGetSourcei(sourceID, AL_SOURCE_STATE, &state);
@@ -223,8 +214,7 @@
 	return [self isPlaying] || [temporarySounds count] > 0;
 }
 
-#pragma mark -
-#pragma mark properties
+#pragma mark - Properties
 - (ALfloat) volume
 {
 	return volume;

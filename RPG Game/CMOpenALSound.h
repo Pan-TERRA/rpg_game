@@ -6,18 +6,7 @@
 //
 //	Portions of this code are adapted from Apple's oalTouch example and
 //	http://www.gehacktes.net/2009/03/iphone-programming-part-6-multiple-sounds-with-openal/
-//
-//  This code is released under the creative commons attribution-share alike licence, meaning:
-//
-//	Attribution - You must attribute the work in the manner specified by the author or licensor 
-//	(but not in any way that suggests that they endorse you or your use of the work).
-//	In this case, simple credit somewhere in your app or documentation will suffice.
-//
-//	Share Alike - If you alter, transform, or build upon this work, you may distribute the resulting
-//	work only under the same, similar or a compatible license.
-//	Simply put, if you improve upon it, share!
-//
-//	http://creativecommons.org/licenses/by-sa/3.0/us/
+
 
 #import <Foundation/Foundation.h>
 #import <AudioToolbox/AudioToolbox.h>
@@ -45,7 +34,7 @@
 @property (nonatomic) ALfloat pitch;
 @property (nonatomic, copy, readonly) NSString *sourceFileName;
 
-- (id) initWithSoundFile:(NSString *)file doesLoop:(BOOL)loops;
+- (instancetype)initWithSoundFile:(NSString *)file doesLoop:(BOOL)loops;
 
 - (BOOL) play;
 - (BOOL) stop;

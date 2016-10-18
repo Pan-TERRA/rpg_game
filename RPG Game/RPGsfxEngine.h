@@ -10,8 +10,15 @@
 
 @interface RPGSFXEngine : NSObject
 
+@property (nonatomic, assign) BOOL state;
+
 + (instancetype)sharedSFXEngine;
 
 - (void)playSFXNamed:(NSString *)name;
+- (void)playSFXWithSpellID:(NSUInteger)identifier;
+
+- (void)changeVolume:(double)volume;
+- (double)getVolume;
+- (void)toggle:(BOOL)state;
 
 @end

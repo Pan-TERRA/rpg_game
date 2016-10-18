@@ -15,8 +15,6 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 @property (nonatomic, retain) AVAudioPlayer *peacePlayer;
 @property (nonatomic, retain) AVAudioPlayer *battlePlayer;
 
-@property (nonatomic) BOOL state;
-
 @end
 
 @implementation RPGBackgroundMusicController
@@ -59,6 +57,11 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
         [self.peacePlayer pause];
         [self.battlePlayer pause];
     }
+}
+
+- (double)getVolume
+{
+    return self.peacePlayer.volume;
 }
 
 #pragma mark - Init

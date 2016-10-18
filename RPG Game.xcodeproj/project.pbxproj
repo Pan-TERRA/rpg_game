@@ -132,7 +132,6 @@
 		D0CFEE531DB13B2200C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
 		D0CFEE541DB13B2200C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
 		D0CFEE561DB281A900C61D0B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		D0CFEE591DB2946E00C61D0B /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
 		D0CFEE5A1DB2946E00C61D0B /* AppleOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleOpenALSupport.h; sourceTree = "<group>"; };
 		D0CFEE5B1DB2946E00C61D0B /* AppleOpenALSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AppleOpenALSupport.c; sourceTree = "<group>"; };
 		D0CFEE5C1DB2946E00C61D0B /* CMOpenALSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOpenALSound.h; sourceTree = "<group>"; };
@@ -384,7 +383,6 @@
 		D0CFEE581DB2945C00C61D0B /* SFX Engine */ = {
 			isa = PBXGroup;
 			children = (
-				D0CFEE591DB2946E00C61D0B /* SynthesizeSingleton.h */,
 				D0CFEE5A1DB2946E00C61D0B /* AppleOpenALSupport.h */,
 				D0CFEE5B1DB2946E00C61D0B /* AppleOpenALSupport.c */,
 				D0CFEE5C1DB2946E00C61D0B /* CMOpenALSound.h */,
