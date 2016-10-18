@@ -15,7 +15,7 @@
 @interface RPGNetworkManager (Authorization)
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock;
-- (void)logoutWithCompletionHandler:(void (^)(int))callbackBlock;
+       completionHandler:(void (^)(NSInteger))callbackBlock;
+- (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock;
 
 @end

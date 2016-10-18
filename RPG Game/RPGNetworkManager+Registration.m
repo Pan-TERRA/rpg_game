@@ -12,18 +12,25 @@
 
 @implementation RPGNetworkManager (Registration)
 
-- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/register"];
   
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:0];
-  
+   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
+  
+  if (JSONSerializationError != nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from register request"
+                           userInfo:nil] raise];
+  }
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
@@ -34,17 +41,45 @@
                                           completionHandler:^(NSData *data,
                                                               NSURLResponse *response,
                                                               NSError *error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock([responseDictionary[@"status"] intValue]);
-                                                 });
-                                }];
+  {
+    NSDictionary *responseDictionary = nil;
+    NSInteger status = 0;
+    NSError *JSONParsingError = nil;
+
+    if (error != nil)
+    {
+      status = 1;
+    }
+    
+    if (data != nil)
+    {
+      responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:0
+                                                             error:&JSONParsingError];
+      
+      if (JSONParsingError != nil)
+      {
+          // ???: tramper question
+        status = 3;
+      }
+      else
+      {
+        
+      }
+      
+    }
+    else
+    {
+      status = 2;
+    }
+    
+    status = (status != 0) ? status : [responseDictionary[@"status"] integerValue];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock(status);
+    });
+  }];
   
   [task resume];
   
