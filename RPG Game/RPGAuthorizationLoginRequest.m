@@ -29,8 +29,16 @@
   
   if (self != nil)
   {
-    _email = [anEmail copy];
-    _password = [aPassword copy];
+    if (anEmail == nil || aPassword == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _email = [anEmail copy];
+      _password = [aPassword copy];
+    }
   }
   
   return self;
@@ -44,7 +52,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self  initWithEmail:nil password:nil];
 }
 
 #pragma mark - Dealloc
