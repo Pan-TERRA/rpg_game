@@ -11,12 +11,15 @@
 
 @interface RPGBackgroundMusicController : NSObject <AVAudioPlayerDelegate, AVAudioSessionDelegate>
 
+@property (nonatomic) BOOL state;
+
 + (instancetype)sharedBackgroundMusicController;
 
 - (void)switchToBattle;
 - (void)switchToPeace;
 
 - (void)changeVolume:(double)volume;
+- (double)getVolume;
 
 - (void)toggle:(BOOL)state;
 
