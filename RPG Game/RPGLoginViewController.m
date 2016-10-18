@@ -68,11 +68,11 @@
     RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:email
                                                                                                password:password];
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
-                                             completionHandler:^(RPGAuthorizationLoginResponse *response)
+                                             completionHandler:^(NSInteger statusCode)
      {
        // TODO: Proper response status check
-       BOOL success = response != nil && response.username != nil; //response.status
-       NSLog(@"%d", success);
+       BOOL success = (statusCode == 0);
+        // TODO: add switch
        if (!success)
        {
          [self performSelectorOnMainThread:@selector(showErrorText:)
