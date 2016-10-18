@@ -8,6 +8,6 @@
 
 #import "RPGQuestListResponse+Serialization.h"
 
-@implementation RPGQuestListResponse_Serialization
+@implementation RPGQuestListResponse (Serialization)
 
 @end

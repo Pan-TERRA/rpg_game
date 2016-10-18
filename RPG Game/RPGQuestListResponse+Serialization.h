@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RPGQuestListResponse.h"
 
-@interface RPGQuestListResponse_Serialization : NSObject
+@interface RPGQuestListResponse (Serialization)
 
 @end
