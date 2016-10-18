@@ -26,7 +26,15 @@
   
   if (self != nil)
   {
-    _token = [aToken copy];
+    if (aToken == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _token = [aToken copy];
+    }
   }
   
   return self;
@@ -39,7 +47,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self initWithToken:nil];
 }
 
 #pragma mark - Dealloc
