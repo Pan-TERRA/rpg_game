@@ -12,7 +12,7 @@
 
 #pragma mark - Authorization API
 
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
@@ -34,20 +34,21 @@
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                  RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc]
-                                                                                    initWithDictionaryRepresentation:responseDictionary]
-                                                                                   autorelease];
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock(responseObject);
-                                                 });
-                                }];
+  {
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:nil];
+    
+    RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc]
+                                                      initWithDictionaryRepresentation:responseDictionary]
+                                                     autorelease];
+    [responseObject store];
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock([responseDictionary[@"status"] integerValue]);
+    });
+  }];
   
   [task resume];
   
@@ -63,7 +64,7 @@
   [request release];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
+- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
   
@@ -85,19 +86,19 @@
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                    // add response object ?
-                                  
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock([responseDictionary[@"status"] intValue]);
-                                                 });
-                                }];
+  {
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:nil];
+    
+      // add response object ?
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+    callbackBlock([responseDictionary[@"status"] intValue]);
+    });
+  }];
   
   [task resume];
   

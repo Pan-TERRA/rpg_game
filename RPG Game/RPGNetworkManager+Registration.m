@@ -12,7 +12,7 @@
 
 @implementation RPGNetworkManager (Registration)
 
-- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/register"];
   
@@ -34,17 +34,17 @@
                                           completionHandler:^(NSData *data,
                                                               NSURLResponse *response,
                                                               NSError *error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock([responseDictionary[@"status"] intValue]);
-                                                 });
-                                }];
+  {
+    
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:nil];
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock([responseDictionary[@"status"] integerValue]);
+    });
+  }];
   
   [task resume];
   
