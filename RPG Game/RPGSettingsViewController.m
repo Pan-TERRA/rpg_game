@@ -8,7 +8,7 @@
 
 #import "RPGSettingsViewController.h"
 #import "RPGMainViewController.h"
-#import "RPGNetworkManager.h"
+#import "RPGNetworkManager+Authorization.h"
 
 @interface RPGSettingsViewController ()
 

@@ -7,9 +7,7 @@
 //
 
 #import "RPGLoginViewController.h"
-#import "RPGNetworkManager.h"
-#import "RPGAuthorizationLoginRequest.h"
-#import "RPGAuthorizationLoginResponse.h"
+#import "RPGNetworkManager+Authorization.h"
 
 @interface RPGLoginViewController ()
 

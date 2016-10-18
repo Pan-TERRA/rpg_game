@@ -29,6 +29,8 @@
 		283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADD071DAD46EC00BDC706 /* RPGResponse+Serialization.m */; };
 		283ADD0B1DAD48DA00BDC706 /* RPGBattleInitResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADD0A1DAD48DA00BDC706 /* RPGBattleInitResponse.m */; };
 		283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADD0E1DAD502200BDC706 /* RPGBattleConditionResponse.m */; };
+		2862B9A81DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */; };
+		2862B9AB1DB6243200FD05A5 /* RPGNetworkManager+Registration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */; };
 		288E85CF1DABDA8A00321F4D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85CE1DABDA8A00321F4D /* main.m */; };
 		288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85D11DABDA8A00321F4D /* AppDelegate.m */; };
 		288E85DA1DABDA8A00321F4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288E85D91DABDA8A00321F4D /* Assets.xcassets */; };
@@ -118,6 +120,10 @@
 		283ADD0A1DAD48DA00BDC706 /* RPGBattleInitResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleInitResponse.m; sourceTree = "<group>"; };
 		283ADD0D1DAD502200BDC706 /* RPGBattleConditionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleConditionResponse.h; sourceTree = "<group>"; };
 		283ADD0E1DAD502200BDC706 /* RPGBattleConditionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleConditionResponse.m; sourceTree = "<group>"; };
+		2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Authorization.h"; sourceTree = "<group>"; };
+		2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Authorization.m"; sourceTree = "<group>"; };
+		2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Registration.h"; sourceTree = "<group>"; };
+		2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Registration.m"; sourceTree = "<group>"; };
 		288E85CA1DABDA8A00321F4D /* RPG Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RPG Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288E85CE1DABDA8A00321F4D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		288E85D01DABDA8A00321F4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -382,6 +388,10 @@
 			children = (
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
+				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
+				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
+				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
+				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
 				283ADCF51DAD3C8000BDC706 /* Entities */,
 			);
 			name = "Network Communication";
@@ -838,8 +848,10 @@
 				2A8D9BA61DB164520026A5AB /* RPGRegistrationRequest.m in Sources */,
 				2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */,
 				283ADD0B1DAD48DA00BDC706 /* RPGBattleInitResponse.m in Sources */,
+				2862B9AB1DB6243200FD05A5 /* RPGNetworkManager+Registration.m in Sources */,
 				28149A0A1DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m in Sources */,
 				283ADCFB1DAD3CBA00BDC706 /* RPGResponse.m in Sources */,
+				2862B9A81DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m in Sources */,
 				288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */,
 				288E85CF1DABDA8A00321F4D /* main.m in Sources */,
 				283ADCFE1DAD3D1C00BDC706 /* RPGNetworkManager.m in Sources */,
