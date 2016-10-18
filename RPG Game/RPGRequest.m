@@ -26,10 +26,20 @@
 {
   self = [super init];
   
+ 
+  
   if (self != nil)
   {
-    _type = [aType copy];
-    _token = [aToken copy];
+    if (aType == nil || aToken == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _type = [aType copy];
+      _token = [aToken copy];
+    }
   }
   
   return self;
@@ -37,7 +47,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self initWithType:nil token:nil];
 }
 
 + (instancetype)requestWithType:(NSString *)aType token:(NSString *)aToken
