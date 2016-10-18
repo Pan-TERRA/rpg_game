@@ -11,7 +11,7 @@
 @interface RPGQuestListResponse ()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
-@property (nonatomic, copy, readwrite) NSArray *quests;
+@property (nonatomic, retain, readwrite) NSArray *quests;
 
 @end
 
@@ -23,16 +23,19 @@
                         quests:(NSArray *)quests
 {
   self = [super init];
-  if (status != 0)
+  
+  if (status != 0 && quests == nil)
   {
     [self release];
     self = nil;
   }
+  
   if (self != nil)
   {
     _status = status;
-    _quests = [quests copy];
+    _quests = [quests retain];
   }
+  
   return self;
 }
 
@@ -44,7 +47,7 @@
 
 - (instancetype)init
 {
-  return nil;
+  return [self initWithStatus:-1 quests:nil];
 }
 
 #pragma mark - Dealloc

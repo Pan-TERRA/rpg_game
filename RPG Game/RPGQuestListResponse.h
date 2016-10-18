@@ -11,10 +11,10 @@
 @interface RPGQuestListResponse : NSObject
 
 @property (nonatomic, assign, readonly) NSInteger status;
-@property (nonatomic, copy, readonly) NSArray *quests;
+@property (nonatomic, retain, readonly) NSArray *quests;
 
 - (instancetype)initWithStatus:(NSInteger)status
-                        quests:(NSArray *)quests;
+                        quests:(NSArray *)quests NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithStatus:(NSInteger)status
                         quests:(NSArray *)quests;
 
