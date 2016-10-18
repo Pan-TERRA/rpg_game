@@ -6,7 +6,10 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAuthorizationLoginResponse.h"
+#import "RPGAuthorizationLoginResponse+Serialization.h"
+#import "UserSessionKeys.h"
+
+NSString * const kRPGLoginInfo = @"loginInfo";
 
 @interface RPGAuthorizationLoginResponse ()
 
@@ -83,5 +86,17 @@
   [super dealloc];
 }
 
+#pragma mark - Actions
+
+- (void)store
+{
+  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+  [standartUserDefaults setObject:self.username forKey:kRPGUserSessionKeyUsername];
+  [standartUserDefaults setObject:self.token forKey:kRPGUserSessionKeyToken];
+  [standartUserDefaults setObject:self.avatar forKey:kRPGUserSessionKeyAvatar];
+  [standartUserDefaults setInteger:self.gold forKey:kRPGUserSessionKeyGold];
+  [standartUserDefaults setInteger:self.crystals forKey:kRPGUserSessionKeyCrystals];
+  [standartUserDefaults setObject:self.characters forKey:kRPGUserSessionKeyCharacters];
+}
 
 @end

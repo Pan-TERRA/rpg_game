@@ -8,6 +8,13 @@
 
 #import "RPGAuthorizationLoginResponse.h"
 
+extern NSString * const kRPGAuthorizationLoginResponseUsername;
+extern NSString * const kRPGAuthorizationLoginResponseToken;
+extern NSString * const kRPGAuthorizationLoginResponseAvatar;
+extern NSString * const kRPGAuthorizationLoginResponseGold;
+extern NSString * const kRPGAuthorizationLoginResponseCrystals;
+extern NSString * const kRPGAuthorizationLoginResponseCharacters;
+
 @interface RPGAuthorizationLoginResponse (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;

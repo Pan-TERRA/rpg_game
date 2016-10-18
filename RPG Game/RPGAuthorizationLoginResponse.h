@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kRPGLoginInfo;
+
 @interface RPGAuthorizationLoginResponse : NSObject
 
 @property (copy, nonatomic, readonly) NSString *username;
@@ -18,6 +20,8 @@
 @property (nonatomic, readonly) NSInteger crystals;
 
 @property (copy, nonatomic, readonly) NSArray *characters;
+
+#pragma mark - Init
 
 - (instancetype)initWithUsername:(NSString *)aUsername
                            token:(NSString *)aToken
@@ -31,5 +35,9 @@
                                 gold:(NSInteger)aGold
                             crystals:(NSInteger)aCrystals
                           characters:(NSArray *)aCharacters;
+
+#pragma mark - Actions
+
+- (void)store;
 
 @end

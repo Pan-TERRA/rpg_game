@@ -8,12 +8,12 @@
 
 #import "RPGAuthorizationLoginResponse+Serialization.h"
 
-static NSString * const kRPGAuthorizationLoginResponseUsername = @"username";
-static NSString * const kRPGAuthorizationLoginResponseToken = @"token";
-static NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
-static NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
-static NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
-static NSString * const kRPGAuthorizationLoginResponseCharacters = @"characters";
+NSString * const kRPGAuthorizationLoginResponseUsername = @"username";
+NSString * const kRPGAuthorizationLoginResponseToken = @"token";
+NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
+NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
+NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
+NSString * const kRPGAuthorizationLoginResponseCharacters = @"characters";
 
 @implementation RPGAuthorizationLoginResponse (Serialization)
 
