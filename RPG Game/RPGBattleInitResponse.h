@@ -16,9 +16,11 @@
 #pragma mark - Init
 
 - (instancetype)initWithOpponentInfo:(NSDictionary *)anOpponentInfo
-                         currentTurn:(BOOL)aCurrentTurn;
+                         currentTurn:(BOOL)aCurrentTurn
+                              status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
-                         currentTurn:(BOOL)aCurrentTurn;
+                                       currentTurn:(BOOL)aCurrentTurn
+                                            status:(NSInteger)aStatus;
 
 
 @end
