@@ -7,12 +7,23 @@
 //
 
 #import "RPGQuestListTableViewCell.h"
+#import "RPGQuestListViewController.h"
 
 @interface RPGQuestListTableViewCell()
+
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 
 @end
 
 @implementation RPGQuestListTableViewCell
+
+#pragma mark - UITableViewCell Methods
 
 - (void)awakeFromNib
 {
@@ -24,9 +35,43 @@
   [super setSelected:selected animated:animated];
 }
 
-- (void)dealloc
+#pragma mark - Set cell state and content
+
+- (void)setCellContent:(NSDictionary *)cellContent
 {
-  [super dealloc];
+  self.titleLabel.text = [cellContent objectForKey:kRPGQuestTitle];
+  self.descriptionLabel.text = [cellContent objectForKey:kRPGQuestDescription];
+  self.rewardLabel.text = [cellContent objectForKey:kRPGQuestReward];
+  RPGQuestState state = [[cellContent objectForKey:kRPGQuestState] integerValue];
+  switch (state)
+  {
+    case kRPGQuestStateCanTake:
+      [self setStateLabelHidden:YES];
+      break;
+    case kRPGQuestStateInProgress:
+      [self setStateLabelHidden:NO];
+      self.stateLabel.text = kRPGQuestStringStateInProgress;
+      break;
+    case kRPGQuestStateDone:
+      [self setStateLabelHidden:NO];
+      self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      break;
+    case kRPGQuestStateReviewedFalse:
+      [self setStateLabelHidden:NO];
+      self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
+      break;
+    case kRPGQuestStateReviewedTrue:
+      [self setStateLabelHidden:YES];
+      break;
+    default:
+      break;
+  }
+}
+
+- (void)setStateLabelHidden:(BOOL)flag
+{
+  self.stateTitleLabel.hidden = flag;
+  self.stateLabel.hidden = flag;
 }
 
 @end

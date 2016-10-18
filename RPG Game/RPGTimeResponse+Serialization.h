@@ -1,14 +1,14 @@
 //
-//  RPGAuthorizationRequest+Serialization.h
+//  RPGTimeResponse+Serialization.h
 //  RPG Game
 //
-//  Created by Иван Дзюбенко on 10/12/16.
+//  Created by Костянтин Паляничко on 10/14/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAuthorizationRequest.h"
+#import "RPGTimeResponse.h"
 
-@interface RPGAuthorizationRequest (Serialization)
+@interface RPGTimeResponse (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;

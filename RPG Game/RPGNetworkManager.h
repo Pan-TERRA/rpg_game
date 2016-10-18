@@ -14,18 +14,8 @@
  */
 @interface RPGNetworkManager : NSObject
 
+@property (copy, nonatomic, readonly) NSString *token; // replace to RPGUserSession
+
 + (instancetype)sharedNetworkManager;
-
-#pragma mark - API
-
-#pragma mark - Authorization API
-
-- (void)login;
-- (void)logout;
-- (void)registration;
-
-#pragma mark - Quest API
-
-- (void)fetchQuestByType:(int)aType;
 
 @end

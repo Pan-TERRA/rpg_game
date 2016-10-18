@@ -38,7 +38,7 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
   return self;
 }
 
-+ (instancetype)battleInitResponseOpponentInfo:(NSDictionary *)anOpponentInfo
++ (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
                          currentTurn:(BOOL)aCurrentTurn
 {
   return [[[RPGBattleInitResponse alloc] initWithOpponentInfo:anOpponentInfo

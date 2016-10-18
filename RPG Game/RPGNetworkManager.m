@@ -7,13 +7,12 @@
 //
 
 #import "RPGNetworkManager.h"
-#import "RPGAuthorizationRequest+Serialization.h"
 
 static RPGNetworkManager *sharedNetworkManager = nil;
 
 @interface RPGNetworkManager ()
 
-@property (copy, nonatomic) NSString *token;
+@property (copy, nonatomic, readwrite) NSString *token;
 
 @end
 
@@ -21,15 +20,13 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 #pragma mark - Init
 
-
 - (id)init
 {
   self = [super init];
   
   if (self != nil)
   {
-  
-    
+    _token = [[NSString alloc] init];
   }
   
   return self;
@@ -47,6 +44,15 @@ static RPGNetworkManager *sharedNetworkManager = nil;
   
   return sharedNetworkManager;
 }
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [super dealloc];
+}
+
+#pragma mark - Singleton
 
 + (id)allocWithZone:(NSZone *)zone
 {
@@ -77,44 +83,5 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 {
   return self;
 }
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
-}
-
-#pragma mark - Authorization API
-
-- (void)login
-{
-  
-}
-
-- (void)loginWithRequest:(RPGAuthorizationRequest *)aRequest
-{
- 
-}
-
-- (void)logout
-{
-  
-}
-
-- (void)registration
-{
-  
-}
-
-#pragma mark - Authorization API
-
-- (void)fetchQuestByType:(int)aType {
-	
-}
-
-
-
-
 
 @end

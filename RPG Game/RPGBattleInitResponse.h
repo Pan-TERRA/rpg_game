@@ -17,7 +17,7 @@
 
 - (instancetype)initWithOpponentInfo:(NSDictionary *)anOpponentInfo
                          currentTurn:(BOOL)aCurrentTurn;
-+ (instancetype)initWithOpponentInfo:(NSDictionary *)anOpponentInfo
++ (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
                          currentTurn:(BOOL)aCurrentTurn;
 
 
