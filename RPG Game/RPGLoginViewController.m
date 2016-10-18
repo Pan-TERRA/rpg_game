@@ -68,16 +68,12 @@
     RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:email
                                                                                                password:password];
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
-                                             completionHandler:^(RPGAuthorizationLoginResponse *response)
+                                             completionHandler:^(NSInteger status)
      {
-       // TODO: Proper response status check
-       BOOL success = response != nil && response.username != nil; //response.status
-       NSLog(@"%d", success);
-       if (!success)
+       NSLog(@"%d", status);
+       if (status != 0)
        {
-         [self performSelectorOnMainThread:@selector(showErrorText:)
-                                withObject:@"Password or email are incorrect"
-                             waitUntilDone:NO];
+         [self showErrorText:@"Password or email are incorrect"];
        }
      }];
   }
