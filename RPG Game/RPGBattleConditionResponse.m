@@ -32,34 +32,48 @@ static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
                 opponentHP:(int)anOpponentHP
            spellsCondition:(NSDictionary *)aSpellsCondition
                     reward:(NSDictionary *)aReward
+                    status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleConditionResponseType];
+  self = [super initWithType:kRPGBattleConditionResponseType status:aStatus];
   
   if (self != nil)
   {
-    _HP = aHP;
-    _opponentHP = anOpponentHP;
-    _spellsCondition = [aSpellsCondition mutableCopy];
-    _reward = [aReward mutableCopy];
+    if (aHP < 0 ||
+        anOpponentHP < 0 ||
+        aSpellsCondition == nil ||
+        aReward == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _HP = aHP;
+      _opponentHP = anOpponentHP;
+      _spellsCondition = [aSpellsCondition mutableCopy];
+      _reward = [aReward mutableCopy];
+    }
   }
 	
   return self;
 }
 
-- (instancetype)initWithType:(NSString *)aType
+- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
 {
-  return nil;
+  return [self initWithHP:-1 opponentHP:-1 spellsCondition:nil reward:nil status:-1];
 }
 
 + (instancetype)battleConditionResponseWithHP:(int)aHP
-                opponentHP:(int)anOpponentHP
-           spellsCondition:(NSDictionary *)aSpellsCondition
-                    reward:(NSDictionary *)aReward
+                                   opponentHP:(int)anOpponentHP
+                              spellsCondition:(NSDictionary *)aSpellsCondition
+                                       reward:(NSDictionary *)aReward
+                                       status:(NSInteger)aStatus
 {
 	return [[[RPGBattleConditionResponse alloc] initWithHP:aHP
-                                             opponentHP:anOpponentHP
-                                        spellsCondition:aSpellsCondition
-                                                 reward:aReward] autorelease];
+                                              opponentHP:anOpponentHP
+                                         spellsCondition:aSpellsCondition
+                                                  reward:aReward
+                                                  status:aStatus] autorelease];
 }
 
 - (void)dealloc
