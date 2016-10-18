@@ -11,7 +11,7 @@
 @interface RPGResponse ()
 
 @property (copy, readwrite, nonatomic) NSString *type;
-@property (readwrite, nonatomic) int status;
+@property (readwrite, nonatomic) NSInteger status;
 
 @end
 
@@ -22,20 +22,24 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType status:(int)aStatus
+- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
 {
   self = [super init];
   
-  if (aStatus == -1)
-  {
-    [self release];
-    self = nil;
-  }
+ 
 
   if (self != nil)
   {
-    _type = [aType copy];
-    _status = aStatus;
+    if (aType == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _type = [aType copy];
+      _status = aStatus;      
+    }
   }
   
   return self;
@@ -46,7 +50,7 @@
   return [self initWithType:nil status:-1];
 }
 
-+ (instancetype)requestWithType:(NSString *)aType status:(int)aStatus
++ (instancetype)requestWithType:(NSString *)aType status:(NSInteger)aStatus
 {
   return [[[self alloc] initWithType:aType status:aStatus] autorelease];
 }
