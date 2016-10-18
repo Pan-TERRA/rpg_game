@@ -28,7 +28,10 @@
 {
   self = [super init];
   
-  if (aCharacterType == -1)
+  if (aCharacterType < 0 ||
+      anEmail == nil ||
+      aPassword == nil ||
+      aCharacterName == nil)
   {
     [self release];
     self = nil;
