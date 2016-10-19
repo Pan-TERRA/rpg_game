@@ -6,9 +6,11 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
+#import "NibNames.h"
 #import "RPGLoginViewController.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGRegistrationViewController.h"
+#import "RPGMainViewController.h"
 
 @interface RPGLoginViewController ()
 
@@ -82,11 +84,19 @@
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                              completionHandler:^(NSInteger statusCode)
      {
-       // TODO: Proper response status check
        BOOL success = (statusCode == 0);
-        // TODO: add switch
-       if (!success)
+       if (success)
        {
+         RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu
+                                                                                             bundle:nil];
+         [self presentViewController:mainViewController
+                            animated:YES
+                          completion:nil];
+         [mainViewController release];
+       }
+       else
+       {
+         // TODO: add switch that depends on error code
          [self showErrorText:@"Password or email are incorrect"];
        }
      }];
