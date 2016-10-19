@@ -76,6 +76,11 @@
       status = 2;
     }
     
+    if (responseObject == nil)
+    {
+      status = 4;
+    }
+    
     status = (status != 0) ? status : responseObject.status;
     
     dispatch_async(dispatch_get_main_queue(), ^
