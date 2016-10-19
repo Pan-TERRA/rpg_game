@@ -16,6 +16,11 @@
 
 @interface RPGMainViewController ()
 
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
+
 @end
 
 @implementation RPGMainViewController

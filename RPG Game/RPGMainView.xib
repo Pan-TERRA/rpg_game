@@ -9,6 +9,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGMainViewController">
             <connections>
+                <outlet property="crystalsImageView" destination="So4-wR-Ia7" id="7gp-IW-UzS"/>
+                <outlet property="crystalsLabel" destination="5jf-us-bJQ" id="sCa-xg-CIt"/>
+                <outlet property="goldImageView" destination="c5z-DO-r0T" id="k3z-zO-Htq"/>
+                <outlet property="goldLabel" destination="ooY-Ta-rVd" id="gcT-4W-UHd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5yW-vO-q1s"/>
             </connections>
         </placeholder>
