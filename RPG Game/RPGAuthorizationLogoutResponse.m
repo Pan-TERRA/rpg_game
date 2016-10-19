@@ -8,6 +8,10 @@
 
 #import "RPGAuthorizationLogoutResponse.h"
 
+@interface RPGAuthorizationLogoutResponse ()
+
+@end
+
 @implementation RPGAuthorizationLogoutResponse
 
 @end

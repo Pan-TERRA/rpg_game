@@ -26,29 +26,42 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 - (instancetype)initWithOpponentInfo:(NSDictionary *)anOpponentInfo
                          currentTurn:(BOOL)aCurrentTurn
+                              status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleInitResponseType];
+  self = [super initWithType:kRPGBattleInitResponseType status:aStatus];
+  
+  
   
   if (self != nil)
   {
-    _mutableOpponentInfo = [anOpponentInfo mutableCopy];
-    _currentTurn = aCurrentTurn;
+    if (anOpponentInfo == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _mutableOpponentInfo = [anOpponentInfo mutableCopy];
+      _currentTurn = aCurrentTurn;
+    }
   }
   
   return self;
 }
 
 + (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
-                         currentTurn:(BOOL)aCurrentTurn
+                                       currentTurn:(BOOL)aCurrentTurn
+                                            status:(NSInteger)aStatus
 {
   return [[[RPGBattleInitResponse alloc] initWithOpponentInfo:anOpponentInfo
-                                                 currentTurn:aCurrentTurn] autorelease];
+                                                  currentTurn:aCurrentTurn
+                                                       status:aStatus] autorelease];
 }
 
 
-- (instancetype)init
+- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
 {
-  return nil;
+  return [self initWithOpponentInfo:nil currentTurn:0 status:-1];
 }
 
 + (instancetype)battleInitResponse

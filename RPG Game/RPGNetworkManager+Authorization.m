@@ -12,7 +12,7 @@
 
 #pragma mark - Authorization API
 
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(RPGAuthorizationLoginResponse *))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
@@ -20,10 +20,18 @@
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:0];
   
+  NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
                                                      options:NSJSONWritingPrettyPrinted
-                                                       error:nil];
+                                                       error:&JSONSerializationError];
+  
+  if (JSONSerializationError != nil)
+  {
+   [[NSException exceptionWithName:NSInvalidArgumentException
+                            reason:@"JSON cannot be retrieved from login request"
+                          userInfo:nil] raise];
+  }
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
@@ -34,27 +42,63 @@
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                  RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc]
-                                                                                    initWithDictionaryRepresentation:responseDictionary]
-                                                                                   autorelease];
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock(responseObject);
-                                                 });
-                                }];
+  {
+    NSInteger status = 0;
+    NSError *JSONParsingError = nil;
+    RPGAuthorizationLoginResponse *responseObject = nil;
+    
+    if (error != nil)
+    {
+      status = 1;
+    }
+    
+    
+    if (data != nil)
+    {
+      NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&JSONParsingError];
+      
+      if (JSONParsingError != nil)
+      {
+          // ???: tramper question
+        status = 3;
+      }
+      else
+      {
+        responseObject = [[[RPGAuthorizationLoginResponse alloc]
+                           initWithDictionaryRepresentation:responseDictionary] autorelease];
+      }
+
+    }
+    else
+    {
+      status = 2;
+    }
+    
+    if (responseObject == nil)
+    {
+      status = 4;
+    }
+    else
+    {
+      [responseObject store];
+    }
+    
+    status = (status != 0) ? status : responseObject.status;
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock(status);
+    });
+  }];
   
   [task resume];
   
   [session finishTasksAndInvalidate];
 }
 
-- (void)logoutWithCompletionHandler:(void (^)(int))callbackBlock
+- (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
 {
   RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
   
@@ -63,18 +107,25 @@
   [request release];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(int))callbackBlock
+- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
   
   NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
                                                               cachePolicy:NSURLRequestUseProtocolCachePolicy
                                                           timeoutInterval:0];
-  
+  NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
                                                      options:NSJSONWritingPrettyPrinted
                                                        error:nil];
+  
+  if (JSONSerializationError != nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from logout request"
+                           userInfo:nil] raise];
+  }
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
@@ -85,19 +136,46 @@
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
-                                {
-                                  
-                                  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                                                     options:0
-                                                                                                       error:nil];
-                                  
-                                    // add response object ?
-                                  
-                                  dispatch_async(dispatch_get_main_queue(), ^
-                                                 {
-                                                   callbackBlock([responseDictionary[@"status"] intValue]);
-                                                 });
-                                }];
+  {
+    NSDictionary *responseDictionary = nil;
+    NSInteger status = 0;
+    NSError *JSONParsingError = nil;
+    
+
+    if (error != nil)
+    {
+      status = 1;
+    }
+    
+    
+    if (data != nil)
+    {
+      responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:0
+                                                             error:&JSONParsingError];
+      
+      if (JSONParsingError != nil)
+      {
+          // ???: tramper question
+        status = 3;
+      }
+      else
+      {
+          // ???: tramper question
+      }
+    }
+    else
+    {
+      status = 2;
+    }
+    
+    status = (status != 0) ? status : [responseDictionary[@"status"] integerValue];
+  
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock(status);
+    });
+  }];
   
   [task resume];
   

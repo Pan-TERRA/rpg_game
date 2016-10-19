@@ -8,6 +8,7 @@
 
 #import "RPGLoginViewController.h"
 #import "RPGNetworkManager+Authorization.h"
+#import "RPGRegistrationViewController.h"
 
 @interface RPGLoginViewController ()
 
@@ -56,28 +57,37 @@
   
 }
 
+- (IBAction)signupAction:(UIButton *)sender
+{
+  RPGRegistrationViewController *registrationViewController = [[RPGRegistrationViewController alloc] init];
+  [self presentViewController:registrationViewController
+                     animated:YES
+                   completion:nil];
+  [registrationViewController release];
+}
+
 - (IBAction)loginAction:(UIButton *)sender
 {
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
   
-  if (email && password
-      && ![email isEqualToString:@""]
-      && ![password isEqualToString:@""])
+  if (email && password &&
+      ![email isEqualToString:@""] &&
+      ![password isEqualToString:@""])
   {
-    RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:email
-                                                                                               password:password];
+    RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest
+                                             authorizationRequestWithEmail:email
+                                             password:password];
+    
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
-                                             completionHandler:^(RPGAuthorizationLoginResponse *response)
+                                             completionHandler:^(NSInteger statusCode)
      {
        // TODO: Proper response status check
-       BOOL success = response != nil && response.username != nil; //response.status
-       NSLog(@"%d", success);
+       BOOL success = (statusCode == 0);
+        // TODO: add switch
        if (!success)
        {
-         [self performSelectorOnMainThread:@selector(showErrorText:)
-                                withObject:@"Password or email are incorrect"
-                             waitUntilDone:NO];
+         [self showErrorText:@"Password or email are incorrect"];
        }
      }];
   }

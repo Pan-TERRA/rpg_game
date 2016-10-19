@@ -24,16 +24,18 @@
 {
   self = [super init];
   
-  if (status != 0 && quests == nil)
-  {
-    [self release];
-    self = nil;
-  }
-  
   if (self != nil)
   {
-    _status = status;
-    _quests = [quests retain];
+    if (quests == nil)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _status = status;
+      _quests = [quests retain];
+    }
   }
   
   return self;

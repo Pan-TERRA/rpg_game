@@ -20,11 +20,13 @@
 - (instancetype)initWithHP:(int)aHP
                 opponentHP:(int)anOpponentHP
            spellsCondition:(NSDictionary *)aSpellsCondition
-                    reward:(NSDictionary *)aReward NS_DESIGNATED_INITIALIZER;
+                    reward:(NSDictionary *)aReward
+                    status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)battleConditionResponseWithHP:(int)aHP
-                opponentHP:(int)anOpponentHP
-           spellsCondition:(NSDictionary *)aSpellsCondition
-                    reward:(NSDictionary *)aReward;
+                                   opponentHP:(int)anOpponentHP
+                              spellsCondition:(NSDictionary *)aSpellsCondition
+                                       reward:(NSDictionary *)aReward
+                                       status:(NSInteger)aStatus;
 
 @end

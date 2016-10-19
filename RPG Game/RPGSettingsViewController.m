@@ -34,7 +34,7 @@
 - (IBAction)logOut
 {
   RPGNetworkManager *networkManager = [RPGNetworkManager sharedNetworkManager];
-  [networkManager logoutWithCompletionHandler:^(int status)
+  [networkManager logoutWithCompletionHandler:^(NSInteger status)
   {
     NSString *message = (status == 0 ? @"Ok" : @"Something went wrong. Try to delete your iOS and install a new one");
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Log out" message:message preferredStyle:UIAlertControllerStyleAlert];

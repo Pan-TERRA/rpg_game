@@ -14,11 +14,11 @@
 @interface RPGResponse : NSObject
 
 @property (copy, readonly, nonatomic) NSString *type;
-@property (readonly, nonatomic) int status;
+@property (readonly, nonatomic) NSInteger status;
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType status:(int)aStatus NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithType:(NSString *)aType status:(int)aStatus;
+- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
++ (instancetype)requestWithType:(NSString *)aType status:(NSInteger)aStatus;
 
 @end

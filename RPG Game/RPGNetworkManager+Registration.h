@@ -13,6 +13,6 @@
 @interface RPGNetworkManager (Registration)
 
 - (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
-          completionHandler:(void (^)(int))callbackBlock;
+          completionHandler:(void (^)(NSInteger))callbackBlock;
 
 @end

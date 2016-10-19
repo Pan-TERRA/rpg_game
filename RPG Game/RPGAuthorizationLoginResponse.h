@@ -10,6 +10,7 @@
 
 @interface RPGAuthorizationLoginResponse : NSObject
 
+@property (nonatomic, assign, readonly) NSInteger status;
 @property (copy, nonatomic, readonly) NSString *username;
 @property (copy, nonatomic, readonly) NSString *token;
 @property (copy, nonatomic, readonly) NSString *avatar;
@@ -19,17 +20,25 @@
 
 @property (copy, nonatomic, readonly) NSArray *characters;
 
+#pragma mark - Init
+
 - (instancetype)initWithUsername:(NSString *)aUsername
                            token:(NSString *)aToken
                           avatar:(NSString *)anAvatar
                             gold:(NSInteger)aGold
                         crystals:(NSInteger)aCrystals
-                      characters:(NSArray *)aCharacters;
+                      characters:(NSArray *)aCharacters
+                          status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithUsername:(NSString *)aUsername
                                token:(NSString *)aToken
                               avatar:(NSString *)anAvatar
                                 gold:(NSInteger)aGold
                             crystals:(NSInteger)aCrystals
-                          characters:(NSArray *)aCharacters;
+                          characters:(NSArray *)aCharacters
+                              status:(NSInteger)aStatus;
+
+#pragma mark - Actions
+
+- (void)store;
 
 @end
