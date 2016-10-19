@@ -3,10 +3,12 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestListViewController">
             <connections>
+                <outlet property="activityIndicator" destination="haj-qR-g3v" id="dNB-zM-vDd"/>
                 <outlet property="buttonControl" destination="xIk-Xn-vKd" id="VTQ-Em-ikH"/>
                 <outlet property="tableView" destination="u7D-Ey-t6y" id="kgl-KM-wXn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -44,6 +46,13 @@
                         <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="l89-rY-6WR"/>
                     </connections>
                 </button>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="haj-qR-g3v">
+                    <rect key="frame" x="348" y="187" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="haj-qR-g3v" secondAttribute="height" multiplier="1:1" id="COr-5N-s3J"/>
+                        <constraint firstAttribute="width" constant="40" id="a1G-8K-HOY"/>
+                    </constraints>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
@@ -52,8 +61,10 @@
                 <constraint firstItem="xIk-Xn-vKd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="F2v-AX-Fak"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" constant="5" id="Qvl-wi-nmd"/>
                 <constraint firstItem="xIk-Xn-vKd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Woa-hT-CyY"/>
+                <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
                 <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="10" id="pP6-qO-mer"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="centerX" secondItem="xIk-Xn-vKd" secondAttribute="centerX" id="qYS-sf-Hju"/>
+                <constraint firstItem="haj-qR-g3v" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="swj-mT-RbD"/>
                 <constraint firstAttribute="trailing" secondItem="xIk-Xn-vKd" secondAttribute="trailing" constant="10" id="vgB-qa-rQ8"/>
                 <constraint firstItem="5tF-mW-v2f" firstAttribute="top" secondItem="u7D-Ey-t6y" secondAttribute="bottom" constant="5" id="zDn-da-R3F"/>
             </constraints>

@@ -7,7 +7,7 @@
 //
 
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "UserSessionKeys.h"
+#import "RPGUserSessionKeys.h"
 
 @implementation NSUserDefaults (RPGSessionInfo)
 

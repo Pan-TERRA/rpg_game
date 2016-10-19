@@ -14,7 +14,7 @@
 
 #import "RPGSFXEngine.h"
 
-#import "NibNames.h"
+#import "RPGNibNames.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGMainViewController ()

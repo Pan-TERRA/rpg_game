@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "NibNames.h"
+#import "RPGNibNames.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
 

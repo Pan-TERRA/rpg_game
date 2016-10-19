@@ -49,7 +49,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
     {
         if(sharedSFXEngine == nil)
         {
-            sharedSFXEngine = [RPGSFXEngine new];
+            sharedSFXEngine = [[super allocWithZone:NULL] init];
         }
     }
     return sharedSFXEngine;

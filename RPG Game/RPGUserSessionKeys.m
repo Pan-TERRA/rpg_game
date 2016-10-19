@@ -6,7 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "UserSessionKeys.h"
+#import "RPGUserSessionKeys.h"
 
 NSString * const kRPGUserSessionKeyUsername = @"RPG_USERNAME";
 NSString * const kRPGUserSessionKeyToken = @"RPG_TOKEN";
