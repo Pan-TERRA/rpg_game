@@ -15,7 +15,6 @@
 
 @interface RPGLoginViewController ()
 
-@property (assign, nonatomic) IBOutlet UILabel *errorMessageLabel;
 @property (assign, nonatomic) IBOutlet UIButton *loginButton;
 @property (assign, nonatomic) IBOutlet UITextField *emailInputField;
 @property (assign, nonatomic) IBOutlet UITextField *passwordInputField;

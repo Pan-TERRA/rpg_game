@@ -9,7 +9,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGLoginViewController">
             <connections>
                 <outlet property="emailInputField" destination="nlh-Zt-ZOi" id="XYW-5z-0s0"/>
-                <outlet property="errorMessageLabel" destination="iQP-Zd-j7F" id="u1C-Su-Dbq"/>
                 <outlet property="loginActivityIndicator" destination="3i9-nt-l1p" id="6hM-Y5-dMY"/>
                 <outlet property="loginButton" destination="ICW-A7-Q3E" id="Q3a-Qu-WB6"/>
                 <outlet property="passwordInputField" destination="3pk-zf-QCm" id="45M-Li-Buz"/>
@@ -65,15 +64,6 @@
                         <action selector="signupAction:" destination="-1" eventType="touchUpInside" id="LFZ-76-s7K"/>
                     </connections>
                 </button>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login or password are incorrect. Please check them or use &quot;Forgot password&quot; feature." lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iQP-Zd-j7F">
-                    <rect key="frame" x="86" y="242" width="428" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="jiC-Bg-KSP"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                    <color key="textColor" red="1" green="0.09911438423289165" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3i9-nt-l1p">
                     <rect key="frame" x="442" y="179" width="20" height="20"/>
                 </activityIndicatorView>
@@ -92,24 +82,19 @@
                 <constraint firstItem="T3F-Yz-Zgp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="KTF-Gz-OJ0"/>
                 <constraint firstItem="YdM-GY-RsC" firstAttribute="trailing" secondItem="ICW-A7-Q3E" secondAttribute="trailing" id="LS3-zU-xQ0"/>
                 <constraint firstItem="3pk-zf-QCm" firstAttribute="top" secondItem="nlh-Zt-ZOi" secondAttribute="bottom" constant="15" id="PTA-RW-ju3"/>
-                <constraint firstItem="iQP-Zd-j7F" firstAttribute="trailing" secondItem="3pk-zf-QCm" secondAttribute="trailing" id="Th3-4k-3fv"/>
                 <constraint firstItem="ICW-A7-Q3E" firstAttribute="trailing" secondItem="3pk-zf-QCm" secondAttribute="trailing" id="XQF-T2-ROn"/>
                 <constraint firstItem="i7l-7H-KAr" firstAttribute="leading" secondItem="3pk-zf-QCm" secondAttribute="leading" id="eP1-gQ-LOY"/>
                 <constraint firstItem="3pk-zf-QCm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="86" id="hSM-uh-2O2"/>
                 <constraint firstAttribute="trailing" secondItem="nlh-Zt-ZOi" secondAttribute="trailing" constant="86" id="hqY-cR-S06"/>
                 <constraint firstItem="ICW-A7-Q3E" firstAttribute="top" secondItem="3pk-zf-QCm" secondAttribute="bottom" constant="8" id="iN9-z9-eYI"/>
                 <constraint firstItem="3i9-nt-l1p" firstAttribute="baseline" secondItem="ICW-A7-Q3E" secondAttribute="baseline" id="iZX-DO-cjr"/>
-                <constraint firstItem="iQP-Zd-j7F" firstAttribute="top" secondItem="YdM-GY-RsC" secondAttribute="bottom" constant="8" id="jmY-PQ-dBh"/>
-                <constraint firstItem="iQP-Zd-j7F" firstAttribute="top" secondItem="YdM-GY-RsC" secondAttribute="bottom" constant="14" id="lGA-cg-YDx"/>
                 <constraint firstItem="nlh-Zt-ZOi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="86" id="mz5-9P-PU0"/>
                 <constraint firstItem="YdM-GY-RsC" firstAttribute="leading" secondItem="3pk-zf-QCm" secondAttribute="leading" id="nzJ-Vv-f76"/>
                 <constraint firstItem="YdM-GY-RsC" firstAttribute="top" secondItem="3pk-zf-QCm" secondAttribute="bottom" constant="15" id="pv6-5q-or8"/>
                 <constraint firstAttribute="trailing" secondItem="3pk-zf-QCm" secondAttribute="trailing" constant="86" id="slE-oT-vDI"/>
-                <constraint firstItem="iQP-Zd-j7F" firstAttribute="leading" secondItem="3pk-zf-QCm" secondAttribute="leading" id="sqE-dr-wwg"/>
                 <constraint firstItem="i7l-7H-KAr" firstAttribute="top" secondItem="YdM-GY-RsC" secondAttribute="bottom" id="tFe-DE-86l"/>
                 <constraint firstItem="i7l-7H-KAr" firstAttribute="top" secondItem="YdM-GY-RsC" secondAttribute="bottom" id="vmb-4D-yi8"/>
                 <constraint firstItem="nlh-Zt-ZOi" firstAttribute="top" secondItem="T3F-Yz-Zgp" secondAttribute="bottom" constant="20" id="xBY-hs-5ug"/>
-                <constraint firstItem="iQP-Zd-j7F" firstAttribute="top" secondItem="i7l-7H-KAr" secondAttribute="bottom" id="y9D-RI-Jva"/>
             </constraints>
             <variation key="default">
                 <mask key="subviews">
@@ -119,8 +104,6 @@
                     <exclude reference="K4i-fX-z20"/>
                     <exclude reference="tFe-DE-86l"/>
                     <exclude reference="vmb-4D-yi8"/>
-                    <exclude reference="lGA-cg-YDx"/>
-                    <exclude reference="y9D-RI-Jva"/>
                     <exclude reference="nzJ-Vv-f76"/>
                     <exclude reference="pv6-5q-or8"/>
                     <exclude reference="iZX-DO-cjr"/>
