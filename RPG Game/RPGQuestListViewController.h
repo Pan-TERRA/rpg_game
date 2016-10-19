@@ -8,14 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, RPGQuestListViewState)
-{
-  kRPGQuestListViewTakeQuest,
-  kRPGQuestListViewInProgressQuest,
-  kRPGQuestListViewDoneQuest,
-  kRPGQuestListViewReviewQuest
-};
-
 typedef NS_ENUM(NSUInteger, RPGQuestState)
 {
   kRPGQuestStateCanTake,
@@ -26,7 +18,6 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateHide,
   kRPGQuestStateForReview
 };
-
 
 extern NSString * const kRPGQuestTitle;
 extern NSString * const kRPGQuestDescription;
