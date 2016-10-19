@@ -6,7 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "NibNames.h"
+#import "RPGNibNames.h"
 
 NSString * const kRPGMainMenu = @"RPGMainView";
 NSString * const kRPGBattleViewController = @"RPGBattleViewController";

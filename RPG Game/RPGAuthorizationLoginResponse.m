@@ -7,7 +7,7 @@
 //
 
 #import "RPGAuthorizationLoginResponse+Serialization.h"
-#import "UserSessionKeys.h"
+#import "RPGUserSessionKeys.h"
 
 @interface RPGAuthorizationLoginResponse ()
 

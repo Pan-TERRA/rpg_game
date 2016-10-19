@@ -6,7 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "NibNames.h"
+#import "RPGNibNames.h"
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"

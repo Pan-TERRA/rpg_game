@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280A52331DB7C64000FF66B8 /* RPGStatusCodes.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */; };
 		281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */; };
 		281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */; };
 		281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */; };
@@ -15,7 +16,7 @@
 		28149A071DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A061DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.m */; };
 		28149A0A1DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A091DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m */; };
 		28149A0D1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A0C1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m */; };
-		28149A101DB1007400C26881 /* NibNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A0F1DB1007400C26881 /* NibNames.m */; };
+		28149A101DB1007400C26881 /* RPGNibNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A0F1DB1007400C26881 /* RPGNibNames.m */; };
 		28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A151DB1011300C26881 /* RPGLoginViewController.m */; };
 		28149A1B1DB1011300C26881 /* RPGLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28149A161DB1011300C26881 /* RPGLoginViewController.xib */; };
 		28149A1C1DB1011300C26881 /* RPGRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A181DB1011300C26881 /* RPGRegistrationViewController.m */; };
@@ -38,7 +39,7 @@
 		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
 		288E85F31DABDA8A00321F4D /* RPG_GameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */; };
 		288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E86011DABDADB00321F4D /* RPGMainViewController.m */; };
-		28F102221DB7756500C969CA /* UserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* UserSessionKeys.m */; };
+		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
 		2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */; };
 		2A8D9BA21DB1587C0026A5AB /* RPGTimeResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9BA11DB1587C0026A5AB /* RPGTimeResponse+Serialization.m */; };
@@ -89,6 +90,8 @@
 		03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFAFE83BF61093CEFA12B51 /* Pods-RPG Game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG Game.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game.debug.xcconfig"; sourceTree = "<group>"; };
 		134A9863E9725FDBC6942939 /* Pods-RPG GameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests.release.xcconfig"; sourceTree = "<group>"; };
+		280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGStatusCodes.h; sourceTree = "<group>"; };
+		280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGStatusCodes.m; sourceTree = "<group>"; };
 		281499F01DAFCC6200C26881 /* RPGAuthorizationLoginResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAuthorizationLoginResponse.h; sourceTree = "<group>"; };
 		281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAuthorizationLoginResponse.m; sourceTree = "<group>"; };
 		281499F31DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAuthorizationLogoutResponse.h; sourceTree = "<group>"; };
@@ -105,8 +108,8 @@
 		28149A091DAFEF2B00C26881 /* RPGAuthorizationLoginResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGAuthorizationLoginResponse+Serialization.m"; sourceTree = "<group>"; };
 		28149A0B1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGAuthorizationLogoutResponse+Serialization.h"; sourceTree = "<group>"; };
 		28149A0C1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGAuthorizationLogoutResponse+Serialization.m"; sourceTree = "<group>"; };
-		28149A0E1DB1007400C26881 /* NibNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibNames.h; sourceTree = "<group>"; };
-		28149A0F1DB1007400C26881 /* NibNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibNames.m; sourceTree = "<group>"; };
+		28149A0E1DB1007400C26881 /* RPGNibNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGNibNames.h; sourceTree = "<group>"; };
+		28149A0F1DB1007400C26881 /* RPGNibNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNibNames.m; sourceTree = "<group>"; };
 		28149A141DB1011300C26881 /* RPGLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGLoginViewController.h; sourceTree = "<group>"; };
 		28149A151DB1011300C26881 /* RPGLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGLoginViewController.m; sourceTree = "<group>"; };
 		28149A161DB1011300C26881 /* RPGLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGLoginViewController.xib; sourceTree = "<group>"; };
@@ -149,8 +152,8 @@
 		288E85F41DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E86001DABDADB00321F4D /* RPGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGMainViewController.h; sourceTree = "<group>"; };
 		288E86011DABDADB00321F4D /* RPGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMainViewController.m; sourceTree = "<group>"; };
-		28F102201DB7756500C969CA /* UserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserSessionKeys.h; sourceTree = "<group>"; };
-		28F102211DB7756500C969CA /* UserSessionKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserSessionKeys.m; sourceTree = "<group>"; };
+		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
+		28F102211DB7756500C969CA /* RPGUserSessionKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGUserSessionKeys.m; sourceTree = "<group>"; };
 		28F102231DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RPGSessionInfo.h"; sourceTree = "<group>"; };
 		28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RPGSessionInfo.m"; sourceTree = "<group>"; };
 		2A8D9B9D1DB14B5A0026A5AB /* RPGTimeResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGTimeResponse.h; sourceTree = "<group>"; };
@@ -229,6 +232,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		280A522E1DB7C5B500FF66B8 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */,
+				280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */,
+				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
+				28F102201DB7756500C969CA /* RPGUserSessionKeys.h */,
+				28F102211DB7756500C969CA /* RPGUserSessionKeys.m */,
+				28149A0E1DB1007400C26881 /* RPGNibNames.h */,
+				28149A0F1DB1007400C26881 /* RPGNibNames.m */,
+			);
+			name = Constants;
+			sourceTree = "<group>";
+		};
+		280A522F1DB7C60B00FF66B8 /* Session Info */ = {
+			isa = PBXGroup;
+			children = (
+				28F102231DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.h */,
+				28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */,
+			);
+			name = "Session Info";
+			sourceTree = "<group>";
+		};
+		280A52301DB7C61C00FF66B8 /* Network Manager */ = {
+			isa = PBXGroup;
+			children = (
+				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
+				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
+				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
+				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
+				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
+				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
+			);
+			name = "Network Manager";
+			sourceTree = "<group>";
+		};
 		281499E91DAFC93A00C26881 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,12 +454,8 @@
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {
 			isa = PBXGroup;
 			children = (
-				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
-				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
-				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
-				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
-				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
-				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
+				280A522F1DB7C60B00FF66B8 /* Session Info */,
+				280A52301DB7C61C00FF66B8 /* Network Manager */,
 				283ADCF51DAD3C8000BDC706 /* Entities */,
 			);
 			name = "Network Communication";
@@ -479,6 +514,7 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
+				280A522E1DB7C5B500FF66B8 /* Constants */,
 				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
 				288E85D01DABDA8A00321F4D /* AppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* AppDelegate.m */,
@@ -493,7 +529,6 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
-				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -501,12 +536,6 @@
 		288E85CD1DABDA8A00321F4D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				28F102231DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.h */,
-				28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */,
-				28F102201DB7756500C969CA /* UserSessionKeys.h */,
-				28F102211DB7756500C969CA /* UserSessionKeys.m */,
-				28149A0E1DB1007400C26881 /* NibNames.h */,
-				28149A0F1DB1007400C26881 /* NibNames.m */,
 				288E85CE1DABDA8A00321F4D /* main.m */,
 			);
 			name = "Supporting Files";
@@ -927,7 +956,7 @@
 				281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */,
 				283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */,
 				AED6F5781DACD641007ED1B8 /* RPGSettingsViewController.m in Sources */,
-				28F102221DB7756500C969CA /* UserSessionKeys.m in Sources */,
+				28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */,
 				2A8D9BA91DB252170026A5AB /* RPGRegistrationRequest+Serialization.m in Sources */,
 				28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */,
 				28149A0D1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m in Sources */,
@@ -958,7 +987,8 @@
 				D0CFEE791DB65C0100C61D0B /* RPGBackgroundMusicController.m in Sources */,
 				28149A011DAFCD7000C26881 /* RPGAuthorizationLoginRequest+Serialization.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
-				28149A101DB1007400C26881 /* NibNames.m in Sources */,
+				280A52331DB7C64000FF66B8 /* RPGStatusCodes.m in Sources */,
+				28149A101DB1007400C26881 /* RPGNibNames.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,
 				283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */,
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
