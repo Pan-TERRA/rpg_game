@@ -13,6 +13,7 @@
 #import "RPGQuestListViewController.h"
 
 #import "NibNames.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGMainViewController ()
 
@@ -72,6 +73,14 @@
 {
     [super viewDidLoad];
     
+    //set images to money image views
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", [standartUserDefaults sessionGold]];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", [standartUserDefaults sessionCrystals]];
 }
 
 - (void)didReceiveMemoryWarning
