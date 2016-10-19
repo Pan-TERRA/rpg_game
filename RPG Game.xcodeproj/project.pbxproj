@@ -48,6 +48,8 @@
 		AE6D32DE1DB6343700F58878 /* RPGQuestListResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6D32DD1DB6343700F58878 /* RPGQuestListResponse+Serialization.m */; };
 		AE6D32E21DB7B87700F58878 /* RPGQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6D32E11DB7B87700F58878 /* RPGQuest.m */; };
 		AE6D32E51DB7B8A800F58878 /* RPGQuest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6D32E41DB7B8A800F58878 /* RPGQuest+Serialization.m */; };
+		AE6D32E81DB7BDAF00F58878 /* RPGQuestReward.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6D32E71DB7BDAF00F58878 /* RPGQuestReward.m */; };
+		AE6D32EB1DB7BDE100F58878 /* RPGQuestReward+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = AE6D32EA1DB7BDE100F58878 /* RPGQuestReward+Serialization.m */; };
 		AE8076381DB5360400AF5E5B /* RPGQuestListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */; };
 		AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */; };
 		AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */; };
@@ -173,6 +175,10 @@
 		AE6D32E11DB7B87700F58878 /* RPGQuest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuest.m; sourceTree = "<group>"; };
 		AE6D32E31DB7B8A800F58878 /* RPGQuest+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGQuest+Serialization.h"; sourceTree = "<group>"; };
 		AE6D32E41DB7B8A800F58878 /* RPGQuest+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGQuest+Serialization.m"; sourceTree = "<group>"; };
+		AE6D32E61DB7BDAF00F58878 /* RPGQuestReward.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestReward.h; sourceTree = "<group>"; };
+		AE6D32E71DB7BDAF00F58878 /* RPGQuestReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestReward.m; sourceTree = "<group>"; };
+		AE6D32E91DB7BDE100F58878 /* RPGQuestReward+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGQuestReward+Serialization.h"; sourceTree = "<group>"; };
+		AE6D32EA1DB7BDE100F58878 /* RPGQuestReward+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGQuestReward+Serialization.m"; sourceTree = "<group>"; };
 		AE8076361DB5360400AF5E5B /* RPGQuestListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestListResponse.h; sourceTree = "<group>"; };
 		AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestListResponse.m; sourceTree = "<group>"; };
 		AED6F56E1DACD641007ED1B8 /* RPGBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleViewController.h; sourceTree = "<group>"; };
@@ -502,6 +508,10 @@
 				AE6D32E11DB7B87700F58878 /* RPGQuest.m */,
 				AE6D32E31DB7B8A800F58878 /* RPGQuest+Serialization.h */,
 				AE6D32E41DB7B8A800F58878 /* RPGQuest+Serialization.m */,
+				AE6D32E61DB7BDAF00F58878 /* RPGQuestReward.h */,
+				AE6D32E71DB7BDAF00F58878 /* RPGQuestReward.m */,
+				AE6D32E91DB7BDE100F58878 /* RPGQuestReward+Serialization.h */,
+				AE6D32EA1DB7BDE100F58878 /* RPGQuestReward+Serialization.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -939,6 +949,7 @@
 				2A8D9BA91DB252170026A5AB /* RPGRegistrationRequest+Serialization.m in Sources */,
 				28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */,
 				28149A0D1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m in Sources */,
+				AE6D32E81DB7BDAF00F58878 /* RPGQuestReward.m in Sources */,
 				28149A041DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m in Sources */,
 				281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */,
 				281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */,
@@ -970,6 +981,7 @@
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
 				28149A101DB1007400C26881 /* NibNames.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,
+				AE6D32EB1DB7BDE100F58878 /* RPGQuestReward+Serialization.m in Sources */,
 				283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */,
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
