@@ -56,7 +56,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
                                                    object:nil];
         NSError *setCategoryError = nil;
         
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
                                                error:&setCategoryError];
         if (setCategoryError)
         {
