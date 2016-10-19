@@ -244,7 +244,6 @@
 			isa = PBXGroup;
 			children = (
 				281723591DB5207500F74403 /* General */,
-				283ADCFF1DAD3F8600BDC706 /* Quest */,
 				2A8D9B9C1DB14ACB0026A5AB /* Time */,
 				283ADD001DAD3F9100BDC706 /* Battle Init */,
 				283ADD0C1DAD500E00BDC706 /* Battle Condition */,
@@ -406,17 +405,11 @@
 		283ADCF51DAD3C8000BDC706 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				28F1021E1DB7719100C969CA /* Quests */,
 				2A8D9BA31DB163F20026A5AB /* Registration */,
 				281499E91DAFC93A00C26881 /* Authorization */,
 			);
 			name = Entities;
-			sourceTree = "<group>";
-		};
-		283ADCFF1DAD3F8600BDC706 /* Quest */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Quest;
 			sourceTree = "<group>";
 		};
 		283ADD001DAD3F9100BDC706 /* Battle Init */ = {
@@ -475,10 +468,6 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
-				AE8076361DB5360400AF5E5B /* RPGQuestListResponse.h */,
-				AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */,
-				AE6D32DC1DB6343700F58878 /* RPGQuestListResponse+Serialization.h */,
-				AE6D32DD1DB6343700F58878 /* RPGQuestListResponse+Serialization.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -509,6 +498,25 @@
 				288E85F41DABDA8A00321F4D /* Info.plist */,
 			);
 			path = "RPG GameUITests";
+			sourceTree = "<group>";
+		};
+		28F1021E1DB7719100C969CA /* Quests */ = {
+			isa = PBXGroup;
+			children = (
+				28F1021F1DB7719D00C969CA /* Response */,
+			);
+			name = Quests;
+			sourceTree = "<group>";
+		};
+		28F1021F1DB7719D00C969CA /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				AE8076361DB5360400AF5E5B /* RPGQuestListResponse.h */,
+				AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */,
+				AE6D32DC1DB6343700F58878 /* RPGQuestListResponse+Serialization.h */,
+				AE6D32DD1DB6343700F58878 /* RPGQuestListResponse+Serialization.m */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		2A8D9B9C1DB14ACB0026A5AB /* Time */ = {
