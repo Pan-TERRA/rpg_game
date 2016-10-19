@@ -137,9 +137,10 @@ numberOfRowsInComponent:(NSInteger)component
       [self setViewToWaitingForServerResponseState];
       
       RPGRegistrationRequest *registrationRequest = [[[RPGRegistrationRequest alloc] initWithEmail:emailFieldText
-                                                                                         password:passwordFieldText
-                                                                                    characterName:characterNameFieldText
-                                                                                    characterType:selectedClassID]
+                                                                                          password:passwordFieldText
+                                                                                          username:usernameFieldText
+                                                                                     characterName:characterNameFieldText
+                                                                                     characterType:selectedClassID]
                                                      autorelease];
       
       [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
