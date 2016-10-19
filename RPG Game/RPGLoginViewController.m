@@ -8,6 +8,7 @@
 
 #import "RPGLoginViewController.h"
 #import "RPGNetworkManager+Authorization.h"
+#import "RPGRegistrationViewController.h"
 
 @interface RPGLoginViewController ()
 
@@ -54,6 +55,15 @@
 - (IBAction)forgotPasswordAction:(UIButton *)sender
 {
   
+}
+
+- (IBAction)signupAction:(UIButton *)sender
+{
+  RPGRegistrationViewController *registrationViewController = [[RPGRegistrationViewController alloc] init];
+  [self presentViewController:registrationViewController
+                     animated:YES
+                   completion:nil];
+  [registrationViewController release];
 }
 
 - (IBAction)loginAction:(UIButton *)sender
