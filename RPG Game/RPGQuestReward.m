@@ -36,9 +36,9 @@
   return self;
 }
 
-+ (instancetype)responseWithGold:(NSUInteger)gold
-                        crystals:(NSUInteger)crystals
-                         skillId:(NSUInteger)skillId
++ (instancetype)questRewardWithGold:(NSUInteger)gold
+                           crystals:(NSUInteger)crystals
+                            skillId:(NSUInteger)skillId
 {
   return [[[self alloc] initWithGold:gold crystals:crystals skillId:skillId] autorelease];
 }

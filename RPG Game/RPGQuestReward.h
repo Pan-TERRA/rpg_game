@@ -17,8 +17,8 @@
 - (instancetype)initWithGold:(NSUInteger)gold
                     crystals:(NSUInteger)crystals
                      skillId:(NSUInteger)skillId NS_DESIGNATED_INITIALIZER;
-+ (instancetype)responseWithGold:(NSUInteger)gold
-                        crystals:(NSUInteger)crystals
-                         skillId:(NSUInteger)skillId;
++ (instancetype)questRewardWithGold:(NSUInteger)gold
+                           crystals:(NSUInteger)crystals
+                            skillId:(NSUInteger)skillId;
 
 @end

@@ -24,10 +24,10 @@
                      state:(NSUInteger)state
                     reward:(RPGQuestReward *)reward NS_DESIGNATED_INITIALIZER;
 
-+ (instancetype)responseWithId:(NSUInteger)questId
-                          name:(NSString *)name
-                   description:(NSString *)questDescription
-                         state:(NSUInteger)state
-                        reward:(RPGQuestReward *)reward;
++ (instancetype)questWithId:(NSUInteger)questId
+                       name:(NSString *)name
+                description:(NSString *)questDescription
+                      state:(NSUInteger)state
+                     reward:(RPGQuestReward *)reward;
 
 @end

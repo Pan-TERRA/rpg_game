@@ -42,11 +42,11 @@
   return self;
 }
 
-+ (instancetype)responseWithId:(NSUInteger)questId
-                          name:(NSString *)name
-                   description:(NSString *)questDescription
-                         state:(NSUInteger)state
-                        reward:(RPGQuestReward *)reward
++ (instancetype)questWithId:(NSUInteger)questId
+                       name:(NSString *)name
+                description:(NSString *)questDescription
+                      state:(NSUInteger)state
+                     reward:(RPGQuestReward *)reward
 {
   return [[[self alloc] initWithId:questId name:name description:questDescription state:state reward:reward] autorelease];
 }
