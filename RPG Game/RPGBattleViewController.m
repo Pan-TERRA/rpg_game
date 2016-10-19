@@ -7,6 +7,8 @@
 //
 
 #import "RPGBattleViewController.h"
+#import "RPGBackgroundMusicController.h"
+#import "RPGSFXEngine.h"
 
 @interface RPGBattleViewController ()
 
@@ -40,13 +42,52 @@
 
 - (IBAction)back:(id)sender
 {
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Spell Actions
+- (IBAction)spell1_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:1];
+}
+
+- (IBAction)spell2_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:2];
+}
+
+- (IBAction)spell3_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:3];
+}
+
+- (IBAction)spell4_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:4];
+}
+
+- (IBAction)spell5_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:5];
+}
+
+- (IBAction)spell6_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:6];
+}
+
+- (IBAction)spell7_action:(id)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
 }
 
 #pragma mark - UIViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
+    
 }
 
 - (void)didReceiveMemoryWarning

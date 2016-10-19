@@ -7,39 +7,24 @@
 //
 
 #import "RPGSettingsViewController.h"
-#import "RPGMainViewController.h"
 #import "RPGNetworkManager+Authorization.h"
+
+#import "RPGBackgroundMusicController.h"
+#import "RPGSFXEngine.h"
 
 @interface RPGSettingsViewController ()
 
-@property (nonatomic) NSUInteger music;
-@property (nonatomic) NSUInteger sounds;
+@property (assign, nonatomic) IBOutlet UISwitch *musicSwitch;
+@property (assign, nonatomic) IBOutlet UISlider *musicVolumeSlider;
 
-
-@property (assign, nonatomic) IBOutlet UILabel *musicLabel;
-@property (assign, nonatomic) IBOutlet UILabel *soundsLabel;
-
-@property (assign, nonatomic) IBOutlet UIStepper *musicStepper;
-@property (assign, nonatomic) IBOutlet UIStepper *soundsStepper;
-
+@property (assign, nonatomic) IBOutlet UISwitch *soundSwitch;
+@property (assign, nonatomic) IBOutlet UISlider *soundVolumeSlider;
 
 @end
 
 @implementation RPGSettingsViewController
 
 #pragma mark - Event Handling
-
-- (IBAction)musicChanged:(id)sender
-{
-    self.music = self.musicStepper.value;
-    self.musicLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.musicStepper.value];
-}
-
-- (IBAction)soundsChanged:(id)sender
-{
-    self.sounds = self.soundsStepper.value;
-    self.soundsLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.soundsStepper.value];
-}
 
 - (IBAction)back:(id)sender
 {
@@ -57,20 +42,36 @@
   }];
 }
 
+- (IBAction)musicTurn:(UISwitch *)sender
+{
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] toggle:sender.on];
+}
+
+- (IBAction)musicVolumeChange:(UISlider *)sender
+{
+	[[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:sender.value];
+}
+
+- (IBAction)soundTurn:(UISwitch *)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] toggle:sender.on];
+}
+
+- (IBAction)soundVolumeChange:(UISlider *)sender
+{
+    [[RPGSFXEngine sharedSFXEngine] changeVolume:sender.value];
+}
 
 #pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.music = 4;
-    self.sounds = 8;
+    self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].isPlaying;
+    self.musicVolumeSlider.value = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
     
-    self.musicStepper.value = self.music;
-    self.soundsStepper.value = self.sounds;
-    
-    self.musicLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.musicStepper.value];
-    self.soundsLabel.text = [NSString stringWithFormat:@"%lu", (NSUInteger) self.soundsStepper.value];
-    
+    self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].isPlaying;
+    self.soundVolumeSlider.value = [[RPGSFXEngine sharedSFXEngine] getVolume];
 }
 
 - (void)didReceiveMemoryWarning
@@ -82,4 +83,5 @@
 {
     [super dealloc];
 }
+
 @end

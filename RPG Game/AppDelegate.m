@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "NibNames.h"
 #import "RPGRegistrationViewController.h"
+#import "RPGBackgroundMusicController.h"
 
 @interface AppDelegate ()
 
@@ -46,6 +47,9 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
+    
+    [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:0.5];
+    
   return YES;
 }
 
@@ -75,5 +79,4 @@
 {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
-
 @end

@@ -12,6 +12,8 @@
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 
+#import "RPGSFXEngine.h"
+
 #import "NibNames.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
@@ -36,7 +38,7 @@
 
 - (IBAction)segueToShop
 {
-    
+
 }
 
 - (IBAction)segueToChar
