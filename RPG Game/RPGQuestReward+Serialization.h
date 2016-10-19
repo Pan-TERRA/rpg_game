@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RPGQuestReward.h"
 
-@interface RPGQuestReward_Serialization : NSObject
+@interface RPGQuestReward (Serialization)
 
 @end
