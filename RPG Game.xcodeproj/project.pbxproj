@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		280A522A1DB79C1100FF66B8 /* RPGNetworkManager+Quests.m in Sources */ = {isa = PBXBuildFile; fileRef = 280A52291DB79C1100FF66B8 /* RPGNetworkManager+Quests.m */; };
 		281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */; };
 		281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */; };
 		281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */; };
@@ -83,6 +84,8 @@
 		03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AFAFE83BF61093CEFA12B51 /* Pods-RPG Game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG Game.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game.debug.xcconfig"; sourceTree = "<group>"; };
 		134A9863E9725FDBC6942939 /* Pods-RPG GameTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameTests/Pods-RPG GameTests.release.xcconfig"; sourceTree = "<group>"; };
+		280A52281DB79C1100FF66B8 /* RPGNetworkManager+Quests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Quests.h"; sourceTree = "<group>"; };
+		280A52291DB79C1100FF66B8 /* RPGNetworkManager+Quests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Quests.m"; sourceTree = "<group>"; };
 		281499F01DAFCC6200C26881 /* RPGAuthorizationLoginResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAuthorizationLoginResponse.h; sourceTree = "<group>"; };
 		281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAuthorizationLoginResponse.m; sourceTree = "<group>"; };
 		281499F31DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAuthorizationLogoutResponse.h; sourceTree = "<group>"; };
@@ -461,6 +464,8 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
+				280A52281DB79C1100FF66B8 /* RPGNetworkManager+Quests.h */,
+				280A52291DB79C1100FF66B8 /* RPGNetworkManager+Quests.m */,
 				288E85D01DABDA8A00321F4D /* AppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* AppDelegate.m */,
 				28149A131DB100FB00C26881 /* Main View */,
@@ -893,6 +898,7 @@
 				28149A101DB1007400C26881 /* NibNames.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,
 				283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */,
+				280A522A1DB79C1100FF66B8 /* RPGNetworkManager+Quests.m in Sources */,
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
