@@ -61,12 +61,14 @@
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
   
-  if (email && password
-      && ![email isEqualToString:@""]
-      && ![password isEqualToString:@""])
+  if (email && password &&
+      ![email isEqualToString:@""] &&
+      ![password isEqualToString:@""])
   {
-    RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:email
-                                                                                               password:password];
+    RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest
+                                             authorizationRequestWithEmail:email
+                                             password:password];
+    
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                              completionHandler:^(NSInteger statusCode)
      {
@@ -75,9 +77,7 @@
         // TODO: add switch
        if (!success)
        {
-         [self performSelectorOnMainThread:@selector(showErrorText:)
-                                withObject:@"Password or email are incorrect"
-                             waitUntilDone:NO];
+         [self showErrorText:@"Password or email are incorrect"];
        }
      }];
   }

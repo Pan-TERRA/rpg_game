@@ -80,6 +80,10 @@
     {
       status = 4;
     }
+    else
+    {
+      [responseObject store];
+    }
     
     status = (status != 0) ? status : responseObject.status;
     
@@ -171,7 +175,6 @@
     {
       callbackBlock(status);
     });
-    
   }];
   
   [task resume];

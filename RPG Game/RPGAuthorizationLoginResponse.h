@@ -20,6 +20,8 @@
 
 @property (copy, nonatomic, readonly) NSArray *characters;
 
+#pragma mark - Init
+
 - (instancetype)initWithUsername:(NSString *)aUsername
                            token:(NSString *)aToken
                           avatar:(NSString *)anAvatar
@@ -34,5 +36,9 @@
                             crystals:(NSInteger)aCrystals
                           characters:(NSArray *)aCharacters
                               status:(NSInteger)aStatus;
+
+#pragma mark - Actions
+
+- (void)store;
 
 @end
