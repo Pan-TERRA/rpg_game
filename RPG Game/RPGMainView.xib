@@ -146,12 +146,14 @@
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="So4-wR-Ia7">
                     <rect key="frame" x="605" y="42" width="21" height="21"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="So4-wR-Ia7" secondAttribute="height" multiplier="1:1" id="fsC-hp-Bjo"/>
                     </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="c5z-DO-r0T">
                     <rect key="frame" x="605" y="11" width="21" height="21"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="c5z-DO-r0T" secondAttribute="height" multiplier="1:1" id="bax-Tq-3Nr"/>
                     </constraints>
