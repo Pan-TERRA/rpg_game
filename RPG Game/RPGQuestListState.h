@@ -6,8 +6,10 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#ifndef RPGQuestListState_h
-#define RPGQuestListState_h
-
-
-#endif /* RPGQuestListState_h */
+typedef NS_ENUM(NSUInteger, RPGQuestListState)
+{
+  kRPGQuestListTakeQuest,
+  kRPGQuestListInProgressQuest,
+  kRPGQuestListDoneQuest,
+  kRPGQuestListReviewQuest
+};
