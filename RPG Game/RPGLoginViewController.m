@@ -56,6 +56,18 @@
 
 #pragma mark Actions
 
+- (IBAction)editingDidChange:(UITextField *)sender
+{
+  if (self.emailInputField.text.length == 0 || self.passwordInputField.text.length == 0)
+  {
+    self.loginButton.enabled = NO;
+  }
+  else
+  {
+    self.loginButton.enabled = YES;
+  }
+}
+
 - (IBAction)forgotPasswordAction:(UIButton *)sender
 {
   
