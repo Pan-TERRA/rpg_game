@@ -11,6 +11,7 @@
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGMainViewController.h"
+#import "RPGStatusCodes.h"
 
 @interface RPGLoginViewController ()
 
@@ -97,22 +98,39 @@
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                              completionHandler:^(NSInteger statusCode)
      {
+       // statusCode = kRPGStatusCodeOk;
        [self setViewToNormalState];
        
-       BOOL success = (statusCode == 0);
-       if (success)
+       switch (statusCode)
        {
-         RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu
-                                                                                             bundle:nil];
-         [self presentViewController:mainViewController
-                            animated:YES
-                          completion:nil];
-         [mainViewController release];
-       }
-       else
-       {
-         // TODO: add switch that depends on error code
-         [self showErrorText:@"Password or email are incorrect"];
+         case kRPGStatusCodeOk:
+         {
+           RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu
+                                                                                               bundle:nil];
+           [self presentViewController:mainViewController
+                              animated:YES
+                            completion:nil];
+           [mainViewController release];
+           break;
+         }
+         case kRPGStatusCodeUserDoesNotExist:
+         case kRPGStatusCodeWrongPassword:
+         {
+           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                    message:@"Invalid credentials"
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+           UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:nil];
+           [alertController addAction:okAction];
+           [self presentViewController:alertController animated:YES completion:nil];
+           break;
+         }
+         // TODO: case kRPGStatusCodeWrongJSON - we need to resend login request
+         default:
+         {
+           break;
+         }
        }
      }];
   }
