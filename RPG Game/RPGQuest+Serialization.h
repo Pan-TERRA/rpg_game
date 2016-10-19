@@ -10,4 +10,7 @@
 
 @interface RPGQuest (Serialization)
 
+- (NSDictionary *)dictionaryRepresentation;
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
+
 @end
