@@ -8,6 +8,6 @@
 
 #import "RPGQuest+Serialization.h"
 
-@implementation RPGQuest_Serialization
+@implementation RPGQuest (Serialization)
 
 @end
