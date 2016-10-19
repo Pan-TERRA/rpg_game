@@ -34,7 +34,7 @@ NSString * const kRPGQuestReward = @"reward";
   NSString *name = aDictionary[kRPGQuestName];
   NSString *questDescription = aDictionary[kRPGQuestDescription];
   NSUInteger state = [aDictionary[kRPGQuestState] integerValue];
-  RPGQuestReward *reward = [[RPGQuestReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGQuestReward]];
+  RPGQuestReward *reward = [[[RPGQuestReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGQuestReward]] autorelease];
   return [self initWithId:questId name:name description:questDescription state:state reward:reward];
 }
 
