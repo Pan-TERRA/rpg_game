@@ -167,6 +167,7 @@
 		9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG Game.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE6D32DC1DB6343700F58878 /* RPGQuestListResponse+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGQuestListResponse+Serialization.h"; sourceTree = "<group>"; };
 		AE6D32DD1DB6343700F58878 /* RPGQuestListResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGQuestListResponse+Serialization.m"; sourceTree = "<group>"; };
+		AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGQuestListState.h; sourceTree = "<group>"; };
 		AE8076361DB5360400AF5E5B /* RPGQuestListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestListResponse.h; sourceTree = "<group>"; };
 		AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestListResponse.m; sourceTree = "<group>"; };
 		AED6F56E1DACD641007ED1B8 /* RPGBattleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleViewController.h; sourceTree = "<group>"; };
@@ -492,6 +493,7 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
+				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
