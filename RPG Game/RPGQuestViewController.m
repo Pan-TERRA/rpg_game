@@ -9,7 +9,7 @@
 #import "RPGQuestViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
-#import "NibNames.h"
+#import "RPGNibNames.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
