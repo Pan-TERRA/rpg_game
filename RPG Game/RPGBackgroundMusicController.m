@@ -10,6 +10,10 @@
 
 static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
+static NSString * const sRPGBundlePath = @"Sounds.bundle/BackGround/";
+static NSString * const sRPGPeaceMusicName = @"PeaceMusic.mp3";
+static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
+
 @interface RPGBackgroundMusicController ()
 
 @property (nonatomic, retain) AVAudioPlayer *peacePlayer;
@@ -19,51 +23,6 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
 @implementation RPGBackgroundMusicController
 
-#pragma mark - Music Changing
-
-- (void)switchToBattle
-{
-    if (self.state)
-    {
-        [self.peacePlayer pause];
-        [self.battlePlayer play];
-    }
-}
-
-- (void)switchToPeace
-{
-    if (self.state)
-    {
-        [self.battlePlayer pause];
-        [self.peacePlayer play];
-    }
-}
-
-- (void)changeVolume:(double)volume
-{
-    self.peacePlayer.volume = volume;
-    self.battlePlayer.volume = volume;
-}
-
-- (void)toggle:(BOOL)state
-{
-    self.state = state;
-    if (state)
-    {
-        [self switchToPeace];
-    }
-    else
-    {
-        [self.peacePlayer pause];
-        [self.battlePlayer pause];
-    }
-}
-
-- (double)getVolume
-{
-    return self.peacePlayer.volume;
-}
-
 #pragma mark - Init
 
 - (instancetype)init
@@ -72,36 +31,46 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
     
     if (self)
     {
-        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BackGround/PeaceMusic.mp3"]] autorelease];
+        NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+        NSString *peaceMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGPeaceMusicName];
+        NSString *absolutePeaceMusicPath = [bundlePath stringByAppendingPathComponent:peaceMusicPath];
+        
+        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:absolutePeaceMusicPath] autorelease];
         _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
         
         _peacePlayer.numberOfLoops = -1;
         _peacePlayer.delegate = self;
         
-        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:[[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Sounds.bundle/BackGround/BattleMusic.mp3"]] autorelease];
+        NSString *battleMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGBattleMusicName];
+        NSString *absoluteBattleMusicPath = [bundlePath stringByAppendingPathComponent:battleMusicPath];
+        
+        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:absoluteBattleMusicPath] autorelease];
         _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
         
         _battlePlayer.numberOfLoops = -1;
         _battlePlayer.delegate = self;
         
-        [AVAudioSession sharedInstance];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(interruption:) name:AVAudioSessionInterruptionNotification object:nil];
-        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(interruption:)
+                                                     name:AVAudioSessionInterruptionNotification
+                                                   object:nil];
         NSError *setCategoryError = nil;
         
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&setCategoryError];
+        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
+                                               error:&setCategoryError];
         if (setCategoryError)
         {
             NSLog(@"Error setting category! %@", setCategoryError);
         }
         
-        self.state = YES;
+        self.isPlaying = YES;
         
-        if (self.state)
+        if (self.isPlaying)
         {
             [_peacePlayer play];
         }
     }
+    
     return self;
 }
 
@@ -159,11 +128,54 @@ static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
     return self;
 }
 
-#pragma mark - Notification Listening
+#pragma mark - Music Changing
+
+- (void)switchToBattle
+{
+    if (self.isPlaying)
+    {
+        [self.peacePlayer pause];
+        [self.battlePlayer play];
+    }
+}
+
+- (void)switchToPeace
+{
+    if (self.isPlaying)
+    {
+        [self.battlePlayer pause];
+        [self.peacePlayer play];
+    }
+}
+
+- (void)changeVolume:(double)volume
+{
+    self.peacePlayer.volume = volume;
+    self.battlePlayer.volume = volume;
+}
+
+- (void)toggle:(BOOL)state
+{
+    self.isPlaying = state;
+    if (state)
+    {
+        [self switchToPeace];
+    }
+    else
+    {
+        [self.peacePlayer pause];
+        [self.battlePlayer pause];
+    }
+}
+
+- (double)getVolume
+{
+    return self.peacePlayer.volume;
+}
+
+#pragma mark - AudioSession Delegate
 - (void) interruption:(NSNotification*)notification
 {
-    //http://stackoverflow.com/questions/13078901/cocos2d-2-1-delegate-deprecated-in-ios-6-how-do-i-set-the-delegate-for-this
-    
     NSDictionary *interuptionDict = notification.userInfo;
     
     NSUInteger interuptionType = (NSUInteger)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];

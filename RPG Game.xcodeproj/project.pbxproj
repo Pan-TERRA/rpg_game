@@ -479,7 +479,7 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
-				D0CFEE6A1DB65B8F00C61D0B /* Music */,
+				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
 				288E85D01DABDA8A00321F4D /* AppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* AppDelegate.m */,
 				28149A131DB100FB00C26881 /* Main View */,
@@ -577,14 +577,14 @@
 			name = Quests;
 			sourceTree = "<group>";
 		};
-		D0CFEE6A1DB65B8F00C61D0B /* Music */ = {
+		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
 			isa = PBXGroup;
 			children = (
 				D0CFEE671DB65B6100C61D0B /* Sounds.bundle */,
 				D0CFEE6C1DB65BA700C61D0B /* BackGround */,
 				D0CFEE6B1DB65BA100C61D0B /* SFXs */,
 			);
-			name = Music;
+			name = "Sound Engine";
 			sourceTree = "<group>";
 		};
 		D0CFEE6B1DB65BA100C61D0B /* SFXs */ = {

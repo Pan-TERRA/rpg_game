@@ -7,7 +7,6 @@
 //
 
 #import "RPGSettingsViewController.h"
-#import "RPGMainViewController.h"
 #import "RPGNetworkManager+Authorization.h"
 
 #import "RPGBackgroundMusicController.h"
@@ -15,12 +14,11 @@
 
 @interface RPGSettingsViewController ()
 
-@property (retain, nonatomic) IBOutlet UISwitch *musicSwitch;
-@property (retain, nonatomic) IBOutlet UISlider *musicVolumeSlider;
+@property (assign, nonatomic) IBOutlet UISwitch *musicSwitch;
+@property (assign, nonatomic) IBOutlet UISlider *musicVolumeSlider;
 
-@property (retain, nonatomic) IBOutlet UISwitch *soundSwitch;
-@property (retain, nonatomic) IBOutlet UISlider *soundVolumeSlider;
-
+@property (assign, nonatomic) IBOutlet UISwitch *soundSwitch;
+@property (assign, nonatomic) IBOutlet UISlider *soundVolumeSlider;
 
 @end
 
@@ -64,15 +62,15 @@
     [[RPGSFXEngine sharedSFXEngine] changeVolume:sender.value];
 }
 
-
 #pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].state;
+    self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].isPlaying;
     self.musicVolumeSlider.value = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
     
-    self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].state;
+    self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].isPlaying;
     self.soundVolumeSlider.value = [[RPGSFXEngine sharedSFXEngine] getVolume];
 }
 
@@ -83,10 +81,7 @@
 
 - (void)dealloc
 {
-    [_musicSwitch release];
-    [_musicVolumeSlider release];
-    [_soundSwitch release];
-    [_soundVolumeSlider release];
     [super dealloc];
 }
+
 @end

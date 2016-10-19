@@ -10,9 +10,11 @@
 
 @interface RPGSFXEngine : NSObject
 
-@property (nonatomic, assign) BOOL state;
+@property (nonatomic, assign) BOOL isPlaying;
 
 + (instancetype)sharedSFXEngine;
+
+#pragma mark - API
 
 - (void)playSFXNamed:(NSString *)name;
 - (void)playSFXWithSpellID:(NSUInteger)identifier;

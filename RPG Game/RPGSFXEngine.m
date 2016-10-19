@@ -20,33 +20,25 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 
 @implementation RPGSFXEngine
 
-- (void)changeVolume:(double)volume
-{
-    [self.soundManager setSoundEffectsVolume:volume];
-}
+#pragma mark - Init
 
-- (void)toggle:(BOOL)state
+- (instancetype)init
 {
-    self.state = state;
-}
-
-- (void)playSFXNamed:(NSString *)name
-{
-    if (self.state)
+    self = [super init];
+    if (self)
     {
-        self.soundManager.soundFileNames = [NSArray arrayWithObject:[NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name]];
-        [self.soundManager playSoundWithID:0];
+        _soundManager = [CMOpenALSoundManager new];
+        _isPlaying = YES;
     }
+    return self;
 }
 
-- (void)playSFXWithSpellID:(NSUInteger)identifier
-{
-    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", identifier]];
-}
+#pragma mark - Dealloc
 
-- (double)getVolume
+- (void)dealloc
 {
-    return self.soundManager.soundEffectsVolume;
+    [_soundManager release];
+    [super dealloc];
 }
 
 #pragma mark - Singleton
@@ -57,9 +49,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
     {
         if(sharedSFXEngine == nil)
         {
-            sharedSFXEngine = [[super allocWithZone:NULL] init];
-            sharedSFXEngine.soundManager = [[CMOpenALSoundManager new] autorelease];
-            sharedSFXEngine.state = YES;
+            sharedSFXEngine = [RPGSFXEngine new];
         }
     }
     return sharedSFXEngine;
@@ -95,5 +85,36 @@ static RPGSFXEngine *sharedSFXEngine = nil;
     return self;
 }
 
+#pragma mark - Actions
+
+- (void)changeVolume:(double)volume
+{
+    [self.soundManager setSoundEffectsVolume:volume];
+}
+
+- (void)toggle:(BOOL)state
+{
+    self.isPlaying = state;
+}
+
+- (void)playSFXNamed:(NSString *)name
+{
+    if (self.isPlaying)
+    {
+        NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
+        self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
+        [self.soundManager playSoundWithID:0];
+    }
+}
+
+- (void)playSFXWithSpellID:(NSUInteger)identifier
+{
+    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", identifier]];
+}
+
+- (double)getVolume
+{
+    return self.soundManager.soundEffectsVolume;
+}
 
 @end
