@@ -29,6 +29,7 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
 @property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -99,6 +100,13 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
   [super viewWillAppear:animated];
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
   [self.buttonControl setSelectedSegmentIndex:self.buttonLastState];
+  [self setTableHidden:YES];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self updateViewForState:self.buttonLastState];
 }
 
 - (void)didReceiveMemoryWarning
@@ -136,12 +144,14 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
       break;
     }
   }
+  
   if (state != kRPGQuestListReviewQuest)
   {
     self.buttonLastState = state;
     [self.tableView reloadData];
     [self.tableView setContentOffset:CGPointZero animated:YES];
   }
+  
 }
 
 - (IBAction)backButtonOnClicked:(UIButton *)sender
@@ -261,6 +271,77 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
         break;
     }
     [tableView reloadData];
+  }
+}
+
+- (void)updateViewForState:(RPGQuestListState)state
+{
+  void (^callback)(NSArray *) = ^(NSArray *questList)
+  {
+    switch (state)
+    {
+      case kRPGQuestListTakeQuest:
+        self.takeQuestsMutableArray = [questList mutableCopy];
+        break;
+      case kRPGQuestListInProgressQuest:
+        self.inProgressQuestsMutableArray = [questList mutableCopy];
+        break;
+      case kRPGQuestListDoneQuest:
+        self.doneQuestsMutableArray = [questList mutableCopy];
+        break;
+      default:
+        break;
+    }
+    [self setTableHidden:NO];
+    [self.tableView reloadData];
+  };
+  
+  switch (state)
+  {
+    case kRPGQuestListTakeQuest:
+      //upload from server self.takeQuestsMutableArray
+      //pass callback to NetworkManager method
+      break;
+    case kRPGQuestListInProgressQuest:
+      //upload from server self.inProgressQuestsMutableArray
+      //pass callback to NetworkManager method
+      break;
+    case kRPGQuestListDoneQuest:
+      //upload from server self.doneQuestsMutableArray
+      //pass callback to NetworkManager method
+      break;
+    case kRPGQuestListReviewQuest:
+    {
+      // test data
+      //upload random quest from server to check
+      NSDictionary *quest = @{@"title":@"Quest6 title",
+                              @"description":@"Quest description. You have to review this quest.",
+                              @"reward":@"60",
+                              @"state":@"6"};
+      
+      [self showQuestViewWithQuest:quest];
+      break;
+    }
+  }
+  if (state != kRPGQuestListReviewQuest)
+  {
+    self.buttonLastState = state;
+    [self.tableView reloadData];
+    [self.tableView setContentOffset:CGPointZero animated:YES];
+  }
+}
+
+- (void)setTableHidden:(BOOL)flag
+{
+  [self.tableView setHidden:flag];
+  [self.activityIndicator setHidden:!flag];
+  if (flag)
+  {
+    [self.activityIndicator startAnimating];
+  }
+  else
+  {
+    [self.activityIndicator stopAnimating];
   }
 }
 
