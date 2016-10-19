@@ -10,4 +10,15 @@
 
 @interface RPGQuestReward : NSObject
 
+@property (nonatomic, assign, readonly) NSUInteger gold;
+@property (nonatomic, assign, readonly) NSUInteger crystals;
+@property (nonatomic, assign, readonly) NSUInteger skillId;
+
+- (instancetype)initWithGold:(NSUInteger)gold
+                    crystals:(NSUInteger)crystals
+                     skillId:(NSUInteger)skillId NS_DESIGNATED_INITIALIZER;
++ (instancetype)responseWithGold:(NSUInteger)gold
+                        crystals:(NSUInteger)crystals
+                         skillId:(NSUInteger)skillId;
+
 @end
