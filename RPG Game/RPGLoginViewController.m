@@ -40,7 +40,6 @@
   [super viewDidLoad];
 }
 
-
 #pragma mark - Changing UI state
 
 - (void)setViewToWaitingForServerResponseState
@@ -53,15 +52,6 @@
 {
   [self.loginButton setEnabled:YES];
   [self.loginActivityIndicator stopAnimating];
-}
-
-#pragma mark Error representation
-
-- (void)showErrorText:(NSString *)text
-{
-  self.errorMessageLabel.text = text;
-  [self.errorMessageLabel setHidden:NO];
-  [self.errorMessageLabel sizeToFit];
 }
 
 #pragma mark Actions
@@ -133,10 +123,6 @@
          }
        }
      }];
-  }
-  else
-  {
-    [self showErrorText:@"Please fill in all required fields."];
   }
 }
 
