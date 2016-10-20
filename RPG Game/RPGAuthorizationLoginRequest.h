@@ -10,8 +10,8 @@
 
 @interface RPGAuthorizationLoginRequest : NSObject
 
-@property (copy, nonatomic, readonly) NSString *email;
-@property (copy, nonatomic, readonly) NSString *password;
+@property (nonatomic, copy, readonly) NSString *email;
+@property (nonatomic, copy, readonly) NSString *password;
 
 - (instancetype)initWithEmail:(NSString *)anEmail
                      password:(NSString *)aPassword NS_DESIGNATED_INITIALIZER;
