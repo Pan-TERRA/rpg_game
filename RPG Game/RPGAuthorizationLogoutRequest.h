@@ -10,7 +10,7 @@
 
 @interface RPGAuthorizationLogoutRequest : NSObject
 
-@property (copy, nonatomic, readonly) NSString *token;
+@property (nonatomic, copy, readonly) NSString *token;
 
 - (instancetype)initWithToken:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
 + (instancetype)requestWithToken:(NSString *)aToken;

@@ -10,7 +10,7 @@
 
 @interface RPGAuthorizationLogoutRequest ()
 
-@property (copy, nonatomic, readwrite) NSString *token;
+@property (nonatomic, copy, readwrite) NSString *token;
 
 @end
 
@@ -55,7 +55,6 @@
 - (void)dealloc
 {
   [_token release];
-
   [super dealloc];
 }
 
