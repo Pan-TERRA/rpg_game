@@ -12,27 +12,16 @@
 @interface RPGAuthorizationLoginResponse ()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
-@property (copy, nonatomic, readwrite) NSString *username;
-@property (copy, nonatomic, readwrite) NSString *token;
-@property (copy, nonatomic, readwrite) NSString *avatar;
-
-@property (nonatomic, readwrite) NSInteger gold;
-@property (nonatomic, readwrite) NSInteger crystals;
-
-@property (copy, nonatomic, readwrite) NSArray *characters;
+@property (nonatomic, copy, readwrite) NSString *username;
+@property (nonatomic, copy, readwrite) NSString *token;
+@property (nonatomic, copy, readwrite) NSString *avatar;
+@property (nonatomic, assign, readwrite) NSInteger gold;
+@property (nonatomic, assign, readwrite) NSInteger crystals;
+@property (nonatomic, retain, readwrite) NSArray *characters;
 
 @end
 
 @implementation RPGAuthorizationLoginResponse
-
-@synthesize username = _username;
-@synthesize token = _token;
-@synthesize avatar = _avatar;
-
-@synthesize gold = _gold;
-@synthesize crystals = _crystals;
-
-@synthesize characters = _characters;
 
 #pragma mark - Init
 
@@ -109,7 +98,6 @@
   [_token release];
   [_avatar release];
   [_characters release];
-  
   [super dealloc];
 }
 

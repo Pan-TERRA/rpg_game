@@ -11,14 +11,12 @@
 @interface RPGAuthorizationLoginResponse : NSObject
 
 @property (nonatomic, assign, readonly) NSInteger status;
-@property (copy, nonatomic, readonly) NSString *username;
-@property (copy, nonatomic, readonly) NSString *token;
-@property (copy, nonatomic, readonly) NSString *avatar;
-
-@property (nonatomic, readonly) NSInteger gold;
-@property (nonatomic, readonly) NSInteger crystals;
-
-@property (copy, nonatomic, readonly) NSArray *characters;
+@property (nonatomic, copy, readonly) NSString *username;
+@property (nonatomic, copy, readonly) NSString *token;
+@property (nonatomic, copy, readonly) NSString *avatar;
+@property (nonatomic, assign, readonly) NSInteger gold;
+@property (nonatomic, assign, readonly) NSInteger crystals;
+@property (nonatomic, retain, readonly) NSArray *characters;
 
 #pragma mark - Init
 
