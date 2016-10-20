@@ -6,39 +6,39 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGNibNames.h"
 #import "RPGLoginViewController.h"
-#import "RPGNetworkManager+Authorization.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGMainViewController.h"
+#import "RPGNetworkManager+Authorization.h"
+#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGNibNames.h"
 
 @interface RPGLoginViewController ()
 
-@property (assign, nonatomic) IBOutlet UILabel *errorMessageLabel;
-@property (assign, nonatomic) IBOutlet UIButton *loginButton;
-@property (assign, nonatomic) IBOutlet UITextField *emailInputField;
-@property (assign, nonatomic) IBOutlet UITextField *passwordInputField;
-@property (assign, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorMessageLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
 
 @end
 
 @implementation RPGLoginViewController
 
-#pragma mark - Init/dealloc
+#pragma mark - Init
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGLoginViewController"
+  return [super initWithNibName:kRPGLoginViewController
                          bundle:nil];
 }
 
-#pragma mark - View Controller
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
 }
-
 
 #pragma mark - Changing UI state
 
@@ -54,23 +54,23 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark Error representation
+#pragma mark - Error representation
 
-- (void)showErrorText:(NSString *)text
+- (void)showErrorText:(NSString *)aText
 {
-  self.errorMessageLabel.text = text;
+  self.errorMessageLabel.text = aText;
   [self.errorMessageLabel setHidden:NO];
   [self.errorMessageLabel sizeToFit];
 }
 
-#pragma mark Actions
+#pragma mark - Actions
 
-- (IBAction)forgotPasswordAction:(UIButton *)sender
+- (IBAction)forgotPasswordAction:(UIButton *)aSender
 {
   
 }
 
-- (IBAction)signupAction:(UIButton *)sender
+- (IBAction)signupAction:(UIButton *)aSender
 {
   RPGRegistrationViewController *registrationViewController = [[RPGRegistrationViewController alloc] init];
   [self presentViewController:registrationViewController
@@ -79,7 +79,7 @@
   [registrationViewController release];
 }
 
-- (IBAction)loginAction:(UIButton *)sender
+- (IBAction)loginAction:(UIButton *)aSender
 {
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
@@ -102,8 +102,7 @@
        BOOL success = (statusCode == 0);
        if (success)
        {
-         RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu
-                                                                                             bundle:nil];
+         RPGMainViewController *mainViewController = [[RPGMainViewController alloc] init];
          [self presentViewController:mainViewController
                             animated:YES
                           completion:nil];
