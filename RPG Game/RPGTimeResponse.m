@@ -8,11 +8,11 @@
 
 #import "RPGTimeResponse.h"
 
-NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
+NSString *const kRPGTimeResponseType = @"TIME_RESPONSE";
 
 @interface RPGTimeResponse ()
 
-@property (retain, nonatomic, readwrite) NSDate *timestamp;
+@property (nonatomic, retain, readwrite) NSDate *timestamp;
 
 @end
 
@@ -20,9 +20,11 @@ NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
 
 #pragma mark - Init
 
-- (instancetype)initWithTimestamp:(NSDate *)aTimestamp status:(NSInteger)aStatus
+- (instancetype)initWithTimestamp:(NSDate *)aTimestamp
+                           status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGTimeResponseType status:aStatus];
+  self = [super initWithType:kRPGTimeResponseType
+                      status:aStatus];
   
   if (self != nil)
   {
@@ -32,22 +34,28 @@ NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
   return self;
 }
 
-- (instancetype)initWithUnixTimestamp:(int)aUnixTimestamp status:(NSInteger)aStatus
+- (instancetype)initWithUnixTimestamp:(int)aUnixTimestamp
+                               status:(NSInteger)aStatus
 {
   //NSTimeInteval is typedef double
   NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)aUnixTimestamp];
   
-  return [self initWithTimestamp:timestamp status:aStatus];
+  return [self initWithTimestamp:timestamp
+                          status:aStatus];
 }
 
-+ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp status:(NSInteger)aStatus
++ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp
+                                   status:(NSInteger)aStatus
 {
-  return [[[self alloc] initWithTimestamp:aTimestamp status:aStatus] autorelease];
+  return [[[self alloc] initWithTimestamp:aTimestamp
+                                   status:aStatus] autorelease];
 }
 
-+ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp status:(NSInteger)aStatus
++ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp
+                                       status:(NSInteger)aStatus
 {
-  return [[[self alloc] initWithUnixTimestamp:aTimestamp status:aStatus] autorelease];
+  return [[[self alloc] initWithUnixTimestamp:aTimestamp
+                                       status:aStatus] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -55,7 +63,6 @@ NSString *const kRPGTimeResponseType = @"TIME_REQUEST";
 - (void)dealloc
 {
   [_timestamp release];
-  
   [super dealloc];
 }
 
