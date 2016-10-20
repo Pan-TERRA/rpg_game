@@ -10,6 +10,6 @@
 
 @interface RPGQuestViewController : UIViewController
 
-- (void)setViewContent:(NSDictionary *)viewContent;
+- (void)setViewContent:(NSDictionary *)aViewContent;
 
 @end

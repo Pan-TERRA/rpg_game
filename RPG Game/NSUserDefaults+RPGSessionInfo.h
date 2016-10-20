@@ -10,11 +10,11 @@
 
 @interface NSUserDefaults (RPGSessionInfo)
 
-@property (nonatomic, readonly) NSString *sessionUsername;
-@property (nonatomic, readonly) NSString *sessionAvatar;
-@property (nonatomic, readonly) NSString *sessionToken;
-@property (readonly) NSInteger sessionGold;
-@property (readonly) NSInteger sessionCrystals;
-@property (nonatomic, readonly) NSArray *sessionCharacters;
+@property (nonatomic, copy, readonly) NSString *sessionUsername;
+@property (nonatomic, copy, readonly) NSString *sessionAvatar;
+@property (nonatomic, copy, readonly) NSString *sessionToken;
+@property (nonatomic, assign, readonly) NSInteger sessionGold;
+@property (nonatomic, assign, readonly) NSInteger sessionCrystals;
+@property (nonatomic, retain, readonly) NSArray *sessionCharacters;
 
 @end

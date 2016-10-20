@@ -19,37 +19,39 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)status
-                        quests:(NSArray *)quests
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                        quests:(NSArray *)aQuests
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (quests == nil)
+    if (aQuests == nil)
     {
       [self release];
       self = nil;
     }
     else
     {
-      _status = status;
-      _quests = [quests retain];
+      _status = aStatus;
+      _quests = [aQuests retain];
     }
   }
   
   return self;
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)status
-                            quests:(NSArray *)quests
++ (instancetype)responseWithStatus:(NSInteger)aStatus
+                            quests:(NSArray *)aQuests
 {
-  return [[[self alloc] initWithStatus:status quests:quests] autorelease];
+  return [[[self alloc] initWithStatus:aStatus
+                                quests:aQuests] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithStatus:-1 quests:nil];
+  return [self initWithStatus:-1
+                       quests:nil];
 }
 
 #pragma mark - Dealloc

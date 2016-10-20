@@ -7,10 +7,8 @@
 //
 
 #import "RPGNetworkManager.h"
-#import "RPGAuthorizationLoginRequest+Serialization.h"
-#import "RPGAuthorizationLoginResponse+Serialization.h"
-#import "RPGAuthorizationLogoutRequest+Serialization.h"
-#import "RPGAuthorizationLogoutResponse+Serialization.h"
+
+@class RPGAuthorizationLoginRequest;
 
 @interface RPGNetworkManager (Authorization)
 

@@ -6,24 +6,24 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGNetworkManager+Registration.h"
 #import "RPGRegistrationViewController.h"
-#import "RPGRegistrationRequest.h"
 #import "RPGLoginViewController.h"
+#import "RPGNetworkManager+Registration.h"
+#import "RPGRegistrationRequest+Serialization.h"
+#import "RPGNibNames.h"
 
 @interface RPGRegistrationViewController ()
 
-@property (nonatomic, readonly) NSArray *classPickerData;
-// Outlets
-@property (assign, nonatomic) IBOutlet UILabel *errorLabel;
-@property (assign, nonatomic) IBOutlet UIButton *submitButton;
-@property (assign, nonatomic) IBOutlet UIPickerView *classPicker;
-@property (assign, nonatomic) IBOutlet UITextField *emailTextField;
-@property (assign, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (assign, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (assign, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
-@property (assign, nonatomic) IBOutlet UITextField *characterNameTextField;
-@property (assign, nonatomic) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
+@property (nonatomic, retain, readonly) NSArray *classPickerData;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *usernameTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 
 @end
 
@@ -33,8 +33,8 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:@"RPGRegistrationViewController"
-                         bundle:nil];
+  self = [super initWithNibName:kRPGRegistrationViewController bundle:nil];
+  
   if (self != nil)
   {
     //test data
@@ -44,57 +44,55 @@
                           }
                         ] retain];
   }
+  
   return self;
 }
 
-#pragma mark Dealloc
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
   [_classPickerData release];
+  
   [super dealloc];
 }
 
-#pragma mark - View Controller
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
 }
 
-#pragma mark UIPickerView data source
+#pragma mark - UIPickerViewDataSource
 
-// The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (int)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
 {
   return 1;
 }
 
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)aPickerView numberOfRowsInComponent:(NSInteger)aComponent
 {
   return self.classPickerData.count;
 }
 
-// The data to return for the row and component (column) that's being passed in
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
+- (NSString *)pickerView:(UIPickerView *)aPickerView
+             titleForRow:(NSInteger)aRow
+            forComponent:(NSInteger)aComponent
 {
-  return self.classPickerData[row][@"className"];
+  return self.classPickerData[aRow][@"className"];
 }
 
-#pragma mark Error representation
+#pragma mark - Error Representation
 
-- (void)showErrorText:(NSString *)text
+- (void)showErrorText:(NSString *)aText
 {
-  self.errorLabel.text = text;
+  self.errorLabel.text = aText;
   [self.errorLabel setHidden:NO];
   [self.errorLabel sizeToFit];
 }
 
-#pragma mark Changing UI state
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -108,16 +106,9 @@ numberOfRowsInComponent:(NSInteger)component
   [self.submitActivityIndicator stopAnimating];
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
+#pragma mark - IBActions
 
-#pragma mark Actions
-
-- (IBAction)submitButtonAction:(UIButton *)sender
+- (IBAction)submitButtonAction:(UIButton *)aSender
 {
   NSString *emailFieldText = self.emailTextField.text;
   NSString *usernameFieldText = self.usernameTextField.text;
@@ -126,35 +117,35 @@ numberOfRowsInComponent:(NSInteger)component
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger selectedClassID = [self getSelectedClassID];
   
-  if (!([emailFieldText isEqualToString:@""]
-        && [usernameFieldText isEqualToString:@""]
-        && [passwordFieldText isEqualToString:@""]
-        && [confirmPasswordFieldText isEqualToString:@""]
-        && [characterNameFieldText isEqualToString:@""]))
+  if (!([emailFieldText isEqualToString:@""] &&
+        [usernameFieldText isEqualToString:@""] &&
+        [passwordFieldText isEqualToString:@""] &&
+        [confirmPasswordFieldText isEqualToString:@""] &&
+        [characterNameFieldText isEqualToString:@""]))
   {
     if ([passwordFieldText isEqualToString:confirmPasswordFieldText])
     {
       [self setViewToWaitingForServerResponseState];
       
-      RPGRegistrationRequest *registrationRequest = [[[RPGRegistrationRequest alloc] initWithEmail:emailFieldText
-                                                                                          password:passwordFieldText
-                                                                                          username:usernameFieldText
-                                                                                     characterName:characterNameFieldText
-                                                                                     characterType:selectedClassID]
-                                                     autorelease];
+      RPGRegistrationRequest *registrationRequest = [RPGRegistrationRequest registrationRequestWithEmail:emailFieldText
+                                                                                                password:passwordFieldText
+                                                                                                username:usernameFieldText
+                                                                                           characterName:characterNameFieldText
+                                                                                           characterType:selectedClassID];
       
       [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
                                                   completionHandler:^(NSInteger statusCode)
        {
          [self setViewToNormalState];
+         
          BOOL success = (statusCode == 0);
          if (success)
          {
-           RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init]
-                                                          autorelease];
+           RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
            [self presentViewController:loginViewController
                               animated:YES
                             completion:nil];
+           [loginViewController release];
          }
          else
          {
@@ -171,6 +162,13 @@ numberOfRowsInComponent:(NSInteger)component
   {
     [self showErrorText:@"Please fill in all required fields."];
   }
+}
+
+- (NSInteger)getSelectedClassID
+{
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 
 @end

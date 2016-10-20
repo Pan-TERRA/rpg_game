@@ -16,8 +16,8 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 
 @interface RPGBackgroundMusicController ()
 
-@property (nonatomic, retain) AVAudioPlayer *peacePlayer;
-@property (nonatomic, retain) AVAudioPlayer *battlePlayer;
+@property (nonatomic, retain, readwrite) AVAudioPlayer *peacePlayer;
+@property (nonatomic, retain, readwrite) AVAudioPlayer *battlePlayer;
 
 @end
 
@@ -27,168 +27,166 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 
 - (instancetype)init
 {
-    self = [super init];
+  self = [super init];
+  
+  if (self != nil)
+  {
+    NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+    NSString *peaceMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGPeaceMusicName];
+    NSString *absolutePeaceMusicPath = [bundlePath stringByAppendingPathComponent:peaceMusicPath];
     
-    if (self)
+    NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:absolutePeaceMusicPath] autorelease];
+    _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
+    
+    _peacePlayer.numberOfLoops = -1;
+    _peacePlayer.delegate = self;
+    
+    NSString *battleMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGBattleMusicName];
+    NSString *absoluteBattleMusicPath = [bundlePath stringByAppendingPathComponent:battleMusicPath];
+    
+    NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:absoluteBattleMusicPath] autorelease];
+    _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
+    
+    _battlePlayer.numberOfLoops = -1;
+    _battlePlayer.delegate = self;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(interruption:)
+                                                 name:AVAudioSessionInterruptionNotification
+                                               object:nil];
+    NSError *setCategoryError = nil;
+    
+    if (  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError])
     {
-        NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-        NSString *peaceMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGPeaceMusicName];
-        NSString *absolutePeaceMusicPath = [bundlePath stringByAppendingPathComponent:peaceMusicPath];
-        
-        NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:absolutePeaceMusicPath] autorelease];
-        _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
-        
-        _peacePlayer.numberOfLoops = -1;
-        _peacePlayer.delegate = self;
-        
-        NSString *battleMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGBattleMusicName];
-        NSString *absoluteBattleMusicPath = [bundlePath stringByAppendingPathComponent:battleMusicPath];
-        
-        NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:absoluteBattleMusicPath] autorelease];
-        _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
-        
-        _battlePlayer.numberOfLoops = -1;
-        _battlePlayer.delegate = self;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(interruption:)
-                                                     name:AVAudioSessionInterruptionNotification
-                                                   object:nil];
-        NSError *setCategoryError = nil;
-        
-        [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
-                                               error:&setCategoryError];
-        if (setCategoryError)
-        {
-            NSLog(@"Error setting category! %@", setCategoryError);
-        }
-        
-        self.isPlaying = YES;
-        
-        if (self.isPlaying)
-        {
-            [_peacePlayer play];
-        }
+      NSLog(@"Error setting category! %@", setCategoryError);
     }
     
-    return self;
+    self.playing = YES;
+    
+    if ([self isPlaying])
+    {
+      [_peacePlayer play];
+    }
+  }
+  
+  return self;
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-    [_peacePlayer release];
-    [_battlePlayer release];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super dealloc];
+  [_peacePlayer release];
+  [_battlePlayer release];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [super dealloc];
 }
 
 #pragma mark - Singleton
 
 + (id)sharedBackgroundMusicController
 {
-    @synchronized(self)
+  @synchronized(self)
+  {
+    if(sharedBackgroundMusicController == nil)
     {
-        if(sharedBackgroundMusicController == nil)
-        {
-            sharedBackgroundMusicController = [[super allocWithZone:NULL] init];
-        }
+      sharedBackgroundMusicController = [[super allocWithZone:NULL] init];
     }
-    return sharedBackgroundMusicController;
+  }
+  return sharedBackgroundMusicController;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++ (id)allocWithZone:(NSZone *)aZone
 {
-    return [[self sharedBackgroundMusicController] retain];
+  return [[self sharedBackgroundMusicController] retain];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)aZone
 {
-    return self;
+  return self;
 }
 
 - (id)retain
 {
-    return self;
+  return self;
 }
 
 - (NSUInteger)retainCount
 {
-    return UINT_MAX;
+  return UINT_MAX;
 }
 
 - (oneway void)release
 {
-    
+  
 }
 
 - (id)autorelease
 {
-    return self;
+  return self;
 }
 
 #pragma mark - Music Changing
 
 - (void)switchToBattle
 {
-    if (self.isPlaying)
-    {
-        [self.peacePlayer pause];
-        [self.battlePlayer play];
-    }
+  if (self.isPlaying)
+  {
+    [self.peacePlayer pause];
+    [self.battlePlayer play];
+  }
 }
 
 - (void)switchToPeace
 {
-    if (self.isPlaying)
-    {
-        [self.battlePlayer pause];
-        [self.peacePlayer play];
-    }
+  if (self.isPlaying)
+  {
+    [self.battlePlayer pause];
+    [self.peacePlayer play];
+  }
 }
 
-- (void)changeVolume:(double)volume
+- (void)changeVolume:(double)aVolume
 {
-    self.peacePlayer.volume = volume;
-    self.battlePlayer.volume = volume;
+  self.peacePlayer.volume = aVolume;
+  self.battlePlayer.volume = aVolume;
 }
 
-- (void)toggle:(BOOL)state
+- (void)toggle:(BOOL)aState
 {
-    self.isPlaying = state;
-    if (state)
-    {
-        [self switchToPeace];
-    }
-    else
-    {
-        [self.peacePlayer pause];
-        [self.battlePlayer pause];
-    }
+  self.playing = aState;
+  if (self.isPlaying)
+  {
+    [self switchToPeace];
+  }
+  else
+  {
+    [self.peacePlayer pause];
+    [self.battlePlayer pause];
+  }
 }
 
 - (double)getVolume
 {
-    return self.peacePlayer.volume;
+  return self.peacePlayer.volume;
 }
 
 #pragma mark - AudioSession Delegate
-- (void) interruption:(NSNotification*)notification
-{
-    NSDictionary *interuptionDict = notification.userInfo;
-    
-    NSUInteger interuptionType = (NSUInteger)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];
-    
-    if (interuptionType == AVAudioSessionInterruptionTypeBegan)
-    {
-        [self beginInterruption];
-    }
-    else if (interuptionType == AVAudioSessionInterruptionTypeEnded)
-    {
-        [self endInterruption];
-    }
-}
 
+- (void)interruption:(NSNotification*)aNotification
+{
+  NSDictionary *interuptionDict = aNotification.userInfo;
+  
+  NSUInteger interuptionType = (NSUInteger)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];
+  
+  if (interuptionType == AVAudioSessionInterruptionTypeBegan)
+  {
+    [self beginInterruption];
+  }
+  else if (interuptionType == AVAudioSessionInterruptionTypeEnded)
+  {
+    [self endInterruption];
+  }
+}
 
 @end

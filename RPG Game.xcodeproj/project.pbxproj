@@ -39,6 +39,7 @@
 		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
 		288E85F31DABDA8A00321F4D /* RPG_GameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */; };
 		288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E86011DABDADB00321F4D /* RPGMainViewController.m */; };
+		28A5A0D61DB8E95E000EF49F /* RPGNetworkManager+Quests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
 		2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */; };
@@ -152,6 +153,8 @@
 		288E85F41DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E86001DABDADB00321F4D /* RPGMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGMainViewController.h; sourceTree = "<group>"; };
 		288E86011DABDADB00321F4D /* RPGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMainViewController.m; sourceTree = "<group>"; };
+		28A5A0D21DB8E95E000EF49F /* RPGNetworkManager+Quests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Quests.h"; sourceTree = "<group>"; };
+		28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Quests.m"; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
 		28F102211DB7756500C969CA /* RPGUserSessionKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGUserSessionKeys.m; sourceTree = "<group>"; };
 		28F102231DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RPGSessionInfo.h"; sourceTree = "<group>"; };
@@ -260,10 +263,12 @@
 			children = (
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
-				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
-				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
+				28A5A0D21DB8E95E000EF49F /* RPGNetworkManager+Quests.h */,
+				28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */,
 				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
 				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
+				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
+				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
 			);
 			name = "Network Manager";
 			sourceTree = "<group>";
@@ -559,6 +564,47 @@
 			path = "RPG GameUITests";
 			sourceTree = "<group>";
 		};
+		28A5A0D71DB8F75A000EF49F /* Proof Image */ = {
+			isa = PBXGroup;
+			children = (
+				2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */,
+				2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */,
+				2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */,
+			);
+			name = "Proof Image";
+			sourceTree = "<group>";
+		};
+		28A5A0D81DB8F765000EF49F /* Quest List */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F57B1DACD8D8007ED1B8 /* RPGQuestListViewController.h */,
+				AED6F57C1DACD8D8007ED1B8 /* RPGQuestListViewController.m */,
+				AED6F57D1DACD8D8007ED1B8 /* RPGQuestListViewController.xib */,
+				28A5A0D91DB8F773000EF49F /* Table View */,
+			);
+			name = "Quest List";
+			sourceTree = "<group>";
+		};
+		28A5A0D91DB8F773000EF49F /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F5831DACDCAD007ED1B8 /* RPGQuestListTableViewCell.h */,
+				AED6F5841DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m */,
+				AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */,
+			);
+			name = "Table View";
+			sourceTree = "<group>";
+		};
+		28A5A0DA1DB8F787000EF49F /* Quest */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */,
+				AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */,
+				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
+			);
+			name = Quest;
+			sourceTree = "<group>";
+		};
 		28F1021E1DB7719100C969CA /* Quests */ = {
 			isa = PBXGroup;
 			children = (
@@ -610,18 +656,9 @@
 		AED6F57A1DACD89F007ED1B8 /* Quests */ = {
 			isa = PBXGroup;
 			children = (
-				2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */,
-				2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */,
-				2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */,
-				AED6F57B1DACD8D8007ED1B8 /* RPGQuestListViewController.h */,
-				AED6F57C1DACD8D8007ED1B8 /* RPGQuestListViewController.m */,
-				AED6F57D1DACD8D8007ED1B8 /* RPGQuestListViewController.xib */,
-				AED6F5831DACDCAD007ED1B8 /* RPGQuestListTableViewCell.h */,
-				AED6F5841DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m */,
-				AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */,
-				AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */,
-				AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */,
-				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
+				28A5A0D81DB8F765000EF49F /* Quest List */,
+				28A5A0DA1DB8F787000EF49F /* Quest */,
+				28A5A0D71DB8F75A000EF49F /* Proof Image */,
 			);
 			name = Quests;
 			sourceTree = "<group>";
@@ -995,6 +1032,7 @@
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
 				28149A071DAFCF1C00C26881 /* RPGAuthorizationLogoutRequest+Serialization.m in Sources */,
+				28A5A0D61DB8E95E000EF49F /* RPGNetworkManager+Quests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

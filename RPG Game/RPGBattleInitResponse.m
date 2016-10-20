@@ -12,15 +12,12 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 @interface RPGBattleInitResponse ()
 
-@property (retain, nonatomic, readwrite) NSMutableDictionary *mutableOpponentInfo;
-@property (nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
+@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableOpponentInfo;
+@property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
 @end
 
 @implementation RPGBattleInitResponse
-
-@synthesize mutableOpponentInfo = _mutableOpponentInfo;
-@synthesize currentTurn = _currentTurn;
 
 #pragma mark - Init
 
@@ -28,9 +25,8 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
                          currentTurn:(BOOL)aCurrentTurn
                               status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleInitResponseType status:aStatus];
-  
-  
+  self = [super initWithType:kRPGBattleInitResponseType
+                      status:aStatus];
   
   if (self != nil)
   {
@@ -58,15 +54,12 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
                                                        status:aStatus] autorelease];
 }
 
-
-- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
+- (instancetype)initWithType:(NSString *)aType
+                      status:(NSInteger)aStatus
 {
-  return [self initWithOpponentInfo:nil currentTurn:0 status:-1];
-}
-
-+ (instancetype)battleInitResponse
-{
-  return nil;
+  return [self initWithOpponentInfo:nil
+                        currentTurn:0
+                             status:-1];
 }
 
 #pragma mark - Dealloc
@@ -74,7 +67,6 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 - (void)dealloc
 {
   [_mutableOpponentInfo release];
-  
   [super dealloc];
 }
 

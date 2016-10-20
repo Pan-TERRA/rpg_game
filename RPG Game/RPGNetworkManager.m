@@ -12,7 +12,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 @interface RPGNetworkManager ()
 
-@property (copy, nonatomic, readwrite) NSString *token;
+@property (nonatomic, copy, readwrite) NSString *token;
 
 @end
 
@@ -49,17 +49,18 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 - (void)dealloc
 {
+  [_token release];
   [super dealloc];
 }
 
 #pragma mark - Singleton
 
-+ (id)allocWithZone:(NSZone *)zone
++ (id)allocWithZone:(NSZone *)aZone
 {
   return [[self sharedNetworkManager] retain];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)aZone
 {
   return self;
 }

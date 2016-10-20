@@ -10,6 +10,6 @@
 
 @interface RPGQuestListTableViewCell : UITableViewCell
 
-- (void)setCellContent:(NSDictionary *)cellContent;
+- (void)setCellContent:(NSDictionary *)aCellContent;
 
 @end

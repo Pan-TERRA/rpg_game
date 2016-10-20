@@ -7,12 +7,16 @@
 //
 
 #import "RPGNetworkManager+Authorization.h"
+#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGAuthorizationLoginResponse+Serialization.h"
+#import "RPGAuthorizationLogoutRequest+Serialization.h"
 
 @implementation RPGNetworkManager (Authorization)
 
 #pragma mark - Authorization API
 
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
+       completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
@@ -69,7 +73,6 @@
         responseObject = [[[RPGAuthorizationLoginResponse alloc]
                            initWithDictionaryRepresentation:responseDictionary] autorelease];
       }
-
     }
     else
     {
@@ -102,12 +105,14 @@
 {
   RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
   
-  [self logoutWithRequest:request completionHandler:callbackBlock];
+  [self logoutWithRequest:request
+        completionHandler:callbackBlock];
   
   [request release];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
+- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest
+        completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
   
@@ -140,13 +145,11 @@
     NSDictionary *responseDictionary = nil;
     NSInteger status = 0;
     NSError *JSONParsingError = nil;
-    
 
     if (error != nil)
     {
       status = 1;
     }
-    
     
     if (data != nil)
     {

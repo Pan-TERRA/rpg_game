@@ -14,12 +14,14 @@
  */
 @interface RPGRequest : NSObject
 
-@property (copy, readonly, nonatomic) NSString *type;
-@property (copy, readonly, nonatomic) NSString *token;
+@property (nonatomic, copy, readonly) NSString *type;
+@property (nonatomic, copy, readonly) NSString *token;
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithType:(NSString *)aType token:(NSString *)aToken;
+- (instancetype)initWithType:(NSString *)aType
+                       token:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
++ (instancetype)requestWithType:(NSString *)aType
+                          token:(NSString *)aToken;
 
 @end

@@ -11,14 +11,17 @@
 /**
  *  Basic response class. Mainly used by "RPGBattleManager".
  */
+
 @interface RPGResponse : NSObject
 
-@property (copy, readonly, nonatomic) NSString *type;
-@property (readonly, nonatomic) NSInteger status;
+@property (nonatomic, copy, readonly) NSString *type;
+@property (nonatomic, assign, readonly) NSInteger status;
 
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithType:(NSString *)aType status:(NSInteger)aStatus;
+- (instancetype)initWithType:(NSString *)aType
+                      status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
++ (instancetype)responseWithType:(NSString *)aType
+                          status:(NSInteger)aStatus;
 
 @end
