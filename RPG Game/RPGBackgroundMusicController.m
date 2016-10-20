@@ -32,20 +32,21 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   if (self != nil)
   {
     NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
-    
     NSString *peaceMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGPeaceMusicName];
     NSString *absolutePeaceMusicPath = [bundlePath stringByAppendingPathComponent:peaceMusicPath];
-    NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:absolutePeaceMusicPath] autorelease];
     
+    NSURL *peaceMusic = [[[NSURL alloc] initFileURLWithPath:absolutePeaceMusicPath] autorelease];
     _peacePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:peaceMusic error:nil];
+    
     _peacePlayer.numberOfLoops = -1;
     _peacePlayer.delegate = self;
     
     NSString *battleMusicPath = [NSString stringWithFormat:@"%@%@", sRPGBundlePath, sRPGBattleMusicName];
     NSString *absoluteBattleMusicPath = [bundlePath stringByAppendingPathComponent:battleMusicPath];
-    NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:absoluteBattleMusicPath] autorelease];
     
+    NSURL *battleMusic = [[[NSURL alloc] initFileURLWithPath:absoluteBattleMusicPath] autorelease];
     _battlePlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:battleMusic error:nil];
+    
     _battlePlayer.numberOfLoops = -1;
     _battlePlayer.delegate = self;
     
@@ -55,16 +56,14 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
                                                object:nil];
     NSError *setCategoryError = nil;
     
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient
-                                           error:&setCategoryError];
-    if (setCategoryError != nil)
+    if (  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError])
     {
       NSLog(@"Error setting category! %@", setCategoryError);
     }
     
     self.playing = YES;
     
-    if (self.isPlaying)
+    if ([self isPlaying])
     {
       [_peacePlayer play];
     }

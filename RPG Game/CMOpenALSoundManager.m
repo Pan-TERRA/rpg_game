@@ -130,21 +130,6 @@ void interruptionListenerCallback (void *inUserData, UInt32 interruptionState)
 	NSLog(@"begin interruption");
 
 	[self shutdownOpenAL];
-	
-	if(!self.isiPodAudioPlaying)
-	{
-		UInt32	sessionCategory = kAudioSessionCategory_MediaPlayback;
-		AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-		AudioSessionSetActive(YES);
-	}
-	else
-	{
-		UInt32	sessionCategory = kAudioSessionCategory_UserInterfaceSoundEffects;
-		AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);
-		AudioSessionSetActive(YES);
-	}
-	
-	AudioSessionSetActive(NO);
 }
 
 - (void) endInterruption
@@ -166,26 +151,9 @@ void interruptionListenerCallback (void *inUserData, UInt32 interruptionState)
 	OSStatus err = AudioSessionGetProperty(kAudioSessionProperty_OtherAudioIsPlaying, &propertySize, &audioIsAlreadyPlaying);	
 	if(err)
     {
-		NSLog(@"AudioSessionGetProperty error:%i",err);
+		NSLog(@"AudioSessionGetProperty error:%i",(int)err);
     }
 //	NSLog(@"kAudioSessionProperty_OtherAudioIsPlaying = %@", audioIsAlreadyPlaying ? @"YES" : @"NO");
-	
-	if(audioIsAlreadyPlaying && !silenceIpod)
-	{
-		self.isiPodAudioPlaying = YES;
-		
-		//register session as ambient sound so our effects mix with ipod audio
-		UInt32	sessionCategory = kAudioSessionCategory_AmbientSound;
-		AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);		
-	}
-	else
-	{
-		self.isiPodAudioPlaying = NO;
-		
-		//register session as solo ambient sound so the ipod is silenced, and we can use hardware codecs for background audio
-		UInt32	sessionCategory = kAudioSessionCategory_SoloAmbientSound;
-		AudioSessionSetProperty(kAudioSessionProperty_AudioCategory, sizeof(sessionCategory), &sessionCategory);		
-	}		
 }
 
 #pragma mark - Effects Playback
