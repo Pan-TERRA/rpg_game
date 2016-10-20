@@ -26,12 +26,28 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
+                    <rect key="frame" x="86" y="91" width="428" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
                     <rect key="frame" x="86" y="136" width="428" height="30"/>
                     <nil key="textColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-7H-KAr">
+                    <rect key="frame" x="86" y="174" width="52" height="30"/>
+                    <state key="normal" title="Sign up"/>
+                    <connections>
+                        <action selector="signupAction:" destination="-1" eventType="touchUpInside" id="LFZ-76-s7K"/>
+                    </connections>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3i9-nt-l1p">
+                    <rect key="frame" x="442" y="179" width="20" height="20"/>
+                </activityIndicatorView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICW-A7-Q3E">
                     <rect key="frame" x="472" y="174" width="42" height="30"/>
                     <state key="normal" title="Log in"/>
@@ -46,19 +62,6 @@
                         <action selector="forgotPasswordAction:" destination="-1" eventType="touchUpInside" id="8bu-GM-GSy"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
-                    <rect key="frame" x="86" y="91" width="428" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-7H-KAr">
-                    <rect key="frame" x="86" y="174" width="52" height="30"/>
-                    <state key="normal" title="Sign up"/>
-                    <connections>
-                        <action selector="signupAction:" destination="-1" eventType="touchUpInside" id="LFZ-76-s7K"/>
-                    </connections>
-                </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login or password are incorrect. Please check them or use &quot;Forgot password&quot; feature." lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="iQP-Zd-j7F">
                     <rect key="frame" x="86" y="242" width="428" height="50"/>
                     <constraints>
@@ -68,12 +71,6 @@
                     <color key="textColor" red="1" green="0.09911438423289165" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3i9-nt-l1p">
-                    <rect key="frame" x="442" y="179" width="20" height="20"/>
-                </activityIndicatorView>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z4-jm9">
-                    <rect key="frame" x="139" y="371" width="150" height="2"/>
-                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -106,9 +103,6 @@
                 <constraint firstItem="iQP-Zd-j7F" firstAttribute="top" secondItem="i7l-7H-KAr" secondAttribute="bottom" id="y9D-RI-Jva"/>
             </constraints>
             <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="UMw-Z4-jm9"/>
-                </mask>
                 <mask key="constraints">
                     <exclude reference="K4i-fX-z20"/>
                     <exclude reference="tFe-DE-86l"/>
@@ -120,7 +114,7 @@
                     <exclude reference="iZX-DO-cjr"/>
                 </mask>
             </variation>
-            <point key="canvasLocation" x="35.5" y="53.5"/>
+            <point key="canvasLocation" x="-133" y="156"/>
         </view>
     </objects>
 </document>

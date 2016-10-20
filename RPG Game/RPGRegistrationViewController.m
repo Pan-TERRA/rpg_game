@@ -33,8 +33,8 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGRegistrationViewController
-                         bundle:nil];
+  self = [super initWithNibName:kRPGRegistrationViewController bundle:nil];
+  
   if (self != nil)
   {
     //test data
@@ -53,6 +53,7 @@
 - (void)dealloc
 {
   [_classPickerData release];
+  
   [super dealloc];
 }
 
@@ -63,22 +64,18 @@
   [super viewDidLoad];
 }
 
-#pragma mark - UIPickerView data source
+#pragma mark - UIPickerViewDataSource
 
-// The number of columns of data
 - (int)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
 {
   return 1;
 }
 
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)aPickerView
-numberOfRowsInComponent:(NSInteger)aComponent
+- (NSInteger)pickerView:(UIPickerView *)aPickerView numberOfRowsInComponent:(NSInteger)aComponent
 {
   return self.classPickerData.count;
 }
 
-// The data to return for the row and component (column) that's being passed in
 - (NSString *)pickerView:(UIPickerView *)aPickerView
              titleForRow:(NSInteger)aRow
             forComponent:(NSInteger)aComponent
@@ -86,7 +83,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return self.classPickerData[aRow][@"className"];
 }
 
-#pragma mark - Error representation
+#pragma mark - Error Representation
 
 - (void)showErrorText:(NSString *)aText
 {
@@ -95,7 +92,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [self.errorLabel sizeToFit];
 }
 
-#pragma mark - Changing UI state
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -109,14 +106,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [self.submitActivityIndicator stopAnimating];
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
-
-#pragma mark - Actions
+#pragma mark - IBActions
 
 - (IBAction)submitButtonAction:(UIButton *)aSender
 {
@@ -127,11 +117,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger selectedClassID = [self getSelectedClassID];
   
-  if (!([emailFieldText isEqualToString:@""]
-        && [usernameFieldText isEqualToString:@""]
-        && [passwordFieldText isEqualToString:@""]
-        && [confirmPasswordFieldText isEqualToString:@""]
-        && [characterNameFieldText isEqualToString:@""]))
+  if (!([emailFieldText isEqualToString:@""] &&
+        [usernameFieldText isEqualToString:@""] &&
+        [passwordFieldText isEqualToString:@""] &&
+        [confirmPasswordFieldText isEqualToString:@""] &&
+        [characterNameFieldText isEqualToString:@""]))
   {
     if ([passwordFieldText isEqualToString:confirmPasswordFieldText])
     {
@@ -147,6 +137,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
                                                   completionHandler:^(NSInteger statusCode)
        {
          [self setViewToNormalState];
+         
          BOOL success = (statusCode == 0);
          if (success)
          {
@@ -171,6 +162,13 @@ numberOfRowsInComponent:(NSInteger)aComponent
   {
     [self showErrorText:@"Please fill in all required fields."];
   }
+}
+
+- (NSInteger)getSelectedClassID
+{
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 
 @end

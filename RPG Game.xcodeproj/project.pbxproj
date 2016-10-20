@@ -564,6 +564,47 @@
 			path = "RPG GameUITests";
 			sourceTree = "<group>";
 		};
+		28A5A0D71DB8F75A000EF49F /* Proof Image */ = {
+			isa = PBXGroup;
+			children = (
+				2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */,
+				2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */,
+				2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */,
+			);
+			name = "Proof Image";
+			sourceTree = "<group>";
+		};
+		28A5A0D81DB8F765000EF49F /* Quest List */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F57B1DACD8D8007ED1B8 /* RPGQuestListViewController.h */,
+				AED6F57C1DACD8D8007ED1B8 /* RPGQuestListViewController.m */,
+				AED6F57D1DACD8D8007ED1B8 /* RPGQuestListViewController.xib */,
+				28A5A0D91DB8F773000EF49F /* Table View */,
+			);
+			name = "Quest List";
+			sourceTree = "<group>";
+		};
+		28A5A0D91DB8F773000EF49F /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F5831DACDCAD007ED1B8 /* RPGQuestListTableViewCell.h */,
+				AED6F5841DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m */,
+				AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */,
+			);
+			name = "Table View";
+			sourceTree = "<group>";
+		};
+		28A5A0DA1DB8F787000EF49F /* Quest */ = {
+			isa = PBXGroup;
+			children = (
+				AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */,
+				AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */,
+				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
+			);
+			name = Quest;
+			sourceTree = "<group>";
+		};
 		28F1021E1DB7719100C969CA /* Quests */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,18 +656,9 @@
 		AED6F57A1DACD89F007ED1B8 /* Quests */ = {
 			isa = PBXGroup;
 			children = (
-				2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */,
-				2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */,
-				2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */,
-				AED6F57B1DACD8D8007ED1B8 /* RPGQuestListViewController.h */,
-				AED6F57C1DACD8D8007ED1B8 /* RPGQuestListViewController.m */,
-				AED6F57D1DACD8D8007ED1B8 /* RPGQuestListViewController.xib */,
-				AED6F5831DACDCAD007ED1B8 /* RPGQuestListTableViewCell.h */,
-				AED6F5841DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m */,
-				AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */,
-				AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */,
-				AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */,
-				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
+				28A5A0D81DB8F765000EF49F /* Quest List */,
+				28A5A0DA1DB8F787000EF49F /* Quest */,
+				28A5A0D71DB8F75A000EF49F /* Proof Image */,
 			);
 			name = Quests;
 			sourceTree = "<group>";

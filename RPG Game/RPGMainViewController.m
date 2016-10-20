@@ -56,7 +56,7 @@
   
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBActions
 
 - (IBAction)segueToQuests
 {
@@ -86,7 +86,6 @@
   [self presentViewController:battleViewController animated:YES completion:nil];
   [battleViewController release];
 }
-
 
 - (IBAction)segueToArena
 {

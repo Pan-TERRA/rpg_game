@@ -29,8 +29,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGLoginViewController
-                         bundle:nil];
+  return [super initWithNibName:kRPGLoginViewController bundle:nil];
 }
 
 #pragma mark - UIViewController
@@ -40,7 +39,7 @@
   [super viewDidLoad];
 }
 
-#pragma mark - Changing UI state
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -54,7 +53,7 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark - Error representation
+#pragma mark - Error Representation
 
 - (void)showErrorText:(NSString *)aText
 {
@@ -63,7 +62,7 @@
   [self.errorMessageLabel sizeToFit];
 }
 
-#pragma mark - Actions
+#pragma mark - IBActions
 
 - (IBAction)forgotPasswordAction:(UIButton *)aSender
 {
@@ -84,9 +83,7 @@
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
   
-  if (email && password &&
-      ![email isEqualToString:@""] &&
-      ![password isEqualToString:@""])
+  if (![email isEqualToString:@""] && ![password isEqualToString:@""])
   {
     [self setViewToWaitingForServerResponseState];
     
