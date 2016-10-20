@@ -7,18 +7,11 @@
 //
 
 #import "RPGNetworkManager.h"
-
-typedef NS_ENUM(NSUInteger, RPGQuestsState)
-{
-  kRPGQuestEmptyState = 0,
-  kRPGQuestInProgressState,
-  kRPGQuestIsDoneState,
-  kRPGQuestReviewedState
-};
+#import "RPGQuestListState.h"
 
 
 @interface RPGNetworkManager (Quests)
 
-- (void)fetchQuestsByState:(RPGQuestsState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock;
+- (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock;
 
 @end

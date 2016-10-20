@@ -10,27 +10,28 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestListResponse+Serialization.h"
 
+
 @implementation RPGNetworkManager (Quests)
 
-- (void)fetchQuestsByState:(RPGQuestsState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock
+- (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock
 {
   NSString *requestString = nil;
 
   switch (aState)
   {
-    case kRPGQuestEmptyState:
+    case kRPGQuestListTakeQuest:
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/quests"];
       break;
       
-    case kRPGQuestInProgressState:
+    case kRPGQuestListInProgressQuest:
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/in_progress_quests"];
       break;
       
-    case kRPGQuestIsDoneState:
+    case kRPGQuestListDoneQuest:
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/confirmed_quests"];
       break;
       
-    case kRPGQuestReviewedState:
+    case kRPGQuestListReviewQuest:
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/review_quests"];
       break;
  
