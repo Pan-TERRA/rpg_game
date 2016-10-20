@@ -10,23 +10,19 @@
 
 @interface RPGRequest ()
 
-@property (copy, readwrite, nonatomic) NSString *type;
-@property (copy, readwrite, nonatomic) NSString *token;
+@property (nonatomic, copy, readwrite) NSString *type;
+@property (nonatomic, copy, readwrite) NSString *token;
 
 @end
 
 @implementation RPGRequest
 
-@synthesize type = _type;
-@synthesize token = _token;
-
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken
+- (instancetype)initWithType:(NSString *)aType
+                       token:(NSString *)aToken
 {
   self = [super init];
-  
- 
   
   if (self != nil)
   {
@@ -50,14 +46,11 @@
   return [self initWithType:nil token:nil];
 }
 
-+ (instancetype)requestWithType:(NSString *)aType token:(NSString *)aToken
++ (instancetype)requestWithType:(NSString *)aType
+                          token:(NSString *)aToken
 {
-  return [[[RPGRequest alloc] initWithType:aType token:aToken] autorelease];
-}
-
-+ (instancetype)request
-{
-  return nil;
+  return [[[self alloc] initWithType:aType
+                               token:aToken] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -66,7 +59,6 @@
 {
   [_type release];
   [_token release];
-  
   [super dealloc];
 }
 
