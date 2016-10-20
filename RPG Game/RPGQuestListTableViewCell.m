@@ -23,55 +23,67 @@
 
 @implementation RPGQuestListTableViewCell
 
-#pragma mark - UITableViewCell Methods
+#pragma mark - UITableViewCell
 
 - (void)awakeFromNib
 {
   [super awakeFromNib];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (void)setSelected:(BOOL)aSelected animated:(BOOL)anAnimated
 {
-  [super setSelected:selected animated:animated];
+  [super setSelected:aSelected animated:anAnimated];
 }
 
 #pragma mark - Set cell state and content
 
-- (void)setCellContent:(NSDictionary *)cellContent
+- (void)setCellContent:(NSDictionary *)aCellContent
 {
-  self.titleLabel.text = [cellContent objectForKey:kRPGQuestTitle];
-  self.descriptionLabel.text = [cellContent objectForKey:kRPGQuestDescription];
-  self.rewardLabel.text = [cellContent objectForKey:kRPGQuestReward];
-  RPGQuestState state = [[cellContent objectForKey:kRPGQuestState] integerValue];
+  self.titleLabel.text = [aCellContent objectForKey:kRPGQuestTitle];
+  self.descriptionLabel.text = [aCellContent objectForKey:kRPGQuestDescription];
+  self.rewardLabel.text = [aCellContent objectForKey:kRPGQuestReward];
+  RPGQuestState state = [[aCellContent objectForKey:kRPGQuestState] integerValue];
   switch (state)
   {
     case kRPGQuestStateCanTake:
+    {
       [self setStateLabelHidden:YES];
       break;
+    }
     case kRPGQuestStateInProgress:
+    {
       [self setStateLabelHidden:NO];
       self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
+    }
     case kRPGQuestStateDone:
+    {
       [self setStateLabelHidden:NO];
       self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
+    }
     case kRPGQuestStateReviewedFalse:
+    {
       [self setStateLabelHidden:NO];
       self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
+    }
     case kRPGQuestStateReviewedTrue:
+    {
       [self setStateLabelHidden:YES];
       break;
+    }
     default:
+    {
       break;
+    }
   }
 }
 
-- (void)setStateLabelHidden:(BOOL)flag
+- (void)setStateLabelHidden:(BOOL)aFlag
 {
-  self.stateTitleLabel.hidden = flag;
-  self.stateLabel.hidden = flag;
+  self.stateTitleLabel.hidden = aFlag;
+  self.stateLabel.hidden = aFlag;
 }
 
 @end
