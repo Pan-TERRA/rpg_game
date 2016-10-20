@@ -10,11 +10,11 @@
 
 @interface RPGRegistrationRequest : NSObject
 
-@property (copy, nonatomic, readonly) NSString *username;
-@property (copy, nonatomic, readonly) NSString *email;
-@property (copy, nonatomic, readonly) NSString *password;
-@property (copy, nonatomic, readonly) NSString *characterName;
-@property (readonly) NSInteger characterType;
+@property (nonatomic, copy, readonly) NSString *username;
+@property (nonatomic, copy, readonly) NSString *email;
+@property (nonatomic, copy, readonly) NSString *password;
+@property (nonatomic, copy, readonly) NSString *characterName;
+@property (nonatomic, assign, readonly) NSInteger characterType;
 
 - (instancetype)initWithEmail:(NSString *)anEmail
                      password:(NSString *)aPassword

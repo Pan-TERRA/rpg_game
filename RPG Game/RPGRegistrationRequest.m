@@ -10,11 +10,11 @@
 
 @interface RPGRegistrationRequest ()
 
-@property (copy, nonatomic, readwrite) NSString *username;
-@property (copy, nonatomic, readwrite) NSString *email;
-@property (copy, nonatomic, readwrite) NSString *password;
-@property (copy, nonatomic, readwrite) NSString *characterName;
-@property (readwrite) NSInteger characterType;
+@property (nonatomic, copy, readwrite) NSString *username;
+@property (nonatomic, copy, readwrite) NSString *email;
+@property (nonatomic, copy, readwrite) NSString *password;
+@property (nonatomic, copy, readwrite) NSString *characterName;
+@property (nonatomic, assign, readwrite) NSInteger characterType;
 
 @end
 
@@ -78,10 +78,10 @@
 
 - (void)dealloc
 {
+  [_username release];
   [_email release];
   [_password release];
   [_characterName release];
-  
   [super dealloc];
 }
 
