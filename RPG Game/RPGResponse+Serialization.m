@@ -26,9 +26,7 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
-                     status:[aDictionary[kRPGResponseSerializationStatus] intValue]];
+                     status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
 }
-
-
 
 @end
