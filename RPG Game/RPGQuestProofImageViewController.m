@@ -7,6 +7,7 @@
 //
 
 #import "RPGQuestProofImageViewController.h"
+#import "RPGNibNames.h"
 
 @interface RPGQuestProofImageViewController ()
 
@@ -16,7 +17,15 @@
 
 @implementation RPGQuestProofImageViewController
 
-#pragma mark - UIViewController Methods
+#pragma mark - Init
+
+- (instancetype)init
+{
+  return [super initWithNibName:kRPGQuestProofImageViewController
+                         bundle:nil];
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -30,15 +39,16 @@
 
 #pragma mark - Event Handling
 
-- (IBAction)backButtonOnClicked:(UIButton *)sender
+- (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - set view content 
-- (void)setImage:(UIImage *)image
+#pragma mark - set view content
+
+- (void)setImage:(UIImage *)anImage
 {
-  self.proofImageView.image = image;
+  self.proofImageView.image = anImage;
 }
 
 @end
