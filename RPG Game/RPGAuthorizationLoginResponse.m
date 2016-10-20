@@ -37,15 +37,33 @@
   
   if (self != nil)
   {
-    if (aUsername == nil ||
+    if (
+        aStatus == 0 &&
+        (aUsername == nil ||
         aToken == nil ||
         anAvatar == nil ||
         aGold < 0 ||
         aCrystals < 0 ||
-        aCharacter == nil)
+        aCharacter == nil))
     {
       [self release];
       self = nil;
+    }
+    else if (aStatus != 0 &&
+             (aUsername == nil ||
+              aToken == nil ||
+              anAvatar == nil ||
+              aGold < 0 ||
+              aCrystals < 0 ||
+              aCharacter == nil))
+    {
+      _username = nil;
+      _token = nil;
+      _avatar = nil;
+      _gold = -1;
+      _crystals = -1;
+      _character = nil;
+      
     }
     else
     {
@@ -87,7 +105,7 @@
                            gold:-1
                        crystals:-1
                      character:nil
-                         status:-1];
+                         status:0];
 }
 
 #pragma mark - Dealloc

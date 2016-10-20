@@ -26,10 +26,14 @@
   
   if (self != nil)
   {
-    if (aQuests == nil)
+    if (aStatus == 0 && aQuests == nil)
     {
       [self release];
       self = nil;
+    }
+    else if (aStatus != 0 && aQuests == nil)
+    {
+      _quests = nil;
     }
     else
     {
@@ -50,7 +54,7 @@
 
 - (instancetype)init
 {
-  return [self initWithStatus:-1
+  return [self initWithStatus:0
                        quests:nil];
 }
 
