@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kRPGMainMenu;
+extern NSString * const kRPGMainView;
 extern NSString * const kRPGBattleViewController;
 extern NSString * const kRPGSettingsViewController;
 extern NSString * const kRPGQuestListViewController;

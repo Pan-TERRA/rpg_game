@@ -8,7 +8,7 @@
 
 #import "RPGNibNames.h"
 
-NSString * const kRPGMainMenu = @"RPGMainView";
+NSString * const kRPGMainView = @"RPGMainView";
 NSString * const kRPGBattleViewController = @"RPGBattleViewController";
 NSString * const kRPGSettingsViewController = @"RPGSettingsViewController";
 NSString * const kRPGQuestListViewController = @"RPGQuestListViewController";
