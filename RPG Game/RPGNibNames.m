@@ -15,3 +15,5 @@ NSString * const kRPGQuestListViewController = @"RPGQuestListViewController";
 NSString * const kRPGQuestListTableViewCell = @"RPGQuestListTableViewCell";
 NSString * const kRPGQuestViewController = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewController = @"RPGQuestProofImageViewController";
+NSString * const kRPGRegistrationViewController = @"RPGRegistrationViewController";
+NSString * const kRPGLoginViewController = @"RPGLoginViewController";
