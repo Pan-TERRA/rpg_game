@@ -12,9 +12,10 @@
  *  Common network manager for HTTP requests. Provides authorization api, 
     static media download, auxiliary requests.
  */
+
 @interface RPGNetworkManager : NSObject
 
-@property (copy, nonatomic, readonly) NSString *token; // replace to RPGUserSession
+@property (nonatomic, copy, readonly) NSString *token; // replace to RPGUserSession
 
 + (instancetype)sharedNetworkManager;
 
