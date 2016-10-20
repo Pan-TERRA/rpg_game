@@ -10,21 +10,20 @@
 
 @interface RPGBattleConditionResponse : RPGResponse
 
-@property (nonatomic, readonly) int HP;
-@property (nonatomic, readonly) int opponentHP;
-@property (retain, nonatomic, readonly) NSDictionary *spellsCondition;
-@property (retain, nonatomic, readonly) NSDictionary *reward;
+@property (nonatomic, assign, readonly) NSInteger HP;
+@property (nonatomic, assign, readonly) NSInteger opponentHP;
+@property (nonatomic, retain, readonly) NSDictionary *spellsCondition;
+@property (nonatomic, retain, readonly) NSDictionary *reward;
 
 #pragma mark - Init
 
-- (instancetype)initWithHP:(int)aHP
-                opponentHP:(int)anOpponentHP
+- (instancetype)initWithHP:(NSInteger)aHP
+                opponentHP:(NSInteger)anOpponentHP
            spellsCondition:(NSDictionary *)aSpellsCondition
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
-
-+ (instancetype)battleConditionResponseWithHP:(int)aHP
-                                   opponentHP:(int)anOpponentHP
++ (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
+                                   opponentHP:(NSInteger)anOpponentHP
                               spellsCondition:(NSDictionary *)aSpellsCondition
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus;
