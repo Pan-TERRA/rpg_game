@@ -24,7 +24,8 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithUnixTimestamp:[aDictionary[kRPGTimeResponseSerializationTimestamp] intValue] status:[aDictionary[kRPGResponseSerializationStatus] intValue]];
+  return [self initWithUnixTimestamp:[aDictionary[kRPGTimeResponseSerializationTimestamp] intValue]
+                              status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
 }
 
 @end
