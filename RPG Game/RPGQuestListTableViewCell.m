@@ -7,7 +7,10 @@
 //
 
 #import "RPGQuestListTableViewCell.h"
+#import "RPGQuestReward+Serialization.h"
 #import "RPGQuestListViewController.h"
+#import "RPGQuest+Serialization.h"
+#import "RPGQuestReward+Serialization.h"
 
 @interface RPGQuestListTableViewCell()
 
@@ -35,14 +38,15 @@
   [super setSelected:aSelected animated:anAnimated];
 }
 
-#pragma mark - Set cell state and content
+#pragma mark - Cell Content
 
-- (void)setCellContent:(NSDictionary *)aCellContent
+- (void)setCellContent:(RPGQuest *)aCellContent
 {
-  self.titleLabel.text = [aCellContent objectForKey:kRPGQuestTitle];
-  self.descriptionLabel.text = [aCellContent objectForKey:kRPGQuestDescription];
-  self.rewardLabel.text = [aCellContent objectForKey:kRPGQuestReward];
-  RPGQuestState state = [[aCellContent objectForKey:kRPGQuestState] integerValue];
+  self.titleLabel.text = aCellContent.name;
+  self.descriptionLabel.text = aCellContent.questDescription;
+  self.rewardLabel.text = [@(aCellContent.reward.gold) stringValue];
+  RPGQuestState state = aCellContent.state;
+  
   switch (state)
   {
     case kRPGQuestStateCanTake:
@@ -79,6 +83,8 @@
     }
   }
 }
+
+#pragma mark - Cell State
 
 - (void)setStateLabelHidden:(BOOL)aFlag
 {

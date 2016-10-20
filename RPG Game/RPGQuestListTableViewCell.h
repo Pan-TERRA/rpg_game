@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RPGQuest;
+
 @interface RPGQuestListTableViewCell : UITableViewCell
 
-- (void)setCellContent:(NSDictionary *)aCellContent;
+- (void)setCellContent:(RPGQuest *)aCellContent;
 
 @end

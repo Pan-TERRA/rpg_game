@@ -10,6 +10,9 @@
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
 #import "RPGNibNames.h"
+#import "RPGQuest+Serialization.h"
+#import "RPGQuestReward+Serialization.h"
+
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -56,14 +59,15 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Set view state and content
+#pragma mark - View Content
 
-- (void)setViewContent:(NSDictionary *)aViewContent
+- (void)setViewContent:(RPGQuest *)aQuest
 {
-  self.titleLabel.text = [aViewContent objectForKey:kRPGQuestTitle];
-  self.descriptionLabel.text = [aViewContent objectForKey:kRPGQuestDescription];
-  self.rewardLabel.text = [aViewContent objectForKey:kRPGQuestReward];
-  self.state = [[aViewContent objectForKey:kRPGQuestState] integerValue];
+  self.titleLabel.text = aQuest.name;
+  self.descriptionLabel.text = aQuest.questDescription;
+  self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  self.state = aQuest.state;
+  
   switch (self.state)
   {
     case kRPGQuestStateCanTake:
@@ -123,6 +127,8 @@
   }
 }
 
+#pragma mark - View State
+
 - (void)setStateTakeQuest
 {
   self.acceptButton.hidden = NO;
@@ -171,7 +177,7 @@
   self.stateLabel.hidden = aFlag;
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBAction
 
 - (IBAction)acceptButtonOnClick:(UIButton *)aSender
 {

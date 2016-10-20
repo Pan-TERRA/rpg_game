@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RPGQuest;
+
 @interface RPGQuestViewController : UIViewController
 
-- (void)setViewContent:(NSDictionary *)aViewContent;
+- (void)setViewContent:(RPGQuest *)aQuest;
 
 @end
