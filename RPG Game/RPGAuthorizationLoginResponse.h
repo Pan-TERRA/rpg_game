@@ -16,7 +16,7 @@
 @property (nonatomic, copy, readonly) NSString *avatar;
 @property (nonatomic, assign, readonly) NSInteger gold;
 @property (nonatomic, assign, readonly) NSInteger crystals;
-@property (nonatomic, retain, readonly) NSArray *characters;
+@property (nonatomic, retain, readonly) NSDictionary *character;
 
 #pragma mark - Init
 
@@ -25,14 +25,14 @@
                           avatar:(NSString *)anAvatar
                             gold:(NSInteger)aGold
                         crystals:(NSInteger)aCrystals
-                      characters:(NSArray *)aCharacters
+                      character:(NSDictionary *)aCharacter
                           status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithUsername:(NSString *)aUsername
                                token:(NSString *)aToken
                               avatar:(NSString *)anAvatar
                                 gold:(NSInteger)aGold
                             crystals:(NSInteger)aCrystals
-                          characters:(NSArray *)aCharacters
+                          character:(NSDictionary *)aCharacter
                               status:(NSInteger)aStatus;
 
 #pragma mark - Actions

@@ -17,7 +17,7 @@
 @property (nonatomic, copy, readwrite) NSString *avatar;
 @property (nonatomic, assign, readwrite) NSInteger gold;
 @property (nonatomic, assign, readwrite) NSInteger crystals;
-@property (nonatomic, retain, readwrite) NSArray *characters;
+@property (nonatomic, retain, readwrite) NSDictionary *character;
 
 @end
 
@@ -30,7 +30,7 @@
                           avatar:(NSString *)anAvatar
                             gold:(NSInteger)aGold
                         crystals:(NSInteger)aCrystals
-                      characters:(NSArray *)aCharacters
+                      character:(NSDictionary *)aCharacter
                           status:(NSInteger)aStatus
 {
   self = [super init];
@@ -42,7 +42,7 @@
         anAvatar == nil ||
         aGold < 0 ||
         aCrystals < 0 ||
-        aCharacters == nil)
+        aCharacter == nil)
     {
       [self release];
       self = nil;
@@ -55,7 +55,7 @@
       _avatar = [anAvatar copy];
       _gold = aGold;
       _crystals = aCrystals;
-      _characters = [aCharacters retain];
+      _character = [aCharacter retain];
     }
   }
   
@@ -67,7 +67,7 @@
                               avatar:(NSString *)anAvatar
                                 gold:(NSInteger)aGold
                             crystals:(NSInteger)aCrystals
-                          characters:(NSArray *)aCharacters
+                          character:(NSDictionary *)aCharacter
                               status:(NSInteger)aStatus
 {
   return [[[self alloc] initWithUsername:aUsername
@@ -75,7 +75,7 @@
                                   avatar:anAvatar
                                     gold:aGold
                                 crystals:aCrystals
-                              characters:aCharacters
+                              character:aCharacter
                                   status:aStatus] autorelease];
 }
 
@@ -86,7 +86,7 @@
                          avatar:nil
                            gold:-1
                        crystals:-1
-                     characters:nil
+                     character:nil
                          status:-1];
 }
 
@@ -97,7 +97,7 @@
   [_username release];
   [_token release];
   [_avatar release];
-  [_characters release];
+  [_character release];
   [super dealloc];
 }
 
@@ -111,7 +111,7 @@
   [standartUserDefaults setObject:self.avatar forKey:kRPGUserSessionKeyAvatar];
   [standartUserDefaults setInteger:self.gold forKey:kRPGUserSessionKeyGold];
   [standartUserDefaults setInteger:self.crystals forKey:kRPGUserSessionKeyCrystals];
-  [standartUserDefaults setObject:self.characters forKey:kRPGUserSessionKeyCharacters];
+  [standartUserDefaults setObject:self.character forKey:kRPGUserSessionKeyCharacters];
 }
 
 @end
