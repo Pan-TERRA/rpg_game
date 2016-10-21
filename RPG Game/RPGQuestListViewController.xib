@@ -9,9 +9,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestListViewController">
             <connections>
                 <outlet property="activityIndicator" destination="haj-qR-g3v" id="dNB-zM-vDd"/>
-                <outlet property="buttonControl" destination="xIk-Xn-vKd" id="VTQ-Em-ikH"/>
                 <outlet property="tableView" destination="u7D-Ey-t6y" id="kgl-KM-wXn"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewStateButtonControl" destination="xIk-Xn-vKd" id="qzD-rp-ABv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -28,7 +28,7 @@
                         <segment title="Review quests"/>
                     </segments>
                     <connections>
-                        <action selector="buttonControlOnClick:" destination="-1" eventType="valueChanged" id="JKS-Qp-sDm"/>
+                        <action selector="viewStateButtonControlOnClick:" destination="-1" eventType="valueChanged" id="85h-xu-5AN"/>
                     </connections>
                 </segmentedControl>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
