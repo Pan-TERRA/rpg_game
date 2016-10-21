@@ -6,13 +6,21 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
+  // View
 #import "RPGBattleViewController.h"
 #import "RPGBackgroundMusicController.h"
+
+#import "RPGBattleManager.h"
 #import "RPGSFXEngine.h"
-#import "RPGNibNames.h"
 #import "SRWebSocket.h"
 
+  // Constants
+#import "RPGNibNames.h"
+
+
 @interface RPGBattleViewController () <SRWebSocketDelegate>
+
+@property(nonatomic, retain, readwrite) RPGBattleManager *battleManager;
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
@@ -56,15 +64,13 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBAction
 
 - (IBAction)back:(id)aSender
 {
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
   [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-#pragma mark - Spell Actions
 
 - (IBAction)spell1_action:(id)aSender
 {
@@ -99,6 +105,36 @@
 - (IBAction)spell7_action:(id)aSender
 {
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
+}
+
+#pragma mark - SRWebSocketDelegate
+
+- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+{
+  
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string
+{
+  
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithData:(NSData *)data
+{
+  
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
+{
+  
+}
+
+- (void)webSocket:(SRWebSocket *)webSocket
+  idCloseWithCode:(NSInteger)code
+           reason:(nullable NSString *)reason
+         wasClean:(BOOL)wasClean
+{
+  
 }
 
 @end
