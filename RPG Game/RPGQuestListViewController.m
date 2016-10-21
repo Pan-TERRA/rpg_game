@@ -10,6 +10,7 @@
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
+#import "RPGLoginViewController.h"
   // Network, entities
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuest+Serialization.h"
@@ -17,6 +18,7 @@
   // Constants
 #import "RPGQuestListState.h"
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
@@ -189,14 +191,30 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [self setViewToWaitingForServerResponseState];
   
-  fetchQuestsCompletionHandler handler = ^void(NSInteger status, NSArray *questList)
+  fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
   {
     [self setViewToNormalState];
     
-    BOOL succes = (status == 0);
-    if (succes)
+    // statusCode = kRPGStatusCodeWrongToken;
+    switch (statusCode)
     {
-      [self separateQuestsData:questList byState:aState];
+      case kRPGStatusCodeOk:
+      {
+        [self separateQuestsData:questList byState:aState];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
+        [self presentViewController:loginViewController
+                           animated:YES
+                         completion:nil];
+        break;
+      }
+      default:
+      {
+        break;
+      }
     }
   };
   
