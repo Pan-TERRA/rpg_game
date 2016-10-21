@@ -8,7 +8,7 @@
 
 #import "RPGsfxEngine.h"
 #import "CMOpenALSoundManager.h"
-
+#import "NSUserDefaults+RPGVolumeSettings.h"
 
 static RPGSFXEngine *sharedSFXEngine = nil;
 
@@ -50,6 +50,8 @@ static RPGSFXEngine *sharedSFXEngine = nil;
         if(sharedSFXEngine == nil)
         {
             sharedSFXEngine = [[super allocWithZone:NULL] init];
+          double startVolume = [[NSUserDefaults standardUserDefaults] soundsVolume];
+          [sharedSFXEngine changeVolume:startVolume];
         }
     }
     return sharedSFXEngine;
