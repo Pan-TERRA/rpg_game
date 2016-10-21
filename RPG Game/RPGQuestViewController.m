@@ -29,6 +29,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
+@property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
 
@@ -67,6 +68,7 @@
   self.descriptionLabel.text = aQuest.questDescription;
   self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
   self.state = aQuest.state;
+  self.questID = aQuest.questID;
   
   switch (self.state)
   {
