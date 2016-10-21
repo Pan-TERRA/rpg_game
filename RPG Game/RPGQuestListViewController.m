@@ -226,7 +226,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (void)updateViewForState:(RPGQuestListState)aState
 {
   [self setViewToWaitingForServerResponseState];
-  NSLog(@"Upload for state: %d", self.questListState);
+  
   __block typeof(self) weakSelf = self;
   
   fetchQuestsCompletionHandler handler = ^void(NSInteger status, NSArray *questList)
@@ -374,7 +374,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     case kRPGQuestListTakeQuest:
     {
       [self.tableView reloadData];
-      NSLog(@"Update table for state: %d", self.questListState);
       break;
     }
     case kRPGQuestListInProgressQuest:
