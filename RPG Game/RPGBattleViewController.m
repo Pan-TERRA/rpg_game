@@ -10,8 +10,9 @@
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
 #import "RPGNibNames.h"
+#import "SRWebSocket.h"
 
-@interface RPGBattleViewController ()
+@interface RPGBattleViewController () <SRWebSocketDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
