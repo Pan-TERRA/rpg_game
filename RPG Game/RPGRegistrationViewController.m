@@ -12,10 +12,9 @@
 #import "RPGRegistrationRequest+Serialization.h"
 #import "RPGNibNames.h"
 
-@interface RPGRegistrationViewController ()
+@interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (nonatomic, retain, readonly) NSArray *classPickerData;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
@@ -64,14 +63,15 @@
   [super viewDidLoad];
 }
 
-#pragma mark - UIPickerViewDataSource
+#pragma mark UIPickerViewDataSource
 
 - (int)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
 {
   return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)aPickerView numberOfRowsInComponent:(NSInteger)aComponent
+- (NSInteger)pickerView:(UIPickerView *)aPickerView
+numberOfRowsInComponent:(NSInteger)aComponent
 {
   return self.classPickerData.count;
 }
@@ -83,16 +83,17 @@
   return self.classPickerData[aRow][@"className"];
 }
 
-#pragma mark - Error Representation
+#pragma mark Error Representation
 
 - (void)showErrorText:(NSString *)aText
 {
-  self.errorLabel.text = aText;
-  [self.errorLabel setHidden:NO];
-  [self.errorLabel sizeToFit];
+//  self.errorLabel.text = aText;
+//  [self.errorLabel setHidden:NO];
+//  [self.errorLabel sizeToFit];
+  
 }
 
-#pragma mark - View State
+#pragma mark View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -106,7 +107,7 @@
   [self.submitActivityIndicator stopAnimating];
 }
 
-#pragma mark - IBActions
+#pragma mark IBActions
 
 - (IBAction)submitButtonAction:(UIButton *)aSender
 {

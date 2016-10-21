@@ -40,7 +40,7 @@
   [super viewDidLoad];
 }
 
-#pragma mark - View State
+#pragma mark View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -54,7 +54,7 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark Actions
+#pragma mark IBActions
 
 - (IBAction)editingDidChange:(UITextField *)sender
 {
