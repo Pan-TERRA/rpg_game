@@ -109,7 +109,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 
 - (void)playSFXWithSpellID:(NSUInteger)identifier
 {
-    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", identifier]];
+    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", (unsigned long)identifier]];
 }
 
 - (double)getVolume
