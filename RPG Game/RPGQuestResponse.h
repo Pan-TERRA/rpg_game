@@ -10,4 +10,9 @@
 
 @interface RPGQuestResponse : NSObject
 
+@property (nonatomic, assign, readonly) NSInteger status;
+
+- (instancetype)initWithStatus:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
++ (instancetype)questResponseWithStatus:(NSInteger)aStatus;
+
 @end
