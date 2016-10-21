@@ -6,8 +6,11 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RPGQuestRequest.h"
 
-@interface RPGQuestRequest_Serialization : NSObject
+@interface RPGQuestRequest (Serialization)
+
+- (NSDictionary *)dictionaryRepresentation;
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
 
 @end
