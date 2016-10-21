@@ -8,6 +8,22 @@
 
 #import "RPGQuestResponse+Serialization.h"
 
-@implementation RPGQuestResponse_Serialization
+static NSString * const kRPGQuestResponseStatus = @"status";
+
+@implementation RPGQuestResponse (Serialization)
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGQuestResponseStatus] = @(self.status);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithStatus:[aDictionary[kRPGQuestResponseStatus] integerValue]];
+}
 
 @end
