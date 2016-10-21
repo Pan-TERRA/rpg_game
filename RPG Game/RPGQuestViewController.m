@@ -12,7 +12,9 @@
 #import "RPGNibNames.h"
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
-
+#import "RPGNetworkManager+Quests.h"
+#import "RPGQuestRequest+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -185,12 +187,22 @@
 {
   if (self.state == kRPGQuestStateCanTake)
   {
-    //send to server that quest should be in progress
+    void (^handler)(NSInteger) = ^void(NSInteger status)
+    {
+      BOOL success = (status == 0);
+      if (success)
+      {
+        
+      }
+    };
+    RPGQuestRequest *request = [[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID];
+    [[RPGNetworkManager sharedNetworkManager] takeQuestWithRequest:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
     //send to server that quest was done
   }
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender
