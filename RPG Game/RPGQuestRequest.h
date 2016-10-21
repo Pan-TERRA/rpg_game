@@ -10,4 +10,12 @@
 
 @interface RPGQuestRequest : NSObject
 
+@property (nonatomic, copy, readonly) NSString *token;
+@property (nonatomic, assign, readonly) NSUInteger questID;
+
+- (instancetype)initWithToken:(NSString *)aToken
+                      questID:(NSUInteger)aQuestID NS_DESIGNATED_INITIALIZER;
++ (instancetype)questRequestWithToken:(NSString *)aToken
+                      questID:(NSUInteger)aQuestID;
+
 @end
