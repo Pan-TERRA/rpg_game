@@ -10,6 +10,7 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestListResponse+Serialization.h"
 #import "RPGQuestRequest+Serialization.h"
+#import "RPGQuestResponse+Serialization.h"
 
 @implementation RPGNetworkManager (Quests)
 
@@ -120,7 +121,7 @@
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/accept_quest"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
@@ -149,7 +150,7 @@
   {
     NSInteger status = 0;
     NSError *JSONParsingError = nil;
-    RPGQuestListResponse *responseObject = nil;
+    RPGQuestResponse *responseObject = nil;
     
     if (error != nil)
     {
@@ -169,7 +170,7 @@
       }
       else
       {
-        responseObject = [[[RPGQuestListResponse alloc]
+        responseObject = [[[RPGQuestResponse alloc]
                            initWithDictionaryRepresentation:responseDictionary] autorelease];
       }
       
