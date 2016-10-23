@@ -8,6 +8,12 @@
 
 #import "RPGBattleManager.h"
 
+  // Entities
+#import "RPGBattleInitResponse.h"
+#import "RPGRequest+Serialization.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
+
 @interface RPGBattleManager ()
 
 @end
@@ -39,7 +45,28 @@
 
 - (void)sendBattleInitRequest
 {
-	
+  NSError *JSONSerializationError = nil;
+  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+  RPGRequest *request = [[RPGRequest alloc] initWithType:@"BATTLE_INIT" token:token];
+  
+  if (request != nil)
+  {
+    NSData *data = [NSJSONSerialization dataWithJSONObject:[request dictionaryRepresentation]
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+    
+    if (data == nil)
+    {
+      [[NSException exceptionWithName:NSInvalidArgumentException
+                               reason:@"JSON cannot be retrieved from battle init request"
+                             userInfo:nil] raise];
+    }
+    else
+    {
+      [self send:data];
+    }
+  }
+  
 }
 
 
