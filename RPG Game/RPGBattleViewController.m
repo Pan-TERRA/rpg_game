@@ -94,6 +94,8 @@
 - (IBAction)spell1_action:(id)aSender
 {
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:1];
+  
+  // TODO: [self.battleManager sendSpellActionRequestWithID:aSender.tag];
 }
 
 - (IBAction)spell2_action:(id)aSender
