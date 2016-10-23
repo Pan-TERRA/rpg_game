@@ -497,7 +497,8 @@
 		283ADCF51DAD3C8000BDC706 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				28F1021E1DB7719100C969CA /* Quests */,
+				28AE27161DBD161300834FBB /* Quest */,
+				28F1021E1DB7719100C969CA /* Quest List */,
 				2A8D9BA31DB163F20026A5AB /* Registration */,
 				281499E91DAFC93A00C26881 /* Authorization */,
 			);
@@ -564,14 +565,6 @@
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
-				AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */,
-				AE5E68001DBA773100715480 /* RPGQuestRequest.m */,
-				AE5E68021DBA78B200715480 /* RPGQuestRequest+Serialization.h */,
-				AE5E68031DBA78B200715480 /* RPGQuestRequest+Serialization.m */,
-				AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */,
-				AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */,
-				AE5E68081DBA7EB900715480 /* RPGQuestResponse+Serialization.h */,
-				AE5E68091DBA7EB900715480 /* RPGQuestResponse+Serialization.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -674,12 +667,43 @@
 			name = Reward;
 			sourceTree = "<group>";
 		};
-		28F1021E1DB7719100C969CA /* Quests */ = {
+		28AE27161DBD161300834FBB /* Quest */ = {
+			isa = PBXGroup;
+			children = (
+				28AE27171DBD161F00834FBB /* Request */,
+				28AE27181DBD162700834FBB /* Response */,
+			);
+			name = Quest;
+			sourceTree = "<group>";
+		};
+		28AE27171DBD161F00834FBB /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */,
+				AE5E68001DBA773100715480 /* RPGQuestRequest.m */,
+				AE5E68021DBA78B200715480 /* RPGQuestRequest+Serialization.h */,
+				AE5E68031DBA78B200715480 /* RPGQuestRequest+Serialization.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		28AE27181DBD162700834FBB /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */,
+				AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */,
+				AE5E68081DBA7EB900715480 /* RPGQuestResponse+Serialization.h */,
+				AE5E68091DBA7EB900715480 /* RPGQuestResponse+Serialization.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		28F1021E1DB7719100C969CA /* Quest List */ = {
 			isa = PBXGroup;
 			children = (
 				28F1021F1DB7719D00C969CA /* Response */,
 			);
-			name = Quests;
+			name = "Quest List";
 			sourceTree = "<group>";
 		};
 		28F1021F1DB7719D00C969CA /* Response */ = {
