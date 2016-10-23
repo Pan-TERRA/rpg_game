@@ -1,4 +1,4 @@
-  //
+   //
   //  RPGQuestListViewController.m
   //  RPG Game
   //
@@ -18,6 +18,8 @@
 #import "RPGQuestListState.h"
 #import "RPGNibNames.h"
 
+CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
+
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
 NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
@@ -26,15 +28,17 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGQuestListViewController () <UITableViewDelegate, UITableViewDataSource>
 
-// !!!: rename
-@property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *buttonControl;
-
+@property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *viewStateButtonControl;
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
-@property (nonatomic, assign, readwrite) RPGQuestListState buttonLastState;
+@property (nonatomic, assign, readwrite) RPGQuestListState questListState;
 @property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
+
+@property(nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
+@property(nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
+@property(nonatomic, assign, readwrite, getter=canUpdateWhenScrollTable) BOOL updateWhenScrollTable;
 
 @end
 
@@ -51,6 +55,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     _takeQuestsMutableArray = [[NSMutableArray alloc] init];
     _inProgressQuestsMutableArray = [[NSMutableArray alloc] init];
     _doneQuestsMutableArray = [[NSMutableArray alloc] init];
+    _updateWhenScrollTable = YES;
   }
   
   return self;
@@ -78,14 +83,14 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [super viewWillAppear:anAnimated];
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
-  [self.buttonControl setSelectedSegmentIndex:self.buttonLastState];
+  [self.viewStateButtonControl setSelectedSegmentIndex:self.questListState];
   [self setViewToNormalState];
 }
 
 - (void)viewDidAppear:(BOOL)anAnimated
 {
   [super viewDidAppear:anAnimated];
-  [self updateViewForState:self.buttonLastState];
+  [self updateViewForState:self.questListState willReload:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,23 +98,62 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UIScrollView
+
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
+{
+  if (aScrollView.contentOffset.y < kRPGQuestListViewControllerRefreshIndicatorOffset)
+  {
+    if (self.canUpdateWhenScrollTable)
+    {
+      self.updateWhenScrollTable = NO;
+  
+      [self updateViewForState:self.questListState willReload:NO];
+    }
+  }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  self.updateWhenScrollTable = YES;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+  [self.tableView reloadData];
+}
+
 #pragma mark - UITableViewDataSourceDelegate
 
 - (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)aSection
 {
   NSUInteger result = 0;
-    // ???: create new property viewState?
-  switch (self.buttonControl.selectedSegmentIndex)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
+    {
       result = [self.takeQuestsMutableArray count];
       break;
+    }
     case kRPGQuestListInProgressQuest:
+    {
       result = [self.inProgressQuestsMutableArray count];
       break;
+    }
     case kRPGQuestListDoneQuest:
+    {
       result = [self.doneQuestsMutableArray count];
       break;
+    }
+    default:
+    {
+      break;
+    }
   }
   return result;
 }
@@ -123,10 +167,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCell
                                                  owner:self
                                                options:nil];
-    cell = [nib objectAtIndex:0];
+    cell = [nib firstObject];
   }
   
-  switch (self.buttonControl.selectedSegmentIndex)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
     {
@@ -143,6 +187,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       [cell setCellContent:[self.doneQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
     }
+    default:
+    {
+      break;
+    }
   }
   
   return cell;
@@ -157,7 +205,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  switch (self.buttonControl.selectedSegmentIndex)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
     {
@@ -174,47 +222,77 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       [self showQuestViewWithQuest:[self.doneQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
     }
+    default:
+    {
+      break;
+    }
   }
 }
 
 #pragma mark - View Update
 
-
 /**
- *  Provides data display. Invokes at viewDidAppeer, buttonControlOnClick.
+ *  Provides data display. Invokes at viewDidAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
  *
  *  @param aState A view state. Depends from self.buttonControl.selectedSegmentIndex.
+ *  @param aWillReloadFlag
  */
-- (void)updateViewForState:(RPGQuestListState)aState
+- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag
 {
   [self setViewToWaitingForServerResponseState];
   
+  __block typeof(self) weakSelf = self;
+  
   fetchQuestsCompletionHandler handler = ^void(NSInteger status, NSArray *questList)
   {
-    [self setViewToNormalState];
+    [weakSelf setViewToNormalState];
     
-    BOOL succes = (status == 0);
-    if (succes)
+    BOOL success = (status == 0);
+    
+    if (success)
     {
-      [self separateQuestsData:questList byState:aState];
+      [weakSelf processQuestsData:questList byState:aState];
+      
+      if (aWillReloadFlag)
+      {
+        [weakSelf.tableView reloadData];
+      }
     }
   };
   
-  [self fetchQuestsDataByState:aState completionHandler:handler];
+  [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
+                                             completionHandler:handler];
+}
+
+/**
+ *  Define if quest array should be uploaded from server.
+ *
+ *  @param aFlag A boolean value that defines action
+ */
+- (void)shouldUpdateView:(BOOL)aFlag
+{
+  if (aFlag)
+  {
+    [self.tableView reloadData];
+  }
+  else
+  {
+    [self updateViewForState:self.questListState willReload:YES];
+  }
 }
 
 #pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
-  [self.tableView setHidden:YES];
+//  [self.tableView setHidden:YES];
   [self.activityIndicator setHidden:NO];
   [self.activityIndicator startAnimating];
 }
 
 - (void)setViewToNormalState
 {
-  [self.tableView setHidden:NO];
+//  [self.tableView setHidden:NO];
   [self.activityIndicator setHidden:YES];
   [self.activityIndicator stopAnimating];
 }
@@ -223,55 +301,34 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 /**
  *  Separate array of RPGQuest items to specific model arrays
+ *  or show with quest for review.
  *
  *  @param aData  An array from RPGQuestListResponse
  *  @param aState A view state
  */
-- (void)separateQuestsData:(NSArray *)aData byState:(RPGQuestListState)aState
+- (void)processQuestsData:(NSArray *)aData byState:(RPGQuestListState)aState
 {
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-        // ???: mutable copy? already mutable, check this
-      self.takeQuestsMutableArray = [aData mutableCopy];
+      // ???: Tramper question
+      self.takeQuestsMutableArray = (NSMutableArray *)aData;
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      self.inProgressQuestsMutableArray = [aData mutableCopy];
+      self.inProgressQuestsMutableArray = (NSMutableArray *)aData;
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      self.doneQuestsMutableArray = [aData mutableCopy];
+      self.doneQuestsMutableArray = (NSMutableArray *)aData;
       break;
     }
-    default:
-    {
-      break;
-    }
-  }
-  
-  [self.tableView reloadData];
-}
-
-- (void)fetchQuestsDataByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))aCompletionHandler
-{
-  switch (aState)
-  {
-    case kRPGQuestListTakeQuest:
-    case kRPGQuestListInProgressQuest:
-    case kRPGQuestListDoneQuest:
-    {
-      [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
-                                                 completionHandler:aCompletionHandler];
-      break;
-    }
-      
     case kRPGQuestListReviewQuest:
     {
-        // test data
+      // test data
       RPGQuest *testQuest = [RPGQuest questWithID:34343
                                              name:@"Quest6 title"
                                       description:@"Quest description. You have to review this quest."
@@ -279,15 +336,9 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
                                            reward:[RPGQuestReward questRewardWithGold:20 crystals:29 skillID:22]];
       
       [self showQuestViewWithQuest:testQuest];
+      //[self showQuestViewWithQuest:[aData firstObject]];
       break;
     }
-  }
-  
-  if (aState != kRPGQuestListReviewQuest)
-  {
-    self.buttonLastState = aState;
-    [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
   }
 }
 
@@ -313,7 +364,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     //send to server that quest should be deleted
   if (anEditingStyle == UITableViewCellEditingStyleDelete)
   {
-    switch (self.buttonControl.selectedSegmentIndex)
+    switch (self.questListState)
     {
       case kRPGQuestListTakeQuest:
       {
@@ -330,6 +381,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
         break;
       }
+      default:
+      {
+        break;
+      }
     }
     [aTableView reloadData];
   }
@@ -337,11 +392,43 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark - IBActions
 
-- (IBAction)buttonControlOnClick:(UISegmentedControl *)aSender
+- (IBAction)viewStateButtonControlOnClick:(UISegmentedControl *)aSender
 {
   RPGQuestListState state = aSender.selectedSegmentIndex;
   
-  [self updateViewForState:state];
+  if (state != kRPGQuestListReviewQuest)
+  {
+    self.questListState = state;
+  }
+  
+  switch (state)
+  {
+    case kRPGQuestListTakeQuest:
+    {
+      [self.tableView reloadData];
+      break;
+    }
+    case kRPGQuestListInProgressQuest:
+    {
+      [self shouldUpdateView:self.isInProgressQuestsVisited];
+      self.inProgressQuestsVisited = YES;
+      break;
+    }
+    case kRPGQuestListDoneQuest:
+    {
+      [self shouldUpdateView:self.isDoneQuestsVisited];
+      self.doneQuestsVisited = YES;
+      break;
+    }
+    case kRPGQuestListReviewQuest:
+    {
+      [self updateViewForState:state willReload:YES];
+    }
+    default:
+    {
+      break;
+    }
+  }
 }
 
 - (IBAction)backButtonOnClicked:(UIButton *)aSender

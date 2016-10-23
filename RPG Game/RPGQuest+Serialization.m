@@ -9,7 +9,7 @@
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
 
-NSString * const kRPGQuestID = @"id";
+NSString * const kRPGQuestID = @"quest_id";
 NSString * const kRPGQuestName = @"name";
 NSString * const kRPGQuestDescription = @"description";
 NSString * const kRPGQuestState = @"state";
