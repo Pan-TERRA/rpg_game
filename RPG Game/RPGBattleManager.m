@@ -37,6 +37,11 @@
 	
 }
 
+- (void)sendBattleInitRequest
+{
+	
+}
+
 
 
 

@@ -16,6 +16,7 @@
 @property (nonatomic, assign) id <SRWebSocketDelegate>delegate;
 
 - (void)sendSpellActionRequestWithID:(NSInteger)anID;
+- (void)sendBattleInitRequest;
 - (void)sendBattleCondtionRequest;
 - (void)sendTimeSynchRequest;
 
