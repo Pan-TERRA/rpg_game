@@ -20,9 +20,7 @@
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:0];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
@@ -116,9 +114,7 @@
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:0];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]

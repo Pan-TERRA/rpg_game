@@ -39,7 +39,7 @@
       break;
   }
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
