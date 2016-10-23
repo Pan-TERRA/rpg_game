@@ -13,6 +13,8 @@
 #import "RPGBattleManager.h"
 #import "RPGSFXEngine.h"
 #import "SRWebSocket.h"
+#import "RPGBattleInitResponse+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -64,6 +66,12 @@
   [self.battleManager open];
   
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  NSUserDefaults *userSession = [NSUserDefaults standardUserDefaults];
+  self.player1NickName.text = [userSession sessionUsername];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -130,9 +138,33 @@
 
 #pragma mark - SRWebSocketDelegate
 
+- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
+{
+  RPGBattleInitResponse *battleInitResponse = nil;
+  NSData *data = [(NSString *)message dataUsingEncoding:NSUTF8StringEncoding];
+
+  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                     options:0
+                                                                       error:nil];
+  
+  if (responseDictionary != nil)
+  {
+    battleInitResponse = [[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary];
+  }
+  else
+  {
+    
+  }
+  
+ if (battleInitResponse != nil && battleInitResponse.status == 0)
+ {
+   self.player2NickName.text = battleInitResponse.opponentInfo[@"name"];
+ }
+}
+
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  
+  [self.battleManager sendBattleInitRequest];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string
