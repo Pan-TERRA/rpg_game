@@ -16,7 +16,6 @@
 
 @interface RPGLoginViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorMessageLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
@@ -68,22 +67,10 @@
   }
 }
 
-//- (IBAction)forgotPasswordAction:(UIButton *)sender
-//=======
-//#pragma mark - Error Representation
-//
-//- (void)showErrorText:(NSString *)aText
-//{
-//  self.errorMessageLabel.text = aText;
-//  [self.errorMessageLabel setHidden:NO];
-//  [self.errorMessageLabel sizeToFit];
-//}
-//
-//#pragma mark - IBActions
-//
-//- (IBAction)forgotPasswordAction:(UIButton *)aSender
-//>>>>>>> development
-
+- (IBAction)forgotPasswordAction:(UIButton *)sender
+{
+  
+}
 
 - (IBAction)signupAction:(UIButton *)aSender
 {
