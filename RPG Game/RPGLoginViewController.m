@@ -14,13 +14,15 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
-@interface RPGLoginViewController ()
+@interface RPGLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *errorMessageLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign, readwrite) UITextField *activeField;
 
 @end
 
@@ -30,7 +32,31 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGLoginViewController bundle:nil];
+  self = [super initWithNibName:kRPGLoginViewController bundle:nil];
+  
+  if (self != nil)
+  {
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillShow:)
+                          name:UIKeyboardWillShowNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillHide:)
+                          name:UIKeyboardWillHideNotification
+                        object:nil];
+  }
+  
+  return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController
@@ -66,6 +92,42 @@
   {
     self.loginButton.enabled = YES;
   }
+}
+
+#pragma mark - Notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGFloat adjustmentHeight = keyboardFrame.size.height;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+  
+  CGRect viewRect = self.view.frame;
+  viewRect.size.height -= keyboardFrame.size.height;
+  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin)) {
+    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+  }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+  self.activeField = textField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+  self.activeField = nil;
 }
 
 //- (IBAction)forgotPasswordAction:(UIButton *)sender
