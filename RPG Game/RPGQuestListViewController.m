@@ -1,4 +1,4 @@
-  //
+   //
   //  RPGQuestListViewController.m
   //  RPG Game
   //
@@ -17,6 +17,8 @@
   // Constants
 #import "RPGQuestListState.h"
 #import "RPGNibNames.h"
+
+CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
@@ -88,7 +90,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (void)viewDidAppear:(BOOL)anAnimated
 {
   [super viewDidAppear:anAnimated];
-  [self updateViewForState:self.questListState];
+  [self updateViewForState:self.questListState willReload:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -100,19 +102,30 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
-  if (aScrollView.contentOffset.y < 0.0)
+  if (aScrollView.contentOffset.y < kRPGQuestListViewControllerRefreshIndicatorOffset)
   {
     if (self.canUpdateWhenScrollTable)
     {
-      [aScrollView setContentOffset:CGPointMake(0.0, 0.0) animated:NO];
       self.updateWhenScrollTable = NO;
-      [self updateViewForState:self.questListState];
+  
+      [self updateViewForState:self.questListState willReload:NO];
     }
   }
-  else
-  {
-    self.updateWhenScrollTable = YES;
-  }
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+  self.updateWhenScrollTable = YES;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+  [self.tableView reloadData];
 }
 
 #pragma mark - UITableViewDataSourceDelegate
@@ -222,8 +235,9 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
  *  Provides data display. Invokes at viewDidAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
  *
  *  @param aState A view state. Depends from self.buttonControl.selectedSegmentIndex.
+ *  @param aWillReloadFlag
  */
-- (void)updateViewForState:(RPGQuestListState)aState
+- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag
 {
   [self setViewToWaitingForServerResponseState];
   
@@ -234,9 +248,15 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     [weakSelf setViewToNormalState];
     
     BOOL success = (status == 0);
+    
     if (success)
     {
       [weakSelf processQuestsData:questList byState:aState];
+      
+      if (aWillReloadFlag)
+      {
+        [weakSelf.tableView reloadData];
+      }
     }
   };
   
@@ -244,18 +264,35 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
                                              completionHandler:handler];
 }
 
+/**
+ *  Define if quest array should be uploaded from server.
+ *
+ *  @param aFlag A boolean value that defines action
+ */
+- (void)shouldUpdateView:(BOOL)aFlag
+{
+  if (aFlag)
+  {
+    [self.tableView reloadData];
+  }
+  else
+  {
+    [self updateViewForState:self.questListState willReload:YES];
+  }
+}
+
 #pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
-  [self.tableView setHidden:YES];
+//  [self.tableView setHidden:YES];
   [self.activityIndicator setHidden:NO];
   [self.activityIndicator startAnimating];
 }
 
 - (void)setViewToNormalState
 {
-  [self.tableView setHidden:NO];
+//  [self.tableView setHidden:NO];
   [self.activityIndicator setHidden:YES];
   [self.activityIndicator stopAnimating];
 }
@@ -303,12 +340,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       break;
     }
   }
-  
-  [self.tableView reloadData];
 }
-
-//  //[self.tableView setContentOffset:CGPointZero animated:YES];
-
 
 #pragma mark - QuestView Display
 
@@ -390,7 +422,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      [self updateViewForState:state];
+      [self updateViewForState:state willReload:YES];
     }
     default:
     {
@@ -402,23 +434,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-/**
- *  Define if quest array should be uploaded from server.
- *
- *  @param aFlag A boolean value that defines action
- */
-- (void)shouldUpdateView:(BOOL)aFlag
-{
-  if (aFlag)
-  {
-    [self.tableView reloadData];
-  }
-  else
-  {
-    [self updateViewForState:self.questListState];
-  }
 }
 
 @end
