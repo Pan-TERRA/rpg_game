@@ -25,15 +25,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
-                    <rect key="frame" x="86" y="136" width="428" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
-                    <connections>
-                        <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="8lE-xe-KtE"/>
-                    </connections>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICW-A7-Q3E">
                     <rect key="frame" x="472" y="174" width="42" height="30"/>
                     <state key="normal" title="Log in"/>
@@ -48,15 +39,6 @@
                         <action selector="forgotPasswordAction:" destination="-1" eventType="touchUpInside" id="8bu-GM-GSy"/>
                     </connections>
                 </button>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
-                    <rect key="frame" x="86" y="91" width="428" height="30"/>
-                    <nil key="textColor"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                    <connections>
-                        <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="X6M-G6-u0F"/>
-                    </connections>
-                </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-7H-KAr">
                     <rect key="frame" x="86" y="174" width="52" height="30"/>
                     <state key="normal" title="Sign up"/>
@@ -70,6 +52,26 @@
                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z4-jm9">
                     <rect key="frame" x="139" y="371" width="150" height="2"/>
                 </progressView>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
+                    <rect key="frame" x="86" y="91" width="428" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                    <connections>
+                        <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="X6M-G6-u0F"/>
+                        <action selector="userDoneEnteringUsername:" destination="-1" eventType="editingDidEndOnExit" id="l26-w3-Rf7"/>
+                    </connections>
+                </textField>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
+                    <rect key="frame" x="86" y="136" width="428" height="30"/>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                    <connections>
+                        <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="8lE-xe-KtE"/>
+                        <action selector="userDoneEnteringPassword:" destination="-1" eventType="editingDidEndOnExit" id="KZK-yG-qCB"/>
+                    </connections>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>

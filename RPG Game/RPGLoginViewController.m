@@ -135,4 +135,14 @@
   }
 }
 
+- (IBAction)userDoneEnteringUsername:(UITextField *)aSender
+{
+  [self.passwordInputField becomeFirstResponder];
+}
+
+- (IBAction)userDoneEnteringPassword:(UITextField *)aSender
+{
+  [self loginAction:self.loginButton];
+}
+
 @end
