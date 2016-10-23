@@ -18,6 +18,25 @@
 
 #pragma mark - Init
 
+#pragma mark - Dealloc
+
+#pragma mark - Actions
+
+- (void)sendSpellActionRequestWithID:(NSInteger)anID
+{
+	
+}
+
+- (void)sendBattleCondtionRequest
+{
+	
+}
+
+- (void)sendTimeSynchRequest
+{
+	
+}
+
 
 
 

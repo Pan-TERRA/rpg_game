@@ -10,6 +10,13 @@
 
 @interface RPGBattleManager : SRWebSocket
 
+/**
+ *  SRWebsocket delegate, usually view controller. Handle response messages.
+ */
 @property (nonatomic, assign) id <SRWebSocketDelegate>delegate;
+
+- (void)sendSpellActionRequestWithID:(NSInteger)anID;
+- (void)sendBattleCondtionRequest;
+- (void)sendTimeSynchRequest;
 
 @end
