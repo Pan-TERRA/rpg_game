@@ -68,6 +68,13 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
                              status:-1];
 }
 
+#pragma mark - Accessors
+
+- (NSDictionary *)opponentInfo
+{
+  return _mutableOpponentInfo;
+}
+
 #pragma mark - Dealloc
 
 - (void)dealloc
