@@ -57,6 +57,7 @@
               aCrystals < 0 ||
               aCharacter == nil))
     {
+      _status = aStatus;
       _username = nil;
       _token = nil;
       _avatar = nil;
