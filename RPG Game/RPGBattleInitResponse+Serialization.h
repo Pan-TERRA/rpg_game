@@ -10,4 +10,7 @@
 
 @interface RPGBattleInitResponse (Serialization)
 
+- (NSDictionary *)dictionaryRepresentation;
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
+
 @end
