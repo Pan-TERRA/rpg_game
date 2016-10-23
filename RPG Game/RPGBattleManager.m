@@ -8,6 +8,17 @@
 
 #import "RPGBattleManager.h"
 
+@interface RPGBattleManager ()
+
+@end
+
 @implementation RPGBattleManager
+
+@synthesize delegate = _delegate;
+
+#pragma mark - Init
+
+
+
 
 @end

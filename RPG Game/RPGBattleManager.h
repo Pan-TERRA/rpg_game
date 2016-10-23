@@ -10,4 +10,6 @@
 
 @interface RPGBattleManager : SRWebSocket
 
+@property (nonatomic, assign) id <SRWebSocketDelegate>delegate;
+
 @end
