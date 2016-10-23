@@ -10,6 +10,7 @@
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
+#import "RPGLoginViewController.h"
   // Network, entities
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuest+Serialization.h"
@@ -17,6 +18,7 @@
   // Constants
 #import "RPGQuestListState.h"
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
@@ -243,19 +245,32 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   
   __block typeof(self) weakSelf = self;
   
-  fetchQuestsCompletionHandler handler = ^void(NSInteger status, NSArray *questList)
+  fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
   {
     [weakSelf setViewToNormalState];
     
-    BOOL success = (status == 0);
-    
-    if (success)
+    switch (statusCode)
     {
-      [weakSelf processQuestsData:questList byState:aState];
-      
-      if (aWillReloadFlag)
+      case kRPGStatusCodeOk:
       {
-        [weakSelf.tableView reloadData];
+        [weakSelf processQuestsData:questList byState:aState];
+        if (aWillReloadFlag)
+        {
+          [weakSelf.tableView reloadData];
+        }
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
+        [self presentViewController:loginViewController
+                           animated:YES
+                         completion:nil];
+        break;
+      }
+      default:
+      {
+        break;
       }
     }
   };
