@@ -28,7 +28,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
   if (self)
   {
       _soundManager = [CMOpenALSoundManager new];
-      _isPlaying = [[NSUserDefaults standardUserDefaults] isSoundsPlaying];
+      _playing = [[NSUserDefaults standardUserDefaults] isSoundsPlaying];
   }
   return self;
 }
