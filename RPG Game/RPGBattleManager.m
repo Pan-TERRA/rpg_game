@@ -100,7 +100,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 - (void)sendBattleInitRequest
 {
   NSError *JSONError = nil;
-  RPGRequest *request = [[RPGRequest alloc] initWithType:kRPGBattleInitResponseType token:self.token];
+  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitResponseType token:self.token];
   
   if (request != nil)
   {
