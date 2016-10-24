@@ -15,8 +15,6 @@
 
 @interface RPGNetworkManager : NSObject
 
-@property (nonatomic, copy, readonly) NSString *token; // replace to RPGUserSession
-
 + (instancetype)sharedNetworkManager;
 
 @end

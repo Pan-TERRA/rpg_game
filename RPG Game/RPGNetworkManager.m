@@ -12,8 +12,6 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 @interface RPGNetworkManager ()
 
-@property (nonatomic, copy, readwrite) NSString *token;
-
 @end
 
 @implementation RPGNetworkManager
@@ -22,35 +20,20 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 - (id)init
 {
-  self = [super init];
-  
-  if (self != nil)
-  {
-    _token = [[NSString alloc] init];
-  }
-  
-  return self;
+  return [super init];
 }
 
 + (id)sharedNetworkManager
 {
-  @synchronized(self)
+  @synchronized (self)
   {
-    if(sharedNetworkManager == nil)
+    if (sharedNetworkManager == nil)
     {
       sharedNetworkManager = [[super allocWithZone:NULL] init];
     }
   }
   
   return sharedNetworkManager;
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [_token release];
-  [super dealloc];
 }
 
 #pragma mark - Singleton
