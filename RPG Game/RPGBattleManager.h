@@ -8,15 +8,17 @@
 
 #import <SocketRocket/SocketRocket.h>
 
+@class RPGBattle;
+
 @interface RPGBattleManager : SRWebSocket
 
-/**
- *  SRWebsocket delegate, usually view controller. Handle response messages.
- */
+@property (retain, nonatomic, readonly) RPGBattle *battle;
 @property (nonatomic, assign) id <SRWebSocketDelegate>delegate;
 
+- (instancetype)init;
+
 - (void)sendSpellActionRequestWithID:(NSInteger)anID;
-- (void)sendBattleInitRequest;
+//- (void)sendBattleInitRequest;
 - (void)sendBattleCondtionRequest;
 - (void)sendTimeSynchRequest;
 
