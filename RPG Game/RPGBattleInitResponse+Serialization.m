@@ -22,7 +22,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
   dictionaryRepresentation[kRPGBattleInitResponseOpponentInfo] = self.opponentInfo;
-  dictionaryRepresentation[kRPGBattleInitResponseCurrentTurn] = [[NSNumber alloc] initWithBool:self.isCurrentTurn];
+  dictionaryRepresentation[kRPGBattleInitResponseCurrentTurn] = [NSNumber numberWithBool:self.isCurrentTurn];
   dictionaryRepresentation[kRPGBattleInitResponseOpponentTime] = @(self.time);
 
   return dictionaryRepresentation;
