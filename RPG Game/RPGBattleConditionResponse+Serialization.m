@@ -9,11 +9,11 @@
 #import "RPGBattleConditionResponse+Serialization.h"
 #import "RPGResponse+Serialization.h"
 
-NSString * const kRPGBattleConditionResponseHP = @"HP";
-NSString * const kRPGBattleConditionResponseOpponentHP = @"OpponentHP";
-NSString * const kRPGBattleConditionResponseSpellsCondition = @"SpellsCondition";
-NSString * const kRPGBattleConditionResponseReward = @"Reward";
-NSString * const kRPGBattleConditionResponseStatus = @"Status";
+NSString * const kRPGBattleConditionResponseHP = @"hp";
+NSString * const kRPGBattleConditionResponseOpponentHP = @"opponent_hp";
+NSString * const kRPGBattleConditionResponseSpellsCondition = @"skills_condition";
+NSString * const kRPGBattleConditionResponseReward = @"reward";
+NSString * const kRPGBattleConditionResponseStatus = @"status";
 
 @implementation RPGBattleConditionResponse (Serialization)
 
