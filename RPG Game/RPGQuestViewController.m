@@ -12,7 +12,9 @@
 #import "RPGNibNames.h"
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
-
+#import "RPGNetworkManager+Quests.h"
+#import "RPGQuestRequest+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -29,6 +31,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
+@property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
 
@@ -67,6 +70,7 @@
   self.descriptionLabel.text = aQuest.questDescription;
   self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
   self.state = aQuest.state;
+  self.questID = aQuest.questID;
   
   switch (self.state)
   {
@@ -183,12 +187,22 @@
 {
   if (self.state == kRPGQuestStateCanTake)
   {
-    //send to server that quest should be in progress
+    void (^handler)(NSInteger) = ^void(NSInteger status)
+    {
+      BOOL success = (status == 0);
+      if (success)
+      {
+        
+      }
+    };
+    RPGQuestRequest *request = [[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID];
+    [[RPGNetworkManager sharedNetworkManager] takeQuestWithRequest:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
     //send to server that quest was done
   }
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender

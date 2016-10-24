@@ -9,9 +9,11 @@
 #import "RPGNetworkManager.h"
 #import "RPGQuestListState.h"
 
+@class RPGQuestRequest;
 
 @interface RPGNetworkManager (Quests)
 
 - (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock;
+- (void)takeQuestWithRequest:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock;
 
 @end

@@ -7,13 +7,22 @@
 //
 
 #import "NSUserDefaults+RPGVolumeSettings.h"
-#import "RPGUserVolumeSettingsKeys.h"
+
+NSString * const kRPGUserVolumeSettingsKeyIsMusicPlaying = @"RPG_IS_MUSIC_PLAYING";
+NSString * const kRPGUserVolumeSettingsKeyIsSoundsPlaying = @"RPG_IS_SOUNDS_PLAYING";
+NSString * const kRPGUserVolumeSettingsKeyMusicVolume = @"RPG_MUSIC_VOLUME";
+NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 
 @implementation NSUserDefaults (RPGVolumeSettings)
 
 - (BOOL)isMusicPlaying
 {
-  return [self boolForKey:kRPGUserVolumeSettingsKeyIsMusicPlaying];
+  BOOL result = TRUE;
+  if ([self objectForKey:kRPGUserVolumeSettingsKeyIsMusicPlaying])
+  {
+    result = [self boolForKey:kRPGUserVolumeSettingsKeyIsMusicPlaying];
+  }
+  return result;
 }
 
 - (void)setIsMusicPlaying:(BOOL)anIsMusicPlaying
@@ -23,7 +32,13 @@
 
 - (BOOL)isSoundsPlaying
 {
-  return [self boolForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying];
+  BOOL result = TRUE;
+  if ([self objectForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying])
+  {
+    result = [self boolForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying];
+  }
+  return result;
+
 }
 
 - (void)setIsSoundsPlaying:(BOOL)anIsSoundsPlaying
@@ -33,7 +48,12 @@
 
 - (double)musicVolume
 {
-  return [self doubleForKey:kRPGUserVolumeSettingsKeyMusicVolume];
+  double result = 1.0;
+  if ([self objectForKey:kRPGUserVolumeSettingsKeyMusicVolume])
+  {
+    result = [self doubleForKey:kRPGUserVolumeSettingsKeyMusicVolume];
+  }
+  return result;
 }
 
 - (void)setMusicVolume:(double)aMusicVolume
@@ -43,7 +63,12 @@
 
 - (double)soundsVolume
 {
-  return [self doubleForKey:kRPGUserVolumeSettingsKeySoundsVolume];
+  double result = 1.0;
+  if ([self objectForKey:kRPGUserVolumeSettingsKeySoundsVolume])
+  {
+    result = [self doubleForKey:kRPGUserVolumeSettingsKeySoundsVolume];
+  }
+  return result;
 }
 
 - (void)setSoundsVolume:(double)aSoundsVolume

@@ -62,7 +62,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
       NSLog(@"Error setting category! %@", setCategoryError);
     }
     
-    self.playing = YES;
+    self.playing = [[NSUserDefaults standardUserDefaults] isMusicPlaying];
     
     if ([self isPlaying])
     {

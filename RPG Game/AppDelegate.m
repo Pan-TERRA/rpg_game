@@ -10,7 +10,6 @@
 #import "RPGNibNames.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
-#import "NSUserDefaults+RPGVolumeSettings.h"
 #import "RPGSFXEngine.h"
 
 @interface AppDelegate ()
@@ -63,7 +62,6 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
-  [self saveVolumeSettingsToUserDefaults];
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
@@ -80,19 +78,6 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-  [self saveVolumeSettingsToUserDefaults];
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-}
-
-- (void)saveVolumeSettingsToUserDefaults
-{
-  double musicVolume = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
-  double soundsVolume = [[RPGSFXEngine sharedSFXEngine] getVolume];
-  BOOL isMusicPlaying = [[RPGBackgroundMusicController sharedBackgroundMusicController] isPlaying];
-  BOOL isSoundsPlaying = [[RPGSFXEngine sharedSFXEngine] isPlaying];
-  [[NSUserDefaults standardUserDefaults] setMusicVolume:musicVolume];
-  [[NSUserDefaults standardUserDefaults] setSoundsVolume:soundsVolume];
-  [[NSUserDefaults standardUserDefaults] setIsMusicPlaying:isMusicPlaying];
-  [[NSUserDefaults standardUserDefaults] setIsSoundsPlaying:isSoundsPlaying];
 }
 @end

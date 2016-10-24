@@ -164,6 +164,13 @@
   }
 }
 
+- (IBAction)userDoneEnteringText:(UITextField *)aSender
+{
+  NSInteger nextTag = aSender.tag + 1;
+  UIResponder *nextResponder = [aSender.superview viewWithTag:nextTag];
+  [nextResponder becomeFirstResponder];
+}
+
 - (NSInteger)getSelectedClassID
 {
   NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
