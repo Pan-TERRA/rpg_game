@@ -18,7 +18,7 @@
   // Constants
 #import "RPGNibNames.h"
 
-@interface RPGBattleViewController () <SRWebSocketDelegate>
+@interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleManager *battleManager;
 
@@ -60,9 +60,7 @@
   [super viewDidLoad];
   
     // SRWebsocket instance initializing
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"ws://10.55.33.31:8888/ws"];
-  self.battleManager = [[RPGBattleManager alloc] initWithURL:[NSURL URLWithString:requestString]];
-  self.battleManager.delegate = self;
+  self.battleManager = [[RPGBattleManager alloc] init];
   [self.battleManager open];
   
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
@@ -70,8 +68,7 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  NSUserDefaults *userSession = [NSUserDefaults standardUserDefaults];
-  self.player1NickName.text = [userSession sessionUsername];
+
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -136,58 +133,5 @@
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
 }
 
-#pragma mark - SRWebSocketDelegate
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
-{
-  RPGBattleInitResponse *battleInitResponse = nil;
-  NSData *data = [(NSString *)message dataUsingEncoding:NSUTF8StringEncoding];
-
-  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                     options:0
-                                                                       error:nil];
-  
-  if (responseDictionary != nil)
-  {
-    battleInitResponse = [[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary];
-  }
-  else
-  {
-    
-  }
-  
- if (battleInitResponse != nil && battleInitResponse.status == 0)
- {
-   self.player2NickName.text = battleInitResponse.opponentInfo[@"name"];
- }
-}
-
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket
-{
-  [self.battleManager sendBattleInitRequest];
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithData:(NSData *)data
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket
-  didCloseWithCode:(NSInteger)code
-           reason:(nullable NSString *)reason
-         wasClean:(BOOL)wasClean
-{
-  
-}
 
 @end
