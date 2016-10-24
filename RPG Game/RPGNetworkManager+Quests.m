@@ -21,19 +21,27 @@
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
-      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/quests"];
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIQuestsRoute];
       break;
       
     case kRPGQuestListInProgressQuest:
-      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/in_progress_quests"];
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIQuestsInProgressRoute];
       break;
       
     case kRPGQuestListDoneQuest:
-      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/confirmed_quests"];
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIConfirmedQuestsRoute];
       break;
       
     case kRPGQuestListReviewQuest:
-      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/review_quests"];
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIReviewQuestsRoute];
       break;
  
     default:
@@ -119,7 +127,9 @@
 
 - (void)takeQuestWithRequest:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/accept_quest"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPIAcceptQuestRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   

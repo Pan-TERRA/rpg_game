@@ -19,7 +19,9 @@
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
        completionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPILoginRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
@@ -114,7 +116,9 @@
 - (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest
         completionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPISignoutRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   NSError *JSONSerializationError = nil;

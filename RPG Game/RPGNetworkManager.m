@@ -10,9 +10,23 @@
 
 static RPGNetworkManager *sharedNetworkManager = nil;
 
-@interface RPGNetworkManager ()
+#pragma mark - API constants
 
-@end
+// General
+NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
+// Authorization
+NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
+NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
+// Registration
+NSString * const kRPGNetworkManagerAPIRegisterRoute = @"/register";
+// Quests
+NSString * const kRPGNetworkManagerAPIQuestsRoute = @"/quests";
+NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute = @"/in_progress_quests";
+NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute = @"/confirmed_quests";
+NSString * const kRPGNetworkManagerAPIReviewQuestsRoute = @"/review_quests";
+NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
+
+#pragma mark -
 
 @implementation RPGNetworkManager
 

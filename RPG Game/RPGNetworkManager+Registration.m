@@ -14,7 +14,9 @@
 - (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
           completionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/register"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPIRegisterRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
    NSError *JSONSerializationError = nil;
