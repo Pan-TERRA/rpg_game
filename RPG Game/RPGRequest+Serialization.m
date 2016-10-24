@@ -8,8 +8,8 @@
 
 #import "RPGRequest+Serialization.h"
 
-static NSString *const kRPGRequestSerializationType = @"type";
-static NSString *const kRPGRequestSerializationToken = @"token";
+NSString *const kRPGRequestSerializationType = @"type";
+NSString *const kRPGRequestSerializationToken = @"token";
 
 @implementation RPGRequest (Serialization)
 
