@@ -50,7 +50,33 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGBattleViewController bundle:nil];
+  self = [super initWithNibName:kRPGBattleViewController bundle:nil];
+  
+  if (self != nil)
+  {
+    _battleManager = [[RPGBattleManager alloc] init];
+    [_battleManager open];
+    if (_battleManager != nil)
+    {
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(modelDidChange:)
+                                                   name:kRPBBattleManagerModelDidChangeNotification
+                                                 object:_battleManager];
+      
+    }
+  }
+  
+  return nil;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [_battleManager release];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController
@@ -60,25 +86,25 @@
   [super viewDidLoad];
   
     // SRWebsocket instance initializing
-  self.battleManager = [[RPGBattleManager alloc] init];
-  [self.battleManager open];
+  
   
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-
+  [super viewWillAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [super viewWillDisappear:animated];
   [self.battleManager close];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-  
+  [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,5 +159,11 @@
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
 }
 
+#pragma mark - Notifications
+
+- (void)modelDidChange:(NSNotification *)aNotification
+{
+  
+}
 
 @end
