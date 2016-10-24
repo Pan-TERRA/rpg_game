@@ -44,6 +44,7 @@
 		28A5A0E01DB9186B000EF49F /* RPGQuest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0DE1DB9186B000EF49F /* RPGQuest+Serialization.m */; };
 		28A5A0E51DB91878000EF49F /* RPGQuestReward.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0E21DB91878000EF49F /* RPGQuestReward.m */; };
 		28A5A0E61DB91878000EF49F /* RPGQuestReward+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0E41DB91878000EF49F /* RPGQuestReward+Serialization.m */; };
+		28AE271B1DBD22B700834FBB /* RPGBattleInitResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AE271A1DBD22B700834FBB /* RPGBattleInitResponse+Serialization.m */; };
 		28D175431DBA42B600A934ED /* RPGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D175421DBA42B600A934ED /* RPGBattleManager.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -172,6 +173,8 @@
 		28A5A0E21DB91878000EF49F /* RPGQuestReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestReward.m; sourceTree = "<group>"; };
 		28A5A0E31DB91878000EF49F /* RPGQuestReward+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGQuestReward+Serialization.h"; sourceTree = "<group>"; };
 		28A5A0E41DB91878000EF49F /* RPGQuestReward+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGQuestReward+Serialization.m"; sourceTree = "<group>"; };
+		28AE27191DBD22B700834FBB /* RPGBattleInitResponse+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGBattleInitResponse+Serialization.h"; sourceTree = "<group>"; };
+		28AE271A1DBD22B700834FBB /* RPGBattleInitResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGBattleInitResponse+Serialization.m"; sourceTree = "<group>"; };
 		28D175411DBA42B600A934ED /* RPGBattleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleManager.h; sourceTree = "<group>"; };
 		28D175421DBA42B600A934ED /* RPGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleManager.m; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -510,6 +513,8 @@
 			children = (
 				283ADD091DAD48DA00BDC706 /* RPGBattleInitResponse.h */,
 				283ADD0A1DAD48DA00BDC706 /* RPGBattleInitResponse.m */,
+				28AE27191DBD22B700834FBB /* RPGBattleInitResponse+Serialization.h */,
+				28AE271A1DBD22B700834FBB /* RPGBattleInitResponse+Serialization.m */,
 			);
 			name = "Battle Init";
 			sourceTree = "<group>";
@@ -887,6 +892,7 @@
 				TargetAttributes = {
 					288E85C91DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = S62KPRX8XQ;
 					};
 					288E85E21DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1089,6 +1095,7 @@
 				28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */,
 				2A8D9BA91DB252170026A5AB /* RPGRegistrationRequest+Serialization.m in Sources */,
 				28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */,
+				28AE271B1DBD22B700834FBB /* RPGBattleInitResponse+Serialization.m in Sources */,
 				AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */,
 				28149A0D1DAFEF4F00C26881 /* RPGAuthorizationLogoutResponse+Serialization.m in Sources */,
 				28149A041DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m in Sources */,
@@ -1271,11 +1278,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-11.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1285,11 +1295,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-11.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
