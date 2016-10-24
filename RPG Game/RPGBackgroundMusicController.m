@@ -62,9 +62,9 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     }
     
 	[[AVAudioSession sharedInstance] setActive:YES error:nil];
-    self.isPlaying = YES;
+    self.playing = YES;
     
-    if ([self isPlaying])
+    if (self.isPlaying)
     {
       [_peacePlayer play];
     }
@@ -155,7 +155,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 
 - (void)toggle:(BOOL)aState
 {
-  self.isPlaying = aState;
+  self.playing = aState;
   if (self.isPlaying)
   {
     [self switchToPeace];

@@ -28,7 +28,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
   if (self)
   {
     _soundManager = [CMOpenALSoundManager new];
-    _isPlaying = YES;
+    _playing = YES;
   }
   return self;
 }
@@ -94,7 +94,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 
 - (void)toggle:(BOOL)state
 {
-  self.isPlaying = state;
+  self.playing = state;
 }
 
 - (void)playSFXNamed:(NSString *)name
