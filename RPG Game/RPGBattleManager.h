@@ -10,6 +10,8 @@
 
 @class RPGBattle;
 
+extern NSString * const kRPBBattleManagerModelDidChangeNotification;
+
 @interface RPGBattleManager : SRWebSocket
 
 @property (retain, nonatomic, readonly) RPGBattle *battle;

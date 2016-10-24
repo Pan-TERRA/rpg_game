@@ -17,6 +17,7 @@
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 
+NSString * const kRPBBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
 static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.31:8888/ws";
 static NSString * const kRPGBattleManagerResponseType = @"type";
 
