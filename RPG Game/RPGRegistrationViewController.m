@@ -164,6 +164,11 @@
   }
 }
 
+- (IBAction)cancelButtonAction:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
   NSInteger nextTag = aSender.tag + 1;
