@@ -151,6 +151,7 @@
                 </scrollView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="rXL-dV-CSz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="CM3-Uw-Ut3"/>
                 <constraint firstAttribute="trailing" secondItem="aof-43-j00" secondAttribute="trailing" id="Sjd-1x-zHq"/>
@@ -159,7 +160,15 @@
                 <constraint firstItem="aof-43-j00" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iC4-sD-b5w"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="RPD-bb-vuJ" appends="YES" id="zRs-53-NjD"/>
+            </connections>
             <point key="canvasLocation" x="56" y="98"/>
         </view>
+        <tapGestureRecognizer id="RPD-bb-vuJ">
+            <connections>
+                <action selector="userTappedView:" destination="-1" id="3A4-zo-ZOC"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

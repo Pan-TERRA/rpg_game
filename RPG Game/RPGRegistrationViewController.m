@@ -177,6 +177,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
   }
 }
 
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
+{
+  [self.activeField endEditing:YES];
+}
+
 - (NSInteger)getSelectedClassID
 {
   NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
