@@ -11,6 +11,7 @@
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGSFXEngine.h"
 #import "RPGNibNames.h"
+#import "NSUserDefaults+RPGVolumeSettings.h"
 
 @interface RPGSettingsViewController ()
 
@@ -69,21 +70,29 @@
 - (IBAction)musicTurn:(UISwitch *)aSender
 {
   [[RPGBackgroundMusicController sharedBackgroundMusicController] toggle:aSender.on];
+  BOOL isMusicPlaying = [[RPGBackgroundMusicController sharedBackgroundMusicController] isPlaying];
+  [[NSUserDefaults standardUserDefaults] setIsMusicPlaying:isMusicPlaying];
 }
 
 - (IBAction)musicVolumeChange:(UISlider *)aSender
 {
   [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:aSender.value];
+  double musicVolume = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
+  [[NSUserDefaults standardUserDefaults] setMusicVolume:musicVolume];
 }
 
 - (IBAction)soundTurn:(UISwitch *)aSender
 {
   [[RPGSFXEngine sharedSFXEngine] toggle:aSender.on];
+  BOOL isSoundsPlaying = [[RPGSFXEngine sharedSFXEngine] isPlaying];
+  [[NSUserDefaults standardUserDefaults] setIsSoundsPlaying:isSoundsPlaying];
 }
 
 - (IBAction)soundVolumeChange:(UISlider *)aSender
 {
   [[RPGSFXEngine sharedSFXEngine] changeVolume:aSender.value];
+  double soundsVolume = [[RPGSFXEngine sharedSFXEngine] getVolume];
+  [[NSUserDefaults standardUserDefaults] setSoundsVolume:soundsVolume];
 }
 
 @end

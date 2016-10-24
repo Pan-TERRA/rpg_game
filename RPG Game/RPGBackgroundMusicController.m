@@ -7,6 +7,7 @@
 //
 
 #import "RPGBackgroundMusicController.h"
+#import "NSUserDefaults+RPGVolumeSettings.h"
 
 static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
@@ -61,8 +62,8 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
       NSLog(@"Error setting category! %@", setCategoryError);
     }
     
+    self.playing = [[NSUserDefaults standardUserDefaults] isMusicPlaying];
 	[[AVAudioSession sharedInstance] setActive:YES error:nil];
-    self.playing = YES;
     
     if (self.isPlaying)
     {
@@ -92,6 +93,8 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     if(sharedBackgroundMusicController == nil)
     {
       sharedBackgroundMusicController = [[super allocWithZone:NULL] init];
+      double startVolume = [[NSUserDefaults standardUserDefaults] musicVolume];
+      [sharedBackgroundMusicController changeVolume:startVolume];
     }
   }
   return sharedBackgroundMusicController;

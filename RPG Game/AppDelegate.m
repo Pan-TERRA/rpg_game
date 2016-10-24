@@ -10,6 +10,7 @@
 #import "RPGNibNames.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
+#import "RPGSFXEngine.h"
 
 @interface AppDelegate ()
 
@@ -48,7 +49,7 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
     
-    [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:0.5];
+    [RPGBackgroundMusicController sharedBackgroundMusicController];
     
   return YES;
 }
