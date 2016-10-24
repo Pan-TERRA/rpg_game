@@ -8,7 +8,7 @@
 
 #import "RPGBattleConditionResponse.h"
 
-static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
+NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 
 @interface RPGBattleConditionResponse ()
 

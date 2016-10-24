@@ -8,6 +8,8 @@
 
 #import "RPGResponse.h"
 
+extern NSString * const kRPGBattleInitResponseType;
+
 @interface RPGBattleInitResponse : RPGResponse
 
 @property (nonatomic, retain, readonly) NSDictionary *opponentInfo;

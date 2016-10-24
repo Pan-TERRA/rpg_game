@@ -8,7 +8,7 @@
 
 #import "RPGBattleInitResponse.h"
 
-static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
+NSString * const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 @interface RPGBattleInitResponse ()
 
