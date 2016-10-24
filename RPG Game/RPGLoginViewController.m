@@ -82,7 +82,7 @@
 
 #pragma mark IBActions
 
-- (IBAction)editingDidChange:(UITextField *)sender
+- (IBAction)editingDidChange:(UITextField *)aSender
 {
   if (self.emailInputField.text.length == 0 || self.passwordInputField.text.length == 0)
   {
@@ -94,19 +94,25 @@
   }
 }
 
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
+{
+  [self.activeField endEditing:YES];
+}
+
 #pragma mark - Notifications
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
   CGFloat adjustmentHeight = keyboardFrame.size.height;
-  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
   
   CGRect viewRect = self.view.frame;
   viewRect.size.height -= keyboardFrame.size.height;
-  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin)) {
+  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
+  {
     [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
   }
 }
@@ -120,12 +126,12 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField
+- (void)textFieldDidBeginEditing:(UITextField *)aTextField
 {
-  self.activeField = textField;
+  self.activeField = aTextField;
 }
 
-- (void)textFieldDidEndEditing:(UITextField *)textField
+- (void)textFieldDidEndEditing:(UITextField *)aTextField
 {
   self.activeField = nil;
 }
