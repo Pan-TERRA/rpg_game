@@ -12,7 +12,7 @@
 #import "RPGRegistrationRequest+Serialization.h"
 #import "RPGNibNames.h"
 
-@interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, retain, readonly) NSArray *classPickerData;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
@@ -23,6 +23,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign, readwrite) UITextField *activeField;
 
 @end
 
@@ -42,6 +44,15 @@
                              @"id": @1
                           }
                         ] retain];
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillShow:)
+                          name:UIKeyboardWillShowNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillHide:)
+                          name:UIKeyboardWillHideNotification
+                        object:nil];
   }
   
   return self;
@@ -52,6 +63,7 @@
 - (void)dealloc
 {
   [_classPickerData release];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   [super dealloc];
 }
@@ -170,6 +182,43 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
   
   return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
+}
+
+#pragma mark - Notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGFloat adjustmentHeight = keyboardFrame.size.height;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+  
+  CGRect viewRect = self.view.frame;
+  viewRect.size.height -= keyboardFrame.size.height;
+  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
+  {
+    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+  }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)aTextField
+{
+  self.activeField = aTextField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)aTextField
+{
+  self.activeField = nil;
 }
 
 @end
