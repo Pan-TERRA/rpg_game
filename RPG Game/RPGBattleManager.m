@@ -156,11 +156,13 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
   
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPBBattleManagerModelDidChangeNotification object:self];
 //    self.battle = [self.battle updateWithBattleInitResponse:battleInitResponse];
   }
   
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
   {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPBBattleManagerModelDidChangeNotification object:self];
 //    self.battle = [self.battle updateWithBattleConditionResponse:battleInitResponse];
   }
 }
