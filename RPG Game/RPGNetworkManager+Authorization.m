@@ -10,6 +10,7 @@
 #import "RPGAuthorizationLoginRequest+Serialization.h"
 #import "RPGAuthorizationLoginResponse+Serialization.h"
 #import "RPGAuthorizationLogoutRequest+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @implementation RPGNetworkManager (Authorization)
 
@@ -101,7 +102,8 @@
 
 - (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
 {
-  RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
+  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+  RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:token];
   
   [self logoutWithRequest:request
         completionHandler:callbackBlock];
