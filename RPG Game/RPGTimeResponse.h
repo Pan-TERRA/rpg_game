@@ -10,13 +10,17 @@
 
 @interface RPGTimeResponse : RPGResponse
 
-@property (retain, nonatomic, readonly) NSDate *timestamp;
+@property (nonatomic, retain, readonly) NSDate *timestamp;
 
 #pragma mark - Init
 
-- (instancetype)initWithTimestamp:(NSDate *)aTimestamp status:(NSInteger)aStatus;
-+ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp status:(NSInteger)aStatus;
-- (instancetype)initWithUnixTimestamp:(int)aTimestamp status:(NSInteger)aStatus;
-+ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp status:(NSInteger)aStatus;
+- (instancetype)initWithTimestamp:(NSDate *)aTimestamp
+                           status:(NSInteger)aStatus;
+- (instancetype)initWithUnixTimestamp:(int)aTimestamp
+                               status:(NSInteger)aStatus;
++ (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp
+                                   status:(NSInteger)aStatus;
++ (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp
+                                       status:(NSInteger)aStatus;
 
 @end

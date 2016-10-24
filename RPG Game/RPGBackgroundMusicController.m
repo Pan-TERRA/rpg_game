@@ -16,8 +16,8 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 
 @interface RPGBackgroundMusicController ()
 
-@property (nonatomic, retain) AVAudioPlayer *peacePlayer;
-@property (nonatomic, retain) AVAudioPlayer *battlePlayer;
+@property (nonatomic, retain, readwrite) AVAudioPlayer *peacePlayer;
+@property (nonatomic, retain, readwrite) AVAudioPlayer *battlePlayer;
 
 @end
 
@@ -56,17 +56,15 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
                                                object:nil];
     NSError *setCategoryError = nil;
     
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback
-                                           error:&setCategoryError];
-    [[AVAudioSession sharedInstance] setActive:YES error:nil];
-    if (setCategoryError)
+    if (![[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:&setCategoryError])
     {
       NSLog(@"Error setting category! %@", setCategoryError);
     }
     
+	[[AVAudioSession sharedInstance] setActive:YES error:nil];
     self.isPlaying = YES;
     
-    if (self.isPlaying)
+    if ([self isPlaying])
     {
       [_peacePlayer play];
     }
@@ -99,12 +97,12 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   return sharedBackgroundMusicController;
 }
 
-+ (id)allocWithZone:(NSZone *)zone
++ (id)allocWithZone:(NSZone *)aZone
 {
   return [[self sharedBackgroundMusicController] retain];
 }
 
-- (id)copyWithZone:(NSZone *)zone
+- (id)copyWithZone:(NSZone *)aZone
 {
   return self;
 }
@@ -149,16 +147,16 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   }
 }
 
-- (void)changeVolume:(double)volume
+- (void)changeVolume:(double)aVolume
 {
-  self.peacePlayer.volume = volume;
-  self.battlePlayer.volume = volume;
+  self.peacePlayer.volume = aVolume;
+  self.battlePlayer.volume = aVolume;
 }
 
-- (void)toggle:(BOOL)state
+- (void)toggle:(BOOL)aState
 {
-  self.isPlaying = state;
-  if (state)
+  self.isPlaying = aState;
+  if (self.isPlaying)
   {
     [self switchToPeace];
   }
@@ -175,9 +173,10 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 }
 
 #pragma mark - AudioSession Delegate
-- (void) interruption:(NSNotification*)notification
+
+- (void)interruption:(NSNotification*)aNotification
 {
-  NSDictionary *interuptionDict = notification.userInfo;
+  NSDictionary *interuptionDict = aNotification.userInfo;
   
   NSUInteger interuptionType = (NSUInteger)[interuptionDict valueForKey:AVAudioSessionInterruptionTypeKey];
   
@@ -190,6 +189,5 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     [self endInterruption];
   }
 }
-
 
 @end

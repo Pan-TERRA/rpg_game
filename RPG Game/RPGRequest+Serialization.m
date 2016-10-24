@@ -29,5 +29,4 @@ static NSString *const kRPGRequestSerializationToken = @"token";
                       token:aDictionary[kRPGRequestSerializationToken]];
 }
 
-
 @end

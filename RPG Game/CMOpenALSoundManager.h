@@ -17,12 +17,12 @@
 
 @class CMOpenALSound;
 
-@interface CMOpenALSoundManager : NSObject 
-{	
-	NSMutableDictionary	*soundDictionary;	// stores our soundkeys
-	NSArray				*soundFileNames;	// array that holds the filenames for the sounds, they will be referenced by index
-
-	float				soundEffectsVolume;
+@interface CMOpenALSoundManager : NSObject
+{
+  NSMutableDictionary	*soundDictionary;	// stores our soundkeys
+  NSArray	*soundFileNames;	// array that holds the filenames for the sounds, they will be referenced by index
+  
+  float soundEffectsVolume;
 }
 
 @property (nonatomic, retain) NSArray *soundFileNames;

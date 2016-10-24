@@ -10,6 +10,11 @@
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
 #import "RPGNibNames.h"
+#import "RPGQuest+Serialization.h"
+#import "RPGQuestReward+Serialization.h"
+#import "RPGNetworkManager+Quests.h"
+#import "RPGQuestRequest+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -26,12 +31,21 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
+@property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
 
 @implementation RPGQuestViewController
 
-#pragma mark - UIViewController Methods
+#pragma mark - Init
+
+- (instancetype)init
+{
+  return [super initWithNibName:kRPGQuestViewController
+                         bundle:nil];
+}
+
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
@@ -48,39 +62,55 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - set view state and content
+#pragma mark - View Content
 
-- (void)setViewContent:(NSDictionary *)viewContent
+- (void)setViewContent:(RPGQuest *)aQuest
 {
-  self.titleLabel.text = [viewContent objectForKey:kRPGQuestTitle];
-  self.descriptionLabel.text = [viewContent objectForKey:kRPGQuestDescription];
-  self.rewardLabel.text = [viewContent objectForKey:kRPGQuestReward];
-  self.state = [[viewContent objectForKey:kRPGQuestState] integerValue];
+  self.titleLabel.text = aQuest.name;
+  self.descriptionLabel.text = aQuest.questDescription;
+  self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  self.state = aQuest.state;
+  self.questID = aQuest.questID;
+  
   switch (self.state)
   {
     case kRPGQuestStateCanTake:
+    {
       [self setStateTakeQuest];
       break;
+    }
     case kRPGQuestStateInProgress:
+    {
       [self setStateInProgressQuest];
       self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
+    }
     case kRPGQuestStateDone:
+    {
       [self setStateReviewedQuest:NO];
       self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
+    }
     case kRPGQuestStateReviewedFalse:
+    {
       [self setStateReviewedQuest:NO];
       self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
+    }
     case kRPGQuestStateForReview:
+    {
       [self setStateForReviewQuest];
       break;
+    }
     case kRPGQuestStateReviewedTrue:
+    {
       [self setStateReviewedQuest:YES];
       break;
+    }
     default:
+    {
       break;
+    }
   }
   
   switch (self.state)
@@ -89,13 +119,19 @@
     case kRPGQuestStateReviewedFalse:
     case kRPGQuestStateForReview:
     case kRPGQuestStateReviewedTrue:
+    {
       //upload image from server
       //self.proofImageView.image = ...
       break;
+    }
     default:
+    {
       break;
+    }
   }
 }
+
+#pragma mark - View State
 
 - (void)setStateTakeQuest
 {
@@ -115,13 +151,13 @@
   [self setStateItemsHidden:NO];
 }
 
-- (void)setStateReviewedQuest:(BOOL)flag
+- (void)setStateReviewedQuest:(BOOL)aFlag
 {
   self.acceptButton.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = YES;
   [self setProofItemsHidden:NO];
-  [self setStateItemsHidden:flag];
+  [self setStateItemsHidden:aFlag];
 }
 
 - (void)setStateForReviewQuest
@@ -133,38 +169,48 @@
   [self setStateItemsHidden:YES];
 }
 
-- (void)setProofItemsHidden:(BOOL)flag
+- (void)setProofItemsHidden:(BOOL)aFlag
 {
-  self.proofLabel.hidden = flag;
-  self.proofImageView.hidden = flag;
+  self.proofLabel.hidden = aFlag;
+  self.proofImageView.hidden = aFlag;
 }
 
-- (void)setStateItemsHidden:(BOOL)flag
+- (void)setStateItemsHidden:(BOOL)aFlag
 {
-  self.stateTitleLabel.hidden = flag;
-  self.stateLabel.hidden = flag;
+  self.stateTitleLabel.hidden = aFlag;
+  self.stateLabel.hidden = aFlag;
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBAction
 
-- (IBAction)acceptButtonOnClick:(UIButton *)sender
+- (IBAction)acceptButtonOnClick:(UIButton *)aSender
 {
   if (self.state == kRPGQuestStateCanTake)
   {
-    //send to server that quest should be in progress
+    void (^handler)(NSInteger) = ^void(NSInteger status)
+    {
+      BOOL success = (status == 0);
+      if (success)
+      {
+        
+      }
+    };
+    RPGQuestRequest *request = [[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID];
+    [[RPGNetworkManager sharedNetworkManager] takeQuestWithRequest:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
     //send to server that quest was done
   }
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)denyButtonOnClick:(UIButton *)sender
+- (IBAction)denyButtonOnClick:(UIButton *)aSender
 {
   //send to server that quest wasn't done
 }
 
-- (IBAction)addProofButtonOnClick:(UIButton *)sender
+- (IBAction)addProofButtonOnClick:(UIButton *)aSender
 {
   UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
   picker.delegate = self;
@@ -173,23 +219,24 @@
   [self presentViewController:picker animated:YES completion:nil];
 }
 
-- (IBAction)backButtonOnClick:(UIButton *)sender
+- (IBAction)backButtonOnClick:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)handleTapGesture
 {
-  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] initWithNibName:kRPGQuestProofImageViewController bundle:nil] autorelease];
+  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
   [self presentViewController:questProofImageViewController animated:YES completion:nil];
   [questProofImageViewController setImage:self.proofImageView.image];
+  [questProofImageViewController release];
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
-  UIImage *chosenImage = info[UIImagePickerControllerEditedImage];
+  UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
   // !!!: leak
   self.proofImageView.image = chosenImage;
   
@@ -198,12 +245,12 @@
   self.stateLabel.text = kRPGQuestStringStateNotReviewed;
   
   //send image to server
-  [picker dismissViewControllerAnimated:YES completion:NULL];
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
-  [picker dismissViewControllerAnimated:YES completion:NULL];
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

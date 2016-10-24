@@ -12,29 +12,25 @@ static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 
 @interface RPGBattleConditionResponse ()
 
-@property (nonatomic, readwrite) int HP;
-@property (nonatomic, readwrite) int opponentHP;
-@property (retain, nonatomic) NSMutableDictionary *mutableSpellsCondition;
-@property (retain, nonatomic, readonly) NSMutableDictionary *mutableReward;
+@property (nonatomic, assign, readwrite) NSInteger HP;
+@property (nonatomic, assign, readwrite) NSInteger opponentHP;
+@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableSpellsCondition;
+@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableReward;
 
 @end
 
 @implementation RPGBattleConditionResponse
 
-@synthesize HP = _HP;
-@synthesize opponentHP = _opponentHP;
-@synthesize mutableSpellsCondition = _mutableSpellsCondition;
-@synthesize mutableReward = _mutableReward;
-
 #pragma mark - Init
 
-- (instancetype)initWithHP:(int)aHP
-                opponentHP:(int)anOpponentHP
+- (instancetype)initWithHP:(NSInteger)aHP
+                opponentHP:(NSInteger)anOpponentHP
            spellsCondition:(NSDictionary *)aSpellsCondition
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleConditionResponseType status:aStatus];
+  self = [super initWithType:kRPGBattleConditionResponseType
+                      status:aStatus];
   
   if (self != nil)
   {
@@ -54,33 +50,40 @@ static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
       _reward = [aReward mutableCopy];
     }
   }
-	
+  
   return self;
 }
 
-- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
+- (instancetype)initWithType:(NSString *)aType
+                      status:(NSInteger)aStatus
 {
-  return [self initWithHP:-1 opponentHP:-1 spellsCondition:nil reward:nil status:-1];
+  return [self initWithHP:-1
+               opponentHP:-1
+          spellsCondition:nil
+                   reward:nil
+                   status:-1];
 }
 
-+ (instancetype)battleConditionResponseWithHP:(int)aHP
-                                   opponentHP:(int)anOpponentHP
++ (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
+                                   opponentHP:(NSInteger)anOpponentHP
                               spellsCondition:(NSDictionary *)aSpellsCondition
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus
 {
-	return [[[RPGBattleConditionResponse alloc] initWithHP:aHP
+  return [[[RPGBattleConditionResponse alloc] initWithHP:aHP
                                               opponentHP:anOpponentHP
                                          spellsCondition:aSpellsCondition
                                                   reward:aReward
                                                   status:aStatus] autorelease];
 }
 
+#pragma mark - Dealloc
+
 - (void)dealloc
 {
   [_mutableSpellsCondition release];
   [_mutableReward release];
-  
   [super dealloc];
 }
+
 @end

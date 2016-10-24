@@ -8,22 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSUInteger, RPGQuestState)
-{
-  kRPGQuestStateCanTake,
-  kRPGQuestStateInProgress,
-  kRPGQuestStateDone,
-  kRPGQuestStateReviewedFalse,
-  kRPGQuestStateReviewedTrue,
-  kRPGQuestStateHide,
-  kRPGQuestStateForReview
-};
-
-extern NSString * const kRPGQuestTitle;
-extern NSString * const kRPGQuestDescription;
-extern NSString * const kRPGQuestReward;
-extern NSString * const kRPGQuestState;
-
 extern NSString * const kRPGQuestStringStateInProgress;
 extern NSString * const kRPGQuestStringStateNotReviewed;
 extern NSString * const kRPGQuestStringStateReviewedFalse;

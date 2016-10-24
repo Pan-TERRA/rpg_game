@@ -14,7 +14,7 @@ static NSString * const kRPGAuthorizationLoginResponseToken = @"token";
 static NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
 static NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
 static NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
-static NSString * const kRPGAuthorizationLoginResponseCharacters = @"characters";
+static NSString * const kRPGAuthorizationLoginResponseCharacter = @"character";
 
 @implementation RPGAuthorizationLoginResponse (Serialization)
 
@@ -28,7 +28,7 @@ static NSString * const kRPGAuthorizationLoginResponseCharacters = @"characters"
   dictionaryRepresentation[kRPGAuthorizationLoginResponseAvatar] = self.avatar;
   dictionaryRepresentation[kRPGAuthorizationLoginResponseGold] = @(self.gold);
   dictionaryRepresentation[kRPGAuthorizationLoginResponseCrystals] = @(self.crystals);
-  dictionaryRepresentation[kRPGAuthorizationLoginResponseCharacters] = [NSArray array];
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseCharacter] = self.character;
   
   return dictionaryRepresentation;
 }
@@ -40,7 +40,7 @@ static NSString * const kRPGAuthorizationLoginResponseCharacters = @"characters"
                          avatar:aDictionary[kRPGAuthorizationLoginResponseAvatar]
                            gold:[aDictionary[kRPGAuthorizationLoginResponseGold] integerValue]
                        crystals:[aDictionary[kRPGAuthorizationLoginResponseCrystals] integerValue]
-                     characters:aDictionary[kRPGAuthorizationLoginResponseCharacters]
+                     character:aDictionary[kRPGAuthorizationLoginResponseCharacter]
                          status:[aDictionary[kRPGAuthorizationLoginResponseStatus] integerValue]];
 }
 

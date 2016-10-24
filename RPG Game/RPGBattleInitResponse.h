@@ -10,8 +10,8 @@
 
 @interface RPGBattleInitResponse : RPGResponse
 
-@property (retain, nonatomic, readonly) NSDictionary *opponentInfo;
-@property (nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
+@property (nonatomic, retain, readonly) NSDictionary *opponentInfo;
+@property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
 #pragma mark - Init
 
@@ -21,6 +21,5 @@
 + (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
                                        currentTurn:(BOOL)aCurrentTurn
                                             status:(NSInteger)aStatus;
-
 
 @end

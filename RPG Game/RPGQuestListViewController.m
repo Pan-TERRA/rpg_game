@@ -1,35 +1,46 @@
-//
-//  RPGQuestListViewController.m
-//  RPG Game
-//
-//  Created by Максим Шульга on 10/11/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+   //
+  //  RPGQuestListViewController.m
+  //  RPG Game
+  //
+  //  Created by Максим Шульга on 10/11/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
-#import "RPGNibNames.h"
+  // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
 #import "RPGQuestViewController.h"
+#import "RPGLoginViewController.h"
+  // Network, entities
+#import "RPGNetworkManager+Quests.h"
+#import "RPGQuest+Serialization.h"
+#import "RPGQuestReward+Serialization.h"
+  // Constants
 #import "RPGQuestListState.h"
+#import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
-NSString * const kRPGQuestTitle = @"title";
-NSString * const kRPGQuestDescription = @"description";
-NSString * const kRPGQuestReward = @"reward";
-NSString * const kRPGQuestState = @"state";
+CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
 NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
 
+typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
+
 @interface RPGQuestListViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *buttonControl;
+@property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *viewStateButtonControl;
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
-@property (nonatomic, assign, readwrite) RPGQuestListState buttonLastState;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, assign, readwrite) RPGQuestListState questListState;
 @property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
-@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+@property(nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
+@property(nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
+@property(nonatomic, assign, readwrite, getter=canUpdateWhenScrollTable) BOOL updateWhenScrollTable;
 
 @end
 
@@ -37,15 +48,18 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
 
 #pragma mark - Init
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (instancetype)init
 {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  self = [super initWithNibName:kRPGQuestListViewController bundle:nil];
+  
   if (self != nil)
   {
     _takeQuestsMutableArray = [[NSMutableArray alloc] init];
     _inProgressQuestsMutableArray = [[NSMutableArray alloc] init];
     _doneQuestsMutableArray = [[NSMutableArray alloc] init];
+    _updateWhenScrollTable = YES;
   }
+  
   return self;
 }
 
@@ -56,57 +70,29 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
   [_takeQuestsMutableArray release];
   [_inProgressQuestsMutableArray release];
   [_doneQuestsMutableArray release];
+  
   [super dealloc];
 }
 
-#pragma mark - UIViewController Methods
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-    // test data
-  NSDictionary *dict1 = @{@"title":@"Quest1 title",
-                          @"description":@"Quest description. You can take this quest.",
-                          @"reward":@"10", @"state":@"0"};
-  NSDictionary *dict2 = @{@"title":@"Quest2 title",
-                          @"description":@"Quest description. You have not done this quest yet.",
-                          @"reward":@"20",
-                          @"state":@"1"};
-  NSDictionary *dict3 = @{@"title":@"Quest3 title",
-                          @"description":@"Quest description. You have done this quest. But it has not been reviewed yet.",
-                          @"reward":@"30",
-                          @"state":@"2"};
-  NSDictionary *dict4 = @{@"title":@"Quest4 title",
-                          @"description":@"Quest description. You have done this quest. It has already been reviewed. But it has FALSE state.",
-                          @"reward":@"40",
-                          @"state":@"3"};
-  NSDictionary *dict5 = @{@"title":@"Quest5 title",
-                          @"description":@"Quest description. You have done this quest. It has already been reviewed. It has TRUE state.",
-                          @"reward":@"50",
-                          @"state":@"4"};
-  
-  [self.takeQuestsMutableArray addObject:dict1];
-  [self.takeQuestsMutableArray addObject:dict1];
-  [self.inProgressQuestsMutableArray addObject:dict2];
-  [self.inProgressQuestsMutableArray addObject:dict3];
-  [self.inProgressQuestsMutableArray addObject:dict4];
-  [self.doneQuestsMutableArray addObject:dict5];
-  [self.doneQuestsMutableArray addObject:dict5];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)anAnimated
 {
-  [super viewWillAppear:animated];
+  [super viewWillAppear:anAnimated];
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
-  [self.buttonControl setSelectedSegmentIndex:self.buttonLastState];
-  [self setTableHidden:YES];
+  [self.viewStateButtonControl setSelectedSegmentIndex:self.questListState];
+  [self setViewToNormalState];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)anAnimated
 {
-  [super viewDidAppear:animated];
-  [self updateViewForState:self.buttonLastState];
+  [super viewDidAppear:anAnimated];
+  [self updateViewForState:self.questListState willReload:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -114,96 +100,99 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Event handling
+#pragma mark - UIScrollView
 
-- (IBAction)buttonControlOnClick:(UISegmentedControl *)sender
+- (void)scrollViewDidScroll:(UIScrollView *)aScrollView
 {
-  RPGQuestListState state = sender.selectedSegmentIndex;
-  
-  switch (state)
+  if (aScrollView.contentOffset.y < kRPGQuestListViewControllerRefreshIndicatorOffset)
   {
-    case kRPGQuestListTakeQuest:
-      //upload from server self.takeQuestsMutableArray
-      break;
-    case kRPGQuestListInProgressQuest:
-      //upload from server self.inProgressQuestsMutableArray
-      break;
-    case kRPGQuestListDoneQuest:
-      //upload from server self.doneQuestsMutableArray
-      break;
-    case kRPGQuestListReviewQuest:
+    if (self.canUpdateWhenScrollTable)
     {
-        // test data
-      //upload random quest from server to check
-      NSDictionary *quest = @{@"title":@"Quest6 title",
-                              @"description":@"Quest description. You have to review this quest.",
-                              @"reward":@"60",
-                              @"state":@"6"};
-      
-      [self showQuestViewWithQuest:quest];
-      break;
+      self.updateWhenScrollTable = NO;
+  
+      [self updateViewForState:self.questListState willReload:NO];
     }
   }
-  
-  if (state != kRPGQuestListReviewQuest)
-  {
-    self.buttonLastState = state;
-    [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
-  }
-  
 }
 
-- (IBAction)backButtonOnClicked:(UIButton *)sender
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  self.updateWhenScrollTable = YES;
 }
 
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+  [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+}
+
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+{
+  [self.tableView reloadData];
+}
 
 #pragma mark - UITableViewDataSourceDelegate
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)aTableView numberOfRowsInSection:(NSInteger)aSection
 {
   NSUInteger result = 0;
-  switch (self.buttonControl.selectedSegmentIndex)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
+    {
       result = [self.takeQuestsMutableArray count];
       break;
+    }
     case kRPGQuestListInProgressQuest:
+    {
       result = [self.inProgressQuestsMutableArray count];
       break;
+    }
     case kRPGQuestListDoneQuest:
+    {
       result = [self.doneQuestsMutableArray count];
       break;
+    }
+    default:
+    {
+      break;
+    }
   }
   return result;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+- (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[tableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCell];
+  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCell];
   
   if (cell == nil)
   {
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCell
                                                  owner:self
                                                options:nil];
-    
-    cell = [nib objectAtIndex:0];
+    cell = [nib firstObject];
   }
   
-  switch (self.buttonControl.selectedSegmentIndex)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
-      [cell setCellContent:[self.takeQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [cell setCellContent:[self.takeQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
     case kRPGQuestListInProgressQuest:
-      [cell setCellContent:[self.inProgressQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [cell setCellContent:[self.inProgressQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
     case kRPGQuestListDoneQuest:
-      [cell setCellContent:[self.doneQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [cell setCellContent:[self.doneQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
+    default:
+    {
+      break;
+    }
   }
   
   return cell;
@@ -211,138 +200,255 @@ NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
 
 #pragma mark - UITableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
   return 150;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGQuestListState state = self.buttonControl.selectedSegmentIndex;
-  
-  switch (state)
+  switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
-      [self showQuestViewWithQuest:[self.takeQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [self showQuestViewWithQuest:[self.takeQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
     case kRPGQuestListInProgressQuest:
-      [self showQuestViewWithQuest:[self.inProgressQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [self showQuestViewWithQuest:[self.inProgressQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
     case kRPGQuestListDoneQuest:
-      [self showQuestViewWithQuest:[self.doneQuestsMutableArray objectAtIndex:indexPath.row]];
+    {
+      [self showQuestViewWithQuest:[self.doneQuestsMutableArray objectAtIndex:anIndexPath.row]];
       break;
+    }
     default:
+    {
       break;
+    }
   }
 }
 
-#pragma mark - Quest View
+#pragma mark - View Update
 
-- (void)showQuestViewWithQuest:(NSDictionary *)viewContent
+/**
+ *  Provides data display. Invokes at viewDidAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
+ *
+ *  @param aState A view state. Depends from self.buttonControl.selectedSegmentIndex.
+ *  @param aWillReloadFlag
+ */
+- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag
 {
-  RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc]
-                                                  initWithNibName:kRPGQuestViewController
-                                                  bundle:nil] autorelease];
-  [self presentViewController:questViewController animated:YES completion:nil];
-  [questViewController setViewContent:viewContent];
+  [self setViewToWaitingForServerResponseState];
+  
+  __block typeof(self) weakSelf = self;
+  
+  fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
+  {
+    [weakSelf setViewToNormalState];
+    
+    switch (statusCode)
+    {
+      case kRPGStatusCodeOk:
+      {
+        [weakSelf processQuestsData:questList byState:aState];
+        if (aWillReloadFlag)
+        {
+          [weakSelf.tableView reloadData];
+        }
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
+        [self presentViewController:loginViewController
+                           animated:YES
+                         completion:nil];
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+  };
+  
+  [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
+                                             completionHandler:handler];
 }
 
-#pragma mark - Swipe Delete
+/**
+ *  Define if quest array should be uploaded from server.
+ *
+ *  @param aFlag A boolean value that defines action
+ */
+- (void)shouldUpdateView:(BOOL)aFlag
+{
+  if (aFlag)
+  {
+    [self.tableView reloadData];
+  }
+  else
+  {
+    [self updateViewForState:self.questListState willReload:YES];
+  }
+}
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+#pragma mark - View State
+
+- (void)setViewToWaitingForServerResponseState
+{
+//  [self.tableView setHidden:YES];
+  [self.activityIndicator setHidden:NO];
+  [self.activityIndicator startAnimating];
+}
+
+- (void)setViewToNormalState
+{
+//  [self.tableView setHidden:NO];
+  [self.activityIndicator setHidden:YES];
+  [self.activityIndicator stopAnimating];
+}
+
+#pragma mark - Quest Data Handling
+
+/**
+ *  Separate array of RPGQuest items to specific model arrays
+ *  or show with quest for review.
+ *
+ *  @param aData  An array from RPGQuestListResponse
+ *  @param aState A view state
+ */
+- (void)processQuestsData:(NSArray *)aData byState:(RPGQuestListState)aState
+{
+  switch (aState)
+  {
+    case kRPGQuestListTakeQuest:
+    {
+      // ???: Tramper question
+      self.takeQuestsMutableArray = (NSMutableArray *)aData;
+      break;
+    }
+    case kRPGQuestListInProgressQuest:
+    {
+      self.inProgressQuestsMutableArray = (NSMutableArray *)aData;
+      break;
+    }
+    case kRPGQuestListDoneQuest:
+    {
+      self.doneQuestsMutableArray = (NSMutableArray *)aData;
+      break;
+    }
+    case kRPGQuestListReviewQuest:
+    {
+      // test data
+      RPGQuest *testQuest = [RPGQuest questWithID:34343
+                                             name:@"Quest6 title"
+                                      description:@"Quest description. You have to review this quest."
+                                            state:6
+                                           reward:[RPGQuestReward questRewardWithGold:20 crystals:29 skillID:22]];
+      
+      [self showQuestViewWithQuest:testQuest];
+      //[self showQuestViewWithQuest:[aData firstObject]];
+      break;
+    }
+  }
+}
+
+#pragma mark - QuestView Display
+
+- (void)showQuestViewWithQuest:(RPGQuest *)aQuest
+{
+  RPGQuestViewController *questViewController = [[RPGQuestViewController alloc] init];
+  [self presentViewController:questViewController animated:YES completion:nil];
+  [questViewController setViewContent:aQuest];
+  [questViewController release];
+}
+
+#pragma mark - Delete On Swipe
+
+- (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
   return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)anEditingStyle forRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  if (editingStyle == UITableViewCellEditingStyleDelete)
+    //send to server that quest should be deleted
+  if (anEditingStyle == UITableViewCellEditingStyleDelete)
   {
-    switch (self.buttonControl.selectedSegmentIndex)
+    switch (self.questListState)
     {
       case kRPGQuestListTakeQuest:
-        [self.takeQuestsMutableArray removeObjectAtIndex:indexPath.row];
+      {
+        [self.takeQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
         break;
+      }
       case kRPGQuestListInProgressQuest:
-        [self.inProgressQuestsMutableArray removeObjectAtIndex:indexPath.row];
+      {
+        [self.inProgressQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
         break;
+      }
       case kRPGQuestListDoneQuest:
-        [self.doneQuestsMutableArray removeObjectAtIndex:indexPath.row];
+      {
+        [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
         break;
+      }
+      default:
+      {
+        break;
+      }
     }
-    [tableView reloadData];
+    [aTableView reloadData];
   }
 }
 
-- (void)updateViewForState:(RPGQuestListState)state
+#pragma mark - IBActions
+
+- (IBAction)viewStateButtonControlOnClick:(UISegmentedControl *)aSender
 {
-  void (^callback)(NSArray *) = ^(NSArray *questList)
+  RPGQuestListState state = aSender.selectedSegmentIndex;
+  
+  if (state != kRPGQuestListReviewQuest)
   {
-    switch (state)
-    {
-      case kRPGQuestListTakeQuest:
-        self.takeQuestsMutableArray = [questList mutableCopy];
-        break;
-      case kRPGQuestListInProgressQuest:
-        self.inProgressQuestsMutableArray = [questList mutableCopy];
-        break;
-      case kRPGQuestListDoneQuest:
-        self.doneQuestsMutableArray = [questList mutableCopy];
-        break;
-      default:
-        break;
-    }
-    [self setTableHidden:NO];
-    [self.tableView reloadData];
-  };
+    self.questListState = state;
+  }
   
   switch (state)
   {
     case kRPGQuestListTakeQuest:
-      //upload from server self.takeQuestsMutableArray
-      //pass callback to NetworkManager method
+    {
+      [self.tableView reloadData];
       break;
+    }
     case kRPGQuestListInProgressQuest:
-      //upload from server self.inProgressQuestsMutableArray
-      //pass callback to NetworkManager method
+    {
+      [self shouldUpdateView:self.isInProgressQuestsVisited];
+      self.inProgressQuestsVisited = YES;
       break;
+    }
     case kRPGQuestListDoneQuest:
-      //upload from server self.doneQuestsMutableArray
-      //pass callback to NetworkManager method
+    {
+      [self shouldUpdateView:self.isDoneQuestsVisited];
+      self.doneQuestsVisited = YES;
       break;
+    }
     case kRPGQuestListReviewQuest:
     {
-      // test data
-      //upload random quest from server to check
-      NSDictionary *quest = @{@"title":@"Quest6 title",
-                              @"description":@"Quest description. You have to review this quest.",
-                              @"reward":@"60",
-                              @"state":@"6"};
-      
-      [self showQuestViewWithQuest:quest];
+      [self updateViewForState:state willReload:YES];
+    }
+    default:
+    {
       break;
     }
   }
-  if (state != kRPGQuestListReviewQuest)
-  {
-    self.buttonLastState = state;
-    [self.tableView reloadData];
-    [self.tableView setContentOffset:CGPointZero animated:YES];
-  }
 }
 
-- (void)setTableHidden:(BOOL)flag
+- (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
-  [self.tableView setHidden:flag];
-  [self.activityIndicator setHidden:!flag];
-  if (flag)
-  {
-    [self.activityIndicator startAnimating];
-  }
-  else
-  {
-    [self.activityIndicator stopAnimating];
-  }
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

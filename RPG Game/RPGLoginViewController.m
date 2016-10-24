@@ -6,41 +6,40 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGNibNames.h"
 #import "RPGLoginViewController.h"
-#import "RPGNetworkManager+Authorization.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGMainViewController.h"
+#import "RPGNetworkManager+Authorization.h"
+#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 @interface RPGLoginViewController ()
 
-@property (assign, nonatomic) IBOutlet UILabel *errorMessageLabel;
-@property (assign, nonatomic) IBOutlet UIButton *loginButton;
-@property (assign, nonatomic) IBOutlet UITextField *emailInputField;
-@property (assign, nonatomic) IBOutlet UITextField *passwordInputField;
-@property (assign, nonatomic) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
 
 @end
 
 @implementation RPGLoginViewController
 
-#pragma mark - Init/dealloc
+#pragma mark - Init
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGLoginViewController"
-                         bundle:nil];
+  return [super initWithNibName:kRPGLoginViewController bundle:nil];
 }
 
-#pragma mark - View Controller
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
 }
 
-
-#pragma mark - Changing UI state
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -54,23 +53,26 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark Error representation
-
-- (void)showErrorText:(NSString *)text
-{
-  self.errorMessageLabel.text = text;
-  [self.errorMessageLabel setHidden:NO];
-  [self.errorMessageLabel sizeToFit];
-}
-
 #pragma mark Actions
+
+- (IBAction)editingDidChange:(UITextField *)sender
+{
+  if (self.emailInputField.text.length == 0 || self.passwordInputField.text.length == 0)
+  {
+    self.loginButton.enabled = NO;
+  }
+  else
+  {
+    self.loginButton.enabled = YES;
+  }
+}
 
 - (IBAction)forgotPasswordAction:(UIButton *)sender
 {
   
 }
 
-- (IBAction)signupAction:(UIButton *)sender
+- (IBAction)signupAction:(UIButton *)aSender
 {
   RPGRegistrationViewController *registrationViewController = [[RPGRegistrationViewController alloc] init];
   [self presentViewController:registrationViewController
@@ -79,14 +81,12 @@
   [registrationViewController release];
 }
 
-- (IBAction)loginAction:(UIButton *)sender
+- (IBAction)loginAction:(UIButton *)aSender
 {
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
   
-  if (email && password &&
-      ![email isEqualToString:@""] &&
-      ![password isEqualToString:@""])
+  if (![email isEqualToString:@""] && ![password isEqualToString:@""])
   {
     [self setViewToWaitingForServerResponseState];
     
@@ -97,29 +97,52 @@
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                              completionHandler:^(NSInteger statusCode)
      {
+       // statusCode = kRPGStatusCodeOk;
        [self setViewToNormalState];
        
-       BOOL success = (statusCode == 0);
-       if (success)
+       switch (statusCode)
        {
-         RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainMenu
-                                                                                             bundle:nil];
-         [self presentViewController:mainViewController
-                            animated:YES
-                          completion:nil];
-         [mainViewController release];
-       }
-       else
-       {
-         // TODO: add switch that depends on error code
-         [self showErrorText:@"Password or email are incorrect"];
+         case kRPGStatusCodeOk:
+         {
+           RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainView
+                                                                                               bundle:nil];
+           [self presentViewController:mainViewController
+                              animated:YES
+                            completion:nil];
+           [mainViewController release];
+           break;
+         }
+         case kRPGStatusCodeUserDoesNotExist:
+         case kRPGStatusCodeWrongPassword:
+         {
+           UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                    message:@"Invalid credentials"
+                                                                             preferredStyle:UIAlertControllerStyleAlert];
+           UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                              style:UIAlertActionStyleDefault
+                                                            handler:nil];
+           [alertController addAction:okAction];
+           [self presentViewController:alertController animated:YES completion:nil];
+           break;
+         }
+         // TODO: case kRPGStatusCodeWrongJSON - we need to resend login request
+         default:
+         {
+           break;
+         }
        }
      }];
   }
-  else
-  {
-    [self showErrorText:@"Please fill in all required fields."];
-  }
+}
+
+- (IBAction)userDoneEnteringUsername:(UITextField *)aSender
+{
+  [self.passwordInputField becomeFirstResponder];
+}
+
+- (IBAction)userDoneEnteringPassword:(UITextField *)aSender
+{
+  [self loginAction:self.loginButton];
 }
 
 @end

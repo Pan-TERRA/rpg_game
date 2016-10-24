@@ -10,15 +10,12 @@
 
 @interface RPGAuthorizationLoginRequest ()
 
-@property (copy, nonatomic, readwrite) NSString *email;
-@property (copy, nonatomic, readwrite) NSString *password;
+@property (nonatomic, copy, readwrite) NSString *email;
+@property (nonatomic, copy, readwrite) NSString *password;
 
 @end
 
 @implementation RPGAuthorizationLoginRequest
-
-@synthesize password = _password;
-@synthesize email = _email;
 
 #pragma mark - Init
 
@@ -47,12 +44,14 @@
 + (instancetype)authorizationRequestWithEmail:(NSString *)anEmail
                                      password:(NSString *)aPassword
 {
-  return [[[self alloc] initWithEmail:anEmail password:aPassword] autorelease];
+  return [[[self alloc] initWithEmail:anEmail
+                             password:aPassword] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self  initWithEmail:nil password:nil];
+  return [self initWithEmail:nil
+                    password:nil];
 }
 
 #pragma mark - Dealloc
@@ -61,10 +60,7 @@
 {
   [_email release];
   [_password release];
-  
   [super dealloc];
 }
-
-
 
 @end

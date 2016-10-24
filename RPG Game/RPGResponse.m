@@ -10,24 +10,20 @@
 
 @interface RPGResponse ()
 
-@property (copy, readwrite, nonatomic) NSString *type;
-@property (readwrite, nonatomic) NSInteger status;
+@property (nonatomic, copy, readwrite) NSString *type;
+@property (nonatomic, assign, readwrite) NSInteger status;
 
 @end
 
 @implementation RPGResponse
 
-@synthesize type = _type;
-@synthesize status = _status;
-
 #pragma mark - Init
 
-- (instancetype)initWithType:(NSString *)aType status:(NSInteger)aStatus
+- (instancetype)initWithType:(NSString *)aType
+                      status:(NSInteger)aStatus
 {
   self = [super init];
   
- 
-
   if (self != nil)
   {
     if (aType == nil)
@@ -50,14 +46,11 @@
   return [self initWithType:nil status:-1];
 }
 
-+ (instancetype)requestWithType:(NSString *)aType status:(NSInteger)aStatus
++ (instancetype)responseWithType:(NSString *)aType
+                          status:(NSInteger)aStatus
 {
-  return [[[self alloc] initWithType:aType status:aStatus] autorelease];
-}
-
-+ (instancetype)request
-{
-  return nil;
+  return [[[self alloc] initWithType:aType
+                              status:aStatus] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -65,7 +58,6 @@
 - (void)dealloc
 {
   [_type release];
-  
   [super dealloc];
 }
 

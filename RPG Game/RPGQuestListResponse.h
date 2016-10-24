@@ -13,9 +13,9 @@
 @property (nonatomic, assign, readonly) NSInteger status;
 @property (nonatomic, retain, readonly) NSArray *quests;
 
-- (instancetype)initWithStatus:(NSInteger)status
-                        quests:(NSArray *)quests NS_DESIGNATED_INITIALIZER;
-+ (instancetype)responseWithStatus:(NSInteger)status
-                        quests:(NSArray *)quests;
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                        quests:(NSArray *)aQuests NS_DESIGNATED_INITIALIZER;
++ (instancetype)responseWithStatus:(NSInteger)aStatus
+                        quests:(NSArray *)aQuests;
 
 @end

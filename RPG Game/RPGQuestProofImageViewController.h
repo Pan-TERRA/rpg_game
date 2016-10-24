@@ -10,6 +10,6 @@
 
 @interface RPGQuestProofImageViewController : UIViewController
 
-- (void)setImage:(UIImage *)image;
+- (void)setImage:(UIImage *)anImage;
 
 @end

@@ -7,89 +7,175 @@
 //
 
 #import "RPGRegistrationViewController.h"
+#import "RPGLoginViewController.h"
+#import "RPGNetworkManager+Registration.h"
+#import "RPGRegistrationRequest+Serialization.h"
+#import "RPGNibNames.h"
 
 @interface RPGRegistrationViewController ()
 
-@property (nonatomic, retain) NSArray *classPickerData;
-// Outlets
-@property (assign, nonatomic) IBOutlet UILabel *errorLabel;
-
-@property (assign, nonatomic) IBOutlet UITextField *usernameTextField;
-@property (assign, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (assign, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
-@property (assign, nonatomic) IBOutlet UITextField *characterNameTextField;
+@property (nonatomic, retain, readonly) NSArray *classPickerData;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *usernameTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 
 @end
 
 @implementation RPGRegistrationViewController
 
-#pragma mark - Init/Dealloc
+#pragma mark - Init
 
 - (instancetype)init
 {
-  self = [super initWithNibName:@"RPGRegistrationViewController"
-                         bundle:nil];
+  self = [super initWithNibName:kRPGRegistrationViewController bundle:nil];
+  
   if (self != nil)
   {
-    _classPickerData = [[NSArray alloc] initWithObjects:@"Warrior", @"Mage", nil];
+    //test data
+    _classPickerData = [@[
+                          @{ @"className": @"Researcher",
+                             @"id": @1
+                          }
+                        ] retain];
   }
+  
   return self;
 }
+
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
   [_classPickerData release];
+  
   [super dealloc];
 }
 
-#pragma mark -
+#pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+  [super viewDidLoad];
 }
 
-#pragma mark - UIPickerView data source
+#pragma mark - UIPickerViewDataSource
 
-// The number of columns of data
-- (int)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+- (int)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
 {
   return 1;
 }
 
-// The number of rows of data
-- (NSInteger)pickerView:(UIPickerView *)pickerView
-numberOfRowsInComponent:(NSInteger)component
+- (NSInteger)pickerView:(UIPickerView *)aPickerView numberOfRowsInComponent:(NSInteger)aComponent
 {
   return self.classPickerData.count;
 }
 
-// The data to return for the row and component (column) that's being passed in
-- (NSString *)pickerView:(UIPickerView *)pickerView
-             titleForRow:(NSInteger)row
-            forComponent:(NSInteger)component
+- (NSString *)pickerView:(UIPickerView *)aPickerView
+             titleForRow:(NSInteger)aRow
+            forComponent:(NSInteger)aComponent
 {
-  return self.classPickerData[row];
+  return self.classPickerData[aRow][@"className"];
 }
 
-#pragma mark - Error representation
+#pragma mark - Error Representation
 
-- (void)showErrorText:(NSString *)text
+- (void)showErrorText:(NSString *)aText
 {
-  self.errorLabel.text = text;
+  self.errorLabel.text = aText;
   [self.errorLabel setHidden:NO];
   [self.errorLabel sizeToFit];
 }
 
-#pragma mark - Actions
+#pragma mark - View State
 
-- (IBAction)submitButtonAction:(UIButton *)sender
+- (void)setViewToWaitingForServerResponseState
 {
-  if (![self.passwordTextField.text isEqualToString:self.confirmPasswordTextField.text])
+  [self.submitButton setEnabled:NO];
+  [self.submitActivityIndicator startAnimating];
+}
+
+- (void)setViewToNormalState
+{
+  [self.submitButton setEnabled:YES];
+  [self.submitActivityIndicator stopAnimating];
+}
+
+#pragma mark - IBActions
+
+- (IBAction)submitButtonAction:(UIButton *)aSender
+{
+  NSString *emailFieldText = self.emailTextField.text;
+  NSString *usernameFieldText = self.usernameTextField.text;
+  NSString *passwordFieldText = self.passwordTextField.text;
+  NSString *confirmPasswordFieldText = self.confirmPasswordTextField.text;
+  NSString *characterNameFieldText = self.characterNameTextField.text;
+  NSInteger selectedClassID = [self getSelectedClassID];
+  
+  if (!([emailFieldText isEqualToString:@""] &&
+        [usernameFieldText isEqualToString:@""] &&
+        [passwordFieldText isEqualToString:@""] &&
+        [confirmPasswordFieldText isEqualToString:@""] &&
+        [characterNameFieldText isEqualToString:@""]))
   {
-    [self showErrorText:@"Password doesn't match. Lorem ipsum if the message is too large."];
+    if ([passwordFieldText isEqualToString:confirmPasswordFieldText])
+    {
+      [self setViewToWaitingForServerResponseState];
+      
+      RPGRegistrationRequest *registrationRequest = [RPGRegistrationRequest registrationRequestWithEmail:emailFieldText
+                                                                                                password:passwordFieldText
+                                                                                                username:usernameFieldText
+                                                                                           characterName:characterNameFieldText
+                                                                                           characterType:selectedClassID];
+      
+      [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
+                                                  completionHandler:^(NSInteger statusCode)
+       {
+         [self setViewToNormalState];
+         
+         BOOL success = (statusCode == 0);
+         if (success)
+         {
+           RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
+           [self presentViewController:loginViewController
+                              animated:YES
+                            completion:nil];
+           [loginViewController release];
+         }
+         else
+         {
+           [self showErrorText:@"SOMETHING WENT WRONG"];
+         }
+       }];
+    }
+    else
+    {
+      [self showErrorText:@"Password doesn't match. Lorem ipsum if the message is too large."];
+    }
   }
+  else
+  {
+    [self showErrorText:@"Please fill in all required fields."];
+  }
+}
+
+- (IBAction)userDoneEnteringText:(UITextField *)aSender
+{
+  NSInteger nextTag = aSender.tag + 1;
+  UIResponder *nextResponder = [aSender.superview viewWithTag:nextTag];
+  [nextResponder becomeFirstResponder];
+}
+
+- (NSInteger)getSelectedClassID
+{
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 
 @end

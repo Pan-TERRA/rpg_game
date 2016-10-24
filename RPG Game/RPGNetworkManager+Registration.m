@@ -7,18 +7,16 @@
 //
 
 #import "RPGNetworkManager+Registration.h"
-
 #import "RPGRegistrationRequest+Serialization.h"
 
 @implementation RPGNetworkManager (Registration)
 
-- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
+- (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
+          completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/register"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:0];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
    NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
@@ -66,7 +64,6 @@
       {
         
       }
-      
     }
     else
     {

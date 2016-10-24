@@ -8,6 +8,7 @@
 
 #import "RPGRegistrationRequest+Serialization.h"
 
+static NSString * const kRPGRegistrationRequestUsername = @"username";
 static NSString * const kRPGRegistrationRequestEmail = @"email";
 static NSString * const kRPGRegistrationRequestPassword = @"password";
 static NSString * const kRPGRegistrationRequestCharacter = @"character";
@@ -20,6 +21,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
+  dictionaryRepresentation[kRPGRegistrationRequestUsername] = self.username;
   dictionaryRepresentation[kRPGRegistrationRequestEmail] = self.email;
   dictionaryRepresentation[kRPGRegistrationRequestPassword] = self.password;
   dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
@@ -32,6 +34,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
 {
   return [self initWithEmail:aDictionary[kRPGRegistrationRequestEmail]
                     password:aDictionary[kRPGRegistrationRequestPassword]
+                    username:aDictionary[kRPGRegistrationRequestUsername]
                characterName:aDictionary[kRPGRegistrationRequestCharacterName]
                characterType:[aDictionary[kRPGRegistrationRequestCharacterType] integerValue]];
 }

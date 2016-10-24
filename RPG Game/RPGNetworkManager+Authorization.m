@@ -7,18 +7,20 @@
 //
 
 #import "RPGNetworkManager+Authorization.h"
+#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGAuthorizationLoginResponse+Serialization.h"
+#import "RPGAuthorizationLogoutRequest+Serialization.h"
 
 @implementation RPGNetworkManager (Authorization)
 
 #pragma mark - Authorization API
 
-- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
+- (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
+       completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:0];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
@@ -69,7 +71,6 @@
         responseObject = [[[RPGAuthorizationLoginResponse alloc]
                            initWithDictionaryRepresentation:responseDictionary] autorelease];
       }
-
     }
     else
     {
@@ -102,18 +103,18 @@
 {
   RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
   
-  [self logoutWithRequest:request completionHandler:callbackBlock];
+  [self logoutWithRequest:request
+        completionHandler:callbackBlock];
   
   [request release];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest completionHandler:(void (^)(NSInteger))callbackBlock
+- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest
+        completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
   
-  NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]
-                                                              cachePolicy:NSURLRequestUseProtocolCachePolicy
-                                                          timeoutInterval:0];
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[aRequest dictionaryRepresentation]
@@ -140,13 +141,11 @@
     NSDictionary *responseDictionary = nil;
     NSInteger status = 0;
     NSError *JSONParsingError = nil;
-    
 
     if (error != nil)
     {
       status = 1;
     }
-    
     
     if (data != nil)
     {
