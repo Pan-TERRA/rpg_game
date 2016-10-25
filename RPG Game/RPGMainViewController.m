@@ -60,9 +60,8 @@
 
 - (IBAction)segueToQuests
 {
-  RPGQuestListViewController *questListViewController = [[RPGQuestListViewController alloc] init];
+  RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] init] autorelease];
   [self presentViewController:questListViewController animated:YES completion:nil];
-  [questListViewController release];
 }
 
 - (IBAction)segueToShop
@@ -82,9 +81,8 @@
 
 - (IBAction)segueToAdventures
 {
-  RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] init];
+  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] init] autorelease];
   [self presentViewController:battleViewController animated:YES completion:nil];
-  [battleViewController release];
 }
 
 - (IBAction)segueToArena
@@ -94,9 +92,8 @@
 
 - (IBAction)segueToSettings
 {
-  RPGSettingsViewController *settingsViewController = [[RPGSettingsViewController alloc] init];
+  RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] init] autorelease];
   [self presentViewController:settingsViewController animated:YES completion:nil];
-  [settingsViewController release];
 }
 
 @end
