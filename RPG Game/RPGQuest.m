@@ -39,6 +39,7 @@
     _questDescription = [aQuestDescription copy];
     _state = aState;
     _reward = [aReward retain];
+    _proofImageStringURL = [aStringURL copy];
   }
   
   return self;
