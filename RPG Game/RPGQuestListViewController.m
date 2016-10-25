@@ -353,15 +353,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      // test data
-      RPGQuest *testQuest = [RPGQuest questWithID:34343
-                                             name:@"Quest6 title"
-                                      description:@"Quest description. You have to review this quest."
-                                            state:6
-                                           reward:[RPGQuestReward questRewardWithGold:20 crystals:29 skillID:22]];
-      
-      [self showQuestViewWithQuest:testQuest];
-      //[self showQuestViewWithQuest:[aData firstObject]];
+      [self showQuestViewWithQuest:[aData firstObject]];
       break;
     }
   }
