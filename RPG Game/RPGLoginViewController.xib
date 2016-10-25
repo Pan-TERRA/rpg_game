@@ -32,13 +32,14 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
                                     <rect key="frame" x="86" y="136" width="428" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                    <textInputTraits key="textInputTraits" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                     <connections>
                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="8lE-xe-KtE"/>
+                                        <action selector="userDoneEnteringPassword:" destination="-1" eventType="editingDidEndOnExit" id="aNE-kE-vXC"/>
                                         <outlet property="delegate" destination="-1" id="qol-z5-PNw"/>
                                     </connections>
                                 </textField>
@@ -56,13 +57,14 @@
                                         <action selector="forgotPasswordAction:" destination="-1" eventType="touchUpInside" id="8bu-GM-GSy"/>
                                     </connections>
                                 </button>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
+                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
                                     <rect key="frame" x="86" y="91" width="428" height="30"/>
                                     <nil key="textColor"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <textInputTraits key="textInputTraits"/>
+                                    <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
                                     <connections>
                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="X6M-G6-u0F"/>
+                                        <action selector="userDoneEnteringUsername:" destination="-1" eventType="editingDidEndOnExit" id="3Kx-ka-Fez"/>
                                         <outlet property="delegate" destination="-1" id="VmR-Qh-qlh"/>
                                     </connections>
                                 </textField>

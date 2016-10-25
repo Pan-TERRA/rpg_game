@@ -105,7 +105,7 @@
 
 - (IBAction)userDoneEnteringPassword:(UITextField *)aSender
 {
-  [self loginAction:self.loginButton];
+  [self loginAction:nil];
 }
 
 - (IBAction)forgotPasswordAction:(UIButton *)sender
