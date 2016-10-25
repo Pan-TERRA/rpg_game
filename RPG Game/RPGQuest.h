@@ -13,8 +13,8 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateCanTake,
   kRPGQuestStateInProgress,
   kRPGQuestStateDone,
-  kRPGQuestStateReviewedFalse,
   kRPGQuestStateReviewedTrue,
+  kRPGQuestStateReviewedFalse,
   kRPGQuestStateHide,
   kRPGQuestStateForReview
 };
