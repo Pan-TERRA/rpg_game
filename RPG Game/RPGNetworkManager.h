@@ -8,14 +8,29 @@
   
 #import <Foundation/Foundation.h>
 
+#pragma mark - API constants
+
+// General
+extern NSString * const kRPGNetworkManagerAPIHost;
+// Authorization
+extern NSString * const kRPGNetworkManagerAPILoginRoute;
+extern NSString * const kRPGNetworkManagerAPISignoutRoute;
+// Registration
+extern NSString * const kRPGNetworkManagerAPIRegisterRoute;
+// Quests
+extern NSString * const kRPGNetworkManagerAPIQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute;
+extern NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIReviewQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
+
+#pragma mark -
+
 /**
- *  Common network manager for HTTP requests. Provides authorization api, 
-    static media download, auxiliary requests.
+ *  Common network manager for HTTP requests. Provides authorization api,
+ static media download, auxiliary requests.
  */
-
 @interface RPGNetworkManager : NSObject
-
-@property (nonatomic, copy, readonly) NSString *token; // replace to RPGUserSession
 
 + (instancetype)sharedNetworkManager;
 

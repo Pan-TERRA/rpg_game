@@ -10,6 +10,7 @@
 #import "RPGAuthorizationLoginRequest+Serialization.h"
 #import "RPGAuthorizationLoginResponse+Serialization.h"
 #import "RPGAuthorizationLogoutRequest+Serialization.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @implementation RPGNetworkManager (Authorization)
 
@@ -18,7 +19,9 @@
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
        completionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/login"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPILoginRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   
@@ -101,7 +104,8 @@
 
 - (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
 {
-  RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:self.token];
+  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+  RPGAuthorizationLogoutRequest *request = [[RPGAuthorizationLogoutRequest alloc] initWithToken:token];
   
   [self logoutWithRequest:request
         completionHandler:callbackBlock];
@@ -112,7 +116,9 @@
 - (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest
         completionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/signout"];
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPISignoutRoute];
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   NSError *JSONSerializationError = nil;
