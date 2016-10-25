@@ -64,7 +64,7 @@
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    _imagePickerController = picker;
+    _imagePickerController = [picker retain];
   }
   return _imagePickerController;
 }
