@@ -8,12 +8,6 @@
 
 #import "RPGQuest.h"
 
-extern NSString * const kRPGQuestID;
-extern NSString * const kRPGQuestName;
-extern NSString * const kRPGQuestDescription;
-extern NSString * const kRPGQuestState;
-extern NSString * const kRPGQuestReward;
-
 @interface RPGQuest (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
