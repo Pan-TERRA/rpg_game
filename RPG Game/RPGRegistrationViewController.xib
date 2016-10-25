@@ -119,15 +119,24 @@
                         <action selector="userDoneEnteringText:" destination="-1" eventType="editingDidEndOnExit" id="XXk-uN-tYX"/>
                     </connections>
                 </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F8h-W6-j0o">
+                    <rect key="frame" x="50" y="382" width="48" height="30"/>
+                    <state key="normal" title="Cancel"/>
+                    <connections>
+                        <action selector="cancelButtonAction:" destination="-1" eventType="touchUpInside" id="CQ7-vH-cEN"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="KPV-m7-euA" firstAttribute="trailing" secondItem="hqJ-Of-aAA" secondAttribute="trailing" id="05h-fR-Wdg"/>
                 <constraint firstItem="jg5-Of-sug" firstAttribute="top" secondItem="KPV-m7-euA" secondAttribute="bottom" constant="8" id="1Jl-Qz-8XS"/>
+                <constraint firstItem="F8h-W6-j0o" firstAttribute="leading" secondItem="kDh-Rc-IQc" secondAttribute="leading" id="3Wq-2X-5gA"/>
                 <constraint firstItem="KPV-m7-euA" firstAttribute="top" secondItem="hqJ-Of-aAA" secondAttribute="bottom" constant="8" id="3yI-FR-vqf"/>
                 <constraint firstItem="klf-Ub-H1u" firstAttribute="leading" secondItem="jg5-Of-sug" secondAttribute="leading" id="5im-UN-QZw"/>
                 <constraint firstItem="KPV-m7-euA" firstAttribute="height" secondItem="hqJ-Of-aAA" secondAttribute="height" id="6XU-bs-bZ9"/>
                 <constraint firstItem="ElW-y1-Fe1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="8Ua-dp-HOr"/>
+                <constraint firstItem="VR6-e4-NmN" firstAttribute="centerY" secondItem="F8h-W6-j0o" secondAttribute="centerY" id="8Y9-pO-Bbn"/>
                 <constraint firstItem="KPV-m7-euA" firstAttribute="top" secondItem="hqJ-Of-aAA" secondAttribute="bottom" constant="8" id="9wZ-ho-mHA"/>
                 <constraint firstItem="jg5-Of-sug" firstAttribute="leading" secondItem="KPV-m7-euA" secondAttribute="leading" id="BjJ-yV-sjf"/>
                 <constraint firstItem="hqJ-Of-aAA" firstAttribute="top" secondItem="ElW-y1-Fe1" secondAttribute="bottom" constant="29" id="DhU-Dy-Oc0"/>
