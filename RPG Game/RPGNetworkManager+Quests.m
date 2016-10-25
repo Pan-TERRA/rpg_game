@@ -198,4 +198,9 @@
   [session finishTasksAndInvalidate];
 }
 
+- (void)addProofWithRequest:(RPGQuestRequest *)aRequest imageData:(NSData *)imageData completionHandler:(void (^)(NSInteger status))callbackBlock
+{
+
+}
+
 @end
