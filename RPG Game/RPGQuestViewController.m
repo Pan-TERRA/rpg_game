@@ -245,6 +245,19 @@
   self.stateLabel.text = kRPGQuestStringStateNotReviewed;
   
   //send image to server
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    BOOL success = (status == 0);
+    if (success)
+    {
+      
+    }
+  };
+  
+  NSData *data = UIImagePNGRepresentation(chosenImage);
+  RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
+  
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
