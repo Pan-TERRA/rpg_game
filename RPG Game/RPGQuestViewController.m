@@ -81,6 +81,33 @@
   [self.proofImageView addGestureRecognizer:tapGesture];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+  switch (self.state)
+  {
+    case kRPGQuestStateDone:
+    case kRPGQuestStateReviewedFalse:
+    case kRPGQuestStateForReview:
+    case kRPGQuestStateReviewedTrue:
+    {
+      void (^handler)(NSData *) = ^void(NSData *imageData)
+      {
+        self.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
+      };
+      //test data
+      NSURL *imageURL = [NSURL URLWithString:@"http://10.55.33.31:8000/uploads/proofs/25/1.jpg"];
+      //NSURL *imageURL = [NSURL URLWithString:self.proofImageStringURL];
+      [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+      break;
+    }
+    default:
+    {
+      break;
+    }
+  }
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -139,23 +166,6 @@
     case kRPGQuestStateReviewedTrue:
     {
       [self setStateReviewedQuest:YES];
-      break;
-    }
-    default:
-    {
-      break;
-    }
-  }
-  
-  switch (self.state)
-  {
-    case kRPGQuestStateDone:
-    case kRPGQuestStateReviewedFalse:
-    case kRPGQuestStateForReview:
-    case kRPGQuestStateReviewedTrue:
-    {
-      //upload image from server
-      //self.proofImageView.image = ...
       break;
     }
     default:
