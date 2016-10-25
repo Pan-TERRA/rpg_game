@@ -100,6 +100,16 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   [super didReceiveMemoryWarning];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
+}
+
 #pragma mark - UIScrollView
 
 - (void)scrollViewDidScroll:(UIScrollView *)aScrollView
