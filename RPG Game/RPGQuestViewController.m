@@ -32,6 +32,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 @property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
 
 @end
@@ -51,6 +52,7 @@
 - (void)dealloc
 {
   [_imagePickerController release];
+  [_proofImageStringURL release];
   [super dealloc];
 }
 
@@ -95,9 +97,7 @@
       {
         self.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
       };
-      //test data
-      NSURL *imageURL = [NSURL URLWithString:@"http://10.55.33.31:8000/uploads/proofs/25/1.jpg"];
-      //NSURL *imageURL = [NSURL URLWithString:self.proofImageStringURL];
+      NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://10.55.33.31:8000", self.proofImageStringURL]];
       [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
       break;
     }
@@ -132,6 +132,7 @@
   self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
   self.state = aQuest.state;
   self.questID = aQuest.questID;
+  self.proofImageStringURL = aQuest.proofImageStringURL;
   
   switch (self.state)
   {
