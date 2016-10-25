@@ -110,6 +110,8 @@
                               animated:YES
                             completion:nil];
            [mainViewController release];
+           [self.emailInputField setText:@""];
+           [self.passwordInputField setText:@""];
            break;
          }
          case kRPGStatusCodeUserDoesNotExist:

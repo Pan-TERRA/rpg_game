@@ -11,6 +11,7 @@
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGSFXEngine.h"
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 @interface RPGSettingsViewController ()
 
@@ -60,10 +61,35 @@
   RPGNetworkManager *networkManager = [RPGNetworkManager sharedNetworkManager];
   [networkManager logoutWithCompletionHandler:^(NSInteger status)
    {
-     NSString *message = (status == 0 ? @"Ok" : @"Something went wrong. Try to delete your iOS and install a new one");
-     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Log out" message:message preferredStyle:UIAlertControllerStyleAlert];
-     [self presentViewController:alert animated:YES completion:nil];
+     switch (status)
+     {
+       case kRPGStatusCodeOk:
+         
+         break;
+         
+       case kRPGStatusCodeWrongJSON:
+         NSLog(@"Logout: wrongJSON");
+         break;
+         
+       default:
+         break;
+     }
    }];
+  
+  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Log out"
+                                                                           message:@"Success"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                     style:UIAlertActionStyleDefault
+                                                   handler:^(UIAlertAction *action)
+                             {
+                               [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                               [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
+                               [self dismissViewControllerAnimated:YES completion:nil];
+                             }];
+  
+  [alertController addAction:okAction];
+  [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (IBAction)musicTurn:(UISwitch *)aSender
