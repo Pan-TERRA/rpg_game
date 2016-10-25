@@ -39,6 +39,16 @@
   [super viewDidLoad];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
+}
+
 #pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
