@@ -28,17 +28,20 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
 @property (nonatomic, copy, readonly) NSString *questDescription;
 @property (nonatomic, assign, readonly) RPGQuestState state;
 @property (nonatomic, retain, readonly) RPGQuestReward *reward;
+@property (nonatomic, copy, readonly) NSString *proofImageStringURL;
 
 - (instancetype)initWithID:(NSUInteger)aQuestID
                       name:(NSString *)aName
                description:(NSString *)aQuestDescription
                      state:(NSUInteger)aState
-                    reward:(RPGQuestReward *)aReward NS_DESIGNATED_INITIALIZER;
+                    reward:(RPGQuestReward *)aReward
+       proofImageStringURL:(NSString *)aStringURL NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)questWithID:(NSUInteger)aQuestID
                        name:(NSString *)aName
                 description:(NSString *)aQuestDescription
                       state:(NSUInteger)aState
-                     reward:(RPGQuestReward *)aReward;
+                     reward:(RPGQuestReward *)aReward
+        proofImageStringURL:(NSString *)aStringURL;
 
 @end
