@@ -38,9 +38,7 @@
 //                                                                  autorelease];
 //  [self.window setRootViewController:registrationViewController];
  
-  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
-                                                 initWithNibName:@"RPGLoginViewController"
-                                                          bundle:nil];
+  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
   self.loginViewController = loginViewController;
   [self.window setRootViewController:loginViewController];
   
