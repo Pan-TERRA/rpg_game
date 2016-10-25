@@ -13,19 +13,19 @@
 #import <OpenAL/al.h>
 #import <OpenAL/alc.h>
 
-@interface CMOpenALSound : NSObject 
+@interface CMOpenALSound : NSObject
 {
-	ALuint			bufferID;		
-	ALuint			sourceID;			//base source ID
-	ALdouble		duration;			//duration of the sound in seconds
-	ALfloat			volume;				//volume [0 - 1]
-	ALfloat			pitch;				//speed
-	
-	ALenum			error;				
-	ALvoid			*bufferData;		//holds the actual sound data
-
-	NSMutableArray	*temporarySounds;	//holds source IDs to temporary sounds (sounds played when the base source was busy)
-	NSString		*sourceFileName;
+  ALuint			bufferID;
+  ALuint			sourceID;			//base source ID
+  ALdouble		duration;			//duration of the sound in seconds
+  ALfloat			volume;				//volume [0 - 1]
+  ALfloat			pitch;				//speed
+  
+  ALenum			error;
+  ALvoid			*bufferData;		//holds the actual sound data
+  
+  NSMutableArray	*temporarySounds;	//holds source IDs to temporary sounds (sounds played when the base source was busy)
+  NSString		*sourceFileName;
 }
 
 @property (nonatomic, readonly) ALenum error;
