@@ -32,6 +32,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
 
 @end
 
@@ -43,6 +44,29 @@
 {
   return [super initWithNibName:kRPGQuestViewController
                          bundle:nil];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_imagePickerController release];
+  [super dealloc];
+}
+
+#pragma mark - Custom Getter
+
+- (UIImagePickerController *)pickerController
+{
+  if (_imagePickerController == nil)
+  {
+    UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imagePickerController = picker;
+  }
+  return _imagePickerController;
 }
 
 #pragma mark - UIViewController
@@ -212,11 +236,10 @@
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
 {
-  UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
-  picker.delegate = self;
-  picker.allowsEditing = YES;
-  picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-  [self presentViewController:picker animated:YES completion:nil];
+  if (self.pickerController)
+  {
+    [self presentViewController:self.pickerController animated:NO completion:nil];
+  }
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)aSender
