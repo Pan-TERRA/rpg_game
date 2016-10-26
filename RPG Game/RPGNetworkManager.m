@@ -89,6 +89,7 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
+  request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
   if ([anObject isKindOfClass:[NSDictionary class]])
@@ -105,10 +106,10 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
                                                          error:&JSONSerializationError];
   }
   
-  if (JSONSerializationError != nil)
+  if (request.HTTPBody == nil)
   {
     [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved from request"
+                             reason:@"JSON cannot be retrieved"
                            userInfo:nil] raise];
   }
   
