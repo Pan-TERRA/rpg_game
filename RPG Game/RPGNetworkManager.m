@@ -7,6 +7,9 @@
 //
 
 #import "RPGNetworkManager.h"
+#import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 static RPGNetworkManager *sharedNetworkManager = nil;
 
@@ -80,6 +83,36 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 - (id)autorelease
 {
   return self;
+}
+
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod
+{
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
+  request.HTTPMethod = aMethod;
+  NSError *JSONSerializationError = nil;
+  
+  if ([anObject isKindOfClass:[NSDictionary class]])
+  {
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+  }
+  
+	if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
+  {
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+  }
+  
+  if (JSONSerializationError != nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from request"
+                           userInfo:nil] raise];
+  }
+  
+  return request;
 }
 
 @end

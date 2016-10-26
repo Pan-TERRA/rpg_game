@@ -8,6 +8,7 @@
   
 #import <Foundation/Foundation.h>
 
+
 #pragma mark - API constants
 
 // General
@@ -33,5 +34,16 @@ extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
 @interface RPGNetworkManager : NSObject
 
 + (instancetype)sharedNetworkManager;
+
+/**
+ *  Helper method. Returns request with specific URL and HTTP method, body is JSON
+ *  presentaion of an object. Raises exception if serialization fails.
+ *
+ *  @param anObject Serializable object or NSDictionary instance
+ *  @param aMethod  HTTP method
+ *
+ *  @return
+ */
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod;
 
 @end
