@@ -28,4 +28,5 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
                      questID:[aDictionary[kRPGQuestRequestQuestID] integerValue]
                       result:[aDictionary[kRPGQuestReviewRequestResult] boolValue]];
 }
+
 @end
