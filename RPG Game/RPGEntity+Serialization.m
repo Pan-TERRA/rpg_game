@@ -9,7 +9,7 @@
 #import "RPGEntity+Serialization.h"
 
 NSString * const kRPGEntityName = @"name";
-NSString * const kRPGEntityHP = @"HP";
+NSString * const kRPGEntityHP = @"hp";
 
 @implementation RPGEntity (Serialization)
 
