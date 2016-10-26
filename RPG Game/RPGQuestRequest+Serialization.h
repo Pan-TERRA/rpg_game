@@ -7,8 +7,9 @@
 //
 
 #import "RPGQuestRequest.h"
+#import "RPGSerializable.h"
 
-@interface RPGQuestRequest (Serialization)
+@interface RPGQuestRequest (Serialization) <RPGSerializable>
 
 - (NSDictionary *)dictionaryRepresentation;
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
