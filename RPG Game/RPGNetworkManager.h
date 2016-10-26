@@ -47,6 +47,6 @@ extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
  *
  *  @return
  */
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod;
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
 
 @end

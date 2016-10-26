@@ -88,7 +88,7 @@ NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
   return self;
 }
 
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
