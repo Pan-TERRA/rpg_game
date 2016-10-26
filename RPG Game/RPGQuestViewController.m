@@ -87,7 +87,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-  [super viewWillAppear:animated];
+  [super viewDidAppear:animated];
   switch (self.state)
   {
     case kRPGQuestStateDone:
