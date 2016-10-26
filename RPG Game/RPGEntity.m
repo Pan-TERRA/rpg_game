@@ -10,6 +10,33 @@
 
 @implementation RPGEntity
 
+#pragma mark - Init
 
+- (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP
+{
+  self = [super init];
+  
+  if (self != nil)
+  {
+    _name = [aName copy];
+    _HP = aHP;
+  }
+  
+  return self;
+}
+
++ (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP
+{
+  return [[[self alloc] initWithName:aName HP:aHP] autorelease];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_name release];
+  
+  [super dealloc];
+}
 
 @end
