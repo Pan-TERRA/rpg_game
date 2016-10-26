@@ -24,6 +24,9 @@ extern NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute;
 extern NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewQuestsRoute;
 extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
+extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
 
 #pragma mark -
 

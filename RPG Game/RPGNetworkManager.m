@@ -28,6 +28,9 @@ NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute = @"/in_progress_que
 NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute = @"/confirmed_quests";
 NSString * const kRPGNetworkManagerAPIReviewQuestsRoute = @"/review_quests";
 NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
+NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
+NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
+NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 
 #pragma mark -
 
