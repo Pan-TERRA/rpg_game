@@ -11,10 +11,11 @@
 #import "RPGBackgroundMusicController.h"
   // Misc
 #import "RPGBattleManager.h"
+#import "RPGBattle.h"
 #import "RPGSFXEngine.h"
 #import "SRWebSocket.h"
-#import "RPGBattleInitResponse+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGBattleInitResponse+Serialization.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -66,7 +67,7 @@
     }
   }
   
-  return nil;
+  return self;
 }
 
 #pragma mark - Dealloc
@@ -163,7 +164,18 @@
 
 - (void)modelDidChange:(NSNotification *)aNotification
 {
+  RPGBattle *battle = self.battleManager.battle;
+  NSInteger playerHP = battle.player.HP;
+  NSInteger opponentHP = battle.opponent.HP;
   
+    // client
+  self.player1NickName.text = battle.player.name;
+  self.player1hp.text = [@(playerHP) stringValue];
+  [self.player1hpBar setProgress:((float)playerHP / 100) animated:YES];
+    // opponent
+  self.player2NickName.text = battle.opponent.name;
+  self.player2hp.text = [@(opponentHP) stringValue];
+  [self.player2hpBar setProgress:(1 - ((float)opponentHP / 100)) animated:YES];
 }
 
 @end
