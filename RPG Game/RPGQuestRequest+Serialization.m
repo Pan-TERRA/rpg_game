@@ -8,8 +8,8 @@
 
 #import "RPGQuestRequest+Serialization.h"
 
-static NSString * const kRPGQuestRequestToken = @"token";
-static NSString * const kRPGQuestRequestQuestID = @"quest_id";
+NSString * const kRPGQuestRequestToken = @"token";
+NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 @implementation RPGQuestRequest (Serialization)
 

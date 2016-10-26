@@ -8,6 +8,9 @@
 
 #import "RPGQuestRequest.h"
 
+extern NSString * const kRPGQuestRequestToken;
+extern NSString * const kRPGQuestRequestQuestID;
+
 @interface RPGQuestRequest (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
