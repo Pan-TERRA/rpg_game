@@ -17,8 +17,6 @@
 
 @implementation RPGBattle
 
-@synthesize spells = _spells;
-
 #pragma mark - Init
 
 - (instancetype)initWithBattleInitResponse:(RPGBattleInitResponse *)aResponse
@@ -27,15 +25,33 @@
   
   if (self != nil)
   {
-    _player = [[RPGPlayer alloc] initWithSpells:<#(NSArray *)#>]
+    _player = [[RPGPlayer alloc] initWithSpells:[NSArray array]];
+    _opponent = [aResponse.opponentInfo retain];
+    _startTime = aResponse.time;
+    _currentTime = aResponse.time;
   }
+  
+  return self;
 }
 
-- (instancetype)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse {
-	
+- (instancetype)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse
+{
+  return nil;
 }
 
-- (instancetype)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse {
-	
+- (instancetype)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse
+{
+  return nil;
 }
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_player release];
+  [_opponent release];
+  
+  [super dealloc];
+}
+
 @end

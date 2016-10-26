@@ -15,10 +15,10 @@
 
 @interface RPGBattle : NSObject
 
-@property (retain, nonatomic, readonly) RPGPlayer <RPGClientEntity>*player;
-@property (retain, nonatomic, readonly) RPGPlayer *opponent;
-@property (assign, nonatomic, readonly) NSInteger *startTime;
-@property (assign, nonatomic, readonly) NSInteger *currentTime;
+@property (retain, nonatomic, readonly) RPGPlayer *player;
+@property (retain, nonatomic, readonly) RPGEntity *opponent;
+@property (assign, nonatomic, readonly) NSInteger startTime;
+@property (assign, nonatomic, readonly) NSInteger currentTime;
 
 - (instancetype)initWithBattleInitResponse:(RPGBattleInitResponse *)aResponse;
 - (instancetype)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse;
