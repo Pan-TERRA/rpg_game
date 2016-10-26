@@ -26,5 +26,6 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeNetworkManagerEmptyResponseData = 1701,
   kRPGStatusCodeNetworkManagerServerError = 1702,
   kRPGStatusCodeNetworkManagerSerializingError = 1703,
-  kRPGStatusCodeNetworkManagerNoInternetConnection = 1704
+  kRPGStatusCodeNetworkManagerNoInternetConnection = 1704,
+  kRPGStatusCodeNetworkManagerResponseObjectValidationFail = 1705
 };

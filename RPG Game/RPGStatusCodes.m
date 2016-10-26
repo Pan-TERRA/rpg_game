@@ -24,5 +24,6 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeNetworkManagerEmptyResponseData] = @"Response data is empty",
   [kRPGStatusCodeNetworkManagerServerError] = @"External server error",
   [kRPGStatusCodeNetworkManagerSerializingError] = @"Respose data serialization error",
-  [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"No Internet connection"
+  [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"No Internet connection",
+  [kRPGStatusCodeNetworkManagerResponseObjectValidationFail] = @"Response object validation failure"
 };
