@@ -11,6 +11,7 @@
 #import "RPGQuestListResponse+Serialization.h"
 #import "RPGQuestRequest+Serialization.h"
 #import "RPGQuestResponse+Serialization.h"
+#import "RPGQuestReviewRequest+Serialization.h"
 
 @implementation RPGNetworkManager (Quests)
 
@@ -316,6 +317,87 @@
     dispatch_async(dispatch_get_main_queue(), ^
     {
       callbackBlock(data);
+    });
+  }];
+  
+  [task resume];
+  
+  [session finishTasksAndInvalidate];
+}
+
+- (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock
+{
+  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/review_result"];
+  
+  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
+  
+  NSError *JSONSerializationError = nil;
+  request.HTTPMethod = @"POST";
+  
+  NSDictionary *requestDictionary = [aRequest dictionaryRepresentation];
+  request.HTTPBody = [NSJSONSerialization dataWithJSONObject:requestDictionary
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:&JSONSerializationError];
+  
+  if (JSONSerializationError != nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from request"
+                           userInfo:nil] raise];
+  }
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
+  
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  
+  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                          completionHandler:^(NSData * _Nullable data,
+                                                              NSURLResponse * _Nullable response,
+                                                              NSError * _Nullable error)
+  {
+    NSInteger status = 0;
+    NSError *JSONParsingError = nil;
+    RPGQuestResponse *responseObject = nil;
+    
+    if (error != nil)
+    {
+      status = 1;
+    }
+    
+    if (data != nil)
+    {
+      NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:0
+                                                                           error:&JSONParsingError];
+      
+      if (JSONParsingError != nil)
+      {
+        // ???: tramper question
+        status = 3;
+      }
+      else
+      {
+        responseObject = [[[RPGQuestResponse alloc]
+                           initWithDictionaryRepresentation:responseDictionary] autorelease];
+      }
+      
+    }
+    else
+    {
+      status = 2;
+    }
+    
+    if (responseObject == nil)
+    {
+      status = 4;
+    }
+    
+    status = (status != 0) ? status : responseObject.status;
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      callbackBlock(status);
     });
   }];
   
