@@ -15,8 +15,21 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeOk,
   kRPGStatusCodeWrongJSON,
   kRPGStatusCodeUserDoesNotExist,
+  kRPGStatusCodeWrongEmail,
   kRPGStatusCodeWrongPassword,
   kRPGStatusCodeWrongToken,
   kRPGStatusCodeUsernameIsAlreadyTaken,
-  kRPGStatusCodeEmailIsAlreadyTaken
+  kRPGStatusCodeEmailIsAlreadyTaken,
+  kRPGStatusCodeAlreadyOnline,
+  kRPGStatusCodeUserHasNoSuchCharacter,
+  kRPGStatusCodeSkillWithSuchIDNotFound,
+  kRPGStatusCodeNotYourTurn,
+  kRPGStatusCodeSkillOnCooldownOrDoesNotExist,
+  kRPGStatusCodeRunOutOfTime,
+  kRPGStatusCodeQuestAlreadyInProgress,
+  kRPGStatusCodeServerDidNotGetFile,
+  kRPGStatusCodeUserHasNoSuchQuest,
+  kRPGStatusCodeNotPicture,
+  kRPGStatusCodeTooBigPicture,
+  kRPGStatusCodeTurnAction
 };
