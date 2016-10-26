@@ -8,7 +8,7 @@
 
 #import "RPGsfxEngine.h"
 #import "CMOpenALSoundManager.h"
-
+#import "NSUserDefaults+RPGVolumeSettings.h"
 
 static RPGSFXEngine *sharedSFXEngine = nil;
 
@@ -24,97 +24,102 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 
 - (instancetype)init
 {
-    self = [super init];
-    if (self)
-    {
-        _soundManager = [CMOpenALSoundManager new];
-        _isPlaying = YES;
-    }
-    return self;
+  self = [super init];
+  if (self)
+  {
+      _soundManager = [CMOpenALSoundManager new];
+      _playing = [[NSUserDefaults standardUserDefaults] isSoundsPlaying];
+  }
+  return self;
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-    [_soundManager release];
-    [super dealloc];
+  [_soundManager release];
+  [super dealloc];
 }
 
 #pragma mark - Singleton
 
 + (instancetype)sharedSFXEngine
 {
-    @synchronized(self)
+  @synchronized(self)
+  {
+    if(sharedSFXEngine == nil)
     {
         if(sharedSFXEngine == nil)
         {
-            sharedSFXEngine = [[super allocWithZone:NULL] init];
+          sharedSFXEngine = [[super allocWithZone:NULL] init];
+          double startVolume = [[NSUserDefaults standardUserDefaults] soundsVolume];
+          [sharedSFXEngine changeVolume:startVolume];
         }
     }
-    return sharedSFXEngine;
+  }
+  return sharedSFXEngine;
 }
 
 + (id)allocWithZone:(NSZone *)zone
 {
-    return [[self sharedSFXEngine] retain];
+  return [[self sharedSFXEngine] retain];
 }
 
 - (id)copyWithZone:(NSZone *)zone
 {
-    return self;
+  return self;
 }
 
 - (id)retain
 {
-    return self;
+  return self;
 }
 
 - (NSUInteger)retainCount
 {
-    return UINT_MAX;
+  return UINT_MAX;
 }
 
 - (oneway void)release
 {
-    
+  
 }
 
 - (id)autorelease
 {
-    return self;
+  return self;
 }
 
 #pragma mark - Actions
 
 - (void)changeVolume:(double)volume
 {
-    [self.soundManager setSoundEffectsVolume:volume];
+  [self.soundManager setSoundEffectsVolume:volume];
 }
 
 - (void)toggle:(BOOL)state
 {
-    self.isPlaying = state;
+  self.playing = state;
 }
 
 - (void)playSFXNamed:(NSString *)name
 {
-    if (self.isPlaying)
-    {
-        NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
-        self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
-        [self.soundManager playSoundWithID:0];
-    }
+  if (self.isPlaying)
+  {
+    NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
+    self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
+    [self.soundManager playSoundWithID:0];
+  }
 }
 
 - (void)playSFXWithSpellID:(NSUInteger)identifier
 {
-    [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", identifier]];
+  [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", (unsigned long)identifier]];
 }
 
 - (double)getVolume
 {
-    return self.soundManager.soundEffectsVolume;
+  return self.soundManager.soundEffectsVolume;
 }
 
 @end

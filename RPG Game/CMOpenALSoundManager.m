@@ -15,244 +15,142 @@
 
 @property (nonatomic, retain) NSMutableDictionary *soundDictionary;
 @property (nonatomic) BOOL interrupted;
-@property (nonatomic) BOOL isiPodAudioPlaying;
 
 @end
-
-@interface CMOpenALSoundManager(private)
-- (NSString *) keyForSoundID:(NSUInteger)soundID;
-- (void) setupAudioCategorySilenceIpod:(BOOL)silenceIpod;
-- (void) shutdownOpenAL;
-- (BOOL) startupOpenAL;
-@end
-
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-
-//audio interruption callback...
-void interruptionListenerCallback (void *inUserData, UInt32 interruptionState) 
-{
-    CMOpenALSoundManager *soundMgr = (CMOpenALSoundManager *) inUserData;
-	
-    if (interruptionState == kAudioSessionBeginInterruption) 
-	{		
-		NSLog(@"Start audio interruption");
-		[soundMgr beginInterruption];
-		soundMgr.interrupted = YES;
-    } 
-	else if ((interruptionState == kAudioSessionEndInterruption) && soundMgr.interrupted)
-	{
-		NSLog(@"Stop audio interruption");
-		[soundMgr endInterruption];
-        soundMgr.interrupted = NO;
-    }
-}
 
 @implementation CMOpenALSoundManager
-@synthesize soundDictionary, soundFileNames, isiPodAudioPlaying, interrupted;
+@synthesize soundDictionary, soundFileNames;
 
-
-#pragma mark - Init/Dealloc
+#pragma mark - Init
 - (instancetype)init
 {
-	self = [super init];		
-	if (self)
-	{
-		self.soundDictionary = [NSMutableDictionary dictionary];
-		self.soundEffectsVolume = 1.0;
-
-		//isiPodAudioPlaying = YES; 
-		[self endInterruption];
-	}
-	return self;
+  self = [super init];
+  if (self)
+  {
+    self.soundDictionary = [NSMutableDictionary dictionary];
+    self.soundEffectsVolume = 1.0;
+    
+    [self startupOpenAL];
+  }
+  return self;
 }
 
-// start up openAL
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [self shutdownOpenAL];
+  [soundFileNames release];
+  [soundDictionary release];
+  
+  [super dealloc];
+}
+
+#pragma mark - OpenAL
 - (BOOL)startupOpenAL
-{				
-	ALCcontext	*context = NULL;
-	ALCdevice	*device = NULL;
-
-	// Initialization
-	device = alcOpenDevice(NULL); // select the "preferred device"
-	if(!device)
-    {
-        return NO;
-    }
-	// use the device to make a context
-	context = alcCreateContext(device, NULL);
-	if(!context)
-    {
-        return NO;
-    }
-	
-	// set my context to the currently active one
-	alcMakeContextCurrent(context);
-	
-//	NSLog(@"oal inited ok");
-	return YES;
+{
+  ALCcontext	*context = NULL;
+  ALCdevice	*device = NULL;
+  
+  device = alcOpenDevice(NULL); // select the "preferred device"
+  
+  if (!device)
+  {
+    return NO;
+  }
+  
+  context = alcCreateContext(device, NULL);
+  
+  if (!context)
+  {
+    return NO;
+  }
+  
+  alcMakeContextCurrent(context);
+  
+  return YES;
 }
 
-- (void) dealloc
+- (void)shutdownOpenAL
 {
-	NSLog(@"CMOpenALSoundManager dealloc");
-	
-	[self shutdownOpenAL];
-	
-	[soundFileNames release];
-	[soundDictionary release];
-
-	[super dealloc];
-}
-
-- (void) shutdownOpenAL
-{
-	
-	ALCcontext	*context = NULL;
-    ALCdevice	*device = NULL;
-	
-	//Get active context (there can only be one)
-    context = alcGetCurrentContext();
-	
-    //Get device for active context
-    device = alcGetContextsDevice(context);
-	
-    //Release context
-    alcDestroyContext(context);
-	
-    //Close device
-    alcCloseDevice(device);
+  ALCcontext	*context = NULL;
+  ALCdevice	*device = NULL;
+  
+  context = alcGetCurrentContext();
+  device = alcGetContextsDevice(context);
+  alcDestroyContext(context);
+  alcCloseDevice(device);
 }
 
 #pragma mark - Audio Session Management
 
-- (void) beginInterruption
-{		
-	NSLog(@"begin interruption");
-
-	[self shutdownOpenAL];
+- (void)beginInterruption
+{
+  NSLog(@"begin interruption");
+  [self shutdownOpenAL];
 }
 
-- (void) endInterruption
+- (void)endInterruption
 {
-	NSLog(@"end interruption");
-	[self setupAudioCategorySilenceIpod: NO];
-	[self startupOpenAL];	
-	
-	AudioSessionSetActive(YES);
-}
-
-- (void) setupAudioCategorySilenceIpod:(BOOL)silenceIpod;
-{
-	UInt32 audioIsAlreadyPlaying;
-	UInt32 propertySize = sizeof(audioIsAlreadyPlaying);
-	
-	
-	//query audio hw to see if ipod is playing...
-	OSStatus err = AudioSessionGetProperty(kAudioSessionProperty_OtherAudioIsPlaying, &propertySize, &audioIsAlreadyPlaying);	
-	if(err)
-    {
-		NSLog(@"AudioSessionGetProperty error:%i",(int)err);
-    }
-//	NSLog(@"kAudioSessionProperty_OtherAudioIsPlaying = %@", audioIsAlreadyPlaying ? @"YES" : @"NO");
+  NSLog(@"end interruption");
+  [self startupOpenAL];
 }
 
 #pragma mark - Effects Playback
-// grab the filename (key) from the filenames array
-- (NSString *) keyForSoundID:(NSUInteger)soundID
+
+- (NSString *)keyForSoundID:(NSUInteger)soundID
 {
-	if(soundID >= [soundFileNames count])
-    {
-		return nil;
-    }
-    return [soundFileNames objectAtIndex:soundID];
+  if (soundID >= [soundFileNames count])
+  {
+    return nil;
+  }
+  
+  return [soundFileNames objectAtIndex:soundID];
 }
 
-- (void) playSoundWithID:(NSUInteger)soundID
-{	
-	//get sound key
-	NSString *soundFile = [self keyForSoundID:soundID];
-	if(!soundFile)
+- (void)playSoundWithID:(NSUInteger)soundID
+{
+  //get sound key
+  NSString *soundFile = [self keyForSoundID:soundID];
+  
+  if (!soundFile)
+  {
+    return;
+  }
+  
+  CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];
+  
+  if (!sound)
+  {
+    //create a new sound
+    sound = [[CMOpenALSound alloc] initWithSoundFile:soundFile doesLoop:NO]; //this will return nil on failure
+    
+    if(!sound) //error
     {
-        return;
+      return;
     }
     
-	CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];
-	
-	if(!sound)
-	{
-		//create a new sound
-		sound = [[CMOpenALSound alloc] initWithSoundFile:soundFile doesLoop:NO]; //this will return nil on failure
-		
-		if(!sound) //error
-        {
-			return;
-        }
-		[soundDictionary setObject:sound forKey:soundFile];
-		[sound release];
-	}
-	
-	[sound play];
-	sound.volume = self.soundEffectsVolume;
-}
-
-- (void) stopSoundWithID:(NSUInteger)soundID
-{
-	NSString *soundFile = [self keyForSoundID:soundID];
-	if(!soundFile)
-    {
-        return;
-    }
-	
-	CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];		
-	[sound stop];
-}
-
-- (void) pauseSoundWithID:(NSUInteger)soundID
-{
-	NSString *soundFile = [self keyForSoundID:soundID];
-    if(!soundFile)
-    {
-        return;
-    }
-	CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];		
-	[sound stop];
-}
-
-- (void) rewindSoundWithID:(NSUInteger)soundID
-{
-	NSString *soundFile = [self keyForSoundID:soundID];
-	if(!soundFile)
-    {
-        return;
-    }
-	CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];
-	[sound rewind];
-}
-
-- (BOOL) isPlayingSoundWithID:(NSUInteger)soundID
-{
-	NSString *soundFile = [self keyForSoundID:soundID];
-	if(!soundFile)
-    {
-        return NO;
-    }
-	CMOpenALSound *sound = [soundDictionary objectForKey:soundFile];		
-	return [sound isAnyPlaying];
+    [soundDictionary setObject:sound forKey:soundFile];
+    [sound release];
+  }
+  
+  [sound play];
+  sound.volume = self.soundEffectsVolume;
 }
 
 #pragma mark - Properties
 
-- (float) soundEffectsVolume
+- (float)soundEffectsVolume
 {
-	return soundEffectsVolume;
+  return soundEffectsVolume;
 }
 
-- (void) setSoundEffectsVolume:(float) newVolume
+- (void)setSoundEffectsVolume:(float) newVolume
 {
-	soundEffectsVolume = newVolume;
-	for(NSString *key in soundDictionary)
-	{
-		((CMOpenALSound *)[soundDictionary objectForKey:key]).volume = newVolume;
-	}
+  soundEffectsVolume = newVolume;
+  for(NSString *key in soundDictionary)
+  {
+    ((CMOpenALSound *)[soundDictionary objectForKey:key]).volume = newVolume;
+  }
 }
 @end

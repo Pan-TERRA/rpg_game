@@ -14,12 +14,14 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
-@interface RPGLoginViewController ()
+@interface RPGLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign, readwrite) UITextField *activeField;
 
 @end
 
@@ -29,7 +31,31 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGLoginViewController bundle:nil];
+  self = [super initWithNibName:kRPGLoginViewController bundle:nil];
+  
+  if (self != nil)
+  {
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillShow:)
+                          name:UIKeyboardWillShowNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillHide:)
+                          name:UIKeyboardWillHideNotification
+                        object:nil];
+  }
+  
+  return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController
@@ -63,9 +89,9 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark Actions
+#pragma mark IBActions
 
-- (IBAction)editingDidChange:(UITextField *)sender
+- (IBAction)editingDidChange:(UITextField *)aSender
 {
   if (self.emailInputField.text.length == 0 || self.passwordInputField.text.length == 0)
   {
@@ -77,9 +103,62 @@
   }
 }
 
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
+{
+  [self.activeField endEditing:YES];
+}
+
+- (IBAction)userDoneEnteringUsername:(UITextField *)aSender
+{
+  [self.passwordInputField becomeFirstResponder];
+}
+
+- (IBAction)userDoneEnteringPassword:(UITextField *)aSender
+{
+  [self loginAction:nil];
+}
+
 - (IBAction)forgotPasswordAction:(UIButton *)sender
 {
   
+}
+
+
+#pragma mark - Notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGFloat adjustmentHeight = keyboardFrame.size.height;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+  
+  CGRect viewRect = self.view.frame;
+  viewRect.size.height -= keyboardFrame.size.height;
+  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
+  {
+    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+  }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)aTextField
+{
+  self.activeField = aTextField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)aTextField
+{
+  self.activeField = nil;
 }
 
 - (IBAction)signupAction:(UIButton *)aSender
@@ -120,6 +199,8 @@
                               animated:YES
                             completion:nil];
            [mainViewController release];
+           [self.emailInputField setText:@""];
+           [self.passwordInputField setText:@""];
            break;
          }
          case kRPGStatusCodeUserDoesNotExist:
@@ -145,14 +226,6 @@
   }
 }
 
-- (IBAction)userDoneEnteringUsername:(UITextField *)aSender
-{
-  [self.passwordInputField becomeFirstResponder];
-}
 
-- (IBAction)userDoneEnteringPassword:(UITextField *)aSender
-{
-  [self loginAction:self.loginButton];
-}
 
 @end

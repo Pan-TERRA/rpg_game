@@ -10,7 +10,7 @@
 
 @interface RPGSFXEngine : NSObject
 
-@property (nonatomic, assign) BOOL isPlaying;
+@property (nonatomic, assign, readwrite, getter=isPlaying) BOOL playing;
 
 + (instancetype)sharedSFXEngine;
 

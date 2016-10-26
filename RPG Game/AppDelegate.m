@@ -10,6 +10,7 @@
 #import "RPGNibNames.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
+#import "RPGSFXEngine.h"
 
 @interface AppDelegate ()
 
@@ -37,9 +38,7 @@
 //                                                                  autorelease];
 //  [self.window setRootViewController:registrationViewController];
  
-  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc]
-                                                 initWithNibName:@"RPGLoginViewController"
-                                                          bundle:nil];
+  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
   self.loginViewController = loginViewController;
   [self.window setRootViewController:loginViewController];
   
@@ -48,7 +47,7 @@
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
     
-    [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:0.5];
+    [RPGBackgroundMusicController sharedBackgroundMusicController];
     
   return YES;
 }

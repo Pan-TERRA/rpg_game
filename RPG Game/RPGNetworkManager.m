@@ -7,14 +7,29 @@
 //
 
 #import "RPGNetworkManager.h"
+#import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 static RPGNetworkManager *sharedNetworkManager = nil;
 
-@interface RPGNetworkManager ()
+#pragma mark - API constants
 
-@property (nonatomic, copy, readwrite) NSString *token;
+// General
+NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
+// Authorization
+NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
+NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
+// Registration
+NSString * const kRPGNetworkManagerAPIRegisterRoute = @"/register";
+// Quests
+NSString * const kRPGNetworkManagerAPIQuestsRoute = @"/quests";
+NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute = @"/in_progress_quests";
+NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute = @"/confirmed_quests";
+NSString * const kRPGNetworkManagerAPIReviewQuestsRoute = @"/review_quests";
+NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 
-@end
+#pragma mark -
 
 @implementation RPGNetworkManager
 
@@ -22,35 +37,20 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 - (id)init
 {
-  self = [super init];
-  
-  if (self != nil)
-  {
-    _token = [[NSString alloc] init];
-  }
-  
-  return self;
+  return [super init];
 }
 
 + (id)sharedNetworkManager
 {
-  @synchronized(self)
+  @synchronized (self)
   {
-    if(sharedNetworkManager == nil)
+    if (sharedNetworkManager == nil)
     {
       sharedNetworkManager = [[super allocWithZone:NULL] init];
     }
   }
   
   return sharedNetworkManager;
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [_token release];
-  [super dealloc];
 }
 
 #pragma mark - Singleton
@@ -83,6 +83,37 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 - (id)autorelease
 {
   return self;
+}
+
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod
+{
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
+  request.HTTPMethod = aMethod;
+  request.HTTPBody = nil;
+  NSError *JSONSerializationError = nil;
+  
+  if ([anObject isKindOfClass:[NSDictionary class]])
+  {
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+  }
+  
+	if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
+  {
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+  }
+  
+  if (request.HTTPBody == nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved"
+                           userInfo:nil] raise];
+  }
+  
+  return request;
 }
 
 @end

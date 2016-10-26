@@ -12,10 +12,9 @@
 #import "RPGRegistrationRequest+Serialization.h"
 #import "RPGNibNames.h"
 
-@interface RPGRegistrationViewController ()
+@interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, retain, readonly) NSArray *classPickerData;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *errorLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
@@ -24,6 +23,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign, readwrite) UITextField *activeField;
 
 @end
 
@@ -43,6 +44,15 @@
                              @"id": @1
                           }
                         ] retain];
+    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillShow:)
+                          name:UIKeyboardWillShowNotification
+                        object:nil];
+    [defaultCenter addObserver:self
+                      selector:@selector(keyboardWillHide:)
+                          name:UIKeyboardWillHideNotification
+                        object:nil];
   }
   
   return self;
@@ -53,6 +63,7 @@
 - (void)dealloc
 {
   [_classPickerData release];
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
   
   [super dealloc];
 }
@@ -81,7 +92,8 @@
   return 1;
 }
 
-- (NSInteger)pickerView:(UIPickerView *)aPickerView numberOfRowsInComponent:(NSInteger)aComponent
+- (NSInteger)pickerView:(UIPickerView *)aPickerView
+numberOfRowsInComponent:(NSInteger)aComponent
 {
   return self.classPickerData.count;
 }
@@ -93,16 +105,17 @@
   return self.classPickerData[aRow][@"className"];
 }
 
-#pragma mark - Error Representation
+#pragma mark Error Representation
 
 - (void)showErrorText:(NSString *)aText
 {
-  self.errorLabel.text = aText;
-  [self.errorLabel setHidden:NO];
-  [self.errorLabel sizeToFit];
+//  self.errorLabel.text = aText;
+//  [self.errorLabel setHidden:NO];
+//  [self.errorLabel sizeToFit];
+  
 }
 
-#pragma mark - View State
+#pragma mark View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -116,7 +129,7 @@
   [self.submitActivityIndicator stopAnimating];
 }
 
-#pragma mark - IBActions
+#pragma mark IBActions
 
 - (IBAction)submitButtonAction:(UIButton *)aSender
 {
@@ -174,6 +187,11 @@
   }
 }
 
+- (IBAction)cancelButtonAction:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
   NSInteger nextTag = aSender.tag + 1;
@@ -181,11 +199,54 @@
   [nextResponder becomeFirstResponder];
 }
 
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
+{
+  [self.activeField endEditing:YES];
+
+}
+
 - (NSInteger)getSelectedClassID
 {
   NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
   
   return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
+}
+
+#pragma mark - Notifications
+
+- (void)keyboardWillShow:(NSNotification *)aNotification
+{
+  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+  CGFloat adjustmentHeight = keyboardFrame.size.height;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+  
+  CGRect viewRect = self.view.frame;
+  viewRect.size.height -= keyboardFrame.size.height;
+  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
+  {
+    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
+  }
+}
+
+- (void)keyboardWillHide:(NSNotification *)aNotification
+{
+  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
+  self.scrollView.contentInset = contentInsets;
+  self.scrollView.scrollIndicatorInsets = contentInsets;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)aTextField
+{
+  self.activeField = aTextField;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)aTextField
+{
+  self.activeField = nil;
 }
 
 @end
