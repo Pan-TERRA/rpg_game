@@ -15,10 +15,13 @@
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
+#import "RPGQuestRequest.h"
   // Constants
 #import "RPGQuestListState.h"
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
+
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
@@ -378,24 +381,25 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)anEditingStyle forRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-    //send to server that quest should be deleted
   if (anEditingStyle == UITableViewCellEditingStyleDelete)
   {
-    switch (self.questListState)
+    NSUInteger questID = 0;
+    RPGQuestListState state = self.questListState;
+    switch (state)
     {
       case kRPGQuestListTakeQuest:
       {
-        [self.takeQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+        questID = ((RPGQuest *)[self.takeQuestsMutableArray objectAtIndex:anIndexPath.row]).questID;
         break;
       }
       case kRPGQuestListInProgressQuest:
       {
-        [self.inProgressQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+        questID = ((RPGQuest *)[self.inProgressQuestsMutableArray objectAtIndex:anIndexPath.row]).questID;
         break;
       }
       case kRPGQuestListDoneQuest:
       {
-        [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+        questID = ((RPGQuest *)[self.doneQuestsMutableArray objectAtIndex:anIndexPath.row]).questID;
         break;
       }
       default:
@@ -403,7 +407,49 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         break;
       }
     }
-    [aTableView reloadData];
+    
+    void (^handler)(NSInteger) = ^void(NSInteger status)
+    {
+      BOOL success = (status == 0);
+      if (success)
+      {
+        switch (state)
+        {
+          case kRPGQuestListTakeQuest:
+          {
+            [self.takeQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+            break;
+          }
+          case kRPGQuestListInProgressQuest:
+          {
+            [self.inProgressQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+            break;
+          }
+          case kRPGQuestListDoneQuest:
+          {
+            [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
+            break;
+          }
+          default:
+          {
+            break;
+          }
+        }
+        [aTableView reloadData];
+      }
+      else
+      {
+        NSString *message = @"Can't delete quest.";
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete quest" message:message preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action)
+        {
+          [alert dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        [self presentViewController:alert animated:YES completion:nil];
+      }
+    };
+    RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:questID] autorelease];
+    [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest request:request completionHandler:handler];
   }
 }
 

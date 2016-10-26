@@ -271,6 +271,7 @@
 		280A522E1DB7C5B500FF66B8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				AE7B37E21DC0C30000D105C5 /* RPGQuestAction.h */,
 				280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */,
 				280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */,
 				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
