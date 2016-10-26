@@ -99,7 +99,7 @@
       {
         self.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
       };
-      NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://10.55.33.31:8000", self.proofImageStringURL]];
+      NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
       [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
       break;
     }
