@@ -150,7 +150,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       });
       
       return;
@@ -261,7 +261,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       });
       return;
     }
