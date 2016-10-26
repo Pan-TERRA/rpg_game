@@ -7,6 +7,7 @@
 //
 
 #import "RPGPlayer.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @implementation RPGPlayer
 
@@ -16,7 +17,7 @@
 
 - (instancetype)initWithSpells:(NSArray *)aSpells
 {
-  self = [super init];
+  self = [super initWithName:[[NSUserDefaults standardUserDefaults] sessionUsername] HP:100];
   
   if (self != nil)
   {
