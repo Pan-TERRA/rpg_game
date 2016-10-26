@@ -15,6 +15,7 @@
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuestRequest+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGQuestAction.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -240,8 +241,8 @@
         
       }
     };
-    RPGQuestRequest *request = [[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID];
-    [[RPGNetworkManager sharedNetworkManager] takeQuestWithRequest:request completionHandler:handler];
+    RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+    [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
