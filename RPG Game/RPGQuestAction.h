@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#ifndef RPGQuestAction_h
-#define RPGQuestAction_h
-
-
-#endif /* RPGQuestAction_h */
+typedef NS_ENUM(NSUInteger, RPGQuestAction)
+{
+  kRPGQuestActionTakeQuest,
+  kRPGQuestActionDeleteQuest
+};
