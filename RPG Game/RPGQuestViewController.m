@@ -14,6 +14,7 @@
 #import "RPGQuestReward+Serialization.h"
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuestRequest+Serialization.h"
+#import "RPGQuestReviewRequest+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
@@ -245,14 +246,14 @@
   }
   else if (self.state == kRPGQuestStateForReview)
   {
-    //send to server that quest was done
+    [self sendQuestProofWithResult:YES];
   }
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender
 {
-  //send to server that quest wasn't done
+  [self sendQuestProofWithResult:NO];
 }
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
@@ -308,6 +309,22 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Send Quest Proof
+
+- (void)sendQuestProofWithResult:(BOOL)aResult
+{
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    BOOL success = (status == 0);
+    if (success)
+    {
+      
+    }
+  };
+  RPGQuestReviewRequest *request = [[RPGQuestReviewRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID result:aResult];
+  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
 }
 
 @end
