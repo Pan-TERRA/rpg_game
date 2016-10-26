@@ -10,4 +10,13 @@
 
 @interface RPGQuestReviewRequest : RPGQuestRequest
 
+@property (nonatomic, assign, readonly) BOOL result;
+
+- (instancetype)initWithToken:(NSString *)aToken
+                      questID:(NSUInteger)aQuestID
+                       result:(BOOL)aResult NS_DESIGNATED_INITIALIZER;
++ (instancetype)questReviewRequestWithToken:(NSString *)aToken
+                                    questID:(NSUInteger)aQuestID
+                                     result:(BOOL)aResult;
+
 @end
