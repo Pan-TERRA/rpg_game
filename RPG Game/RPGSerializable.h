@@ -6,8 +6,9 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#ifndef RPGSerializable_h
-#define RPGSerializable_h
+@protocol RPGSerializable <NSObject>
 
+- (NSDictionary *)dictionaryRepresentation;
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
 
-#endif /* RPGSerializable_h */
+@end
