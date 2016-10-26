@@ -7,63 +7,57 @@
 //
 
 #import "RPGNetworkManager+Quests.h"
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+  // Entities
 #import "RPGQuestListResponse+Serialization.h"
 #import "RPGQuestRequest+Serialization.h"
 #import "RPGQuestResponse+Serialization.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @implementation RPGNetworkManager (Quests)
 
 - (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock
 {
   NSString *requestString = nil;
-
+  NSDictionary *requestDictionary = @{ @"token" : [[NSUserDefaults standardUserDefaults] sessionToken] };
+  
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@%@",
                        kRPGNetworkManagerAPIHost,
                        kRPGNetworkManagerAPIQuestsRoute];
       break;
-      
+    }
     case kRPGQuestListInProgressQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@%@",
                        kRPGNetworkManagerAPIHost,
                        kRPGNetworkManagerAPIQuestsInProgressRoute];
       break;
-      
+    }
     case kRPGQuestListDoneQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@%@",
                        kRPGNetworkManagerAPIHost,
                        kRPGNetworkManagerAPIConfirmedQuestsRoute];
       break;
-      
+    }
     case kRPGQuestListReviewQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@%@",
                        kRPGNetworkManagerAPIHost,
                        kRPGNetworkManagerAPIReviewQuestsRoute];
       break;
- 
+    }
     default:
       break;
   }
   
-  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
-  
-  NSError *JSONSerializationError = nil;
-  request.HTTPMethod = @"POST";
-  
-  NSDictionary *requestDictionary = @{ @"token" : [[NSUserDefaults standardUserDefaults] sessionToken] };
-  request.HTTPBody = [NSJSONSerialization dataWithJSONObject:requestDictionary
-                                                     options:NSJSONWritingPrettyPrinted
-                                                       error:&JSONSerializationError];
-  
-  if (JSONSerializationError != nil)
-  {
-    [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved from request"
-                           userInfo:nil] raise];
-  }
+  NSURLRequest *request = [self requestWithObject:requestDictionary URLstring:requestString method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
@@ -75,49 +69,100 @@
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-    NSInteger status = 0;
-    NSError *JSONParsingError = nil;
-    RPGQuestListResponse *responseObject = nil;
-    
+      // something went wrong
     if (error != nil)
     {
-      status = 1;
-    }
-    
-    if (data != nil)
-    {
-      NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                         options:0
-                                                                           error:&JSONParsingError];
-      
-      if (JSONParsingError != nil)
+        // no internet connection
+      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
       {
-          // ???: tramper question
-        status = 3;
-      }
-      else
-      {
-        responseObject = [[[RPGQuestListResponse alloc]
-                           initWithDictionaryRepresentation:responseDictionary] autorelease];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
+        
+        return;
       }
       
-    }
-    else
-    {
-      status = 2;
+      NSLog(@"Network error");
+      NSLog(@"Domain: %@", error.domain);
+      NSLog(@"Error Code: %ld", error.code);
+      NSLog(@"Description: %@", [error localizedDescription]);
+      NSLog(@"Reason: %@", [error localizedFailureReason]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
+      
+      return;
     }
     
+      // server status code
+    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
+    if (responseStatusCode != 200)
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      dispatch_async(dispatch_get_main_queue(), ^
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+       });
+      
+      return;
+    }
+    
+      //data empty
+    if (data == nil)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      });
+      
+      return;
+    }
+    
+    NSError *JSONParsingError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:&JSONParsingError];
+      // serialization error
+    if (responseDictionary == nil)
+    {
+      NSLog(@"JSON Error");
+      NSLog(@"Domain: %@", JSONParsingError.domain);
+      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
+      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
+      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+      });
+      
+      return;
+    }
+    
+    RPGQuestListResponse *responseObject = nil;
+    responseObject = [[[RPGQuestListResponse alloc]
+                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+      // validation error
     if (responseObject == nil)
     {
-      status = 4;
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      });
+      
+      return;
     }
-    
-    status = (status != 0) ? status : responseObject.status;
-    
-    dispatch_async(dispatch_get_main_queue(), ^
+    else if (responseObject.status == kRPGStatusCodeOk)
     {
-      callbackBlock(status, responseObject.quests);
-    });
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(responseObject.status, responseObject.quests);
+      });
+    }
+
   }];
   
   [task resume];
@@ -131,76 +176,103 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIAcceptQuestRoute];
   
-  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
-  
-  NSError *JSONSerializationError = nil;
-  request.HTTPMethod = @"POST";
-  
-  NSDictionary *requestDictionary = [aRequest dictionaryRepresentation];
-  request.HTTPBody = [NSJSONSerialization dataWithJSONObject:requestDictionary
-                                                     options:NSJSONWritingPrettyPrinted
-                                                       error:&JSONSerializationError];
-  
-  if (JSONSerializationError != nil)
-  {
-    [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved from request"
-                           userInfo:nil] raise];
-  }
-  
+  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+ 
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-  configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
-  
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-  
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-    NSInteger status = 0;
-    NSError *JSONParsingError = nil;
-    RPGQuestResponse *responseObject = nil;
-    
+      // something went wrong
     if (error != nil)
     {
-      status = 1;
-    }
-    
-    if (data != nil)
-    {
-      NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                         options:0
-                                                                           error:&JSONParsingError];
-      
-      if (JSONParsingError != nil)
+        // no internet connection
+      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
       {
-        // ???: tramper question
-        status = 3;
-      }
-      else
-      {
-        responseObject = [[[RPGQuestResponse alloc]
-                           initWithDictionaryRepresentation:responseDictionary] autorelease];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+        });
+        return;
       }
       
-    }
-    else
-    {
-      status = 2;
+      NSLog(@"Network error");
+      NSLog(@"Domain: %@", error.domain);
+      NSLog(@"Error Code: %ld", error.code);
+      NSLog(@"Description: %@", [error localizedDescription]);
+      NSLog(@"Reason: %@", [error localizedFailureReason]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+      });
+      return;
     }
     
+      // server status code
+    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
+    if (responseStatusCode != 200)
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+      });
+      return;
+    }
+    
+      //data empty
+    if (data == nil)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+      });
+      return;
+    }
+    
+    NSError *JSONParsingError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:&JSONParsingError];
+      // serialization error
+    if (responseDictionary == nil)
+    {
+      NSLog(@"JSON Error");
+      NSLog(@"Domain: %@", JSONParsingError.domain);
+      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
+      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
+      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+      });
+      return;
+    }
+    
+    RPGQuestResponse *responseObject = nil;
+    responseObject = [[[RPGQuestResponse alloc]
+                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+      // validation error
     if (responseObject == nil)
     {
-      status = 4;
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+      });
+      return;
+    }
+    else if (responseObject.status == kRPGStatusCodeOk)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(responseObject.status);
+      });
     }
     
-    status = (status != 0) ? status : responseObject.status;
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-      callbackBlock(status);
-    });
   }];
   
   [task resume];

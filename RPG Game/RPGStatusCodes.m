@@ -10,6 +10,7 @@
 
 NSString * const RPGStatusCodeDescription[] =
 {
+    // Server Status Codes
   [kRPGStatusCodeOk] = @"OK",
   [kRPGStatusCodeWrongJSON] = @"Wrong JSON",
   [kRPGStatusCodeUserDoesNotExist] = @"User does not exist",
@@ -29,5 +30,13 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeUserHasNoSuchQuest] = @"User has no such quest",
   [kRPGStatusCodeNotPicture] = @"Not a picture",
   [kRPGStatusCodeTooBigPicture] = @"Too big picture",
-  [kRPGStatusCodeTurnAction] = @"Turn action"
+  [kRPGStatusCodeTurnAction] = @"Turn action",
+  
+    // RPGNetworkManager Status Codes
+  [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",
+  [kRPGStatusCodeNetworkManagerEmptyResponseData] = @"Response data is empty",
+  [kRPGStatusCodeNetworkManagerServerError] = @"External server error",
+  [kRPGStatusCodeNetworkManagerSerializingError] = @"Respose data serialization error",
+  [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"No Internet connection",
+  [kRPGStatusCodeNetworkManagerResponseObjectValidationFail] = @"Response object validation failure"
 };

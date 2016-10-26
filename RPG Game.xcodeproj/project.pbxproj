@@ -144,6 +144,7 @@
 		283ADD0A1DAD48DA00BDC706 /* RPGBattleInitResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleInitResponse.m; sourceTree = "<group>"; };
 		283ADD0D1DAD502200BDC706 /* RPGBattleConditionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleConditionResponse.h; sourceTree = "<group>"; };
 		283ADD0E1DAD502200BDC706 /* RPGBattleConditionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleConditionResponse.m; sourceTree = "<group>"; };
+		2852313E1DC0CBC5002F702B /* RPGSerializable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGSerializable.h; sourceTree = "<group>"; };
 		2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Authorization.h"; sourceTree = "<group>"; };
 		2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Authorization.m"; sourceTree = "<group>"; };
 		2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Registration.h"; sourceTree = "<group>"; };
@@ -500,6 +501,7 @@
 		283ADCF51DAD3C8000BDC706 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
 				28AE27161DBD161300834FBB /* Quest */,
 				28F1021E1DB7719100C969CA /* Quest List */,
 				2A8D9BA31DB163F20026A5AB /* Registration */,

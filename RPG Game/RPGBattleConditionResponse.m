@@ -46,8 +46,8 @@ static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
     {
       _HP = aHP;
       _opponentHP = anOpponentHP;
-      _spellsCondition = [aSpellsCondition mutableCopy];
-      _reward = [aReward mutableCopy];
+      _mutableSpellsCondition = [aSpellsCondition mutableCopy];
+      _mutableReward = [aReward mutableCopy];
     }
   }
   
@@ -84,6 +84,18 @@ static NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
   [_mutableSpellsCondition release];
   [_mutableReward release];
   [super dealloc];
+}
+
+#pragma mark - Accessors
+
+- (NSDictionary *)spellsCondition
+{
+  return self.mutableSpellsCondition;
+}
+
+- (NSDictionary *)reward
+{
+  return self.mutableReward;
 }
 
 @end

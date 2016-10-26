@@ -12,6 +12,7 @@ extern NSString * const RPGStatusCodeDescription[];
 
 typedef NS_ENUM(NSInteger, RPGStatusCode)
 {
+    // Server Status Codes
   kRPGStatusCodeOk,
   kRPGStatusCodeWrongJSON,
   kRPGStatusCodeUserDoesNotExist,
@@ -31,5 +32,13 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeUserHasNoSuchQuest,
   kRPGStatusCodeNotPicture,
   kRPGStatusCodeTooBigPicture,
-  kRPGStatusCodeTurnAction
+  kRPGStatusCodeTurnAction,
+  
+    // RPGNetworkManager Status Codes
+  kRPGStatusCodeNetworkManagerUnknown = 1700,
+  kRPGStatusCodeNetworkManagerEmptyResponseData = 1701,
+  kRPGStatusCodeNetworkManagerServerError = 1702,
+  kRPGStatusCodeNetworkManagerSerializingError = 1703,
+  kRPGStatusCodeNetworkManagerNoInternetConnection = 1704,
+  kRPGStatusCodeNetworkManagerResponseObjectValidationFail = 1705
 };
