@@ -21,23 +21,25 @@
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/quests"];
       break;
-      
+    }
     case kRPGQuestListInProgressQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/in_progress_quests"];
       break;
-      
+    }
     case kRPGQuestListDoneQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/confirmed_quests"];
       break;
-      
+    }
     case kRPGQuestListReviewQuest:
+    {
       requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/review_quests"];
       break;
- 
-    default:
-      break;
+    }
   }
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
@@ -117,9 +119,23 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)takeQuestWithRequest:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock
+- (void)doQuestAction:(RPGQuestAction)anAction request:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/accept_quest"];
+  NSString *requestString = nil;
+  
+  switch (anAction)
+  {
+    case kRPGQuestActionTakeQuest:
+    {
+      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/accept_quest"];
+      break;
+    }
+    case kRPGQuestActionDeleteQuest:
+    {
+      requestString = [NSString stringWithFormat:@"%@", @"http://10.55.33.28:8000/skip_quest"];
+      break;
+    }
+  }
   
   NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
   

@@ -8,13 +8,14 @@
 
 #import "RPGNetworkManager.h"
 #import "RPGQuestListState.h"
+#import "RPGQuestAction.h"
 
 @class RPGQuestRequest;
 
 @interface RPGNetworkManager (Quests)
 
 - (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock;
-- (void)takeQuestWithRequest:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock;
+- (void)doQuestAction:(RPGQuestAction)anAction request:(RPGQuestRequest *)aRequest completionHandler:(void (^)(NSInteger status))callbackBlock;
 - (void)addProofWithRequest:(RPGQuestRequest *)aRequest imageData:(NSData *)imageData completionHandler:(void (^)(NSInteger status))callbackBlock;
 - (void)getImageProofDataFromURL:(NSURL *)url completionHandler:(void (^)(NSData *imageData))callbackBlock;
 
