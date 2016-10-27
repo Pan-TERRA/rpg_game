@@ -34,7 +34,9 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
   NSInteger status = [aDictionary[kRPGResponseSerializationStatus] integerValue];
   NSInteger time = [aDictionary[kRPGBattleInitResponseOpponentTime] integerValue];
   
-  return [self initWithOpponentInfo:opponentInfo currentTurn:currentTurn  time:time status:status];
+  return [self initWithOpponentInfo:[opponentInfo autorelease]
+                        currentTurn:currentTurn
+                               time:time status:status];
 }
 
 @end

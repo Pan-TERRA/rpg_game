@@ -7,8 +7,9 @@
 //
 
 #import "RPGAuthorizationLoginResponse.h"
+#import "RPGSerializable.h"
 
-@interface RPGAuthorizationLoginResponse (Serialization)
+@interface RPGAuthorizationLoginResponse (Serialization) <RPGSerializable>
 
 - (NSDictionary *)dictionaryRepresentation;
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;

@@ -21,7 +21,8 @@
 @property (assign, nonatomic, readonly) NSInteger currentTime;
 
 - (instancetype)initWithBattleInitResponse:(RPGBattleInitResponse *)aResponse;
-- (instancetype)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse;
-- (instancetype)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse;
++ (instancetype)battleWithBattleInitResponse:(RPGBattleInitResponse *)aResponse;
+- (void)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse;
+- (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse;
 
 @end

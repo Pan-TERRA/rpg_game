@@ -19,7 +19,7 @@ extern NSString * const kRPBBattleManagerModelDidChangeNotification;
 
 - (instancetype)init;
 
-- (void)sendSpellActionRequestWithID:(NSInteger)anID;
+- (void)sendSkillActionRequestWithID:(NSInteger)anID;
 //- (void)sendBattleInitRequest;
 - (void)sendBattleCondtionRequest;
 - (void)sendTimeSynchRequest;

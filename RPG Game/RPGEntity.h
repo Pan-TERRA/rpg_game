@@ -10,8 +10,8 @@
 
 @interface RPGEntity : NSObject
 
-@property (copy, nonatomic, readonly) NSString *name;
-@property (assign, nonatomic, readonly) NSInteger HP;
+@property (copy, nonatomic, readwrite) NSString *name;
+@property (assign, nonatomic, readwrite) NSInteger HP;
 
 - (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP;
 + (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP;

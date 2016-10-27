@@ -11,32 +11,32 @@
 
 @implementation RPGPlayer
 
-@synthesize spells = _spells;
+@synthesize skills = _skills;
 
 #pragma mark - Init
 
-- (instancetype)initWithSpells:(NSArray *)aSpells
+- (instancetype)initWithSkills:(NSArray *)aSkills
 {
   self = [super initWithName:[[NSUserDefaults standardUserDefaults] sessionUsername] HP:100];
   
   if (self != nil)
   {
-    _spells = aSpells;
+    _skills = aSkills;
   }
   
   return self;
 }
 
-+ (instancetype)playerWithSpells:(NSArray *)aSpells
++ (instancetype)playerWithSkills:(NSArray *)aSkills
 {
-  return [[self alloc] initWithSpells:aSpells];
+  return [[[self alloc] initWithSkills:aSkills] autorelease];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_spells release];
+  [_skills release];
   
   [super dealloc];
 }

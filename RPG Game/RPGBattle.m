@@ -8,8 +8,11 @@
 
 #import "RPGBattle.h"
   // Entities
+#import "RPGBattleConditionResponse.h"
+#import "RPGTimeResponse.h"
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGPlayer.h"
+#import "RPGSkill+Serialization.h"
 
 @interface RPGBattle ()
 
@@ -25,7 +28,7 @@
   
   if (self != nil)
   {
-    _player = [[RPGPlayer alloc] initWithSpells:[NSArray array]];
+    _player = [[RPGPlayer alloc] initWithSkills:[NSArray array]];
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;
@@ -34,14 +37,35 @@
   return self;
 }
 
-- (instancetype)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse
++ (instancetype)battleWithBattleInitResponse:(RPGBattleInitResponse *)aResponse
 {
-  return nil;
+  return [[[self alloc] initWithBattleInitResponse:aResponse] autorelease];
 }
 
-- (instancetype)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse
+- (void)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse
 {
-  return nil;
+  self.player.HP = aResponse.HP;
+  self.opponent.HP = aResponse.opponentHP;
+  
+  for (NSDictionary *skillConditionDictionary in aResponse.skillsCondition)
+  {
+    NSInteger skillID = [skillConditionDictionary[kRPGSkillID] integerValue];
+    NSInteger cooldown = [skillConditionDictionary[kRPGSkillCooldown] integerValue];
+    
+    for (RPGSkill *skill in self.player.skills)
+    {
+      if (skillID == skill.skillID)
+      {
+        skill.cooldown = cooldown;
+      }
+    }
+  }
+  
+}
+
+- (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse
+{
+  return;
 }
 
 #pragma mark - Dealloc

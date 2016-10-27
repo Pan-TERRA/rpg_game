@@ -8,7 +8,7 @@
 
 #import "RPGTimeResponse.h"
 
-NSString *const kRPGTimeResponseType = @"TIME_RESPONSE";
+NSString * const kRPGTimeResponseType = @"TIME_RESPONSE";
 
 @interface RPGTimeResponse ()
 

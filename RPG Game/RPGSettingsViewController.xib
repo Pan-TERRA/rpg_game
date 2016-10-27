@@ -40,10 +40,10 @@
                             <color key="textColor" red="0.36317123229999998" green="0.51012030050000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-xL-M1M">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-xL-M1M">
                             <rect key="frame" x="257" y="21" width="421" height="31"/>
                             <connections>
-                                <action selector="musicVolumeChange:" destination="-1" eventType="valueChanged" id="KIh-xa-2D3"/>
+                                <action selector="musicVolumeChange:" destination="-1" eventType="valueChanged" id="cOd-TQ-wBZ"/>
                             </connections>
                         </slider>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UxP-3D-1gF">
@@ -58,10 +58,10 @@
                             <color key="textColor" red="0.36317123230691706" green="0.51012030054622759" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-Zw-wVW">
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-Zw-wVW">
                             <rect key="frame" x="257" y="120" width="421" height="31"/>
                             <connections>
-                                <action selector="soundVolumeChange:" destination="-1" eventType="valueChanged" id="MM3-Sf-X3Z"/>
+                                <action selector="soundVolumeChange:" destination="-1" eventType="valueChanged" id="yQ7-ly-ye6"/>
                             </connections>
                         </slider>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-YK-0Oa">

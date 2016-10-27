@@ -7,7 +7,7 @@
 //
 
 #import "RPGAuthorizationLoginResponse+Serialization.h"
-#import "RPGUserSessionKeys.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGAuthorizationLoginResponse ()
 
@@ -125,12 +125,13 @@
 - (void)store
 {
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  [standartUserDefaults setObject:self.username forKey:kRPGUserSessionKeyUsername];
-  [standartUserDefaults setObject:self.token forKey:kRPGUserSessionKeyToken];
-  [standartUserDefaults setObject:self.avatar forKey:kRPGUserSessionKeyAvatar];
-  [standartUserDefaults setInteger:self.gold forKey:kRPGUserSessionKeyGold];
-  [standartUserDefaults setInteger:self.crystals forKey:kRPGUserSessionKeyCrystals];
-  [standartUserDefaults setObject:self.character forKey:kRPGUserSessionKeyCharacters];
+  standartUserDefaults.sessionToken = self.token;
+  standartUserDefaults.sessionUsername = self.username;
+  standartUserDefaults.sessionAvatar = self.avatar;
+  standartUserDefaults.sessionGold = self.gold;
+  standartUserDefaults.sessionCrystals = self.crystals;
+  // TODO: characters array instead of one character
+  standartUserDefaults.sessionCharacters = [NSArray arrayWithObject:self.character];
 }
 
 @end

@@ -17,31 +17,19 @@
 
 @class CMOpenALSound;
 
-@interface CMOpenALSoundManager : NSObject 
-{	
-
-	NSMutableDictionary	*soundDictionary;	// stores our soundkeys
-	NSArray				*soundFileNames;	// array that holds the filenames for the sounds, they will be referenced by index
-	
-	BOOL				isiPodAudioPlaying;	// ipod playing music? 
-
-	float				soundEffectsVolume;
-	
-	BOOL				interrupted;
+@interface CMOpenALSoundManager : NSObject
+{
+  NSMutableDictionary	*soundDictionary;	// stores our soundkeys
+  NSArray	*soundFileNames;	// array that holds the filenames for the sounds, they will be referenced by index
+  
+  float soundEffectsVolume;
 }
 
 @property (nonatomic, retain) NSArray *soundFileNames;
-@property (nonatomic, readonly) BOOL isiPodAudioPlaying;
 @property (nonatomic) float soundEffectsVolume;
 
 - (void) beginInterruption;	// handle os sound interruptions
 - (void) endInterruption;
 
 - (void) playSoundWithID:(NSUInteger)soundID;	//id is the index in the sound filename array
-- (void) stopSoundWithID:(NSUInteger)soundID;
-- (void) pauseSoundWithID:(NSUInteger)soundID;
-- (void) rewindSoundWithID:(NSUInteger)soundID;
-
-- (BOOL) isPlayingSoundWithID:(NSUInteger)soundID;
-
 @end

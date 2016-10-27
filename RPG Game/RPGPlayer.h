@@ -10,13 +10,13 @@
 
 @protocol RPGClientEntity <NSObject>
 
-@property (retain, nonatomic, readonly) NSArray *spells;
+@property (retain, nonatomic, readonly) NSArray *skills;
 
 @end
 
 @interface RPGPlayer : RPGEntity <RPGClientEntity>
 
-- (instancetype)initWithSpells:(NSArray *)aSpells;
-+ (instancetype)playerWithSpells:(NSArray *)aSpells;
+- (instancetype)initWithSkills:(NSArray *)aSkills;
++ (instancetype)playerWithSkills:(NSArray *)aSkills;
 
 @end

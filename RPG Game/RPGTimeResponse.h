@@ -8,6 +8,8 @@
 
 #import "RPGResponse.h"
 
+extern NSString * const kRPGTimeResponseType;
+
 @interface RPGTimeResponse : RPGResponse
 
 @property (nonatomic, retain, readonly) NSDate *timestamp;
