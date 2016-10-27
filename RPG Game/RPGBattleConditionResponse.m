@@ -36,8 +36,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
   {
     if (aHP < 0 ||
         anOpponentHP < 0 ||
-        aSkillsCondition == nil ||
-        aReward == nil)
+        aSkillsCondition == nil)
     {
       [self release];
       self = nil;
