@@ -202,7 +202,7 @@
 {
   self.acceptButton.hidden = YES;
   self.denyButton.hidden = YES;
-  self.addProofButton.hidden = YES;
+  self.addProofButton.hidden = (self.state != kRPGQuestStateReviewedFalse);
   [self setProofItemsHidden:NO];
   [self setStateItemsHidden:aFlag];
 }
