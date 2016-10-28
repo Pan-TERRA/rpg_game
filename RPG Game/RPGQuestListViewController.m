@@ -133,9 +133,13 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   self.updateWhenScrollTable = YES;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+- (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate
 {
-  [scrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    // triggered only after refresh scroll
+  if (!self.canUpdateWhenScrollTable)
+  {
+    [aScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+  }
 }
 
 - (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
