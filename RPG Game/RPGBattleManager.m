@@ -10,7 +10,7 @@
   // Entities
 #import "RPGBattle.h"
 #import "RPGRequest+Serialization.h"
-#import "RPGSkillActionRequest.h"
+#import "RPGSkillActionRequest+Serialization.h"
 #import "RPGTimeResponse+Serialization.h"
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGBattleConditionResponse+Serialization.h"
@@ -62,54 +62,39 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 #pragma mark - Actions
 
+#pragma mark  Message Send
+
 - (void)sendBattleInitRequest
 {
-  NSError *JSONError = nil;
   RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitResponseType token:self.token];
   
   if (request != nil)
   {
-    NSData *data = [NSJSONSerialization dataWithJSONObject:[request dictionaryRepresentation]
-                                                   options:NSJSONWritingPrettyPrinted
-                                                     error:&JSONError];
-    
-    if (data == nil)
-    {
-      [[NSException exceptionWithName:NSInvalidArgumentException
-                               reason:@"JSON cannot be retrieved from battle init request"
-                             userInfo:nil] raise];
-    }
-    else
-    {
-      [self send:data];
-    }
+    [self sendBattleManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
   }
 }
 
 - (void)sendSkillActionRequestWithID:(NSInteger)anID
 {
-  NSError *JSONError = nil;
+  
   RPGSkillActionRequest *request = [RPGSkillActionRequest requestWithSkillID:anID
                                                                        token:self.token];
   
   if (request != nil)
   {
-    NSData *data = [NSJSONSerialization dataWithJSONObject:[request dictionaryRepresentation]
-                                                   options:NSJSONWritingPrettyPrinted
-                                                     error:&JSONError];
-    
-    if (data == nil)
-    {
-      [[NSException exceptionWithName:NSInvalidArgumentException
-                               reason:@"JSON cannot be retrieved from skill actiion request"
-                             userInfo:nil] raise];
-    }
-    else
-    {
-      [self send:data];
-    }
+    [self sendBattleManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
   }
 }
+
+
 
 - (void)sendBattleCondtionRequest
 {
@@ -119,6 +104,30 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 - (void)sendTimeSynchRequest
 {
 	
+}
+
+#pragma mark  API
+
+- (void)sendBattleManagerMessageWithObject:(id<RPGSerializable>)anObject
+{
+    // logging
+  NSLog(@"\r\nRequest:\r\n %@", [anObject dictionaryRepresentation]);
+  
+  NSError *JSONError = nil;
+  NSData *data = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
+                                                 options:NSJSONWritingPrettyPrinted
+                                                   error:&JSONError];
+  
+  if (data == nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from skill actiion request"
+                           userInfo:nil] raise];
+  }
+  else
+  {
+    [self send:data];
+  }
 }
 
 #pragma mark - SRWebSocketDelegate
@@ -142,6 +151,9 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
   // TODO: Add status validation
   if (responseDictionary != nil)
   {
+      // logging
+    NSLog(@"\r\nResponse:\r\n %@", responseDictionary);
+    
       // battle init
     if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitResponseType])
     {
