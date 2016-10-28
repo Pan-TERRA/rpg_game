@@ -298,7 +298,7 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIProofQuestRoute];
   
-  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:requestString]] autorelease];
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestString]];
   
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
@@ -307,12 +307,19 @@
   NSData *requestJSONData = [NSJSONSerialization dataWithJSONObject:requestDictionary
                                                         options:NSJSONWritingPrettyPrinted
                                                           error:&JSONSerializationError];
-  
+  if (requestJSONData == nil)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved from request"
+                           userInfo:nil] raise];
+  }
+
+    // build HTTP body
   NSString *boundary = @"---------------------------Boundary Line---------------------------";
   NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
   [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
   
-  NSMutableData *body = [[[NSMutableData alloc] init] autorelease];
+  NSMutableData *body = [NSMutableData data];
   
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[@"Content-Disposition: form-data; name=\"json\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
@@ -324,19 +331,10 @@
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 
   request.HTTPBody = body;
-  
-  if (JSONSerializationError != nil)
-  {
-    [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved from request"
-                           userInfo:nil] raise];
-  }
+  // END build HTTP body
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-  configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
-  
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-  
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
@@ -438,17 +436,18 @@
 
 - (void)getImageProofDataFromURL:(NSURL *)url completionHandler:(void (^)(NSData *imageData))callbackBlock
 {
-  NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
-  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   request.HTTPMethod = @"GET";
 
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  // ???: Tramper quetion. downloadTask
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
+      // TODO: validation
     dispatch_async(dispatch_get_main_queue(), ^
     {
       callbackBlock(data);

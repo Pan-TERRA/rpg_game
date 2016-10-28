@@ -17,6 +17,7 @@
 #import "RPGQuestReviewRequest+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestAction.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -62,9 +63,11 @@
 
 - (UIImagePickerController *)pickerController
 {
+  
+  
   if (_imagePickerController == nil)
   {
-    UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+    UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
@@ -108,6 +111,7 @@
       break;
     }
   }
+  
 }
 
 - (void)didReceiveMemoryWarning
