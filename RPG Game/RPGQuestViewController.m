@@ -263,9 +263,34 @@
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
 {
-  if (self.pickerController)
+  if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)])
   {
-    [self presentViewController:self.pickerController animated:NO completion:nil];
+    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted)
+    {
+      if (granted) {
+        if (self.pickerController)
+        {
+          [self presentViewController:self.pickerController animated:NO completion:nil];
+        }
+      }
+      else
+      {
+        NSString *message = @"Give this app permission to access your camera in your settings app!";
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No camera access"
+                                                                       message:message
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                                  style:UIAlertActionStyleCancel
+                                                handler:^(UIAlertAction *action)
+        {
+          [alert dismissViewControllerAnimated:YES completion:nil];
+        }]];
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          [self presentViewController:alert animated:YES completion:nil];
+        });
+      }
+    }];
   }
 }
 
