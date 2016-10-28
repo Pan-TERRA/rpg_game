@@ -199,8 +199,8 @@
 		288E86011DABDADB00321F4D /* RPGMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMainViewController.m; sourceTree = "<group>"; };
 		28A1F2641DC23DD400F9DF3A /* RPGSkillActionRequest+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGSkillActionRequest+Serialization.h"; sourceTree = "<group>"; };
 		28A1F2651DC23DD400F9DF3A /* RPGSkillActionRequest+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGSkillActionRequest+Serialization.m"; sourceTree = "<group>"; };
-		28A309601DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSUserDefaults+RPGVolumeSettings.h"; path = "RPG Game/NSUserDefaults+RPGVolumeSettings.h"; sourceTree = "<group>"; };
-		28A309611DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSUserDefaults+RPGVolumeSettings.m"; path = "RPG Game/NSUserDefaults+RPGVolumeSettings.m"; sourceTree = "<group>"; };
+		28A309601DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+RPGVolumeSettings.h"; sourceTree = "<group>"; };
+		28A309611DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+RPGVolumeSettings.m"; sourceTree = "<group>"; };
 		28A5A0D21DB8E95E000EF49F /* RPGNetworkManager+Quests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+Quests.h"; sourceTree = "<group>"; };
 		28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Quests.m"; sourceTree = "<group>"; };
 		28A5A0DB1DB9186B000EF49F /* RPGQuest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuest.h; sourceTree = "<group>"; };
@@ -308,7 +308,6 @@
 		280A522E1DB7C5B500FF66B8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				AE7B37E21DC0C30000D105C5 /* RPGQuestAction.h */,
 				280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */,
 				280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */,
 				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
@@ -320,13 +319,15 @@
 			name = Constants;
 			sourceTree = "<group>";
 		};
-		280A522F1DB7C60B00FF66B8 /* Session Info */ = {
+		280A522F1DB7C60B00FF66B8 /* User Defaults */ = {
 			isa = PBXGroup;
 			children = (
+				28A309601DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.h */,
+				28A309611DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m */,
 				28F102231DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.h */,
 				28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */,
 			);
-			name = "Session Info";
+			name = "User Defaults";
 			sourceTree = "<group>";
 		};
 		280A52301DB7C61C00FF66B8 /* Network Manager */ = {
@@ -532,7 +533,6 @@
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {
 			isa = PBXGroup;
 			children = (
-				280A522F1DB7C60B00FF66B8 /* Session Info */,
 				280A52301DB7C61C00FF66B8 /* Network Manager */,
 				283ADCF51DAD3C8000BDC706 /* Entities */,
 			);
@@ -543,6 +543,7 @@
 			isa = PBXGroup;
 			children = (
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				28A9151F1DC37A3C001E0F51 /* Quest Review */,
 				28AE27161DBD161300834FBB /* Quest */,
 				28F1021E1DB7719100C969CA /* Quest List */,
 				2A8D9BA31DB163F20026A5AB /* Registration */,
@@ -656,8 +657,6 @@
 		288E85C11DABDA8A00321F4D = {
 			isa = PBXGroup;
 			children = (
-				28A309601DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.h */,
-				28A309611DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m */,
 				288E85CC1DABDA8A00321F4D /* RPG Game */,
 				288E85E61DABDA8A00321F4D /* RPG GameTests */,
 				288E85F11DABDA8A00321F4D /* RPG GameUITests */,
@@ -697,11 +696,8 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
+				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
-				AE7B37E31DC0E43B00D105C5 /* RPGQuestReviewRequest.h */,
-				AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */,
-				AE7B37E61DC0E5BC00D105C5 /* RPGQuestReviewRequest+Serialization.h */,
-				AE7B37E71DC0E5BC00D105C5 /* RPGQuestReviewRequest+Serialization.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -802,6 +798,17 @@
 				28A5A0E41DB91878000EF49F /* RPGQuestReward+Serialization.m */,
 			);
 			name = Reward;
+			sourceTree = "<group>";
+		};
+		28A9151F1DC37A3C001E0F51 /* Quest Review */ = {
+			isa = PBXGroup;
+			children = (
+				AE7B37E31DC0E43B00D105C5 /* RPGQuestReviewRequest.h */,
+				AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */,
+				AE7B37E61DC0E5BC00D105C5 /* RPGQuestReviewRequest+Serialization.h */,
+				AE7B37E71DC0E5BC00D105C5 /* RPGQuestReviewRequest+Serialization.m */,
+			);
+			name = "Quest Review";
 			sourceTree = "<group>";
 		};
 		28AE27161DBD161300834FBB /* Quest */ = {
