@@ -56,8 +56,8 @@
 {
   [super viewWillAppear:anAnimated];
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%ld", [standartUserDefaults sessionGold]];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", [standartUserDefaults sessionCrystals]];
+  self.goldLabel.text = [NSString stringWithFormat:@"%d", [standartUserDefaults sessionGold]];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%d", [standartUserDefaults sessionCrystals]];
 }
 
 - (void)didReceiveMemoryWarning

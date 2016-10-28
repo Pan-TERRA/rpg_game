@@ -45,7 +45,7 @@
       
       NSLog(@"Network error");
       NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %ld", error.code);
+      NSLog(@"Error Code: %d", error.code);
       NSLog(@"Description: %@", [error localizedDescription]);
       NSLog(@"Reason: %@", [error localizedFailureReason]);
       
