@@ -98,12 +98,17 @@
     case kRPGQuestStateForReview:
     case kRPGQuestStateReviewedTrue:
     {
-      void (^handler)(NSData *) = ^void(NSData *imageData)
+      if (self.proofImageStringURL != nil)
       {
-        self.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
-      };
-      NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
-      [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+        __block typeof(self) weakSelf = self;
+        
+        void (^handler)(NSData *) = ^void(NSData *imageData)
+        {
+          weakSelf.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
+        };
+        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
+        [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+      }
       break;
     }
     default:
@@ -111,7 +116,6 @@
       break;
     }
   }
-  
 }
 
 - (void)didReceiveMemoryWarning
@@ -263,14 +267,21 @@
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
 {
+  self.addProofButton.enabled = NO;
   if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)])
   {
+    __block typeof(self) weakSelf = self;
+    
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted)
     {
-      if (granted) {
-        if (self.pickerController)
+      if (granted)
+      {
+        if (weakSelf.pickerController)
         {
-          [self presentViewController:self.pickerController animated:NO completion:nil];
+          dispatch_async(dispatch_get_main_queue(), ^
+          {
+            [weakSelf presentViewController:weakSelf.pickerController animated:NO completion:nil];
+          });
         }
       }
       else
@@ -283,13 +294,20 @@
                                                   style:UIAlertActionStyleCancel
                                                 handler:^(UIAlertAction *action)
         {
-          [alert dismissViewControllerAnimated:YES completion:nil];
+          dispatch_async(dispatch_get_main_queue(), ^
+          {
+            [alert dismissViewControllerAnimated:YES completion:nil];
+          });
         }]];
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          [self presentViewController:alert animated:YES completion:nil];
+          [weakSelf presentViewController:alert animated:YES completion:nil];
         });
       }
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        weakSelf.addProofButton.enabled = YES;
+      });
     }];
   }
 }
@@ -313,24 +331,23 @@
 {
   UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
   // !!!: leak
-  self.proofImageView.image = chosenImage;
+  __block typeof(self) weakSelf = self;
   
-  self.state = kRPGQuestStateDone;
-  [self setStateReviewedQuest:NO];
-  self.stateLabel.text = kRPGQuestStringStateNotReviewed;
-  
-  //send image to server
   void (^handler)(NSInteger) = ^void(NSInteger status)
   {
     BOOL success = (status == 0);
     if (success)
     {
-      
+      weakSelf.state = kRPGQuestStateDone;
+      [weakSelf setStateReviewedQuest:NO];
+      weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      weakSelf.proofImageView.image = chosenImage;
     }
   };
   
   NSData *data = UIImagePNGRepresentation(chosenImage);
-  RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
   [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
   
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
@@ -353,7 +370,8 @@
       
     }
   };
-  RPGQuestReviewRequest *request = [[RPGQuestReviewRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID result:aResult];
+  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questID result:aResult];
   [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
 }
 
