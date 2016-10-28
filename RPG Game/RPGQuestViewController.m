@@ -250,7 +250,8 @@
         
       }
     };
-    RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+    NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
     [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
