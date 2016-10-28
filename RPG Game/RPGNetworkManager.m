@@ -28,6 +28,9 @@ NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute = @"/in_progress_que
 NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute = @"/confirmed_quests";
 NSString * const kRPGNetworkManagerAPIReviewQuestsRoute = @"/review_quests";
 NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
+NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
+NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
+NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 
 #pragma mark -
 
@@ -85,7 +88,7 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
   return self;
 }
 
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:aString method:(NSString *)aMethod
+- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;

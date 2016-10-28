@@ -17,6 +17,8 @@
 
 @implementation RPGQuestRequest
 
+#pragma mark - Init
+
 - (instancetype)initWithToken:(NSString *)aToken
                       questID:(NSUInteger)aQuestID
 {
@@ -40,6 +42,14 @@
                               questID:(NSUInteger)aQuestID
 {
   return [[[self alloc] initWithToken:aToken questID:aQuestID] autorelease];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_token release];
+  [super dealloc];
 }
 
 @end

@@ -42,6 +42,16 @@
   //set images to money image views
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
+}
+
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];

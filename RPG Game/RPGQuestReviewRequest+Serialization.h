@@ -1,14 +1,14 @@
 //
-//  RPGQuest+Serialization.h
+//  RPGQuestReviewRequest+Serialization.h
 //  RPG Game
 //
-//  Created by Максим Шульга on 10/19/16.
+//  Created by Максим Шульга on 10/26/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGQuest.h"
+#import "RPGQuestReviewRequest.h"
 
-@interface RPGQuest (Serialization)
+@interface RPGQuestReviewRequest (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation;
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;

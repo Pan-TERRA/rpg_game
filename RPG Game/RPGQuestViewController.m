@@ -14,7 +14,9 @@
 #import "RPGQuestReward+Serialization.h"
 #import "RPGNetworkManager+Quests.h"
 #import "RPGQuestRequest+Serialization.h"
+#import "RPGQuestReviewRequest+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGQuestAction.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -32,6 +34,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
+@property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
 
 @end
 
@@ -43,6 +47,30 @@
 {
   return [super initWithNibName:kRPGQuestViewController
                          bundle:nil];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_imagePickerController release];
+  [_proofImageStringURL release];
+  [super dealloc];
+}
+
+#pragma mark - Custom Getter
+
+- (UIImagePickerController *)pickerController
+{
+  if (_imagePickerController == nil)
+  {
+    UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
+    picker.delegate = self;
+    picker.allowsEditing = YES;
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    _imagePickerController = [picker retain];
+  }
+  return _imagePickerController;
 }
 
 #pragma mark - UIViewController
@@ -57,9 +85,44 @@
   [self.proofImageView addGestureRecognizer:tapGesture];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  switch (self.state)
+  {
+    case kRPGQuestStateDone:
+    case kRPGQuestStateReviewedFalse:
+    case kRPGQuestStateForReview:
+    case kRPGQuestStateReviewedTrue:
+    {
+      void (^handler)(NSData *) = ^void(NSData *imageData)
+      {
+        self.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
+      };
+      NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
+      [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+      break;
+    }
+    default:
+    {
+      break;
+    }
+  }
+}
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
 }
 
 #pragma mark - View Content
@@ -71,6 +134,7 @@
   self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
   self.state = aQuest.state;
   self.questID = aQuest.questID;
+  self.proofImageStringURL = aQuest.proofImageStringURL;
   
   switch (self.state)
   {
@@ -112,23 +176,6 @@
       break;
     }
   }
-  
-  switch (self.state)
-  {
-    case kRPGQuestStateDone:
-    case kRPGQuestStateReviewedFalse:
-    case kRPGQuestStateForReview:
-    case kRPGQuestStateReviewedTrue:
-    {
-      //upload image from server
-      //self.proofImageView.image = ...
-      break;
-    }
-    default:
-    {
-      break;
-    }
-  }
 }
 
 #pragma mark - View State
@@ -155,7 +202,7 @@
 {
   self.acceptButton.hidden = YES;
   self.denyButton.hidden = YES;
-  self.addProofButton.hidden = YES;
+  self.addProofButton.hidden = (self.state != kRPGQuestStateReviewedFalse);
   [self setProofItemsHidden:NO];
   [self setStateItemsHidden:aFlag];
 }
@@ -195,28 +242,27 @@
         
       }
     };
-    RPGQuestRequest *request = [[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID];
-    [[RPGNetworkManager sharedNetworkManager] takeQuestWithRequest:request completionHandler:handler];
+    RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+    [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
-    //send to server that quest was done
+    [self sendQuestProofWithResult:YES];
   }
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender
 {
-  //send to server that quest wasn't done
+  [self sendQuestProofWithResult:NO];
 }
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
 {
-  UIImagePickerController *picker = [[[UIImagePickerController alloc] init] autorelease];
-  picker.delegate = self;
-  picker.allowsEditing = YES;
-  picker.sourceType = UIImagePickerControllerSourceTypeCamera;
-  [self presentViewController:picker animated:YES completion:nil];
+  if (self.pickerController)
+  {
+    [self presentViewController:self.pickerController animated:NO completion:nil];
+  }
 }
 
 - (IBAction)backButtonOnClick:(UIButton *)aSender
@@ -245,12 +291,41 @@
   self.stateLabel.text = kRPGQuestStringStateNotReviewed;
   
   //send image to server
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    BOOL success = (status == 0);
+    if (success)
+    {
+      
+    }
+  };
+  
+  NSData *data = UIImagePNGRepresentation(chosenImage);
+  RPGQuestRequest *request = [[[RPGQuestRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID] autorelease];
+  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
+  
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Send Quest Proof
+
+- (void)sendQuestProofWithResult:(BOOL)aResult
+{
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    BOOL success = (status == 0);
+    if (success)
+    {
+      
+    }
+  };
+  RPGQuestReviewRequest *request = [[RPGQuestReviewRequest alloc] initWithToken:[[NSUserDefaults standardUserDefaults] sessionToken] questID:self.questID result:aResult];
+  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
 }
 
 @end
