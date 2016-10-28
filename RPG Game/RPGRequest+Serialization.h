@@ -7,11 +7,12 @@
 //
 
 #import "RPGRequest.h"
+#import "RPGSerializable.h"
 
 extern NSString *const kRPGRequestSerializationType;
 extern NSString *const kRPGRequestSerializationToken;
 
-@interface RPGRequest (Serialization)
+@interface RPGRequest (Serialization) <RPGSerializable>
 
 - (NSDictionary *)dictionaryRepresentation;
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary;
