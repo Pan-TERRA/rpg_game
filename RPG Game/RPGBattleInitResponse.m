@@ -7,13 +7,15 @@
 //
 
 #import "RPGBattleInitResponse.h"
+#import "RPGEntity.h"
 
-static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
+NSString * const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 @interface RPGBattleInitResponse ()
 
-@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableOpponentInfo;
+@property (nonatomic, retain, readwrite) RPGEntity *opponentInfo;
 @property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
+@property (nonatomic, assign, readwrite) NSInteger time;
 
 @end
 
@@ -21,8 +23,9 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 #pragma mark - Init
 
-- (instancetype)initWithOpponentInfo:(NSDictionary *)anOpponentInfo
+- (instancetype)initWithOpponentInfo:(RPGEntity *)anOpponentInfo
                          currentTurn:(BOOL)aCurrentTurn
+                                time:(NSInteger)aTime
                               status:(NSInteger)aStatus
 {
   self = [super initWithType:kRPGBattleInitResponseType
@@ -37,7 +40,8 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
     }
     else
     {
-      _mutableOpponentInfo = [anOpponentInfo mutableCopy];
+      _time = aTime;
+      _opponentInfo = [anOpponentInfo retain];
       _currentTurn = aCurrentTurn;
     }
   }
@@ -45,12 +49,14 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
   return self;
 }
 
-+ (instancetype)battleInitResponseWithOpponentInfo:(NSDictionary *)anOpponentInfo
++ (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
                                        currentTurn:(BOOL)aCurrentTurn
+                                              time:(NSInteger)aTime
                                             status:(NSInteger)aStatus
 {
   return [[[RPGBattleInitResponse alloc] initWithOpponentInfo:anOpponentInfo
                                                   currentTurn:aCurrentTurn
+                                                         time:aTime
                                                        status:aStatus] autorelease];
 }
 
@@ -59,6 +65,7 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 {
   return [self initWithOpponentInfo:nil
                         currentTurn:0
+                               time:0
                              status:-1];
 }
 
@@ -66,7 +73,7 @@ static NSString *const kRPGBattleInitResponseType = @"BATTLE_INIT";
 
 - (void)dealloc
 {
-  [_mutableOpponentInfo release];
+  [_opponentInfo release];
   [super dealloc];
 }
 

@@ -75,9 +75,19 @@
   [super viewDidLoad];
 }
 
-#pragma mark UIPickerViewDataSource
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
+}
 
-- (int)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
+#pragma mark - UIPickerViewDataSource
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
 {
   return 1;
 }

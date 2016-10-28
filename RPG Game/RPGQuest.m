@@ -15,6 +15,7 @@
 @property (nonatomic, copy, readwrite) NSString *questDescription;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, retain, readwrite) RPGQuestReward *reward;
+@property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 
 @end
 
@@ -27,6 +28,7 @@
                description:(NSString *)aQuestDescription
                      state:(NSUInteger)aState
                     reward:(RPGQuestReward *)aReward
+       proofImageStringURL:(NSString *)aStringURL
 {
   self = [super init];
   
@@ -37,6 +39,7 @@
     _questDescription = [aQuestDescription copy];
     _state = aState;
     _reward = [aReward retain];
+    _proofImageStringURL = [aStringURL copy];
   }
   
   return self;
@@ -47,17 +50,19 @@
                 description:(NSString *)aQuestDescription
                       state:(NSUInteger)aState
                      reward:(RPGQuestReward *)aReward
+        proofImageStringURL:(NSString *)aStringURL
 {
   return [[[self alloc] initWithID:aQuestID
                               name:aName
                        description:aQuestDescription
                              state:aState
-                            reward:aReward] autorelease];
+                            reward:aReward
+               proofImageStringURL:aStringURL] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithID:0 name:nil description:nil state:0 reward:nil];
+  return [self initWithID:0 name:nil description:nil state:0 reward:nil proofImageStringURL:nil];
 }
 
 #pragma mark - Dealloc
@@ -67,6 +72,7 @@
   [_name release];
   [_questDescription release];
   [_reward release];
+  [_proofImageStringURL release];
   
   [super dealloc];
 }

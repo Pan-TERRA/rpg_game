@@ -14,7 +14,7 @@ static NSString * const kRPGAuthorizationLoginResponseToken = @"token";
 static NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
 static NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
 static NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
-static NSString * const kRPGAuthorizationLoginResponseCharacter = @"character";
+static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 @implementation RPGAuthorizationLoginResponse (Serialization)
 
@@ -35,12 +35,13 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"character";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
+  NSDictionary *character = [aDictionary[kRPGAuthorizationLoginResponseCharacter] firstObject];
   return [self initWithUsername:aDictionary[kRPGAuthorizationLoginResponseUsername]
                           token:aDictionary[kRPGAuthorizationLoginResponseToken]
                          avatar:aDictionary[kRPGAuthorizationLoginResponseAvatar]
                            gold:[aDictionary[kRPGAuthorizationLoginResponseGold] integerValue]
                        crystals:[aDictionary[kRPGAuthorizationLoginResponseCrystals] integerValue]
-                     character:aDictionary[kRPGAuthorizationLoginResponseCharacter]
+                     character:character
                          status:[aDictionary[kRPGAuthorizationLoginResponseStatus] integerValue]];
 }
 

@@ -50,6 +50,16 @@
   [super didReceiveMemoryWarning];
 }
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
+}
+
 #pragma mark - Event Handling
 
 - (IBAction)back:(id)aSender

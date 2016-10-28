@@ -11,24 +11,27 @@
 #import "RPGBackgroundMusicController.h"
   // Misc
 #import "RPGBattleManager.h"
+#import "RPGBattle.h"
 #import "RPGSFXEngine.h"
 #import "SRWebSocket.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGBattleInitResponse+Serialization.h"
   // Constants
 #import "RPGNibNames.h"
 
-@interface RPGBattleViewController () <SRWebSocketDelegate>
+@interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleManager *battleManager;
 
-  // player 1
+  // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1hp;
 @property (nonatomic, assign, readwrite) IBOutlet UIProgressView *player1hpBar;
-  // player 2
+  // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2hp;
 @property (nonatomic, assign, readwrite) IBOutlet UIProgressView *player2hpBar;
-  // spell bar
+  // Skill bar
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell1Button;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell2Button;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell3Button;
@@ -36,7 +39,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell5Button;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell6Button;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell7Button;
-  // misc
+  // Misc
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timer;
 
@@ -48,7 +51,33 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGBattleViewController bundle:nil];
+  self = [super initWithNibName:kRPGBattleViewController bundle:nil];
+  
+  if (self != nil)
+  {
+    _battleManager = [[RPGBattleManager alloc] init];
+    [_battleManager open];
+    if (_battleManager != nil)
+    {
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(modelDidChange:)
+                                                   name:kRPBBattleManagerModelDidChangeNotification
+                                                 object:_battleManager];
+      
+    }
+  }
+  
+  return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [_battleManager release];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController
@@ -58,27 +87,40 @@
   [super viewDidLoad];
   
     // SRWebsocket instance initializing
-  NSString *requestString = [NSString stringWithFormat:@"%@", @"ws://10.55.33.31:8888/ws"];
-  self.battleManager = [[RPGBattleManager alloc] initWithURL:[NSURL URLWithString:requestString]];
-  self.battleManager.delegate = self;
-  [self.battleManager open];
+  
   
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
+  [super viewWillDisappear:animated];
   [self.battleManager close];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-  
+  [super viewDidDisappear:animated];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
+  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
+  {
+    mask = UIInterfaceOrientationMaskLandscape;
+  }
+  return mask;
 }
 
 #pragma mark - IBAction
@@ -89,13 +131,13 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark  Spell Action
+#pragma mark  Skill Action
 
-- (IBAction)spell1_action:(id)aSender
+- (IBAction)spell1_action:(UIButton *)aSender
 {
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:1];
   
-  // TODO: [self.battleManager sendSpellActionRequestWithID:aSender.tag];
+  [self.battleManager sendSkillActionRequestWithID:aSender.tag];
 }
 
 - (IBAction)spell2_action:(id)aSender
@@ -128,34 +170,22 @@
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
 }
 
-#pragma mark - SRWebSocketDelegate
+#pragma mark - Notifications
 
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+- (void)modelDidChange:(NSNotification *)aNotification
 {
-  
-}
+  RPGBattle *battle = self.battleManager.battle;
 
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithData:(NSData *)data
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
-{
-  
-}
-
-- (void)webSocket:(SRWebSocket *)webSocket
-  didCloseWithCode:(NSInteger)code
-           reason:(nullable NSString *)reason
-         wasClean:(BOOL)wasClean
-{
-  
+    // client
+  NSInteger playerHP = battle.player.HP;
+  self.player1NickName.text = battle.player.name;
+  self.player1hp.text = [@(playerHP) stringValue];
+  [self.player1hpBar setProgress:((float)playerHP / 100) animated:YES];
+    // opponent
+  NSInteger opponentHP = battle.opponent.HP;
+  self.player2NickName.text = battle.opponent.name;
+  self.player2hp.text = [@(opponentHP) stringValue];
+  [self.player2hpBar setProgress:(1 - ((float)opponentHP / 100)) animated:YES];
 }
 
 @end
