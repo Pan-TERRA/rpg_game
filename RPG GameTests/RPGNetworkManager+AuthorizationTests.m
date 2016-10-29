@@ -37,6 +37,14 @@
     [super tearDown];
 }
 
+- (void)loginWithCompletionHandler:(void (^)(NSInteger))callbackBlock
+{
+  RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
+                                                                                                               password:@PASSWORD];
+  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest
+                            completionHandler:callbackBlock];
+}
+
 - (void)test_requestSharedNetworkManager_correctInstanseReturned
 {
   XCTAssertEqualObjects([self.sharedNetworkManager class], [RPGNetworkManager class]);
@@ -45,9 +53,7 @@
 - (void)testLogin_sendCorrectRequest_successCodeReturned
 {
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution (needed for asyncronious testing)"];
-  RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
-                                                                                                               password:@PASSWORD];
-  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest completionHandler:^(NSInteger statusCode)
+  [self loginWithCompletionHandler:^(NSInteger statusCode)
   {
     XCTAssertEqual(statusCode, kRPGStatusCodeOk);
     [testExpectation fulfill];
@@ -60,7 +66,8 @@
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
   RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@"kjnlwkjbwq"
                                                                                                                password:@PASSWORD];
-  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest completionHandler:^(NSInteger statusCode)
+  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest
+                            completionHandler:^(NSInteger statusCode)
   {
     XCTAssertEqual(statusCode, kRPGStatusCodeWrongEmail);
     [testExpectation fulfill];
@@ -73,7 +80,8 @@
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
   RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@"dsaf@hvsiu.wfjj"
                                                                                                                password:@PASSWORD];
-  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest completionHandler:^(NSInteger statusCode)
+  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest
+                            completionHandler:^(NSInteger statusCode)
   {
     XCTAssertEqual(statusCode, kRPGStatusCodeUserDoesNotExist);
     [testExpectation fulfill];
@@ -86,7 +94,8 @@
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
   RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
                                                                                                                password:@"ohwwhfhj"];
-  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest completionHandler:^(NSInteger statusCode)
+  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest
+                            completionHandler:^(NSInteger statusCode)
   {
     XCTAssertEqual(statusCode, kRPGStatusCodeWrongPassword);
     [testExpectation fulfill];
@@ -97,9 +106,7 @@
 - (void)testLogout_sendCorrectRequest_successCodeReturned
 {
   XCTestExpectation *loginExpectation = [self expectationWithDescription:@"finish login"];
-  RPGAuthorizationLoginRequest *authorizationLoginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
-                                                                                                               password:@PASSWORD];
-  [self.sharedNetworkManager loginWithRequest:authorizationLoginRequest completionHandler:^(NSInteger statusCode)
+  [self loginWithCompletionHandler:^(NSInteger statusCode)
   {
     [loginExpectation fulfill];
   }];
