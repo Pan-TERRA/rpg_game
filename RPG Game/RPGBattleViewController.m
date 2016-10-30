@@ -57,13 +57,13 @@
   {
     _battleManager = [[RPGBattleManager alloc] init];
     [_battleManager open];
+    
     if (_battleManager != nil)
     {
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
-                                                   name:kRPBBattleManagerModelDidChangeNotification
+                                                   name:kRPGBattleManagerModelDidChangeNotification
                                                  object:_battleManager];
-      
     }
   }
   
@@ -85,10 +85,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-    // SRWebsocket instance initializing
-  
-  
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
 }
 

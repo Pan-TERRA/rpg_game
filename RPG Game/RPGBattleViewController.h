@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPGBattleManager.h"
 
 @interface RPGBattleViewController : UIViewController
+
+@property(nonatomic, retain, readonly) RPGBattleManager *battleManager;
 
 @end
