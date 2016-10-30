@@ -34,6 +34,9 @@ NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
+// Classes
+NSString * const kRPGNetworkManagerAPIClassesRoute = @"/classes";
+NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
 
 #pragma mark -
 

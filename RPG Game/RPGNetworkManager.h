@@ -30,6 +30,9 @@ extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
 // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
+// Classes
+extern NSString * const kRPGNetworkManagerAPIClassesRoute;
+extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 
 #pragma mark -
 
