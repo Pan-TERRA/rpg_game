@@ -10,7 +10,8 @@
 
 @class RPGBattle;
 
-extern NSString * const kRPBBattleManagerModelDidChangeNotification;
+extern NSString * const kRPGBattleManagerDidEndSetUpNotification;
+extern NSString * const kRPGBattleManagerModelDidChangeNotification;
 
 @interface RPGBattleManager : SRWebSocket
 
@@ -20,7 +21,7 @@ extern NSString * const kRPBBattleManagerModelDidChangeNotification;
 - (instancetype)init;
 
 - (void)sendSkillActionRequestWithID:(NSInteger)anID;
-//- (void)sendBattleInitRequest;
+- (void)sendBattleInitRequest;
 - (void)sendBattleCondtionRequest;
 - (void)sendTimeSynchRequest;
 
