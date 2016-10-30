@@ -38,8 +38,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
   {
     if (aHP < 0 ||
         anOpponentHP < 0 ||
-        aSkillsCondition == nil ||
-        aSkillsDamage == nil)
+        aSkillsCondition == nil)
     {
       [self release];
       self = nil;
@@ -75,12 +74,12 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus
 {
-  return [[[RPGBattleConditionResponse alloc] initWithHP:aHP
-                                              opponentHP:anOpponentHP
-                                         skillsCondition:aSkillsCondition
-                                            skillsDamage:aSkillsDamage
-                                                  reward:aReward
-                                                  status:aStatus] autorelease];
+  return [[[self alloc] initWithHP:aHP
+                        opponentHP:anOpponentHP
+                   skillsCondition:aSkillsCondition
+                      skillsDamage:aSkillsDamage
+                            reward:aReward
+                            status:aStatus] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -90,6 +89,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
   [_mutableSkillsCondition release];
   [_mutableSkillsDamage release];
   [_mutableReward release];
+  
   [super dealloc];
 }
 
