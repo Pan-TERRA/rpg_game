@@ -8,9 +8,7 @@
 
 #import "RPGNetworkManager+Skills.h"
 #import "RPGSkillsRequest.h"
-#import "RPGSkillsResponse.h"
 #import "RPGSkillsResponse+Serialization.h"
-#import "RPGSkillInfoResponse.h"
 #import "RPGSkillInfoResponse+Serialization.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 // Constants
