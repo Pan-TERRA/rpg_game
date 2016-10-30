@@ -35,4 +35,10 @@
   return self;
 }
 
+- (void)dealloc
+{
+  [_skills release];
+  [super dealloc];
+}
+
 @end

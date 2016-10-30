@@ -8,6 +8,11 @@
 
 #import "RPGNetworkManager.h"
 
+@class RPGSkillsRequest;
+
 @interface RPGNetworkManager (Skills)
+
+- (void)fetchSkillsByRequest:(RPGSkillsRequest *)aRequest completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock;
+- (void)getSkillInfoByID:(NSInteger)ID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
 
 @end
