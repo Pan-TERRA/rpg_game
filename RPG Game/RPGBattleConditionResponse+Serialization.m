@@ -12,6 +12,7 @@
 NSString * const kRPGBattleConditionResponseHP = @"hp";
 NSString * const kRPGBattleConditionResponseOpponentHP = @"opponent_hp";
 NSString * const kRPGBattleConditionResponseSkillsCondition = @"skills_condition";
+NSString * const kRPGBattleConditionResponseSkillsDamage = @"skills_damage";
 NSString * const kRPGBattleConditionResponseReward = @"reward";
 NSString * const kRPGBattleConditionResponseStatus = @"status";
 
@@ -24,6 +25,7 @@ NSString * const kRPGBattleConditionResponseStatus = @"status";
   dictionaryRepresentation[kRPGBattleConditionResponseHP] = @(self.HP);
   dictionaryRepresentation[kRPGBattleConditionResponseOpponentHP] = @(self.opponentHP);
   dictionaryRepresentation[kRPGBattleConditionResponseSkillsCondition] = self.skillsCondition;
+  dictionaryRepresentation[kRPGBattleConditionResponseSkillsDamage] = self.skillsDamage;
   dictionaryRepresentation[kRPGBattleConditionResponseReward] = self.reward;
   dictionaryRepresentation[kRPGBattleConditionResponseStatus] = @(self.status);
   
@@ -35,6 +37,7 @@ NSString * const kRPGBattleConditionResponseStatus = @"status";
   return [self initWithHP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
                opponentHP:[aDictionary[kRPGBattleConditionResponseOpponentHP] integerValue]
           skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
+             skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]
                    reward:aDictionary[kRPGBattleConditionResponseReward]
                    status:[aDictionary[kRPGBattleConditionResponseStatus] integerValue]];
 }

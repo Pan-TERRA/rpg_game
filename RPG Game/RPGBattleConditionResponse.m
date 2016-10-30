@@ -15,6 +15,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 @property (nonatomic, assign, readwrite) NSInteger HP;
 @property (nonatomic, assign, readwrite) NSInteger opponentHP;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
+@property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsDamage;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *mutableReward;
 
 @end
@@ -26,6 +27,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 - (instancetype)initWithHP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
+              skillsDamage:(NSArray *)aSkillsDamage
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus
 {
@@ -46,6 +48,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
       _HP = aHP;
       _opponentHP = anOpponentHP;
       _mutableSkillsCondition = [aSkillsCondition mutableCopy];
+      _mutableSkillsDamage = [aSkillsDamage mutableCopy];
       _mutableReward = [aReward mutableCopy];
     }
   }
@@ -59,6 +62,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
   return [self initWithHP:-1
                opponentHP:-1
           skillsCondition:nil
+             skillsDamage:nil
                    reward:nil
                    status:-1];
 }
@@ -66,14 +70,16 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
+                                 skillsDamage:(NSArray *)aSkillsDamage
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus
 {
-  return [[[RPGBattleConditionResponse alloc] initWithHP:aHP
-                                              opponentHP:anOpponentHP
-                                         skillsCondition:aSkillsCondition
-                                                  reward:aReward
-                                                  status:aStatus] autorelease];
+  return [[[self alloc] initWithHP:aHP
+                        opponentHP:anOpponentHP
+                   skillsCondition:aSkillsCondition
+                      skillsDamage:aSkillsDamage
+                            reward:aReward
+                            status:aStatus] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -81,7 +87,9 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 - (void)dealloc
 {
   [_mutableSkillsCondition release];
+  [_mutableSkillsDamage release];
   [_mutableReward release];
+  
   [super dealloc];
 }
 
@@ -90,6 +98,11 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
 - (NSArray *)skillsCondition
 {
   return self.mutableSkillsCondition;
+}
+
+- (NSArray *)skillsDamage
+{
+  return self.mutableSkillsDamage;
 }
 
 - (NSDictionary *)reward
