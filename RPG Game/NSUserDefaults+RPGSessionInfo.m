@@ -15,9 +15,9 @@
 
 #pragma mark Username
 
-- (void)setSessionUsername:(NSString *)sessionUsername
+- (void)setSessionUsername:(NSString *)aSessionUsername
 {
-  [self setObject:self.sessionUsername forKey:kRPGUserSessionKeyUsername];
+  [self setObject:aSessionUsername forKey:kRPGUserSessionKeyUsername];
 }
 
 - (NSString *)sessionUsername
