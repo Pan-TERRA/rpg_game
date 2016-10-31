@@ -13,16 +13,30 @@
 extern NSString * const kRPGBattleManagerDidEndSetUpNotification;
 extern NSString * const kRPGBattleManagerModelDidChangeNotification;
 
+/**
+ *  Provides basic socket interaction. Holds RPGBattle instance.
+ *  
+ * @warning Self-delegated.
+ */
 @interface RPGBattleManager : SRWebSocket
 
 @property (retain, nonatomic, readonly) RPGBattle *battle;
 @property (nonatomic, assign) id <SRWebSocketDelegate>delegate;
 
+/**
+ *  Prime initializer. Inits RPGBattle instance.
+ *
+ */
 - (instancetype)init;
+
 
 - (void)sendSkillActionRequestWithID:(NSInteger)anID;
 - (void)sendBattleInitRequest;
 - (void)sendBattleCondtionRequest;
+
+/**
+ *  Sends time request. Dipatches it every 5 seconds.
+ */
 - (void)sendTimeSynchRequest;
 
 @end

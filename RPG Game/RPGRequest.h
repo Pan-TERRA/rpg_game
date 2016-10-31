@@ -10,7 +10,8 @@
 
 /**
  *  Basic request class. Mainly used for static requests and "RPGBattleManager"
-    socket messages.
+ *  socket messages.
+ *  @warning R
  */
 @interface RPGRequest : NSObject
 

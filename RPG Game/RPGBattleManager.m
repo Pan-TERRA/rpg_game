@@ -33,6 +33,8 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 @property (retain, nonatomic, readwrite) RPGBattle *battle;
 @property (copy, nonatomic, readwrite) NSString *token;
 
+
+
 @end
 
 @implementation RPGBattleManager
@@ -237,7 +239,5 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 {
   
 }
-
-
 
 @end

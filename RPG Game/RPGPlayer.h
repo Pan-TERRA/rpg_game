@@ -14,6 +14,9 @@
 
 @end
 
+/**
+ *  User battle entity. Used by RPGBattle as player object.
+ */
 @interface RPGPlayer : RPGEntity <RPGClientEntity>
 
 - (instancetype)initWithSkills:(NSArray *)aSkills;
