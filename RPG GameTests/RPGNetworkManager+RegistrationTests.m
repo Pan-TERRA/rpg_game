@@ -42,9 +42,19 @@
   [super tearDown];
 }
 
-- (void)deleteUser
+- (void)preregister
 {
-  [self login];
+  XCTestExpectation *loginExpectation = [self expectationWithDescription:@"finish login"];
+  RPGAuthorizationLoginRequest *loginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
+                                                                                                  password:@PASSWORD];
+  [self.sharedNetworkManager loginWithRequest:loginRequest
+                            completionHandler:^(NSInteger statusCode)
+  {
+    [loginExpectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
+  
+  XCTestExpectation *deleteUserExpectation = [self expectationWithDescription:@"finish user deleting"];
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              @DELETEROUTE];
@@ -58,17 +68,23 @@
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                           completionHandler:^(NSData *data,
                                                               NSURLResponse *response,
-                                                              NSError *error){}];
+                                                              NSError *error)
+  {
+    [deleteUserExpectation fulfill];
+  }];
   [task resume];
   [session finishTasksAndInvalidate];
+  [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
 }
 
-- (void)login
+- (void)registerUser
 {
-  RPGAuthorizationLoginRequest *loginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:@EMAIL
-                                                                                                  password:@PASSWORD];
-  [self.sharedNetworkManager loginWithRequest:loginRequest
-                            completionHandler:^(NSInteger statusCode){}];
+  XCTestExpectation *registrationExpectation = [self expectationWithDescription:@"finish registration"];
+  [self registerWithCompletionHandler:^(NSInteger statusCode)
+   {
+     [registrationExpectation fulfill];
+   }];
+  [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
 }
 
 - (void)registerWithCompletionHandler:(void (^)(NSInteger))callbackBlock
@@ -84,12 +100,13 @@
 
 - (void)test_sendCorrectRequest_successCodeReturned
 {
-  XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
-  [self deleteUser];
+  [self preregister];
+  
+  XCTestExpectation *registrationExpectation = [self expectationWithDescription:@"finish registration"];
   [self registerWithCompletionHandler:^(NSInteger statusCode)
   {
     XCTAssertEqual(statusCode, kRPGStatusCodeOk);
-    [testExpectation fulfill];
+    [registrationExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
 }
@@ -113,9 +130,10 @@
 
 - (void)test_sendExistingEmail_emailIsAlreadyTakenCodeReturned
 {
+  [self preregister];
+  [self registerUser];
+  
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
-  [self deleteUser];
-  [self registerWithCompletionHandler:^(NSInteger statusCode){}];
   RPGRegistrationRequest *registrationRequest = [RPGRegistrationRequest registrationRequestWithEmail:@EMAIL
                                                                                             password:@PASSWORD
                                                                                             username:@"sadfhlj"
@@ -132,9 +150,10 @@
 
 - (void)test_sendExistingUsername_usernameIsAlreadyTakenCodeReturned
 {
+  [self preregister];
+  [self registerUser];
+  
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution"];
-  [self deleteUser];
-  [self registerWithCompletionHandler:^(NSInteger statusCode){}];
   RPGRegistrationRequest *registrationRequest = [RPGRegistrationRequest registrationRequestWithEmail:@"afsd@asfoih.com"
                                                                                             password:@PASSWORD
                                                                                             username:@USERNAME
