@@ -7,11 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPGQuestListState.h"
+
+@class RPGQuest;
 
 extern NSString * const kRPGQuestStringStateInProgress;
 extern NSString * const kRPGQuestStringStateNotReviewed;
 extern NSString * const kRPGQuestStringStateReviewedFalse;
 
 @interface RPGQuestListViewController : UIViewController
+
+- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag;
+- (void)showQuestViewWithQuest:(RPGQuest *)aQuest;
 
 @end

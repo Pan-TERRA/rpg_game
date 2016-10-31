@@ -10,7 +10,7 @@
 
 NSString * const kRPGQuestRewardGold = @"gold";
 NSString * const kRPGQuestRewardCrystals = @"crystals";
-NSString * const kRPGQuestRewardSkillId = @"skillID";
+NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 @implementation RPGQuestReward (Serialization)
 
