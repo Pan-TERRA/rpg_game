@@ -7,10 +7,10 @@
 //
 
 /**
- * @typedef OldCarType
- * @brief A list of older car types.
- * @constant OldCarTypeModelT A cool old car.
- * @constant OldCarTypeModelA A sophisticated old car.
+ * @typedef RPGQuestAction
+ * @brief A list of quest actions. Used by RPGNetworkManager for routing.
+ * @constant kRPGQuestActionTakeQuest A take quest action.
+ * @constant kRPGQuestActionDeleteQuest A delete quest action.
  */
 typedef NS_ENUM(NSUInteger, RPGQuestAction)
 {
