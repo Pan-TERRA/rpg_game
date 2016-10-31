@@ -6,17 +6,17 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "RPGAppDelegate.h"
 #import "RPGNibNames.h"
 #import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
 
-@interface AppDelegate ()
+@interface RPGAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation RPGAppDelegate
 
 #pragma mark - Dealloc
 
@@ -32,22 +32,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  
-//  RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc]
-//                                                                  init]
-//                                                                  autorelease];
-//  [self.window setRootViewController:registrationViewController];
- 
-  RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
-  self.loginViewController = loginViewController;
+  RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
   [self.window setRootViewController:loginViewController];
-  
-  [loginViewController release];
-  
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
     
-    [RPGBackgroundMusicController sharedBackgroundMusicController];
+  [RPGBackgroundMusicController sharedBackgroundMusicController];
     
   return YES;
 }

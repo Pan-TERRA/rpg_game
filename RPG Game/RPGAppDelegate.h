@@ -12,7 +12,7 @@
 
 @class RPGMainViewController;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface RPGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (retain, nonatomic) UIWindow *window;
 
