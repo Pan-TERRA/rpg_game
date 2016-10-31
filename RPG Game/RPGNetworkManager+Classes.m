@@ -116,13 +116,11 @@
       
       return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status, responseObject.classes);
-                     });
-    }
+      callbackBlock(responseObject.status, responseObject.classes);
+    });
     
   }];
   
@@ -237,13 +235,11 @@
       
       return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status, responseObject.classInfo);
-                     });
-    }
+      callbackBlock(responseObject.status, responseObject.classInfo);
+    });
     
   }];
   

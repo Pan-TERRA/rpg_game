@@ -239,13 +239,11 @@
       
       return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status, responseObject.skill);
-                     });
-    }
+      callbackBlock(responseObject.status, responseObject.skill);
+    });
     
   }];
   
