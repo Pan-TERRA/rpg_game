@@ -5,8 +5,13 @@
 //  Created by Иван Дзюбенко on 10/11/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
+//
+//#pragma clang diagnostic ignored "-Wnullability-completeness"
+
   
 #import <Foundation/Foundation.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 
 #pragma mark - API constants
@@ -53,6 +58,8 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
  *
  *  @return
  */
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
+- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
 
 @end
+
+NS_ASSUME_NONNULL_END

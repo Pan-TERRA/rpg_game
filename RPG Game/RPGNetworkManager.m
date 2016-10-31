@@ -94,35 +94,42 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   return self;
 }
 
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
+
+- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
   request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
-  if ([anObject isKindOfClass:[NSDictionary class]])
+  if (anObject != nil)
   {
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&JSONSerializationError];
+    
+    if ([anObject isKindOfClass:[NSDictionary class]])
+    {
+      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
+                                                         options:NSJSONWritingPrettyPrinted
+                                                           error:&JSONSerializationError];
+    }
+    
+    if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
+    {
+      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
+                                                         options:NSJSONWritingPrettyPrinted
+                                                           error:&JSONSerializationError];
+    }
+    
+    if (request.HTTPBody == nil)
+    {
+      [[NSException exceptionWithName:NSInvalidArgumentException
+                               reason:@"JSON cannot be retrieved"
+                             userInfo:nil] raise];
+    }
+    
   }
-  
-	if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
-  {
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&JSONSerializationError];
-  }
-  
-//  if (request.HTTPBody == nil)
-//  {
-//    [[NSException exceptionWithName:NSInvalidArgumentException
-//                             reason:@"JSON cannot be retrieved"
-//                           userInfo:nil] raise];
-//  }
   
   return request;
 }
+
 
 @end
