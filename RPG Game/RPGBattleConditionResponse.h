@@ -8,8 +8,6 @@
 
 #import "RPGResponse.h"
 
-extern NSString * const kRPGBattleConditionResponseType;
-
 @interface RPGBattleConditionResponse : RPGResponse
 
 @property (nonatomic, assign, readonly) NSInteger HP;

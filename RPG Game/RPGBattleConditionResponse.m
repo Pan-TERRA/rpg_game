@@ -7,8 +7,7 @@
 //
 
 #import "RPGBattleConditionResponse.h"
-
-NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
+#import "RPGMessageTypes.h"
 
 @interface RPGBattleConditionResponse ()
 
@@ -31,7 +30,7 @@ NSString * const kRPGBattleConditionResponseType = @"BATTLE_CONDITION";
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleConditionResponseType
+  self = [super initWithType:kRPGBattleConditionMessageType
                       status:aStatus];
   
   if (self != nil)

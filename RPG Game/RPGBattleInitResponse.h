@@ -10,8 +10,6 @@
 
 @class RPGEntity;
 
-extern NSString * const kRPGBattleInitResponseType;
-
 @interface RPGBattleInitResponse : RPGResponse
 
 @property (nonatomic, retain, readonly) RPGEntity *opponentInfo;

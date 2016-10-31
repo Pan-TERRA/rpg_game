@@ -17,6 +17,8 @@
 #import "RPGBattleConditionResponse.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+  // Constants
+#import "RPGMessageTypes.h"
 
   // Notifications
 NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDidEndSetUp";
@@ -69,7 +71,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 - (void)sendBattleInitRequest
 {
-  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitResponseType token:self.token];
+  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType token:self.token];
   
   if (request != nil)
   {
@@ -159,13 +161,13 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
     NSLog(@"\r\nResponse:\r\n %@", responseDictionary);
     
       // battle init
-    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitResponseType])
+    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitMessageType])
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
     }
     
       // battle condition
-    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleConditionResponseType])
+    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleConditionMessageType])
     {
       battleConditionResponse = [[[RPGBattleConditionResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
     }
