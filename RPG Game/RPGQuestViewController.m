@@ -63,8 +63,6 @@
 
 - (UIImagePickerController *)pickerController
 {
-  
-  
   if (_imagePickerController == nil)
   {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
@@ -100,14 +98,7 @@
     {
       if (self.proofImageStringURL != nil)
       {
-        __block typeof(self) weakSelf = self;
-        
-        void (^handler)(NSData *) = ^void(NSData *imageData)
-        {
-          weakSelf.proofImageView.image = [[[UIImage alloc] initWithData:imageData] autorelease];
-        };
-        NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
-        [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+        [self uploadImage];
       }
       break;
     }
@@ -148,12 +139,12 @@
   {
     case kRPGQuestStateCanTake:
     {
-      [self setStateTakeQuest];
+      [self setStateTakeOrInProgressQuest];
       break;
     }
     case kRPGQuestStateInProgress:
     {
-      [self setStateInProgressQuest];
+      [self setStateTakeOrInProgressQuest];
       self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     }
@@ -188,22 +179,13 @@
 
 #pragma mark - View State
 
-- (void)setStateTakeQuest
+- (void)setStateTakeOrInProgressQuest
 {
-  self.acceptButton.hidden = NO;
+  self.acceptButton.hidden = !(self.state == kRPGQuestStateCanTake);
   self.denyButton.hidden = YES;
-  self.addProofButton.hidden = NO;
+  self.addProofButton.hidden = (self.state == kRPGQuestStateCanTake);
   [self setProofItemsHidden:YES];
-  [self setStateItemsHidden:YES];
-}
-
-- (void)setStateInProgressQuest
-{
-  self.acceptButton.hidden = YES;
-  self.denyButton.hidden = YES;
-  self.addProofButton.hidden = NO;
-  [self setProofItemsHidden:YES];
-  [self setStateItemsHidden:NO];
+  [self setStateItemsHidden:(self.state == kRPGQuestStateCanTake)];
 }
 
 - (void)setStateReviewedQuest:(BOOL)aFlag
@@ -242,17 +224,7 @@
 {
   if (self.state == kRPGQuestStateCanTake)
   {
-    void (^handler)(NSInteger) = ^void(NSInteger status)
-    {
-      BOOL success = (status == 0);
-      if (success)
-      {
-        
-      }
-    };
-    NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
-    [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
+    [self takeQuest];
   }
   else if (self.state == kRPGQuestStateForReview)
   {
@@ -267,6 +239,80 @@
 }
 
 - (IBAction)addProofButtonOnClick:(UIButton *)aSender
+{
+  [self addProofWithCamera];
+}
+
+- (IBAction)backButtonOnClick:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Open QuestProofImageView
+
+- (void)handleTapGesture
+{
+  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
+  [self presentViewController:questProofImageViewController animated:YES completion:nil];
+  [questProofImageViewController setImage:self.proofImageView.image];
+  [questProofImageViewController release];
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
+{
+  UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
+  // !!!: leak
+  __block typeof(self) weakSelf = self;
+  
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    weakSelf.addProofButton.enabled = YES;
+    BOOL success = (status == 0);
+    if (success)
+    {
+      weakSelf.state = kRPGQuestStateDone;
+      [weakSelf setStateReviewedQuest:NO];
+      weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      weakSelf.proofImageView.image = chosenImage;
+    }
+  };
+  
+  NSData *data = UIImagePNGRepresentation(chosenImage);
+  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
+  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
+  
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
+{
+  self.addProofButton.enabled = YES;
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+#pragma mark - Take Quest
+
+- (void)takeQuest
+{
+  void (^handler)(NSInteger) = ^void(NSInteger status)
+  {
+    BOOL success = (status == 0);
+    if (success)
+    {
+      
+    }
+  };
+  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
+  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
+}
+
+#pragma mark - Add Proof With Camera
+
+- (void)addProofWithCamera
 {
   self.addProofButton.enabled = NO;
   if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)])
@@ -303,60 +349,27 @@
         dispatch_async(dispatch_get_main_queue(), ^
         {
           [weakSelf presentViewController:alert animated:YES completion:nil];
+          weakSelf.addProofButton.enabled = YES;
         });
       }
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        weakSelf.addProofButton.enabled = YES;
-      });
     }];
   }
 }
 
-- (IBAction)backButtonOnClick:(UIButton *)aSender
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
+#pragma mark - Upload Image
 
-- (void)handleTapGesture
+- (void)uploadImage
 {
-  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
-  [self presentViewController:questProofImageViewController animated:YES completion:nil];
-  [questProofImageViewController setImage:self.proofImageView.image];
-  [questProofImageViewController release];
-}
-
-#pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
-{
-  UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
-  // !!!: leak
   __block typeof(self) weakSelf = self;
   
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  void (^handler)(NSData *) = ^void(NSData *imageData)
   {
-    BOOL success = (status == 0);
-    if (success)
-    {
-      weakSelf.state = kRPGQuestStateDone;
-      [weakSelf setStateReviewedQuest:NO];
-      weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
-      weakSelf.proofImageView.image = chosenImage;
-    }
+    UIImage *image = [[UIImage alloc] initWithData:imageData];
+    weakSelf.proofImageView.image = image;
+    [image release];
   };
-  
-  NSData *data = UIImagePNGRepresentation(chosenImage);
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
-  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
-  
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
-{
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
+  [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
 }
 
 #pragma mark - Send Quest Proof
