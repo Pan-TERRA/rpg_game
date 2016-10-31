@@ -46,7 +46,6 @@
 		288E85D21DABDA8A00321F4D /* RPGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */; };
 		288E85DA1DABDA8A00321F4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288E85D91DABDA8A00321F4D /* Assets.xcassets */; };
 		288E85DD1DABDA8A00321F4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */; };
-		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
 		288E85F31DABDA8A00321F4D /* RPG_GameUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */; };
 		288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E86011DABDADB00321F4D /* RPGMainViewController.m */; };
 		28A1F2661DC23DD400F9DF3A /* RPGSkillActionRequest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A1F2651DC23DD400F9DF3A /* RPGSkillActionRequest+Serialization.m */; };
@@ -69,6 +68,9 @@
 		28A915741DC7B94A001E0F51 /* RPGSkillsRequest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9156C1DC7B94A001E0F51 /* RPGSkillsRequest+Serialization.m */; };
 		28A915751DC7B94A001E0F51 /* RPGSkillsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9156E1DC7B94A001E0F51 /* RPGSkillsResponse.m */; };
 		28A915761DC7B94A001E0F51 /* RPGSkillsResponse+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A915701DC7B94A001E0F51 /* RPGSkillsResponse+Serialization.m */; };
+		28A9157D1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */; };
+		28A9157E1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */; };
+		28A9157F1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157C1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m */; };
 		28D175431DBA42B600A934ED /* RPGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D175421DBA42B600A934ED /* RPGBattleManager.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -204,7 +206,6 @@
 		288E85DC1DABDA8A00321F4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		288E85DE1DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E85E31DABDA8A00321F4D /* RPG GameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RPG GameTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		288E85E71DABDA8A00321F4D /* RPG_GameTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPG_GameTests.m; sourceTree = "<group>"; };
 		288E85E91DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		288E85EE1DABDA8A00321F4D /* RPG GameUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "RPG GameUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288E85F21DABDA8A00321F4D /* RPG_GameUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPG_GameUITests.m; sourceTree = "<group>"; };
@@ -252,6 +253,9 @@
 		28A9156E1DC7B94A001E0F51 /* RPGSkillsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillsResponse.m; sourceTree = "<group>"; };
 		28A9156F1DC7B94A001E0F51 /* RPGSkillsResponse+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGSkillsResponse+Serialization.h"; sourceTree = "<group>"; };
 		28A915701DC7B94A001E0F51 /* RPGSkillsResponse+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGSkillsResponse+Serialization.m"; sourceTree = "<group>"; };
+		28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNetworkManager_NoNetworkTests.m; sourceTree = "<group>"; };
+		28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+AuthorizationTests.m"; sourceTree = "<group>"; };
+		28A9157C1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+RegistrationTests.m"; sourceTree = "<group>"; };
 		28D175411DBA42B600A934ED /* RPGBattleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleManager.h; sourceTree = "<group>"; };
 		28D175421DBA42B600A934ED /* RPGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleManager.m; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -737,7 +741,9 @@
 		288E85E61DABDA8A00321F4D /* RPG GameTests */ = {
 			isa = PBXGroup;
 			children = (
-				288E85E71DABDA8A00321F4D /* RPG_GameTests.m */,
+				28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */,
+				28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */,
+				28A9157C1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m */,
 				288E85E91DABDA8A00321F4D /* Info.plist */,
 			);
 			path = "RPG GameTests";
@@ -1443,7 +1449,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */,
+				28A9157E1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m in Sources */,
+				28A9157D1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m in Sources */,
+				28A9157F1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
