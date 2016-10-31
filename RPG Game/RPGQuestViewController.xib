@@ -32,17 +32,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
-                    <rect key="frame" x="486" y="364" width="70" height="30"/>
+                    <rect key="frame" x="566" y="364" width="70" height="30"/>
                     <state key="normal" title="Accept"/>
                     <connections>
                         <action selector="acceptButtonOnClick:" destination="-1" eventType="touchUpInside" id="ADi-0P-27P"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
-                    <rect key="frame" x="566" y="364" width="70" height="30"/>
+                    <rect key="frame" x="486" y="364" width="70" height="30"/>
                     <state key="normal" title="Deny"/>
                     <connections>
                         <action selector="denyButtonOnClick:" destination="-1" eventType="touchUpInside" id="3G5-ad-ppS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
+                    <rect key="frame" x="566" y="364" width="70" height="30"/>
+                    <state key="normal" title="Add proof"/>
+                    <connections>
+                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grH-jv-bBd">
@@ -54,13 +61,6 @@
                     <state key="normal" title="Back"/>
                     <connections>
                         <action selector="backButtonOnClick:" destination="-1" eventType="touchUpInside" id="K5J-Kt-XQB"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
-                    <rect key="frame" x="566" y="364" width="70" height="30"/>
-                    <state key="normal" title="Add proof"/>
-                    <connections>
-                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eO4-tZ-RU6">
@@ -241,19 +241,21 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="tuQ-Ba-KJA" firstAttribute="width" secondItem="eO4-tZ-RU6" secondAttribute="width" id="26N-p5-aFy"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="trailing" constant="10" id="4O9-FP-SWB"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="width" id="4kb-d8-2qA"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="width" id="9Ao-sF-Soz"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Bpj-c4-GjR" secondAttribute="top" id="ASw-IK-WuM"/>
+                <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="10" id="DnF-Xy-siF"/>
                 <constraint firstItem="eO4-tZ-RU6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="FR3-43-1e3"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="0Cf-4K-WWr" secondAttribute="top" id="Hc9-ww-Z8a"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="tuQ-Ba-KJA" secondAttribute="bottom" constant="5" id="IcX-OS-dnx"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Lld-Ax-hOC" secondAttribute="top" id="SZR-cV-otT"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="NNr-wZ-G2R"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="trailing" secondItem="tuQ-Ba-KJA" secondAttribute="trailing" id="V0T-X6-aoC"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="10" id="Ya9-yP-B3o"/>
                 <constraint firstAttribute="trailing" secondItem="eO4-tZ-RU6" secondAttribute="trailing" constant="20" id="Z9O-tG-XBp"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="width" id="bGU-Xi-0Og"/>
                 <constraint firstItem="tuQ-Ba-KJA" firstAttribute="top" secondItem="eO4-tZ-RU6" secondAttribute="bottom" constant="20" id="d85-S4-Xqf"/>
                 <constraint firstItem="eO4-tZ-RU6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="gZ1-Ps-iSc"/>
-                <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="p8V-Ev-tcr"/>
+                <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="Lld-Ax-hOC" secondAttribute="top" id="ghm-Qx-A90"/>
                 <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Bpj-c4-GjR" secondAttribute="width" id="sxr-LZ-CZR"/>
                 <constraint firstItem="tuQ-Ba-KJA" firstAttribute="leading" secondItem="eO4-tZ-RU6" secondAttribute="leading" id="ukg-rL-wm6"/>
                 <constraint firstAttribute="bottom" secondItem="grH-jv-bBd" secondAttribute="bottom" constant="20" id="vQ6-3c-nll"/>
@@ -262,6 +264,12 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="vi8-8u-fC5"/>
+                    <exclude reference="Ya9-yP-B3o"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>
