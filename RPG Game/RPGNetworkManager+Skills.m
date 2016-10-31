@@ -41,9 +41,9 @@
       if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
-                       });
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
         
         return;
       }
@@ -55,9 +55,9 @@
       NSLog(@"Reason: %@", [error localizedFailureReason]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
       
       return;
     }
@@ -68,9 +68,9 @@
     {
       NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
       
       return;
     }
@@ -79,9 +79,9 @@
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      });
       
       return;
     }
@@ -100,9 +100,9 @@
       NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+      });
       
       return;
     }
@@ -113,9 +113,9 @@
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      });
       
       return;
     }
@@ -161,9 +161,9 @@
       if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
-                       });
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
         
         return;
       }
@@ -175,9 +175,9 @@
       NSLog(@"Reason: %@", [error localizedFailureReason]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
       
       return;
     }
@@ -188,9 +188,9 @@
     {
       NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
       
       return;
     }
@@ -220,9 +220,9 @@
       NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+      });
       
       return;
     }
@@ -233,9 +233,9 @@
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      });
       
       return;
     }
