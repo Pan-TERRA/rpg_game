@@ -193,12 +193,8 @@
        {
          case kRPGStatusCodeOk:
          {
-           RPGMainViewController *mainViewController = [[RPGMainViewController alloc] initWithNibName:kRPGMainView
-                                                                                               bundle:nil];
-           [self presentViewController:mainViewController
-                              animated:YES
-                            completion:nil];
-           [mainViewController release];
+           RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
+           [self presentViewController:mainViewController animated:YES completion:nil];
            [self.emailInputField setText:@""];
            [self.passwordInputField setText:@""];
            break;

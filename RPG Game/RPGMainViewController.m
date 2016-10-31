@@ -1,10 +1,10 @@
-//
-//  RPGMainViewController.m
-//  RPG Game
-//
-//  Created by Иван Дзюбенко on 10/10/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGMainViewController.m
+  //  RPG Game
+  //
+  //  Created by Иван Дзюбенко on 10/10/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGMainViewController.h"
 #import "RPGBattleViewController.h"
@@ -21,6 +21,9 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
+@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+@property (retain, nonatomic) IBOutlet RPGBattleViewController *battleViewController;
+
 @end
 
 @implementation RPGMainViewController
@@ -33,13 +36,24 @@
                          bundle:nil];
 }
 
+- (void)dealloc
+{
+  [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                  name:kRPGBattleManagerDidEndSetUpNotification
+                                                object:self.battleViewController.battleManager];
+  
+  [_battleViewController release];
+  [_battleInitModal release];
+  [super dealloc];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-  //set images to money image views
+    //set images to money image views
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -55,9 +69,10 @@
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];
+  
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%d", [standartUserDefaults sessionGold]];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%d", [standartUserDefaults sessionCrystals]];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionGold]];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionCrystals]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -71,8 +86,10 @@
 - (IBAction)segueToQuests
 {
   RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] init] autorelease];
+  
   [self presentViewController:questListViewController animated:YES completion:nil];
 }
+
 
 - (IBAction)segueToShop
 {
@@ -91,8 +108,17 @@
 
 - (IBAction)segueToAdventures
 {
-  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] init] autorelease];
-  [self presentViewController:battleViewController animated:YES completion:nil];
+  self.battleViewController = [[[RPGBattleViewController alloc] init] autorelease];
+  
+  [[NSNotificationCenter defaultCenter] addObserver:self
+                                           selector:@selector(battleManagerDidEndSetUp:)
+                                               name:kRPGBattleManagerDidEndSetUpNotification
+                                             object:self.battleViewController.battleManager];
+  
+  [self addChildViewController:self.battleInitModal];
+  self.battleInitModal.view.frame = self.view.frame;
+  [self.view addSubview:self.battleInitModal.view];
+  [self.battleInitModal didMoveToParentViewController:self];
 }
 
 - (IBAction)segueToArena
@@ -106,4 +132,20 @@
   [self presentViewController:settingsViewController animated:YES completion:nil];
 }
 
+#pragma mark - Notifications
+
+/**
+ *  Performs after SRWebSocket webSocketDidOpen:
+ *
+ */
+- (void)battleManagerDidEndSetUp:(NSNotification *)aNotification
+{
+  [self.battleInitModal.view removeFromSuperview];
+  [self.battleInitModal removeFromParentViewController];
+  
+  [self presentViewController:self.battleViewController animated:YES completion:^
+   {
+     [self.battleViewController.battleManager sendBattleInitRequest];
+   }];
+}
 @end
