@@ -16,8 +16,11 @@
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsRewardImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldRewardImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
@@ -44,10 +47,18 @@
 {
   self.titleLabel.text = aCellContent.name;
   self.descriptionLabel.text = aCellContent.questDescription;
-  self.rewardLabel.text = [@(aCellContent.reward.gold) stringValue];
-  RPGQuestState state = aCellContent.state;
-  
-  switch (state)
+  self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
+  self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
+  if (aCellContent.reward.skillID != 0)
+  {
+    
+  }
+  else
+  {
+    self.skillRewardImageView.hidden = YES;
+  }
+
+  switch (aCellContent.state)
   {
     case kRPGQuestStateCanTake:
     {
