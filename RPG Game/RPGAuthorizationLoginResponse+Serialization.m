@@ -41,7 +41,7 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
                          avatar:aDictionary[kRPGAuthorizationLoginResponseAvatar]
                            gold:[aDictionary[kRPGAuthorizationLoginResponseGold] integerValue]
                        crystals:[aDictionary[kRPGAuthorizationLoginResponseCrystals] integerValue]
-                     character:character
+                      character:character
                          status:[aDictionary[kRPGAuthorizationLoginResponseStatus] integerValue]];
 }
 

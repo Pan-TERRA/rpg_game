@@ -31,6 +31,12 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
 NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
+// Skills
+NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
+NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
+// Classes
+NSString * const kRPGNetworkManagerAPIClassesRoute = @"/classes";
+NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
 
 #pragma mark -
 
@@ -88,35 +94,42 @@ NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
   return self;
 }
 
-- (NSURLRequest *)requestWithObject:(id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
+
+- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
   request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
-  if ([anObject isKindOfClass:[NSDictionary class]])
+  if (anObject != nil)
   {
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&JSONSerializationError];
-  }
-  
-	if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
-  {
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&JSONSerializationError];
-  }
-  
-  if (request.HTTPBody == nil)
-  {
-    [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved"
-                           userInfo:nil] raise];
+    
+    if ([anObject isKindOfClass:[NSDictionary class]])
+    {
+      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
+                                                         options:NSJSONWritingPrettyPrinted
+                                                           error:&JSONSerializationError];
+    }
+    
+    if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
+    {
+      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
+                                                         options:NSJSONWritingPrettyPrinted
+                                                           error:&JSONSerializationError];
+    }
+    
+    if (request.HTTPBody == nil)
+    {
+      [[NSException exceptionWithName:NSInvalidArgumentException
+                               reason:@"JSON cannot be retrieved"
+                             userInfo:nil] raise];
+    }
+    
   }
   
   return request;
 }
+
 
 @end
