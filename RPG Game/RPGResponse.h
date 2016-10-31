@@ -11,7 +11,6 @@
 /**
  *  Basic response class. Mainly used by "RPGBattleManager".
  */
-
 @interface RPGResponse : NSObject
 
 @property (nonatomic, copy, readonly) NSString *type;

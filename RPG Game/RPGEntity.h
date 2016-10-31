@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  Basic battle entity. Used by RPGBattle as opponent
+ *  object.
+ */
 @interface RPGEntity : NSObject
 
 @property (copy, nonatomic, readwrite) NSString *name;
