@@ -9,7 +9,7 @@
 #import "RPGSkillsRequest+Serialization.h"
 
 static NSString * const kRPGSkillsRequestToken = @"token";
-static NSString * const kRPGSkillsRequestCharacterID = @"character_id";
+static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 @implementation RPGSkillsRequest (Serialization)
 

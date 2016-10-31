@@ -16,11 +16,14 @@
 
 @implementation RPGNetworkManager (Skills)
 
-- (void)fetchSkillsByRequest:(RPGSkillsRequest *)aRequest completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
+- (void)fetchSkillsByCharacterID:(NSInteger)characterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
+  
+  RPGSkillsRequest *aRequest = [[RPGSkillsRequest alloc] initWithToken:[NSUserDefaults standardUserDefaults].sessionToken
+                                                           characterID:characterID];
   
   NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
   
@@ -116,13 +119,10 @@
       
       return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status, responseObject.skills);
-                     });
-    }
+      callbackBlock(responseObject.status, responseObject.skills);
+    });
     
   }];
   
