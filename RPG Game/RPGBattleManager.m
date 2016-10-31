@@ -17,8 +17,14 @@
 #import "RPGBattleConditionResponse.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+  // Constants
+#import "RPGMessageTypes.h"
 
-NSString * const kRPBBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
+  // Notifications
+NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDidEndSetUp";
+NSString * const kRPGBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
+
+// TODO: replace to separate header file
 static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.31:8888/ws";
 static NSString * const kRPGBattleManagerResponseType = @"type";
 
@@ -35,7 +41,6 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 #pragma mark - Init
 
-
 - (instancetype)init
 {
   self = [super initWithURL:[NSURL URLWithString:kRPGBattleManagerAPI]];
@@ -43,8 +48,8 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
   if (self != nil)
   {
     _delegate = self;
-//    _battle = [[RPGBattle alloc] init];
-    _token = [[[NSUserDefaults standardUserDefaults] sessionToken] retain];
+    _battle = [[RPGBattle alloc] init];
+    _token = [[[NSUserDefaults standardUserDefaults] sessionToken] copy];
   }
   
   return self;
@@ -66,7 +71,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 - (void)sendBattleInitRequest
 {
-  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitResponseType token:self.token];
+  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType token:self.token];
   
   if (request != nil)
   {
@@ -134,7 +139,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  [self sendBattleInitRequest];
+   [self sendBattleInitRequest];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
@@ -155,13 +160,16 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
     NSLog(@"\r\nResponse:\r\n %@", responseDictionary);
     
       // battle init
-    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitResponseType])
+    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitMessageType])
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
+        // send notification to main menu
+      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
+                                                          object:self];
     }
     
       // battle condition
-    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleConditionResponseType])
+    if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleConditionMessageType])
     {
       battleConditionResponse = [[[RPGBattleConditionResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
     }
@@ -187,13 +195,14 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRPBBattleManagerModelDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
+                                                        object:self];
   }
     // battle condition
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
   {
     [self.battle updateWithBattleConditionResponse:battleConditionResponse];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRPBBattleManagerModelDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification object:self];
   }
   
     // time synch
@@ -201,7 +210,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
   {
     [self.battle updateWithTimeSynchResponse:timeSynchResponse];
     // TODO: KVO support instead of notifications
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRPBBattleManagerModelDidChangeNotification object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification object:self];
   }
 }
 

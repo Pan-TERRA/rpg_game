@@ -43,7 +43,7 @@
 		2862B9A81DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */; };
 		2862B9AB1DB6243200FD05A5 /* RPGNetworkManager+Registration.m in Sources */ = {isa = PBXBuildFile; fileRef = 2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */; };
 		288E85CF1DABDA8A00321F4D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85CE1DABDA8A00321F4D /* main.m */; };
-		288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85D11DABDA8A00321F4D /* AppDelegate.m */; };
+		288E85D21DABDA8A00321F4D /* RPGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */; };
 		288E85DA1DABDA8A00321F4D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 288E85D91DABDA8A00321F4D /* Assets.xcassets */; };
 		288E85DD1DABDA8A00321F4D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */; };
 		288E85E81DABDA8A00321F4D /* RPG_GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 288E85E71DABDA8A00321F4D /* RPG_GameTests.m */; };
@@ -56,6 +56,7 @@
 		28A5A0E01DB9186B000EF49F /* RPGQuest+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0DE1DB9186B000EF49F /* RPGQuest+Serialization.m */; };
 		28A5A0E51DB91878000EF49F /* RPGQuestReward.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0E21DB91878000EF49F /* RPGQuestReward.m */; };
 		28A5A0E61DB91878000EF49F /* RPGQuestReward+Serialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A5A0E41DB91878000EF49F /* RPGQuestReward+Serialization.m */; };
+		28A9152A1DC77299001E0F51 /* RPGMessageTypes.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A915291DC77299001E0F51 /* RPGMessageTypes.m */; };
 		28D175431DBA42B600A934ED /* RPGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D175421DBA42B600A934ED /* RPGBattleManager.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -184,8 +185,8 @@
 		2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Registration.m"; sourceTree = "<group>"; };
 		288E85CA1DABDA8A00321F4D /* RPG Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "RPG Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288E85CE1DABDA8A00321F4D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		288E85D01DABDA8A00321F4D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		288E85D11DABDA8A00321F4D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGAppDelegate.h; sourceTree = "<group>"; };
+		288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RPGAppDelegate.m; sourceTree = "<group>"; };
 		288E85D91DABDA8A00321F4D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		288E85DC1DABDA8A00321F4D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		288E85DE1DABDA8A00321F4D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -211,6 +212,9 @@
 		28A5A0E21DB91878000EF49F /* RPGQuestReward.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestReward.m; sourceTree = "<group>"; };
 		28A5A0E31DB91878000EF49F /* RPGQuestReward+Serialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGQuestReward+Serialization.h"; sourceTree = "<group>"; };
 		28A5A0E41DB91878000EF49F /* RPGQuestReward+Serialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGQuestReward+Serialization.m"; sourceTree = "<group>"; };
+		28A915271DC769B9001E0F51 /* RPGQuestAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestAction.h; sourceTree = "<group>"; };
+		28A915281DC771C8001E0F51 /* RPGMessageTypes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGMessageTypes.h; sourceTree = "<group>"; };
+		28A915291DC77299001E0F51 /* RPGMessageTypes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGMessageTypes.m; sourceTree = "<group>"; };
 		28D175411DBA42B600A934ED /* RPGBattleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleManager.h; sourceTree = "<group>"; };
 		28D175421DBA42B600A934ED /* RPGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleManager.m; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -315,6 +319,8 @@
 				28F102211DB7756500C969CA /* RPGUserSessionKeys.m */,
 				28149A0E1DB1007400C26881 /* RPGNibNames.h */,
 				28149A0F1DB1007400C26881 /* RPGNibNames.m */,
+				28A915281DC771C8001E0F51 /* RPGMessageTypes.h */,
+				28A915291DC77299001E0F51 /* RPGMessageTypes.m */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -335,23 +341,12 @@
 			children = (
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
-				28A5A0D21DB8E95E000EF49F /* RPGNetworkManager+Quests.h */,
-				28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */,
-				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
-				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
-				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
-				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
+				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				28A915241DC76963001E0F51 /* Quests */,
+				28A915251DC76968001E0F51 /* Authorization */,
+				28A915261DC76970001E0F51 /* Registration */,
 			);
 			name = "Network Manager";
-			sourceTree = "<group>";
-		};
-		281499E91DAFC93A00C26881 /* Authorization */ = {
-			isa = PBXGroup;
-			children = (
-				281499EB1DAFC95300C26881 /* Login */,
-				281499EA1DAFC94100C26881 /* Logout */,
-			);
-			name = Authorization;
 			sourceTree = "<group>";
 		};
 		281499EA1DAFC94100C26881 /* Logout */ = {
@@ -534,22 +529,8 @@
 			isa = PBXGroup;
 			children = (
 				280A52301DB7C61C00FF66B8 /* Network Manager */,
-				283ADCF51DAD3C8000BDC706 /* Entities */,
 			);
 			name = "Network Communication";
-			sourceTree = "<group>";
-		};
-		283ADCF51DAD3C8000BDC706 /* Entities */ = {
-			isa = PBXGroup;
-			children = (
-				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
-				28A9151F1DC37A3C001E0F51 /* Quest Review */,
-				28AE27161DBD161300834FBB /* Quest */,
-				28F1021E1DB7719100C969CA /* Quest List */,
-				2A8D9BA31DB163F20026A5AB /* Registration */,
-				281499E91DAFC93A00C26881 /* Authorization */,
-			);
-			name = Entities;
 			sourceTree = "<group>";
 		};
 		283ADD001DAD3F9100BDC706 /* Battle Init */ = {
@@ -679,24 +660,24 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
-				288E85D01DABDA8A00321F4D /* AppDelegate.h */,
-				288E85D11DABDA8A00321F4D /* AppDelegate.m */,
-				285231611DC0F107002F702B /* Battle Entities */,
-				28149A121DB100B900C26881 /* Settings */,
-				28149A131DB100FB00C26881 /* Main View */,
+				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
+				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
 				28149A1E1DB1011B00C26881 /* Login */,
 				28149A1F1DB1012200C26881 /* Registration */,
-				AED6F57A1DACD89F007ED1B8 /* Quests */,
+				28149A131DB100FB00C26881 /* Main View */,
 				28149A111DB1008100C26881 /* Battle */,
+				285231611DC0F107002F702B /* Battle Entities */,
 				281499EC1DAFC95F00C26881 /* Battle Manager */,
+				AED6F57A1DACD89F007ED1B8 /* Quests */,
+				28149A121DB100B900C26881 /* Settings */,
 				283ADCF41DAD3C5000BDC706 /* Network Communication */,
 				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
 				28A5A0E71DB918FC000EF49F /* Entities */,
+				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				280A522E1DB7C5B500FF66B8 /* Constants */,
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
-				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
 			);
 			path = "RPG Game";
@@ -811,6 +792,39 @@
 			name = "Quest Review";
 			sourceTree = "<group>";
 		};
+		28A915241DC76963001E0F51 /* Quests */ = {
+			isa = PBXGroup;
+			children = (
+				28A5A0D21DB8E95E000EF49F /* RPGNetworkManager+Quests.h */,
+				28A5A0D31DB8E95E000EF49F /* RPGNetworkManager+Quests.m */,
+				28A9151F1DC37A3C001E0F51 /* Quest Review */,
+				28AE27161DBD161300834FBB /* Quest */,
+				28F1021E1DB7719100C969CA /* Quest List */,
+			);
+			name = Quests;
+			sourceTree = "<group>";
+		};
+		28A915251DC76968001E0F51 /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				2862B9A61DB6234F00FD05A5 /* RPGNetworkManager+Authorization.h */,
+				2862B9A71DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m */,
+				281499EB1DAFC95300C26881 /* Login */,
+				281499EA1DAFC94100C26881 /* Logout */,
+			);
+			name = Authorization;
+			sourceTree = "<group>";
+		};
+		28A915261DC76970001E0F51 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2862B9A91DB6243200FD05A5 /* RPGNetworkManager+Registration.h */,
+				2862B9AA1DB6243200FD05A5 /* RPGNetworkManager+Registration.m */,
+				281723581DB5205200F74403 /* Request */,
+			);
+			name = Registration;
+			sourceTree = "<group>";
+		};
 		28AE27161DBD161300834FBB /* Quest */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,14 +886,6 @@
 			name = Time;
 			sourceTree = "<group>";
 		};
-		2A8D9BA31DB163F20026A5AB /* Registration */ = {
-			isa = PBXGroup;
-			children = (
-				281723581DB5205200F74403 /* Request */,
-			);
-			name = Registration;
-			sourceTree = "<group>";
-		};
 		4BA921AB8CB063DE64593829 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -893,6 +899,7 @@
 		AED6F57A1DACD89F007ED1B8 /* Quests */ = {
 			isa = PBXGroup;
 			children = (
+				28A915271DC769B9001E0F51 /* RPGQuestAction.h */,
 				28A5A0D81DB8F765000EF49F /* Quest List */,
 				28A5A0DA1DB8F787000EF49F /* Quest */,
 				28A5A0D71DB8F75A000EF49F /* Proof Image */,
@@ -1261,7 +1268,7 @@
 				AE7B37E81DC0E5BC00D105C5 /* RPGQuestReviewRequest+Serialization.m in Sources */,
 				283ADCFB1DAD3CBA00BDC706 /* RPGResponse.m in Sources */,
 				2862B9A81DB6234F00FD05A5 /* RPGNetworkManager+Authorization.m in Sources */,
-				288E85D21DABDA8A00321F4D /* AppDelegate.m in Sources */,
+				288E85D21DABDA8A00321F4D /* RPGAppDelegate.m in Sources */,
 				D0CFEE681DB65B6100C61D0B /* RPGSFXEngine.m in Sources */,
 				288E85CF1DABDA8A00321F4D /* main.m in Sources */,
 				2852315C1DC0F089002F702B /* RPGSkillActionRequest.m in Sources */,
@@ -1282,6 +1289,7 @@
 				28A309621DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m in Sources */,
 				28149A101DB1007400C26881 /* RPGNibNames.m in Sources */,
 				AE5E68041DBA78B200715480 /* RPGQuestRequest+Serialization.m in Sources */,
+				28A9152A1DC77299001E0F51 /* RPGMessageTypes.m in Sources */,
 				285231561DC0F089002F702B /* RPGEntity.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,
 				283ADD081DAD46EC00BDC706 /* RPGResponse+Serialization.m in Sources */,
@@ -1435,7 +1443,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-11.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-3.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1452,7 +1460,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-11.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.my-app-3.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

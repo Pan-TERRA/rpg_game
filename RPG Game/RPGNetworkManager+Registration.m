@@ -34,7 +34,7 @@
     if (error != nil)
     {
         // no internet connection
-      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
+      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -45,7 +45,7 @@
       
       NSLog(@"Network error");
       NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %ld", error.code);
+      NSLog(@"Error Code: %d", error.code);
       NSLog(@"Description: %@", [error localizedDescription]);
       NSLog(@"Reason: %@", [error localizedFailureReason]);
       

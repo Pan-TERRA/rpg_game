@@ -8,13 +8,12 @@
 
 #import "RPGResponse.h"
 
-extern NSString * const kRPGBattleConditionResponseType;
-
 @interface RPGBattleConditionResponse : RPGResponse
 
 @property (nonatomic, assign, readonly) NSInteger HP;
 @property (nonatomic, assign, readonly) NSInteger opponentHP;
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
+@property (nonatomic, retain, readonly) NSArray *skillsDamage;
 @property (nonatomic, retain, readonly) NSDictionary *reward;
 
 #pragma mark - Init
@@ -22,11 +21,13 @@ extern NSString * const kRPGBattleConditionResponseType;
 - (instancetype)initWithHP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
+              skillsDamage:(NSArray *)aSkillsDamage
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
+                                 skillsDamage:(NSArray *)aSkillsDamage
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus;
 

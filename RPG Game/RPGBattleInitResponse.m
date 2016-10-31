@@ -8,8 +8,7 @@
 
 #import "RPGBattleInitResponse.h"
 #import "RPGEntity.h"
-
-NSString * const kRPGBattleInitResponseType = @"BATTLE_INIT";
+#import "RPGMessageTypes.h"
 
 @interface RPGBattleInitResponse ()
 
@@ -28,7 +27,7 @@ NSString * const kRPGBattleInitResponseType = @"BATTLE_INIT";
                                 time:(NSInteger)aTime
                               status:(NSInteger)aStatus
 {
-  self = [super initWithType:kRPGBattleInitResponseType
+  self = [super initWithType:kRPGBattleInitMessageType
                       status:aStatus];
   
   if (self != nil)
