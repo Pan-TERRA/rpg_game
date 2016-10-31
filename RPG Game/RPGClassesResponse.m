@@ -20,16 +20,8 @@
   self = [super init];
   if (self)
   {
-    if (status >= 0 && classes != nil)
-    {
-      _status = status;
-      _classes = [[NSArray alloc] initWithArray:classes];
-    }
-    else
-    {
-      [self release];
-      self = nil;
-    }
+    _status = status;
+    _classes = [[NSArray alloc] initWithArray:classes];
   }
   
   return self;

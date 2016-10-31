@@ -20,16 +20,8 @@
   self = [super init];
   if (self)
   {
-    if (status >= 0 && skills != nil)
-    {
-      _status = status;
-      _skills = [[NSArray alloc] initWithArray:skills];
-    }
-    else
-    {
-      [self release];
-      self = nil;
-    }
+    _status = status;
+    _skills = [[NSArray alloc] initWithArray:skills];
   }
   
   return self;

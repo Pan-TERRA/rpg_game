@@ -15,16 +15,8 @@
   self = [super init];
   if (self)
   {
-    if (status >= 0 && skill != nil)
-    {
-      _status = status;
-      _skill = [[NSDictionary alloc] initWithDictionary:skill];
-    }
-    else
-    {
-      [self release];
-      self = nil;
-    }
+    _status = status;
+    _skill = [[NSDictionary alloc] initWithDictionary:skill];
   }
   return self;
 }

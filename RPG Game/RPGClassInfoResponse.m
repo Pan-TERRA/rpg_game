@@ -15,16 +15,8 @@
   self = [super init];
   if (self)
   {
-    if (status >= 0 && classInfo != nil)
-    {
-      _status = status;
-      _classInfo = [[NSDictionary alloc] initWithDictionary:classInfo];
-    }
-    else
-    {
-      [self release];
-      self = nil;
-    }
+    _status = status;
+    _classInfo = [[NSDictionary alloc] initWithDictionary:classInfo];
   }
   return self;
 }
