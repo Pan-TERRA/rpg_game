@@ -16,15 +16,14 @@
 
 @implementation RPGNetworkManager (Skills)
 
-- (void)fetchSkillsByCharacterID:(NSInteger)characterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
+- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
   
-  RPGSkillsRequest *aRequest = [[[RPGSkillsRequest alloc] initWithToken:[NSUserDefaults standardUserDefaults].sessionToken
-                                                           characterID:characterID] autorelease];
-  
+  RPGSkillsRequest *aRequest = [RPGSkillsRequest skillsRequestWithToken:[NSUserDefaults standardUserDefaults].sessionToken
+                                                           characterID:aCharacterID];
   NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -38,7 +37,7 @@
     if (error != nil)
     {
       // no internet connection
-      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
+      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -131,17 +130,12 @@
   [session finishTasksAndInvalidate];
 }
 
-#pragma mark -
-
-/**
-  Skill info's keys are: @"name", @"description", @"multiplier"
-*/
-- (void)getSkillInfoByID:(NSInteger)ID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock
+- (void)getSkillInfoByID:(NSInteger)anID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillInfoRoute,
-                             ID];
+                             anID];
   
   NSURLRequest *request = [self requestWithObject:nil
                                         URLstring:requestString
@@ -158,7 +152,7 @@
     if (error != nil)
     {
       // no internet connection
-      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
+      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -199,10 +193,10 @@
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
-                     });
-      
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      });
+
       return;
     }
     

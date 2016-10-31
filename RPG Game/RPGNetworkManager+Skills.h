@@ -12,7 +12,23 @@
 
 @interface RPGNetworkManager (Skills)
 
-- (void)fetchSkillsByCharacterID:(NSInteger)characterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock;
-- (void)getSkillInfoByID:(NSInteger)ID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
+
+/**
+ *  Fetches skill identifiers by specific character ID.
+ *
+ *  @param aCharacterID  A character ID.
+ *  @param callbackBlock Completion handler.
+ */
+- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID
+               completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock;
+
+/**
+ *  Fetches skill info such as name, description, multiplier.
+ *
+ *  @param anID A skill ID.
+ *  @param callbackBlock Completion handler.
+ */
+- (void)getSkillInfoByID:(NSInteger)anID
+       completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
 
 @end

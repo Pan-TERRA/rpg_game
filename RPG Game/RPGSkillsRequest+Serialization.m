@@ -16,6 +16,7 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  
   dictionary[kRPGSkillsRequestToken] = self.token;
   dictionary[kRPGSkillsRequestCharacterID] = @(self.characterID);
   

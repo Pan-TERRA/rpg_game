@@ -16,6 +16,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  
   dictionary[kRPGClassesResposeStatus] = @(self.status);
   dictionary[kRPGClassesResposeClasses] = self.classes;
   

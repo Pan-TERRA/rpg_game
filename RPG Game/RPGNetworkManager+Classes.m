@@ -35,7 +35,7 @@
     if (error != nil)
     {
       // no internet connection
-      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
+      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -129,15 +129,12 @@
   [session finishTasksAndInvalidate];
 }
 
-/**
- Class info's keys are: @"name", @"description", @"multiplier"
- */
-- (void)getClassInfoByID:(NSInteger)ID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock
+- (void)getClassInfoByID:(NSInteger)anID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIClassInfoRoute,
-                             ID];
+                             anID];
   
   NSURLRequest *request = [self requestWithObject:nil
                                         URLstring:requestString
@@ -154,7 +151,7 @@
     if (error != nil)
     {
       // no internet connection
-      if (error.domain == NSURLErrorDomain && error.code == NSURLErrorNotConnectedToInternet)
+      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {

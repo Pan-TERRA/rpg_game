@@ -13,14 +13,14 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithToken:(NSString *)token characterID:(NSInteger)characterID
+- (instancetype)initWithToken:(NSString *)aToken characterID:(NSInteger)characterID
 {
   self = [super init];
   if (self != nil)
   {
-    if (token != nil && characterID >= 0)
+    if (aToken != nil && characterID >= 0)
     {
-      _token = [token copy];
+      _token = [aToken copy];
       _characterID = characterID;
     }
     else
@@ -38,6 +38,11 @@
   return [self initWithToken:nil characterID:-1];
 }
 
++ (instancetype)skillsRequestWithToken:(NSString *)aToken characterID:(NSInteger)aCharacterID
+{
+  return [[[self alloc] initWithToken:aToken characterID:aCharacterID] autorelease];
+}
+
 #pragma mark - Dealloc
 
 - (void)dealloc
@@ -45,5 +50,7 @@
   [_token release];
   [super dealloc];
 }
+
+
 
 @end

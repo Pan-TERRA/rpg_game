@@ -10,7 +10,20 @@
 
 @interface RPGNetworkManager (Classes)
 
+/**
+ *  Fetches class identifiers.
+ *
+ *  @param callbackBlock A completion handler
+ */
 - (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger status, NSArray *classes))callbackBlock;
-- (void)getClassInfoByID:(NSInteger)ID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
+
+/**
+ *  Fetches class info such as name and description.
+ *
+ *  @param anID          A class ID.
+ *  @param callbackBlock A completion handler.
+ */
+- (void)getClassInfoByID:(NSInteger)anID
+       completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
 
 @end
