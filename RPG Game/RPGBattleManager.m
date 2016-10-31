@@ -139,8 +139,7 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
-                                                      object:self];
+   [self sendBattleInitRequest];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
@@ -164,6 +163,9 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
     if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitMessageType])
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
+        // send notification to main menu
+      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
+                                                          object:self];
     }
     
       // battle condition

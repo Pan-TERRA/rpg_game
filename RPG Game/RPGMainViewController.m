@@ -135,7 +135,7 @@
 #pragma mark - Notifications
 
 /**
- *  Performs after SRWebSocket webSocketDidOpen:
+ *  Performs after SRWebSocket receive BATTLE_INIT message
  *
  */
 - (void)battleManagerDidEndSetUp:(NSNotification *)aNotification
@@ -143,9 +143,6 @@
   [self.battleInitModal.view removeFromSuperview];
   [self.battleInitModal removeFromParentViewController];
   
-  [self presentViewController:self.battleViewController animated:YES completion:^
-   {
-     [self.battleViewController.battleManager sendBattleInitRequest];
-   }];
+  [self presentViewController:self.battleViewController animated:YES completion:nil];
 }
 @end
