@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "RPGQuestListState.h"
 
-@interface RPGQuestTableController : NSObject
+@class RPGQuestListViewController;
+
+@interface RPGQuestTableViewController : NSObject <UITableViewDelegate, UITableViewDataSource>
+
+@property (nonatomic, assign, readwrite) RPGQuestListViewController *questListViewController;
+@property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
+@property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
+@property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
+@property (nonatomic, assign, readwrite) RPGQuestListState questListState;
 
 @end
