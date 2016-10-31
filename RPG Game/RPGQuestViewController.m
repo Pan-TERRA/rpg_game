@@ -28,8 +28,11 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *rewardTypeImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsRewardImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldRewardImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
@@ -130,7 +133,17 @@
 {
   self.titleLabel.text = aQuest.name;
   self.descriptionLabel.text = aQuest.questDescription;
-  self.rewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  self.crystalsRewardLabel.text = [@(aQuest.reward.crystals) stringValue];
+  self.goldRewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  if (aQuest.reward.skillID != 0)
+  {
+    
+  }
+  else
+  {
+    self.skillRewardImageView.hidden = YES;
+  }
+  
   self.state = aQuest.state;
   self.questID = aQuest.questID;
   self.proofImageStringURL = aQuest.proofImageStringURL;
