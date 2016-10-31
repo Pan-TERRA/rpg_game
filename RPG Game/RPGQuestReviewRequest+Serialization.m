@@ -17,7 +17,7 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 {
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGQuestReviewRequestResult] = self.token;
+  dictionaryRepresentation[kRPGQuestReviewRequestResult] = @(self.result);
   
   return dictionaryRepresentation;
 }
