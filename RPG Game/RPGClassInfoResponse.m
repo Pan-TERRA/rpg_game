@@ -13,7 +13,7 @@
 - (instancetype)initWithStatus:(NSInteger)status classInfo:(NSDictionary *)classInfo
 {
   self = [super init];
-  if (self)
+  if (self != nil)
   {
     _status = status;
     _classInfo = [[NSDictionary alloc] initWithDictionary:classInfo];

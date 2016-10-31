@@ -16,7 +16,7 @@
 - (instancetype)initWithToken:(NSString *)token characterID:(NSInteger)characterID
 {
   self = [super init];
-  if (self)
+  if (self != nil)
   {
     if (token != nil && characterID >= 0)
     {

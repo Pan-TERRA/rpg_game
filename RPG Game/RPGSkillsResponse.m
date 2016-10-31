@@ -18,7 +18,7 @@
 - (instancetype)initWithStatus:(NSInteger)status skills:(NSArray *)skills
 {
   self = [super init];
-  if (self)
+  if (self != nil)
   {
     _status = status;
     _skills = [[NSArray alloc] initWithArray:skills];

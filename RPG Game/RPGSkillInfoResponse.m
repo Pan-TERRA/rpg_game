@@ -13,7 +13,7 @@
 - (instancetype)initWithStatus:(NSInteger)status skill:(NSDictionary *)skill
 {
   self = [super init];
-  if (self)
+  if (self != nil)
   {
     _status = status;
     _skill = [[NSDictionary alloc] initWithDictionary:skill];
