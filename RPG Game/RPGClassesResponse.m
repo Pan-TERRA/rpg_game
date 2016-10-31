@@ -21,7 +21,14 @@
   if (self != nil)
   {
     _status = status;
+    if (classes != nil)
+    {
     _classes = [[NSArray alloc] initWithArray:classes];
+    }
+    else
+    {
+      _classes = [[NSArray alloc] init];
+    }
   }
   
   return self;

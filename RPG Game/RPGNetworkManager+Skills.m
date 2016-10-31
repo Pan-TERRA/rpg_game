@@ -22,8 +22,8 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
   
-  RPGSkillsRequest *aRequest = [[RPGSkillsRequest alloc] initWithToken:[NSUserDefaults standardUserDefaults].sessionToken
-                                                           characterID:characterID];
+  RPGSkillsRequest *aRequest = [[[RPGSkillsRequest alloc] initWithToken:[NSUserDefaults standardUserDefaults].sessionToken
+                                                           characterID:characterID] autorelease];
   
   NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
   

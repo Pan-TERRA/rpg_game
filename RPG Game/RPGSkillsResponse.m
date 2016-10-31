@@ -21,7 +21,14 @@
   if (self != nil)
   {
     _status = status;
-    _skills = [[NSArray alloc] initWithArray:skills];
+    if (skills != nil)
+    {
+      _skills = [[NSArray alloc] initWithArray:skills];
+    }
+    else
+    {
+      _skills = [[NSArray alloc] init];
+    }
   }
   
   return self;
