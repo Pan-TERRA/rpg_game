@@ -18,6 +18,8 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestAction.h"
 #import <AVFoundation/AVFoundation.h>
+#import "RPGStatusCodes.h"
+#import "RPGAlert.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -279,16 +281,33 @@
   // !!!: leak
   __block typeof(self) weakSelf = self;
   
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
     weakSelf.addProofButton.enabled = YES;
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      weakSelf.state = kRPGQuestStateDone;
-      [weakSelf setStateReviewedQuest:NO];
-      weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
-      weakSelf.proofImageView.image = chosenImage;
+      case kRPGStatusCodeOk:
+      {
+        weakSelf.state = kRPGQuestStateDone;
+        [weakSelf setStateReviewedQuest:NO];
+        weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+        weakSelf.proofImageView.image = chosenImage;
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't upload proof image.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        break;
+      }
     }
   };
   
