@@ -245,7 +245,6 @@
   {
     [self sendQuestProofWithResult:YES];
   }
-  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender
@@ -329,13 +328,35 @@
 
 - (void)takeQuest
 {
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  self.acceptButton.enabled = NO;
+  
+  __block typeof(self) weakSelf = self;
+  
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      
+      case kRPGStatusCodeOk:
+      {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't take quest.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        break;
+      }
     }
+    weakSelf.acceptButton.enabled = YES;
   };
   NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
