@@ -7,10 +7,11 @@
 //
 
 #import "RPGAppDelegate.h"
-#import "RPGNibNames.h"
-#import "RPGRegistrationViewController.h"
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
+#import "RPGInitialScreenViewController.h"
+// Constants
+#import "RPGNibNames.h"
 
 @interface RPGAppDelegate ()
 
@@ -22,7 +23,6 @@
 
 - (void)dealloc
 {
-  [_loginViewController release];
   [_window release];
   [super dealloc];
 }
@@ -32,8 +32,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
   self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-  RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
-  [self.window setRootViewController:loginViewController];
+  
+  RPGInitialScreenViewController *initialScreenViewController = [[RPGInitialScreenViewController alloc] init];
+  [self.window setRootViewController:initialScreenViewController];
+  [initialScreenViewController release];
+  
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
     

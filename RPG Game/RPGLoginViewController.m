@@ -11,6 +11,7 @@
 #import "RPGMainViewController.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGAuthorizationLoginRequest+Serialization.h"
+// Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
@@ -74,18 +75,6 @@
     mask = UIInterfaceOrientationMaskLandscape;
   }
   return mask;
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-  [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
-   {
-     if (isValid)
-     {
-       RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
-       [self presentViewController:mainViewController animated:NO completion:nil];
-     }
-   }];
 }
 
 #pragma mark - View State

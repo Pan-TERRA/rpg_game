@@ -8,15 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "RPGLoginViewController.h"
-
 @class RPGMainViewController;
 
 @interface RPGAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (retain, nonatomic) UIWindow *window;
-
-@property (retain, nonatomic) RPGLoginViewController *loginViewController;
 
 
 @end
