@@ -117,7 +117,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
   {
     [weakSelf setViewToNormalState];
-    
     switch (statusCode)
     {
       case kRPGStatusCodeOk:
@@ -131,14 +130,16 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       }
       case kRPGStatusCodeWrongToken:
       {
-        RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
-        [self presentViewController:loginViewController
-                           animated:YES
-                         completion:nil];
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+        [weakSelf showAlertViewControllerWithMessage:message viewController:loginViewController];
         break;
       }
       default:
       {
+        NSString *message = @"Can't update quest list.";
+        [weakSelf showAlertViewControllerWithMessage:message viewController:weakSelf];
         break;
       }
     }
@@ -272,6 +273,23 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Show Alert
+
+- (void)showAlertViewControllerWithMessage:(NSString *)message viewController:(UIViewController *)viewController
+{
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                 message:message
+                                                          preferredStyle:UIAlertControllerStyleAlert];
+  [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+                                            style:UIAlertActionStyleCancel
+                                          handler:^(UIAlertAction *action)
+  {
+    [alert dismissViewControllerAnimated:YES completion:nil];
+  }]];
+  
+  [viewController presentViewController:alert animated:YES completion:nil];
 }
 
 @end
