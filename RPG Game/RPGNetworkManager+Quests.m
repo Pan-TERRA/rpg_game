@@ -148,17 +148,14 @@
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       });
-      
-      return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    else
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(responseObject.status, responseObject.quests);
       });
     }
-
   }];
   
   [task resume];
@@ -275,16 +272,14 @@
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       });
-      return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    else
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(responseObject.status);
       });
     }
-
   }];
   
   [task resume];
@@ -418,9 +413,8 @@
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       });
-      return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    else
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -552,9 +546,8 @@
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       });
-      return;
     }
-    else if (responseObject.status == kRPGStatusCodeOk)
+    else
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
