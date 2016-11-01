@@ -8,6 +8,7 @@
 
 #import "RPGNetworkManager.h"
 #import "RPGSerializable.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -17,6 +18,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 // General
 NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
+static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/tokenexists";
 // Authorization
 NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
 NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
@@ -131,5 +133,64 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   return request;
 }
 
+#pragma mark - General requests
+
+- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock
+{
+  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+  if (token != nil)
+  {
+    NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                               kRPGNetworkManagerAPIHost,
+                               kRPGNetworkManagerAPITokenExistsRoute];
+    
+    NSURLRequest *request = [self requestWithObject:@{ @"token": token }
+                                          URLstring:requestString
+                                             method:@"POST"];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    [[session dataTaskWithRequest:request
+               completionHandler:^(NSData * _Nullable data,
+                                   NSURLResponse * _Nullable response,
+                                   NSError * _Nullable error)
+    {
+      BOOL result = NO;
+      
+      if (error == nil && data != nil)
+      {
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                           options:0
+                                                                             error:nil];
+        if (responseDictionary != nil
+            && responseDictionary[@"status"] != nil
+            && [responseDictionary[@"status"] integerValue] == 0)
+        {
+          result = YES;
+        }
+      }
+      else
+      {
+        NSLog(@"Network error");
+        NSLog(@"Domain: %@", error.domain);
+        NSLog(@"Error Code: %ld", error.code);
+        NSLog(@"Description: %@", [error localizedDescription]);
+        NSLog(@"Reason: %@", [error localizedFailureReason]);
+      }
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(result);
+      });
+      
+    }] resume];
+    
+    [session finishTasksAndInvalidate];
+  }
+  else
+  {
+    callbackBlock(NO);
+  }
+}
 
 @end

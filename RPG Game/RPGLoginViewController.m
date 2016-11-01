@@ -14,6 +14,7 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
+
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
@@ -73,6 +74,18 @@
     mask = UIInterfaceOrientationMaskLandscape;
   }
   return mask;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
+   {
+     if (isValid)
+     {
+       RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
+       [self presentViewController:mainViewController animated:NO completion:nil];
+     }
+   }];
 }
 
 #pragma mark - View State

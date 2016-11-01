@@ -60,6 +60,10 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
  */
 - (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
 
+#pragma mark - General requests
+
+- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
+
 @end
 
 NS_ASSUME_NONNULL_END
