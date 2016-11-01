@@ -214,7 +214,16 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      [self showQuestViewWithQuest:[aData firstObject]];
+      if ([aData count])
+      {
+        [self showQuestViewWithQuest:[aData firstObject]];
+      }
+      else
+      {
+        NSString *message = @"No quests for review.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:self];
+        [self.viewStateButtonControl setSelectedSegmentIndex:self.tableViewController.questListState];
+      }
       break;
     }
   }
