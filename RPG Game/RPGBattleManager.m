@@ -15,10 +15,13 @@
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGBattleConditionResponse+Serialization.h"
 #import "RPGBattleConditionResponse.h"
+#import "RPGNetworkManager.h"
+#import "RPGNetworkManager+Skills.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
+#import "RPGStatusCodes.h"
 
   // Notifications
 NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDidEndSetUp";
@@ -27,6 +30,8 @@ NSString * const kRPGBattleManagerModelDidChangeNotification = @"RPGBattleManage
 // TODO: replace to separate header file
 static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.31:8888/ws";
 static NSString * const kRPGBattleManagerResponseType = @"type";
+
+typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGBattleManager () <SRWebSocketDelegate>
 
@@ -165,9 +170,46 @@ static NSString * const kRPGBattleManagerResponseType = @"type";
     if ([responseDictionary[kRPGBattleManagerResponseType] isEqualToString:kRPGBattleInitMessageType])
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
+      
+     
+      
+      
+      fetchSkillsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *skills)
+      {
+        switch (statusCode)
+        {
+          case kRPGStatusCodeOk:
+          {
+            self.battle.player = [[RPGPlayer alloc] initWithSkills:skills];
+            break;
+          }
+          default:
+          {
+            NSLog(@"RPGBattleManager. Fetch skills unknown error");
+            self.battle.player = [[RPGPlayer alloc] initWithSkills:[NSArray array]];
+            break;
+          }
+        }
         // send notification to main menu
-      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
-                                                          object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
+                                                            object:self];
+      };
+      
+      NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+      NSDictionary *character = nil;
+      NSInteger characterID = -1;
+      if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
+      {
+        character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
+      }
+      if (character)
+      {
+        characterID = [character[@"char_id"] integerValue];
+      }
+      
+      [[RPGNetworkManager sharedNetworkManager] fetchSkillsByCharacterID:characterID completionHandler:handler];
+
+      
     }
     
       // battle condition

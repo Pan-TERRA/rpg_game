@@ -16,6 +16,7 @@
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse+Serialization.h"
+#import "RPGSkill.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -127,43 +128,17 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark  Skill Action
+#pragma mark - Skill Action
 
-- (IBAction)spell1_action:(UIButton *)aSender
+- (IBAction)skillAction:(UIButton *)aSender
 {
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:1];
-  
-  [self.battleManager sendSkillActionRequestWithID:aSender.tag];
-}
-
-- (IBAction)spell2_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:2];
-}
-
-- (IBAction)spell3_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:3];
-}
-
-- (IBAction)spell4_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:4];
-}
-
-- (IBAction)spell5_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:5];
-}
-
-- (IBAction)spell6_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:6];
-}
-
-- (IBAction)spell7_action:(id)aSender
-{
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
+  RPGSkill *usingSkill = nil;
+  if (aSender.tag < self.battleManager.battle.player.skills.count)
+  {
+    usingSkill = self.battleManager.battle.player.skills[aSender.tag];
+    [self.battleManager sendSkillActionRequestWithID:usingSkill.skillID];
+  }
+  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:aSender.tag];
 }
 
 #pragma mark - Notifications

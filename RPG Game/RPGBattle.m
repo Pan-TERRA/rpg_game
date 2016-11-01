@@ -28,7 +28,6 @@
   
   if (self != nil)
   {
-    _player = [[RPGPlayer alloc] initWithSkills:[NSArray array]];
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;

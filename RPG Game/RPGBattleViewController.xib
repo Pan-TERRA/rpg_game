@@ -77,19 +77,7 @@
                     <color key="textColor" red="1" green="0.60024914940615237" blue="0.087810021978525388" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv">
-                    <rect key="frame" x="8" y="310" width="96" height="96"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="gRd-Qf-vfv" secondAttribute="height" multiplier="1:1" id="CDz-Ye-ZJl"/>
-                    </constraints>
-                    <state key="normal" title="Spell_1">
-                        <color key="titleColor" red="0.56231745390475329" green="0.49745047836397116" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="spell1_action:" destination="-1" eventType="touchUpInside" id="tAt-di-3hV"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS">
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS">
                     <rect key="frame" x="112" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="5ie-zx-qMS" secondAttribute="height" multiplier="1:1" id="RXf-Vf-8QI"/>
@@ -98,10 +86,10 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell2_action:" destination="-1" eventType="touchUpInside" id="2Dr-1E-0Ga"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="hyR-EE-4QH"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P">
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P">
                     <rect key="frame" x="216" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="oJF-h0-v6P" secondAttribute="height" multiplier="1:1" id="lpv-7m-iwl"/>
@@ -110,10 +98,10 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell3_action:" destination="-1" eventType="touchUpInside" id="jOq-hd-3vI"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="mOX-Lp-Zma"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE">
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE">
                     <rect key="frame" x="320" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="6tp-kP-1RE" secondAttribute="height" multiplier="1:1" id="FTf-TT-pEf"/>
@@ -122,10 +110,10 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell4_action:" destination="-1" eventType="touchUpInside" id="YNg-XB-tey"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="wVP-Vm-5oI"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY">
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY">
                     <rect key="frame" x="424" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="kPK-Ei-hzY" secondAttribute="height" multiplier="1:1" id="Nla-0o-RNe"/>
@@ -134,10 +122,10 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell5_action:" destination="-1" eventType="touchUpInside" id="AsJ-sq-ywL"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="9mf-lt-0sy"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y">
+                <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y">
                     <rect key="frame" x="528" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="INb-B7-s2Y" secondAttribute="height" multiplier="1:1" id="mgh-GP-K5s"/>
@@ -146,10 +134,10 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell6_action:" destination="-1" eventType="touchUpInside" id="H7m-Hf-jvr"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="SZc-8U-tbU"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS">
+                <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS">
                     <rect key="frame" x="632" y="310" width="96" height="96"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jrS-I0-TxS" secondAttribute="height" multiplier="1:1" id="PWW-ri-9ee"/>
@@ -158,7 +146,7 @@
                         <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
-                        <action selector="spell7_action:" destination="-1" eventType="touchUpInside" id="VtP-Lw-FDT"/>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="osD-TM-FrE"/>
                     </connections>
                 </button>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" editable="NO" text="[Player1]: damaged to 85 [Player2]: resolve 20 hp [Player2]: damaged to 15 [Player1]: *ушёл пить чай*" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="2cd-xD-wsS">
@@ -172,6 +160,18 @@
                     <state key="normal" title="Back (временная кнопка)"/>
                     <connections>
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="ubY-O3-5J4"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv">
+                    <rect key="frame" x="8" y="310" width="96" height="96"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="gRd-Qf-vfv" secondAttribute="height" multiplier="1:1" id="CDz-Ye-ZJl"/>
+                    </constraints>
+                    <state key="normal" title="Spell_1">
+                        <color key="titleColor" red="0.56231745390475329" green="0.49745047836397116" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="mCj-LS-NV0"/>
                     </connections>
                 </button>
             </subviews>

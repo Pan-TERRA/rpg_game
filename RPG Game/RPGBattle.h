@@ -19,7 +19,7 @@
  */
 @interface RPGBattle : NSObject
 
-@property (retain, nonatomic, readonly) RPGPlayer *player;
+@property (retain, nonatomic, readwrite) RPGPlayer *player;
 @property (retain, nonatomic, readonly) RPGEntity *opponent;
 @property (assign, nonatomic, readonly) NSInteger startTime;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
