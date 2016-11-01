@@ -21,9 +21,9 @@
   [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
                                             style:UIAlertActionStyleCancel
                                           handler:^(UIAlertAction *action)
-                    {
-                      [alert dismissViewControllerAnimated:YES completion:nil];
-                    }]];
+  {
+    [alert dismissViewControllerAnimated:YES completion:nil];
+  }]];
   
   [viewController presentViewController:alert animated:YES completion:nil];
 }
