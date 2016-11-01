@@ -34,7 +34,7 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGRegistrationViewController bundle:nil];
+  self = [super initWithNibName:kRPGRegistrationViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {

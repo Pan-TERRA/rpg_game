@@ -8,12 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kRPGMainView;
-extern NSString * const kRPGBattleViewController;
-extern NSString * const kRPGSettingsViewController;
-extern NSString * const kRPGQuestListViewController;
-extern NSString * const kRPGQuestListTableViewCell;
-extern NSString * const kRPGQuestViewController;
-extern NSString * const kRPGQuestProofImageViewController;
-extern NSString * const kRPGRegistrationViewController;
-extern NSString * const kRPGLoginViewController;
+extern NSString * const kRPGMainViewNIBName;
+extern NSString * const kRPGBattleViewControllerNIBName;
+extern NSString * const kRPGSettingsViewControllerNIBName;
+extern NSString * const kRPGQuestListViewControllerNIBName;
+extern NSString * const kRPGQuestListTableViewCellNIBName;
+extern NSString * const kRPGQuestViewControllerNIBName;
+extern NSString * const kRPGQuestProofImageViewControllerNIBName;
+extern NSString * const kRPGRegistrationViewControllerNIBName;
+extern NSString * const kRPGLoginViewControllerNIBName;

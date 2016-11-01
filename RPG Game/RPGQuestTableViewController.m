@@ -115,11 +115,11 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCell];
+  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCellNIBName];
   
   if (cell == nil)
   {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCell
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCellNIBName
                                                  owner:self
                                                options:nil];
     cell = [nib firstObject];

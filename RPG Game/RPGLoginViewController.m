@@ -31,7 +31,7 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGLoginViewController bundle:nil];
+  self = [super initWithNibName:kRPGLoginViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {

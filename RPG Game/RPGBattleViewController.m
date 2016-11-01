@@ -51,7 +51,7 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGBattleViewController bundle:nil];
+  self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {

@@ -21,7 +21,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGQuestProofImageViewController
+  return [super initWithNibName:kRPGQuestProofImageViewControllerNIBName
                          bundle:nil];
 }
 

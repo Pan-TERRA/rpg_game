@@ -32,7 +32,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGMainView
+  return [super initWithNibName:kRPGMainViewNIBName
                          bundle:nil];
 }
 

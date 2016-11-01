@@ -44,7 +44,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGQuestListViewController bundle:nil];
+  self = [super initWithNibName:kRPGQuestListViewControllerNIBName bundle:nil];
   if (self != nil)
   {
     _tableViewController = [[RPGQuestTableViewController alloc] init];

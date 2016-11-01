@@ -49,7 +49,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGQuestViewController
+  return [super initWithNibName:kRPGQuestViewControllerNIBName
                          bundle:nil];
 }
 

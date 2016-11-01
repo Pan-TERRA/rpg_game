@@ -29,7 +29,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGSettingsViewController
+  return [super initWithNibName:kRPGSettingsViewControllerNIBName
                          bundle:nil];
 }
 

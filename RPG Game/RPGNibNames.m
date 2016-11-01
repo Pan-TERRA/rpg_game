@@ -8,12 +8,12 @@
 
 #import "RPGNibNames.h"
 
-NSString * const kRPGMainView = @"RPGMainView";
-NSString * const kRPGBattleViewController = @"RPGBattleViewController";
-NSString * const kRPGSettingsViewController = @"RPGSettingsViewController";
-NSString * const kRPGQuestListViewController = @"RPGQuestListViewController";
-NSString * const kRPGQuestListTableViewCell = @"RPGQuestListTableViewCell";
-NSString * const kRPGQuestViewController = @"RPGQuestViewController";
-NSString * const kRPGQuestProofImageViewController = @"RPGQuestProofImageViewController";
-NSString * const kRPGRegistrationViewController = @"RPGRegistrationViewController";
-NSString * const kRPGLoginViewController = @"RPGLoginViewController";
+NSString * const kRPGMainViewNIBName = @"RPGMainView";
+NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
+NSString * const kRPGSettingsViewControllerNIBName = @"RPGSettingsViewController";
+NSString * const kRPGQuestListViewControllerNIBName = @"RPGQuestListViewController";
+NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell";
+NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
+NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
+NSString * const kRPGRegistrationViewControllerNIBName = @"RPGRegistrationViewController";
+NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
