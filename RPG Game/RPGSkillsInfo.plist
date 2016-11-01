@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>4</key>
+	<dict>
+		<key>description</key>
+		<string>Hit&amp;Run</string>
+		<key>name</key>
+		<string>Hit</string>
+		<key>multiplier</key>
+		<integer>3</integer>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>description</key>
+		<string>Cook a borsch and kill a man</string>
+		<key>name</key>
+		<string>Borsch</string>
+		<key>multiplier</key>
+		<integer>2</integer>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>description</key>
+		<string>Kill everyone with a fire</string>
+		<key>name</key>
+		<string>Fireball</string>
+		<key>multiplier</key>
+		<integer>2</integer>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>description</key>
+		<string>Attack on every turn</string>
+		<key>name</key>
+		<string>autoattack</string>
+		<key>multiplier</key>
+		<integer>1</integer>
+	</dict>
+</dict>
+</plist>
