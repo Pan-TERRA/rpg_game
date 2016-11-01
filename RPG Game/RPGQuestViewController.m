@@ -282,7 +282,6 @@
   
   void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    weakSelf.addProofButton.enabled = YES;
     switch (statusCode)
     {
       case kRPGStatusCodeOk:
@@ -418,13 +417,37 @@
 
 - (void)sendQuestProofWithResult:(BOOL)aResult
 {
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  self.acceptButton.enabled = NO;
+  self.denyButton.enabled = NO;
+  
+  __block typeof(self) weakSelf = self;
+  
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      
+      case kRPGStatusCodeOk:
+      {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't send quest proof.";
+        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        break;
+      }
     }
+    self.acceptButton.enabled = YES;
+    self.denyButton.enabled = YES;
   };
   NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
   RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questID result:aResult];
