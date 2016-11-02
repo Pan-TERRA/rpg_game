@@ -9,6 +9,8 @@
 #import "RPGBattleManager.h"
   // Entities
 #import "RPGBattle.h"
+#import "RPGSkill.h"
+#import "RPGSkill+Serialization.h"
 #import "RPGRequest+Serialization.h"
 #import "RPGSkillActionRequest+Serialization.h"
 #import "RPGTimeResponse+Serialization.h"
@@ -171,16 +173,21 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
       
-     
-      
-      
       fetchSkillsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *skills)
       {
         switch (statusCode)
         {
           case kRPGStatusCodeOk:
           {
-            self.battle.player = [[RPGPlayer alloc] initWithSkills:skills];
+            //Convert NSDictionary -> RPGSkill
+            NSMutableArray *skillsArray = [NSMutableArray array];
+            for (NSDictionary *skillDictionary in skills)
+            {
+//              RPGSkill *skill = [[[RPGSkill alloc] initWithDictionaryRepresentation:skillDictionary] autorelease];
+//              [skillsArray addObject:skill];
+            }
+            //Тут надо с плиста доставать по ID, а не вся та хрень, которую делаю я.
+            self.battle.player = [[RPGPlayer alloc] initWithSkills:skillsArray];
             break;
           }
           default:
@@ -191,8 +198,11 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
           }
         }
         // send notification to main menu
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
+                                                            object:self];
         [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
                                                             object:self];
+        
       };
       
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -239,8 +249,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
-                                                        object:self];
+   
   }
     // battle condition
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)

@@ -21,7 +21,7 @@
   
   if (self != nil)
   {
-    _skills = aSkills;
+    _skills = [aSkills retain];
   }
   
   return self;
