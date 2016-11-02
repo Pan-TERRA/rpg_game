@@ -183,11 +183,12 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
             NSMutableArray *skillsArray = [NSMutableArray array];
             for (NSDictionary *skillDictionary in skills)
             {
-//              RPGSkill *skill = [[[RPGSkill alloc] initWithDictionaryRepresentation:skillDictionary] autorelease];
-//              [skillsArray addObject:skill];
+              NSInteger skillID = [skillDictionary[@"skill_id"] integerValue];
+              RPGSkill *skill = [RPGSkill skillWithSkillID:skillID];
+              [skillsArray addObject:skill];
             }
-            //Тут надо с плиста доставать по ID, а не вся та хрень, которую делаю я.
-            self.battle.player = [[RPGPlayer alloc] initWithSkills:skillsArray];
+
+            self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
             break;
           }
           default:
@@ -208,6 +209,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
       NSDictionary *character = nil;
       NSInteger characterID = -1;
+      
       if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
       {
         character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
@@ -219,7 +221,6 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
       
       [[RPGNetworkManager sharedNetworkManager] fetchSkillsByCharacterID:characterID completionHandler:handler];
 
-      
     }
     
       // battle condition
