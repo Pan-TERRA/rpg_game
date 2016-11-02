@@ -28,7 +28,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGQuestListViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UISegmentedControl *viewStateButtonControl;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *takeQuestListButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *inProgressQuestListButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *doneQuestListButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *reviewQuestButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 
@@ -76,7 +79,9 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [super viewWillAppear:anAnimated];
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
-  [self.viewStateButtonControl setSelectedSegmentIndex:self.tableViewController.questListState];
+  RPGQuestListState state = self.tableViewController.questListState;
+  [self setActiveButtonForState:state];
+  [self updateViewForState:state willReload:YES];
   [self setViewToNormalState];
 }
 
@@ -222,7 +227,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       {
         NSString *message = @"No quests for review.";
         [RPGAlert showAlertViewControllerWithMessage:message viewController:self];
-        [self.viewStateButtonControl setSelectedSegmentIndex:self.tableViewController.questListState];
+        [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;
     }
@@ -241,9 +246,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark - IBActions
 
-- (IBAction)viewStateButtonControlOnClick:(UISegmentedControl *)aSender
+- (IBAction)viewStateButtonOnClick:(UIButton *)aSender
 {
-  RPGQuestListState state = aSender.selectedSegmentIndex;
+  RPGQuestListState state = aSender.tag;
+  [self setActiveButtonForState:state];
   
   if (state != kRPGQuestListReviewQuest)
   {
@@ -272,9 +278,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     case kRPGQuestListReviewQuest:
     {
       [self updateViewForState:state willReload:YES];
-    }
-    default:
-    {
       break;
     }
   }
@@ -283,6 +286,52 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - Set Button Image
+
+- (void)setActiveButtonForState:(RPGQuestListState)aState
+{
+  UIImage *activeButtonImage = [UIImage imageNamed:@""];
+  UIImage *inactiveButtonImage = [UIImage imageNamed:@""];
+  
+  [self.takeQuestListButton setImage:inactiveButtonImage forState:UIControlStateNormal];
+  [self.inProgressQuestListButton setImage:inactiveButtonImage forState:UIControlStateNormal];
+  [self.doneQuestListButton setImage:inactiveButtonImage forState:UIControlStateNormal];
+  [self.reviewQuestButton setImage:inactiveButtonImage forState:UIControlStateNormal];
+  
+  [self.takeQuestListButton setImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+  [self.inProgressQuestListButton setImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+  [self.doneQuestListButton setImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+  [self.reviewQuestButton setImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+  
+  switch (aState)
+  {
+    case kRPGQuestListTakeQuest:
+    {
+      [self.takeQuestListButton setImage:activeButtonImage forState:UIControlStateNormal];
+      [self.takeQuestListButton setImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      break;
+    }
+    case kRPGQuestListInProgressQuest:
+    {
+      [self.inProgressQuestListButton setImage:activeButtonImage forState:UIControlStateNormal];
+      [self.inProgressQuestListButton setImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      break;
+    }
+    case kRPGQuestListDoneQuest:
+    {
+      [self.inProgressQuestListButton setImage:activeButtonImage forState:UIControlStateNormal];
+      [self.doneQuestListButton setImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      break;
+    }
+    case kRPGQuestListReviewQuest:
+    {
+      [self.reviewQuestButton setImage:activeButtonImage forState:UIControlStateNormal];
+      [self.reviewQuestButton setImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      break;
+    }
+  }
 }
 
 @end
