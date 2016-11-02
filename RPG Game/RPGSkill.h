@@ -13,7 +13,7 @@
 @property (assign, nonatomic, readonly) NSInteger skillID;
 @property (assign, nonatomic, readwrite) NSInteger cooldown;
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown;
-+ (instancetype)skillWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown;
+- (instancetype)initWithSkillID:(NSInteger)aSkillID;
++ (instancetype)skillWithSkillID:(NSInteger)aSkillID;
 
 @end

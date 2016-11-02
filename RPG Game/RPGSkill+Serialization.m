@@ -26,8 +26,12 @@ NSString * const kRPGSkillCooldown = @"cooldown";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithSkillID:[aDictionary[kRPGSkillID] integerValue]
-                      cooldown:[aDictionary[kRPGSkillCooldown] integerValue]];
+  self = [self initWithSkillID:[aDictionary[kRPGSkillID] integerValue]];
+  if (self)
+  {
+    self.cooldown = [aDictionary[kRPGSkillCooldown] integerValue];
+  }
+  return self;
 }
 
 

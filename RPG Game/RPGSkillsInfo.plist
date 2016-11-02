@@ -4,12 +4,18 @@
 <dict>
 	<key>4</key>
 	<dict>
-		<key>description</key>
+		<key>specification</key>
 		<string>Hit&amp;Run</string>
 		<key>name</key>
 		<string>Hit</string>
 		<key>multiplier</key>
 		<integer>3</integer>
+		<key>cooldown</key>
+		<integer>1</integer>
+		<key>imageName</key>
+		<string></string>
+		<key>soundName</key>
+		<string></string>
 	</dict>
 	<key>3</key>
 	<dict>
@@ -19,6 +25,12 @@
 		<string>Borsch</string>
 		<key>multiplier</key>
 		<integer>2</integer>
+		<key>cooldown</key>
+		<integer>1</integer>
+		<key>imageName</key>
+		<string></string>
+		<key>soundName</key>
+		<string></string>
 	</dict>
 	<key>2</key>
 	<dict>
@@ -28,6 +40,12 @@
 		<string>Fireball</string>
 		<key>multiplier</key>
 		<integer>2</integer>
+		<key>cooldown</key>
+		<integer>1</integer>
+		<key>imageName</key>
+		<string></string>
+		<key>soundName</key>
+		<string></string>
 	</dict>
 	<key>1</key>
 	<dict>
@@ -37,6 +55,12 @@
 		<string>autoattack</string>
 		<key>multiplier</key>
 		<integer>1</integer>
+		<key>cooldown</key>
+		<integer>1</integer>
+		<key>imageName</key>
+		<string></string>
+		<key>soundName</key>
+		<string></string>
 	</dict>
 </dict>
 </plist>

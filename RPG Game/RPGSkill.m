@@ -18,22 +18,21 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown
+- (instancetype)initWithSkillID:(NSInteger)aSkillID
 {
   self = [super init];
   
   if (self != nil)
   {
     _skillID = aSkillID;
-    _cooldown = aCooldown;
   }
   
   return self;
 }
 
-+ (instancetype)skillWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown
++ (instancetype)skillWithSkillID:(NSInteger)aSkillID
 {
-  return [[[self alloc] initWithSkillID:aSkillID cooldown:aCooldown] autorelease];
+  return [[[self alloc] initWithSkillID:aSkillID] autorelease];
 }
 
 
