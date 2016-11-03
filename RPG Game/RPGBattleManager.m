@@ -194,7 +194,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
           default:
           {
             NSLog(@"RPGBattleManager. Fetch skills unknown error");
-            self.battle.player = [[RPGPlayer alloc] initWithSkills:[NSArray array]];
+            self.battle.player = [RPGPlayer playerWithSkills:[NSArray array]];
             break;
           }
         }

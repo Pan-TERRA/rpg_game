@@ -9,7 +9,7 @@
 #import "RPGSkillRepresentation.h"
 
 NSString * const kRPGSkillRepresentationName = @"name";
-NSString * const kRPGSkillRepresentationSpecification = @"description";
+NSString * const kRPGSkillRepresentationSkillDescription = @"description";
 NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
 NSString * const kRPGSkillRepresentationCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
@@ -22,7 +22,8 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 - (instancetype)initWithSkillID:(NSInteger)aSkillID
 {
   self = [super init];
-  if (self)
+  
+  if (self != nil)
   {
     //TODO: remove hardcode
     NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
@@ -30,19 +31,20 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
     NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
     
     _name = [skillDictionary[kRPGSkillRepresentationName] copy];
-    _specification = [skillDictionary[kRPGSkillRepresentationSpecification] copy];
+    _skillDescription = [skillDictionary[kRPGSkillRepresentationSkillDescription] copy];
     _multiplier = [skillDictionary[kRPGSkillRepresentationMultiplier] floatValue];
     _cooldown = [skillDictionary[kRPGSkillRepresentationCooldown] integerValue];
     _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
     _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
   }
+  
   return self;
 }
 
 - (void)dealloc
 {
   [_name release];
-  [_specification release];
+  [_skillDescription release];
   [_imageName release];
   [_soundName release];
   [super dealloc];

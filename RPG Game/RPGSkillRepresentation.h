@@ -18,7 +18,7 @@ extern NSString * const kRPGSkillRepresentationSoundName;
 @interface RPGSkillRepresentation : NSObject
 
 @property (nonatomic, copy, readonly) NSString *name;
-@property (nonatomic, copy, readonly) NSString *specification;
+@property (nonatomic, copy, readonly) NSString *skillDescription;
 @property (nonatomic, assign, readonly) float multiplier;
 @property (nonatomic, assign, readonly) NSInteger cooldown;
 @property (nonatomic, copy, readonly) NSString *imageName;
