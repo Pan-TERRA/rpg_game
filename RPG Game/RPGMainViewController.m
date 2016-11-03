@@ -19,8 +19,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
-@property (nonatomic, assign, readwrite) IBOutlet UIViewController *battleInitModal;
-@property (nonatomic, assign, readwrite) RPGBattleViewController *battleViewController;
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, retain, readwrite) RPGBattleViewController *battleViewController;
 
 @end
 
