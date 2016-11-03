@@ -21,8 +21,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
-@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
-@property (retain, nonatomic) IBOutlet RPGBattleViewController *battleViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, assign, readwrite) IBOutlet RPGBattleViewController *battleViewController;
 
 @end
 
@@ -42,8 +42,6 @@
                                                   name:kRPGBattleManagerDidEndSetUpNotification
                                                 object:self.battleViewController.battleManager];
   
-  [_battleViewController release];
-  [_battleInitModal release];
   [super dealloc];
 }
 
