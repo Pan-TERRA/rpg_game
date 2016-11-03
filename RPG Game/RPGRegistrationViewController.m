@@ -164,11 +164,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
          BOOL success = (statusCode == 0);
          if (success)
          {
-           RPGLoginViewController *loginViewController = [[RPGLoginViewController alloc] init];
-           [self presentViewController:loginViewController
-                              animated:YES
-                            completion:nil];
-           [loginViewController release];
+           [self dismissViewControllerAnimated:YES completion:nil];
          }
          else
          {
