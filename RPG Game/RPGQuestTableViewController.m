@@ -125,6 +125,10 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     cell = [nib firstObject];
   }
   
+  cell.backgroundColor = [UIColor clearColor];
+  cell.backgroundView = [[UIView new] autorelease];
+  cell.selectedBackgroundView = [[UIView new] autorelease];
+  
   switch (self.questListState)
   {
     case kRPGQuestListTakeQuest:
