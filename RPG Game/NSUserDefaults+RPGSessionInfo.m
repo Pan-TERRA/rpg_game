@@ -65,7 +65,7 @@
 
 - (void)setSessionCrystals:(NSInteger)sessionCrystals
 {
-  [self setInteger:self.sessionCrystals forKey:kRPGUserSessionKeyCrystals];
+  [self setInteger:sessionCrystals forKey:kRPGUserSessionKeyCrystals];
 }
 
 - (NSInteger)sessionCrystals
