@@ -102,6 +102,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
              titleForRow:(NSInteger)aRow
             forComponent:(NSInteger)aComponent
 {
+  //TODO: remove hardcode
   return self.classPickerData[aRow][@"className"];
 }
 
@@ -208,7 +209,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
 - (NSInteger)getSelectedClassID
 {
   NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
+  //TODO: remove hardcode
   return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 

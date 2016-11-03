@@ -100,6 +100,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
+      //TODO: remove hardcode
       callbackBlock([responseDictionary[@"status"] integerValue]);
     });
   }];

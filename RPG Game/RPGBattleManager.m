@@ -182,6 +182,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
             NSMutableArray *skillsArray = [NSMutableArray array];
             for (NSDictionary *skillDictionary in skills)
             {
+              //TODO: remove hardcode
               NSInteger skillID = [skillDictionary[@"skill_id"] integerValue];
               RPGSkill *skill = [RPGSkill skillWithSkillID:skillID];
               [skillsArray addObject:skill];
@@ -215,6 +216,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
       }
       if (character)
       {
+        //TODO: remove hardcode
         characterID = [character[@"char_id"] integerValue];
       }
       

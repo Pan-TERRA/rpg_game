@@ -24,6 +24,7 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
   self = [super init];
   if (self)
   {
+    //TODO: remove hardcode
     NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
     NSDictionary *plistDictionary = [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
     NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
