@@ -31,8 +31,9 @@
   return self;
 }
 
-- (void)viewDidLoad
+- (void)viewDidAppear:(BOOL)animated
 {
+  [super viewDidAppear:animated];
   [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
    {
      UIViewController *viewControllerToBePresented = nil;
