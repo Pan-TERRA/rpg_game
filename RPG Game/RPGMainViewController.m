@@ -16,13 +16,11 @@
 
 @interface RPGMainViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIViewController *battleInitModal;
-@property (nonatomic, assign, readwrite) IBOutlet RPGBattleViewController *battleViewController;
+@property (nonatomic, assign, readwrite) RPGBattleViewController *battleViewController;
 
 @end
 
@@ -50,8 +48,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-    //set images to money image views
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
