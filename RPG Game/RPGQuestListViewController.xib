@@ -10,9 +10,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestListViewController">
             <connections>
                 <outlet property="activityIndicator" destination="haj-qR-g3v" id="dNB-zM-vDd"/>
+                <outlet property="doneQuestListButton" destination="L4V-zu-eOI" id="XTX-oa-pbp"/>
+                <outlet property="inProgressQuestListButton" destination="Cjb-T6-vMT" id="XEB-Ei-MEL"/>
+                <outlet property="reviewQuestButton" destination="Rp1-Zn-0ou" id="6hu-j8-h1x"/>
                 <outlet property="tableView" destination="u7D-Ey-t6y" id="kgl-KM-wXn"/>
+                <outlet property="takeQuestListButton" destination="Sly-hB-P6D" id="epa-tM-DP4"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
-                <outlet property="viewStateButtonControl" destination="xIk-Xn-vKd" id="qzD-rp-ABv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -23,14 +26,6 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="k3T-zf-arz" userLabel="Quest List Background">
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
-                    <rect key="frame" x="110" y="83" width="516" height="286"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
                     <rect key="frame" x="692" y="374" width="34" height="30"/>
                     <state key="normal" title="Back"/>
@@ -38,6 +33,81 @@
                         <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="l89-rY-6WR"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xu-Ph-Wpt" userLabel="Table Control Container">
+                    <rect key="frame" x="110" y="10" width="516" height="62"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-hB-P6D">
+                            <rect key="frame" x="0.0" y="0.0" width="103" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <state key="normal" title="Take Quests">
+                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="1ap-WZ-CYY"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-T6-vMT">
+                            <rect key="frame" x="142" y="0.0" width="103" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <state key="normal" title="In progress Quests">
+                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="wJ9-P0-iyS"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Zn-0ou">
+                            <rect key="frame" x="413" y="0.0" width="103" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <state key="normal" title="Review Quests">
+                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="uFM-1w-FZH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4V-zu-eOI">
+                            <rect key="frame" x="271" y="0.0" width="103" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <state key="normal" title="Done Quests">
+                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="RrI-gD-jp4"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="width" secondItem="Sly-hB-P6D" secondAttribute="height" multiplier="65:31" id="2Q0-Hs-OTe"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="0.8:4" id="BI0-5O-hON"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="3:4" id="DIU-xt-Xve"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="7.2:4" id="LQo-8a-Kjc"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="5:4" id="SUL-uV-7sz"/>
+                        <constraint firstAttribute="height" constant="62" id="UDW-IE-AcB"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="width" secondItem="L4V-zu-eOI" secondAttribute="width" id="Y8F-jo-zBq"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="YDG-Ds-8jc"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="height" secondItem="Cjb-T6-vMT" secondAttribute="height" id="aqE-3Y-aln"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="width" secondItem="7xu-Ph-Wpt" secondAttribute="width" multiplier="0.2" id="c2G-iB-GRl"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="width" secondItem="Sly-hB-P6D" secondAttribute="width" id="daz-Lo-QPb"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="height" secondItem="L4V-zu-eOI" secondAttribute="height" id="e2p-xW-aWu"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="height" secondItem="Sly-hB-P6D" secondAttribute="height" id="frX-Ph-R6y"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="kq3-1s-5LP"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="log-QO-hvL"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="height" secondItem="7xu-Ph-Wpt" secondAttribute="height" id="mm5-S5-Fex"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="width" secondItem="L4V-zu-eOI" secondAttribute="height" multiplier="17:5" id="vzX-0X-SGb"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="width" secondItem="Cjb-T6-vMT" secondAttribute="width" id="y2I-AI-O06"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="width" secondItem="Cjb-T6-vMT" secondAttribute="height" multiplier="89:30" id="yyH-HH-nAS"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="zAT-7a-k7H"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="yyH-HH-nAS"/>
+                            <exclude reference="2Q0-Hs-OTe"/>
+                            <exclude reference="vzX-0X-SGb"/>
+                        </mask>
+                    </variation>
+                </view>
                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="haj-qR-g3v">
                     <rect key="frame" x="348" y="187" width="40" height="40"/>
                     <constraints>
@@ -45,42 +115,32 @@
                         <constraint firstAttribute="width" constant="40" id="a1G-8K-HOY"/>
                     </constraints>
                 </activityIndicatorView>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Xn-vKd">
-                    <rect key="frame" x="110" y="50" width="516" height="29"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
+                    <rect key="frame" x="110" y="82" width="516" height="287"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <segments>
-                        <segment title="" image="Ruby"/>
-                        <segment title="In progress"/>
-                        <segment title="Done quests"/>
-                        <segment title="Review quests"/>
-                    </segments>
-                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                    <connections>
-                        <action selector="viewStateButtonControlOnClick:" destination="-1" eventType="valueChanged" id="85h-xu-5AN"/>
-                    </connections>
-                </segmentedControl>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="k3T-zf-arz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Bi-oE-ZxA"/>
-                <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="xIk-Xn-vKd" secondAttribute="width" id="7ds-5B-EYj"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="74q-CS-hmo"/>
                 <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="10" id="9PY-fB-QAB"/>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9sD-de-yoT"/>
                 <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E8X-U2-51Y"/>
-                <constraint firstItem="xIk-Xn-vKd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="F2v-AX-Fak"/>
-                <constraint firstItem="xIk-Xn-vKd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="I7O-mJ-wAS"/>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Gks-gW-m2n"/>
                 <constraint firstAttribute="trailing" secondItem="k3T-zf-arz" secondAttribute="trailing" id="QfU-8N-kln"/>
-                <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" constant="5" id="Qvl-wi-nmd"/>
-                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" id="VrX-fK-Jff"/>
-                <constraint firstItem="xIk-Xn-vKd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Woa-hT-CyY"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
-                <constraint firstItem="xIk-Xn-vKd" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="cto-Tu-gvg"/>
-                <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="xIk-Xn-vKd" secondAttribute="width" id="n7j-e9-Jvi"/>
-                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" id="nnD-3w-hRa"/>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="width" secondItem="u7D-Ey-t6y" secondAttribute="width" id="dtz-CA-TRs"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="7xu-Ph-Wpt" secondAttribute="bottom" constant="10" id="k2c-eA-8bl"/>
                 <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="10" id="pP6-qO-mer"/>
-                <constraint firstItem="u7D-Ey-t6y" firstAttribute="centerX" secondItem="xIk-Xn-vKd" secondAttribute="centerX" id="qYS-sf-Hju"/>
                 <constraint firstAttribute="bottom" secondItem="k3T-zf-arz" secondAttribute="bottom" id="r4E-ve-Skk"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="swj-mT-RbD"/>
-                <constraint firstAttribute="trailing" secondItem="xIk-Xn-vKd" secondAttribute="trailing" constant="10" id="vgB-qa-rQ8"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="x8V-kO-MPp"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="haj-qR-g3v" secondAttribute="bottom" constant="10" id="xrS-J7-uVH"/>
                 <constraint firstItem="5tF-mW-v2f" firstAttribute="top" secondItem="u7D-Ey-t6y" secondAttribute="bottom" constant="5" id="zDn-da-R3F"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -88,17 +148,12 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="VrX-fK-Jff"/>
-                    <exclude reference="nnD-3w-hRa"/>
-                    <exclude reference="Woa-hT-CyY"/>
-                    <exclude reference="vgB-qa-rQ8"/>
-                    <exclude reference="7ds-5B-EYj"/>
+                    <exclude reference="xrS-J7-uVH"/>
                 </mask>
             </variation>
         </view>
     </objects>
     <resources>
         <image name="Menu Background" width="501" height="310"/>
-        <image name="Ruby" width="20" height="20"/>
     </resources>
 </document>

@@ -11,9 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGMainViewController">
             <connections>
                 <outlet property="battleInitModal" destination="YP5-wj-lWT" id="vsO-wb-cfJ"/>
-                <outlet property="crystalsImageView" destination="So4-wR-Ia7" id="7gp-IW-UzS"/>
                 <outlet property="crystalsLabel" destination="5jf-us-bJQ" id="sCa-xg-CIt"/>
-                <outlet property="goldImageView" destination="c5z-DO-r0T" id="k3z-zO-Htq"/>
                 <outlet property="goldLabel" destination="ooY-Ta-rVd" id="gcT-4W-UHd"/>
                 <outlet property="view" destination="iN0-l3-epB" id="5yW-vO-q1s"/>
             </connections>
@@ -64,7 +62,7 @@
         </viewController>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleAspectFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="Gri-Kw-NIp" userLabel="Main Menu Background">

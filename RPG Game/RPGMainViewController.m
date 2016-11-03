@@ -16,13 +16,11 @@
 
 @interface RPGMainViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
-@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
-@property (retain, nonatomic) IBOutlet RPGBattleViewController *battleViewController;
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, retain, readwrite) RPGBattleViewController *battleViewController;
 
 @end
 
@@ -42,8 +40,6 @@
                                                   name:kRPGBattleManagerDidEndSetUpNotification
                                                 object:self.battleViewController.battleManager];
   
-  [_battleViewController release];
-  [_battleInitModal release];
   [super dealloc];
 }
 
@@ -52,9 +48,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-    //set images to money image views
- 
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations

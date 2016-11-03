@@ -130,8 +130,8 @@
                     <nil key="highlightedColor"/>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="dET-PC-xyX"/>
                             <exclude reference="XXU-99-TCS"/>
+                            <exclude reference="dET-PC-xyX"/>
                         </mask>
                     </variation>
                 </label>
