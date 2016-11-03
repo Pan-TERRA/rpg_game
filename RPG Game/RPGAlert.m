@@ -13,16 +13,21 @@
 
 #pragma mark - Show Alert
 
-+ (void)showAlertViewControllerWithMessage:(NSString *)message viewController:(UIViewController *)viewController
++ (void)showAlertViewControllerWithTitle:(NSString *)title
+                                 message:(NSString *)message
+                          viewController:(UIViewController *)viewController
+                              completion:(void (^)())completionHandler
 {
-  UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+  UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                  message:message
                                                           preferredStyle:UIAlertControllerStyleAlert];
-  [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
+  __block UIAlertController *weakAlert = alert;
+  [alert addAction:[UIAlertAction actionWithTitle:@"OK"
                                             style:UIAlertActionStyleCancel
                                           handler:^(UIAlertAction *action)
   {
-    [alert dismissViewControllerAnimated:YES completion:nil];
+    [weakAlert dismissViewControllerAnimated:YES completion:nil];
+    completionHandler();
   }]];
   
   [viewController presentViewController:alert animated:YES completion:nil];

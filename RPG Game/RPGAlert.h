@@ -12,6 +12,9 @@
 
 @interface RPGAlert : NSObject
 
-+ (void)showAlertViewControllerWithMessage:(NSString *)message viewController:(UIViewController *)viewController;
++ (void)showAlertViewControllerWithTitle:(NSString *)title
+                                 message:(NSString *)message
+                          viewController:(UIViewController *)viewController
+                              completion:(void (^)())completionHandler;
 
 @end
