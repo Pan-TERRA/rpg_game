@@ -8,7 +8,6 @@
 
 #import "RPGSkillActionRequest+Serialization.h"
 #import "RPGRequest+Serialization.h"
-#import "RPGSkill+Serialization.h"
 
 @implementation RPGSkillActionRequest (Serialization)
 
@@ -17,14 +16,14 @@
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   // !!!: change to proper constant
 //  dictionaryRepresentation[kRPGSkillID] = @(self.skillID);
-    dictionaryRepresentation[@"skill_id"] = @(self.skillID);
+  dictionaryRepresentation[@"skill_id"] = @(self.skillID);
   
   return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger skllID = [aDictionary[kRPGSkillID] integerValue];
+  NSInteger skllID = [aDictionary[@"skill_id"] integerValue];
   return [self initWithSkillID:skllID token:aDictionary[kRPGRequestSerializationToken]];
 }
 

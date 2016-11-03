@@ -11,7 +11,7 @@
 NSString * const kRPGSkillRepresentationName = @"name";
 NSString * const kRPGSkillRepresentationSkillDescription = @"description";
 NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
-NSString * const kRPGSkillRepresentationCooldown = @"cooldown";
+NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"absoluteCooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 
@@ -33,7 +33,8 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
     _name = [skillDictionary[kRPGSkillRepresentationName] copy];
     _skillDescription = [skillDictionary[kRPGSkillRepresentationSkillDescription] copy];
     _multiplier = [skillDictionary[kRPGSkillRepresentationMultiplier] floatValue];
-    _cooldown = [skillDictionary[kRPGSkillRepresentationCooldown] integerValue];
+    _absoluteCooldown = [skillDictionary[kRPGSkillRepresentationAbsoluteCooldown] integerValue];
+    _remainingCooldown = 0;
     _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
     _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
   }

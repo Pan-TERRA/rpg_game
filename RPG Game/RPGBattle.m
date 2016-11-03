@@ -12,7 +12,6 @@
 #import "RPGTimeResponse.h"
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGPlayer.h"
-#import "RPGSkill+Serialization.h"
 #import "RPGSFXEngine.h"
 
 @interface RPGBattle ()
@@ -47,20 +46,7 @@
   self.player.HP = aResponse.HP;
   self.opponent.HP = aResponse.opponentHP;
   
-  for (NSDictionary *skillConditionDictionary in aResponse.skillsCondition)
-  {
-    NSInteger skillID = [skillConditionDictionary[kRPGSkillID] integerValue];
-    NSInteger cooldown = [skillConditionDictionary[kRPGSkillCooldown] integerValue];
-    
-    for (RPGSkill *skill in self.player.skills)
-    {
-      if (skillID == skill.skillID)
-      {
-        skill.cooldown = cooldown;
-      }
-    }
-  }
-  //TODO: remove hardcode
+  //TODO: remove hardcode && remove SFXEngine logic from model
   NSInteger skillID = [[aResponse.skillsDamage valueForKey:@"skill_id"] integerValue];
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
 }

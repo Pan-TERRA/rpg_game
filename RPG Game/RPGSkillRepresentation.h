@@ -11,7 +11,7 @@
 extern NSString * const kRPGSkillRepresentationName;
 extern NSString * const kRPGSkillRepresentationSpecification;
 extern NSString * const kRPGSkillRepresentationMultiplier;
-extern NSString * const kRPGSkillRepresentationCooldown;
+extern NSString * const kRPGSkillRepresentationAbsoluteCooldown;
 extern NSString * const kRPGSkillRepresentationImageName;
 extern NSString * const kRPGSkillRepresentationSoundName;
 
@@ -20,7 +20,8 @@ extern NSString * const kRPGSkillRepresentationSoundName;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *skillDescription;
 @property (nonatomic, assign, readonly) float multiplier;
-@property (nonatomic, assign, readonly) NSInteger cooldown;
+@property (nonatomic, assign, readonly) NSInteger absoluteCooldown;
+@property (nonatomic, assign, readwrite) NSInteger remainingCooldown;
 @property (nonatomic, copy, readonly) NSString *imageName;
 @property (nonatomic, copy, readonly) NSString *soundName;
 

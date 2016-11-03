@@ -15,7 +15,6 @@
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse+Serialization.h"
-#import "RPGSkill.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -131,11 +130,11 @@
 
 - (IBAction)skillAction:(UIButton *)aSender
 {
-  RPGSkill *usingSkill = nil;
+  NSNumber *usingSkillID = nil;
   if (aSender.tag < self.battleManager.battle.player.skills.count)
   {
-    usingSkill = self.battleManager.battle.player.skills[aSender.tag];
-    [self.battleManager sendSkillActionRequestWithID:usingSkill.skillID];
+    usingSkillID = self.battleManager.battle.player.skills[aSender.tag];
+    [self.battleManager sendSkillActionRequestWithID:[usingSkillID integerValue]];
   }
 }
 

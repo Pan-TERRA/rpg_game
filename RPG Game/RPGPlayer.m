@@ -15,7 +15,7 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithSkills:(NSArray *)aSkills
+- (instancetype)initWithSkills:(NSArray<NSNumber *> *)aSkills
 {
   self = [super initWithName:[[NSUserDefaults standardUserDefaults] sessionUsername] HP:100];
   
@@ -27,7 +27,7 @@
   return self;
 }
 
-+ (instancetype)playerWithSkills:(NSArray *)aSkills
++ (instancetype)playerWithSkills:(NSArray<NSNumber *> *)aSkills
 {
   return [[[self alloc] initWithSkills:aSkills] autorelease];
 }

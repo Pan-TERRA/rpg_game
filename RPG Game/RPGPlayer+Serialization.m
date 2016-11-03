@@ -8,38 +8,31 @@
 
 #import "RPGPlayer+Serialization.h"
 #import "RPGEntity+Serialization.h"
-#import "RPGSkill+Serialization.h"
 
 NSString * const kRPGPlayerSkills = @"skills";
+
+@interface RPGPlayer ()
+
+@property (retain, nonatomic, readwrite) NSArray<NSNumber *> *skills;
+
+@end
 
 @implementation RPGPlayer (Serialization)
 
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
-  
-  NSMutableArray *skills = [NSMutableArray arrayWithCapacity:[self.skills count]];
-  for (RPGSkill *skill in self.skills)
-  {
-    [skills addObject:[skill dictionaryRepresentation]];
-  }
-  dictionaryRepresentation[kRPGEntityName] = skills;
+
+  dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
   
   return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSMutableArray *skills = [NSMutableArray array];
-  
-  for (NSDictionary *skillDictionaryRepresentation in aDictionary[kRPGPlayerSkills])
-  {
-    RPGSkill *skill = [[RPGSkill alloc] initWithDictionaryRepresentation:skillDictionaryRepresentation];
-    [skills addObject:skill];
-    [skill release];
-  }
-  
-  return [self initWithSkills:[[skills copy] autorelease]];
+  self = [super initWithDictionaryRepresentation:aDictionary];
+  self.skills = aDictionary[kRPGPlayerSkills];
+  return self;
 }
 
 

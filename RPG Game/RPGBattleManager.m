@@ -9,7 +9,6 @@
 #import "RPGBattleManager.h"
   // Entities
 #import "RPGBattle.h"
-#import "RPGSkill.h"
 #import "RPGRequest+Serialization.h"
 #import "RPGSkillActionRequest+Serialization.h"
 #import "RPGTimeResponse+Serialization.h"
@@ -179,13 +178,11 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
           case kRPGStatusCodeOk:
           {
             //Convert NSDictionary -> RPGSkill
-            NSMutableArray *skillsArray = [NSMutableArray array];
+            NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
             for (NSDictionary *skillDictionary in skills)
             {
               //TODO: remove hardcode
-              NSInteger skillID = [skillDictionary[@"skill_id"] integerValue];
-              RPGSkill *skill = [RPGSkill skillWithSkillID:skillID];
-              [skillsArray addObject:skill];
+              [skillsArray addObject:skillDictionary[@"skill_id"]];
             }
 
             self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
