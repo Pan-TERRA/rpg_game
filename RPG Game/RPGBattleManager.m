@@ -10,7 +10,6 @@
   // Entities
 #import "RPGBattle.h"
 #import "RPGSkill.h"
-#import "RPGSkill+Serialization.h"
 #import "RPGRequest+Serialization.h"
 #import "RPGSkillActionRequest+Serialization.h"
 #import "RPGTimeResponse+Serialization.h"

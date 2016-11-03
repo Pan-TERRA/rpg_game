@@ -13,6 +13,7 @@
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGPlayer.h"
 #import "RPGSkill+Serialization.h"
+#import "RPGSFXEngine.h"
 
 @interface RPGBattle ()
 
@@ -59,7 +60,9 @@
       }
     }
   }
-  
+  //TODO: remove hardcode
+  NSInteger skillID = [[aResponse.skillsDamage valueForKey:@"skill_id"] integerValue];
+  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
 }
 
 - (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse

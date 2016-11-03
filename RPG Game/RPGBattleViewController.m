@@ -12,7 +12,6 @@
   // Misc
 #import "RPGBattleManager.h"
 #import "RPGBattle.h"
-#import "RPGSFXEngine.h"
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse+Serialization.h"
@@ -138,7 +137,6 @@
     usingSkill = self.battleManager.battle.player.skills[aSender.tag];
     [self.battleManager sendSkillActionRequestWithID:usingSkill.skillID];
   }
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:aSender.tag];
 }
 
 #pragma mark - Notifications
