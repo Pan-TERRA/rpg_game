@@ -297,13 +297,13 @@
         UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
         [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
         break;
       }
       default:
       {
         NSString *message = @"Can't upload proof image.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
         break;
       }
     }
@@ -345,13 +345,13 @@
         UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
         [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
         break;
       }
       default:
       {
         NSString *message = @"Can't take quest.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
         break;
       }
     }
@@ -389,7 +389,7 @@
         NSString *message = @"Give this app permission to access your camera in your settings app!";
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
           weakSelf.addProofButton.enabled = YES;
         });
       }
@@ -434,13 +434,13 @@
         UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
         [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
         break;
       }
       default:
       {
         NSString *message = @"Can't send quest proof.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
         break;
       }
     }
