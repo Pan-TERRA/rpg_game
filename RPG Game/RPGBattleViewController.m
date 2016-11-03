@@ -18,6 +18,8 @@
 #import "RPGBattleInitResponse+Serialization.h"
   // Constants
 #import "RPGNibNames.h"
+  // Custom Views
+#import "RPGProgressBar.h"
 
 @interface RPGBattleViewController ()
 
@@ -26,11 +28,11 @@
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1hp;
-@property (nonatomic, assign, readwrite) IBOutlet UIProgressView *player1hpBar;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player1hpBar;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2hp;
-@property (nonatomic, assign, readwrite) IBOutlet UIProgressView *player2hpBar;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player2hpBar;
   // Skill bar
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell1Button;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell2Button;
@@ -176,12 +178,15 @@
   NSInteger playerHP = battle.player.HP;
   self.player1NickName.text = battle.player.name;
   self.player1hp.text = [@(playerHP) stringValue];
-  [self.player1hpBar setProgress:((float)playerHP / 100) animated:YES];
+  self.player1hpBar.progress = ((float)playerHP / 100);
+  [self.player1hpBar setNeedsDisplay];
     // opponent
   NSInteger opponentHP = battle.opponent.HP;
   self.player2NickName.text = battle.opponent.name;
   self.player2hp.text = [@(opponentHP) stringValue];
-  [self.player2hpBar setProgress:(1 - ((float)opponentHP / 100)) animated:YES];
+  self.player2hpBar.progress = ((float)opponentHP / 100);
+  [self.player2hpBar setNeedsDisplay];
+  
 }
 
 @end

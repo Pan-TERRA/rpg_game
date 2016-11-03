@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestListViewController">
@@ -19,21 +20,16 @@
             <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Xn-vKd">
-                    <rect key="frame" x="10" y="10" width="716" height="29"/>
-                    <segments>
-                        <segment title="Take quest"/>
-                        <segment title="In progress"/>
-                        <segment title="Done quests"/>
-                        <segment title="Review quests"/>
-                    </segments>
-                    <connections>
-                        <action selector="viewStateButtonControlOnClick:" destination="-1" eventType="valueChanged" id="85h-xu-5AN"/>
-                    </connections>
-                </segmentedControl>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="k3T-zf-arz" userLabel="Quest List Background">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
-                    <rect key="frame" x="10" y="43" width="716" height="326"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="110" y="83" width="516" height="286"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
                     <rect key="frame" x="692" y="374" width="34" height="30"/>
@@ -49,17 +45,40 @@
                         <constraint firstAttribute="width" constant="40" id="a1G-8K-HOY"/>
                     </constraints>
                 </activityIndicatorView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xIk-Xn-vKd">
+                    <rect key="frame" x="110" y="50" width="516" height="29"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <segments>
+                        <segment title="" image="Ruby"/>
+                        <segment title="In progress"/>
+                        <segment title="Done quests"/>
+                        <segment title="Review quests"/>
+                    </segments>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <action selector="viewStateButtonControlOnClick:" destination="-1" eventType="valueChanged" id="85h-xu-5AN"/>
+                    </connections>
+                </segmentedControl>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Bi-oE-ZxA"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="xIk-Xn-vKd" secondAttribute="width" id="7ds-5B-EYj"/>
                 <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="10" id="9PY-fB-QAB"/>
-                <constraint firstItem="xIk-Xn-vKd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="F2v-AX-Fak"/>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E8X-U2-51Y"/>
+                <constraint firstItem="xIk-Xn-vKd" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="F2v-AX-Fak"/>
+                <constraint firstItem="xIk-Xn-vKd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="I7O-mJ-wAS"/>
+                <constraint firstAttribute="trailing" secondItem="k3T-zf-arz" secondAttribute="trailing" id="QfU-8N-kln"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" constant="5" id="Qvl-wi-nmd"/>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" id="VrX-fK-Jff"/>
                 <constraint firstItem="xIk-Xn-vKd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Woa-hT-CyY"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
+                <constraint firstItem="xIk-Xn-vKd" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="cto-Tu-gvg"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="xIk-Xn-vKd" secondAttribute="width" id="n7j-e9-Jvi"/>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="xIk-Xn-vKd" secondAttribute="bottom" id="nnD-3w-hRa"/>
                 <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="10" id="pP6-qO-mer"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="centerX" secondItem="xIk-Xn-vKd" secondAttribute="centerX" id="qYS-sf-Hju"/>
+                <constraint firstAttribute="bottom" secondItem="k3T-zf-arz" secondAttribute="bottom" id="r4E-ve-Skk"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="swj-mT-RbD"/>
                 <constraint firstAttribute="trailing" secondItem="xIk-Xn-vKd" secondAttribute="trailing" constant="10" id="vgB-qa-rQ8"/>
                 <constraint firstItem="5tF-mW-v2f" firstAttribute="top" secondItem="u7D-Ey-t6y" secondAttribute="bottom" constant="5" id="zDn-da-R3F"/>
@@ -67,6 +86,19 @@
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="VrX-fK-Jff"/>
+                    <exclude reference="nnD-3w-hRa"/>
+                    <exclude reference="Woa-hT-CyY"/>
+                    <exclude reference="vgB-qa-rQ8"/>
+                    <exclude reference="7ds-5B-EYj"/>
+                </mask>
+            </variation>
         </view>
     </objects>
+    <resources>
+        <image name="Menu Background" width="501" height="310"/>
+        <image name="Ruby" width="20" height="20"/>
+    </resources>
 </document>

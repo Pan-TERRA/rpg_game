@@ -54,6 +54,7 @@
   [super viewDidLoad];
   
     //set images to money image views
+ 
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
