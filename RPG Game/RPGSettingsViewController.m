@@ -13,6 +13,7 @@
 #import "RPGNibNames.h"
 #import "NSUserDefaults+RPGVolumeSettings.h"
 #import "RPGStatusCodes.h"
+#import "RPGAlert.h"
 
 @interface RPGSettingsViewController ()
 
@@ -87,20 +88,10 @@
      }
    }];
   
-  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Log out"
-                                                                           message:@"Success"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-  UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                     style:UIAlertActionStyleDefault
-                                                   handler:^(UIAlertAction *action)
-                             {
-                               [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                               [self.presentingViewController dismissViewControllerAnimated:YES completion:nil];
-                               [self dismissViewControllerAnimated:YES completion:nil];
-                             }];
-  
-  [alertController addAction:okAction];
-  [self presentViewController:alertController animated:YES completion:nil];
+  [RPGAlert showAlertViewControllerWithTitle:@"Log out" message:@"Success" viewController:self completion:^(void){
+    UIViewController *viewController = self.presentingViewController.presentingViewController;
+    [viewController dismissViewControllerAnimated:YES completion:nil];
+  }];
 }
 
 - (IBAction)musicTurn:(UISwitch *)aSender
