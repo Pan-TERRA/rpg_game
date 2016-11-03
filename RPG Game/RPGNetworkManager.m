@@ -1,10 +1,10 @@
-//
-//  RPGNetworkManager.m
-//  RPG Game
-//
-//  Created by Иван Дзюбенко on 10/11/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGNetworkManager.m
+  //  RPG Game
+  //
+  //  Created by Иван Дзюбенко on 10/11/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGNetworkManager.h"
 #import "RPGSerializable.h"
@@ -16,15 +16,15 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
 #pragma mark - API constants
 
-// General
+  // General
 NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
 static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/tokenexists";
-// Authorization
+  // Authorization
 NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
 NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
-// Registration
+  // Registration
 NSString * const kRPGNetworkManagerAPIRegisterRoute = @"/register";
-// Quests
+  // Quests
 NSString * const kRPGNetworkManagerAPIQuestsRoute = @"/quests";
 NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute = @"/in_progress_quests";
 NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute = @"/confirmed_quests";
@@ -33,10 +33,10 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
 NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
-// Skills
+  // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
-// Classes
+  // Classes
 NSString * const kRPGNetworkManagerAPIClassesRoute = @"/classes";
 NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
 
@@ -138,6 +138,7 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+  
   if (token != nil)
   {
     NSString *requestString = [NSString stringWithFormat:@"%@%@",
@@ -151,39 +152,39 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
     [[session dataTaskWithRequest:request
-               completionHandler:^(NSData * _Nullable data,
-                                   NSURLResponse * _Nullable response,
-                                   NSError * _Nullable error)
-    {
-      BOOL result = NO;
-      
-      if (error == nil && data != nil)
+                completionHandler:^(NSData * _Nullable data,
+                                    NSURLResponse * _Nullable response,
+                                    NSError * _Nullable error)
       {
-        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                           options:0
-                                                                             error:nil];
-        if (responseDictionary != nil
-            && responseDictionary[@"status"] != nil
-            && [responseDictionary[@"status"] integerValue] == 0)
+        BOOL result = NO;
+        
+        if (error == nil && data != nil)
         {
-          result = YES;
+          NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                             options:0
+                                                                               error:nil];
+          if (responseDictionary != nil
+              && responseDictionary[@"status"] != nil
+              && [responseDictionary[@"status"] integerValue] == 0)
+          {
+            result = YES;
+          }
         }
-      }
-      else
-      {
-        NSLog(@"Network error");
-        NSLog(@"Domain: %@", error.domain);
-        NSLog(@"Error Code: %ld", error.code);
-        NSLog(@"Description: %@", [error localizedDescription]);
-        NSLog(@"Reason: %@", [error localizedFailureReason]);
-      }
-      
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        callbackBlock(result);
-      });
-      
-    }] resume];
+        else
+        {
+          NSLog(@"Network error");
+          NSLog(@"Domain: %@", error.domain);
+          NSLog(@"Error Code: %ld", error.code);
+          NSLog(@"Description: %@", [error localizedDescription]);
+          NSLog(@"Reason: %@", [error localizedFailureReason]);
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          callbackBlock(result);
+        });
+        
+      }] resume];
     
     [session finishTasksAndInvalidate];
   }

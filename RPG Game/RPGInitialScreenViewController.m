@@ -22,20 +22,21 @@
 - (instancetype)init
 {
   self = [super init];
+  
   if (self != nil)
   {
     [self initWithNibName:kRPGInitialScreenViewControllerNIBName bundle:nil];
   }
+  
   return self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidLoad
 {
-  [super viewWillAppear:animated];
-  
   [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
    {
      UIViewController *viewControllerToBePresented = nil;
+     
      if (isValid)
      {
        viewControllerToBePresented = [[RPGMainViewController alloc] init];
@@ -44,9 +45,8 @@
      {
        viewControllerToBePresented = [[RPGLoginViewController alloc] init];
      }
-     [viewControllerToBePresented autorelease];
-     
-     [self presentViewController:viewControllerToBePresented
+    
+     [self presentViewController:[viewControllerToBePresented autorelease]
                         animated:YES
                       completion:nil];
    }];
