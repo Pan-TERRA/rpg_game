@@ -139,13 +139,13 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         UIViewController *loginViewController = self.presentingViewController.presentingViewController;
         [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:loginViewController];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
         break;
       }
       default:
       {
         NSString *message = @"Can't update quest list.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:weakSelf];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
         break;
       }
     }
@@ -226,7 +226,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       else
       {
         NSString *message = @"No quests for review.";
-        [RPGAlert showAlertViewControllerWithMessage:message viewController:self];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;
