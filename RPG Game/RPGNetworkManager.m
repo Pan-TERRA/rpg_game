@@ -197,4 +197,15 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   }
 }
 
+- (BOOL)isNoInternerConnection:(NSError *)anError
+{
+  return ([anError.domain isEqualToString:NSURLErrorDomain] && anError.code == NSURLErrorNotConnectedToInternet);
+}
+
+- (BOOL)isResponseCodeNot200:(NSURLResponse *)aResponse
+{
+  NSInteger responseStatusCode = [(NSHTTPURLResponse *)aResponse statusCode];
+  return responseStatusCode != 200;
+}
+
 @end

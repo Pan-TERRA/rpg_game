@@ -66,6 +66,7 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 #pragma mark - Error Handling
 
 - (BOOL)isNoInternerConnection:(NSError *)anError;
+- (BOOL)isResponseCodeNot200:(NSURLResponse *)aResponse;
 
 #pragma mark - General Requests
 
