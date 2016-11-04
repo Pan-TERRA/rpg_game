@@ -103,21 +103,17 @@
     RPGSkillsResponse *responseObject = [[[RPGSkillsResponse alloc]
                        initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
-    if (responseObject == nil)
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-      });
-      
-      return;
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock(responseObject.status, responseObject.skills);
+      if (responseObject == nil)
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      }
+      else
+      {
+        callbackBlock(responseObject.status, responseObject.skills);
+      }
     });
-    
   }];
   
   [task resume];
@@ -208,19 +204,16 @@
     RPGSkillInfoResponse *responseObject = [[[RPGSkillInfoResponse alloc]
                                           initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
-    if (responseObject == nil)
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-      });
-      
-      return;
-    }
-    
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock(responseObject.status, responseObject.skill);
+      if (responseObject == nil)
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      }
+      else
+      {
+        callbackBlock(responseObject.status, responseObject.skill);
+      }
     });
     
   }];
