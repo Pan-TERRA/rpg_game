@@ -7,13 +7,14 @@
 //
 
 #import "RPGNetworkManager+Quests.h"
-  // Misc
-#import "NSUserDefaults+RPGSessionInfo.h"
   // Entities
 #import "RPGQuestListResponse+Serialization.h"
 #import "RPGQuestRequest+Serialization.h"
 #import "RPGQuestResponse+Serialization.h"
 #import "RPGQuestReviewRequest+Serialization.h"
+  //Misc
+#import "NSObject+RPGErrorLog.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -69,7 +70,7 @@
     if (error != nil)
     {
         // no internet connection
-      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
+      if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -79,11 +80,7 @@
         return;
       }
       
-      NSLog(@"Network error");
-      NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %d", error.code);
-      NSLog(@"Description: %@", [error localizedDescription]);
-      NSLog(@"Reason: %@", [error localizedFailureReason]);
+      [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -93,11 +90,10 @@
       return;
     }
     
-      // server status code
-    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
-    if (responseStatusCode != 200)
+    if ([self isResponseCodeNot200:response])
     {
-      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
       dispatch_async(dispatch_get_main_queue(), ^
        {
          callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
@@ -106,7 +102,6 @@
       return;
     }
     
-      //data empty
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
@@ -121,14 +116,9 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:&JSONParsingError];
-      // serialization error
     if (responseDictionary == nil)
     {
-      NSLog(@"JSON Error");
-      NSLog(@"Domain: %@", JSONParsingError.domain);
-      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
-      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
-      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -197,8 +187,7 @@
     // something went wrong
     if (error != nil)
     {
-      // no internet connection
-      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
+      if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -207,11 +196,7 @@
         return;
       }
       
-      NSLog(@"Network error");
-      NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %d", error.code);
-      NSLog(@"Description: %@", [error localizedDescription]);
-      NSLog(@"Reason: %@", [error localizedFailureReason]);
+      [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -220,11 +205,10 @@
       return;
     }
     
-    // server status code
-    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
-    if (responseStatusCode != 200)
+    if ([self isResponseCodeNot200:response])
     {
-      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
@@ -232,7 +216,6 @@
       return;
     }
     
-    //data empty
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
@@ -246,25 +229,20 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:&JSONParsingError];
-    // serialization error
     if (responseDictionary == nil)
     {
-      NSLog(@"JSON Error");
-      NSLog(@"Domain: %@", JSONParsingError.domain);
-      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
-      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
-      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
       });
+      
       return;
     }
     
-    RPGQuestResponse *responseObject = nil;
-    responseObject = [[[RPGQuestResponse alloc]
-                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
+                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
@@ -338,8 +316,7 @@
     // something went wrong
     if (error != nil)
     {
-      // no internet connection
-      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
+      if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -348,11 +325,7 @@
         return;
       }
       
-      NSLog(@"Network error");
-      NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %d", error.code);
-      NSLog(@"Description: %@", [error localizedDescription]);
-      NSLog(@"Reason: %@", [error localizedFailureReason]);
+      [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -361,11 +334,10 @@
       return;
     }
     
-    // server status code
-    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
-    if (responseStatusCode != 200)
+    if ([self isResponseCodeNot200:response])
     {
-      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
@@ -373,7 +345,6 @@
       return;
     }
     
-    //data empty
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
@@ -390,11 +361,7 @@
     // serialization error
     if (responseDictionary == nil)
     {
-      NSLog(@"JSON Error");
-      NSLog(@"Domain: %@", JSONParsingError.domain);
-      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
-      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
-      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      [self  logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -403,24 +370,21 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = nil;
-    responseObject = [[[RPGQuestResponse alloc]
-                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
+                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
-    if (responseObject == nil)
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
+      if (responseObject == nil)
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-      });
-    }
-    else
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
+      }
+      else
       {
         callbackBlock(responseObject.status);
-      });
-    }
+      }
+    });
+
   }];
   
   [task resume];
@@ -471,8 +435,7 @@
       // something went wrong
     if (error != nil)
     {
-        // no internet connection
-      if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorNotConnectedToInternet)
+      if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
@@ -480,12 +443,8 @@
         });
         return;
       }
-      
-      NSLog(@"Network error");
-      NSLog(@"Domain: %@", error.domain);
-      NSLog(@"Error Code: %d", error.code);
-      NSLog(@"Description: %@", [error localizedDescription]);
-      NSLog(@"Reason: %@", [error localizedFailureReason]);
+     
+      [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -494,11 +453,10 @@
       return;
     }
     
-      // server status code
-    NSInteger responseStatusCode = [(NSHTTPURLResponse *)response statusCode];
-    if (responseStatusCode != 200)
+    if ([self isResponseCodeNot200:response])
     {
-      NSLog(@"Network error. HTTP status code: %ld", (long)responseStatusCode);
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+            
       dispatch_async(dispatch_get_main_queue(), ^
       {
         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
@@ -506,7 +464,6 @@
       return;
     }
     
-      //data empty
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
@@ -523,11 +480,7 @@
       // serialization error
     if (responseDictionary == nil)
     {
-      NSLog(@"JSON Error");
-      NSLog(@"Domain: %@", JSONParsingError.domain);
-      NSLog(@"Error Code: %ld", (long)JSONParsingError.code);
-      NSLog(@"Description: %@", [JSONParsingError localizedDescription]);
-      NSLog(@"Reason: %@", [JSONParsingError localizedFailureReason]);
+      [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
@@ -536,24 +489,21 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = nil;
-    responseObject = [[[RPGQuestResponse alloc]
-                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
+                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
       // validation error
-    if (responseObject == nil)
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
+      if (responseObject == nil)
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-      });
-    }
-    else
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
+      }
+      else
       {
         callbackBlock(responseObject.status);
-      });
-    }
+      }
+    });
+
   }];
   
   [task resume];
