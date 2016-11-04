@@ -27,7 +27,10 @@
                                           handler:^(UIAlertAction *action)
   {
     [weakAlert dismissViewControllerAnimated:YES completion:nil];
-    completionHandler();
+    if (completionHandler != nil)
+    {
+      completionHandler();
+    }
   }]];
   
   [viewController presentViewController:alert animated:YES completion:nil];
