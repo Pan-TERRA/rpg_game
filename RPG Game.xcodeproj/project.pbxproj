@@ -72,6 +72,7 @@
 		28A9157D1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */; };
 		28A9157E1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */; };
 		28A9157F1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157C1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m */; };
+		28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */; };
 		28D175431DBA42B600A934ED /* RPGBattleManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 28D175421DBA42B600A934ED /* RPGBattleManager.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -263,6 +264,8 @@
 		28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNetworkManager_NoNetworkTests.m; sourceTree = "<group>"; };
 		28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+AuthorizationTests.m"; sourceTree = "<group>"; };
 		28A9157C1DC7BCA8001E0F51 /* RPGNetworkManager+RegistrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+RegistrationTests.m"; sourceTree = "<group>"; };
+		28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RPGErrorLog.h"; sourceTree = "<group>"; };
+		28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RPGErrorLog.m"; sourceTree = "<group>"; };
 		28D175411DBA42B600A934ED /* RPGBattleManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleManager.h; sourceTree = "<group>"; };
 		28D175421DBA42B600A934ED /* RPGBattleManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleManager.m; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -733,6 +736,7 @@
 				283ADCF41DAD3C5000BDC706 /* Network Communication */,
 				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
 				28A5A0E71DB918FC000EF49F /* Entities */,
+				28B4DDB01DCC971200332DCD /* Support */,
 				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				280A522E1DB7C5B500FF66B8 /* Constants */,
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
@@ -1008,6 +1012,15 @@
 				AE5E68091DBA7EB900715480 /* RPGQuestResponse+Serialization.m */,
 			);
 			name = Response;
+			sourceTree = "<group>";
+		};
+		28B4DDB01DCC971200332DCD /* Support */ = {
+			isa = PBXGroup;
+			children = (
+				28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */,
+				28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */,
+			);
+			name = Support;
 			sourceTree = "<group>";
 		};
 		28F1021E1DB7719100C969CA /* Quest List */ = {
@@ -1475,6 +1488,7 @@
 				288E86021DABDADB00321F4D /* RPGMainViewController.m in Sources */,
 				285231581DC0F089002F702B /* RPGPlayer.m in Sources */,
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
+				28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */,
 				AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */,
 				285231571DC0F089002F702B /* RPGEntity+Serialization.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
