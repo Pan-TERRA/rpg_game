@@ -10,6 +10,7 @@
 
   
 #import <Foundation/Foundation.h>
+#import "RPGStatusCodes.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,6 +50,8 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 
 + (instancetype)sharedNetworkManager;
 
+#pragma mark - Helper Methods
+
 /**
  *  Helper method. Returns request with specific URL and HTTP method, body is JSON
  *  presentaion of an object. Raises exception if serialization fails.
@@ -59,6 +62,10 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
  *  @return
  */
 - (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
+
+#pragma mark - Error Handling
+
+- (BOOL)isNoInternerConnection:(NSError *)anError;
 
 #pragma mark - General Requests
 
