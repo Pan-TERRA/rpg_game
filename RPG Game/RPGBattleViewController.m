@@ -21,6 +21,8 @@
   // Custom Views
 #import "RPGProgressBar.h"
 
+static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
+
 @interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleManager *battleManager;
@@ -43,7 +45,9 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *spell7Button;
   // Misc
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *timer;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
+@property (nonatomic, retain, readwrite) NSTimer *timer;
+@property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
 @end
 
@@ -66,6 +70,10 @@
                                                selector:@selector(modelDidChange:)
                                                    name:kRPGBattleManagerModelDidChangeNotification
                                                  object:_battleManager];
+      [_battleManager addObserver:self
+                       forKeyPath:@"battle.currentTurn"
+                          options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
     }
   }
   
@@ -77,6 +85,9 @@
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [_battleManager removeObserver:self
+                      forKeyPath:@"battle.currentTurn"
+                         context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
   
   [super dealloc];
@@ -95,6 +106,12 @@
   [super viewWillAppear:animated];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  [self restartTimer];
+}
+
 - (void)viewWillDisappear:(BOOL)animated
 {
   [super viewWillDisappear:animated];
@@ -103,6 +120,8 @@
 
 - (void)viewDidDisappear:(BOOL)animated
 {
+    // TODO: if we end battle, we may want to invalidate this timer earlier
+  [self.timer invalidate];
   [super viewDidDisappear:animated];
 }
 
@@ -187,6 +206,48 @@
   self.player2hpBar.progress = ((float)opponentHP / 100);
   [self.player2hpBar setNeedsDisplay];
   
+}
+
+- (void)observeValueForKeyPath:(NSString *)aKeyPath
+                      ofObject:(id)anObject
+                        change:(NSDictionary<NSString *,id> *)aChange
+                       context:(void *)aContext
+{
+  if (aContext == &kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext)
+  {
+    BOOL oldCurrentTurn = [aChange[NSKeyValueChangeOldKey] boolValue];
+    BOOL newCurrentTurn = [aChange[NSKeyValueChangeNewKey] boolValue];
+    if (oldCurrentTurn != newCurrentTurn)
+    {
+      [self restartTimer];
+    }
+  }
+  else
+  {
+    [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
+  }
+}
+
+#pragma mark - Timer
+
+- (void)restartTimer
+{
+  [self.timer invalidate];
+  self.timerCounter = kRPGBattleTurnDuration;
+  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
+                                                target:self
+                                              selector:@selector(updateTimerLabel:)
+                                              userInfo:nil
+                                               repeats:YES];
+}
+
+- (void)updateTimerLabel:(NSTimer *)aTimer
+{
+  self.timerLabel.text = [@(self.timerCounter) stringValue];
+  if (self.timerCounter > 0)
+  {
+    self.timerCounter -= 1;
+  }
 }
 
 @end

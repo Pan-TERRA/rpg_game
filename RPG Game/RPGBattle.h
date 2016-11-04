@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "RPGPlayer.h"
 
+extern const NSInteger kRPGBattleTurnDuration;
+
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;

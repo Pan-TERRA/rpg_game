@@ -14,6 +14,8 @@
 #import "RPGPlayer.h"
 #import "RPGSkill+Serialization.h"
 
+const NSInteger kRPGBattleTurnDuration = 30;
+
 @interface RPGBattle ()
 
 @property (assign, nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
