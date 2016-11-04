@@ -31,11 +31,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsRewardImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldRewardImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
