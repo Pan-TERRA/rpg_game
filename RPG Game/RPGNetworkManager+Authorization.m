@@ -107,6 +107,7 @@
         else if (responseObject.status == kRPGStatusCodeOk)
         {
           [responseObject store];
+          callbackBlock(responseObject.status);
         }
         else
         {
