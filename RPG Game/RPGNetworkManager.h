@@ -16,14 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark - API constants
 
-// General
+  // General
 extern NSString * const kRPGNetworkManagerAPIHost;
-// Authorization
+  // Authorization
 extern NSString * const kRPGNetworkManagerAPILoginRoute;
 extern NSString * const kRPGNetworkManagerAPISignoutRoute;
-// Registration
+  // Registration
 extern NSString * const kRPGNetworkManagerAPIRegisterRoute;
-// Quests
+  // Quests
 extern NSString * const kRPGNetworkManagerAPIQuestsRoute;
 extern NSString * const kRPGNetworkManagerAPIQuestsInProgressRoute;
 extern NSString * const kRPGNetworkManagerAPIConfirmedQuestsRoute;
@@ -32,10 +32,10 @@ extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
 extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
-// Skills
+  // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
-// Classes
+  // Classes
 extern NSString * const kRPGNetworkManagerAPIClassesRoute;
 extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 
@@ -60,7 +60,7 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
  */
 - (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
 
-#pragma mark - General requests
+#pragma mark - General Requests
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
 
