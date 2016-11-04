@@ -16,6 +16,8 @@
 
 @interface RPGBattle ()
 
+@property (assign, nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
+
 @end
 
 @implementation RPGBattle
@@ -32,6 +34,7 @@
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;
+    _currentTurn = aResponse.currentTurn;
   }
   
   return self;
@@ -46,6 +49,7 @@
 {
   self.player.HP = aResponse.HP;
   self.opponent.HP = aResponse.opponentHP;
+  self.currentTurn = aResponse.currentTurn;
   
   for (NSDictionary *skillConditionDictionary in aResponse.skillsCondition)
   {

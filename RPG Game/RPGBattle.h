@@ -23,6 +23,7 @@
 @property (retain, nonatomic, readonly) RPGEntity *opponent;
 @property (assign, nonatomic, readonly) NSInteger startTime;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
+@property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
 /**
  *  Inits model. Sets startTime, general player info.
