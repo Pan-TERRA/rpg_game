@@ -744,10 +744,6 @@
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
 				877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
-				AEFC27871DC7A67C00905ADD /* RPGQuestTableViewController.h */,
-				AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */,
-				AEFC278A1DC8B90200905ADD /* RPGAlert.h */,
-				AEFC278B1DC8B90200905ADD /* RPGAlert.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -1017,10 +1013,21 @@
 		28B4DDB01DCC971200332DCD /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				AEFC278A1DC8B90200905ADD /* RPGAlert.h */,
+				AEFC278B1DC8B90200905ADD /* RPGAlert.m */,
 				28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */,
 				28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */,
 			);
 			name = Support;
+			sourceTree = "<group>";
+		};
+		28B4DDB41DCCE51100332DCD /* Quest Table View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27871DC7A67C00905ADD /* RPGQuestTableViewController.h */,
+				AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */,
+			);
+			name = "Quest Table View Controller";
 			sourceTree = "<group>";
 		};
 		28F1021E1DB7719100C969CA /* Quest List */ = {
@@ -1077,6 +1084,7 @@
 			isa = PBXGroup;
 			children = (
 				28A915271DC769B9001E0F51 /* RPGQuestAction.h */,
+				28B4DDB41DCCE51100332DCD /* Quest Table View Controller */,
 				28A5A0D81DB8F765000EF49F /* Quest List */,
 				28A5A0DA1DB8F787000EF49F /* Quest */,
 				28A5A0D71DB8F75A000EF49F /* Proof Image */,
