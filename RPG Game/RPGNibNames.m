@@ -17,3 +17,4 @@ NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
 NSString * const kRPGRegistrationViewControllerNIBName = @"RPGRegistrationViewController";
 NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
+NSString * const kRPGInitialScreenViewControllerNIBName = @"RPGInitialScreenViewController";

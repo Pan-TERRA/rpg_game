@@ -37,14 +37,14 @@
   [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBActions
 
 - (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - set view content
+#pragma mark - Set View Content
 
 - (void)setImage:(UIImage *)anImage
 {

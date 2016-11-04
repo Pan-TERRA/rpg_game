@@ -18,6 +18,8 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestAction.h"
 #import <AVFoundation/AVFoundation.h>
+#import "RPGStatusCodes.h"
+#import "RPGAlert.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -243,7 +245,6 @@
   {
     [self sendQuestProofWithResult:YES];
   }
-  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)denyButtonOnClick:(UIButton *)aSender
@@ -279,16 +280,32 @@
   // !!!: leak
   __block typeof(self) weakSelf = self;
   
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    weakSelf.addProofButton.enabled = YES;
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      weakSelf.state = kRPGQuestStateDone;
-      [weakSelf setStateReviewedQuest:NO];
-      weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
-      weakSelf.proofImageView.image = chosenImage;
+      case kRPGStatusCodeOk:
+      {
+        weakSelf.state = kRPGQuestStateDone;
+        [weakSelf setStateReviewedQuest:NO];
+        weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+        weakSelf.proofImageView.image = chosenImage;
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't upload proof image.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        break;
+      }
     }
   };
   
@@ -310,13 +327,35 @@
 
 - (void)takeQuest
 {
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  self.acceptButton.enabled = NO;
+  
+  __block typeof(self) weakSelf = self;
+  
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      
+      case kRPGStatusCodeOk:
+      {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't take quest.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        break;
+      }
     }
+    weakSelf.acceptButton.enabled = YES;
   };
   NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
@@ -341,27 +380,16 @@
           dispatch_async(dispatch_get_main_queue(), ^
           {
             [weakSelf presentViewController:weakSelf.pickerController animated:NO completion:nil];
+            weakSelf.addProofButton.enabled = YES;
           });
         }
       }
       else
       {
         NSString *message = @"Give this app permission to access your camera in your settings app!";
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No camera access"
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
-                                                  style:UIAlertActionStyleCancel
-                                                handler:^(UIAlertAction *action)
-        {
-          dispatch_async(dispatch_get_main_queue(), ^
-          {
-            [alert dismissViewControllerAnimated:YES completion:nil];
-          });
-        }]];
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          [weakSelf presentViewController:alert animated:YES completion:nil];
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
           weakSelf.addProofButton.enabled = YES;
         });
       }
@@ -373,14 +401,12 @@
 
 - (void)uploadImage
 {
-  __block typeof(self) weakSelf = self;
-  
+  // !!!: SELF not WEAKSELF
   void (^handler)(NSData *) = ^void(NSData *imageData)
   {
-    UIImage *image = [[UIImage alloc] initWithData:imageData];
-    weakSelf.proofImageView.image = image;
-    [image release];
+    self.proofImageView.image = [UIImage imageWithData:imageData];
   };
+  
   NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
   [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
 }
@@ -389,13 +415,37 @@
 
 - (void)sendQuestProofWithResult:(BOOL)aResult
 {
-  void (^handler)(NSInteger) = ^void(NSInteger status)
+  self.acceptButton.enabled = NO;
+  self.denyButton.enabled = NO;
+  
+  __block typeof(self) weakSelf = self;
+  
+  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    BOOL success = (status == 0);
-    if (success)
+    switch (statusCode)
     {
-      
+      case kRPGStatusCodeOk:
+      {
+        [weakSelf dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't send quest proof.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        break;
+      }
     }
+    self.acceptButton.enabled = YES;
+    self.denyButton.enabled = YES;
   };
   NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
   RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questID result:aResult];

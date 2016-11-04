@@ -11,8 +11,10 @@
 #import "RPGMainViewController.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGAuthorizationLoginRequest+Serialization.h"
+// Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
+
 
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
