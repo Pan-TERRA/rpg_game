@@ -269,7 +269,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPD-g9-VjK">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rPD-g9-VjK">
                         <rect key="frame" x="53" y="73" width="38" height="20"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="20" id="fwf-NZ-Ceb"/>
@@ -279,7 +279,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fg4-fJ-cnO">
-                        <rect key="frame" x="48" y="98" width="529" height="89"/>
+                        <rect key="frame" x="53" y="98" width="519" height="156"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
@@ -291,46 +291,22 @@
                 <constraints>
                     <constraint firstItem="SkV-Ok-5W5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="45" id="2jJ-xS-fkp"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vaY-Ri-H0g" secondAttribute="trailing" id="A2B-Q4-frW"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Fg4-fJ-cnO" secondAttribute="bottom" constant="30" id="BTc-rR-7K2"/>
-                    <constraint firstItem="Fg4-fJ-cnO" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="40" id="C1T-t6-jEH"/>
                     <constraint firstItem="Fg4-fJ-cnO" firstAttribute="top" secondItem="rPD-g9-VjK" secondAttribute="bottom" constant="5" id="CNE-1U-7Rr"/>
                     <constraint firstItem="vaY-Ri-H0g" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="CbE-DW-mNf"/>
-                    <constraint firstItem="vaY-Ri-H0g" firstAttribute="leading" secondItem="rPD-g9-VjK" secondAttribute="trailing" id="Fr1-AV-gO6"/>
-                    <constraint firstItem="rPD-g9-VjK" firstAttribute="top" secondItem="SkV-Ok-5W5" secondAttribute="bottom" constant="10" id="Mq4-ar-wfB"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="Fg4-fJ-cnO" secondAttribute="trailing" constant="40" id="RKk-du-OW7"/>
-                    <constraint firstItem="vaY-Ri-H0g" firstAttribute="leading" secondItem="rPD-g9-VjK" secondAttribute="trailing" id="VxH-z6-TE6"/>
-                    <constraint firstItem="vaY-Ri-H0g" firstAttribute="leading" secondItem="rPD-g9-VjK" secondAttribute="trailing" id="Yw5-ob-Wiu"/>
-                    <constraint firstItem="SkV-Ok-5W5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="bvg-oO-RyG"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="SkV-Ok-5W5" secondAttribute="trailing" constant="335" id="csZ-ic-Otp"/>
-                    <constraint firstItem="SkV-Ok-5W5" firstAttribute="leading" secondItem="rPD-g9-VjK" secondAttribute="trailing" id="dsQ-fG-hZf"/>
                     <constraint firstItem="rPD-g9-VjK" firstAttribute="top" secondItem="SkV-Ok-5W5" secondAttribute="bottom" constant="10" id="duO-kG-WB0"/>
                     <constraint firstItem="SkV-Ok-5W5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="20" id="fhH-UM-NkJ"/>
                     <constraint firstItem="vaY-Ri-H0g" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="k4d-tl-nkS"/>
+                    <constraint firstItem="Fg4-fJ-cnO" firstAttribute="width" secondItem="SkV-Ok-5W5" secondAttribute="width" id="kNK-zE-Ndt"/>
+                    <constraint firstItem="Fg4-fJ-cnO" firstAttribute="leading" secondItem="SkV-Ok-5W5" secondAttribute="leading" id="lkZ-iW-yoX"/>
                     <constraint firstAttribute="trailingMargin" secondItem="SkV-Ok-5W5" secondAttribute="trailing" constant="45" id="o1O-3M-1HV"/>
-                    <constraint firstItem="Fg4-fJ-cnO" firstAttribute="leading" secondItem="SkV-Ok-5W5" secondAttribute="leading" id="oKL-lY-rhQ"/>
                     <constraint firstItem="rPD-g9-VjK" firstAttribute="leading" secondItem="SkV-Ok-5W5" secondAttribute="leading" id="wxI-4z-fbN"/>
                     <constraint firstAttribute="bottomMargin" secondItem="vaY-Ri-H0g" secondAttribute="bottom" id="xGs-8o-CRG"/>
                 </constraints>
-                <variation key="default">
-                    <mask key="constraints">
-                        <exclude reference="Fr1-AV-gO6"/>
-                        <exclude reference="VxH-z6-TE6"/>
-                        <exclude reference="Yw5-ob-Wiu"/>
-                        <exclude reference="bvg-oO-RyG"/>
-                        <exclude reference="csZ-ic-Otp"/>
-                        <exclude reference="dsQ-fG-hZf"/>
-                        <exclude reference="Mq4-ar-wfB"/>
-                        <exclude reference="oKL-lY-rhQ"/>
-                    </mask>
-                </variation>
             </tableViewCellContentView>
             <connections>
-                <outlet property="crystalsRewardImageView" destination="fvF-qf-f38" id="MOK-XV-hYy"/>
                 <outlet property="crystalsRewardLabel" destination="8Qv-8M-6vn" id="wB3-rw-RXF"/>
                 <outlet property="descriptionLabel" destination="Fg4-fJ-cnO" id="Fu4-06-gSS"/>
-                <outlet property="goldRewardImageView" destination="fjM-Ya-EcK" id="aYu-Jn-KRT"/>
                 <outlet property="goldRewardLabel" destination="dkF-q7-MoJ" id="B0O-sP-A9P"/>
-                <outlet property="proofTypeImageView" destination="LsY-Pd-cWq" id="yZp-Pj-DNb"/>
                 <outlet property="skillRewardImageView" destination="tRq-nF-VXt" id="xWs-ZE-Gih"/>
                 <outlet property="stateLabel" destination="b4J-6c-CCw" id="vID-Xc-6AJ"/>
                 <outlet property="stateTitleLabel" destination="U96-7T-hV6" id="zcS-75-oeX"/>
