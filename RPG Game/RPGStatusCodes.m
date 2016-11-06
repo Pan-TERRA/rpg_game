@@ -19,7 +19,7 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeWrongToken] = @"Wrong token",
   [kRPGStatusCodeUsernameIsAlreadyTaken] = @"Username is already taken",
   [kRPGStatusCodeEmailIsAlreadyTaken] = @"Email is already taken",
-  [kRPGStatusCodeAlreadyOnline] = @"Already online",
+  [kRPGStatusCodeQuestWithSuchIDNotFound] = @"Quest with such ID not found",
   [kRPGStatusCodeUserHasNoSuchCharacter] = @"User has no such character",
   [kRPGStatusCodeSkillWithSuchIDNotFound] = @"Skill with such ID not found",
   [kRPGStatusCodeNotYourTurn] = @"Not your turn",
@@ -31,6 +31,9 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeNotPicture] = @"Not a picture",
   [kRPGStatusCodeTooBigPicture] = @"Too big picture",
   [kRPGStatusCodeTurnAction] = @"Turn action",
+  [kRPGStatusCodeWrongClass] = @"Wrong class",
+  [kRPGStatusCodeQuestNotAccepted] = @"Quest is not accepted",
+  [kRPGStatusCodeQuestNotSkipped] = @"Quest is not skipped",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",
