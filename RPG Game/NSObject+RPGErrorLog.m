@@ -12,8 +12,6 @@
 
 - (void)logError:(NSError *)anError withTitle:(NSString *)aTitle
 {
-  NSLog(@"%s", __PRETTY_FUNCTION__);
-  
   NSLog(@"%@", aTitle);
   NSLog(@"Domain: %@", anError.domain);
   NSLog(@"Error Code: %ld", anError.code);
