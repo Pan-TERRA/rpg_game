@@ -7,23 +7,25 @@
 //
 
 #import "RPGLoginViewController.h"
-#import "RPGRegistrationViewController.h"
+  // Views
 #import "RPGMainViewController.h"
+#import "RPGRegistrationViewController.h"
+  // API
 #import "RPGNetworkManager+Authorization.h"
+  // Entities
 #import "RPGAuthorizationLoginRequest+Serialization.h"
-// Constants
+  // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
-
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
-@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, assign, readwrite) UITextField *activeField;
+@property (nonatomic, assign, readwrite) UITextField *activeField; // for observation
 
 @end
 
@@ -91,7 +93,7 @@
   [self.loginActivityIndicator stopAnimating];
 }
 
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction)editingDidChange:(UITextField *)aSender
 {
@@ -115,6 +117,7 @@
   [self.passwordInputField becomeFirstResponder];
 }
 
+  // "return key" ending editing
 - (IBAction)userDoneEnteringPassword:(UITextField *)aSender
 {
   [self loginAction:nil];
@@ -125,19 +128,21 @@
   
 }
 
-
 #pragma mark - Notifications
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
   CGFloat adjustmentHeight = keyboardFrame.size.height;
+    // TODO: Replace with constants. RPGViewsConstants
   UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
   
+    // Shrink view
   CGRect viewRect = self.view.frame;
   viewRect.size.height -= keyboardFrame.size.height;
+    // Check if input text field is not visible
   if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
   {
     [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
@@ -153,6 +158,7 @@
 
 #pragma mark - UITextFieldDelegate
 
+  // First responder toggle
 - (void)textFieldDidBeginEditing:(UITextField *)aTextField
 {
   self.activeField = aTextField;
@@ -177,7 +183,7 @@
   NSString *email = self.emailInputField.text;
   NSString *password = self.passwordInputField.text;
   
-  if (![email isEqualToString:@""] && ![password isEqualToString:@""])
+  if (email.length != 0 && password.length != 0)
   {
     [self setViewToWaitingForServerResponseState];
     
@@ -188,7 +194,6 @@
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                              completionHandler:^(NSInteger statusCode)
      {
-       // statusCode = kRPGStatusCodeOk;
        [self setViewToNormalState];
        
        switch (statusCode)
