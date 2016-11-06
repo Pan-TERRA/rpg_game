@@ -201,6 +201,7 @@
            [self.passwordInputField setText:@""];
            break;
          }
+         case kRPGStatusCodeWrongEmail:
          case kRPGStatusCodeUserDoesNotExist:
          case kRPGStatusCodeWrongPassword:
          {
