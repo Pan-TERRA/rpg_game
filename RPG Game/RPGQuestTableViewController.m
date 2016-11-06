@@ -159,7 +159,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  return 150;
+  return 200;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath
