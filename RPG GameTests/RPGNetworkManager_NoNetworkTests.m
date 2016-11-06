@@ -7,8 +7,8 @@
 //
 
 #define TIMEOUT 10
-#define EMAIL "eleonora@gmail.com"
-#define PASSWORD "eleonora"
+#define EMAIL "testblablabla@test.test"
+#define PASSWORD "test"
 #define USERNAME "ololo"
 #define CHARACTERNAME "ololocreature"
 #define TYPEID 1
