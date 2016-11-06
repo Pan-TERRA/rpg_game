@@ -12,8 +12,6 @@
 #import "RPGClassInfoResponse+Serialization.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
-  // Constants
-#import "RPGStatusCodes.h"
 
 @implementation RPGNetworkManager (Classes)
 

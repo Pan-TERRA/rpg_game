@@ -15,9 +15,6 @@
   //Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGStatusCodes.h"
-  // Constants
-#import "RPGStatusCodes.h"
 
 @implementation RPGNetworkManager (Quests)
 
