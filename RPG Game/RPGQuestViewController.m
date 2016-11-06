@@ -402,9 +402,27 @@
 - (void)uploadImage
 {
   // !!!: SELF not WEAKSELF
-  void (^handler)(NSData *) = ^void(NSData *imageData)
+  void (^handler)(RPGStatusCode, NSData *) = ^void(RPGStatusCode statusCode, NSData *imageData)
   {
-    self.proofImageView.image = [UIImage imageWithData:imageData];
+    switch (statusCode)
+    {
+      case kRPGStatusCodeOk:
+      {
+        self.proofImageView.image = [UIImage imageWithData:imageData];
+        break;
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
+        [loginViewController dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+    
   };
   
   NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
