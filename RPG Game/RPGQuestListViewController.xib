@@ -27,8 +27,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
-                    <rect key="frame" x="692" y="374" width="34" height="30"/>
-                    <state key="normal" title="Back"/>
+                    <rect key="frame" x="686" y="364" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="ddq-qU-tBE"/>
+                        <constraint firstAttribute="height" constant="40" id="vW7-CZ-8P1"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
                         <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="l89-rY-6WR"/>
                     </connections>
@@ -102,8 +106,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="yyH-HH-nAS"/>
                             <exclude reference="2Q0-Hs-OTe"/>
+                            <exclude reference="yyH-HH-nAS"/>
                             <exclude reference="vzX-0X-SGb"/>
                         </mask>
                     </variation>
@@ -116,7 +120,7 @@
                     </constraints>
                 </activityIndicatorView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
-                    <rect key="frame" x="110" y="82" width="516" height="287"/>
+                    <rect key="frame" x="110" y="82" width="516" height="277"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -155,5 +159,6 @@
     </objects>
     <resources>
         <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
     </resources>
 </document>
