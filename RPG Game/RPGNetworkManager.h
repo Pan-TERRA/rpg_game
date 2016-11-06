@@ -10,10 +10,10 @@
 
   
 #import <Foundation/Foundation.h>
+  // Constants
 #import "RPGStatusCodes.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 #pragma mark - API constants
 
