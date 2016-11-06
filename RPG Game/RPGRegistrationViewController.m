@@ -7,24 +7,30 @@
 //
 
 #import "RPGRegistrationViewController.h"
+  // Views
 #import "RPGLoginViewController.h"
+  // API
 #import "RPGNetworkManager+Registration.h"
+  // Entities
 #import "RPGRegistrationRequest+Serialization.h"
+  // Constants
 #import "RPGNibNames.h"
 
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
-@property (nonatomic, retain, readonly) NSArray *classPickerData;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
-@property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
+@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, assign, readwrite) UITextField *activeField;
+
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *usernameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
+@property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
+@property (nonatomic, retain, readonly) NSArray *classPickerData;
+
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
-@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, assign, readwrite) UITextField *activeField;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
 
 @end
 
@@ -44,6 +50,7 @@
                              @"id": @1
                           }
                         ] retain];
+    
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self
                       selector:@selector(keyboardWillShow:)
@@ -107,6 +114,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 #pragma mark Error Representation
 
+  // TODO: Redo
 - (void)showErrorText:(NSString *)aText
 {
 //  self.errorLabel.text = aText;
@@ -131,6 +139,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 #pragma mark IBActions
 
+- (IBAction)cancelButtonAction:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)submitButtonAction:(UIButton *)aSender
 {
   NSString *emailFieldText = self.emailTextField.text;
@@ -140,11 +153,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger selectedClassID = [self getSelectedClassID];
   
-  if (!([emailFieldText isEqualToString:@""] &&
-        [usernameFieldText isEqualToString:@""] &&
-        [passwordFieldText isEqualToString:@""] &&
-        [confirmPasswordFieldText isEqualToString:@""] &&
-        [characterNameFieldText isEqualToString:@""]))
+  if ([self textFieldsNotEmpty])
   {
     if ([passwordFieldText isEqualToString:confirmPasswordFieldText])
     {
@@ -183,11 +192,23 @@ numberOfRowsInComponent:(NSInteger)aComponent
   }
 }
 
-- (IBAction)cancelButtonAction:(UIButton *)aSender
+- (BOOL)textFieldsNotEmpty
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  return self.emailTextField.text.length != 0 &&
+         self.usernameTextField.text.length != 0 &&
+         self.passwordTextField.text.length != 0 &&
+         self.confirmPasswordTextField.text.length != 0 &&
+         self.characterNameTextField.text.length != 0;
 }
 
+- (NSInteger)getSelectedClassID
+{
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
+}
+
+  // "return key" ending editing
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
   NSInteger nextTag = aSender.tag + 1;
@@ -201,25 +222,21 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
-
 #pragma mark - Notifications
 
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
   CGFloat adjustmentHeight = keyboardFrame.size.height;
+    // TODO: Replace with constants. RPGViewsConstants
   UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
   
+    // Shrink view
   CGRect viewRect = self.view.frame;
   viewRect.size.height -= keyboardFrame.size.height;
+    // Check if input text field is not visible
   if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
   {
     [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
@@ -235,6 +252,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 #pragma mark - UITextFieldDelegate
 
+  // First responder toggle
 - (void)textFieldDidBeginEditing:(UITextField *)aTextField
 {
   self.activeField = aTextField;
