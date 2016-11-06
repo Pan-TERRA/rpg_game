@@ -15,6 +15,7 @@
   //Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGStatusCodes.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -392,7 +393,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)getImageProofDataFromURL:(NSURL *)url completionHandler:(void (^)(NSData *imageData))callbackBlock
+- (void)getImageProofDataFromURL:(NSURL *)url completionHandler:(void (^)(RPGStatusCode statusCode, NSData *imageData))callbackBlock
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
   request.HTTPMethod = @"GET";
@@ -405,11 +406,50 @@
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-      // TODO: validation
+    if (error != nil)
+    {
+      if ([self isNoInternerConnection:error])
+      {
+        dispatch_async(dispatch_get_main_queue(), ^
+                       {
+                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+                       });
+        return;
+      }
+      
+      [self logError:error withTitle:@"Network error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+                     {
+                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+                     });
+      return;
+    }
+    
+    if ([self isResponseCodeNot200:response])
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+                     {
+                       callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+                     });
+      return;
+    }
+    
+   
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock(data);
+      if (data == nil)
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      }
+      else
+      {
+        callbackBlock(kRPGStatusCodeOk, data);
+      }
     });
+      
   }];
   
   [task resume];
