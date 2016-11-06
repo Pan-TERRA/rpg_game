@@ -6,18 +6,18 @@
   //  Copyright © 2016 RPG-team. All rights reserved.
   //
 
-  // Views
 #import "RPGQuestListViewController.h"
+  // Views
 #import "RPGQuestViewController.h"
 #import "RPGLoginViewController.h"
-  // Network, entities
+#import "RPGQuestTableViewController.h"
+  // API
 #import "RPGNetworkManager+Quests.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
-
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGQuestTableViewController.h"
 #import "RPGAlert.h"
 
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
@@ -28,11 +28,12 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGQuestListViewController ()
 
+@property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
+
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *takeQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *inProgressQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *doneQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *reviewQuestButton;
-@property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @property(nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
@@ -49,6 +50,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (instancetype)init
 {
   self = [super initWithNibName:kRPGQuestListViewControllerNIBName bundle:nil];
+  
   if (self != nil)
   {
     _tableViewController = [[RPGQuestTableViewController alloc] init];
@@ -81,14 +83,13 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
   RPGQuestListState state = self.tableViewController.questListState;
   [self setActiveButtonForState:state];
-  [self updateViewForState:state willReload:YES];
+  [self updateViewForState:state shouldReload:YES];
   [self setViewToNormalState];
 }
 
 - (void)viewDidAppear:(BOOL)anAnimated
 {
   [super viewDidAppear:anAnimated];
-  [self updateViewForState:self.tableViewController.questListState willReload:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,13 +109,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark - View Update
 
-/**
- *  Provides data display. Invokes at viewDidAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
- *
- *  @param aState A view state. Depends from self.buttonControl.selectedSegmentIndex.
- *  @param aWillReloadFlag
- */
-- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag
+  //Invokes at viewWillAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
+- (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag
 {
   [self setViewToWaitingForServerResponseState];
   
@@ -128,7 +124,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       case kRPGStatusCodeOk:
       {
         [weakSelf processQuestsData:questList byState:aState];
-        if (aWillReloadFlag)
+        if (aShouldReloadFlag)
         {
           [weakSelf.tableView reloadData];
         }
@@ -168,7 +164,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   }
   else
   {
-    [self updateViewForState:self.tableViewController.questListState willReload:YES];
+    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
   }
 }
 
@@ -176,14 +172,12 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)setViewToWaitingForServerResponseState
 {
-//  [self.tableView setHidden:YES];
   [self.activityIndicator setHidden:NO];
   [self.activityIndicator startAnimating];
 }
 
 - (void)setViewToNormalState
 {
-//  [self.tableView setHidden:NO];
   [self.activityIndicator setHidden:YES];
   [self.activityIndicator stopAnimating];
 }
@@ -191,7 +185,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 #pragma mark - Quest Data Handling
 
 /**
- *  Separate array of RPGQuest items to specific model arrays
+ *  Separates array of RPGQuest items to specific model arrays
  *  or show with quest for review.
  *
  *  @param aData  An array from RPGQuestListResponse
@@ -277,7 +271,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      [self updateViewForState:state willReload:YES];
+      [self updateViewForState:state shouldReload:YES];
       break;
     }
   }
@@ -288,50 +282,55 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Set Button Image
+#pragma mark - Set Button Background
 
 - (void)setActiveButtonForState:(RPGQuestListState)aState
 {
-  UIImage *activeButtonImage = [UIImage imageNamed:@"main_button_active"];
-  UIImage *inactiveButtonImage = [UIImage imageNamed:@"main_button_inactive"];
+  UIButton *takeQuestListButton = self.takeQuestListButton;
+  UIButton *inProgressQuestListButton = self.inProgressQuestListButton;
+  UIButton *doneQuestListButton = self.doneQuestListButton;
+  UIButton *reviewQuestButton = self.reviewQuestButton;
   
-  [self.takeQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateNormal];
-  [self.inProgressQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateNormal];
-  [self.doneQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateNormal];
-  [self.reviewQuestButton setBackgroundImage:inactiveButtonImage forState:UIControlStateNormal];
-  
-  [self.takeQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
-  [self.inProgressQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
-  [self.doneQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
-  [self.reviewQuestButton setBackgroundImage:activeButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
-  
+  [self toggleButtonBackground:takeQuestListButton active:NO];
+  [self toggleButtonBackground:inProgressQuestListButton active:NO];
+  [self toggleButtonBackground:doneQuestListButton active:NO];
+  [self toggleButtonBackground:reviewQuestButton active:NO];
+
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-      [self.takeQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateNormal];
-      [self.takeQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      [self toggleButtonBackground:takeQuestListButton active:YES];
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      [self.inProgressQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateNormal];
-      [self.inProgressQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+     [self toggleButtonBackground:inProgressQuestListButton active:YES];
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      [self.doneQuestListButton setBackgroundImage:activeButtonImage forState:UIControlStateNormal];
-      [self.doneQuestListButton setBackgroundImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      [self toggleButtonBackground:doneQuestListButton active:YES];
       break;
     }
     case kRPGQuestListReviewQuest:
     {
-      [self.reviewQuestButton setBackgroundImage:activeButtonImage forState:UIControlStateNormal];
-      [self.reviewQuestButton setBackgroundImage:inactiveButtonImage forState:UIControlStateSelected | UIControlStateHighlighted];
+      [self toggleButtonBackground:reviewQuestButton active:YES];
       break;
     }
   }
+}
+
+- (void)toggleButtonBackground:(UIButton *)aButton active:(BOOL)anActiveFlag
+{
+  UIImage *activeButtonImage = [UIImage imageNamed:@"main_button_active"];
+  UIImage *inactiveButtonImage = [UIImage imageNamed:@"main_button_inactive"];
+ 
+  [aButton setBackgroundImage:(anActiveFlag ? activeButtonImage : inactiveButtonImage)
+                     forState:UIControlStateNormal];
+  [aButton setBackgroundImage:(!anActiveFlag ? activeButtonImage : inactiveButtonImage)
+                     forState:UIControlStateSelected | UIControlStateHighlighted];
+ 
 }
 
 @end
