@@ -165,15 +165,14 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
           NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:0
                                                                                error:&JSONError];
-          if (responseDictionary != nil
-              && responseDictionary[@"status"] != nil
-              && [responseDictionary[@"status"] integerValue] == 0)
-          {
-            result = YES;
-          }
-          else
+
+          if (responseDictionary == nil)
           {
             [self logError:JSONError withTitle:@"JSON parsing error"];
+          }
+          else if ([responseDictionary[@"status"] integerValue] == 0)
+          {
+            result = YES;
           }
         }
         else
@@ -191,7 +190,7 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
     [task resume];
     [session finishTasksAndInvalidate];
   }
-  else
+  else // if no token
   {
     callbackBlock(NO);
   }
