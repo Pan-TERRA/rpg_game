@@ -69,8 +69,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="vGy-xc-F4I"/>
                                             <exclude reference="Ywq-Lt-pxO"/>
+                                            <exclude reference="vGy-xc-F4I"/>
                                         </mask>
                                     </variation>
                                 </imageView>
@@ -125,14 +125,14 @@
                                     <exclude reference="Bc6-GN-D4h"/>
                                     <exclude reference="pX4-Pr-mbD"/>
                                     <exclude reference="0Xg-uz-Ev4"/>
+                                    <exclude reference="9Zl-a5-QGF"/>
                                     <exclude reference="GcP-Jc-UFF"/>
                                     <exclude reference="iPK-aQ-8oe"/>
-                                    <exclude reference="9Zl-a5-QGF"/>
                                     <exclude reference="uuJ-f1-YJd"/>
-                                    <exclude reference="f6I-yc-bFe"/>
                                     <exclude reference="TjL-WX-McB"/>
-                                    <exclude reference="GiO-Jg-bqX"/>
+                                    <exclude reference="f6I-yc-bFe"/>
                                     <exclude reference="4d4-in-PxI"/>
+                                    <exclude reference="GiO-Jg-bqX"/>
                                 </mask>
                             </variation>
                         </view>
@@ -173,8 +173,8 @@
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="wF0-EZ-c8d"/>
                                             <exclude reference="cvA-fj-R8e"/>
+                                            <exclude reference="wF0-EZ-c8d"/>
                                         </mask>
                                     </variation>
                                 </label>
@@ -187,8 +187,8 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="tdA-pS-RS5"/>
                                             <exclude reference="nUW-ad-dGE"/>
+                                            <exclude reference="tdA-pS-RS5"/>
                                         </mask>
                                     </variation>
                                 </imageView>
@@ -280,52 +280,25 @@
                         </mask>
                     </variation>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
-                    <rect key="frame" x="601" y="354" width="40" height="40"/>
-                    <state key="normal" backgroundImage="main_button_inactive">
-                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="acceptButtonOnClick:" destination="-1" eventType="touchUpInside" id="ADi-0P-27P"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
-                    <rect key="frame" x="551" y="354" width="40" height="40"/>
-                    <state key="normal" backgroundImage="main_button_inactive">
-                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="denyButtonOnClick:" destination="-1" eventType="touchUpInside" id="3G5-ad-ppS"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
-                    <rect key="frame" x="601" y="354" width="40" height="40"/>
-                    <state key="normal" backgroundImage="main_button_inactive">
-                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
-                    </connections>
-                </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tuQ-Ba-KJA">
                     <rect key="frame" x="45" y="70" width="646" height="279"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpB-1Z-c9g">
                             <rect key="frame" x="0.0" y="0.0" width="646" height="577"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myW-ff-wcL">
-                                    <rect key="frame" x="0.0" y="25" width="646" height="117"/>
-                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
-                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yi-cw-St8">
                                     <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="owl-na-nYa"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                    <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myW-ff-wcL">
+                                    <rect key="frame" x="0.0" y="25" width="646" height="117"/>
+                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -367,6 +340,33 @@
                         <constraint firstItem="bpB-1Z-c9g" firstAttribute="top" secondItem="tuQ-Ba-KJA" secondAttribute="top" id="sDM-Jz-UfC"/>
                     </constraints>
                 </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
+                    <rect key="frame" x="601" y="354" width="40" height="40"/>
+                    <state key="normal" backgroundImage="confirm_icon_inactive">
+                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="acceptButtonOnClick:" destination="-1" eventType="touchUpInside" id="ADi-0P-27P"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
+                    <rect key="frame" x="551" y="354" width="40" height="40"/>
+                    <state key="normal" backgroundImage="cancel_icon_inactive">
+                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="denyButtonOnClick:" destination="-1" eventType="touchUpInside" id="3G5-ad-ppS"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
+                    <rect key="frame" x="601" y="354" width="40" height="40"/>
+                    <state key="normal" backgroundImage="plus_icon_inactive">
+                        <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="addProofButtonOnClick:" destination="-1" eventType="touchUpInside" id="s3S-BF-kSx"/>
+                    </connections>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grH-jv-bBd">
                     <rect key="frame" x="651" y="354" width="40" height="40"/>
                     <constraints>
@@ -419,8 +419,10 @@
         <image name="Label Item Light Brown" width="151" height="50"/>
         <image name="Ruby" width="20" height="20"/>
         <image name="back_icon_inactive" width="40" height="40"/>
+        <image name="cancel_icon_inactive" width="40" height="41"/>
         <image name="char_icon" width="40" height="41"/>
-        <image name="main_button_inactive" width="275" height="137"/>
+        <image name="confirm_icon_inactive" width="40" height="40"/>
+        <image name="plus_icon_inactive" width="40" height="40"/>
         <image name="start_icon" width="40" height="38"/>
         <image name="table_item_bg" width="551" height="150"/>
     </resources>
