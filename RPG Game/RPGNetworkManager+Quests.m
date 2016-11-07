@@ -408,18 +408,18 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
-                       });
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
         return;
       }
       
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
       return;
     }
     
@@ -428,9 +428,9 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
-                     });
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
       return;
     }
     
