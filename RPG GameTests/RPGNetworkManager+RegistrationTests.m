@@ -105,7 +105,7 @@
   XCTestExpectation *registrationExpectation = [self expectationWithDescription:@"finish registration"];
   [self registerWithCompletionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeOk);
+    XCTAssertEqual(statusCode, kRPGStatusCodeOK);
     [registrationExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
@@ -142,7 +142,7 @@
   [self.sharedNetworkManager registerWithRequest:registrationRequest
                                completionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeEmailIsAlreadyTaken);
+    XCTAssertEqual(statusCode, kRPGStatusCodeEmailAlreadyTaken);
     [testExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
@@ -162,7 +162,7 @@
   [self.sharedNetworkManager registerWithRequest:registrationRequest
                                completionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeUsernameIsAlreadyTaken);
+    XCTAssertEqual(statusCode, kRPGStatusCodeUsernameAlreadyTaken);
     [testExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];

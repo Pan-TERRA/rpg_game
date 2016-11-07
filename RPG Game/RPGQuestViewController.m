@@ -281,7 +281,7 @@
   {
     switch (statusCode)
     {
-      case kRPGStatusCodeOk:
+      case kRPGStatusCodeOK:
       {
         weakSelf.state = kRPGQuestStateDone;
         [weakSelf setStateReviewedQuest:NO];
@@ -332,7 +332,7 @@
   {
     switch (statusCode)
     {
-      case kRPGStatusCodeOk:
+      case kRPGStatusCodeOK:
       {
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
         break;
@@ -403,7 +403,7 @@
   {
     switch (statusCode)
     {
-      case kRPGStatusCodeOk:
+      case kRPGStatusCodeOK:
       {
         self.proofImageView.image = [UIImage imageWithData:imageData];
         break;
@@ -439,7 +439,7 @@
   {
     switch (statusCode)
     {
-      case kRPGStatusCodeOk:
+      case kRPGStatusCodeOK:
       {
         [weakSelf dismissViewControllerAnimated:YES completion:nil];
         break;

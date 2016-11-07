@@ -104,7 +104,7 @@
         {
           callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
         }
-        else if (responseObject.status == kRPGStatusCodeOk)
+        else if (responseObject.status == kRPGStatusCodeOK)
         {
           [responseObject store];
           callbackBlock(responseObject.status);

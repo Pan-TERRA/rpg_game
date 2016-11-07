@@ -75,7 +75,7 @@
    {
      switch (status)
      {
-       case kRPGStatusCodeOk:
+       case kRPGStatusCodeOK:
          
          break;
          

@@ -125,7 +125,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     [weakSelf setViewToNormalState];
     switch (statusCode)
     {
-      case kRPGStatusCodeOk:
+      case kRPGStatusCodeOK:
       {
         [weakSelf processQuestsData:questList byState:aState];
         if (aWillReloadFlag)

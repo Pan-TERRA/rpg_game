@@ -11,14 +11,14 @@
 NSString * const RPGStatusCodeDescription[] =
 {
     // Server Status Codes
-  [kRPGStatusCodeOk] = @"OK",
+  [kRPGStatusCodeOK] = @"OK",
   [kRPGStatusCodeWrongJSON] = @"Wrong JSON",
   [kRPGStatusCodeUserDoesNotExist] = @"User does not exist",
   [kRPGStatusCodeWrongEmail] = @"Wrong email",
   [kRPGStatusCodeWrongPassword] = @"Wrong password",
   [kRPGStatusCodeWrongToken] = @"Wrong token",
-  [kRPGStatusCodeUsernameIsAlreadyTaken] = @"Username is already taken",
-  [kRPGStatusCodeEmailIsAlreadyTaken] = @"Email is already taken",
+  [kRPGStatusCodeUsernameAlreadyTaken] = @"Username is already taken",
+  [kRPGStatusCodeEmailAlreadyTaken] = @"Email is already taken",
   [kRPGStatusCodeQuestWithSuchIDNotFound] = @"Quest with such ID not found",
   [kRPGStatusCodeUserHasNoSuchCharacter] = @"User has no such character",
   [kRPGStatusCodeSkillWithSuchIDNotFound] = @"Skill with such ID not found",

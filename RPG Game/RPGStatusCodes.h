@@ -13,14 +13,14 @@ extern NSString * const RPGStatusCodeDescription[];
 typedef NS_ENUM(NSInteger, RPGStatusCode)
 {
     // Server Status Codes
-  kRPGStatusCodeOk = 0,
+  kRPGStatusCodeOK = 0,
   kRPGStatusCodeWrongJSON = 1,
   kRPGStatusCodeUserDoesNotExist = 2,
   kRPGStatusCodeWrongEmail = 3,
   kRPGStatusCodeWrongPassword = 4,
   kRPGStatusCodeWrongToken = 5,
-  kRPGStatusCodeUsernameIsAlreadyTaken = 6,
-  kRPGStatusCodeEmailIsAlreadyTaken = 7,
+  kRPGStatusCodeUsernameAlreadyTaken = 6,
+  kRPGStatusCodeEmailAlreadyTaken = 7,
   kRPGStatusCodeQuestWithSuchIDNotFound = 8,
   kRPGStatusCodeUserHasNoSuchCharacter = 9,
   kRPGStatusCodeSkillWithSuchIDNotFound = 10,

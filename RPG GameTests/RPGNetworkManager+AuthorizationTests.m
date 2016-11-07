@@ -52,9 +52,9 @@
                                                                                        characterType:1];
   [self.sharedNetworkManager registerWithRequest:registrationRequest completionHandler:^(NSInteger statusCode)
   {
-    if (statusCode != kRPGStatusCodeOk &&
-        statusCode != kRPGStatusCodeEmailIsAlreadyTaken &&
-        statusCode != kRPGStatusCodeUsernameIsAlreadyTaken)
+    if (statusCode != kRPGStatusCodeOK &&
+        statusCode != kRPGStatusCodeEmailAlreadyTaken &&
+        statusCode != kRPGStatusCodeUsernameAlreadyTaken)
     {
       XCTFail(@"could not register: status code %ld", (long)statusCode);
     }
@@ -81,7 +81,7 @@
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution (needed for asyncronious testing)"];
   [self loginWithCompletionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeOk);
+    XCTAssertEqual(statusCode, kRPGStatusCodeOK);
     [testExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
@@ -141,7 +141,7 @@
   XCTestExpectation *logoutExpectation = [self expectationWithDescription:@"finish logout"];
   [self.sharedNetworkManager logoutWithCompletionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeOk);
+    XCTAssertEqual(statusCode, kRPGStatusCodeOK);
     [logoutExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];

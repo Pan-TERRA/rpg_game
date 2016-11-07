@@ -446,7 +446,7 @@
       }
       else
       {
-        callbackBlock(kRPGStatusCodeOk, data);
+        callbackBlock(kRPGStatusCodeOK, data);
       }
     });
       
