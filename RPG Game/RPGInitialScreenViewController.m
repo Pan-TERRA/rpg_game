@@ -7,10 +7,12 @@
 //
 
 #import "RPGInitialScreenViewController.h"
-#import "RPGNetworkManager.h"
+  // Views
 #import "RPGMainViewController.h"
 #import "RPGLoginViewController.h"
-// Constants
+  // API
+#import "RPGNetworkManager.h"
+  // Constants
 #import "RPGNibNames.h"
 
 @interface RPGInitialScreenViewController ()
@@ -34,6 +36,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
+  
   [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
    {
      UIViewController *viewControllerToBePresented = nil;

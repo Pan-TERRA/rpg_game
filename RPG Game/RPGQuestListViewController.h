@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+  // Constants
 #import "RPGQuestListState.h"
 
 @class RPGQuest;
@@ -16,8 +17,14 @@ extern NSString * const kRPGQuestStringStateNotReviewed;
 extern NSString * const kRPGQuestStringStateReviewedFalse;
 
 @interface RPGQuestListViewController : UIViewController
-
-- (void)updateViewForState:(RPGQuestListState)aState willReload:(BOOL)aWillReloadFlag;
+/**
+ *  Update the quest list table view.
+ *
+ *  @param aState            A qust list state.
+ *  @param aShouldReloadFlag A flag that indicates whether to perform 
+ *         reloadData method on table or not.
+ */
+- (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag;
 - (void)showQuestViewWithQuest:(RPGQuest *)aQuest;
 
 @end

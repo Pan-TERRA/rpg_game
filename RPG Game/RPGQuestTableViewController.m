@@ -7,14 +7,19 @@
 //
 
 #import "RPGQuestTableViewController.h"
+  // API
+#import "RPGNetworkManager+Quests.h"
+  // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
-#import "RPGQuestListState.h"
-#import "RPGNibNames.h"
+  // Entities
 #import "RPGQuest.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGQuestRequest.h"
-#import "RPGNetworkManager+Quests.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
+  // Constants
+#import "RPGNibNames.h"
+#import "RPGQuestListState.h"
 
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
@@ -64,7 +69,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     {
       self.updateWhenScrollTable = NO;
       
-      [self.questListViewController updateViewForState:self.questListState willReload:NO];
+      [self.questListViewController updateViewForState:self.questListState shouldReload:NO];
     }
   }
 }
@@ -79,6 +84,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
   // triggered only after refresh scroll
   if (!self.canUpdateWhenScrollTable)
   {
+    [self.tableView reloadData];
     [aScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
   }
 }
@@ -159,7 +165,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  return 150;
+  return 200;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath

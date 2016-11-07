@@ -7,10 +7,12 @@
 //
 
 #import "RPGAppDelegate.h"
+  // Views
+#import "RPGInitialScreenViewController.h"
+  // Misc
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
-#import "RPGInitialScreenViewController.h"
-// Constants
+ // Constants
 #import "RPGNibNames.h"
 
 @interface RPGAppDelegate ()
@@ -24,10 +26,11 @@
 - (void)dealloc
 {
   [_window release];
+  
   [super dealloc];
 }
 
-#pragma mark -
+#pragma mark - UIApplicationDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
