@@ -801,7 +801,7 @@
 				AED6F57B1DACD8D8007ED1B8 /* RPGQuestListViewController.h */,
 				AED6F57C1DACD8D8007ED1B8 /* RPGQuestListViewController.m */,
 				AED6F57D1DACD8D8007ED1B8 /* RPGQuestListViewController.xib */,
-				28A5A0D91DB8F773000EF49F /* Table View */,
+				28B4DDB41DCCE51100332DCD /* Quest Table View Controller */,
 			);
 			name = "Quest List";
 			sourceTree = "<group>";
@@ -1026,6 +1026,7 @@
 			children = (
 				AEFC27871DC7A67C00905ADD /* RPGQuestTableViewController.h */,
 				AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */,
+				28A5A0D91DB8F773000EF49F /* Table View */,
 			);
 			name = "Quest Table View Controller";
 			sourceTree = "<group>";
@@ -1084,7 +1085,6 @@
 			isa = PBXGroup;
 			children = (
 				28A915271DC769B9001E0F51 /* RPGQuestAction.h */,
-				28B4DDB41DCCE51100332DCD /* Quest Table View Controller */,
 				28A5A0D81DB8F765000EF49F /* Quest List */,
 				28A5A0DA1DB8F787000EF49F /* Quest */,
 				28A5A0D71DB8F75A000EF49F /* Proof Image */,

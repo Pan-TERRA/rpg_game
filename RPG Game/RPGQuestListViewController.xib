@@ -43,6 +43,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-hB-P6D">
                             <rect key="frame" x="-9" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Take Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -53,6 +54,7 @@
                         <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Zn-0ou">
                             <rect key="frame" x="404" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Review Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -63,6 +65,7 @@
                         <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L4V-zu-eOI">
                             <rect key="frame" x="268" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Done Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -73,6 +76,7 @@
                         <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-T6-vMT">
                             <rect key="frame" x="127" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="In progress Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>

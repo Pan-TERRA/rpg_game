@@ -25,7 +25,7 @@ NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDi
 NSString * const kRPGBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
 
 // TODO: replace to separate header file
-static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.31:8888/ws";
+static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.28:8888/ws";
 static NSString * const kRPGBattleManagerResponseType = @"type";
 
 @interface RPGBattleManager () <SRWebSocketDelegate>

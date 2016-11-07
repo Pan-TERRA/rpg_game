@@ -7,12 +7,16 @@
   //
 
 #import "RPGMainViewController.h"
+  // API
 #import "RPGBattleViewController.h"
+  // Views
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
+  // Misc
 #import "RPGSFXEngine.h"
-#import "RPGNibNames.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGMainViewController ()
 
@@ -33,6 +37,8 @@
   return [super initWithNibName:kRPGMainViewNIBName
                          bundle:nil];
 }
+
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
@@ -108,7 +114,7 @@
                                            selector:@selector(battleManagerDidEndSetUp:)
                                                name:kRPGBattleManagerDidEndSetUpNotification
                                              object:self.battleViewController.battleManager];
-  
+
   [self addChildViewController:self.battleInitModal];
   self.battleInitModal.view.frame = self.view.frame;
   [self.view addSubview:self.battleInitModal.view];
@@ -130,7 +136,6 @@
 
 /**
  *  Performs after SRWebSocket receive BATTLE_INIT message
- *
  */
 - (void)battleManagerDidEndSetUp:(NSNotification *)aNotification
 {

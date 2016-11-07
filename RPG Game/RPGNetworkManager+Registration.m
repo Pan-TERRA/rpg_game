@@ -11,8 +11,6 @@
 #import "RPGRegistrationRequest+Serialization.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
-  // Constants
-#import "RPGStatusCodes.h"
 
 @implementation RPGNetworkManager (Registration)
 

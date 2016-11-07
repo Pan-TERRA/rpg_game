@@ -6,37 +6,45 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import "RPGQuestViewController.h"
+  // API
+#import "RPGNetworkManager+Quests.h"
+  // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
-#import "RPGNibNames.h"
+  // Entities
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
-#import "RPGNetworkManager+Quests.h"
 #import "RPGQuestRequest+Serialization.h"
 #import "RPGQuestReviewRequest+Serialization.h"
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGQuestAction.h"
-#import <AVFoundation/AVFoundation.h>
-#import "RPGStatusCodes.h"
 #import "RPGAlert.h"
+  // Constants
+#import "RPGNibNames.h"
+#import "RPGQuestAction.h"
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
+
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
+
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
+
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 @property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
 
@@ -91,6 +99,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
+  
   switch (self.state)
   {
     case kRPGQuestStateDone:
@@ -291,10 +300,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
@@ -339,10 +349,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
@@ -408,14 +419,10 @@
         self.proofImageView.image = [UIImage imageWithData:imageData];
         break;
       }
-      case kRPGStatusCodeWrongToken:
-      {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
       default:
       {
+        NSString *message = @"Can't upload quest proof image.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
         break;
       }
     }
@@ -446,10 +453,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
