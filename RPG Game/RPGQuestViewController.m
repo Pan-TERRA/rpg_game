@@ -300,10 +300,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
@@ -348,10 +349,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
@@ -417,14 +419,10 @@
         self.proofImageView.image = [UIImage imageWithData:imageData];
         break;
       }
-      case kRPGStatusCodeWrongToken:
-      {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
       default:
       {
+        NSString *message = @"Can't upload quest proof image.";
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
         break;
       }
     }
@@ -455,10 +453,11 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        UIViewController *loginViewController = self.presentingViewController.presentingViewController.presentingViewController;
-        [loginViewController dismissViewControllerAnimated:YES completion:nil];
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:loginViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
       default:
