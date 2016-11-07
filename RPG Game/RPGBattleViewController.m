@@ -239,6 +239,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                                               selector:@selector(updateTimerLabel:)
                                               userInfo:nil
                                                repeats:YES];
+  [self updateTimerLabel:nil];
 }
 
 - (void)updateTimerLabel:(NSTimer *)aTimer
