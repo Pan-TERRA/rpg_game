@@ -30,7 +30,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *stateImageView;
+
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
@@ -66,6 +67,7 @@
 {
   [_imagePickerController release];
   [_proofImageStringURL release];
+  [_stateImageView release];
   [super dealloc];
 }
 
@@ -161,19 +163,19 @@
     case kRPGQuestStateInProgress:
     {
       [self setStateTakeOrInProgressQuest];
-      self.stateLabel.text = kRPGQuestStringStateInProgress;
+      //self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     }
     case kRPGQuestStateDone:
     {
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      //self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
     }
     case kRPGQuestStateReviewedFalse:
     {
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
+      //self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
     }
     case kRPGQuestStateForReview:
@@ -231,7 +233,7 @@
 - (void)setStateItemsHidden:(BOOL)aFlag
 {
   self.stateTitleLabel.hidden = aFlag;
-  self.stateLabel.hidden = aFlag;
+  self.stateImageView.hidden = aFlag;
 }
 
 #pragma mark - IBAction
@@ -289,7 +291,7 @@
       {
         weakSelf.state = kRPGQuestStateDone;
         [weakSelf setStateReviewedQuest:NO];
-        weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+        //weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
         weakSelf.proofImageView.image = chosenImage;
         break;
       }

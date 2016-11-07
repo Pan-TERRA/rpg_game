@@ -16,8 +16,9 @@
 
 @interface RPGQuestListTableViewCell()
 
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
+@property (retain, nonatomic) IBOutlet UIImageView *stateImageView;
+
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
@@ -69,19 +70,19 @@
     case kRPGQuestStateInProgress:
     {
       [self setStateLabelHidden:NO];
-      self.stateLabel.text = kRPGQuestStringStateInProgress;
+      //self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     }
     case kRPGQuestStateDone:
     {
       [self setStateLabelHidden:NO];
-      self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      //self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
     }
     case kRPGQuestStateReviewedFalse:
     {
       [self setStateLabelHidden:NO];
-      self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
+      //self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
     }
     case kRPGQuestStateReviewedTrue:
@@ -101,7 +102,11 @@
 - (void)setStateLabelHidden:(BOOL)aFlag
 {
   self.stateTitleLabel.hidden = aFlag;
-  self.stateLabel.hidden = aFlag;
+  self.stateImageView.hidden = aFlag;
 }
 
+- (void)dealloc {
+  [_stateImageView release];
+  [super dealloc];
+}
 @end
