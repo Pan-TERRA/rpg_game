@@ -197,12 +197,12 @@
                     </variation>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="27" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lez-UF-BPa">
-                    <rect key="frame" x="293" y="8" width="150" height="72"/>
+                    <rect key="frame" x="293" y="30" width="150" height="69"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="150" id="9kD-cW-8d6"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="60"/>
-                    <color key="textColor" red="1" green="0.60024914940615237" blue="0.087810021978525388" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="60"/>
+                    <color key="textColor" red="0.61960784313725492" green="0.3843137254901961" blue="0.17647058823529413" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TmA-7m-uPF" userLabel="Spell Bar Container">
@@ -501,13 +501,13 @@
                 <constraint firstItem="eGV-R3-AZJ" firstAttribute="top" secondItem="wCY-p1-9Mh" secondAttribute="bottom" id="fK8-XF-NfM"/>
                 <constraint firstItem="Lez-UF-BPa" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hgz-gt-PCz"/>
                 <constraint firstItem="285-ls-YlH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="i9l-W8-omd"/>
-                <constraint firstItem="Lez-UF-BPa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="ine-vF-Hfx"/>
                 <constraint firstItem="wCY-p1-9Mh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="iqi-Fm-XPG"/>
                 <constraint firstAttribute="bottom" secondItem="TmA-7m-uPF" secondAttribute="bottom" constant="5" id="kKn-cv-dTf"/>
                 <constraint firstAttribute="trailing" secondItem="eGV-R3-AZJ" secondAttribute="trailing" id="ncA-3f-713"/>
                 <constraint firstAttribute="trailing" secondItem="8c7-Al-VCY" secondAttribute="trailing" constant="76" id="pT2-1E-UEm"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="top" secondItem="8c7-Al-VCY" secondAttribute="bottom" constant="10" id="rEM-ep-EEA"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="top" secondItem="Lez-UF-BPa" secondAttribute="bottom" constant="8" id="ua9-iI-PgH"/>
+                <constraint firstItem="Lez-UF-BPa" firstAttribute="centerY" secondItem="Fo0-pu-vx9" secondAttribute="centerY" id="xSK-1g-74S"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
