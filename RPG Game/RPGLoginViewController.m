@@ -198,7 +198,7 @@
        
        switch (statusCode)
        {
-         case kRPGStatusCodeOk:
+         case kRPGStatusCodeOK:
          {
            RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
            [self presentViewController:mainViewController animated:YES completion:nil];
