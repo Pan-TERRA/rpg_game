@@ -100,39 +100,33 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AYi-2e-d0P" userLabel="Quest Item Reward Container">
-                                <rect key="frame" x="306" y="0.0" width="225" height="30"/>
+                                <rect key="frame" x="377" y="0.0" width="154" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="Au3-4i-Wwv">
-                                        <rect key="frame" x="0.0" y="0.0" width="225" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="154" height="30"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KYq-at-Nob">
-                                        <rect key="frame" x="10" y="5" width="61" height="20"/>
-                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
-                                        <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ruby" translatesAutoresizingMaskIntoConstraints="NO" id="fvF-qf-f38">
-                                        <rect key="frame" x="81" y="5" width="20" height="20"/>
+                                        <rect key="frame" x="10" y="5" width="20" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qv-8M-6vn">
-                                        <rect key="frame" x="111" y="5" width="17" height="20"/>
+                                        <rect key="frame" x="40" y="5" width="17" height="20"/>
                                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                         <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gold" translatesAutoresizingMaskIntoConstraints="NO" id="fjM-Ya-EcK">
-                                        <rect key="frame" x="138" y="5" width="20" height="20"/>
+                                        <rect key="frame" x="67" y="5" width="20" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkF-q7-MoJ">
-                                        <rect key="frame" x="168" y="5" width="17" height="20"/>
+                                        <rect key="frame" x="97" y="5" width="17" height="20"/>
                                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                         <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="char_icon" translatesAutoresizingMaskIntoConstraints="NO" id="tRq-nF-VXt">
-                                        <rect key="frame" x="195" y="5" width="20" height="20"/>
+                                        <rect key="frame" x="124" y="5" width="20" height="20"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="20" id="On0-o6-jw1"/>
@@ -147,19 +141,18 @@
                                     <constraint firstItem="dkF-q7-MoJ" firstAttribute="centerY" secondItem="fjM-Ya-EcK" secondAttribute="centerY" id="2v7-kL-HfR"/>
                                     <constraint firstAttribute="trailing" secondItem="Au3-4i-Wwv" secondAttribute="trailing" id="4qh-u0-ArC"/>
                                     <constraint firstItem="8Qv-8M-6vn" firstAttribute="centerY" secondItem="fvF-qf-f38" secondAttribute="centerY" id="7no-3I-R34"/>
-                                    <constraint firstItem="KYq-at-Nob" firstAttribute="centerY" secondItem="AYi-2e-d0P" secondAttribute="centerY" id="8iG-mB-wxW"/>
-                                    <constraint firstItem="fvF-qf-f38" firstAttribute="leading" secondItem="KYq-at-Nob" secondAttribute="trailing" constant="10" id="AZ5-ae-ghC"/>
-                                    <constraint firstItem="KYq-at-Nob" firstAttribute="leading" secondItem="AYi-2e-d0P" secondAttribute="leading" constant="10" id="CRa-od-u1v"/>
                                     <constraint firstAttribute="height" constant="30" id="J6e-Wa-9Pw"/>
                                     <constraint firstItem="tRq-nF-VXt" firstAttribute="leading" secondItem="dkF-q7-MoJ" secondAttribute="trailing" constant="10" id="Kfo-NQ-7jz"/>
                                     <constraint firstAttribute="bottom" secondItem="Au3-4i-Wwv" secondAttribute="bottom" id="Kxy-cR-Tfh"/>
                                     <constraint firstItem="fjM-Ya-EcK" firstAttribute="centerY" secondItem="8Qv-8M-6vn" secondAttribute="centerY" id="OQh-IY-SBv"/>
                                     <constraint firstAttribute="trailing" secondItem="tRq-nF-VXt" secondAttribute="trailing" constant="10" id="PaS-RJ-fRE"/>
-                                    <constraint firstItem="fvF-qf-f38" firstAttribute="centerY" secondItem="KYq-at-Nob" secondAttribute="centerY" id="ZkP-4m-PKC"/>
+                                    <constraint firstItem="tRq-nF-VXt" firstAttribute="centerY" secondItem="AYi-2e-d0P" secondAttribute="centerY" id="Yf2-9J-pbM"/>
+                                    <constraint firstItem="fvF-qf-f38" firstAttribute="leading" secondItem="AYi-2e-d0P" secondAttribute="leading" constant="10" id="ZS6-wN-UZQ"/>
                                     <constraint firstItem="Au3-4i-Wwv" firstAttribute="leading" secondItem="AYi-2e-d0P" secondAttribute="leading" id="b9W-NO-86p"/>
                                     <constraint firstItem="Au3-4i-Wwv" firstAttribute="top" secondItem="AYi-2e-d0P" secondAttribute="top" id="hLX-aP-Slj"/>
                                     <constraint firstItem="tRq-nF-VXt" firstAttribute="centerY" secondItem="dkF-q7-MoJ" secondAttribute="centerY" id="uxn-ED-hSc"/>
                                     <constraint firstItem="8Qv-8M-6vn" firstAttribute="leading" secondItem="fvF-qf-f38" secondAttribute="trailing" constant="10" id="vYJ-DU-Zh1"/>
+                                    <constraint firstItem="tRq-nF-VXt" firstAttribute="centerY" secondItem="AYi-2e-d0P" secondAttribute="centerY" id="zIh-ov-Fqa"/>
                                 </constraints>
                             </view>
                         </subviews>
