@@ -84,12 +84,7 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    mask = UIInterfaceOrientationMaskLandscape;
-  }
-  return mask;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - UIPickerViewDataSource

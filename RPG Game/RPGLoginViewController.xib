@@ -25,7 +25,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h69-zc-lQh">
                     <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-n2-zE7" userLabel="Scroll View Contetn View">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A4B-n2-zE7" userLabel="Scroll View Content View">
                             <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="fgt-i1-ZDL">
@@ -54,8 +54,8 @@
                                         <constraint firstAttribute="trailing" secondItem="cHd-Ys-CwZ" secondAttribute="trailing" id="aEs-rb-Lw4"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NxC-0c-a7a" userLabel="Login Form Container">
-                                    <rect key="frame" x="100" y="66" width="467" height="245"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NxC-0c-a7a" userLabel="Login Form Container">
+                                    <rect key="frame" x="100" y="65" width="467" height="245"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiU-3l-e5x" userLabel="Email Input Container">
                                             <rect key="frame" x="0.0" y="0.0" width="467" height="50"/>
@@ -66,8 +66,13 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
                                                     <rect key="frame" x="25" y="10" width="427" height="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="X6M-G6-u0F"/>
                                                         <action selector="userDoneEnteringUsername:" destination="-1" eventType="editingDidEndOnExit" id="3Kx-ka-Fez"/>
@@ -97,8 +102,13 @@
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
                                                     <rect key="frame" x="25" y="10" width="427" height="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
+                                                            <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="8lE-xe-KtE"/>
                                                         <action selector="userDoneEnteringPassword:" destination="-1" eventType="editingDidEndOnExit" id="aNE-kE-vXC"/>
@@ -126,7 +136,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                             <state key="normal" title="Sign up" backgroundImage="main_button_inactive">
-                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="signupAction:" destination="-1" eventType="touchUpInside" id="LFZ-76-s7K"/>
@@ -147,7 +157,7 @@
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                             <state key="normal" title="Log in" backgroundImage="main_button_inactive">
-                                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="vhi-91-fjM"/>
@@ -223,13 +233,7 @@
                                 <constraint firstItem="NxC-0c-a7a" firstAttribute="centerY" secondItem="A4B-n2-zE7" secondAttribute="centerY" id="pvB-1G-2Bx">
                                     <variation key="heightClass=compact-widthClass=compact" constant="55"/>
                                 </constraint>
-                                <constraint firstItem="NxC-0c-a7a" firstAttribute="top" secondItem="A4B-n2-zE7" secondAttribute="top" constant="100" id="yNa-W7-Er7"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="yNa-W7-Er7"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -241,7 +245,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
                 <constraint firstItem="NxC-0c-a7a" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="2Kd-W7-JYS"/>

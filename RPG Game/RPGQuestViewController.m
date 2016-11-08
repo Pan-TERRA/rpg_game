@@ -27,16 +27,20 @@
 
 @interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
+
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *stateImageView;
+
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
@@ -127,12 +131,7 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    mask = UIInterfaceOrientationMaskLandscape;
-  }
-  return mask;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - View Content
@@ -143,13 +142,37 @@
   self.descriptionLabel.text = aQuest.questDescription;
   self.crystalsRewardLabel.text = [@(aQuest.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  
   if (aQuest.reward.skillID != 0)
   {
     
   }
   else
   {
-    self.skillRewardImageView.hidden = YES;
+    UIImageView *skillRewardView = self.skillRewardImageView;
+    UILabel *goldRewardLabel = self.goldRewardLabel;
+    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:skillRewardView.superview
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
+    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:goldRewardLabel
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
+    [skillRewardView removeFromSuperview];
+    [goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:goldRewardLabel.superview
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:goldRewardLabel
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                         multiplier:1.0
+                                                                           constant:10]];
   }
   
   self.state = aQuest.state;
@@ -166,19 +189,19 @@
     case kRPGQuestStateInProgress:
     {
       [self setStateTakeOrInProgressQuest];
-      self.stateLabel.text = kRPGQuestStringStateInProgress;
+      //self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     }
     case kRPGQuestStateDone:
     {
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = kRPGQuestStringStateNotReviewed;
+      //self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
     }
     case kRPGQuestStateReviewedFalse:
     {
       [self setStateReviewedQuest:NO];
-      self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
+      //self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
     }
     case kRPGQuestStateForReview:
@@ -235,8 +258,43 @@
 
 - (void)setStateItemsHidden:(BOOL)aFlag
 {
-  self.stateTitleLabel.hidden = aFlag;
-  self.stateLabel.hidden = aFlag;
+  if (aFlag)
+  {
+    UIImageView *stateImageView = self.stateImageView;
+    UIImageView *proofImageView = self.proofImageView;
+    UILabel *stateTitleLabel = self.stateTitleLabel;
+    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:stateImageView.superview
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:10]];
+    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:stateTitleLabel
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:10]];
+    [stateImageView removeFromSuperview];
+    [stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:stateTitleLabel
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:proofImageView
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
+    
+    [stateTitleLabel removeFromSuperview];
+    [proofImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView.superview
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:proofImageView
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                        multiplier:1.0
+                                                                          constant:10]];
+  }
 }
 
 #pragma mark - IBAction
@@ -294,7 +352,7 @@
       {
         weakSelf.state = kRPGQuestStateDone;
         [weakSelf setStateReviewedQuest:NO];
-        weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
+        //weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
         weakSelf.proofImageView.image = chosenImage;
         break;
       }

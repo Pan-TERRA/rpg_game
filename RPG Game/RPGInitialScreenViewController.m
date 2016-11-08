@@ -21,6 +21,8 @@
 
 @implementation RPGInitialScreenViewController
 
+#pragma mark - Init
+
 - (instancetype)init
 {
   self = [super init];
@@ -32,6 +34,8 @@
   
   return self;
 }
+
+#pragma mark - UIViewController
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -54,6 +58,11 @@
                         animated:YES
                       completion:nil];
    }];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 @end
