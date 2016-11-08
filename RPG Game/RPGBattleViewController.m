@@ -189,44 +189,6 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:7];
 }
 
-#pragma mark - Notifications
-
-- (void)modelDidChange:(NSNotification *)aNotification
-{
-  RPGBattle *battle = self.battleManager.battle;
-
-    // client
-  NSInteger playerHP = battle.player.HP;
-  self.player1NickName.text = battle.player.name;
-  self.player1hp.text = [@(playerHP) stringValue];
-  self.player1hpBar.progress = ((float)playerHP / 100);
-    // opponent
-  NSInteger opponentHP = battle.opponent.HP;
-  self.player2NickName.text = battle.opponent.name;
-  self.player2hp.text = [@(opponentHP) stringValue];
-  self.player2hpBar.progress = ((float)opponentHP / 100);
-}
-
-- (void)observeValueForKeyPath:(NSString *)aKeyPath
-                      ofObject:(id)anObject
-                        change:(NSDictionary<NSString *,id> *)aChange
-                       context:(void *)aContext
-{
-  if (aContext == &kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext)
-  {
-    BOOL oldCurrentTurn = [aChange[NSKeyValueChangeOldKey] boolValue];
-    BOOL newCurrentTurn = [aChange[NSKeyValueChangeNewKey] boolValue];
-    if (oldCurrentTurn != newCurrentTurn)
-    {
-      [self restartTimer];
-    }
-  }
-  else
-  {
-    [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
-  }
-}
-
 #pragma mark - Timer
 
 - (void)restartTimer
@@ -247,6 +209,48 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   if (self.timerCounter > 0)
   {
     self.timerCounter -= 1;
+  }
+  // TODO: Add battle condition request if something went wrong with time.
+}
+
+#pragma mark - Notifications
+
+- (void)modelDidChange:(NSNotification *)aNotification
+{
+  RPGBattle *battle = self.battleManager.battle;
+
+    // client
+  NSInteger playerHP = battle.player.HP;
+  self.player1NickName.text = battle.player.name;
+  self.player1hp.text = [@(playerHP) stringValue];
+  self.player1hpBar.progress = ((float)playerHP / 100);
+    // opponent
+  NSInteger opponentHP = battle.opponent.HP;
+  self.player2NickName.text = battle.opponent.name;
+  self.player2hp.text = [@(opponentHP) stringValue];
+  self.player2hpBar.progress = ((float)opponentHP / 100);
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)aKeyPath
+                      ofObject:(id)anObject
+                        change:(NSDictionary<NSString *,id> *)aChange
+                       context:(void *)aContext
+{
+  if (aContext == &kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext)
+  {
+    BOOL oldCurrentTurn = [aChange[NSKeyValueChangeOldKey] boolValue];
+    BOOL newCurrentTurn = [aChange[NSKeyValueChangeNewKey] boolValue];
+    
+    if (oldCurrentTurn != newCurrentTurn)
+    {
+      [self restartTimer];
+    }
+  }
+  else
+  {
+    [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
   }
 }
 

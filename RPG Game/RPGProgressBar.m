@@ -69,11 +69,17 @@
         
         if (self.align == kRPGProgressBarRightAlign)
         {
-          currentProgressBarRect = CGRectMake(originX, originY, currentWidth, height);
+          currentProgressBarRect = CGRectMake(originX,
+                                              originY,
+                                              currentWidth,
+                                              height);
         }
         else
         {
-          currentProgressBarRect = CGRectMake(originX + width - currentWidth, originY, currentWidth, height);
+          currentProgressBarRect = CGRectMake(originX + width - currentWidth,
+                                              originY,
+                                              currentWidth,
+                                              height);
         }
         
         [UIView beginAnimations:nil context:nil];
@@ -94,6 +100,7 @@
 {
   [super drawRect:rect];
   
+    // Invokes once
   UIImage *progressBarImage = [UIImage imageNamed:@"pink_bar"];
   [progressBarImage drawInRect:rect];
 }
