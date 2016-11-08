@@ -15,6 +15,7 @@ NSString * const kRPGBattleConditionResponseSkillsCondition = @"skills_condition
 NSString * const kRPGBattleConditionResponseSkillsDamage = @"skills_damage";
 NSString * const kRPGBattleConditionResponseReward = @"reward";
 NSString * const kRPGBattleConditionResponseStatus = @"status";
+NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 @implementation RPGBattleConditionResponse (Serialization)
 
@@ -28,6 +29,7 @@ NSString * const kRPGBattleConditionResponseStatus = @"status";
   dictionaryRepresentation[kRPGBattleConditionResponseSkillsDamage] = self.skillsDamage;
   dictionaryRepresentation[kRPGBattleConditionResponseReward] = self.reward;
   dictionaryRepresentation[kRPGBattleConditionResponseStatus] = @(self.status);
+  dictionaryRepresentation[kRPGBattleConditionResponseCurrentTurn] = @(self.currentTurn);
   
   return [dictionaryRepresentation autorelease];
 }
@@ -39,7 +41,8 @@ NSString * const kRPGBattleConditionResponseStatus = @"status";
           skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
              skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]
                    reward:aDictionary[kRPGBattleConditionResponseReward]
-                   status:[aDictionary[kRPGBattleConditionResponseStatus] integerValue]];
+                   status:[aDictionary[kRPGBattleConditionResponseStatus] integerValue]
+              currentTurn:[aDictionary[kRPGBattleConditionResponseCurrentTurn] boolValue]];
 }
 
 @end

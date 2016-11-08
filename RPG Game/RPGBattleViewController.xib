@@ -22,7 +22,7 @@
                 <outlet property="spell5Button" destination="kPK-Ei-hzY" id="AZz-1A-qhT"/>
                 <outlet property="spell6Button" destination="INb-B7-s2Y" id="0ky-Vq-Iqc"/>
                 <outlet property="spell7Button" destination="jrS-I0-TxS" id="TUA-2r-iOx"/>
-                <outlet property="timer" destination="Lez-UF-BPa" id="fdb-Oh-bOg"/>
+                <outlet property="timerLabel" destination="Lez-UF-BPa" id="aSv-im-1Mh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

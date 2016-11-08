@@ -15,6 +15,7 @@
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
 @property (nonatomic, retain, readonly) NSArray *skillsDamage;
 @property (nonatomic, retain, readonly) NSDictionary *reward;
+@property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
 #pragma mark - Init
 
@@ -23,12 +24,14 @@
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSArray *)aSkillsDamage
                     reward:(NSDictionary *)aReward
-                    status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                    status:(NSInteger)aStatus
+               currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSArray *)aSkillsDamage
                                        reward:(NSDictionary *)aReward
-                                       status:(NSInteger)aStatus;
+                                       status:(NSInteger)aStatus
+                                  currentTurn:(BOOL)aCurrentTurn;
 
 @end
