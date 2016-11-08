@@ -142,34 +142,37 @@
   self.descriptionLabel.text = aQuest.questDescription;
   self.crystalsRewardLabel.text = [@(aQuest.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aQuest.reward.gold) stringValue];
+  
   if (aQuest.reward.skillID != 0)
   {
     
   }
   else
   {
-    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.skillRewardImageView.superview
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
-    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
-                                                                             attribute:NSLayoutAttributeLeading
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.goldRewardLabel
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
-    [self.skillRewardImageView removeFromSuperview];
-    [self.goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.goldRewardLabel.superview
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:self.goldRewardLabel
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                              multiplier:1.0
-                                                                                constant:10]];
+    UIImageView *skillRewardView = self.skillRewardImageView;
+    UILabel *goldRewardLabel = self.goldRewardLabel;
+    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:skillRewardView.superview
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
+    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:goldRewardLabel
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
+    [skillRewardView removeFromSuperview];
+    [goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:goldRewardLabel.superview
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                          relatedBy:NSLayoutRelationEqual
+                                                                             toItem:goldRewardLabel
+                                                                          attribute:NSLayoutAttributeTrailing
+                                                                         multiplier:1.0
+                                                                           constant:10]];
   }
   
   self.state = aQuest.state;
@@ -255,38 +258,42 @@
 
 - (void)setStateItemsHidden:(BOOL)aFlag
 {
-  if (aFlag) {
-    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.stateImageView.superview
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
-    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
-                                                                             attribute:NSLayoutAttributeLeading
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.stateTitleLabel
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
-    [self.stateImageView removeFromSuperview];
-    [self.stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateTitleLabel
-                                                                       attribute:NSLayoutAttributeLeading
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.proofTypeImageView
-                                                                       attribute:NSLayoutAttributeTrailing
-                                                                      multiplier:1.0
-                                                                        constant:10]];
+  if (aFlag)
+  {
+    UIImageView *stateImageView = self.stateImageView;
+    UIImageView *proofImageView = self.proofImageView;
+    UILabel *stateTitleLabel = self.stateTitleLabel;
+    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:stateImageView.superview
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:10]];
+    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
+                                                                  attribute:NSLayoutAttributeLeading
+                                                                  relatedBy:NSLayoutRelationEqual
+                                                                     toItem:stateTitleLabel
+                                                                  attribute:NSLayoutAttributeTrailing
+                                                                 multiplier:1.0
+                                                                   constant:10]];
+    [stateImageView removeFromSuperview];
+    [stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:stateTitleLabel
+                                                                   attribute:NSLayoutAttributeLeading
+                                                                   relatedBy:NSLayoutRelationEqual
+                                                                      toItem:proofImageView
+                                                                   attribute:NSLayoutAttributeTrailing
+                                                                  multiplier:1.0
+                                                                    constant:10]];
     
-    [self.stateTitleLabel removeFromSuperview];
-    [self.proofTypeImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.proofTypeImageView.superview
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:self.proofTypeImageView
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                              multiplier:1.0
-                                                                                constant:10]];
+    [stateTitleLabel removeFromSuperview];
+    [proofImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView.superview
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                         relatedBy:NSLayoutRelationEqual
+                                                                            toItem:proofImageView
+                                                                         attribute:NSLayoutAttributeTrailing
+                                                                        multiplier:1.0
+                                                                          constant:10]];
   }
 }
 
