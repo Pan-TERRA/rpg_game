@@ -4,7 +4,7 @@
 <dict>
 	<key>4</key>
 	<dict>
-		<key>specification</key>
+		<key>description</key>
 		<string>Hit&amp;Run</string>
 		<key>name</key>
 		<string>Hit</string>
