@@ -16,8 +16,9 @@
 
 @interface RPGQuestListTableViewCell()
 
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (retain, nonatomic) IBOutlet UIImageView *stateImageView;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *stateImageView;
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
@@ -57,7 +58,28 @@
   }
   else
   {
-    self.skillRewardImageView.hidden = YES;
+    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
+                                                                             attribute:NSLayoutAttributeTrailing
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.skillRewardImageView.superview
+                                                                             attribute:NSLayoutAttributeTrailing
+                                                                            multiplier:1.0
+                                                                              constant:10]];
+    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
+                                                                             attribute:NSLayoutAttributeLeading
+                                                                             relatedBy:NSLayoutRelationEqual
+                                                                                toItem:self.goldRewardLabel
+                                                                             attribute:NSLayoutAttributeTrailing
+                                                                            multiplier:1.0
+                                                                              constant:10]];
+    [self.skillRewardImageView removeFromSuperview];
+    [self.goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.goldRewardLabel.superview
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                               relatedBy:NSLayoutRelationEqual
+                                                                                  toItem:self.goldRewardLabel
+                                                                               attribute:NSLayoutAttributeTrailing
+                                                                              multiplier:1.0
+                                                                                constant:10]];
   }
 
   switch (aCellContent.state)
@@ -101,12 +123,39 @@
 
 - (void)setStateLabelHidden:(BOOL)aFlag
 {
-  self.stateTitleLabel.hidden = aFlag;
-  self.stateImageView.hidden = aFlag;
+  if (aFlag) {
+    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.stateImageView.superview
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.0
+                                                                        constant:10]];
+    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
+                                                                       attribute:NSLayoutAttributeLeading
+                                                                       relatedBy:NSLayoutRelationEqual
+                                                                          toItem:self.stateTitleLabel
+                                                                       attribute:NSLayoutAttributeTrailing
+                                                                      multiplier:1.0
+                                                                        constant:10]];
+    [self.stateImageView removeFromSuperview];
+    [self.stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateTitleLabel
+                                                                        attribute:NSLayoutAttributeLeading
+                                                                        relatedBy:NSLayoutRelationEqual
+                                                                           toItem:self.proofTypeImageView
+                                                                        attribute:NSLayoutAttributeTrailing
+                                                                       multiplier:1.0
+                                                                         constant:10]];
+    
+    [self.stateTitleLabel removeFromSuperview];
+    [self.proofTypeImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.proofTypeImageView.superview
+                                                                                  attribute:NSLayoutAttributeTrailing
+                                                                                  relatedBy:NSLayoutRelationEqual
+                                                                                     toItem:self.proofTypeImageView
+                                                                                  attribute:NSLayoutAttributeTrailing
+                                                                                 multiplier:1.0
+                                                                                   constant:10]];
+  }
 }
 
-- (void)dealloc {
-  [_stateImageView release];
-  [super dealloc];
-}
 @end
