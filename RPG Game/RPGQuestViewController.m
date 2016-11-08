@@ -261,7 +261,7 @@
   if (aFlag)
   {
     UIImageView *stateImageView = self.stateImageView;
-    UIImageView *proofImageView = self.proofImageView;
+    UIImageView *proofTypeImageView = self.proofTypeImageView;
     UILabel *stateTitleLabel = self.stateTitleLabel;
     [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
                                                                   attribute:NSLayoutAttributeTrailing
@@ -281,16 +281,16 @@
     [stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:stateTitleLabel
                                                                    attribute:NSLayoutAttributeLeading
                                                                    relatedBy:NSLayoutRelationEqual
-                                                                      toItem:proofImageView
+                                                                      toItem:proofTypeImageView
                                                                    attribute:NSLayoutAttributeTrailing
                                                                   multiplier:1.0
                                                                     constant:10]];
     
     [stateTitleLabel removeFromSuperview];
-    [proofImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView.superview
+    [proofTypeImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:proofTypeImageView.superview
                                                                          attribute:NSLayoutAttributeTrailing
                                                                          relatedBy:NSLayoutRelationEqual
-                                                                            toItem:proofImageView
+                                                                            toItem:proofTypeImageView
                                                                          attribute:NSLayoutAttributeTrailing
                                                                         multiplier:1.0
                                                                           constant:10]];
