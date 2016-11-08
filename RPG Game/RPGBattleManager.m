@@ -28,7 +28,7 @@ NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDi
 NSString * const kRPGBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
 
 // TODO: replace to separate header file
-static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.31:8888/ws";
+static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.28:8888/ws";
 static NSString * const kRPGBattleManagerResponseType = @"type";
 
 typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
@@ -37,8 +37,6 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 @property (retain, nonatomic, readwrite) RPGBattle *battle;
 @property (copy, nonatomic, readwrite) NSString *token;
-
-
 
 @end
 
@@ -196,11 +194,14 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
           }
         }
         // send notification to main menu
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
+                                                             object:self];
+          [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
                                                             object:self];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
-                                                            object:self];
-        
+        });
+       
       };
       
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -218,7 +219,6 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
       }
       
       [[RPGNetworkManager sharedNetworkManager] fetchSkillsByCharacterID:characterID completionHandler:handler];
-
     }
     
       // battle condition
@@ -260,9 +260,8 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
     // time synch
   if (timeSynchResponse != nil && timeSynchResponse.status == 0)
   {
-    [self.battle updateWithTimeSynchResponse:timeSynchResponse];
-    // TODO: KVO support instead of notifications
-    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification object:self];
+//    [self.battle updateWithTimeSynchResponse:timeSynchResponse];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification object:self];
   }
 }
 

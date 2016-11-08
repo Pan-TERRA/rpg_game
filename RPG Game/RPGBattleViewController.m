@@ -132,10 +132,11 @@
 
 - (IBAction)skillAction:(UIButton *)aSender
 {
-  NSNumber *usingSkillID = nil;
-  if (aSender.tag < self.battleManager.battle.player.skills.count)
+  NSArray *skills = self.battleManager.battle.player.skills;
+  
+  if (aSender.tag < skills.count)
   {
-    usingSkillID = self.battleManager.battle.player.skills[aSender.tag - 1];
+    NSNumber *usingSkillID = skills[aSender.tag - 1];
     [self.battleManager sendSkillActionRequestWithID:[usingSkillID integerValue]];
   }
 }
