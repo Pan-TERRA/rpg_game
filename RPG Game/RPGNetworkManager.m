@@ -7,8 +7,10 @@
   //
 
 #import "RPGNetworkManager.h"
+  // Misc
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "NSObject+RPGErrorLog.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -106,7 +108,6 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   
   if (anObject != nil)
   {
-    
     if ([anObject isKindOfClass:[NSDictionary class]])
     {
       request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
@@ -133,7 +134,7 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   return request;
 }
 
-#pragma mark - General requests
+#pragma mark - General Requests
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock
 {
@@ -151,32 +152,32 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-    [[session dataTaskWithRequest:request
-                completionHandler:^(NSData * _Nullable data,
-                                    NSURLResponse * _Nullable response,
-                                    NSError * _Nullable error)
+    NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                            completionHandler:^(NSData * _Nullable data,
+                                                                NSURLResponse * _Nullable response,
+                                                                NSError * _Nullable error)
       {
         BOOL result = NO;
         
         if (error == nil && data != nil)
         {
+          NSError *JSONError = nil;
           NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                              options:0
-                                                                               error:nil];
-          if (responseDictionary != nil
-              && responseDictionary[@"status"] != nil
-              && [responseDictionary[@"status"] integerValue] == 0)
+                                                                               error:&JSONError];
+
+          if (responseDictionary == nil)
+          {
+            [self logError:JSONError withTitle:@"JSON parsing error"];
+          }
+          else if ([responseDictionary[@"status"] integerValue] == 0)
           {
             result = YES;
           }
         }
         else
         {
-          NSLog(@"Network error");
-          NSLog(@"Domain: %@", error.domain);
-          NSLog(@"Error Code: %ld", error.code);
-          NSLog(@"Description: %@", [error localizedDescription]);
-          NSLog(@"Reason: %@", [error localizedFailureReason]);
+          [self logError:error withTitle:@"Network error"];
         }
         
         dispatch_async(dispatch_get_main_queue(), ^
@@ -184,14 +185,26 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
           callbackBlock(result);
         });
         
-      }] resume];
+      }];
     
+    [task resume];
     [session finishTasksAndInvalidate];
   }
-  else
+  else // if no token
   {
     callbackBlock(NO);
   }
+}
+
+- (BOOL)isNoInternerConnection:(NSError *)anError
+{
+  return ([anError.domain isEqualToString:NSURLErrorDomain] && anError.code == NSURLErrorNotConnectedToInternet);
+}
+
+- (BOOL)isResponseCodeNot200:(NSURLResponse *)aResponse
+{
+  NSInteger responseStatusCode = [(NSHTTPURLResponse *)aResponse statusCode];
+  return responseStatusCode != 200;
 }
 
 @end

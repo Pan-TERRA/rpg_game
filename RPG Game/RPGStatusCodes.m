@@ -11,15 +11,15 @@
 NSString * const RPGStatusCodeDescription[] =
 {
     // Server Status Codes
-  [kRPGStatusCodeOk] = @"OK",
+  [kRPGStatusCodeOK] = @"OK",
   [kRPGStatusCodeWrongJSON] = @"Wrong JSON",
   [kRPGStatusCodeUserDoesNotExist] = @"User does not exist",
   [kRPGStatusCodeWrongEmail] = @"Wrong email",
   [kRPGStatusCodeWrongPassword] = @"Wrong password",
   [kRPGStatusCodeWrongToken] = @"Wrong token",
-  [kRPGStatusCodeUsernameIsAlreadyTaken] = @"Username is already taken",
-  [kRPGStatusCodeEmailIsAlreadyTaken] = @"Email is already taken",
-  [kRPGStatusCodeAlreadyOnline] = @"Already online",
+  [kRPGStatusCodeUsernameAlreadyTaken] = @"Username is already taken",
+  [kRPGStatusCodeEmailAlreadyTaken] = @"Email is already taken",
+  [kRPGStatusCodeQuestWithSuchIDNotFound] = @"Quest with such ID not found",
   [kRPGStatusCodeUserHasNoSuchCharacter] = @"User has no such character",
   [kRPGStatusCodeSkillWithSuchIDNotFound] = @"Skill with such ID not found",
   [kRPGStatusCodeNotYourTurn] = @"Not your turn",
@@ -31,6 +31,13 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeNotPicture] = @"Not a picture",
   [kRPGStatusCodeTooBigPicture] = @"Too big picture",
   [kRPGStatusCodeTurnAction] = @"Turn action",
+  [kRPGStatusCodeWrongClass] = @"Wrong class",
+  [kRPGStatusCodeClassNotFound] = @"Class not found",
+  [kRPGStatusCodeBattleDoesNotExist] = @"Battle does not exist",
+  [kRPGStatusCodeQuestNotAccepted] = @"Quest is not accepted",
+  [kRPGStatusCodeQuestNotSkipped] = @"Quest is not skipped",
+  [kRPGStatusCodeNoQuestForVoting] = @"No quest for voting",
+  [kRPGStatusCodeClassesNotFound] = @"ClassesNotFound",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",

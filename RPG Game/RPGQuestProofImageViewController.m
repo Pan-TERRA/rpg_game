@@ -7,6 +7,7 @@
 //
 
 #import "RPGQuestProofImageViewController.h"
+  // Constants
 #import "RPGNibNames.h"
 
 @interface RPGQuestProofImageViewController ()

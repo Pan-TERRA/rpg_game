@@ -7,13 +7,16 @@
 //
 
 #import "RPGSettingsViewController.h"
-#import "RPGBackgroundMusicController.h"
+  // API
 #import "RPGNetworkManager+Authorization.h"
+  // Misc
+#import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
-#import "RPGNibNames.h"
 #import "NSUserDefaults+RPGVolumeSettings.h"
-#import "RPGStatusCodes.h"
 #import "RPGAlert.h"
+  // Constants
+#import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 @interface RPGSettingsViewController ()
 
@@ -61,7 +64,7 @@
   return mask;
 }
 
-#pragma mark - Event Handling
+#pragma mark - IBAction
 
 - (IBAction)back:(id)aSender
 {
@@ -75,7 +78,7 @@
    {
      switch (status)
      {
-       case kRPGStatusCodeOk:
+       case kRPGStatusCodeOK:
          
          break;
          

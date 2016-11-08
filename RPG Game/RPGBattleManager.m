@@ -7,6 +7,9 @@
 //
 
 #import "RPGBattleManager.h"
+  // API
+#import "RPGNetworkManager.h"
+#import "RPGNetworkManager+Skills.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGRequest+Serialization.h"
@@ -15,10 +18,9 @@
 #import "RPGBattleInitResponse+Serialization.h"
 #import "RPGBattleConditionResponse+Serialization.h"
 #import "RPGBattleConditionResponse.h"
-#import "RPGNetworkManager.h"
-#import "RPGNetworkManager+Skills.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "NSObject+RPGErrorLog.h"
   // Constants
 #import "RPGMessageTypes.h"
 #import "RPGStatusCodes.h"
@@ -169,11 +171,12 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
     {
       battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:responseDictionary] autorelease];
       
+        // invokes on main thread
       fetchSkillsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *skills)
       {
         switch (statusCode)
         {
-          case kRPGStatusCodeOk:
+          case kRPGStatusCodeOK:
           {
             //Convert NSDictionary -> RPGSkill
             NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
@@ -194,14 +197,10 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
           }
         }
         // send notification to main menu
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
-                                                             object:self];
-          [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
                                                             object:self];
-        });
-       
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
+                                                             object:self];
       };
       
       NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -235,11 +234,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
   }
   else
   {
-      NSLog(@"JSON Error");
-      NSLog(@"Domain: %@", JSONError.domain);
-      NSLog(@"Error Code: %ld", (long)JSONError.code);
-      NSLog(@"Description: %@", [JSONError localizedDescription]);
-      NSLog(@"Reason: %@", [JSONError localizedFailureReason]);
+    [self logError:JSONError withTitle:@"JSON error"];
   }
 
   // TODO: add error handling

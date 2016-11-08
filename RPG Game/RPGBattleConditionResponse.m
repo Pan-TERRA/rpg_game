@@ -16,6 +16,7 @@
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsDamage;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *mutableReward;
+@property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
 @end
 
@@ -29,6 +30,7 @@
               skillsDamage:(NSArray *)aSkillsDamage
                     reward:(NSDictionary *)aReward
                     status:(NSInteger)aStatus
+               currentTurn:(BOOL)aCurrentTurn
 {
   self = [super initWithType:kRPGBattleConditionMessageType
                       status:aStatus];
@@ -49,6 +51,7 @@
       _mutableSkillsCondition = [aSkillsCondition mutableCopy];
       _mutableSkillsDamage = [aSkillsDamage mutableCopy];
       _mutableReward = [aReward mutableCopy];
+      _currentTurn = aCurrentTurn;
     }
   }
   
@@ -63,7 +66,8 @@
           skillsCondition:nil
              skillsDamage:nil
                    reward:nil
-                   status:-1];
+                   status:-1
+              currentTurn:NO];
 }
 
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
@@ -72,13 +76,15 @@
                                  skillsDamage:(NSArray *)aSkillsDamage
                                        reward:(NSDictionary *)aReward
                                        status:(NSInteger)aStatus
+                                  currentTurn:(BOOL)aCurrentTurn
 {
   return [[[self alloc] initWithHP:aHP
                         opponentHP:anOpponentHP
                    skillsCondition:aSkillsCondition
                       skillsDamage:aSkillsDamage
                             reward:aReward
-                            status:aStatus] autorelease];
+                            status:aStatus
+                       currentTurn:aCurrentTurn] autorelease];
 }
 
 #pragma mark - Dealloc

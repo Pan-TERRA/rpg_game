@@ -7,14 +7,18 @@
 //
 
 #define TIMEOUT 10
-#define EMAIL "eleonora@gmail.com"
-#define PASSWORD "eleonora"
+#define EMAIL "testblablabla@test.test"
+#define PASSWORD "test"
+#define USERNAME "test"
+#define CHARACTERNAME "test"
 
 #import <XCTest/XCTest.h>
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGAuthorizationLogoutRequest.h"
+#import "RPGRegistrationRequest.h"
 #import "RPGStatusCodes.h"
 #import "RPGNetworkManager+Authorization.h"
+#import "RPGNetworkManager+Registration.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
 @interface RPGNetworkManager_AuthorizationTests : XCTestCase
@@ -27,14 +31,36 @@
 
 - (void)setUp
 {
-    [super setUp];
-    self.sharedNetworkManager = [RPGNetworkManager sharedNetworkManager];
+  [super setUp];
+  self.sharedNetworkManager = [RPGNetworkManager sharedNetworkManager];
+  [self registerUser];
 }
 
 - (void)tearDown
 {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
+}
+
+- (void)registerUser
+{
+  XCTestExpectation *registrationExpectation = [self expectationWithDescription:@"finish registration"];
+  RPGRegistrationRequest *registrationRequest = [RPGRegistrationRequest registrationRequestWithEmail:@EMAIL
+                                                                                            password:@PASSWORD
+                                                                                            username:@USERNAME
+                                                                                       characterName:@CHARACTERNAME
+                                                                                       characterType:1];
+  [self.sharedNetworkManager registerWithRequest:registrationRequest completionHandler:^(NSInteger statusCode)
+  {
+    if (statusCode != kRPGStatusCodeOK &&
+        statusCode != kRPGStatusCodeEmailAlreadyTaken &&
+        statusCode != kRPGStatusCodeUsernameAlreadyTaken)
+    {
+      XCTFail(@"could not register: status code %ld", (long)statusCode);
+    }
+    [registrationExpectation fulfill];
+  }];
+  [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
 }
 
 - (void)loginWithCompletionHandler:(void (^)(NSInteger))callbackBlock
@@ -55,7 +81,7 @@
   XCTestExpectation *testExpectation = [self expectationWithDescription:@"finish block execution (needed for asyncronious testing)"];
   [self loginWithCompletionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeOk);
+    XCTAssertEqual(statusCode, kRPGStatusCodeOK);
     [testExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];
@@ -115,7 +141,7 @@
   XCTestExpectation *logoutExpectation = [self expectationWithDescription:@"finish logout"];
   [self.sharedNetworkManager logoutWithCompletionHandler:^(NSInteger statusCode)
   {
-    XCTAssertEqual(statusCode, kRPGStatusCodeOk);
+    XCTAssertEqual(statusCode, kRPGStatusCodeOK);
     [logoutExpectation fulfill];
   }];
   [self waitForExpectationsWithTimeout:TIMEOUT handler:nil];

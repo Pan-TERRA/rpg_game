@@ -22,7 +22,7 @@
                 <outlet property="spell5Button" destination="kPK-Ei-hzY" id="AZz-1A-qhT"/>
                 <outlet property="spell6Button" destination="INb-B7-s2Y" id="0ky-Vq-Iqc"/>
                 <outlet property="spell7Button" destination="jrS-I0-TxS" id="TUA-2r-iOx"/>
-                <outlet property="timer" destination="Lez-UF-BPa" id="fdb-Oh-bOg"/>
+                <outlet property="timerLabel" destination="Lez-UF-BPa" id="aSv-im-1Mh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -211,7 +211,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="RcX-6y-qXc" userLabel="Spell Bar Background">
                             <rect key="frame" x="0.0" y="0.0" width="516" height="75"/>
                         </imageView>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv">
                             <rect key="frame" x="16" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="5QZ-el-MXe"/>
@@ -231,10 +231,10 @@
                                 </mask>
                             </variation>
                             <connections>
-                                <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="w7e-7y-wtP"/>
+                                <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="KGN-wH-sLD"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS">
                             <rect key="frame" x="86" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="HMe-bW-GLV"/>
@@ -253,11 +253,8 @@
                                     <exclude reference="toz-ul-XD7"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="U7U-4R-nGD"/>
-                            </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P">
                             <rect key="frame" x="159" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="2ef-pk-jwt"/>
@@ -280,7 +277,30 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="PCs-0N-r7S"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY">
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE">
+                            <rect key="frame" x="233" y="13" width="50" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="15t-a4-IXt"/>
+                                <constraint firstAttribute="width" secondItem="6tp-kP-1RE" secondAttribute="height" multiplier="1:1" id="FTf-TT-pEf"/>
+                                <constraint firstAttribute="width" constant="50" id="J4w-Gu-oNQ"/>
+                                <constraint firstAttribute="height" constant="50" id="MZF-kk-pAv"/>
+                                <constraint firstAttribute="width" constant="40" id="vCh-Lv-7T3"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="battle_empty_icon_lock">
+                                <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="15t-a4-IXt"/>
+                                    <exclude reference="FTf-TT-pEf"/>
+                                    <exclude reference="vCh-Lv-7T3"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="05z-4k-SFj"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY">
                             <rect key="frame" x="307" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="kPK-Ei-hzY" secondAttribute="height" multiplier="1:1" id="Nla-0o-RNe"/>
@@ -303,7 +323,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="5Z1-9o-Gs5"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y">
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y">
                             <rect key="frame" x="380" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="CCr-Gw-dpF"/>
@@ -326,7 +346,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="KUE-TH-uDW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS">
+                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS">
                             <rect key="frame" x="450" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="2ZY-Pd-tZm"/>
@@ -347,29 +367,6 @@
                             </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="ZRj-8i-dhw"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE">
-                            <rect key="frame" x="233" y="13" width="50" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="15t-a4-IXt"/>
-                                <constraint firstAttribute="width" secondItem="6tp-kP-1RE" secondAttribute="height" multiplier="1:1" id="FTf-TT-pEf"/>
-                                <constraint firstAttribute="width" constant="50" id="J4w-Gu-oNQ"/>
-                                <constraint firstAttribute="height" constant="50" id="MZF-kk-pAv"/>
-                                <constraint firstAttribute="width" constant="40" id="vCh-Lv-7T3"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="battle_empty_icon_lock">
-                                <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="15t-a4-IXt"/>
-                                    <exclude reference="FTf-TT-pEf"/>
-                                    <exclude reference="vCh-Lv-7T3"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="05z-4k-SFj"/>
                             </connections>
                         </button>
                     </subviews>

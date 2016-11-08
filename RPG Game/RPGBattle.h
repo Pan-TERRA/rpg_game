@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "RPGPlayer.h"
 
+extern const NSInteger kRPGBattleTurnDuration;
+
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
@@ -23,6 +25,7 @@
 @property (retain, nonatomic, readonly) RPGEntity *opponent;
 @property (assign, nonatomic, readonly) NSInteger startTime;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
+@property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
 /**
  *  Inits model. Sets startTime, general player info.

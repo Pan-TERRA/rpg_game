@@ -7,23 +7,23 @@
 //
 
 #import "RPGQuestListTableViewCell.h"
-#import "RPGQuestReward+Serialization.h"
+  // Views
 #import "RPGQuestListViewController.h"
+  // Entities
+#import "RPGQuestReward+Serialization.h"
 #import "RPGQuest+Serialization.h"
 #import "RPGQuestReward+Serialization.h"
 
 @interface RPGQuestListTableViewCell()
 
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
+
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *crystalsRewardImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *goldRewardImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateLabel;
 
 @end
 
@@ -49,6 +49,7 @@
   self.descriptionLabel.text = aCellContent.questDescription;
   self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
+  
   if (aCellContent.reward.skillID != 0)
   {
     

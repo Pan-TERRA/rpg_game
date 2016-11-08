@@ -14,7 +14,11 @@
 #import "RPGPlayer.h"
 #import "RPGSFXEngine.h"
 
+const NSInteger kRPGBattleTurnDuration = 30;
+
 @interface RPGBattle ()
+
+@property (assign, nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
 @end
 
@@ -31,6 +35,7 @@
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;
+    _currentTurn = aResponse.currentTurn;
   }
   
   return self;
@@ -45,10 +50,15 @@
 {
   self.player.HP = aResponse.HP;
   self.opponent.HP = aResponse.opponentHP;
+  self.currentTurn = aResponse.currentTurn;
   
   //TODO: remove hardcode && remove SFXEngine logic from model
   NSInteger skillID = [[aResponse.skillsDamage valueForKey:@"skill_id"] integerValue];
-  [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
+  
+  if (skillID != 0)
+  {
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
+  }
 }
 
 - (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse

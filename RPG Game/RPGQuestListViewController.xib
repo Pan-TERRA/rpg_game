@@ -27,8 +27,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
-                    <rect key="frame" x="692" y="374" width="34" height="30"/>
-                    <state key="normal" title="Back"/>
+                    <rect key="frame" x="686" y="364" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="ddq-qU-tBE"/>
+                        <constraint firstAttribute="height" constant="40" id="vW7-CZ-8P1"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
                         <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="l89-rY-6WR"/>
                     </connections>
@@ -36,9 +40,10 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xu-Ph-Wpt" userLabel="Table Control Container">
                     <rect key="frame" x="110" y="10" width="516" height="62"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-hB-P6D">
-                            <rect key="frame" x="0.0" y="0.0" width="103" height="62"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-hB-P6D">
+                            <rect key="frame" x="-9" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Take Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -46,19 +51,10 @@
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="1ap-WZ-CYY"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-T6-vMT">
-                            <rect key="frame" x="142" y="0.0" width="103" height="62"/>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Zn-0ou">
+                            <rect key="frame" x="404" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                            <state key="normal" title="In progress Quests">
-                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="wJ9-P0-iyS"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Zn-0ou">
-                            <rect key="frame" x="413" y="0.0" width="103" height="62"/>
-                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Review Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -66,9 +62,10 @@
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="uFM-1w-FZH"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L4V-zu-eOI">
-                            <rect key="frame" x="271" y="0.0" width="103" height="62"/>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L4V-zu-eOI">
+                            <rect key="frame" x="268" y="0.0" width="121" height="62"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Done Quests">
                                 <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
@@ -76,19 +73,30 @@
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="RrI-gD-jp4"/>
                             </connections>
                         </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-T6-vMT">
+                            <rect key="frame" x="127" y="0.0" width="121" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="In progress Quests">
+                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="wJ9-P0-iyS"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Cjb-T6-vMT" firstAttribute="width" secondItem="Sly-hB-P6D" secondAttribute="height" multiplier="65:31" id="2Q0-Hs-OTe"/>
                         <constraint firstItem="Sly-hB-P6D" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="0.8:4" id="BI0-5O-hON"/>
-                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="3:4" id="DIU-xt-Xve"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="2.9:4" id="DIU-xt-Xve"/>
                         <constraint firstItem="Rp1-Zn-0ou" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="7.2:4" id="LQo-8a-Kjc"/>
-                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="5:4" id="SUL-uV-7sz"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="5.1:4" id="SUL-uV-7sz"/>
                         <constraint firstAttribute="height" constant="62" id="UDW-IE-AcB"/>
                         <constraint firstItem="Rp1-Zn-0ou" firstAttribute="width" secondItem="L4V-zu-eOI" secondAttribute="width" id="Y8F-jo-zBq"/>
                         <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="YDG-Ds-8jc"/>
                         <constraint firstItem="L4V-zu-eOI" firstAttribute="height" secondItem="Cjb-T6-vMT" secondAttribute="height" id="aqE-3Y-aln"/>
-                        <constraint firstItem="Sly-hB-P6D" firstAttribute="width" secondItem="7xu-Ph-Wpt" secondAttribute="width" multiplier="0.2" id="c2G-iB-GRl"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="width" secondItem="7xu-Ph-Wpt" secondAttribute="width" multiplier="0.235" id="c2G-iB-GRl"/>
                         <constraint firstItem="Cjb-T6-vMT" firstAttribute="width" secondItem="Sly-hB-P6D" secondAttribute="width" id="daz-Lo-QPb"/>
                         <constraint firstItem="Rp1-Zn-0ou" firstAttribute="height" secondItem="L4V-zu-eOI" secondAttribute="height" id="e2p-xW-aWu"/>
                         <constraint firstItem="Cjb-T6-vMT" firstAttribute="height" secondItem="Sly-hB-P6D" secondAttribute="height" id="frX-Ph-R6y"/>
@@ -102,8 +110,8 @@
                     </constraints>
                     <variation key="default">
                         <mask key="constraints">
-                            <exclude reference="yyH-HH-nAS"/>
                             <exclude reference="2Q0-Hs-OTe"/>
+                            <exclude reference="yyH-HH-nAS"/>
                             <exclude reference="vzX-0X-SGb"/>
                         </mask>
                     </variation>
@@ -116,7 +124,7 @@
                     </constraints>
                 </activityIndicatorView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
-                    <rect key="frame" x="110" y="82" width="516" height="287"/>
+                    <rect key="frame" x="110" y="82" width="516" height="277"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -155,5 +163,6 @@
     </objects>
     <resources>
         <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
     </resources>
 </document>
