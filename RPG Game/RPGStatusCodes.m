@@ -32,8 +32,12 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeTooBigPicture] = @"Too big picture",
   [kRPGStatusCodeTurnAction] = @"Turn action",
   [kRPGStatusCodeWrongClass] = @"Wrong class",
+  [kRPGStatusCodeClassNotFound] = @"Class not found",
+  [kRPGStatusCodeBattleDoesNotExist] = @"Battle does not exist",
   [kRPGStatusCodeQuestNotAccepted] = @"Quest is not accepted",
   [kRPGStatusCodeQuestNotSkipped] = @"Quest is not skipped",
+  [kRPGStatusCodeNoQuestForVoting] = @"No quest for voting",
+  [kRPGStatusCodeClassesNotFound] = @"ClassesNotFound",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",

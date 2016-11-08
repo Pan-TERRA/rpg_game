@@ -34,8 +34,12 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeTooBigPicture = 18,
   kRPGStatusCodeTurnAction = 19,
   kRPGStatusCodeWrongClass = 20,
-  kRPGStatusCodeQuestNotAccepted = 21,
-  kRPGStatusCodeQuestNotSkipped = 22,
+  kRPGStatusCodeClassNotFound = 21,
+  kRPGStatusCodeBattleDoesNotExist = 22,
+  kRPGStatusCodeQuestNotAccepted = 23,
+  kRPGStatusCodeQuestNotSkipped = 24,
+  kRPGStatusCodeNoQuestForVoting = 25,
+  kRPGStatusCodeClassesNotFound = 26,
   
     // RPGNetworkManager Status Codes
   kRPGStatusCodeNetworkManagerUnknown = 1700,
