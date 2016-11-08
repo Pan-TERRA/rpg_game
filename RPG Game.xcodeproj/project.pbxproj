@@ -23,6 +23,7 @@
 		28149A1D1DB1011300C26881 /* RPGRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28149A191DB1011300C26881 /* RPGRegistrationViewController.xib */; };
 		2817233D1DB5005500F74403 /* RPGQuestProofImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */; };
 		2817233E1DB5005500F74403 /* RPGQuestProofImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */; };
+		28307BD41DD0CD2A002E6233 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28307BD31DD0CD2A002E6233 /* QuartzCore.framework */; };
 		283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADCF71DAD3CAB00BDC706 /* RPGRequest.m */; };
 		283ADCFB1DAD3CBA00BDC706 /* RPGResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADCFA1DAD3CBA00BDC706 /* RPGResponse.m */; };
 		283ADCFE1DAD3D1C00BDC706 /* RPGNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */; };
@@ -165,6 +166,7 @@
 		2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestProofImageViewController.h; sourceTree = "<group>"; };
 		2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestProofImageViewController.m; sourceTree = "<group>"; };
 		2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuestProofImageViewController.xib; sourceTree = "<group>"; };
+		28307BD31DD0CD2A002E6233 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		283ADCF61DAD3CAB00BDC706 /* RPGRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRequest.h; sourceTree = "<group>"; };
 		283ADCF71DAD3CAB00BDC706 /* RPGRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRequest.m; sourceTree = "<group>"; };
 		283ADCF91DAD3CBA00BDC706 /* RPGResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGResponse.h; sourceTree = "<group>"; };
@@ -345,6 +347,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28307BD41DD0CD2A002E6233 /* QuartzCore.framework in Frameworks */,
 				580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1064,6 +1067,7 @@
 		4BA921AB8CB063DE64593829 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				28307BD31DD0CD2A002E6233 /* QuartzCore.framework */,
 				9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */,
 				03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */,
 				48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */,

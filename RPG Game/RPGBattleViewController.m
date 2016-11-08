@@ -133,6 +133,8 @@
 
 - (IBAction)spell1_action:(UIButton *)aSender
 {
+  
+  
   [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:1];
   
   [self.battleManager sendSkillActionRequestWithID:aSender.tag];
@@ -179,14 +181,11 @@
   self.player1NickName.text = battle.player.name;
   self.player1hp.text = [@(playerHP) stringValue];
   self.player1hpBar.progress = ((float)playerHP / 100);
-  [self.player1hpBar setNeedsDisplay];
     // opponent
   NSInteger opponentHP = battle.opponent.HP;
   self.player2NickName.text = battle.opponent.name;
   self.player2hp.text = [@(opponentHP) stringValue];
   self.player2hpBar.progress = ((float)opponentHP / 100);
-  [self.player2hpBar setNeedsDisplay];
-  
 }
 
 @end

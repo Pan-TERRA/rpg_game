@@ -7,6 +7,11 @@
 //
 
 #import "RPGProgressBar.h"
+#import <QuartzCore/QuartzCore.h>
+
+@interface RPGProgressBar ()
+
+@end
 
 @implementation RPGProgressBar
 
@@ -34,7 +39,6 @@
     _progress = 1.0;
     _align = kRPGProgressBarRightAlign;
   }
-  
   return self;
 }
 
@@ -42,17 +46,45 @@
 
 - (void)setProgress:(CGFloat)aProgress
 {
-  if (aProgress > 1)
+  if (_progress != aProgress)
   {
-    _progress = 1;
-  }
-  else if (aProgress < 0)
-  {
-    _progress = 0;
-  }
-  else
-  {
-    _progress = aProgress;
+    if (aProgress > 1)
+    {
+      _progress = 1;
+    }
+    else if (aProgress < 0)
+    {
+      _progress = 0;
+    }
+    else
+    {
+        _progress = aProgress;
+      
+        CGFloat originX = self.frame.origin.x;
+        CGFloat originY = self.frame.origin.y;
+        CGFloat width = self.frame.size.width;
+        CGFloat height = self.frame.size.height;
+        CGFloat currentWidth = self.frame.size.width * _progress;
+        CGRect currentProgressBarRect = CGRectZero;
+        
+        if (self.align == kRPGProgressBarRightAlign)
+        {
+          currentProgressBarRect = CGRectMake(originX, originY, currentWidth, height);
+        }
+        else
+        {
+          currentProgressBarRect = CGRectMake(originX + width - currentWidth, originY, currentWidth, height);
+        }
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        [UIView setAnimationDelay:0.5];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        
+        self.frame = currentProgressBarRect;
+        
+        [UIView commitAnimations];
+    }
   }
 }
 
@@ -62,23 +94,8 @@
 {
   [super drawRect:rect];
   
-  CGFloat width = rect.size.width;
-  CGFloat currentWidth = rect.size.width * self.progress;
-  CGFloat height = rect.size.height;
-  CGRect progressBarRect = CGRectZero;
-  
-  if (self.align == kRPGProgressBarRightAlign)
-  {
-    progressBarRect = CGRectMake(0, 0, currentWidth, height);
-  }
-  else
-  {
-    progressBarRect = CGRectMake(width - currentWidth, 0, currentWidth, height);
-  }
-  
-  
-  UIImage *progressImage = [UIImage imageNamed:@"pink_bar"];
-  [progressImage drawInRect:progressBarRect];
+  UIImage *progressBarImage = [UIImage imageNamed:@"pink_bar"];
+  [progressBarImage drawInRect:rect];
 }
 
 @end
