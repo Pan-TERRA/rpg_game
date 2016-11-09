@@ -8,6 +8,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGSkillDescriptionViewController">
             <connections>
+                <outlet property="cooldownLabel" destination="jz0-JI-oUE" id="3f4-sy-fJp"/>
+                <outlet property="descriptionLabel" destination="dKV-8M-zUW" id="4pm-G9-UAY"/>
+                <outlet property="multiplierLabel" destination="T9a-0p-8a3" id="xho-jV-JWD"/>
+                <outlet property="titleLabel" destination="3dk-dY-hdr" id="MEA-MI-2dV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -16,20 +20,23 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dk-dY-hdr">
-                    <rect key="frame" x="278" y="224" width="44" height="27"/>
-                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="23"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrx-DJ-ZRp">
-                    <rect key="frame" x="150" y="224" width="300" height="153"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrx-DJ-ZRp">
+                    <rect key="frame" x="150" y="254" width="300" height="92"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="nsp-kx-WVY">
-                            <rect key="frame" x="0.0" y="0.0" width="300" height="153"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="92"/>
                         </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dk-dY-hdr">
+                            <rect key="frame" x="128" y="8" width="44" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="24" id="VZI-U3-wq4"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="23"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t32-YB-g9U" userLabel="Cooldown">
-                            <rect key="frame" x="16" y="32" width="105" height="20"/>
+                            <rect key="frame" x="16" y="36" width="105" height="20"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx1-7s-i7r" userLabel="Value">
                                     <rect key="frame" x="96" y="0.0" width="9" height="20"/>
@@ -58,8 +65,15 @@
                                 </mask>
                             </variation>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="284" translatesAutoresizingMaskIntoConstraints="NO" id="dKV-8M-zUW" userLabel="Description">
+                            <rect key="frame" x="24" y="64" width="260" height="4"/>
+                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</string>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="15"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dF2-Rr-1LL" userLabel="Multiplier">
-                            <rect key="frame" x="179" y="32" width="105" height="20"/>
+                            <rect key="frame" x="179" y="36" width="105" height="20"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0v-1e-L6m" userLabel="Value">
                                     <rect key="frame" x="75" y="0.0" width="30" height="20"/>
@@ -88,41 +102,50 @@
                                 </mask>
                             </variation>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="284" translatesAutoresizingMaskIntoConstraints="NO" id="dKV-8M-zUW">
-                            <rect key="frame" x="24" y="60" width="260" height="69"/>
-                            <string key="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</string>
-                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="15"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <nil key="highlightedColor"/>
-                        </label>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="0q8-3D-hsj"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="leading" secondItem="3dk-dY-hdr" secondAttribute="trailing" constant="7" id="1KS-32-U3Z"/>
                         <constraint firstItem="dKV-8M-zUW" firstAttribute="top" secondItem="dF2-Rr-1LL" secondAttribute="bottom" constant="8" id="7Hg-i9-T4v"/>
-                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="width" secondItem="nsp-kx-WVY" secondAttribute="width" multiplier="0.35" id="9VP-mp-Xrz"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="width" secondItem="rrx-DJ-ZRp" secondAttribute="width" multiplier="0.35" id="7v8-eJ-BUP"/>
                         <constraint firstItem="nsp-kx-WVY" firstAttribute="top" secondItem="rrx-DJ-ZRp" secondAttribute="top" id="Bxg-0B-7WN"/>
                         <constraint firstAttribute="trailing" secondItem="dKV-8M-zUW" secondAttribute="trailing" constant="16" id="MdC-4S-A4d"/>
                         <constraint firstItem="nsp-kx-WVY" firstAttribute="leading" secondItem="rrx-DJ-ZRp" secondAttribute="leading" id="PUD-at-Nhi"/>
                         <constraint firstItem="t32-YB-g9U" firstAttribute="leading" secondItem="rrx-DJ-ZRp" secondAttribute="leading" constant="16" id="SoT-bg-dfV"/>
                         <constraint firstAttribute="trailing" secondItem="dF2-Rr-1LL" secondAttribute="trailing" constant="16" id="Ux2-a2-C7t"/>
                         <constraint firstAttribute="bottom" secondItem="dKV-8M-zUW" secondAttribute="bottom" constant="24" id="Vrp-z9-455"/>
+                        <constraint firstItem="t32-YB-g9U" firstAttribute="centerY" secondItem="rrx-DJ-ZRp" secondAttribute="centerY" id="dnd-q6-MTX"/>
                         <constraint firstItem="dKV-8M-zUW" firstAttribute="leading" secondItem="rrx-DJ-ZRp" secondAttribute="leading" constant="24" id="gIl-Em-Naa"/>
+                        <constraint firstItem="3dk-dY-hdr" firstAttribute="top" secondItem="t32-YB-g9U" secondAttribute="bottom" constant="11" id="iFF-AG-CzQ"/>
                         <constraint firstItem="t32-YB-g9U" firstAttribute="width" secondItem="rrx-DJ-ZRp" secondAttribute="width" multiplier="0.35" id="kEY-KI-nli"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="top" secondItem="3dk-dY-hdr" secondAttribute="bottom" constant="4" id="kRH-4o-0r5"/>
                         <constraint firstAttribute="trailing" secondItem="nsp-kx-WVY" secondAttribute="trailing" id="kVn-ko-l7R"/>
+                        <constraint firstItem="3dk-dY-hdr" firstAttribute="top" secondItem="rrx-DJ-ZRp" secondAttribute="top" constant="8" id="nwf-by-Ard"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="top" secondItem="3dk-dY-hdr" secondAttribute="bottom" constant="-3" id="qP8-gO-IcO"/>
                         <constraint firstAttribute="bottom" secondItem="nsp-kx-WVY" secondAttribute="bottom" id="wRx-lS-sUq"/>
+                        <constraint firstItem="3dk-dY-hdr" firstAttribute="centerX" secondItem="rrx-DJ-ZRp" secondAttribute="centerX" id="zTI-Ju-WCb"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="centerY" secondItem="rrx-DJ-ZRp" secondAttribute="centerY" id="zrG-nq-69p"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="iFF-AG-CzQ"/>
+                            <exclude reference="1KS-32-U3Z"/>
+                            <exclude reference="qP8-gO-IcO"/>
+                        </mask>
+                    </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="rrx-DJ-ZRp" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Axx-Dc-bKb"/>
                 <constraint firstItem="rrx-DJ-ZRp" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GzD-gF-HBv"/>
-                <constraint firstItem="3dk-dY-hdr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="g1R-hY-75g"/>
-                <constraint firstItem="dF2-Rr-1LL" firstAttribute="top" secondItem="3dk-dY-hdr" secondAttribute="bottom" constant="5" id="j1n-3x-mmn"/>
-                <constraint firstItem="jz0-JI-oUE" firstAttribute="top" secondItem="3dk-dY-hdr" secondAttribute="bottom" constant="5" id="nHv-Jf-3Qh"/>
-                <constraint firstItem="3dk-dY-hdr" firstAttribute="top" secondItem="rrx-DJ-ZRp" secondAttribute="top" id="vyT-AM-Q27"/>
             </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                    <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
         </view>
     </objects>
     <resources>

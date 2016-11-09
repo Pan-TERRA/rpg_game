@@ -15,6 +15,7 @@
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse.h"
+#import "RPGSkillRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
   // Custom Views
@@ -28,25 +29,18 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *player1hp;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player1hpBar;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *player2hp;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player2hpBar;
   // Skill bar
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell1Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell2Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell3Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell4Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell5Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell6Button;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *spell7Button;
+@property (retain, nonatomic) IBOutlet UIView *skillBar;
   // Misc
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
+@property (nonatomic, retain, readwrite) NSArray<RPGSkillRepresentation *> *skillRepresentations;
 
 @property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
 
@@ -62,6 +56,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   
   if (self != nil)
   {
+    _skillRepresentations = [NSArray new];
     _battleManager = [[RPGBattleManager alloc] init];
     [_battleManager open];
     
@@ -94,8 +89,9 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                       forKeyPath:@"battle.currentTurn"
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
-  
+  [_skillRepresentations release];
   [_battleInitModal release];
+  [_skillBar release];
   [super dealloc];
 }
 
@@ -202,12 +198,10 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
     // client
   NSInteger playerHP = battle.player.HP;
   self.player1NickName.text = battle.player.name;
-  self.player1hp.text = [@(playerHP) stringValue];
   self.player1hpBar.progress = ((float)playerHP / 100);
     // opponent
   NSInteger opponentHP = battle.opponent.HP;
   self.player2NickName.text = battle.opponent.name;
-  self.player2hp.text = [@(opponentHP) stringValue];
   self.player2hpBar.progress = ((float)opponentHP / 100);
 }
 

@@ -12,17 +12,10 @@
                 <outlet property="battleInitModal" destination="Uv3-NW-3Xp" id="xJD-wy-aXT"/>
                 <outlet property="battleTextView" destination="2cd-xD-wsS" id="9yA-Xb-8C9"/>
                 <outlet property="player1NickName" destination="285-ls-YlH" id="Rvx-HA-zpD"/>
-                <outlet property="player1hp" destination="rRp-dO-E44" id="5uI-zV-eYH"/>
                 <outlet property="player1hpBar" destination="Kyt-St-ty5" id="H9c-F5-tbC"/>
                 <outlet property="player2NickName" destination="T2l-ok-lRD" id="G5h-6P-cil"/>
                 <outlet property="player2hpBar" destination="bpT-d5-5De" id="Lr6-U0-iql"/>
-                <outlet property="spell1Button" destination="gRd-Qf-vfv" id="Ryv-Di-Aql"/>
-                <outlet property="spell2Button" destination="5ie-zx-qMS" id="Nj7-69-sKf"/>
-                <outlet property="spell3Button" destination="oJF-h0-v6P" id="nI2-bQ-otu"/>
-                <outlet property="spell4Button" destination="6tp-kP-1RE" id="cmn-Rk-MP3"/>
-                <outlet property="spell5Button" destination="kPK-Ei-hzY" id="AZz-1A-qhT"/>
-                <outlet property="spell6Button" destination="INb-B7-s2Y" id="0ky-Vq-Iqc"/>
-                <outlet property="spell7Button" destination="jrS-I0-TxS" id="TUA-2r-iOx"/>
+                <outlet property="skillBar" destination="TmA-7m-uPF" id="aqT-jf-LTa"/>
                 <outlet property="timerLabel" destination="Lez-UF-BPa" id="aSv-im-1Mh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -91,22 +84,6 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRp-dO-E44" userLabel="Player HP">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="21" id="4aS-8I-OXg"/>
-                        <constraint firstAttribute="height" constant="21" id="lcX-fa-M7t"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Cochin-Bold" family="Cochin" pointSize="21"/>
-                    <color key="textColor" red="0.94117647058823528" green="0.0" blue="0.49019607843137253" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="4aS-8I-OXg"/>
-                            <exclude reference="lcX-fa-M7t"/>
-                        </mask>
-                    </variation>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fo0-pu-vx9" userLabel="Player HP bar">
                     <rect key="frame" x="5" y="39" width="220" height="50"/>
                     <subviews>
@@ -169,22 +146,6 @@
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="29"/>
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXv-IA-Js0" userLabel="Opponent HP">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="XXU-99-TCS"/>
-                        <constraint firstAttribute="width" constant="21" id="dET-PC-xyX"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="Cochin-Bold" family="Cochin" pointSize="21"/>
-                    <color key="textColor" red="0.94117647059999998" green="0.0" blue="0.49019607840000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="XXU-99-TCS"/>
-                            <exclude reference="dET-PC-xyX"/>
-                        </mask>
-                    </variation>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c7-Al-VCY" userLabel="Opponent HP bar">
                     <rect key="frame" x="511" y="39" width="220" height="50"/>
@@ -262,7 +223,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="RcX-6y-qXc" userLabel="Spell Bar Background">
                             <rect key="frame" x="0.0" y="0.0" width="516" height="75"/>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRd-Qf-vfv" userLabel="Skill1 Button">
                             <rect key="frame" x="16" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="5QZ-el-MXe"/>
@@ -285,7 +246,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="KGN-wH-sLD"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5ie-zx-qMS" userLabel="Skill2 Button">
                             <rect key="frame" x="86" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="HMe-bW-GLV"/>
@@ -308,7 +269,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="UA5-yw-NSY"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P">
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="oJF-h0-v6P" userLabel="Skill3 Button">
                             <rect key="frame" x="159" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="2ef-pk-jwt"/>
@@ -331,7 +292,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="PCs-0N-r7S"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE">
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6tp-kP-1RE" userLabel="Skill4 Button">
                             <rect key="frame" x="233" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="15t-a4-IXt"/>
@@ -354,7 +315,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="05z-4k-SFj"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY">
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kPK-Ei-hzY" userLabel="Skill5 Button">
                             <rect key="frame" x="307" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="kPK-Ei-hzY" secondAttribute="height" multiplier="1:1" id="Nla-0o-RNe"/>
@@ -377,7 +338,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="5Z1-9o-Gs5"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y">
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="INb-B7-s2Y" userLabel="Skill6 Button">
                             <rect key="frame" x="380" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="CCr-Gw-dpF"/>
@@ -400,7 +361,7 @@
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="KUE-TH-uDW"/>
                             </connections>
                         </button>
-                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS">
+                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jrS-I0-TxS" userLabel="Skill7 Button">
                             <rect key="frame" x="450" y="13" width="50" height="50"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="2ZY-Pd-tZm"/>
