@@ -71,6 +71,10 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                                                selector:@selector(modelDidChange:)
                                                    name:kRPGBattleManagerModelDidChangeNotification
                                                  object:_battleManager];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(removeBattlleInitModal:)
+                                                   name:kRPGBattleManagerDidEndSetUpNotification
+                                                 object:_battleManager];
       [_battleManager addObserver:self
                        forKeyPath:@"battle.currentTurn"
                           options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
@@ -205,6 +209,12 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   self.player2NickName.text = battle.opponent.name;
   self.player2hp.text = [@(opponentHP) stringValue];
   self.player2hpBar.progress = ((float)opponentHP / 100);
+}
+
+- (void)removeBattlleInitModal:(NSNotification *)aNotification
+{
+  [self.battleInitModal.view removeFromSuperview];
+  [self.battleInitModal removeFromParentViewController];
 }
 
 #pragma mark - KVO
