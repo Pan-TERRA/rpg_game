@@ -13,10 +13,10 @@
 
 #pragma mark - Show Alert
 
-+ (void)showAlertViewControllerWithTitle:(NSString *)title
-                                 message:(NSString *)message
-                          viewController:(UIViewController *)viewController
-                              completion:(void (^)())completionHandler
++ (void)showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+        rootViewController:(UIViewController *)viewController
+                completion:(void (^)())completionHandler
 {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                  message:message

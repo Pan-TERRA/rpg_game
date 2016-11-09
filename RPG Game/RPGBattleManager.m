@@ -108,7 +108,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 
 
-- (void)sendBattleCondtionRequest
+- (void)sendBattleConditionRequest
 {
   
 }

@@ -359,7 +359,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void){
           UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -368,7 +368,7 @@
       default:
       {
         NSString *message = @"Can't upload proof image.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
         break;
       }
     }
@@ -408,7 +408,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void){
           UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -417,7 +417,7 @@
       default:
       {
         NSString *message = @"Can't take quest.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
         break;
       }
     }
@@ -455,7 +455,7 @@
         NSString *message = @"Give this app permission to access your camera in your settings app!";
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+          [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
           weakSelf.addProofButton.enabled = YES;
         });
       }
@@ -480,7 +480,7 @@
       default:
       {
         NSString *message = @"Can't upload quest proof image.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:self completion:nil];
         break;
       }
     }
@@ -512,7 +512,8 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void)
+        {
           UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -521,7 +522,7 @@
       default:
       {
         NSString *message = @"Can't send quest proof.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
         break;
       }
     }

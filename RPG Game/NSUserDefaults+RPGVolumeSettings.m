@@ -15,6 +15,8 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 
 @implementation NSUserDefaults (RPGVolumeSettings)
 
+#pragma mark - Accessors
+
 - (BOOL)isMusicPlaying
 {
   BOOL result = TRUE;
@@ -25,7 +27,7 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
   return result;
 }
 
-- (void)setIsMusicPlaying:(BOOL)anIsMusicPlaying
+- (void)setMusicPlaying:(BOOL)anIsMusicPlaying
 {
   [self setBool:anIsMusicPlaying forKey:kRPGUserVolumeSettingsKeyIsMusicPlaying];
 }
@@ -38,10 +40,9 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
     result = [self boolForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying];
   }
   return result;
-
 }
 
-- (void)setIsSoundsPlaying:(BOOL)anIsSoundsPlaying
+- (void)setSoundsPlaying:(BOOL)anIsSoundsPlaying
 {
   [self setBool:anIsSoundsPlaying forKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying];
 }

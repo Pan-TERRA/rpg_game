@@ -128,7 +128,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void)
+        {
           UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -137,7 +138,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       default:
       {
         NSString *message = @"Can't update quest list.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
         break;
       }
     }
@@ -209,14 +210,14 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      if ([aData count])
+      if (aData.count != 0)
       {
-        [self showQuestViewWithQuest:[aData firstObject]];
+        [self showQuestViewWithQuest:aData.firstObject];
       }
       else
       {
         NSString *message = @"No quests for review.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:self completion:nil];
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;
@@ -301,7 +302,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListInProgressQuest:
     {
-     [self toggleButtonBackground:inProgressQuestListButton active:YES];
+      [self toggleButtonBackground:inProgressQuestListButton active:YES];
       break;
     }
     case kRPGQuestListDoneQuest:
