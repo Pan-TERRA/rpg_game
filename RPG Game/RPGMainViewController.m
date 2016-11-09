@@ -18,6 +18,9 @@
   // Constants
 #import "RPGNibNames.h"
 
+#import "RPGNetworkManager.h"
+#import "RPGResources.h"
+
 @interface RPGMainViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
@@ -65,9 +68,16 @@
 {
   [super viewWillAppear:anAnimated];
   
-  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionGold]];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionCrystals]];
+  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(NSInteger aStatusCode, RPGResources *aResources) {
+    NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+    if (aStatusCode == 0)
+    {
+      standartUserDefaults.sessionGold = aResources.gold;
+      standartUserDefaults.sessionCrystals = aResources.crystals;
+    }
+    self.goldLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionGold];
+    self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionCrystals];
+  }];
 }
 
 - (void)didReceiveMemoryWarning
