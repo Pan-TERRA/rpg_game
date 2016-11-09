@@ -7,6 +7,9 @@
 //
 
 #import "RPGEntity.h"
+#import "RPGSerializable.h"
+
+extern NSString * const kRPGPlayerSkills;
 
 @protocol RPGClientEntity <NSObject>
 
@@ -17,7 +20,7 @@
 /**
  *  User battle entity. Used by RPGBattle as player object.
  */
-@interface RPGPlayer : RPGEntity <RPGClientEntity>
+@interface RPGPlayer : RPGEntity <RPGClientEntity, RPGSerializable>
 
 - (instancetype)initWithSkills:(NSArray<NSNumber *> *)aSkills;
 + (instancetype)playerWithSkills:(NSArray<NSNumber *> *)aSkills;

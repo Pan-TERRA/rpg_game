@@ -7,6 +7,7 @@
 //
 
 #import "RPGSkillActionRequest.h"
+#import "RPGRequest.h"
 
 NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
 
@@ -41,6 +42,24 @@ NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
 - (void)dealloc
 {
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+    // !!!: change to proper constant
+    //  dictionaryRepresentation[kRPGSkillID] = @(self.skillID);
+  dictionaryRepresentation[@"skill_id"] = @(self.skillID);
+  
+  return [dictionaryRepresentation autorelease];
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  NSInteger skllID = [aDictionary[@"skill_id"] integerValue];
+  return [self initWithSkillID:skllID token:aDictionary[kRPGRequestSerializationToken]];
 }
 
 @end

@@ -13,7 +13,7 @@
   // API
 #import "RPGNetworkManager+Authorization.h"
   // Entities
-#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGAuthorizationLoginRequest.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -71,12 +71,7 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    mask = UIInterfaceOrientationMaskLandscape;
-  }
-  return mask;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - View State

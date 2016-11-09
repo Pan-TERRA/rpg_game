@@ -8,6 +8,8 @@
 
 #import "RPGSkillsRequest.h"
 
+static NSString * const kRPGSkillsRequestToken = @"token";
+static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 @implementation RPGSkillsRequest
 
@@ -51,6 +53,22 @@
   [super dealloc];
 }
 
+#pragma mark - RPGSerializable
 
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  
+  dictionary[kRPGSkillsRequestToken] = self.token;
+  dictionary[kRPGSkillsRequestCharacterID] = @(self.characterID);
+  
+  return dictionary;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithToken:aDictionary[kRPGSkillsRequestToken]
+                 characterID:[aDictionary[kRPGSkillsRequestCharacterID] integerValue]];
+}
 
 @end

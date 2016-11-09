@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGQuestReward : NSObject
+@interface RPGQuestReward : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSUInteger gold;
 @property (nonatomic, assign, readonly) NSUInteger crystals;

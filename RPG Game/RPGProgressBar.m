@@ -11,6 +11,8 @@
 
 @interface RPGProgressBar ()
 
+@property (assign, nonatomic, readwrite) CGFloat absoluteWidth;
+
 @end
 
 @implementation RPGProgressBar
@@ -23,6 +25,7 @@
   
   if (self != nil)
   {
+    _absoluteWidth = frame.size.width;
     _progress = 1.0;
     _align = kRPGProgressBarRightAlign;
   }
@@ -46,55 +49,50 @@
 
 - (void)setProgress:(CGFloat)aProgress
 {
-  if (_progress != aProgress)
+  
+  if (aProgress > 1)
   {
-    if (aProgress > 1)
+    _progress = 1;
+  }
+  else if (aProgress < 0)
+  {
+    _progress = 0;
+  }
+  else
+  {
+    _progress = aProgress;
+    
+    CGFloat originX = self.frame.origin.x;
+    CGFloat originY = self.frame.origin.y;
+    CGFloat height = self.frame.size.height;
+    CGFloat pastWidth = self.frame.size.width;
+    CGFloat currentWidth = self.absoluteWidth * _progress;
+    CGRect currentProgressBarRect = CGRectZero;
+    
+    if (self.align == kRPGProgressBarRightAlign)
     {
-      _progress = 1;
-    }
-    else if (aProgress < 0)
-    {
-      _progress = 0;
+      currentProgressBarRect = CGRectMake(originX,
+                                          originY,
+                                          currentWidth,
+                                          height);
     }
     else
     {
-        _progress = aProgress;
-      
-        CGFloat originX = self.frame.origin.x;
-        CGFloat originY = self.frame.origin.y;
-        CGFloat width = self.frame.size.width;
-        CGFloat height = self.frame.size.height;
-        CGFloat currentWidth = self.frame.size.width * _progress;
-        CGRect currentProgressBarRect = CGRectZero;
-        
-        if (self.align == kRPGProgressBarRightAlign)
-        {
-          currentProgressBarRect = CGRectMake(originX,
-                                              originY,
-                                              currentWidth,
-                                              height);
-        }
-        else
-        {
-          currentProgressBarRect = CGRectMake(originX + width - currentWidth,
-                                              originY,
-                                              currentWidth,
-                                              height);
-        }
-        
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:0.5];
-        [UIView setAnimationDelay:0.5];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-        
-        self.frame = currentProgressBarRect;
-        
-        [UIView commitAnimations];
-      
-      
-     
-      
+      currentProgressBarRect = CGRectMake(originX + pastWidth - currentWidth,
+                                          originY,
+                                          currentWidth,
+                                          height);
+
     }
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDelay:0.5];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    
+    self.frame = currentProgressBarRect;
+    
+    [UIView commitAnimations];
   }
 }
 
@@ -105,6 +103,7 @@
   [super drawRect:rect];
   
   CGFloat width = self.frame.size.width;
+  self.absoluteWidth = width;
   CGFloat height = self.frame.size.height;
   CGFloat currentWidth = self.frame.size.width * _progress;
   CGRect currentProgressBarRect = CGRectZero;

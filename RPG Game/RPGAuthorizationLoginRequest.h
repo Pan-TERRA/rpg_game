@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGAuthorizationLoginRequest : NSObject
+@interface RPGAuthorizationLoginRequest : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *email;
 @property (nonatomic, copy, readonly) NSString *password;

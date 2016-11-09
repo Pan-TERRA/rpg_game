@@ -14,7 +14,7 @@
 #import "RPGBattle.h"
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGBattleInitResponse+Serialization.h"
+#import "RPGBattleInitResponse.h"
   // Constants
 #import "RPGNibNames.h"
   // Custom Views
@@ -48,6 +48,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
+@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+
 @end
 
 @implementation RPGBattleViewController
@@ -69,6 +71,10 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                                                selector:@selector(modelDidChange:)
                                                    name:kRPGBattleManagerModelDidChangeNotification
                                                  object:_battleManager];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(removeBattlleInitModal:)
+                                                   name:kRPGBattleManagerDidEndSetUpNotification
+                                                 object:_battleManager];
       [_battleManager addObserver:self
                        forKeyPath:@"battle.currentTurn"
                           options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
@@ -89,6 +95,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
   
+  [_battleInitModal release];
   [super dealloc];
 }
 
@@ -97,7 +104,13 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
+  
+  [self addChildViewController:self.battleInitModal];
+  self.battleInitModal.view.frame = self.view.frame;
+  [self.view addSubview:self.battleInitModal.view];
+  [self.battleInitModal didMoveToParentViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -131,12 +144,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    mask = UIInterfaceOrientationMaskLandscape;
-  }
-  return mask;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - IBAction
@@ -201,6 +209,12 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   self.player2NickName.text = battle.opponent.name;
   self.player2hp.text = [@(opponentHP) stringValue];
   self.player2hpBar.progress = ((float)opponentHP / 100);
+}
+
+- (void)removeBattlleInitModal:(NSNotification *)aNotification
+{
+  [self.battleInitModal.view removeFromSuperview];
+  [self.battleInitModal removeFromParentViewController];
 }
 
 #pragma mark - KVO

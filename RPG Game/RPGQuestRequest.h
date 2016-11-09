@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGQuestRequest : NSObject
+extern NSString * const kRPGQuestRequestToken;
+extern NSString * const kRPGQuestRequestQuestID;
+
+@interface RPGQuestRequest : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *token;
 @property (nonatomic, assign, readonly) NSUInteger questID;

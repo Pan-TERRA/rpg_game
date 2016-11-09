@@ -10,7 +10,7 @@
   // Entities
 #import "RPGBattleConditionResponse.h"
 #import "RPGTimeResponse.h"
-#import "RPGBattleInitResponse+Serialization.h"
+#import "RPGBattleInitResponse.h"
 #import "RPGPlayer.h"
 #import "RPGSFXEngine.h"
 
@@ -32,6 +32,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
   
   if (self != nil)
   {
+//    _player = nil;
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;

@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGSkillInfoResponse : NSObject
+@interface RPGSkillInfoResponse : NSObject <RPGSerializable>
 
 @property (assign, nonatomic, readwrite) NSInteger status;
 @property (copy, nonatomic, readwrite) NSDictionary *skill;

@@ -7,8 +7,9 @@
 //
 
 #import "RPGRequest.h"
+#import "RPGSerializable.h"
 
-@interface RPGSkillsRequest : NSObject
+@interface RPGSkillsRequest : NSObject <RPGSerializable>
 
 @property (copy, nonatomic, readwrite) NSString *token;
 @property (assign, nonatomic, readwrite) NSInteger characterID;

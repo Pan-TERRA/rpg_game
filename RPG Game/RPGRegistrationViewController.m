@@ -12,7 +12,7 @@
   // API
 #import "RPGNetworkManager+Registration.h"
   // Entities
-#import "RPGRegistrationRequest+Serialization.h"
+#import "RPGRegistrationRequest.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -84,12 +84,7 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
 {
-  UIInterfaceOrientationMask mask = UIInterfaceOrientationMaskAll;
-  if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)
-  {
-    mask = UIInterfaceOrientationMaskLandscape;
-  }
-  return mask;
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - UIPickerViewDataSource

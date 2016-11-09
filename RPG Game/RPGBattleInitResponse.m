@@ -10,6 +10,10 @@
 #import "RPGEntity.h"
 #import "RPGMessageTypes.h"
 
+static NSString * const kRPGBattleInitResponseOpponentInfo = @"opponent_info";
+static NSString * const kRPGBattleInitResponseOpponentTime = @"time";
+static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
+
 @interface RPGBattleInitResponse ()
 
 @property (nonatomic, retain, readwrite) RPGEntity *opponentInfo;
@@ -75,5 +79,31 @@
   [_opponentInfo release];
   [super dealloc];
 }
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
+  
+  dictionaryRepresentation[kRPGBattleInitResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
+  dictionaryRepresentation[kRPGBattleInitResponseCurrentTurn] = [NSNumber numberWithBool:self.isCurrentTurn];
+  dictionaryRepresentation[kRPGBattleInitResponseOpponentTime] = @(self.time);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  RPGEntity *opponentInfo = [[RPGEntity alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponseOpponentInfo]];
+  BOOL currentTurn = [aDictionary[kRPGBattleInitResponseCurrentTurn] boolValue];
+  NSInteger status = [aDictionary[kRPGResponseSerializationStatus] integerValue];
+  NSInteger time = [aDictionary[kRPGBattleInitResponseOpponentTime] integerValue];
+  
+  return [self initWithOpponentInfo:[opponentInfo autorelease]
+                        currentTurn:currentTurn
+                               time:time status:status];
+}
+
 
 @end

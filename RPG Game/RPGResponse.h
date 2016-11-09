@@ -7,11 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
+
+extern NSString * const kRPGResponseSerializationStatus;
 
 /**
  *  Basic response class. Mainly used by "RPGBattleManager".
  */
-@interface RPGResponse : NSObject
+@interface RPGResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *type;
 @property (nonatomic, assign, readonly) NSInteger status;

@@ -7,8 +7,9 @@
 //
 
 #import "RPGResponse.h"
+#import "RPGSerializable.h"
 
-@interface RPGSkillsResponse : NSObject
+@interface RPGSkillsResponse : NSObject <RPGSerializable>
 
 @property (assign, nonatomic, readwrite) NSInteger status;
 @property (copy, nonatomic, readwrite) NSArray *skills;
