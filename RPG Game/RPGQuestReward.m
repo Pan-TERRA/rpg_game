@@ -64,20 +64,18 @@ NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
-  dictionaryRepresentation[kRPGQuestRewardGold] = @(self.gold);
-  dictionaryRepresentation[kRPGQuestRewardCrystals] = @(self.crystals);
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
+  
   dictionaryRepresentation[kRPGQuestRewardSkillId] = @(self.skillID);
+  
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSUInteger gold = [aDictionary[kRPGQuestRewardGold] integerValue];
-  NSUInteger crystals = [aDictionary[kRPGQuestRewardCrystals] integerValue];
-  NSUInteger skillID = [aDictionary[kRPGQuestRewardSkillId] integerValue];
-  
-  return [self initWithGold:gold crystals:crystals skillID:skillID];
+  return [self initWithGold:[aDictionary[kRPGResourcesGold] integerValue]
+                   crystals:[aDictionary[kRPGResourcesCrystals] integerValue]
+                    skillID:[aDictionary[kRPGQuestRewardSkillId] integerValue]];
 }
 
 @end
