@@ -22,17 +22,17 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrx-DJ-ZRp">
+                <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rrx-DJ-ZRp">
                     <rect key="frame" x="150" y="224" width="300" height="153"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="nsp-kx-WVY">
+                        <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="nsp-kx-WVY">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="153"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t32-YB-g9U" userLabel="Cooldown">
-                            <rect key="frame" x="16" y="32" width="120" height="20"/>
+                            <rect key="frame" x="16" y="32" width="105" height="20"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rx1-7s-i7r" userLabel="Value">
-                                    <rect key="frame" x="111" y="0.0" width="9" height="20"/>
+                                    <rect key="frame" x="96" y="0.0" width="9" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -59,10 +59,10 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dF2-Rr-1LL" userLabel="Multiplier">
-                            <rect key="frame" x="164" y="32" width="120" height="20"/>
+                            <rect key="frame" x="179" y="32" width="105" height="20"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0v-1e-L6m" userLabel="Value">
-                                    <rect key="frame" x="90" y="0.0" width="30" height="20"/>
+                                    <rect key="frame" x="75" y="0.0" width="30" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
@@ -100,7 +100,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="300" id="0q8-3D-hsj"/>
                         <constraint firstItem="dKV-8M-zUW" firstAttribute="top" secondItem="dF2-Rr-1LL" secondAttribute="bottom" constant="8" id="7Hg-i9-T4v"/>
-                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="width" secondItem="nsp-kx-WVY" secondAttribute="width" multiplier="0.4" id="9VP-mp-Xrz"/>
+                        <constraint firstItem="dF2-Rr-1LL" firstAttribute="width" secondItem="nsp-kx-WVY" secondAttribute="width" multiplier="0.35" id="9VP-mp-Xrz"/>
                         <constraint firstItem="nsp-kx-WVY" firstAttribute="top" secondItem="rrx-DJ-ZRp" secondAttribute="top" id="Bxg-0B-7WN"/>
                         <constraint firstAttribute="trailing" secondItem="dKV-8M-zUW" secondAttribute="trailing" constant="16" id="MdC-4S-A4d"/>
                         <constraint firstItem="nsp-kx-WVY" firstAttribute="leading" secondItem="rrx-DJ-ZRp" secondAttribute="leading" id="PUD-at-Nhi"/>
@@ -108,7 +108,7 @@
                         <constraint firstAttribute="trailing" secondItem="dF2-Rr-1LL" secondAttribute="trailing" constant="16" id="Ux2-a2-C7t"/>
                         <constraint firstAttribute="bottom" secondItem="dKV-8M-zUW" secondAttribute="bottom" constant="24" id="Vrp-z9-455"/>
                         <constraint firstItem="dKV-8M-zUW" firstAttribute="leading" secondItem="rrx-DJ-ZRp" secondAttribute="leading" constant="24" id="gIl-Em-Naa"/>
-                        <constraint firstItem="t32-YB-g9U" firstAttribute="width" secondItem="rrx-DJ-ZRp" secondAttribute="width" multiplier="0.4" id="kEY-KI-nli"/>
+                        <constraint firstItem="t32-YB-g9U" firstAttribute="width" secondItem="rrx-DJ-ZRp" secondAttribute="width" multiplier="0.35" id="kEY-KI-nli"/>
                         <constraint firstAttribute="trailing" secondItem="nsp-kx-WVY" secondAttribute="trailing" id="kVn-ko-l7R"/>
                         <constraint firstAttribute="bottom" secondItem="nsp-kx-WVY" secondAttribute="bottom" id="wRx-lS-sUq"/>
                     </constraints>

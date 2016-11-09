@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@class RPGSkillRepresentation;
 
 @interface RPGSkillDescriptionViewController : UIViewController
+
+@property (nonatomic, retain, readonly) RPGSkillRepresentation* skillRepresentation;
+
+- (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation;
 
 @end
