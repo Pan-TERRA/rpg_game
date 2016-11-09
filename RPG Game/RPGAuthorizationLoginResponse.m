@@ -6,8 +6,16 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAuthorizationLoginResponse+Serialization.h"
+#import "RPGAuthorizationLoginResponse.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+
+static NSString * const kRPGAuthorizationLoginResponseStatus = @"status";
+static NSString * const kRPGAuthorizationLoginResponseUsername = @"username";
+static NSString * const kRPGAuthorizationLoginResponseToken = @"token";
+static NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
+static NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
+static NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
+static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 @interface RPGAuthorizationLoginResponse ()
 
@@ -133,5 +141,35 @@
   // TODO: characters array instead of one character
   standartUserDefaults.sessionCharacters = [NSArray arrayWithObject:self.character];
 }
+
+#pragma mark - RPGSerialization 
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseStatus] = @(self.status);
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseUsername] = self.username;
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseToken] = self.token;
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseAvatar] = self.avatar;
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseGold] = @(self.gold);
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseCrystals] = @(self.crystals);
+  dictionaryRepresentation[kRPGAuthorizationLoginResponseCharacter] = self.character;
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  NSDictionary *character = [aDictionary[kRPGAuthorizationLoginResponseCharacter] firstObject];
+  return [self initWithUsername:aDictionary[kRPGAuthorizationLoginResponseUsername]
+                          token:aDictionary[kRPGAuthorizationLoginResponseToken]
+                         avatar:aDictionary[kRPGAuthorizationLoginResponseAvatar]
+                           gold:[aDictionary[kRPGAuthorizationLoginResponseGold] integerValue]
+                       crystals:[aDictionary[kRPGAuthorizationLoginResponseCrystals] integerValue]
+                      character:character
+                         status:[aDictionary[kRPGAuthorizationLoginResponseStatus] integerValue]];
+}
+
 
 @end

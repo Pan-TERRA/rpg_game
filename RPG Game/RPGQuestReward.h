@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "RPGResources.h"
+#import "RPGSerializable.h"
 
-@interface RPGQuestReward : RPGResources
+@interface RPGQuestReward : RPGResources <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSUInteger skillID;
 

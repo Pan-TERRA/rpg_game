@@ -9,6 +9,7 @@
 #import "RPGTimeResponse.h"
 
 NSString * const kRPGTimeResponseType = @"TIME_RESPONSE";
+NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 
 @interface RPGTimeResponse ()
 
@@ -65,5 +66,23 @@ NSString * const kRPGTimeResponseType = @"TIME_RESPONSE";
   [_timestamp release];
   [super dealloc];
 }
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
+  
+  dictionaryRepresentation[kRPGTimeResponseSerializationTimestamp] = @([self.timestamp timeIntervalSince1970]);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithUnixTimestamp:[aDictionary[kRPGTimeResponseSerializationTimestamp] intValue]
+                              status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
+}
+
 
 @end

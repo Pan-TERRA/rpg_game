@@ -8,6 +8,8 @@
 
 #import "RPGQuestResponse.h"
 
+static NSString * const kRPGQuestResponseStatus = @"status";
+
 @interface RPGQuestResponse()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
@@ -36,6 +38,22 @@
 + (instancetype)questResponseWithStatus:(NSInteger)aStatus
 {
   return [[[self alloc] initWithStatus:aStatus] autorelease];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGQuestResponseStatus] = @(self.status);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithStatus:[aDictionary[kRPGQuestResponseStatus] integerValue]];
 }
 
 @end

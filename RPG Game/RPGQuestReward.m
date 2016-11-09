@@ -8,6 +8,10 @@
 
 #import "RPGQuestReward.h"
 
+NSString * const kRPGQuestRewardGold = @"gold";
+NSString * const kRPGQuestRewardCrystals = @"crystals";
+NSString * const kRPGQuestRewardSkillId = @"skill_id";
+
 @interface RPGQuestReward()
 
 @property (nonatomic, assign, readwrite) NSUInteger skillID;
@@ -54,6 +58,26 @@
 - (void)dealloc
 {
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  dictionaryRepresentation[kRPGQuestRewardGold] = @(self.gold);
+  dictionaryRepresentation[kRPGQuestRewardCrystals] = @(self.crystals);
+  dictionaryRepresentation[kRPGQuestRewardSkillId] = @(self.skillID);
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  NSUInteger gold = [aDictionary[kRPGQuestRewardGold] integerValue];
+  NSUInteger crystals = [aDictionary[kRPGQuestRewardCrystals] integerValue];
+  NSUInteger skillID = [aDictionary[kRPGQuestRewardSkillId] integerValue];
+  
+  return [self initWithGold:gold crystals:crystals skillID:skillID];
 }
 
 @end

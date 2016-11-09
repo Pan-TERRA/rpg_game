@@ -8,6 +8,8 @@
 
 #import "RPGQuestReviewRequest.h"
 
+static NSString * const kRPGQuestReviewRequestResult = @"result";
+
 @interface RPGQuestReviewRequest ()
 
 @property (nonatomic, assign, readwrite) BOOL result;
@@ -46,5 +48,24 @@
 {
   return [[[self alloc] initWithToken:aToken questID:aQuestID result:aResult] autorelease];
 }
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
+  
+  dictionaryRepresentation[kRPGQuestReviewRequestResult] = @(self.result);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithToken:aDictionary[kRPGQuestRequestToken]
+                     questID:[aDictionary[kRPGQuestRequestQuestID] integerValue]
+                      result:[aDictionary[kRPGQuestReviewRequestResult] boolValue]];
+}
+
 
 @end

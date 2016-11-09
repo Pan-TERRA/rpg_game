@@ -8,6 +8,9 @@
 
 #import "RPGRequest.h"
 
+NSString *const kRPGRequestSerializationType = @"type";
+NSString *const kRPGRequestSerializationToken = @"token";
+
 @interface RPGRequest ()
 
 @property (nonatomic, copy, readwrite) NSString *type;
@@ -60,6 +63,24 @@
   [_type release];
   [_token release];
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGRequestSerializationType] = self.type;
+  dictionaryRepresentation[kRPGRequestSerializationToken] = self.token;
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithType:aDictionary[kRPGRequestSerializationType]
+                      token:aDictionary[kRPGRequestSerializationToken]];
 }
 
 @end

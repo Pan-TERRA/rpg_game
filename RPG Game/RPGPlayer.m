@@ -9,6 +9,14 @@
 #import "RPGPlayer.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
+NSString * const kRPGPlayerSkills = @"skills";
+
+@interface RPGPlayer ()
+
+@property (retain, nonatomic, readwrite) NSArray<NSNumber *> *skills;
+
+@end
+
 @implementation RPGPlayer
 
 @synthesize skills = _skills;
@@ -39,5 +47,23 @@
   [_skills release];
   
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  
+  dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
+  
+  return [dictionaryRepresentation autorelease];
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  self = [super initWithDictionaryRepresentation:aDictionary];
+  self.skills = aDictionary[kRPGPlayerSkills];
+  return self;
 }
 @end

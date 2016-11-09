@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
+
+extern NSString * const kRPGEntityName;
+extern NSString * const kRPGEntityHP;
 
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
  *  object.
  */
-@interface RPGEntity : NSObject
+@interface RPGEntity : NSObject <RPGSerializable>
 
 @property (copy, nonatomic, readwrite) NSString *name;
 @property (assign, nonatomic, readwrite) NSInteger HP;

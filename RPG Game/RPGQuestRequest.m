@@ -8,6 +8,9 @@
 
 #import "RPGQuestRequest.h"
 
+NSString * const kRPGQuestRequestToken = @"token";
+NSString * const kRPGQuestRequestQuestID = @"quest_id";
+
 @interface RPGQuestRequest()
 
 @property (nonatomic, copy, readwrite) NSString *token;
@@ -50,6 +53,24 @@
 {
   [_token release];
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGQuestRequestToken] = self.token;
+  dictionaryRepresentation[kRPGQuestRequestQuestID] = @(self.questID);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithToken:aDictionary[kRPGQuestRequestToken]
+                     questID:[aDictionary[kRPGQuestRequestQuestID] integerValue]];
 }
 
 @end

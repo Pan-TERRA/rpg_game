@@ -14,10 +14,10 @@
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
   // Entities
-#import "RPGQuest+Serialization.h"
-#import "RPGQuestReward+Serialization.h"
-#import "RPGQuestRequest+Serialization.h"
-#import "RPGQuestReviewRequest+Serialization.h"
+#import "RPGQuest.h"
+#import "RPGQuestReward.h"
+#import "RPGQuestRequest.h"
+#import "RPGQuestReviewRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlert.h"

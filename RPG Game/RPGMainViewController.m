@@ -26,9 +26,6 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
 
-@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleInitModal;
-@property (nonatomic, retain, readwrite) RPGBattleViewController *battleViewController;
-
 @end
 
 @implementation RPGMainViewController
@@ -45,10 +42,6 @@
 
 - (void)dealloc
 {
-  [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                  name:kRPGBattleManagerDidEndSetUpNotification
-                                                object:self.battleViewController.battleManager];
-  
   [super dealloc];
 }
 
@@ -113,17 +106,9 @@
 
 - (IBAction)segueToAdventures
 {
-  self.battleViewController = [[[RPGBattleViewController alloc] init] autorelease];
-  
-  [[NSNotificationCenter defaultCenter] addObserver:self
-                                           selector:@selector(battleManagerDidEndSetUp:)
-                                               name:kRPGBattleManagerDidEndSetUpNotification
-                                             object:self.battleViewController.battleManager];
-
-  [self addChildViewController:self.battleInitModal];
-  self.battleInitModal.view.frame = self.view.frame;
-  [self.view addSubview:self.battleInitModal.view];
-  [self.battleInitModal didMoveToParentViewController:self];
+  [self presentViewController:[[[RPGBattleViewController alloc] init] autorelease]
+                     animated:YES
+                   completion:nil];
 }
 
 - (IBAction)segueToArena
@@ -137,16 +122,4 @@
   [self presentViewController:settingsViewController animated:YES completion:nil];
 }
 
-#pragma mark - Notifications
-
-/**
- *  Performs after SRWebSocket receive BATTLE_INIT message
- */
-- (void)battleManagerDidEndSetUp:(NSNotification *)aNotification
-{
-  [self.battleInitModal.view removeFromSuperview];
-  [self.battleInitModal removeFromParentViewController];
-  
-  [self presentViewController:self.battleViewController animated:YES completion:nil];
-}
 @end

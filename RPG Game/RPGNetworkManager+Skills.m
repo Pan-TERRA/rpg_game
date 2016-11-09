@@ -9,8 +9,8 @@
 #import "RPGNetworkManager+Skills.h"
   // Entities
 #import "RPGSkillsRequest.h"
-#import "RPGSkillsResponse+Serialization.h"
-#import "RPGSkillInfoResponse+Serialization.h"
+#import "RPGSkillsResponse.h"
+#import "RPGSkillInfoResponse.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"

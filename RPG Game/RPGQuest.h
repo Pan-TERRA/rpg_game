@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
 typedef NS_ENUM(NSUInteger, RPGQuestState)
 {
@@ -21,7 +22,7 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
 
 @class RPGQuestReward;
 
-@interface RPGQuest : NSObject
+@interface RPGQuest : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSUInteger questID;
 @property (nonatomic, copy, readonly) NSString *name;

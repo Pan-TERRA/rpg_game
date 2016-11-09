@@ -8,7 +8,7 @@
 
 #import "RPGNetworkManager+Registration.h"
   // Entities
-#import "RPGRegistrationRequest+Serialization.h"
+#import "RPGRegistrationRequest.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
 

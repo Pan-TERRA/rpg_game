@@ -8,10 +8,10 @@
 
 #import "RPGNetworkManager+Quests.h"
   // Entities
-#import "RPGQuestListResponse+Serialization.h"
-#import "RPGQuestRequest+Serialization.h"
-#import "RPGQuestResponse+Serialization.h"
-#import "RPGQuestReviewRequest+Serialization.h"
+#import "RPGQuestListResponse.h"
+#import "RPGQuestRequest.h"
+#import "RPGQuestResponse.h"
+#import "RPGQuestReviewRequest.h"
   //Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"

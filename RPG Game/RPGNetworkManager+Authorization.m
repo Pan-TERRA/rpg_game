@@ -8,9 +8,9 @@
 
 #import "RPGNetworkManager+Authorization.h"
   // Entities
-#import "RPGAuthorizationLoginRequest+Serialization.h"
-#import "RPGAuthorizationLoginResponse+Serialization.h"
-#import "RPGAuthorizationLogoutRequest+Serialization.h"
+#import "RPGAuthorizationLoginRequest.h"
+#import "RPGAuthorizationLoginResponse.h"
+#import "RPGAuthorizationLogoutRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"

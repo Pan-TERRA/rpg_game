@@ -8,7 +8,12 @@
 
 #import "RPGSkillInfoResponse.h"
 
+static NSString * const kRPGSkillInfoResponseStatus = @"status";
+static NSString * const kRPGSkillInfoResponseSkill = @"skill";
+
 @implementation RPGSkillInfoResponse
+
+#pragma mark - Init
 
 - (instancetype)initWithStatus:(NSInteger)status skill:(NSDictionary *)skill
 {
@@ -21,10 +26,29 @@
   return self;
 }
 
+#pragma mark - Dealloc
+
 - (void)dealloc
 {
   [_skill release];
   [super dealloc];
+}
+
+
+#pragma mark - RPGSerializable 
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  return @{
+           kRPGSkillInfoResponseStatus: @(self.status),
+           kRPGSkillInfoResponseSkill: self.skill
+           };
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithStatus:[aDictionary[kRPGSkillInfoResponseStatus] integerValue]
+                        skill:aDictionary[kRPGSkillInfoResponseSkill]];
 }
 
 @end

@@ -13,7 +13,7 @@
   // API
 #import "RPGNetworkManager+Authorization.h"
   // Entities
-#import "RPGAuthorizationLoginRequest+Serialization.h"
+#import "RPGAuthorizationLoginRequest.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"

@@ -7,13 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
+
+extern NSString *const kRPGRequestSerializationType;
+extern NSString *const kRPGRequestSerializationToken;
 
 /**
  *  Basic request class. Mainly used for static requests and "RPGBattleManager"
  *  socket messages.
  *  @warning R
  */
-@interface RPGRequest : NSObject
+@interface RPGRequest : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *type;
 @property (nonatomic, copy, readonly) NSString *token;

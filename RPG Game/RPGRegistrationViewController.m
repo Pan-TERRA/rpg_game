@@ -12,7 +12,7 @@
   // API
 #import "RPGNetworkManager+Registration.h"
   // Entities
-#import "RPGRegistrationRequest+Serialization.h"
+#import "RPGRegistrationRequest.h"
   // Constants
 #import "RPGNibNames.h"
 
