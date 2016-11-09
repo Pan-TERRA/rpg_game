@@ -8,6 +8,7 @@
 
 #import "RPGBattleConditionResponse.h"
 #import "RPGMessageTypes.h"
+#import "RPGResources.h"
 
 NSString * const kRPGBattleConditionResponseHP = @"hp";
 NSString * const kRPGBattleConditionResponseOpponentHP = @"opponent_hp";

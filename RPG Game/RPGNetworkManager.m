@@ -11,7 +11,7 @@
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
-#import "RPGResourcesResponse+Serialization.h"
+#import "RPGResourcesResponse.h"
 
   // Constants
 #import "RPGStatusCodes.h"
