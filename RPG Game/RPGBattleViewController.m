@@ -48,6 +48,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
+
 @end
 
 @implementation RPGBattleViewController
@@ -89,6 +91,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
   
+  [_battleRewardModal release];
   [super dealloc];
 }
 
