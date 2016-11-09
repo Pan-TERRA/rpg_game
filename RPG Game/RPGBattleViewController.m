@@ -163,7 +163,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
   NSInteger tag = aSender.tag;
     // array range check
-  if (tag <= skills.count)
+  if (tag < skills.count)
   {
     [self.battleManager sendSkillActionRequestWithID:[skills[tag] integerValue]];
   }
