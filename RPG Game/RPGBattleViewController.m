@@ -15,6 +15,7 @@
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse+Serialization.h"
+#import "RPGResources.h"
   // Constants
 #import "RPGNibNames.h"
   // Custom Views
@@ -49,6 +50,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
 @property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
 
 @end
 
@@ -90,8 +93,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                       forKeyPath:@"battle.currentTurn"
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
-  
   [_battleRewardModal release];
+
   [super dealloc];
 }
 
@@ -123,7 +126,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 - (void)viewDidDisappear:(BOOL)animated
 {
     // TODO: if we end battle, we may want to invalidate this timer earlier
-  [self.timer invalidate];
+  //[self.timer invalidate];
   [super viewDidDisappear:animated];
 }
 
@@ -191,14 +194,27 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
     // client
   NSInteger playerHP = battle.player.HP;
-  self.player1NickName.text = battle.player.name;
+  NSString *playerName = battle.player.name;
+  self.player1NickName.text = playerName;
   self.player1hp.text = [@(playerHP) stringValue];
-  self.player1hpBar.progress = ((float)playerHP / 100);
+  self.player1hpBar.progress = ((float)playerHP / 100.0);
     // opponent
   NSInteger opponentHP = battle.opponent.HP;
-  self.player2NickName.text = battle.opponent.name;
+  NSString *opponentName = battle.opponent.name;
+  self.player2NickName.text = opponentName;
   self.player2hp.text = [@(opponentHP) stringValue];
-  self.player2hpBar.progress = ((float)opponentHP / 100);
+  self.player2hpBar.progress = ((float)opponentHP / 100.0);
+  
+  if (playerHP == 0 || opponentHP == 0)
+  {
+    [self addChildViewController:self.battleRewardModal];
+    self.battleRewardModal.view.frame = self.view.frame;
+    [self.view addSubview:self.battleRewardModal.view];
+    [self.battleRewardModal didMoveToParentViewController:self];
+    self.winnerNickNameLabel.text = playerHP == 0 ? opponentName : playerName;
+    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", battle.reward.gold];
+    [self.timer invalidate];
+  }
 }
 
 #pragma mark - KVO

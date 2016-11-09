@@ -16,6 +16,7 @@
                 <outlet property="player1hpBar" destination="Kyt-St-ty5" id="H9c-F5-tbC"/>
                 <outlet property="player2NickName" destination="T2l-ok-lRD" id="G5h-6P-cil"/>
                 <outlet property="player2hpBar" destination="bpT-d5-5De" id="Lr6-U0-iql"/>
+                <outlet property="playerRewardLabel" destination="kAt-iY-XkS" id="kPd-AC-MvN"/>
                 <outlet property="spell1Button" destination="gRd-Qf-vfv" id="Ryv-Di-Aql"/>
                 <outlet property="spell2Button" destination="5ie-zx-qMS" id="Nj7-69-sKf"/>
                 <outlet property="spell3Button" destination="oJF-h0-v6P" id="nI2-bQ-otu"/>
@@ -25,6 +26,7 @@
                 <outlet property="spell7Button" destination="jrS-I0-TxS" id="TUA-2r-iOx"/>
                 <outlet property="timerLabel" destination="Lez-UF-BPa" id="aSv-im-1Mh"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="winnerNickNameLabel" destination="nP0-s0-EDh" id="8xu-oQ-Ga7"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -111,6 +113,9 @@
                                 <state key="normal" title="OK" backgroundImage="main_button_inactive">
                                     <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="back:" destination="-1" eventType="touchUpInside" id="CIl-Ie-q7L"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -132,12 +137,20 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="MNQ-Fc-MR7" firstAttribute="centerX" secondItem="seV-Tk-4I5" secondAttribute="centerX" id="0nj-kx-6kY"/>
                     <constraint firstItem="MNQ-Fc-MR7" firstAttribute="centerY" secondItem="seV-Tk-4I5" secondAttribute="centerY" id="ykg-wq-Y4l"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                        <color key="value" red="0.49803921579999999" green="0.49803921579999999" blue="0.49803921579999999" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </view>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
             <point key="canvasLocation" x="398" y="909"/>
         </viewController>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
@@ -153,7 +166,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRp-dO-E44" userLabel="Player HP">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRp-dO-E44" userLabel="Player HP">
                     <rect key="frame" x="0.0" y="0.0" width="22" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="21" id="4aS-8I-OXg"/>
@@ -232,7 +245,7 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXv-IA-Js0" userLabel="Opponent HP">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXv-IA-Js0" userLabel="Opponent HP">
                     <rect key="frame" x="0.0" y="0.0" width="22" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="XXU-99-TCS"/>
@@ -602,10 +615,12 @@
                 <constraint firstItem="8c7-Al-VCY" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="KVx-0y-5ID"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="top" secondItem="Lez-UF-BPa" secondAttribute="bottom" constant="10" id="M4R-GQ-KhH"/>
                 <constraint firstItem="Fo0-pu-vx9" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.3" id="OTF-r1-FDW"/>
+                <constraint firstItem="rRp-dO-E44" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="T3d-VW-WAs"/>
                 <constraint firstAttribute="bottom" secondItem="eGV-R3-AZJ" secondAttribute="bottom" id="UEN-nD-Yl2"/>
                 <constraint firstItem="8c7-Al-VCY" firstAttribute="top" secondItem="T2l-ok-lRD" secondAttribute="bottom" id="UYJ-eQ-ywa"/>
                 <constraint firstItem="8c7-Al-VCY" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="VME-pT-mji"/>
                 <constraint firstAttribute="bottom" secondItem="wCY-p1-9Mh" secondAttribute="bottom" constant="30" id="Yrk-th-T2f"/>
+                <constraint firstItem="rRp-dO-E44" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z73-zX-ZyJ"/>
                 <constraint firstItem="Fo0-pu-vx9" firstAttribute="top" secondItem="285-ls-YlH" secondAttribute="bottom" constant="10" id="ZXj-6N-MHU"/>
                 <constraint firstItem="285-ls-YlH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="aNJ-80-YKf"/>
                 <constraint firstItem="285-ls-YlH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="e1v-TT-06x"/>
@@ -616,10 +631,12 @@
                 <constraint firstItem="285-ls-YlH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="i9l-W8-omd"/>
                 <constraint firstItem="wCY-p1-9Mh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="iqi-Fm-XPG"/>
                 <constraint firstAttribute="bottom" secondItem="TmA-7m-uPF" secondAttribute="bottom" constant="5" id="kKn-cv-dTf"/>
+                <constraint firstItem="OXv-IA-Js0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lwJ-37-nVv"/>
                 <constraint firstAttribute="trailing" secondItem="eGV-R3-AZJ" secondAttribute="trailing" id="ncA-3f-713"/>
                 <constraint firstAttribute="trailing" secondItem="8c7-Al-VCY" secondAttribute="trailing" constant="76" id="pT2-1E-UEm"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="top" secondItem="8c7-Al-VCY" secondAttribute="bottom" constant="10" id="rEM-ep-EEA"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="top" secondItem="Lez-UF-BPa" secondAttribute="bottom" constant="8" id="ua9-iI-PgH"/>
+                <constraint firstItem="OXv-IA-Js0" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wyA-Wa-sQR"/>
                 <constraint firstItem="Lez-UF-BPa" firstAttribute="centerY" secondItem="Fo0-pu-vx9" secondAttribute="centerY" id="xSK-1g-74S"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
