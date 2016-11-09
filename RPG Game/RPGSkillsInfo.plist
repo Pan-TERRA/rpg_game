@@ -43,9 +43,9 @@
 		<key>cooldown</key>
 		<integer>1</integer>
 		<key>imageName</key>
-		<string></string>
+		<string>heal-jade-1</string>
 		<key>soundName</key>
-		<string></string>
+		<string>skill-2-sfx</string>
 	</dict>
 	<key>1</key>
 	<dict>
@@ -58,9 +58,9 @@
 		<key>cooldown</key>
 		<integer>1</integer>
 		<key>imageName</key>
-		<string></string>
+		<string>enchant-magenta-3</string>
 		<key>soundName</key>
-		<string></string>
+		<string>skill-1-sfx</string>
 	</dict>
 </dict>
 </plist>
