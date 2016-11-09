@@ -7,10 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
 @class RPGResources;
 
-@interface RPGResourcesResponse : NSObject
+@interface RPGResourcesResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger status;
 @property (nonatomic, retain, readonly) RPGResources *resources;
