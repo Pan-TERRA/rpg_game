@@ -81,6 +81,8 @@
 		AED6F58C1DACECBD007ED1B8 /* RPGQuestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */; };
 		AEFC27891DC7A67C00905ADD /* RPGQuestTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */; };
 		AEFC278C1DC8B90200905ADD /* RPGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC278B1DC8B90200905ADD /* RPGAlert.m */; };
+		AEFC27AB1DD389C100905ADD /* RPGResources.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27A11DD389C100905ADD /* RPGResources.m */; };
+		AEFC27AD1DD389C100905ADD /* RPGResourcesResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */; };
 		D0B229131B6ECC8305E5F55A /* libPods-RPG GameTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */; };
 		D0CFEE681DB65B6100C61D0B /* RPGSFXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */; };
 		D0CFEE691DB65B6100C61D0B /* Sounds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0CFEE671DB65B6100C61D0B /* Sounds.bundle */; };
@@ -252,6 +254,10 @@
 		AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestTableViewController.m; sourceTree = "<group>"; };
 		AEFC278A1DC8B90200905ADD /* RPGAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAlert.h; sourceTree = "<group>"; };
 		AEFC278B1DC8B90200905ADD /* RPGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAlert.m; sourceTree = "<group>"; };
+		AEFC27A01DD389C100905ADD /* RPGResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGResources.h; sourceTree = "<group>"; };
+		AEFC27A11DD389C100905ADD /* RPGResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGResources.m; sourceTree = "<group>"; };
+		AEFC27A41DD389C100905ADD /* RPGResourcesResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGResourcesResponse.h; sourceTree = "<group>"; };
+		AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGResourcesResponse.m; sourceTree = "<group>"; };
 		D0CFEE651DB65B6100C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
 		D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
 		D0CFEE671DB65B6100C61D0B /* Sounds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sounds.bundle; sourceTree = "<group>"; };
@@ -616,6 +622,10 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
+				AEFC27A01DD389C100905ADD /* RPGResources.h */,
+				AEFC27A11DD389C100905ADD /* RPGResources.m */,
+				AEFC27A41DD389C100905ADD /* RPGResourcesResponse.h */,
+				AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */,
 				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
 				877C86541DC8F102004B4A00 /* Initial Screen */,
@@ -1094,7 +1104,6 @@
 				TargetAttributes = {
 					288E85C91DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S62KPRX8XQ;
 					};
 					288E85E21DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -1303,6 +1312,7 @@
 				AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */,
 				28A9155F1DC7B921001E0F51 /* RPGClassesResponse.m in Sources */,
 				28149A041DAFCDE400C26881 /* RPGAuthorizationLogoutRequest.m in Sources */,
+				AEFC27AB1DD389C100905ADD /* RPGResources.m in Sources */,
 				28A915611DC7B921001E0F51 /* RPGClassInfoResponse.m in Sources */,
 				28A915531DC7B8F3001E0F51 /* RPGNetworkManager+Classes.m in Sources */,
 				281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */,
@@ -1329,6 +1339,7 @@
 				2852315C1DC0F089002F702B /* RPGSkillActionRequest.m in Sources */,
 				D0CFEE771DB65C0100C61D0B /* CMOpenALSound.m in Sources */,
 				283ADCFE1DAD3D1C00BDC706 /* RPGNetworkManager.m in Sources */,
+				AEFC27AD1DD389C100905ADD /* RPGResourcesResponse.m in Sources */,
 				AEFC27891DC7A67C00905ADD /* RPGQuestTableViewController.m in Sources */,
 				AE8076381DB5360400AF5E5B /* RPGQuestListResponse.m in Sources */,
 				D0CFEE791DB65C0100C61D0B /* RPGBackgroundMusicController.m in Sources */,
