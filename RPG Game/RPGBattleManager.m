@@ -270,7 +270,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
 {
-  
+  [self logError:error withTitle:@"Battle manager error"];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket
@@ -278,7 +278,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
            reason:(nullable NSString *)reason
          wasClean:(BOOL)wasClean
 {
-  
+  NSLog(@"Websocket did close \r\nWith code: %ld\r\nReason: %@", (long)code, reason);
 }
 
 @end
