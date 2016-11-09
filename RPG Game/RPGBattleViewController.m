@@ -14,7 +14,7 @@
 #import "RPGBattle.h"
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGBattleInitResponse+Serialization.h"
+#import "RPGBattleInitResponse.h"
   // Constants
 #import "RPGNibNames.h"
   // Custom Views

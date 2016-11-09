@@ -10,9 +10,9 @@
   // Views
 #import "RPGQuestListViewController.h"
   // Entities
-#import "RPGQuestReward+Serialization.h"
-#import "RPGQuest+Serialization.h"
-#import "RPGQuestReward+Serialization.h"
+#import "RPGQuestReward.h"
+#import "RPGQuest.h"
+#import "RPGQuestReward.h"
 
 @interface RPGQuestListTableViewCell()
 

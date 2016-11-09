@@ -8,6 +8,9 @@
 
 #import "RPGAuthorizationLoginRequest.h"
 
+static NSString * const kRPGAuthorizationLoginRequestEmail = @"email";
+static NSString * const kRPGAuthorizationLoginRequestPassword = @"password";
+
 @interface RPGAuthorizationLoginRequest ()
 
 @property (nonatomic, copy, readwrite) NSString *email;
@@ -61,6 +64,24 @@
   [_email release];
   [_password release];
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable 
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGAuthorizationLoginRequestEmail] = self.email;
+  dictionaryRepresentation[kRPGAuthorizationLoginRequestPassword] = self.password;
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithEmail:aDictionary[kRPGAuthorizationLoginRequestEmail]
+                    password:aDictionary[kRPGAuthorizationLoginRequestPassword]];
 }
 
 @end

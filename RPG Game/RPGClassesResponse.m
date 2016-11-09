@@ -8,7 +8,12 @@
 
 #import "RPGClassesResponse.h"
 
+static NSString * const kRPGClassesResposeStatus = @"status";
+static NSString * const kRPGClassesResposeClasses = @"classes";
+
 @implementation RPGClassesResponse
+
+#pragma mark - Init
 
 - (instancetype)init
 {
@@ -34,10 +39,30 @@
   return self;
 }
 
+#pragma mark - Dealloc
+
 - (void)dealloc
 {
   [_classes release];
   [super dealloc];
+}
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  
+  dictionary[kRPGClassesResposeStatus] = @(self.status);
+  dictionary[kRPGClassesResposeClasses] = self.classes;
+  
+  return dictionary;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithStatus:[aDictionary[kRPGClassesResposeStatus] integerValue]
+                      classes:aDictionary[kRPGClassesResposeClasses]];
 }
 
 @end

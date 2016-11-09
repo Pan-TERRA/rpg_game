@@ -8,8 +8,8 @@
 
 #import "RPGNetworkManager+Classes.h"
   // Entities
-#import "RPGClassesResponse+Serialization.h"
-#import "RPGClassInfoResponse+Serialization.h"
+#import "RPGClassesResponse.h"
+#import "RPGClassInfoResponse.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
 

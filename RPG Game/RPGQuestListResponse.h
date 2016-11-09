@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGQuestListResponse : NSObject
+@interface RPGQuestListResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger status;
 @property (nonatomic, retain, readonly) NSArray *quests;

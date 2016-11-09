@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGClassesResponse : NSObject
+@interface RPGClassesResponse : NSObject <RPGSerializable>
 
 @property (assign, nonatomic, readwrite) NSInteger status;
 @property (copy, nonatomic, readwrite) NSArray *classes;

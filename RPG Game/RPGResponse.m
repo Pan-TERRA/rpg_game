@@ -8,6 +8,9 @@
 
 #import "RPGResponse.h"
 
+NSString * const kRPGResponseSerializationType = @"type";
+NSString * const kRPGResponseSerializationStatus = @"status";
+
 @interface RPGResponse ()
 
 @property (nonatomic, copy, readwrite) NSString *type;
@@ -60,5 +63,24 @@
   [_type release];
   [super dealloc];
 }
+
+#pragma mark - RPGSerializable
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
+  dictionaryRepresentation[kRPGResponseSerializationType] = self.type;
+  dictionaryRepresentation[kRPGResponseSerializationStatus] = @(self.status);
+  
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  return [self initWithType:aDictionary[kRPGResponseSerializationType]
+                     status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
+}
+
 
 @end
