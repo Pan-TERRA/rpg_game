@@ -8,6 +8,9 @@
 
 #import "RPGResources.h"
 
+NSString * const kRPGResourcesGold = @"gold";
+NSString * const kRPGResourcesCrystals = @"crystals";
+
 @interface RPGResources()
 
 @property (nonatomic, assign, readwrite) NSInteger gold;
@@ -49,6 +52,22 @@
 - (void)dealloc
 {
   [super dealloc];
+}
+
+- (NSDictionary *)dictionaryRepresentation
+{
+  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  dictionaryRepresentation[kRPGResourcesGold] = @(self.gold);
+  dictionaryRepresentation[kRPGResourcesCrystals] = @(self.crystals);
+  return dictionaryRepresentation;
+}
+
+- (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
+{
+  NSUInteger gold = [aDictionary[kRPGResourcesGold] integerValue];
+  NSUInteger crystals = [aDictionary[kRPGResourcesCrystals] integerValue];
+  
+  return [self initWithGold:gold crystals:crystals];
 }
 
 @end

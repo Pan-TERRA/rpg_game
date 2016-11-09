@@ -7,8 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGResources : NSObject
+extern NSString * const kRPGResourcesGold;
+extern NSString * const kRPGResourcesCrystals;
+
+@interface RPGResources : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger gold;
 @property (nonatomic, assign, readonly) NSInteger crystals;
