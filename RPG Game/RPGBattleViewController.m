@@ -48,6 +48,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
+@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+
 @end
 
 @implementation RPGBattleViewController
@@ -89,6 +91,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
   
+  [_battleInitModal release];
   [super dealloc];
 }
 
@@ -97,7 +100,13 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
+  
+  [self addChildViewController:self.battleInitModal];
+  self.battleInitModal.view.frame = self.view.frame;
+  [self.view addSubview:self.battleInitModal.view];
+  [self.battleInitModal didMoveToParentViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
