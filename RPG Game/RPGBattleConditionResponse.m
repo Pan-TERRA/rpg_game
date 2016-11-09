@@ -15,7 +15,7 @@
 @property (nonatomic, assign, readwrite) NSInteger opponentHP;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsDamage;
-@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableReward;
+@property (nonatomic, retain, readwrite) RPGResources *reward;
 @property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
 @end
@@ -28,7 +28,7 @@
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSArray *)aSkillsDamage
-                    reward:(NSDictionary *)aReward
+                    reward:(RPGResources *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn
 {
@@ -50,7 +50,7 @@
       _opponentHP = anOpponentHP;
       _mutableSkillsCondition = [aSkillsCondition mutableCopy];
       _mutableSkillsDamage = [aSkillsDamage mutableCopy];
-      _mutableReward = [aReward mutableCopy];
+      _reward = [aReward retain];
       _currentTurn = aCurrentTurn;
     }
   }
@@ -74,7 +74,7 @@
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSArray *)aSkillsDamage
-                                       reward:(NSDictionary *)aReward
+                                       reward:(RPGResources *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn
 {
@@ -93,7 +93,7 @@
 {
   [_mutableSkillsCondition release];
   [_mutableSkillsDamage release];
-  [_mutableReward release];
+  [_reward release];
   
   [super dealloc];
 }
@@ -108,11 +108,6 @@
 - (NSArray *)skillsDamage
 {
   return self.mutableSkillsDamage;
-}
-
-- (NSDictionary *)reward
-{
-  return self.mutableReward;
 }
 
 @end
