@@ -11,7 +11,7 @@
 NSString * const kRPGSkillRepresentationName = @"name";
 NSString * const kRPGSkillRepresentationSkillDescription = @"description";
 NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
-NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"absoluteCooldown";
+NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 
@@ -40,6 +40,11 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
   }
   
   return self;
+}
+
++ (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID
+{
+  return [[[self alloc] initWithSkillID:aSkillID] autorelease];
 }
 
 - (void)dealloc

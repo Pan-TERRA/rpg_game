@@ -6,19 +6,19 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-  // View
+// View
 #import "RPGBattleViewController.h"
+#import "RPGSkillBarViewController.h"
 #import "RPGBackgroundMusicController.h"
-  // Misc
+// Misc
 #import "RPGBattleManager.h"
 #import "RPGBattle.h"
 #import "SRWebSocket.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse.h"
-#import "RPGSkillRepresentation.h"
-  // Constants
+// Constants
 #import "RPGNibNames.h"
-  // Custom Views
+// Custom Views
 #import "RPGProgressBar.h"
 
 static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
@@ -27,22 +27,24 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
 @property(nonatomic, retain, readwrite) RPGBattleManager *battleManager;
 
-  // Player 1
+// Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player1hpBar;
-  // Player 2
+// Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player2hpBar;
-  // Skill bar
-@property (retain, nonatomic) IBOutlet UIView *skillBar;
-  // Misc
+// Misc
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
-@property (nonatomic, retain, readwrite) NSArray<RPGSkillRepresentation *> *skillRepresentations;
 
 @property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+//skill bar
+@property (retain, nonatomic) RPGSkillBarViewController *skillBarViewController;
+@property (assign, nonatomic) IBOutlet UIView *skillBar;
+//tooltip
+@property (nonatomic, assign, readwrite) UIView *tooltip;
 
 @end
 
@@ -56,8 +58,14 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   
   if (self != nil)
   {
-    _skillRepresentations = [NSArray new];
     _battleManager = [[RPGBattleManager alloc] init];
+    _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleManager:_battleManager];
+    //TODO: remove hardcode
+    [self addObserver:_skillBarViewController
+           forKeyPath:@"battleManager.battle.player"
+              options:NSKeyValueObservingOptionNew
+              context:nil];
+    
     [_battleManager open];
     
     if (_battleManager != nil)
@@ -85,13 +93,14 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  //TODO: remove hardcode
+  [self removeObserver:_skillBarViewController forKeyPath:@"battleManager.battle.player"];
   [_battleManager removeObserver:self
                       forKeyPath:@"battle.currentTurn"
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
   [_battleManager release];
-  [_skillRepresentations release];
   [_battleInitModal release];
-  [_skillBar release];
+  [_skillBarViewController release];
   [super dealloc];
 }
 
@@ -103,10 +112,18 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
+  //battle init modal
   [self addChildViewController:self.battleInitModal];
   self.battleInitModal.view.frame = self.view.frame;
   [self.view addSubview:self.battleInitModal.view];
   [self.battleInitModal didMoveToParentViewController:self];
+  
+  //skill bar view
+  [self addChildViewController:self.skillBarViewController];
+  CGSize size = self.skillBar.frame.size;
+  self.skillBarViewController.view.frame = CGRectMake(0, 0, size.width, size.height);
+  [self.skillBar addSubview:self.skillBarViewController.view];
+  [self.skillBarViewController didMoveToParentViewController:self];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -128,7 +145,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-    // TODO: if we end battle, we may want to invalidate this timer earlier
+  // TODO: if we end battle, we may want to invalidate this timer earlier
   [self.timer invalidate];
   [super viewDidDisappear:animated];
 }
@@ -151,18 +168,22 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Skill Action
-
-- (IBAction)skillAction:(UIButton *)aSender
+#pragma mark - Tooltips
+- (void)showTooltipWithView:(UIView *)view
 {
-  NSArray *skills = self.battleManager.battle.player.skills;
-
-  NSInteger tag = aSender.tag;
-    // array range check
-  if (tag < skills.count)
+  if (self.tooltip != nil)
   {
-    [self.battleManager sendSkillActionRequestWithID:[skills[tag] integerValue]];
+    [self.tooltip removeFromSuperview];
+    self.tooltip = nil;
   }
+  self.tooltip = view;
+  [self.view addSubview:view];
+}
+
+- (IBAction)removeTooltip:(UITapGestureRecognizer *)recognizer
+{
+  [self.tooltip removeFromSuperview];
+  self.tooltip = nil;
 }
 
 #pragma mark - Timer
@@ -194,12 +215,12 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 - (void)modelDidChange:(NSNotification *)aNotification
 {
   RPGBattle *battle = self.battleManager.battle;
-
-    // client
+  
+  // client
   NSInteger playerHP = battle.player.HP;
   self.player1NickName.text = battle.player.name;
   self.player1hpBar.progress = ((float)playerHP / 100);
-    // opponent
+  // opponent
   NSInteger opponentHP = battle.opponent.HP;
   self.player2NickName.text = battle.opponent.name;
   self.player2hpBar.progress = ((float)opponentHP / 100);

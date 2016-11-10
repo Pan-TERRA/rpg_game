@@ -30,10 +30,6 @@
   if (self)
   {
     _skillRepresentation = [aSkillRepresentation retain];
-    _titleLabel.text = aSkillRepresentation.name;
-    _cooldownLabel.text = [NSString stringWithFormat:@"%lu",aSkillRepresentation.absoluteCooldown];
-    _multiplierLabel.text = [NSString stringWithFormat:@"%2.2f",aSkillRepresentation.multiplier];
-    _descriptionLabel.text = aSkillRepresentation.skillDescription;
   }
   return self;
 }
@@ -41,6 +37,11 @@
 - (instancetype)init
 {
   return [super initWithNibName:@"RPGSkillDescriptionViewController" bundle:nil];
+}
+
++ (instancetype)viewControllerWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
+{
+  return [[[self alloc] initWithSkillRepresentation:aSkillRepresentation] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -52,10 +53,32 @@
 }
 
 #pragma mark - UIViewController
+- (void)viewDidAppear:(BOOL)isAnimated
+{
+  [super viewDidAppear:isAnimated];
+  
+  RPGSkillRepresentation *skill = self.skillRepresentation;
+  self.titleLabel.text = skill.name;
+  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", skill.absoluteCooldown];
+  self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", skill.multiplier];
+  self.descriptionLabel.text = skill.skillDescription;
+  
+  
+  CGRect oldRect = self.view.frame;
+  CGFloat oldLabelHeight = self.descriptionLabel.frame.size.height;
+  
+  [self.descriptionLabel sizeToFit];
+  
+  CGFloat newLabelHeight = self.descriptionLabel.frame.size.height;
+  CGFloat delta = oldLabelHeight - newLabelHeight;
+  CGRect newSuperRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
+                                   oldRect.size.width, oldRect.size.height - delta);
+  self.view.frame = newSuperRect;
+}
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  [self.descriptionLabel sizeToFit];
 }
 
 - (void)didReceiveMemoryWarning

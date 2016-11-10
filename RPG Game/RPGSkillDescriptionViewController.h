@@ -14,5 +14,6 @@
 @property (nonatomic, retain, readonly) RPGSkillRepresentation* skillRepresentation;
 
 - (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation;
++ (instancetype)viewControllerWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation;
 
 @end
