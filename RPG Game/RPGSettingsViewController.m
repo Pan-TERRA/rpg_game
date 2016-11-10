@@ -73,23 +73,32 @@
    {
      switch (status)
      {
+      
+       case kRPGStatusCodeWrongToken:
+       {
+         
+       }
+         
        case kRPGStatusCodeOK:
-         
+       {
+         UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+         [rootViewController dismissViewControllerAnimated:YES
+                                                completion:nil];
          break;
-         
+       }
+
        case kRPGStatusCodeWrongJSON:
+       {
          NSLog(@"Logout: wrongJSON");
          break;
+       }
          
        default:
+       {
          break;
+       }
      }
    }];
-  
-  [RPGAlert showAlertViewControllerWithTitle:@"Log out" message:@"Success" viewController:self completion:^(void){
-    UIViewController *viewController = self.presentingViewController.presentingViewController;
-    [viewController dismissViewControllerAnimated:YES completion:nil];
-  }];
 }
 
 - (IBAction)musicTurn:(UISwitch *)aSender
