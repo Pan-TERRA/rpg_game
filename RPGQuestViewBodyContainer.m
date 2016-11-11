@@ -198,7 +198,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
         {
           UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -208,7 +208,7 @@
       default:
       {
         NSString *message = @"Can't upload proof image.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
@@ -245,7 +245,7 @@
       default:
       {
         NSString *message = @"Can't upload quest proof image.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
