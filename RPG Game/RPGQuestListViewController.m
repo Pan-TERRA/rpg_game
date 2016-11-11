@@ -36,10 +36,11 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *reviewQuestButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-@property(nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
-@property(nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
+@property (nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
+@property (nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
+@property (nonatomic, assign, readwrite, getter=canSendRequest) BOOL sendRequest;
 
-@property(nonatomic, retain, readwrite) RPGQuestTableViewController *tableViewController;
+@property (nonatomic, retain, readwrite) RPGQuestTableViewController *tableViewController;
 
 @end
 
@@ -54,6 +55,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   if (self != nil)
   {
     _tableViewController = [[RPGQuestTableViewController alloc] init];
+    _sendRequest = YES;
   }
   return self;
 }
@@ -107,44 +109,49 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   //Invokes at viewWillAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
 - (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag
 {
-  [self setViewToWaitingForServerResponseState];
-  
-  __block typeof(self) weakSelf = self;
-  
-  fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
+  if (self.canSendRequest)
   {
-    [weakSelf setViewToNormalState];
-    switch (statusCode)
+    self.sendRequest = NO;
+    [self setViewToWaitingForServerResponseState];
+    
+    __block typeof(self) weakSelf = self;
+    
+    fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
     {
-      case kRPGStatusCodeOK:
+      self.sendRequest = YES;
+      [weakSelf setViewToNormalState];
+      
+      switch (statusCode)
       {
-        [weakSelf processQuestsData:questList byState:aState];
-        if (aShouldReloadFlag)
+        case kRPGStatusCodeOK:
         {
-          [weakSelf.tableView reloadData];
+          [weakSelf processQuestsData:questList byState:aState];
+          if (aShouldReloadFlag)
+          {
+            [weakSelf.tableView reloadData];
+          }
+          break;
         }
-        break;
+        case kRPGStatusCodeWrongToken:
+        {
+          NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+            [viewController dismissViewControllerAnimated:YES completion:nil];
+          }];
+          break;
+        }
+        default:
+        {
+          NSString *message = @"Can't update quest list.";
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+          break;
+        }
       }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
-          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't update quest list.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
-        break;
-      }
-    }
-  };
-  
-  [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
-                                             completionHandler:handler];
+    };
+    
+    [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState completionHandler:handler];
+  }
 }
 
 /**
@@ -267,7 +274,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      [self updateViewForState:state shouldReload:YES];
+      [self updateViewForState:state shouldReload:NO];
       break;
     }
   }
