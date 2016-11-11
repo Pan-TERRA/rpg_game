@@ -335,6 +335,7 @@
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				283D19181DD5FE95008C5396 /* Resources */,
 				28A915551DC7B8F6001E0F51 /* Classes */,
 				28A915561DC7B8FD001E0F51 /* Skills */,
 				28A915241DC76963001E0F51 /* Quests */,
@@ -407,10 +408,9 @@
 			children = (
 				AED6F56E1DACD641007ED1B8 /* RPGBattleViewController.h */,
 				AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */,
-				28307BE11DD21CA5002E6233 /* RPGSkillRepresentation.h */,
-				28307BE21DD21CA5002E6233 /* RPGSkillRepresentation.m */,
 				AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */,
-				28A56B4B1DCA48E7005846B6 /* Progress Bar */,
+				283D191A1DD5FEC3008C5396 /* Skill Representation */,
+				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -534,6 +534,33 @@
 			name = "Battle Condition";
 			sourceTree = "<group>";
 		};
+		283D19181DD5FE95008C5396 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27A41DD389C100905ADD /* RPGResourcesResponse.h */,
+				AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		283D19191DD5FEA8008C5396 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27A01DD389C100905ADD /* RPGResources.h */,
+				AEFC27A11DD389C100905ADD /* RPGResources.m */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		283D191A1DD5FEC3008C5396 /* Skill Representation */ = {
+			isa = PBXGroup;
+			children = (
+				28307BE11DD21CA5002E6233 /* RPGSkillRepresentation.h */,
+				28307BE21DD21CA5002E6233 /* RPGSkillRepresentation.m */,
+			);
+			name = "Skill Representation";
+			sourceTree = "<group>";
+		};
 		2852315D1DC0F0BD002F702B /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -622,10 +649,6 @@
 		288E85CC1DABDA8A00321F4D /* RPG Game */ = {
 			isa = PBXGroup;
 			children = (
-				AEFC27A01DD389C100905ADD /* RPGResources.h */,
-				AEFC27A11DD389C100905ADD /* RPGResources.m */,
-				AEFC27A41DD389C100905ADD /* RPGResourcesResponse.h */,
-				AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */,
 				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
 				877C86541DC8F102004B4A00 /* Initial Screen */,
@@ -680,13 +703,13 @@
 			path = "RPG GameUITests";
 			sourceTree = "<group>";
 		};
-		28A56B4B1DCA48E7005846B6 /* Progress Bar */ = {
+		28A56B4B1DCA48E7005846B6 /* Progress Bar View */ = {
 			isa = PBXGroup;
 			children = (
 				28A56B4C1DCA4913005846B6 /* RPGProgressBar.h */,
 				28A56B4D1DCA4913005846B6 /* RPGProgressBar.m */,
 			);
-			name = "Progress Bar";
+			name = "Progress Bar View";
 			sourceTree = "<group>";
 		};
 		28A5A0D71DB8F75A000EF49F /* Proof Image */ = {
@@ -733,6 +756,7 @@
 		28A5A0E71DB918FC000EF49F /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				283D19191DD5FEA8008C5396 /* Resources */,
 				28A5A0E81DB9190A000EF49F /* Quest */,
 				28A5A0E91DB91910000EF49F /* Reward */,
 			);
