@@ -25,10 +25,11 @@
 @implementation RPGSkillBarViewController
 
 #pragma mark - Init
+
 - (instancetype)initWithBattleManager:(RPGBattleManager *)aBattleManager
 {
   self = [self init];
-  if (self)
+  if (self != nil)
   {
     _battleManager = aBattleManager;
     _skillRepresentations = [NSMutableArray new];
@@ -42,8 +43,10 @@
 }
 
 #pragma mark - Dealloc
+
 - (void)dealloc
 {
+  [_skillRepresentations release];
   [super dealloc];
 }
 
@@ -57,7 +60,7 @@
   NSInteger index = aSender.tag - 1;
   
   // array range check
-  if (index < skills.count)
+  if (index < skills.count && index >= 0)
   {
     [self.battleManager sendSkillActionRequestWithID:[skills[index] integerValue]];
   }

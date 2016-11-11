@@ -16,7 +16,6 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *multiplierLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 
-
 @property (nonatomic, retain, readwrite) RPGSkillRepresentation* skillRepresentation;
 
 @end
@@ -24,10 +23,11 @@
 @implementation RPGSkillDescriptionViewController
 
 #pragma mark - Init
+
 - (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
 {
   self = [self init];
-  if (self)
+  if (self != nil)
   {
     _skillRepresentation = [aSkillRepresentation retain];
   }
@@ -45,6 +45,7 @@
 }
 
 #pragma mark - Dealloc
+
 - (void)dealloc
 {
   [_skillRepresentation release];
@@ -53,6 +54,7 @@
 }
 
 #pragma mark - UIViewController
+
 - (void)viewDidAppear:(BOOL)isAnimated
 {
   [super viewDidAppear:isAnimated];

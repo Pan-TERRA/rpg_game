@@ -44,13 +44,14 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
 
 @property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
+#warning - ?
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
 
-@property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleInitModal;
 //skill bar
-@property (retain, nonatomic) RPGSkillBarViewController *skillBarViewController;
-@property (assign, nonatomic) IBOutlet UIView *skillBar;
+@property (nonatomic, retain, readwrite) RPGSkillBarViewController *skillBarViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *skillBar;
 //tooltip
 @property (nonatomic, assign, readwrite) UIView *tooltip;
 
@@ -187,8 +188,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
     self.tooltip = nil;
   }
   //check for correct size
-  CGRect frame = self.view.frame;
-  view.frame = frame;
+  view.frame = self.view.frame;
   
   self.tooltip = view;
   [self.view addSubview:view];
