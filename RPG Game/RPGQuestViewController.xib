@@ -279,17 +279,11 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grH-jv-bBd" userLabel="Back Button">
                             <rect key="frame" x="100" y="0.0" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="Whp-0F-mwz"/>
                                 <constraint firstAttribute="width" secondItem="grH-jv-bBd" secondAttribute="height" multiplier="1:1" id="fRK-Nx-EAF"/>
                             </constraints>
                             <state key="normal" backgroundImage="back_icon_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="Whp-0F-mwz"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="backButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="vIS-5v-9P4"/>
                             </connections>
