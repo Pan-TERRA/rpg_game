@@ -135,7 +135,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         case kRPGStatusCodeWrongToken:
         {
           NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:^(void){
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:^(void)
+          {
             UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
             [viewController dismissViewControllerAnimated:YES completion:nil];
           }];
@@ -144,7 +145,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         default:
         {
           NSString *message = @"Can't update quest list.";
-          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakSelf completion:nil];
+          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
           break;
         }
       }
@@ -223,7 +224,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       else
       {
         NSString *message = @"No quests for review.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:self completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;

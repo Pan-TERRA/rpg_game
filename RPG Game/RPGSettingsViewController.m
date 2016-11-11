@@ -86,7 +86,8 @@
      }
    }];
   
-  [RPGAlert showAlertViewControllerWithTitle:@"Log out" message:@"Success" viewController:self completion:^(void){
+  [RPGAlert showAlertViewControllerWithTitle:@"Log out" message:@"Success" completion:^(void)
+  {
     UIViewController *viewController = self.presentingViewController.presentingViewController;
     [viewController dismissViewControllerAnimated:YES completion:nil];
   }];

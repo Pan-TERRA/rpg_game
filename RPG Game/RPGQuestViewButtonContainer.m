@@ -139,7 +139,8 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakQuestViewController completion:^(void){
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:^(void)
+        {
           UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -148,7 +149,7 @@
       default:
       {
         NSString *message = @"Can't take quest.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakQuestViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
@@ -186,7 +187,7 @@
          NSString *message = @"Give this app permission to access your camera in your settings app!";
          dispatch_async(dispatch_get_main_queue(), ^
          {
-           [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakQuestViewController completion:nil];
+           [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
            //weakSelf.addProofButton.enabled = YES;
          });
        }
@@ -215,7 +216,8 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakQuestViewController completion:^(void){
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:^(void)
+        {
           UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
         }];
@@ -224,7 +226,7 @@
       default:
       {
         NSString *message = @"Can't send quest proof.";
-        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message viewController:weakQuestViewController completion:nil];
+        [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
