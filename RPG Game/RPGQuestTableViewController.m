@@ -71,7 +71,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     {
       self.updateWhenScrollTable = NO;
       
-      [self.questListViewController updateViewForState:self.questListState shouldReload:NO];
+      [self.questListViewController updateViewForState:self.questListState shouldReload:YES];
     }
   }
 }

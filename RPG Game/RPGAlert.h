@@ -14,7 +14,6 @@
 
 + (void)showAlertWithTitle:(NSString *)title
                    message:(NSString *)message
-        rootViewController:(UIViewController *)viewController
                 completion:(void (^)())completionHandler;
 
 @end

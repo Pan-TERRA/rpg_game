@@ -6,7 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <AVFoundation/AVFoundation.h>
+
 #import "RPGQuestViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
@@ -25,32 +25,21 @@
 #import "RPGNibNames.h"
 #import "RPGQuestAction.h"
 
-@interface RPGQuestViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+#import "RPGQuestViewHeaderContainer.h"
+#import "RPGQuestViewBodyContainer.h"
+#import "RPGQuestViewButtonContainer.h"
 
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *stateImageView;
+@interface RPGQuestViewController () 
 
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldRewardLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *skillRewardImageView;
-
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
-
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView;
-
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
-
-@property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 @property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
+
+@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewHeaderContainer *headerContainer;
+@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewBodyContainer *bodyContainer;
+@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewButtonContainer *buttonContainer;
 
 @end
 
@@ -70,22 +59,34 @@
 {
   [_imagePickerController release];
   [_proofImageStringURL release];
+
   [super dealloc];
 }
 
 #pragma mark - Custom Getter
 
-- (UIImagePickerController *)pickerController
+- (UIImagePickerController *)imagePickerController
 {
   if (_imagePickerController == nil)
   {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self;
+    picker.delegate = self.bodyContainer;
     picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imagePickerController = [picker retain];
   }
   return _imagePickerController;
+}
+
+#pragma mark - Custom Setter
+
+- (void)setState:(RPGQuestState)aState
+{
+  _state = aState;
+  
+  [self.headerContainer updateView];
+  [self.bodyContainer updateView];
+  [self.buttonContainer updateView];
 }
 
 #pragma mark - UIViewController
@@ -94,10 +95,9 @@
 {
   [super viewDidLoad];
   
-  UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
-  tapGesture.numberOfTapsRequired = 1;
-  [self.proofImageView setUserInteractionEnabled:YES];
-  [self.proofImageView addGestureRecognizer:tapGesture];
+  self.buttonContainer.questViewController = self;
+  self.headerContainer.questViewController = self;
+  self.bodyContainer.questViewController = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -113,7 +113,7 @@
     {
       if (self.proofImageStringURL != nil)
       {
-        [self uploadImage];
+        [self.bodyContainer uploadImage];
       }
       break;
     }
@@ -138,400 +138,13 @@
 
 - (void)setViewContent:(RPGQuest *)aQuest
 {
-  self.titleLabel.text = aQuest.name;
-  self.descriptionLabel.text = aQuest.questDescription;
-  self.crystalsRewardLabel.text = [@(aQuest.reward.crystals) stringValue];
-  self.goldRewardLabel.text = [@(aQuest.reward.gold) stringValue];
-  
-  if (aQuest.reward.skillID != 0)
-  {
-    
-  }
-  else
-  {
-    UIImageView *skillRewardView = self.skillRewardImageView;
-    UILabel *goldRewardLabel = self.goldRewardLabel;
-    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
-                                                                   attribute:NSLayoutAttributeTrailing
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:skillRewardView.superview
-                                                                   attribute:NSLayoutAttributeTrailing
-                                                                  multiplier:1.0
-                                                                    constant:10]];
-    [skillRewardView removeConstraint:[NSLayoutConstraint constraintWithItem:skillRewardView
-                                                                   attribute:NSLayoutAttributeLeading
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:goldRewardLabel
-                                                                   attribute:NSLayoutAttributeTrailing
-                                                                  multiplier:1.0
-                                                                    constant:10]];
-    [skillRewardView removeFromSuperview];
-    [goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:goldRewardLabel.superview
-                                                                          attribute:NSLayoutAttributeTrailing
-                                                                          relatedBy:NSLayoutRelationEqual
-                                                                             toItem:goldRewardLabel
-                                                                          attribute:NSLayoutAttributeTrailing
-                                                                         multiplier:1.0
-                                                                           constant:10]];
-  }
-  
-  self.state = aQuest.state;
+  RPGQuestState state = aQuest.state;
+  self.state = state;
   self.questID = aQuest.questID;
   self.proofImageStringURL = aQuest.proofImageStringURL;
   
-  switch (self.state)
-  {
-    case kRPGQuestStateCanTake:
-    {
-      [self setStateTakeOrInProgressQuest];
-      break;
-    }
-    case kRPGQuestStateInProgress:
-    {
-      [self setStateTakeOrInProgressQuest];
-      //self.stateLabel.text = kRPGQuestStringStateInProgress;
-      break;
-    }
-    case kRPGQuestStateDone:
-    {
-      [self setStateReviewedQuest:NO];
-      //self.stateLabel.text = kRPGQuestStringStateNotReviewed;
-      break;
-    }
-    case kRPGQuestStateReviewedFalse:
-    {
-      [self setStateReviewedQuest:NO];
-      //self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
-      break;
-    }
-    case kRPGQuestStateForReview:
-    {
-      [self setStateForReviewQuest];
-      break;
-    }
-    case kRPGQuestStateReviewedTrue:
-    {
-      [self setStateReviewedQuest:YES];
-      break;
-    }
-    default:
-    {
-      break;
-    }
-  }
-}
-
-#pragma mark - View State
-
-- (void)setStateTakeOrInProgressQuest
-{
-  self.acceptButton.hidden = !(self.state == kRPGQuestStateCanTake);
-  self.denyButton.hidden = YES;
-  self.addProofButton.hidden = (self.state == kRPGQuestStateCanTake);
-  [self setProofItemsHidden:YES];
-  [self setStateItemsHidden:(self.state == kRPGQuestStateCanTake)];
-}
-
-- (void)setStateReviewedQuest:(BOOL)aFlag
-{
-  self.acceptButton.hidden = YES;
-  self.denyButton.hidden = YES;
-  self.addProofButton.hidden = (self.state != kRPGQuestStateReviewedFalse);
-  [self setProofItemsHidden:NO];
-  [self setStateItemsHidden:aFlag];
-}
-
-- (void)setStateForReviewQuest
-{
-  self.acceptButton.hidden = NO;
-  self.denyButton.hidden = NO;
-  self.addProofButton.hidden = YES;
-  [self setProofItemsHidden:NO];
-  [self setStateItemsHidden:YES];
-}
-
-- (void)setProofItemsHidden:(BOOL)aFlag
-{
-  self.proofLabel.hidden = aFlag;
-  self.proofImageView.hidden = aFlag;
-}
-
-- (void)setStateItemsHidden:(BOOL)aFlag
-{
-  if (aFlag)
-  {
-    UIImageView *stateImageView = self.stateImageView;
-    UIImageView *proofTypeImageView = self.proofTypeImageView;
-    UILabel *stateTitleLabel = self.stateTitleLabel;
-    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
-                                                                  attribute:NSLayoutAttributeTrailing
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:stateImageView.superview
-                                                                  attribute:NSLayoutAttributeTrailing
-                                                                 multiplier:1.0
-                                                                   constant:10]];
-    [stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:stateImageView
-                                                                  attribute:NSLayoutAttributeLeading
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:stateTitleLabel
-                                                                  attribute:NSLayoutAttributeTrailing
-                                                                 multiplier:1.0
-                                                                   constant:10]];
-    [stateImageView removeFromSuperview];
-    [stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:stateTitleLabel
-                                                                   attribute:NSLayoutAttributeLeading
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:proofTypeImageView
-                                                                   attribute:NSLayoutAttributeTrailing
-                                                                  multiplier:1.0
-                                                                    constant:10]];
-    
-    [stateTitleLabel removeFromSuperview];
-    [proofTypeImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:proofTypeImageView.superview
-                                                                         attribute:NSLayoutAttributeTrailing
-                                                                         relatedBy:NSLayoutRelationEqual
-                                                                            toItem:proofTypeImageView
-                                                                         attribute:NSLayoutAttributeTrailing
-                                                                        multiplier:1.0
-                                                                          constant:10]];
-  }
-}
-
-#pragma mark - IBAction
-
-- (IBAction)acceptButtonOnClick:(UIButton *)aSender
-{
-  if (self.state == kRPGQuestStateCanTake)
-  {
-    [self takeQuest];
-  }
-  else if (self.state == kRPGQuestStateForReview)
-  {
-    [self sendQuestProofWithResult:YES];
-  }
-}
-
-- (IBAction)denyButtonOnClick:(UIButton *)aSender
-{
-  [self sendQuestProofWithResult:NO];
-}
-
-- (IBAction)addProofButtonOnClick:(UIButton *)aSender
-{
-  [self addProofWithCamera];
-}
-
-- (IBAction)backButtonOnClick:(UIButton *)aSender
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-#pragma mark - Open QuestProofImageView
-
-- (void)handleTapGesture
-{
-  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
-  [self presentViewController:questProofImageViewController animated:YES completion:nil];
-  [questProofImageViewController setImage:self.proofImageView.image];
-  [questProofImageViewController release];
-}
-
-#pragma mark - UIImagePickerControllerDelegate
-
-- (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
-{
-  UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
-  // !!!: leak
-  __block typeof(self) weakSelf = self;
-  
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        weakSelf.state = kRPGQuestStateDone;
-        [weakSelf setStateReviewedQuest:NO];
-        //weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
-        weakSelf.proofImageView.image = chosenImage;
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void){
-          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't upload proof image.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
-        break;
-      }
-    }
-  };
-  
-  NSData *data = UIImagePNGRepresentation(chosenImage);
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
-  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
-  
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
-{
-  self.addProofButton.enabled = YES;
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
-}
-
-#pragma mark - Take Quest
-
-- (void)takeQuest
-{
-  self.acceptButton.enabled = NO;
-  
-  __block typeof(self) weakSelf = self;
-  
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void){
-          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't take quest.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
-        break;
-      }
-    }
-    weakSelf.acceptButton.enabled = YES;
-  };
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questID];
-  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
-}
-
-#pragma mark - Add Proof With Camera
-
-- (void)addProofWithCamera
-{
-  self.addProofButton.enabled = NO;
-  if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)])
-  {
-    __block typeof(self) weakSelf = self;
-    
-    [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted)
-    {
-      if (granted)
-      {
-        if (weakSelf.pickerController)
-        {
-          dispatch_async(dispatch_get_main_queue(), ^
-          {
-            [weakSelf presentViewController:weakSelf.pickerController animated:NO completion:nil];
-            weakSelf.addProofButton.enabled = YES;
-          });
-        }
-      }
-      else
-      {
-        NSString *message = @"Give this app permission to access your camera in your settings app!";
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
-          weakSelf.addProofButton.enabled = YES;
-        });
-      }
-    }];
-  }
-}
-
-#pragma mark - Upload Image
-
-- (void)uploadImage
-{
-  // !!!: SELF not WEAKSELF
-  void (^handler)(RPGStatusCode, NSData *) = ^void(RPGStatusCode statusCode, NSData *imageData)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        self.proofImageView.image = [UIImage imageWithData:imageData];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't upload quest proof image.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:self completion:nil];
-        break;
-      }
-    }
-    
-  };
-  
-  NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.proofImageStringURL]];
-  [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
-}
-
-#pragma mark - Send Quest Proof
-
-- (void)sendQuestProofWithResult:(BOOL)aResult
-{
-  self.acceptButton.enabled = NO;
-  self.denyButton.enabled = NO;
-  
-  __block typeof(self) weakSelf = self;
-  
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        [weakSelf dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void)
-        {
-          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't send quest proof.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
-        break;
-      }
-    }
-    self.acceptButton.enabled = YES;
-    self.denyButton.enabled = YES;
-  };
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questID result:aResult];
-  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
+  [self.headerContainer setViewContent:aQuest.reward];
+  [self.bodyContainer setViewContent:aQuest];
 }
 
 @end

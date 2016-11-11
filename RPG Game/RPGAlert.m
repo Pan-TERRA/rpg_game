@@ -15,7 +15,6 @@
 
 + (void)showAlertWithTitle:(NSString *)title
                    message:(NSString *)message
-        rootViewController:(UIViewController *)viewController
                 completion:(void (^)())completionHandler
 {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
@@ -33,7 +32,11 @@
     }
   }]];
   
-  [viewController presentViewController:alert animated:YES completion:nil];
+  UIViewController *currentView = [UIApplication sharedApplication].keyWindow.rootViewController;
+  while (currentView.presentedViewController) {
+    currentView = currentView.presentedViewController;
+  }
+  [currentView presentViewController:alert animated:YES completion:nil];
 }
 
 @end

@@ -45,7 +45,7 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Take Quests">
-                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="1ap-WZ-CYY"/>
@@ -56,7 +56,7 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Review Quests">
-                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="uFM-1w-FZH"/>
@@ -67,7 +67,7 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="Done Quests">
-                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="RrI-gD-jp4"/>
@@ -78,7 +78,7 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                             <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
                             <state key="normal" title="In progress Quests">
-                                <color key="titleColor" red="0.048280589282512665" green="0.011906069703400135" blue="0.036167658865451813" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="wJ9-P0-iyS"/>
