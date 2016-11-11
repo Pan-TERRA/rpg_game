@@ -32,9 +32,6 @@
 
 @interface RPGQuestViewController () 
 
-
-
-
 @property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
@@ -97,11 +94,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-//  UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
-//  tapGesture.numberOfTapsRequired = 1;
-//  [self.proofImageView setUserInteractionEnabled:YES];
-//  [self.proofImageView addGestureRecognizer:tapGesture];
   
   self.buttonContainer.questViewController = self;
   self.headerContainer.questViewController = self;
