@@ -261,12 +261,12 @@
 		AEFC27A11DD389C100905ADD /* RPGResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGResources.m; sourceTree = "<group>"; };
 		AEFC27A41DD389C100905ADD /* RPGResourcesResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGResourcesResponse.h; sourceTree = "<group>"; };
 		AEFC27A51DD389C100905ADD /* RPGResourcesResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGResourcesResponse.m; sourceTree = "<group>"; };
-		AEFC27AF1DD4956900905ADD /* RPGQuestViewButtonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPGQuestViewButtonContainer.h; path = "RPG Game/RPGQuestViewButtonContainer.h"; sourceTree = "<group>"; };
-		AEFC27B01DD4956900905ADD /* RPGQuestViewButtonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPGQuestViewButtonContainer.m; path = "RPG Game/RPGQuestViewButtonContainer.m"; sourceTree = "<group>"; };
-		AEFC27B21DD4CB0300905ADD /* RPGQuestViewHeaderContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestViewHeaderContainer.h; sourceTree = "<group>"; };
-		AEFC27B31DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestViewHeaderContainer.m; sourceTree = "<group>"; };
-		AEFC27B51DD4DB7A00905ADD /* RPGQuestViewBodyContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestViewBodyContainer.h; sourceTree = "<group>"; };
-		AEFC27B61DD4DB7A00905ADD /* RPGQuestViewBodyContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestViewBodyContainer.m; sourceTree = "<group>"; };
+		AEFC27AF1DD4956900905ADD /* RPGQuestViewButtonContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestViewButtonContainer.h; sourceTree = "<group>"; };
+		AEFC27B01DD4956900905ADD /* RPGQuestViewButtonContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestViewButtonContainer.m; sourceTree = "<group>"; };
+		AEFC27B21DD4CB0300905ADD /* RPGQuestViewHeaderContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPGQuestViewHeaderContainer.h; path = ../RPGQuestViewHeaderContainer.h; sourceTree = "<group>"; };
+		AEFC27B31DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPGQuestViewHeaderContainer.m; path = ../RPGQuestViewHeaderContainer.m; sourceTree = "<group>"; };
+		AEFC27B51DD4DB7A00905ADD /* RPGQuestViewBodyContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RPGQuestViewBodyContainer.h; path = ../RPGQuestViewBodyContainer.h; sourceTree = "<group>"; };
+		AEFC27B61DD4DB7A00905ADD /* RPGQuestViewBodyContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RPGQuestViewBodyContainer.m; path = ../RPGQuestViewBodyContainer.m; sourceTree = "<group>"; };
 		D0CFEE651DB65B6100C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
 		D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
 		D0CFEE671DB65B6100C61D0B /* Sounds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sounds.bundle; sourceTree = "<group>"; };
@@ -636,12 +636,6 @@
 		288E85C11DABDA8A00321F4D = {
 			isa = PBXGroup;
 			children = (
-				AEFC27B51DD4DB7A00905ADD /* RPGQuestViewBodyContainer.h */,
-				AEFC27B61DD4DB7A00905ADD /* RPGQuestViewBodyContainer.m */,
-				AEFC27B21DD4CB0300905ADD /* RPGQuestViewHeaderContainer.h */,
-				AEFC27B31DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m */,
-				AEFC27AF1DD4956900905ADD /* RPGQuestViewButtonContainer.h */,
-				AEFC27B01DD4956900905ADD /* RPGQuestViewButtonContainer.m */,
 				288E85CC1DABDA8A00321F4D /* RPG Game */,
 				288E85E61DABDA8A00321F4D /* RPG GameTests */,
 				288E85F11DABDA8A00321F4D /* RPG GameUITests */,
@@ -764,6 +758,9 @@
 				AED6F5881DACECBD007ED1B8 /* RPGQuestViewController.h */,
 				AED6F5891DACECBD007ED1B8 /* RPGQuestViewController.m */,
 				AED6F58A1DACECBD007ED1B8 /* RPGQuestViewController.xib */,
+				AEFC27B81DD60ADB00905ADD /* Header Container */,
+				AEFC27B91DD60AEC00905ADD /* Body Container */,
+				AEFC27BA1DD60AFA00905ADD /* ButtonContainer */,
 			);
 			name = Quest;
 			sourceTree = "<group>";
@@ -1010,6 +1007,33 @@
 				28A5A0D71DB8F75A000EF49F /* Proof Image */,
 			);
 			name = Quests;
+			sourceTree = "<group>";
+		};
+		AEFC27B81DD60ADB00905ADD /* Header Container */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27B21DD4CB0300905ADD /* RPGQuestViewHeaderContainer.h */,
+				AEFC27B31DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m */,
+			);
+			name = "Header Container";
+			sourceTree = "<group>";
+		};
+		AEFC27B91DD60AEC00905ADD /* Body Container */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27B51DD4DB7A00905ADD /* RPGQuestViewBodyContainer.h */,
+				AEFC27B61DD4DB7A00905ADD /* RPGQuestViewBodyContainer.m */,
+			);
+			name = "Body Container";
+			sourceTree = "<group>";
+		};
+		AEFC27BA1DD60AFA00905ADD /* ButtonContainer */ = {
+			isa = PBXGroup;
+			children = (
+				AEFC27AF1DD4956900905ADD /* RPGQuestViewButtonContainer.h */,
+				AEFC27B01DD4956900905ADD /* RPGQuestViewButtonContainer.m */,
+			);
+			name = ButtonContainer;
 			sourceTree = "<group>";
 		};
 		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
