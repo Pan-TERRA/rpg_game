@@ -11,6 +11,8 @@
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
+#import "RPGResourcesResponse.h"
+
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -20,7 +22,10 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
   // General
 NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
-static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/tokenexists";
+static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/token_exists";
+  // Resources
+static NSString * const kRPGNetworkManagerAPIResourcesRoute = @"/resources";
+
   // Authorization
 NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
 NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
@@ -194,6 +199,110 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   {
     callbackBlock(NO);
   }
+}
+
+- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock
+{
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPIResourcesRoute];;
+  
+  NSDictionary *requestDictionary = @{ @"token" : [[NSUserDefaults standardUserDefaults] sessionToken] };
+  
+  NSURLRequest *request = [self requestWithObject:requestDictionary URLstring:requestString method:@"POST"];
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                          completionHandler:^(NSData * _Nullable data,
+                                                              NSURLResponse * _Nullable response,
+                                                              NSError * _Nullable error)
+  {
+    // something went wrong
+    if (error != nil)
+    {
+      // no internet connection
+      if ([self isNoInternerConnection:error])
+      {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
+        
+        return;
+      }
+      
+      [self logError:error withTitle:@"Network error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
+      
+      return;
+    }
+    
+    if ([self isResponseCodeNot200:response])
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
+      
+      return;
+    }
+    
+    if (data == nil)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      });
+      
+      return;
+    }
+    
+    NSError *JSONParsingError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:&JSONParsingError];
+    if (responseDictionary == nil)
+    {
+      [self logError:JSONParsingError withTitle:@"JSON error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+      });
+      
+      return;
+    }
+    
+    RPGResourcesResponse *responseObject = nil;
+    responseObject = [[[RPGResourcesResponse alloc]
+                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    // validation error
+    if (responseObject == nil)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      });
+    }
+    else
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(responseObject.status, responseObject.resources);
+      });
+    }
+  }];
+  
+  [task resume];
+  
+  [session finishTasksAndInvalidate];
 }
 
 - (BOOL)isNoInternerConnection:(NSError *)anError

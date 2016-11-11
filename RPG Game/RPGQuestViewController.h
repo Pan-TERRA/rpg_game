@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class RPGQuest;
+#import "RPGQuest.h"
 
 @interface RPGQuestViewController : UIViewController
+
+@property (nonatomic, copy, readonly) NSString *proofImageStringURL;
+@property (nonatomic, assign, readwrite) RPGQuestState state;
+@property (nonatomic, assign, readonly) NSUInteger questID;
+@property (nonatomic, retain, readonly) UIImagePickerController *imagePickerController;
 
 - (void)setViewContent:(RPGQuest *)aQuest;
 

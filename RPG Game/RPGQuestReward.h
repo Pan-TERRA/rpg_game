@@ -7,19 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGResources.h"
 #import "RPGSerializable.h"
 
-@interface RPGQuestReward : NSObject <RPGSerializable>
+@interface RPGQuestReward : RPGResources <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSUInteger gold;
-@property (nonatomic, assign, readonly) NSUInteger crystals;
 @property (nonatomic, assign, readonly) NSUInteger skillID;
 
-- (instancetype)initWithGold:(NSUInteger)aGold
-                    crystals:(NSUInteger)aCrystals
+- (instancetype)initWithGold:(NSInteger)aGold
+                    crystals:(NSInteger)aCrystals
                      skillID:(NSUInteger)aSkillID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)questRewardWithGold:(NSUInteger)aGold
-                           crystals:(NSUInteger)aCrystals
++ (instancetype)questRewardWithGold:(NSInteger)aGold
+                           crystals:(NSInteger)aCrystals
                             skillID:(NSUInteger)aSkillID;
 
 @end

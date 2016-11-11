@@ -28,7 +28,7 @@ static RPGSFXEngine *sharedSFXEngine = nil;
   if (self)
   {
       _soundManager = [CMOpenALSoundManager new];
-      _playing = [[NSUserDefaults standardUserDefaults] isSoundsPlaying];
+      _playing = [NSUserDefaults standardUserDefaults].soundsPlaying;
   }
   return self;
 }
@@ -52,8 +52,8 @@ static RPGSFXEngine *sharedSFXEngine = nil;
         if(sharedSFXEngine == nil)
         {
           sharedSFXEngine = [[super allocWithZone:NULL] init];
-          double startVolume = [[NSUserDefaults standardUserDefaults] soundsVolume];
-          [sharedSFXEngine changeVolume:startVolume];
+          double startVolume = [NSUserDefaults standardUserDefaults].soundsVolume;
+          sharedSFXEngine.volume = startVolume;
         }
     }
   }
@@ -90,21 +90,30 @@ static RPGSFXEngine *sharedSFXEngine = nil;
   return self;
 }
 
-#pragma mark - Actions
+#pragma mark - Accessors
 
-- (void)changeVolume:(double)volume
+- (void)setVolume:(double)volume
 {
-  [self.soundManager setSoundEffectsVolume:volume];
+  self.soundManager.soundEffectsVolume = volume;
 }
 
-- (void)toggle:(BOOL)state
+- (double)volume
 {
+  return self.soundManager.soundEffectsVolume;
+}
+
+#pragma mark - Actions
+
+- (void)toggle
+{
+  static BOOL state = YES;
+  state = !state;
   self.playing = state;
 }
 
 - (void)playSFXNamed:(NSString *)name
 {
-  if (self.isPlaying)
+  if (self.playing)
   {
     NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
     self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
@@ -117,9 +126,5 @@ static RPGSFXEngine *sharedSFXEngine = nil;
   [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", (unsigned long)identifier]];
 }
 
-- (double)getVolume
-{
-  return self.soundManager.soundEffectsVolume;
-}
 
 @end

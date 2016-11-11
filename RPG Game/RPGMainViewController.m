@@ -18,6 +18,9 @@
   // Constants
 #import "RPGNibNames.h"
 
+#import "RPGNetworkManager.h"
+#import "RPGResources.h"
+
 @interface RPGMainViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
@@ -57,16 +60,23 @@
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];
+  [self updateResourcesLabels];
   
-  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionGold]];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)[standartUserDefaults sessionCrystals]];
+  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(NSInteger aStatusCode, RPGResources *aResources)
+  {
+    if (aStatusCode == 0)
+    {
+      NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+      standartUserDefaults.sessionGold = aResources.gold;
+      standartUserDefaults.sessionCrystals = aResources.crystals;
+      [self updateResourcesLabels];
+    }
+  }];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-  
 }
 
 #pragma mark - IBActions
@@ -110,6 +120,13 @@
 {
   RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] init] autorelease];
   [self presentViewController:settingsViewController animated:YES completion:nil];
+}
+
+- (void)updateResourcesLabels
+{
+  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionGold];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionCrystals];
 }
 
 @end

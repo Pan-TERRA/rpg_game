@@ -14,6 +14,7 @@ extern const NSInteger kRPGBattleTurnDuration;
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
+@class RPGResources;
 
 /**
  *  Model entity. Owns player and opponent entities, keeps server start time and
@@ -26,6 +27,7 @@ extern const NSInteger kRPGBattleTurnDuration;
 @property (assign, nonatomic, readonly) NSInteger startTime;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
 @property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
+@property (retain, nonatomic, readonly) RPGResources *reward;
 
 /**
  *  Inits model. Sets startTime, general player info.

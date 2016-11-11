@@ -8,13 +8,15 @@
 
 #import "RPGResponse.h"
 
+@class RPGResources;
+
 @interface RPGBattleConditionResponse : RPGResponse
 
 @property (nonatomic, assign, readonly) NSInteger HP;
 @property (nonatomic, assign, readonly) NSInteger opponentHP;
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
 @property (nonatomic, retain, readonly) NSArray *skillsDamage;
-@property (nonatomic, retain, readonly) NSDictionary *reward;
+@property (nonatomic, retain, readonly) RPGResources *reward;
 @property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
 #pragma mark - Init
@@ -23,14 +25,14 @@
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSArray *)aSkillsDamage
-                    reward:(NSDictionary *)aReward
+                    reward:(RPGResources *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSArray *)aSkillsDamage
-                                       reward:(NSDictionary *)aReward
+                                       reward:(RPGResources *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn;
 

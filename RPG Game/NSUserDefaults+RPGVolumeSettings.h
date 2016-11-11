@@ -10,8 +10,8 @@
 
 @interface NSUserDefaults (RPGVolumeSettings)
 
-@property (nonatomic, assign, readwrite) BOOL isMusicPlaying;
-@property (nonatomic, assign, readwrite) BOOL isSoundsPlaying;
+@property (nonatomic, assign, readwrite, getter=isMusicPlaying) BOOL musicPlaying;
+@property (nonatomic, assign, readwrite, getter=isSoundsPlaying) BOOL soundsPlaying;
 @property (nonatomic, assign, readwrite) double musicVolume;
 @property (nonatomic, assign, readwrite) double soundsVolume;
 

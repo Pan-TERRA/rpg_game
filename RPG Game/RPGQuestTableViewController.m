@@ -25,7 +25,8 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 @interface RPGQuestTableViewController ()
 
-@property(nonatomic, assign, readwrite, getter=canUpdateWhenScrollTable) BOOL updateWhenScrollTable;
+@property (nonatomic, assign, readwrite, getter=canUpdateWhenScrollTable) BOOL updateWhenScrollTable;
+@property (assign, nonatomic, readwrite, getter=isDragging) BOOL dragging;
 
 @end
 
@@ -43,6 +44,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     _inProgressQuestsMutableArray = [[NSMutableArray alloc] init];
     _doneQuestsMutableArray = [[NSMutableArray alloc] init];
     _updateWhenScrollTable = YES;
+    _dragging = NO;
   }
   
   return self;
@@ -69,22 +71,23 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     {
       self.updateWhenScrollTable = NO;
       
-      [self.questListViewController updateViewForState:self.questListState shouldReload:NO];
+      [self.questListViewController updateViewForState:self.questListState shouldReload:YES];
     }
   }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
+  self.dragging = YES;
   self.updateWhenScrollTable = YES;
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)aScrollView willDecelerate:(BOOL)decelerate
 {
-  // triggered only after refresh scroll
+  self.dragging = NO;
+    // triggered only after refresh scroll
   if (!self.canUpdateWhenScrollTable)
   {
-    [self.tableView reloadData];
     [aScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
   }
 }
@@ -128,7 +131,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCellNIBName
                                                  owner:self
                                                options:nil];
-    cell = [nib firstObject];
+    cell = nib.firstObject;
   }
   
   cell.backgroundColor = [UIColor clearColor];

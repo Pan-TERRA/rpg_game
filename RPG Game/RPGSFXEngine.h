@@ -11,6 +11,7 @@
 @interface RPGSFXEngine : NSObject
 
 @property (nonatomic, assign, readwrite, getter=isPlaying) BOOL playing;
+@property (nonatomic, assign, readwrite) double volume;
 
 + (instancetype)sharedSFXEngine;
 
@@ -19,8 +20,6 @@
 - (void)playSFXNamed:(NSString *)name;
 - (void)playSFXWithSpellID:(NSUInteger)identifier;
 
-- (void)changeVolume:(double)volume;
-- (double)getVolume;
-- (void)toggle:(BOOL)state;
+- (void)toggle;
 
 @end
