@@ -6,19 +6,20 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-  // View
 #import "RPGBattleViewController.h"
-#import "RPGBackgroundMusicController.h"
-  // Misc
+  // API
 #import "RPGBattleManager.h"
-#import "RPGBattle.h"
 #import "SRWebSocket.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
+  // Entities
+#import "RPGBattle.h"
 #import "RPGBattleInitResponse.h"
+  // Views
+#import "RPGProgressBar.h"
+  // Misc
+#import "RPGBackgroundMusicController.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
-  // Custom Views
-#import "RPGProgressBar.h"
 
 static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 

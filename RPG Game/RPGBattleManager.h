@@ -32,7 +32,7 @@ extern NSString * const kRPGBattleManagerModelDidChangeNotification;
 
 - (void)sendSkillActionRequestWithID:(NSInteger)anID;
 - (void)sendBattleInitRequest;
-- (void)sendBattleCondtionRequest;
+- (void)sendBattleConditionRequest;
 
 /**
  *  Sends time request. Dipatches it every 5 seconds.

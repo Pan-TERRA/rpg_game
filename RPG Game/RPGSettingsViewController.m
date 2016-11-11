@@ -42,11 +42,11 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].isPlaying;
-  self.musicVolumeSlider.value = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
+  self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].playing;
+  self.musicVolumeSlider.value = [RPGBackgroundMusicController sharedBackgroundMusicController].volume;
   
-  self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].isPlaying;
-  self.soundVolumeSlider.value = [[RPGSFXEngine sharedSFXEngine] getVolume];
+  self.soundSwitch.on = [RPGSFXEngine sharedSFXEngine].playing;
+  self.soundVolumeSlider.value = [RPGSFXEngine sharedSFXEngine].volume;
 }
 
 - (void)didReceiveMemoryWarning
@@ -76,7 +76,8 @@
       
        case kRPGStatusCodeWrongToken:
        {
-         
+         NSLog(@"Logout: wrongJSON");
+         break;
        }
          
        case kRPGStatusCodeOK:
@@ -104,29 +105,29 @@
 - (IBAction)musicTurn:(UISwitch *)aSender
 {
   [[RPGBackgroundMusicController sharedBackgroundMusicController] toggle:aSender.on];
-  BOOL isMusicPlaying = [[RPGBackgroundMusicController sharedBackgroundMusicController] isPlaying];
-  [[NSUserDefaults standardUserDefaults] setIsMusicPlaying:isMusicPlaying];
+  BOOL isMusicPlaying = [RPGBackgroundMusicController sharedBackgroundMusicController].playing;
+  [NSUserDefaults standardUserDefaults].musicPlaying = isMusicPlaying;
 }
 
 - (IBAction)musicVolumeChange:(UISlider *)aSender
 {
-  [[RPGBackgroundMusicController sharedBackgroundMusicController] changeVolume:aSender.value];
-  double musicVolume = [[RPGBackgroundMusicController sharedBackgroundMusicController] getVolume];
-  [[NSUserDefaults standardUserDefaults] setMusicVolume:musicVolume];
+  [RPGBackgroundMusicController sharedBackgroundMusicController].volume = aSender.value;
+  double musicVolume = [RPGBackgroundMusicController sharedBackgroundMusicController].volume;
+  [NSUserDefaults standardUserDefaults].musicVolume = musicVolume;
 }
 
 - (IBAction)soundTurn:(UISwitch *)aSender
 {
-  [[RPGSFXEngine sharedSFXEngine] toggle:aSender.on];
-  BOOL isSoundsPlaying = [[RPGSFXEngine sharedSFXEngine] isPlaying];
-  [[NSUserDefaults standardUserDefaults] setIsSoundsPlaying:isSoundsPlaying];
+  [[RPGSFXEngine sharedSFXEngine] toggle];
+  BOOL isSoundsPlaying = [RPGSFXEngine sharedSFXEngine].playing;
+  [NSUserDefaults standardUserDefaults].soundsPlaying = isSoundsPlaying;
 }
 
 - (IBAction)soundVolumeChange:(UISlider *)aSender
 {
-  [[RPGSFXEngine sharedSFXEngine] changeVolume:aSender.value];
-  double soundsVolume = [[RPGSFXEngine sharedSFXEngine] getVolume];
-  [[NSUserDefaults standardUserDefaults] setSoundsVolume:soundsVolume];
+  [RPGSFXEngine sharedSFXEngine].volume = aSender.value;
+  double soundsVolume = [RPGSFXEngine sharedSFXEngine].volume;
+  [NSUserDefaults standardUserDefaults].soundsVolume = soundsVolume;
 }
 
 @end

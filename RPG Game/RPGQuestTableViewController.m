@@ -128,7 +128,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCellNIBName
                                                  owner:self
                                                options:nil];
-    cell = [nib firstObject];
+    cell = nib.firstObject;
   }
   
   cell.backgroundColor = [UIColor clearColor];

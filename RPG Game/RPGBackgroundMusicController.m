@@ -65,7 +65,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     self.playing = [[NSUserDefaults standardUserDefaults] isMusicPlaying];
 	[[AVAudioSession sharedInstance] setActive:YES error:nil];
     
-    if (self.isPlaying)
+    if (self.playing)
     {
       [_peacePlayer play];
     }
@@ -93,8 +93,8 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     if(sharedBackgroundMusicController == nil)
     {
       sharedBackgroundMusicController = [[super allocWithZone:NULL] init];
-      double startVolume = [[NSUserDefaults standardUserDefaults] musicVolume];
-      [sharedBackgroundMusicController changeVolume:startVolume];
+      double startVolume = [NSUserDefaults standardUserDefaults].musicVolume;
+      sharedBackgroundMusicController.volume = startVolume;
     }
   }
   return sharedBackgroundMusicController;
@@ -130,11 +130,24 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   return self;
 }
 
+#pragma mark - Accessors
+
+- (void)setVolume:(double)aVolume
+{
+  self.peacePlayer.volume = aVolume;
+  self.battlePlayer.volume = aVolume;
+}
+
+- (double)volume
+{
+  return self.peacePlayer.volume;
+}
+
 #pragma mark - Music Changing
 
 - (void)switchToBattle
 {
-  if (self.isPlaying)
+  if (self.playing)
   {
     [self.peacePlayer pause];
     [self.battlePlayer play];
@@ -143,23 +156,17 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 
 - (void)switchToPeace
 {
-  if (self.isPlaying)
+  if (self.playing)
   {
     [self.battlePlayer pause];
     [self.peacePlayer play];
   }
 }
 
-- (void)changeVolume:(double)aVolume
-{
-  self.peacePlayer.volume = aVolume;
-  self.battlePlayer.volume = aVolume;
-}
-
 - (void)toggle:(BOOL)aState
 {
   self.playing = aState;
-  if (self.isPlaying)
+  if (self.playing)
   {
     [self switchToPeace];
   }
@@ -168,11 +175,6 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
     [self.peacePlayer pause];
     [self.battlePlayer pause];
   }
-}
-
-- (double)getVolume
-{
-  return self.peacePlayer.volume;
 }
 
 #pragma mark - AudioSession Delegate
