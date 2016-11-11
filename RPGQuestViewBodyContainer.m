@@ -25,9 +25,38 @@
 @property (nonatomic, retain, readwrite) IBOutlet UILabel *proofLabel;
 @property (nonatomic, retain, readwrite) IBOutlet UIImageView *proofImageView;
 
+@property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
+
 @end
 
 @implementation RPGQuestViewBodyContainer
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_proofLabel release];
+  [_proofImageView release];
+  [_descriptionBottomConstraint release];
+  
+  [super dealloc];
+}
+#pragma mark - Custom Getter
+
+- (NSLayoutConstraint *)descriptionBottomConstraint
+{
+  if (_descriptionBottomConstraint == nil)
+  {
+    _descriptionBottomConstraint = [[NSLayoutConstraint constraintWithItem:self.descriptionLabel.superview
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                 relatedBy:NSLayoutRelationEqual
+                                                                    toItem:self.descriptionLabel
+                                                                 attribute:NSLayoutAttributeBottom
+                                                                multiplier:1.0
+                                                                  constant:0] retain];
+  }
+  return _descriptionBottomConstraint;
+}
 
 #pragma mark - Custom Setter
 
@@ -36,7 +65,7 @@
   _questViewController = questViewController;
   if (_questViewController != nil)
   {
-  
+    
     UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
     tapGesture.numberOfTapsRequired = 1;
     [self.proofImageView setUserInteractionEnabled:YES];
@@ -50,10 +79,7 @@
 {
   self.titleLabel.text = aQuest.name;
   self.descriptionLabel.text = aQuest.questDescription;
-  
-
 }
-
 
 #pragma mark - View State
 
@@ -63,7 +89,7 @@
   {
     case kRPGQuestStateCanTake:
     case kRPGQuestStateInProgress:
-    
+      
     {
       [self setProofItemsHidden:YES];
       break;
@@ -81,45 +107,62 @@
 
 - (void)setProofItemsHidden:(BOOL)aFlag
 {
-  //self.proofLabel.hidden = aFlag;
-  //self.proofImageView.hidden = aFlag;
   UILabel *proofLabel = self.proofLabel;
   UIImageView *proofImageView = self.proofImageView;
   UILabel *descriptionLabel = self.descriptionLabel;
-  UIView *superView = descriptionLabel.superview;
+  UIView *superview = descriptionLabel.superview;
   if (aFlag)
   {
-    [proofImageView removeConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:proofImageView.superview
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                 multiplier:1.0
-                                                                   constant:0]];
-    [proofImageView removeConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
-                                                                  attribute:NSLayoutAttributeTop
-                                                                  relatedBy:NSLayoutRelationEqual
-                                                                     toItem:proofLabel
-                                                                  attribute:NSLayoutAttributeBottom
-                                                                 multiplier:1.0
-                                                                   constant:5]];
     [proofImageView removeFromSuperview];
-    [proofLabel removeConstraint:[NSLayoutConstraint constraintWithItem:proofLabel
-                                                                   attribute:NSLayoutAttributeTop
-                                                                   relatedBy:NSLayoutRelationEqual
-                                                                      toItem:descriptionLabel
-                                                                   attribute:NSLayoutAttributeBottom
-                                                                  multiplier:1.0
-                                                                    constant:10]];
-    
     [proofLabel removeFromSuperview];
-    [descriptionLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:descriptionLabel.superview
-                                                                             attribute:NSLayoutAttributeBottom
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:descriptionLabel
-                                                                             attribute:NSLayoutAttributeBottom
-                                                                            multiplier:1.0
-                                                                              constant:0]];
+    [superview addConstraint:self.descriptionBottomConstraint];
+  }
+  else
+  {
+    NSArray *subviews = superview.subviews;
+    if (![subviews containsObject:proofImageView] && ![subviews containsObject:proofLabel])
+    {
+      [superview removeConstraint:self.descriptionBottomConstraint];
+      
+      [superview addSubview:proofLabel];
+      [superview addSubview:proofImageView];
+      
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                            attribute:NSLayoutAttributeBottom
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:proofImageView
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0
+                                                             constant:0]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:proofLabel
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0
+                                                             constant:5]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:descriptionLabel
+                                                            attribute:NSLayoutAttributeBottom
+                                                           multiplier:1.0
+                                                             constant:10]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel
+                                                            attribute:NSLayoutAttributeLeading
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:descriptionLabel
+                                                            attribute:NSLayoutAttributeLeading
+                                                           multiplier:1.0
+                                                             constant:0]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
+                                                            attribute:NSLayoutAttributeLeading
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:descriptionLabel
+                                                            attribute:NSLayoutAttributeLeading
+                                                           multiplier:1.0
+                                                             constant:0]];
+    }
   }
 }
 
