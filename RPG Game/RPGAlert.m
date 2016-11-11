@@ -13,9 +13,9 @@
 
 #pragma mark - Show Alert
 
-+ (void)showAlertViewControllerWithTitle:(NSString *)title
-                                 message:(NSString *)message
-                              completion:(void (^)())completionHandler
++ (void)showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+                completion:(void (^)())completionHandler
 {
   UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                  message:message

@@ -22,8 +22,10 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 
   // General
 NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
-static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/tokenexists";
+static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/token_exists";
+  // Resources
 static NSString * const kRPGNetworkManagerAPIResourcesRoute = @"/resources";
+
   // Authorization
 NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
 NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";

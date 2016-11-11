@@ -6,20 +6,22 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-  // View
 #import "RPGBattleViewController.h"
-#import "RPGBackgroundMusicController.h"
-  // Misc
+  // API
 #import "RPGBattleManager.h"
-#import "RPGBattle.h"
 #import "SRWebSocket.h"
+  // Entities
+#import "RPGBattle.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGResources.h"
 #import "RPGBattleInitResponse.h"
+  // Views
+#import "RPGProgressBar.h"
+  // Misc
+#import "RPGBackgroundMusicController.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
-  // Custom Views
-#import "RPGProgressBar.h"
 
 static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
@@ -169,7 +171,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 
   NSInteger tag = aSender.tag;
     // array range check
-  if (tag <= skills.count)
+  if (tag < skills.count)
   {
     [self.battleManager sendSkillActionRequestWithID:[skills[tag] integerValue]];
   }
@@ -218,14 +220,17 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   self.player2hp.text = [@(opponentHP) stringValue];
   self.player2hpBar.progress = ((float)opponentHP / 100.0);
   
+    // fight end
   if (playerHP == 0 || opponentHP == 0)
   {
     [self addChildViewController:self.battleRewardModal];
     self.battleRewardModal.view.frame = self.view.frame;
     [self.view addSubview:self.battleRewardModal.view];
     [self.battleRewardModal didMoveToParentViewController:self];
+    
     self.winnerNickNameLabel.text = playerHP == 0 ? opponentName : playerName;
-    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", battle.reward.gold];
+    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battle.reward.gold];
+    
     [self.timer invalidate];
   }
 }

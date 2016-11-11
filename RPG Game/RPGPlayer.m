@@ -25,7 +25,7 @@ NSString * const kRPGPlayerSkills = @"skills";
 
 - (instancetype)initWithSkills:(NSArray<NSNumber *> *)aSkills
 {
-  self = [super initWithName:[[NSUserDefaults standardUserDefaults] sessionUsername] HP:100];
+  self = [super initWithName:[NSUserDefaults standardUserDefaults].sessionUsername HP:100];
   
   if (self != nil)
   {

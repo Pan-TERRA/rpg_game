@@ -126,28 +126,32 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         case kRPGStatusCodeOK:
         {
           [weakSelf processQuestsData:questList byState:aState];
+          
           if (aShouldReloadFlag)
           {
             [weakSelf.tableView reloadData];
           }
-          break;
-        }
-        case kRPGStatusCodeWrongToken:
-        {
-          NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:^(void)
+          else if (self.tableView.isDragging)
           {
-            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-            [viewController dismissViewControllerAnimated:YES completion:nil];
-          }];
+             [weakSelf.tableView reloadData];
+          }
           break;
-        }
-        default:
+      }
+      case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:^(void)
         {
-          NSString *message = @"Can't update quest list.";
-          [RPGAlert showAlertViewControllerWithTitle:@"Error" message:message completion:nil];
-          break;
-        }
+          UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
+        break;
+      }
+      default:
+      {
+        NSString *message = @"Can't update quest list.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message rootViewController:weakSelf completion:nil];
+        break;
       }
     };
     
@@ -217,9 +221,9 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListReviewQuest:
     {
-      if ([aData count])
+      if (aData.count != 0)
       {
-        [self showQuestViewWithQuest:[aData firstObject]];
+        [self showQuestViewWithQuest:aData.firstObject];
       }
       else
       {
@@ -309,7 +313,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     }
     case kRPGQuestListInProgressQuest:
     {
-     [self toggleButtonBackground:inProgressQuestListButton active:YES];
+      [self toggleButtonBackground:inProgressQuestListButton active:YES];
       break;
     }
     case kRPGQuestListDoneQuest:
