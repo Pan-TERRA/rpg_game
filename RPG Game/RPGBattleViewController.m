@@ -176,6 +176,10 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
     [self.tooltip removeFromSuperview];
     self.tooltip = nil;
   }
+  //check for correct size
+  CGRect frame = self.view.frame;
+  view.frame = frame;
+  
   self.tooltip = view;
   [self.view addSubview:view];
 }

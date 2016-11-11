@@ -62,18 +62,6 @@
   self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", skill.absoluteCooldown];
   self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", skill.multiplier];
   self.descriptionLabel.text = skill.skillDescription;
-  
-  
-  CGRect oldRect = self.view.frame;
-  CGFloat oldLabelHeight = self.descriptionLabel.frame.size.height;
-  
-  [self.descriptionLabel sizeToFit];
-  
-  CGFloat newLabelHeight = self.descriptionLabel.frame.size.height;
-  CGFloat delta = oldLabelHeight - newLabelHeight;
-  CGRect newSuperRect = CGRectMake(oldRect.origin.x, oldRect.origin.y,
-                                   oldRect.size.width, oldRect.size.height - delta);
-  self.view.frame = newSuperRect;
 }
 
 - (void)viewDidLoad
