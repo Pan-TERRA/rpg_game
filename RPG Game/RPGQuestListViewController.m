@@ -119,9 +119,14 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       case kRPGStatusCodeOK:
       {
         [weakSelf processQuestsData:questList byState:aState];
+        
         if (aShouldReloadFlag)
         {
           [weakSelf.tableView reloadData];
+        }
+        else if (self.tableView.isDragging)
+        {
+           [weakSelf.tableView reloadData];
         }
         break;
       }
