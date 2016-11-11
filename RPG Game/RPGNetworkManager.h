@@ -40,6 +40,8 @@ extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
 extern NSString * const kRPGNetworkManagerAPIClassesRoute;
 extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 
+@class RPGResources;
+
 #pragma mark -
 
 /**
@@ -71,6 +73,7 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 #pragma mark - General Requests
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
+- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock;
 
 @end
 
