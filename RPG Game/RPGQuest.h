@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateDone,
   kRPGQuestStateReviewedTrue,
   kRPGQuestStateReviewedFalse,
-  kRPGQuestStateForReview = 6
+  kRPGQuestStateForReview = 6 // ???: sho
 };
 
 @class RPGQuestReward;

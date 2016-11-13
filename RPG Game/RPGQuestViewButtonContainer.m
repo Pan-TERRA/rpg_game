@@ -7,15 +7,19 @@
 //
 
 #import "RPGQuestViewButtonContainer.h"
-
+  // API
+#import "RPGNetworkManager+Quests.h"
+  // Views
 #import "RPGQuestViewController.h"
+  // Entities
 #import "RPGQuestRequest.h"
 #import "RPGQuestReviewRequest.h"
-#import "RPGStatusCodes.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGNetworkManager+Quests.h"
 #import "RPGQuest.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlert.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 #import <AVFoundation/AVFoundation.h>
 
@@ -29,7 +33,7 @@
 
 @implementation RPGQuestViewButtonContainer
 
-#pragma mark - View State
+#pragma mark - View Update
 
 - (void)updateView
 {
@@ -40,26 +44,31 @@
       [self setStateTakeOrInProgressQuest:YES];
       break;
     }
+      
     case kRPGQuestStateInProgress:
     {
       [self setStateTakeOrInProgressQuest:NO];
       break;
     }
+      
     case kRPGQuestStateDone:
     {
       [self setStateReviewedQuest:YES];
       break;
     }
+      
     case kRPGQuestStateReviewedFalse:
     {
       [self setStateReviewedQuest:NO];
       break;
     }
+
     case kRPGQuestStateForReview:
     {
       [self setStateForReviewQuest];
       break;
     }
+      
     case kRPGQuestStateReviewedTrue:
     {
       [self setStateReviewedQuest:YES];
@@ -67,6 +76,8 @@
     }
   }
 }
+
+#pragma mark - View State
 
 - (void)setStateTakeOrInProgressQuest:(BOOL)aFlag
 {

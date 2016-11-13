@@ -7,15 +7,19 @@
 //
 
 #import "RPGQuestViewBodyContainer.h"
-
+  // API
+#import "RPGNetworkManager+Quests.h"
+  // View
 #import "RPGQuestViewController.h"
 #import "RPGQuestProofImageViewController.h"
-#import "RPGStatusCodes.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGNetworkManager+Quests.h"
-#import "RPGQuestRequest.h"
+  // Entitites
 #import "RPGQuest.h"
+#import "RPGQuestRequest.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlert.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGQuestViewBodyContainer()
 
@@ -94,6 +98,7 @@
       [self setProofItemsHidden:YES];
       break;
     }
+      
     case kRPGQuestStateForReview:
     case kRPGQuestStateReviewedTrue:
     case kRPGQuestStateDone:
@@ -111,6 +116,7 @@
   UIImageView *proofImageView = self.proofImageView;
   UILabel *descriptionLabel = self.descriptionLabel;
   UIView *superview = descriptionLabel.superview;
+  
   if (aFlag)
   {
     [proofImageView removeFromSuperview];

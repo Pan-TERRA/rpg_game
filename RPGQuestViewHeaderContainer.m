@@ -7,9 +7,10 @@
 //
 
 #import "RPGQuestViewHeaderContainer.h"
-
-#import "RPGQuestReward.h"
+  // Entities
 #import "RPGQuest.h"
+#import "RPGQuestReward.h"
+  // View
 #import "RPGQuestViewController.h"
 
 @interface RPGQuestViewHeaderContainer()
@@ -66,6 +67,7 @@
       [self setStateItemsHidden:YES];
       break;
     }
+      
     case kRPGQuestStateInProgress:
     case kRPGQuestStateDone:
     case kRPGQuestStateReviewedFalse:
