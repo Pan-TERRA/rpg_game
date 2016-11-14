@@ -76,28 +76,7 @@
 {
   [super viewDidAppear:animated];
   
-    //  switch (self.state)
-//  {
-//    case kRPGQuestStateInProgress:
-//    case kRPGQuestStateForReview:
-//    case kRPGQuestStateDone:
-//    case kRPGQuestStateReviewedFalse:
-//    case kRPGQuestStateReviewedTrue:
-//    {
-//      if (self.proofImageStringURL != nil)
-//      {
-//        [self.bodyContainer uploadImage];
-//      }
-//      break;
-//    }
-//      
-//    default:
-//    {
-//      break;
-//    }x
-//  }
-  
-  if (self.state != kRPGQuestStateCanTake && self.proofImageStringURL != nil)
+  if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
   {
     [self.bodyContainer uploadImage];
   }
