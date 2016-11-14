@@ -11,10 +11,13 @@
 #import "RPGLoginViewController.h"
   // API
 #import "RPGNetworkManager+Registration.h"
+#import "RPGNetworkManager+Classes.h"
   // Entities
 #import "RPGRegistrationRequest.h"
   // Constants
 #import "RPGNibNames.h"
+
+static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
 
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
@@ -27,7 +30,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
-@property (nonatomic, retain, readonly) NSArray *classPickerData;
+@property (nonatomic, retain, readwrite) NSArray *classPickerData;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
@@ -45,11 +48,7 @@
   if (self != nil)
   {
     //test data
-    _classPickerData = [@[
-                          @{ @"className": @"Researcher",
-                             @"id": @1
-                          }
-                        ] retain];
+    _classPickerData = [[NSArray alloc] init];
     
     NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
     [defaultCenter addObserver:self
@@ -80,6 +79,39 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [[RPGNetworkManager sharedNetworkManager] getClassInfoByID:1 completionHandler:
+   ^(NSInteger statusCode, NSDictionary *skillInfo)
+  {
+    switch (statusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        self.classPickerData = [NSArray arrayWithObject:skillInfo];
+        [self.classPicker reloadAllComponents];
+        break;
+      }
+      case kRPGStatusCodeWrongEmail:
+      case kRPGStatusCodeUserDoesNotExist:
+      case kRPGStatusCodeWrongPassword:
+      {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                                 message:@"Invalid credentials"
+                                                                          preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:nil];
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+
+  }];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -104,8 +136,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
              titleForRow:(NSInteger)aRow
             forComponent:(NSInteger)aComponent
 {
-  //TODO: remove hardcode
-  return self.classPickerData[aRow][@"className"];
+  return self.classPickerData[aRow][@"name"];
 }
 
 #pragma mark Error Representation
@@ -116,7 +147,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
 //  self.errorLabel.text = aText;
 //  [self.errorLabel setHidden:NO];
 //  [self.errorLabel sizeToFit];
-  
 }
 
 #pragma mark View State
@@ -223,9 +253,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-  CGFloat adjustmentHeight = keyboardFrame.size.height;
-    // TODO: Replace with constants. RPGViewsConstants
-  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
+  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllercContentInsetsGap;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
   

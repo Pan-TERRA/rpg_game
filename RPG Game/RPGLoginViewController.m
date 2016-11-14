@@ -18,6 +18,8 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
+static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
+
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
@@ -128,9 +130,8 @@
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-  CGFloat adjustmentHeight = keyboardFrame.size.height;
-    // TODO: Replace with constants. RPGViewsConstants
-  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight + 10, 0.0);
+  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllercContentInsetsGap;
+  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;
   
@@ -215,7 +216,6 @@
            [self presentViewController:alertController animated:YES completion:nil];
            break;
          }
-         // TODO: case kRPGStatusCodeWrongJSON - we need to resend login request
          default:
          {
            break;
