@@ -25,9 +25,7 @@
 #import "RPGMessageTypes.h"
 #import "RPGStatusCodes.h"
 
-  // Notifications
-NSString * const kRPGBattleManagerDidEndSetUpNotification = @"RPGBattleManagerDidEndSetUp";
-NSString * const kRPGBattleManagerModelDidChangeNotification = @"RPGBattleManagerModelDidChange";
+
 
   // TODO: replace to separate header file
 static NSString * const kRPGBattleManagerAPI = @"ws://10.55.33.28:8888/ws";
@@ -219,10 +217,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
            }
            
              // send notification to battle view controller
-           [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerDidEndSetUpNotification
-                                                               object:self];
-           [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification
-                                                               object:self];
+         
          }];
       }
     }
@@ -237,7 +232,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
       if (battleConditionResponse != nil && battleConditionResponse.status == 0)
       {
         [self.battle updateWithBattleConditionResponse:battleConditionResponse];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleManagerModelDidChangeNotification object:self];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
       }
     }
     

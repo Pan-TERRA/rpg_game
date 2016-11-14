@@ -11,7 +11,7 @@
 @class RPGBattle;
 
 extern NSString * const kRPGBattleManagerDidEndSetUpNotification;
-extern NSString * const kRPGBattleManagerModelDidChangeNotification;
+extern NSString * const kRPGModelDidChangeNotification;
 
 /**
  *  Provides basic socket interaction. Holds RPGBattle instance.
