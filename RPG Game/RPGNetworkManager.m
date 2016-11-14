@@ -11,13 +11,14 @@
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
+  // Entities
 #import "RPGResourcesResponse.h"
-
   // Constants
 #import "RPGStatusCodes.h"
 
-static RPGNetworkManager *sharedNetworkManager = nil;
+NSString * const kRPGNetworkManagerStatus = @"status";
 
+static RPGNetworkManager *sharedNetworkManager = nil;
 #pragma mark - API constants
 
   // General

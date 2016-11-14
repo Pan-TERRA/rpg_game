@@ -40,6 +40,9 @@ extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
 extern NSString * const kRPGNetworkManagerAPIClassesRoute;
 extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 
+  // Constants
+extern NSString * const kRPGNetworkManagerStatus;
+
 @class RPGResources;
 
 #pragma mark -
