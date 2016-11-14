@@ -15,7 +15,7 @@
 @property (nonatomic, assign, readonly) NSInteger HP;
 @property (nonatomic, assign, readonly) NSInteger opponentHP;
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
-@property (nonatomic, retain, readonly) NSArray *skillsDamage;
+@property (nonatomic, retain, readonly) NSDictionary *skillsDamage;
 @property (nonatomic, retain, readonly) RPGResources *reward;
 @property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
@@ -24,14 +24,14 @@
 - (instancetype)initWithHP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
-              skillsDamage:(NSArray *)aSkillsDamage
+              skillsDamage:(NSDictionary *)aSkillsDamage
                     reward:(RPGResources *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
-                                 skillsDamage:(NSArray *)aSkillsDamage
+                                 skillsDamage:(NSDictionary *)aSkillsDamage
                                        reward:(RPGResources *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn;

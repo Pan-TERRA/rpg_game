@@ -23,7 +23,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 @property (nonatomic, assign, readwrite) NSInteger HP;
 @property (nonatomic, assign, readwrite) NSInteger opponentHP;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
-@property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsDamage;
+@property (nonatomic, retain, readwrite) NSMutableDictionary *mutableSkillsDamage;
 @property (nonatomic, retain, readwrite) RPGResources *reward;
 @property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
@@ -36,7 +36,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithHP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
-              skillsDamage:(NSArray *)aSkillsDamage
+              skillsDamage:(NSDictionary *)aSkillsDamage
                     reward:(RPGResources *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn
@@ -82,7 +82,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
-                                 skillsDamage:(NSArray *)aSkillsDamage
+                                 skillsDamage:(NSDictionary *)aSkillsDamage
                                        reward:(RPGResources *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn
@@ -114,7 +114,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
   return self.mutableSkillsCondition;
 }
 
-- (NSArray *)skillsDamage
+- (NSDictionary *)skillsDamage
 {
   return self.mutableSkillsDamage;
 }
