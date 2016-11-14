@@ -13,7 +13,7 @@ extern NSString *const kRPGRequestSerializationType;
 extern NSString *const kRPGRequestSerializationToken;
 
 /**
- *  Basic request class. Mainly used for static requests and "RPGBattleManager"
+ *  Basic request class. Mainly used for static requests and "RPGBattleController"
  *  socket messages.
  *  @warning R
  */
