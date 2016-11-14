@@ -70,7 +70,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   if (self != nil)
   {
     _battleController = [[RPGBattleController alloc] init];
-    
+    _timerCounter = kRPGBattleTurnDuration;
     if (_battleController != nil)
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
@@ -149,7 +149,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  [self restartTimer];
+  
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -226,7 +226,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   {
     self.timerCounter -= 1;
   }
-    // TODO: Add battle condition request if something went wrong with time.
 }
 
 #pragma mark - Notifications
@@ -263,6 +262,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
 - (void)removeBattleInitModal:(NSNotification *)aNotification
 {
+  [self restartTimer];
   [self.battleInitModal.view removeFromSuperview];
   [self.battleInitModal removeFromParentViewController];
 }
