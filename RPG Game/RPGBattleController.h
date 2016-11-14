@@ -28,11 +28,11 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 - (instancetype)init;
 
 - (void)sendSkillActionRequestWithTag:(NSInteger)aTag;
-- (void)sendBattleInitRequest;
+//- (void)sendBattleInitRequest;
 - (void)sendBattleConditionRequest;
 
 - (void)processManagerResponse:(NSDictionary *)aResponse;
-- (void)requestBattleInit:(RPGWebsocketManager *)aManager;
+- (void)requestBattleInit;
 - (void)prepareBattleControllerForDismiss;
 
 @end

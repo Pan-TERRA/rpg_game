@@ -94,7 +94,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 - (void)webSocketDidOpen:(SRWebSocket *)webSocket
 {
-  [self.battleController requestBattleInit:self];
+  [self.battleController requestBattleInit];
 }
 
 - (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message

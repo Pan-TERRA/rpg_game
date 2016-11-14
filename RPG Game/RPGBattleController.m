@@ -58,6 +58,7 @@ static NSString * const kRPGResponseType = @"type";
 
 - (void)dealloc
 {
+  [_battle release];
   [_websocketManager release];
   
   [super dealloc];
@@ -82,23 +83,36 @@ static NSString * const kRPGResponseType = @"type";
 
 #pragma mark - Actions
 
-#pragma mark  Message Send
-
-- (void)sendBattleInitRequest
+- (void)requestBattleInit
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
   RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
                                               token:token];
-  
-  if (request != nil)
-  {
-    [self.websocketManager sendWebsocketManagerMessageWithObject:request];
-  }
-  else
-  {
-    NSLog(@"Request is nil");
-  }
+  [self.websocketManager sendWebsocketManagerMessageWithObject:request];
 }
+
+- (void)prepareBattleControllerForDismiss
+{
+  [self.websocketManager close];
+}
+
+#pragma mark  Message Send
+
+//- (void)sendBattleInitRequest
+//{
+//  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+//  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
+//                                              token:token];
+//  
+//  if (request != nil)
+//  {
+//    [self.websocketManager sendWebsocketManagerMessageWithObject:request];
+//  }
+//  else
+//  {
+//    NSLog(@"Request is nil");
+//  }
+//}
 
 - (void)sendSkillActionRequestWithTag:(NSInteger)aTag
 {
@@ -130,7 +144,7 @@ static NSString * const kRPGResponseType = @"type";
   
 }
 
-#pragma mark - RPGWebsocketReceiver
+#pragma mark -
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
@@ -211,18 +225,7 @@ static NSString * const kRPGResponseType = @"type";
   }
 }
 
-- (void)requestBattleInit:(RPGWebsocketManager *)aManager
-{
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
-                                              token:token];
-  [self.websocketManager sendWebsocketManagerMessageWithObject:request];
-}
 
-- (void)prepareBattleControllerForDismiss
-{
-  [self.websocketManager close];
-}
 
 
 @end
