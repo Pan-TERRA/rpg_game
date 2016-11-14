@@ -11,6 +11,7 @@
 
 extern const NSInteger kRPGBattleTurnDuration;
 
+@class RPGBattleLog;
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
@@ -28,6 +29,7 @@ extern const NSInteger kRPGBattleTurnDuration;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
 @property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
 @property (retain, nonatomic, readonly) RPGResources *reward;
+@property (retain, nonatomic, readonly) RPGBattleLog *battleLog;
 
 /**
  *  Inits model. Sets startTime, general player info.
