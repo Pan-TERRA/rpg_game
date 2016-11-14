@@ -66,14 +66,6 @@ const NSInteger kRPGBattleTurnDuration = 30;
   {
     self.reward = reward;
   }
-  
-  //TODO: remove hardcode && remove SFXEngine logic from model
-  NSInteger skillID = [[aResponse.skillsDamage valueForKey:@"skill_id"] integerValue];
-  
-  if (skillID != 0)
-  {
-    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
-  }
 }
 
 - (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse

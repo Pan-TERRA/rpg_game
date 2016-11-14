@@ -7,7 +7,7 @@
 //
 
 #import "RPGBattleLogViewController.h"
-  // API
+  // Controllers
 #import "RPGBattleController.h"
   // Entities
 #import "RPGBattle.h"
@@ -17,6 +17,7 @@
 #import "RPGSkillRepresentation.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGSFXEngine.h"
 
 static int sRPGBattleLogViewControllerBattleBattleLogAction;
 NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
@@ -93,26 +94,40 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 #pragma mark - Actions
 
+/**
+ *  Builds battle log message. Plays sound.
+ *
+ *  @param anAction An action.
+ */
 - (void)addMessageWithAction:(RPGBattleAction *)anAction
 {
-    // TODO: remove long-line invocations
-  NSString *playerName = self.battleController.battle.player.name;
-  NSString *opponentName = self.battleController.battle.opponent.name;
-  
-  BOOL myTurn = anAction.myTurn;
-  NSString *attackerName = (myTurn ? playerName : opponentName);
-  NSString *defenderName = (myTurn ? opponentName : playerName);
-  
-    // maybe better make class methods for RPGSkillRepresentation?
-  RPGSkillRepresentation *skill = [[[RPGSkillRepresentation alloc] initWithSkillID:anAction.skillID] autorelease];
+  NSInteger skillID = anAction.skillID;
+  RPGSkillRepresentation *skill = [[[RPGSkillRepresentation alloc] initWithSkillID:skillID] autorelease];
   NSString *skillName = skill.name;
+  BOOL myTurn = anAction.myTurn;
+  
+  NSString *playerNickName = self.battleController.playerNickName;
+  NSString *opponentNickName = self.battleController.opponentNickName;
+  
+  NSString *attackerNickName = (myTurn ? playerNickName : opponentNickName);
+  NSString *defenderNickName = (myTurn ? opponentNickName : playerNickName);
   
   NSUInteger randomIndex = arc4random() % self.templates.count;
   NSString *formatString = [NSString stringWithFormat:@"%@\n", self.templates[randomIndex]];
-  NSString *message = [NSString stringWithFormat:formatString, attackerName, defenderName, skillName, (long)anAction.damage];
+  NSString *message = [NSString stringWithFormat:formatString,
+                       attackerNickName,
+                       defenderNickName,
+                       skillName,
+                       (long)anAction.damage];
   
   UITextView *textView = (UITextView *)self.view;
   [textView.textStorage appendAttributedString:[[[NSAttributedString alloc] initWithString:message] autorelease]];
+  
+  if (skillID != 0)
+  {
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
+  }
+  
   [self scrollViewToBottom];
 }
 
