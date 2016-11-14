@@ -15,6 +15,7 @@
 #import "RPGRequest.h"
 #import "RPGSkillsRequest.h"
 #import "RPGSkillActionRequest.h"
+#import "RPGResources.h"
 
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
@@ -66,6 +67,18 @@ static NSString * const kRPGResponseType = @"type";
 
 #pragma mark - Accessors
 
+#pragma mark  Player
+
+- (NSString *)playerNickName
+{
+  return self.battle.player.name;
+}
+
+- (NSInteger)playerHP
+{
+  return self.battle.player.HP;
+}
+
 - (BOOL)isMyTurn
 {
   return self.battle.isCurrentTurn;
@@ -81,38 +94,47 @@ static NSString * const kRPGResponseType = @"type";
   return self.battle.player.skills;
 }
 
-#pragma mark - Actions
+#pragma mark  Opponent
+
+- (NSString *)opponentNickName
+{
+  return self.battle.opponent.name;
+}
+
+- (NSInteger)opponentHP
+{
+  return self.battle.opponent.HP;
+}
+
+#pragma mark  General
+
+- (NSInteger)rewardGold
+{
+  return self.battle.reward.gold;
+}
+
+#pragma mark - API
 
 - (void)requestBattleInit
+{
+  [self sendBattleInitRequest];
+}
+
+- (void)sendBattleInitRequest
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
   RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
                                               token:token];
-  [self.websocketManager sendWebsocketManagerMessageWithObject:request];
+  
+  if (request != nil)
+  {
+    [self.websocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
 }
-
-- (void)prepareBattleControllerForDismiss
-{
-  [self.websocketManager close];
-}
-
-#pragma mark  Message Send
-
-//- (void)sendBattleInitRequest
-//{
-//  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-//  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
-//                                              token:token];
-//  
-//  if (request != nil)
-//  {
-//    [self.websocketManager sendWebsocketManagerMessageWithObject:request];
-//  }
-//  else
-//  {
-//    NSLog(@"Request is nil");
-//  }
-//}
 
 - (void)sendSkillActionRequestWithTag:(NSInteger)aTag
 {
@@ -138,13 +160,6 @@ static NSString * const kRPGResponseType = @"type";
 {
   
 }
-
-- (void)sendTimeSynchRequest
-{
-  
-}
-
-#pragma mark -
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
@@ -193,14 +208,13 @@ static NSString * const kRPGResponseType = @"type";
              self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
              break;
            }
+             
            default:
            {
              NSLog(@"RPGBattleController. Fetch skills unknown error");
              self.battle.player = [RPGPlayer playerWithSkills:[NSArray array]];
              break;
            }
-             
-             
          }
          
            // send notification to battle view controller
@@ -225,7 +239,9 @@ static NSString * const kRPGResponseType = @"type";
   }
 }
 
-
-
+- (void)prepareBattleControllerForDismiss
+{
+  [self.websocketManager close];
+}
 
 @end

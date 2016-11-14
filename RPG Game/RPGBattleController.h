@@ -17,9 +17,18 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 @interface RPGBattleController : NSObject
 
 @property (retain, nonatomic, readonly) RPGBattle *battle;
-@property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
-@property (nonatomic, assign, readonly) NSUInteger skillsCount;
+  // Player
+@property (assign, nonatomic, readonly) NSString *playerNickName;
+@property (assign, nonatomic, readonly) NSInteger playerHP;
 @property (assign, nonatomic, readonly) NSArray<NSNumber *> *skillsID;
+@property (nonatomic, assign, readonly) NSUInteger skillsCount;
+@property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
+  // Opponent
+@property (assign, nonatomic, readonly) NSString *opponentNickName;
+@property (assign, nonatomic, readonly) NSInteger opponentHP;
+  // General
+@property (assign, nonatomic, readonly) NSInteger rewardGold;
+
 
 /**
  *  Prime initializer. Inits RPGBattle instance.
@@ -27,8 +36,9 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
  */
 - (instancetype)init;
 
+#pragma mark - API
+
 - (void)sendSkillActionRequestWithTag:(NSInteger)aTag;
-//- (void)sendBattleInitRequest;
 - (void)sendBattleConditionRequest;
 
 - (void)processManagerResponse:(NSDictionary *)aResponse;
