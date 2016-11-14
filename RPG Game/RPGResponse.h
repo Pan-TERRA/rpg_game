@@ -12,7 +12,7 @@
 extern NSString * const kRPGResponseSerializationStatus;
 
 /**
- *  Basic response class. Mainly used by "RPGBattleManager".
+ *  Basic response class. Mainly used by "RPGBattleController".
  */
 @interface RPGResponse : NSObject <RPGSerializable>
 
