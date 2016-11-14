@@ -242,8 +242,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (void)showQuestViewWithQuest:(RPGQuest *)aQuest
 {
   RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc] init] autorelease];
-  [questViewController setViewContent:aQuest];
   [self presentViewController:questViewController animated:YES completion:nil];
+  [questViewController setViewContent:aQuest];
 }
 
 #pragma mark - IBActions
