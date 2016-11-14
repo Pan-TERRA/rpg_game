@@ -15,18 +15,20 @@ NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 
+static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
+
 @implementation RPGSkillRepresentation
 
+#pragma mark - Init
 
-#pragma mark - Init/Dealloc
 - (instancetype)initWithSkillID:(NSInteger)aSkillID
 {
   self = [super init];
   
   if (self != nil)
   {
-    //TODO: remove hardcode
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
+    NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillRepresentationResourceName
+                                                     ofType:@"plist"];
     NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
     
@@ -46,6 +48,8 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 {
   return [[[self alloc] initWithSkillID:aSkillID] autorelease];
 }
+
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
