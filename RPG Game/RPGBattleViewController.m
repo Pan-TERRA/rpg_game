@@ -18,13 +18,14 @@
 #import "RPGBattleInitResponse.h"
   // Views
 #import "RPGProgressBar.h"
+#import "RPGBattleLogViewController.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBackgroundMusicController.h"
   // Constants
 #import "RPGNibNames.h"
 
-static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
+static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
 @interface RPGBattleViewController ()
 
@@ -36,8 +37,10 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player2hpBar;
-  // Misc
+  // Battle log
+@property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
+  // Misc
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
@@ -70,6 +73,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     
     if (_battleController != nil)
     {
+      _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
@@ -77,7 +81,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
                                                    name:kRPGModelDidChangeNotification
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(removeBattlleInitModal:)
+                                               selector:@selector(removeBattleInitModal:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
@@ -87,7 +91,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
       [_battleController addObserver:self
                           forKeyPath:@"battle.currentTurn"
                              options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                             context:&kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
       
     }
     
@@ -104,8 +108,9 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [[NSNotificationCenter defaultCenter] removeObserver:_skillBar];
   [_battleController removeObserver:self
                          forKeyPath:@"battle.currentTurn"
-                            context:&kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+                            context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
   [_battleInitModal release];
+  [_battleLogViewController release];
   [_battleRewardModal release];
   [_battleController release];
   [_skillBarViewController release];
@@ -119,6 +124,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 {
   [super viewDidLoad];
   
+  self.battleLogViewController.view = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
     //battle init modal
@@ -255,7 +261,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   }
 }
 
-- (void)removeBattlleInitModal:(NSNotification *)aNotification
+- (void)removeBattleInitModal:(NSNotification *)aNotification
 {
   [self.battleInitModal.view removeFromSuperview];
   [self.battleInitModal removeFromParentViewController];
@@ -268,7 +274,7 @@ static int kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
                         change:(NSDictionary<NSString *,id> *)aChange
                        context:(void *)aContext
 {
-  if (aContext == &kRPGBattleViewContollerBattleControllerBattleCurrentTurnContext)
+  if (aContext == &sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext)
   {
     BOOL oldCurrentTurn = [aChange[NSKeyValueChangeOldKey] boolValue];
     BOOL newCurrentTurn = [aChange[NSKeyValueChangeNewKey] boolValue];

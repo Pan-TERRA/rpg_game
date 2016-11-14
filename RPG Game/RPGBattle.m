@@ -14,6 +14,7 @@
 #import "RPGPlayer.h"
 #import "RPGSFXEngine.h"
 #import "RPGResources.h"
+#import "RPGBattleLog.h"
 
 const NSInteger kRPGBattleTurnDuration = 30;
 
@@ -21,6 +22,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
 
 @property (assign, nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 @property (retain, nonatomic, readwrite) RPGResources *reward;
+@property (retain, nonatomic, readwrite) RPGBattleLog *battleLog;
 
 @end
 
@@ -40,6 +42,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
     _currentTime = aResponse.time;
     _currentTurn = aResponse.currentTurn;
     _reward = [[RPGResources alloc] init];
+    _battleLog = [[RPGBattleLog alloc] init];
   }
   
   return self;
@@ -52,6 +55,8 @@ const NSInteger kRPGBattleTurnDuration = 30;
 
 - (void)updateWithBattleConditionResponse:(RPGBattleConditionResponse *)aResponse
 {
+  [self.battleLog updateWithBattleConditionResponse:aResponse];
+  
   self.player.HP = aResponse.HP;
   self.opponent.HP = aResponse.opponentHP;
   self.currentTurn = aResponse.currentTurn;
@@ -83,6 +88,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
   [_player release];
   [_opponent release];
   [_reward release];
+  [_battleLog release];
   
   [super dealloc];
 }
