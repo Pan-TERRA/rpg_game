@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class RPGBattleManager;
+@class RPGBattleController;
 
 @interface RPGBattleLogViewController : UIViewController
 
-@property (retain, nonatomic, readonly) RPGBattleManager *battleManager;
+@property (retain, nonatomic, readonly) RPGBattleController *battleController;
 
-- (instancetype)initWithBattleManager:(RPGBattleManager *)aBattleManager;
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 
 @end

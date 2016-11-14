@@ -112,7 +112,12 @@ NSString * const kRPGQuestProofImageStringURL = @"prove_image";
   
   RPGQuestReward *reward = [[[RPGQuestReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGQuestReward]] autorelease];
   
-  return [self initWithID:questID name:name description:questDescription state:state reward:reward proofImageStringURL:proofImageStringURL];
+  return [self initWithID:questID
+                     name:name
+              description:questDescription
+                    state:state
+                   reward:reward
+      proofImageStringURL:proofImageStringURL];
 }
 
 @end

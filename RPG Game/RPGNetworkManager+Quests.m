@@ -129,21 +129,19 @@
     RPGQuestListResponse *responseObject = nil;
     responseObject = [[[RPGQuestListResponse alloc]
                        initWithDictionaryRepresentation:responseDictionary] autorelease];
-      // validation error
-    if (responseObject == nil)
+    
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
+      if (responseObject == nil)
       {
         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-      });
-    }
-    else
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
+      }
+      else
       {
         callbackBlock(responseObject.status, responseObject.quests);
-      });
-    }
+      }
+    });
+  
   }];
   
   [task resume];

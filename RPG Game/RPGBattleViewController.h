@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-@class RPGBattleManager;
+
+@class RPGBattleController;
 
 @interface RPGBattleViewController : UIViewController
 
-@property (nonatomic, retain, readonly) RPGBattleManager *battleManager;
+@property (nonatomic, retain, readonly) RPGBattleController *battleController;
 
 - (void)showTooltipWithView:(UIView *)view;
 

@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class RPGBattleManager;
+@class RPGBattleController;
 
 @interface RPGSkillBarViewController : UIViewController
 
-@property (nonatomic, assign, readonly) RPGBattleManager *battleManager;
+@property (nonatomic, assign, readonly) RPGBattleController *battleController;
 
-- (instancetype)initWithBattleManager:(RPGBattleManager *)aBattleManager;
-
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
+- (void)battleInitDidEndSetUp:(NSNotification *)aNotification;
 @end

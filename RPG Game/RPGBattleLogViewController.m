@@ -8,7 +8,7 @@
 
 #import "RPGBattleLogViewController.h"
   // API
-#import "RPGBattleManager.h"
+#import "RPGBattleController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGBattleLog.h"
@@ -23,7 +23,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 @interface RPGBattleLogViewController ()
 
-@property (retain, nonatomic, readwrite) RPGBattleManager *battleManager;
+@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
 @property (retain, nonatomic, readwrite) NSArray<NSString *> *templates;
 
 @end
@@ -32,7 +32,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleManager:(RPGBattleManager *)aBattleManager
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
 {
   self = [super init];
   
@@ -44,11 +44,11 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
                                                           encoding:NSUTF8StringEncoding
                                                              error:nil];
     _templates = [[templatesString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] retain];
-    _battleManager = [aBattleManager retain];
-    [_battleManager addObserver:self
-                     forKeyPath:@"battle.battleLog.actions"
-                        options:(NSKeyValueObservingOptionNew)
-                        context:&sRPGBattleLogViewControllerBattleBattleLogAction];
+    _battleController = [aBattleController retain];
+    [_battleController addObserver:self
+                        forKeyPath:@"battle.battleLog.actions"
+                           options:(NSKeyValueObservingOptionNew)
+                           context:&sRPGBattleLogViewControllerBattleBattleLogAction];
   }
   
   return self;
@@ -58,10 +58,10 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 - (void)dealloc
 {
-  [_battleManager removeObserver:self
-                      forKeyPath:@"battle.battleLog.actions"
-                         context:&sRPGBattleLogViewControllerBattleBattleLogAction];
-  [_battleManager release];
+  [_battleController removeObserver:self
+                         forKeyPath:@"battle.battleLog.actions"
+                            context:&sRPGBattleLogViewControllerBattleBattleLogAction];
+  [_battleController release];
   [_templates release];
   
   [super dealloc];
@@ -79,7 +79,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
     if ([aChange[NSKeyValueChangeKindKey] unsignedIntegerValue] == NSKeyValueChangeInsertion)
     {
       NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
-      [self addMessageWithAction:self.battleManager.battle.battleLog.actions[newObjectIndices.firstIndex]];
+      [self addMessageWithAction:self.battleController.battle.battleLog.actions[newObjectIndices.firstIndex]];
     }
   }
   else
@@ -96,8 +96,8 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 - (void)addMessageWithAction:(RPGBattleAction *)anAction
 {
     // TODO: remove long-line invocations
-  NSString *playerName = self.battleManager.battle.player.name;
-  NSString *opponentName = self.battleManager.battle.opponent.name;
+  NSString *playerName = self.battleController.battle.player.name;
+  NSString *opponentName = self.battleController.battle.opponent.name;
   
   BOOL myTurn = anAction.myTurn;
   NSString *attackerName = (myTurn ? playerName : opponentName);

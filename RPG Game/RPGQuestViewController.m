@@ -13,6 +13,9 @@
   // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
+#import "RPGQuestViewHeaderContainer.h"
+#import "RPGQuestViewBodyContainer.h"
+#import "RPGQuestViewButtonContainer.h"
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
@@ -24,11 +27,6 @@
   // Constants
 #import "RPGNibNames.h"
 #import "RPGQuestAction.h"
-
-
-#import "RPGQuestViewHeaderContainer.h"
-#import "RPGQuestViewBodyContainer.h"
-#import "RPGQuestViewButtonContainer.h"
 
 @interface RPGQuestViewController () 
 
@@ -63,8 +61,56 @@
   [super dealloc];
 }
 
-#pragma mark - Custom Getter
+#pragma mark - UIViewController
 
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.buttonContainer.questViewController = self;
+  self.headerContainer.questViewController = self;
+  self.bodyContainer.questViewController = self;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  
+  if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
+  {
+    [self.bodyContainer uploadImage];
+  }
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
+
+#pragma mark - View Content
+
+- (void)setViewContent:(RPGQuest *)aQuest
+{
+  if (aQuest != nil)
+  {
+      //  RPGQuestState state = aQuest.state;
+    self.state = aQuest.state;
+    self.questID = aQuest.questID;
+    self.proofImageStringURL = aQuest.proofImageStringURL;
+    
+    [self.headerContainer setViewContent:aQuest.reward];
+    [self.bodyContainer setViewContent:aQuest];
+  }
+}
+
+#pragma mark - Image Picker Controller
+
+  // custom getter
 - (UIImagePickerController *)imagePickerController
 {
   if (_imagePickerController == nil)
@@ -87,64 +133,6 @@
   [self.headerContainer updateView];
   [self.bodyContainer updateView];
   [self.buttonContainer updateView];
-}
-
-#pragma mark - UIViewController
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  self.buttonContainer.questViewController = self;
-  self.headerContainer.questViewController = self;
-  self.bodyContainer.questViewController = self;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-  
-  switch (self.state)
-  {
-    case kRPGQuestStateDone:
-    case kRPGQuestStateReviewedFalse:
-    case kRPGQuestStateForReview:
-    case kRPGQuestStateReviewedTrue:
-    {
-      if (self.proofImageStringURL != nil)
-      {
-        [self.bodyContainer uploadImage];
-      }
-      break;
-    }
-    default:
-    {
-      break;
-    }
-  }
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
-#pragma mark - View Content
-
-- (void)setViewContent:(RPGQuest *)aQuest
-{
-  RPGQuestState state = aQuest.state;
-  self.state = state;
-  self.questID = aQuest.questID;
-  self.proofImageStringURL = aQuest.proofImageStringURL;
-  
-  [self.headerContainer setViewContent:aQuest.reward];
-  [self.bodyContainer setViewContent:aQuest];
 }
 
 @end

@@ -27,10 +27,12 @@
 - (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
 {
   self = [self init];
+  
   if (self != nil)
   {
     _skillRepresentation = [aSkillRepresentation retain];
   }
+  
   return self;
 }
 
