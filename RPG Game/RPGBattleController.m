@@ -28,6 +28,9 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
+NSString * const kRPGBattleControllerCharacterID = @"char_id";
+NSString * const kRPGBattleControllerSkillID = @"skill_id";
+
 static NSString * const kRPGResponseType = @"type";
 
 @interface RPGBattleController ()
@@ -174,21 +177,9 @@ static NSString * const kRPGResponseType = @"type";
     if (battleInitResponse != nil && battleInitResponse.status == 0)
     {
       self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
-        // getting char id
-      NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-      NSDictionary *character = nil;
-      NSInteger characterID = -1;
       
-      if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
-      {
-        character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
-      }
-      if (character)
-      {
-          //TODO: remove hardcode
-        characterID = [character[@"char_id"] integerValue];
-      }
-      
+        // fetching skills
+      NSInteger characterID = [self getCharacterID];
       [[RPGNetworkManager sharedNetworkManager] fetchSkillsByCharacterID:characterID completionHandler:
        ^void(NSInteger statusCode, NSArray *skills)
        {
@@ -197,14 +188,7 @@ static NSString * const kRPGResponseType = @"type";
          {
            case kRPGStatusCodeOK:
            {
-               //Convert NSDictionary -> RPGSkill
-             NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
-             for (NSDictionary *skillDictionary in skills)
-             {
-                 //TODO: remove hardcode
-               [skillsArray addObject:skillDictionary[@"skill_id"]];
-             }
-             
+             NSArray *skillsArray = [self convertSkillsFromArray:skills];
              self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
              break;
            }
@@ -242,6 +226,38 @@ static NSString * const kRPGResponseType = @"type";
 - (void)prepareBattleControllerForDismiss
 {
   [self.websocketManager close];
+}
+
+#pragma mark - Helper Methods
+
+- (NSInteger)getCharacterID
+{
+  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+  NSDictionary *character = nil;
+  NSInteger characterID = -1;
+  
+  if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
+  {
+    character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
+  }
+  if (character)
+  {
+    characterID = [character[kRPGBattleControllerCharacterID] integerValue];
+  }
+  
+  return characterID;
+}
+
+- (NSArray *)convertSkillsFromArray:(NSArray *)anArray
+{
+  NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
+  
+  for (NSDictionary *skillDictionary in anArray)
+  {
+    [skillsArray addObject:skillDictionary[kRPGBattleControllerSkillID]];
+  }
+  
+  return skillsArray;
 }
 
 @end
