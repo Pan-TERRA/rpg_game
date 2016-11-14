@@ -72,7 +72,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
   
   if (skillID != 0)
   {
-    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSkillID:skillID];
   }
 }
 
