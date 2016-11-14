@@ -32,11 +32,11 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @property(nonatomic, retain, readwrite) RPGBattleController *battleController;
 
   // Player 1
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *player1NickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player1hpBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *playerHPBar;
   // Player 2
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *player2NickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *player2hpBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *opponentHPBar;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -233,18 +233,18 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
 - (void)modelDidChange:(NSNotification *)aNotification
 {
-  RPGBattle *battle = self.battleController.battle;
+  RPGBattleController *battleController = self.battleController;
   
     // client
-  NSInteger playerHP = battle.player.HP;
-  NSString *playerName = battle.player.name;
-  self.player1NickName.text = playerName;
-  self.player1hpBar.progress = ((float)playerHP / 100.0);
+  NSInteger playerHP = battleController.playerHP;
+  NSString *playerNickName = battleController.playerNickName;
+  self.playerNickName.text = playerNickName;
+  self.playerHPBar.progress = ((float)playerHP / 100.0);
     // opponent
-  NSInteger opponentHP = battle.opponent.HP;
-  NSString *opponentName = battle.opponent.name;
-  self.player2NickName.text = opponentName;
-  self.player2hpBar.progress = ((float)opponentHP / 100.0);
+  NSInteger opponentHP = battleController.opponentHP;
+  NSString *opponentNickName = battleController.opponentNickName;
+  self.opponentNickName.text = opponentNickName;
+  self.opponentHPBar.progress = ((float)opponentHP / 100.0);
   
     // fight end
   if (playerHP == 0 || opponentHP == 0)
@@ -254,8 +254,8 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     [self.view addSubview:self.battleRewardModal.view];
     [self.battleRewardModal didMoveToParentViewController:self];
     
-    self.winnerNickNameLabel.text = playerHP == 0 ? opponentName : playerName;
-    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battle.reward.gold];
+    self.winnerNickNameLabel.text = playerHP == 0 ? opponentNickName : playerNickName;
+    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", battleController.rewardGold];
     
     [self.timer invalidate];
   }

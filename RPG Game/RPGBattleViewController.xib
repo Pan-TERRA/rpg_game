@@ -12,10 +12,10 @@
                 <outlet property="battleInitModal" destination="Uv3-NW-3Xp" id="xJD-wy-aXT"/>
                 <outlet property="battleRewardModal" destination="W8p-8V-Xoo" id="awx-Fz-7wA"/>
                 <outlet property="battleTextView" destination="2cd-xD-wsS" id="9yA-Xb-8C9"/>
-                <outlet property="player1NickName" destination="285-ls-YlH" id="Rvx-HA-zpD"/>
-                <outlet property="player1hpBar" destination="Kyt-St-ty5" id="H9c-F5-tbC"/>
-                <outlet property="player2NickName" destination="T2l-ok-lRD" id="G5h-6P-cil"/>
-                <outlet property="player2hpBar" destination="bpT-d5-5De" id="Lr6-U0-iql"/>
+                <outlet property="opponentHPBar" destination="bpT-d5-5De" id="rk9-MT-cPP"/>
+                <outlet property="opponentNickName" destination="T2l-ok-lRD" id="sU1-pm-5HX"/>
+                <outlet property="playerHPBar" destination="Kyt-St-ty5" id="j40-WC-kcl"/>
+                <outlet property="playerNickName" destination="285-ls-YlH" id="qYn-3b-Enw"/>
                 <outlet property="playerRewardLabel" destination="roZ-dN-Hpn" id="FXV-84-bkF"/>
                 <outlet property="skillBar" destination="TmA-7m-uPF" id="aqT-jf-LTa"/>
                 <outlet property="timerLabel" destination="Lez-UF-BPa" id="aSv-im-1Mh"/>
@@ -88,13 +88,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DPT-Zk-iE1">
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DPT-Zk-iE1">
                         <rect key="frame" x="150" y="211" width="300" height="179"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="pOo-29-xQ8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="pOo-29-xQ8">
                                 <rect key="frame" x="0.0" y="0.0" width="300" height="179"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CC0-dX-zZB" userLabel="Reward Container">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CC0-dX-zZB" userLabel="Reward Container">
                                 <rect key="frame" x="68" y="84" width="164" height="30"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="o9v-sw-rkr">
@@ -140,19 +140,19 @@
                                     <constraint firstItem="roZ-dN-Hpn" firstAttribute="height" secondItem="bIa-2n-7On" secondAttribute="height" id="wbH-Bv-SFN"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDf-Sx-y60">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vDf-Sx-y60">
                                 <rect key="frame" x="96" y="20" width="108" height="22"/>
                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7y-eW-1ED" userLabel="NickName">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7y-eW-1ED" userLabel="NickName">
                                 <rect key="frame" x="107" y="52" width="87" height="22"/>
                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zur-Ea-Scc">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zur-Ea-Scc">
                                 <rect key="frame" x="110" y="124" width="80" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="3nF-yq-gjk"/>
