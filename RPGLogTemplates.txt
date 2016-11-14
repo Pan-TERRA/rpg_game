@@ -1,0 +1,4 @@
+%1$@ used %3$@ to get guts out of %2$@: %4$ld points damage, holy shit!
+%1$@ hit %2$@ with %3$@ - this rampage lead to %4$ld hp lost.
+R-R-Rampage! %2$@ cannot withstand the ultimate power of %3$@. %4$ld point damage from %1$@.
+Unstoppable %1$@! %2$@ has just got hit with %3$@ - now he is %4$ld points closer to horrific death!
