@@ -22,7 +22,6 @@
   // TODO: replace to separate header file
 static NSString * const kRPGWebsocketManagerAPI = @"ws://10.55.33.28:8888/ws";
 
-
 typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGWebsocketManager () <SRWebSocketDelegate>
@@ -104,7 +103,6 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
   NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                      options:0
                                                                        error:&JSONError];
-    // TODO: Add status validation
   if (responseDictionary != nil)
   {
       // logging

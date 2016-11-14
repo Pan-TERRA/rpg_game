@@ -65,8 +65,6 @@
 
 - (IBAction)skillButtonLongPress:(UILongPressGestureRecognizer *)aSender
 {
-  NSLog(@"State of long press gesture: %ld", (long)aSender.state);
-  
   if (aSender.state == UIGestureRecognizerStateBegan)
   {
     NSInteger index = aSender.view.tag - 1;
@@ -134,7 +132,6 @@
     else
     {
       skillButton.enabled = false;
-        //TODO: remove hardcode
       backgroundImage = [UIImage imageNamed:@"battle_empty_icon_lock"];
       [skillButton setBackgroundImage:backgroundImage forState:UIControlStateDisabled];
     }
