@@ -26,5 +26,6 @@ extern NSString * const kRPGSkillRepresentationSoundName;
 @property (nonatomic, copy, readonly) NSString *soundName;
 
 - (instancetype)initWithSkillID:(NSInteger)aSkillID;
++ (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID;
 
 @end

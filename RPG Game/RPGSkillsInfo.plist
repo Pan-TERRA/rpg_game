@@ -2,6 +2,21 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>5</key>
+	<dict>
+		<key>description</key>
+		<string>Save your ass! Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem bla-bla-bla Lorem inpus Lorem inpus Lorem inpus Lorem inpus Lorem </string>
+		<key>name</key>
+		<string>Healing</string>
+		<key>multiplier</key>
+		<integer>-100</integer>
+		<key>cooldown</key>
+		<integer>2</integer>
+		<key>imageName</key>
+		<string>heal-jade-1</string>
+		<key>soundName</key>
+		<string>skill-2-sfx</string>
+	</dict>
 	<key>4</key>
 	<dict>
 		<key>description</key>
@@ -58,9 +73,9 @@
 		<key>cooldown</key>
 		<integer>1</integer>
 		<key>imageName</key>
-		<string></string>
+		<string>enchant-magenta-3</string>
 		<key>soundName</key>
-		<string></string>
+		<string>skill-1-sfx</string>
 	</dict>
 </dict>
 </plist>

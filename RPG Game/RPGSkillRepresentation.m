@@ -11,7 +11,7 @@
 NSString * const kRPGSkillRepresentationName = @"name";
 NSString * const kRPGSkillRepresentationSkillDescription = @"description";
 NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
-NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"absoluteCooldown";
+NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 
@@ -27,7 +27,7 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
   {
     //TODO: remove hardcode
     NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
-    NSDictionary *plistDictionary = [[[NSDictionary alloc] initWithContentsOfFile:path] autorelease];
+    NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
     NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
     
     _name = [skillDictionary[kRPGSkillRepresentationName] copy];
@@ -40,6 +40,11 @@ NSString * const kRPGSkillRepresentationSoundName = @"soundName";
   }
   
   return self;
+}
+
++ (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID
+{
+  return [[[self alloc] initWithSkillID:aSkillID] autorelease];
 }
 
 - (void)dealloc
