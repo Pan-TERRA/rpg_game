@@ -17,6 +17,7 @@
 #import "RPGBattleInitResponse.h"
   // Views
 #import "RPGProgressBar.h"
+#import "RPGBattleLogViewController.h"
   // Misc
 #import "RPGBackgroundMusicController.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -56,6 +57,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
 
 @property (retain, nonatomic) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 
 @end
 
@@ -74,6 +76,8 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
     
     if (_battleManager != nil)
     {
+      _battleLogViewController = [[RPGBattleLogViewController alloc]
+                                  initWithBattleManager:_battleManager];
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
                                                    name:kRPGBattleManagerModelDidChangeNotification
@@ -100,6 +104,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
   [_battleManager removeObserver:self
                       forKeyPath:@"battle.currentTurn"
                          context:&kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext];
+  [_battleLogViewController release];
   [_battleManager release];
   [_battleRewardModal release];
   [_battleInitModal release];
@@ -113,6 +118,7 @@ static int kRPGBattleViewContollerBattleManagerBattleCurrentTurnContext;
 {
   [super viewDidLoad];
   
+  self.battleLogViewController.view = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
   [self addChildViewController:self.battleInitModal];
