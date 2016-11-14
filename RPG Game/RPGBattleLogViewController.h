@@ -12,7 +12,7 @@
 
 @interface RPGBattleLogViewController : UIViewController
 
-@property (assign, nonatomic, readonly) RPGBattleManager *battleManager;
+@property (retain, nonatomic, readonly) RPGBattleManager *battleManager;
 
 - (instancetype)initWithBattleManager:(RPGBattleManager *)aBattleManager;
 

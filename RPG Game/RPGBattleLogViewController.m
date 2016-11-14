@@ -23,7 +23,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 @interface RPGBattleLogViewController ()
 
-@property (assign, nonatomic, readwrite) RPGBattleManager *battleManager;
+@property (retain, nonatomic, readwrite) RPGBattleManager *battleManager;
 @property (retain, nonatomic, readwrite) NSArray<NSString *> *templates;
 
 @end
@@ -44,7 +44,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
                                                           encoding:NSUTF8StringEncoding
                                                              error:nil];
     _templates = [[templatesString componentsSeparatedByCharactersInSet:[NSCharacterSet newlineCharacterSet]] retain];
-    _battleManager = aBattleManager;
+    _battleManager = [aBattleManager retain];
     [_battleManager addObserver:self
                      forKeyPath:@"battle.battleLog.actions"
                         options:(NSKeyValueObservingOptionNew)
@@ -61,6 +61,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
   [_battleManager removeObserver:self
                       forKeyPath:@"battle.battleLog.actions"
                          context:&sRPGBattleLogViewControllerBattleBattleLogAction];
+  [_battleManager release];
   [_templates release];
   
   [super dealloc];
