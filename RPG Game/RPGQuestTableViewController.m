@@ -21,6 +21,8 @@
 #import "RPGNibNames.h"
 #import "RPGQuestListState.h"
 
+#import "RPGAlert.h"
+
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 @interface RPGQuestTableViewController ()
@@ -245,18 +247,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       }
       else
       {
-        NSString *message = @"Can't delete quest.";
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete quest"
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
-                                                  style:UIAlertActionStyleCancel
-                                                handler:^(UIAlertAction *action)
-        {
-          [alert dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        [weakSelfQuestListViewController presentViewController:alert animated:YES completion:nil];
+        [RPGAlert showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
       }
     };
     
