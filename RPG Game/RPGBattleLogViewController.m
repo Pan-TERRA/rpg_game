@@ -108,7 +108,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
   NSString *formatString = [NSString stringWithFormat:@"%@\n", self.templates[randomIndex]];
   NSString *message = [NSString stringWithFormat:formatString,
                        self.battleController.attackerNickName,
-                       self.battleController.opponentNickName,
+                       self.battleController.defenderNickName,
                        skillName,
                        (long)anAction.damage];
   
