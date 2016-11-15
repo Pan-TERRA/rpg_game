@@ -203,7 +203,18 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 - (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  return YES;
+  BOOL result = YES;
+  RPGQuestListState state = self.questListState;
+  if (state == kRPGQuestListDoneQuest)
+  {
+    result = NO;
+  }
+  else if (state == kRPGQuestListInProgressQuest &&
+           ((RPGQuest *)[self.inProgressQuestsMutableArray objectAtIndex:anIndexPath.row]).state == kRPGQuestStateDone)
+  {
+    result = NO;
+  }
+  return result;
 }
 
 - (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)anEditingStyle forRowAtIndexPath:(NSIndexPath *)anIndexPath
