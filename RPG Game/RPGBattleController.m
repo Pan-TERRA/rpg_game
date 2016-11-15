@@ -11,12 +11,13 @@
 #import "RPGWebsocketManager.h"
 #import "RPGNetworkManager+Skills.h"
   // Entities
+#import "RPGBattleLog.h"
 #import "RPGBattle.h"
+#import "RPGPlayer.h"
+#import "RPGResources.h"
 #import "RPGRequest.h"
 #import "RPGSkillsRequest.h"
 #import "RPGSkillActionRequest.h"
-#import "RPGResources.h"
-
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
   // Misc
@@ -28,10 +29,9 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
-NSString * const kRPGBattleControllerCharacterID = @"char_id";
-NSString * const kRPGBattleControllerSkillID = @"skill_id";
-
-static NSString * const kRPGResponseType = @"type";
+static NSString * const kRPGBattleControllerCharacterID = @"char_id";
+static NSString * const kRPGBattleControllerSkillID = @"skill_id";
+static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
 
@@ -116,6 +116,21 @@ static NSString * const kRPGResponseType = @"type";
   return self.battle.reward.gold;
 }
 
+- (NSArray *)actions
+{
+  return self.battle.battleLog.actions;
+}
+
+- (NSString *)attackerNickName
+{
+  return self.myTurn ? self.playerNickName : self.opponentNickName;
+}
+
+- (NSString *)defenderNickName
+{
+  return !self.myTurn ? self.playerNickName : self.opponentNickName;
+}
+
 #pragma mark - API
 
 - (void)requestBattleInit
@@ -170,7 +185,7 @@ static NSString * const kRPGResponseType = @"type";
   RPGBattleConditionResponse *battleConditionResponse = nil;
   
     // battle init
-  if ([aResponse[kRPGResponseType] isEqualToString:kRPGBattleInitMessageType])
+  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType])
   {
     battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:aResponse] autorelease];
     
@@ -211,7 +226,7 @@ static NSString * const kRPGResponseType = @"type";
   }
   
   
-  if ([aResponse[kRPGResponseType] isEqualToString:kRPGBattleConditionMessageType])
+  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleConditionMessageType])
   {
     battleConditionResponse = [[[RPGBattleConditionResponse alloc] initWithDictionaryRepresentation:aResponse] autorelease];
     

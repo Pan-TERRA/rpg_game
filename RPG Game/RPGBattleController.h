@@ -27,7 +27,10 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 @property (assign, nonatomic, readonly) NSString *opponentNickName;
 @property (assign, nonatomic, readonly) NSInteger opponentHP;
   // General
+@property (assign, nonatomic, readonly) NSString *attackerNickName;
+@property (assign, nonatomic, readonly) NSString *defenderNickName;
 @property (assign, nonatomic, readonly) NSInteger rewardGold;
+@property (assign, nonatomic, readonly) NSArray *actions;
 
 
 /**

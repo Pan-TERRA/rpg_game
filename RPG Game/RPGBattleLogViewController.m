@@ -10,9 +10,6 @@
   // Controllers
 #import "RPGBattleController.h"
   // Entities
-#import "RPGBattle.h"
-#import "RPGBattleLog.h"
-#import "RPGPlayer.h"
 #import "RPGBattleAction.h"
 #import "RPGSkillRepresentation.h"
   // Misc
@@ -80,7 +77,10 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
     if ([aChange[NSKeyValueChangeKindKey] unsignedIntegerValue] == NSKeyValueChangeInsertion)
     {
       NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
-      [self addMessageWithAction:self.battleController.battle.battleLog.actions[newObjectIndices.firstIndex]];
+      RPGBattleAction *battleAction = self.battleController.actions[newObjectIndices.firstIndex];
+      [self addMessageWithAction:battleAction];
+      [self playSkillSFXWithAction:battleAction];
+      [self scrollViewToBottom];
     }
   }
   else
@@ -95,40 +95,33 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 #pragma mark - Actions
 
 /**
- *  Builds battle log message. Plays sound.
+ *  Builds battle log message.
  *
  *  @param anAction An action.
  */
 - (void)addMessageWithAction:(RPGBattleAction *)anAction
 {
-  NSInteger skillID = anAction.skillID;
-  RPGSkillRepresentation *skill = [[[RPGSkillRepresentation alloc] initWithSkillID:skillID] autorelease];
+  RPGSkillRepresentation *skill = [RPGSkillRepresentation skillrepresentationWithSkillID:anAction.skillID];
   NSString *skillName = skill.name;
-  BOOL myTurn = anAction.myTurn;
-  
-  NSString *playerNickName = self.battleController.playerNickName;
-  NSString *opponentNickName = self.battleController.opponentNickName;
-  
-  NSString *attackerNickName = (myTurn ? playerNickName : opponentNickName);
-  NSString *defenderNickName = (myTurn ? opponentNickName : playerNickName);
   
   NSUInteger randomIndex = arc4random() % self.templates.count;
   NSString *formatString = [NSString stringWithFormat:@"%@\n", self.templates[randomIndex]];
   NSString *message = [NSString stringWithFormat:formatString,
-                       attackerNickName,
-                       defenderNickName,
+                       self.battleController.attackerNickName,
+                       self.battleController.opponentNickName,
                        skillName,
                        (long)anAction.damage];
   
   UITextView *textView = (UITextView *)self.view;
   [textView.textStorage appendAttributedString:[[[NSAttributedString alloc] initWithString:message] autorelease]];
-  
-  if (skillID != 0)
+}
+
+- (void)playSkillSFXWithAction:(RPGBattleAction *)anAction
+{
+  if (anAction.skillID != 0)
   {
-    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:skillID];
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:anAction.skillID];
   }
-  
-  [self scrollViewToBottom];
 }
 
 - (void)scrollViewToBottom

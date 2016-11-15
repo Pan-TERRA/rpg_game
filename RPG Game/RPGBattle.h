@@ -7,15 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "RPGPlayer.h"
 
-extern const NSInteger kRPGBattleTurnDuration;
-
+@class RPGEntity;
+@class RPGPlayer;
 @class RPGBattleLog;
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
 @class RPGResources;
+
+extern const NSInteger kRPGBattleTurnDuration;
 
 /**
  *  Model entity. Owns player and opponent entities, keeps server start time and

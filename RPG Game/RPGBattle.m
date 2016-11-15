@@ -8,6 +8,7 @@
 
 #import "RPGBattle.h"
   // Entities
+#import "RPGPlayer.h"
 #import "RPGBattleConditionResponse.h"
 #import "RPGTimeResponse.h"
 #import "RPGBattleInitResponse.h"

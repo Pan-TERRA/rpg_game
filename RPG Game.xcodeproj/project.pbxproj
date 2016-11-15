@@ -396,16 +396,14 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		281499EC1DAFC95F00C26881 /* Battle Manager */ = {
+		281499EC1DAFC95F00C26881 /* Battle Controller */ = {
 			isa = PBXGroup;
 			children = (
 				28AB94871DD8A8EB00F1503B /* RPGBattleController.h */,
 				28AB94881DD8A8EB00F1503B /* RPGBattleController.m */,
-				28AB948A1DD8AA9300F1503B /* RPGWebsocketManager.h */,
-				28AB948B1DD8AA9300F1503B /* RPGWebsocketManager.m */,
-				281499ED1DAFC96800C26881 /* Entities */,
+				285231611DC0F107002F702B /* Entities */,
 			);
-			name = "Battle Manager";
+			name = "Battle Controller";
 			sourceTree = "<group>";
 		};
 		281499ED1DAFC96800C26881 /* Entities */ = {
@@ -441,12 +439,9 @@
 		28149A111DB1008100C26881 /* Battle */ = {
 			isa = PBXGroup;
 			children = (
-				D0819AC11DD6181E00021DB9 /* Battle ViewController */,
-				28AB94901DDA196F00F1503B /* Battle Log */,
-				D0819AC21DD6182A00021DB9 /* SkillBar ViewController */,
-				D0819AC31DD6183500021DB9 /* SkillDescription ViewController */,
-				283D191A1DD5FEC3008C5396 /* Skill Representation */,
-				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
+				28AB94931DDB0B8700F1503B /* View */,
+				281499EC1DAFC95F00C26881 /* Battle Controller */,
+				28AB94921DDB0B5900F1503B /* Websocket Manager */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -461,14 +456,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
-		28149A131DB100FB00C26881 /* Main View */ = {
+		28149A131DB100FB00C26881 /* Main Menu */ = {
 			isa = PBXGroup;
 			children = (
 				288E86001DABDADB00321F4D /* RPGMainViewController.h */,
 				288E86011DABDADB00321F4D /* RPGMainViewController.m */,
 				AED6F5711DACD641007ED1B8 /* RPGMainView.xib */,
 			);
-			name = "Main View";
+			name = "Main Menu";
 			sourceTree = "<group>";
 		};
 		28149A1E1DB1011B00C26881 /* Login */ = {
@@ -624,14 +619,15 @@
 			name = Response;
 			sourceTree = "<group>";
 		};
-		285231611DC0F107002F702B /* Battle Entities */ = {
+		285231611DC0F107002F702B /* Entities */ = {
 			isa = PBXGroup;
 			children = (
 				285231621DC0F113002F702B /* Battle */,
 				2852315D1DC0F0BD002F702B /* Entity */,
 				2852315E1DC0F0CA002F702B /* Player */,
+				28AB94911DDB0AFE00F1503B /* Battle Log */,
 			);
-			name = "Battle Entities";
+			name = Entities;
 			sourceTree = "<group>";
 		};
 		285231621DC0F113002F702B /* Battle */ = {
@@ -688,13 +684,11 @@
 				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
 				877C86541DC8F102004B4A00 /* Initial Screen */,
-				28149A1E1DB1011B00C26881 /* Login */,
 				28149A1F1DB1012200C26881 /* Registration */,
-				28149A131DB100FB00C26881 /* Main View */,
-				28149A111DB1008100C26881 /* Battle */,
-				285231611DC0F107002F702B /* Battle Entities */,
-				281499EC1DAFC95F00C26881 /* Battle Manager */,
+				28149A1E1DB1011B00C26881 /* Login */,
+				28149A131DB100FB00C26881 /* Main Menu */,
 				AED6F57A1DACD89F007ED1B8 /* Quests */,
+				28149A111DB1008100C26881 /* Battle */,
 				28149A121DB100B900C26881 /* Settings */,
 				283ADCF41DAD3C5000BDC706 /* Network Communication */,
 				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
@@ -705,6 +699,7 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
+				2A6F2AC41DDA07B70036CD2D /* RPGLogTemplates.txt */,
 				877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */,
 				288E85CD1DABDA8A00321F4D /* Supporting Files */,
 			);
@@ -930,18 +925,47 @@
 			name = Response;
 			sourceTree = "<group>";
 		};
-		28AB94901DDA196F00F1503B /* Battle Log */ = {
+		28AB94901DDA196F00F1503B /* Battle Log ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2A6F2ABF1DDA04E80036CD2D /* RPGBattleLogViewController.h */,
+				2A6F2AC01DDA04E80036CD2D /* RPGBattleLogViewController.m */,
+			);
+			name = "Battle Log ViewController";
+			sourceTree = "<group>";
+		};
+		28AB94911DDB0AFE00F1503B /* Battle Log */ = {
 			isa = PBXGroup;
 			children = (
 				2A6F2ABB1DDA04E80036CD2D /* RPGBattleAction.h */,
 				2A6F2ABC1DDA04E80036CD2D /* RPGBattleAction.m */,
 				2A6F2ABD1DDA04E80036CD2D /* RPGBattleLog.h */,
 				2A6F2ABE1DDA04E80036CD2D /* RPGBattleLog.m */,
-				2A6F2AC41DDA07B70036CD2D /* RPGLogTemplates.txt */,
-				2A6F2ABF1DDA04E80036CD2D /* RPGBattleLogViewController.h */,
-				2A6F2AC01DDA04E80036CD2D /* RPGBattleLogViewController.m */,
 			);
 			name = "Battle Log";
+			sourceTree = "<group>";
+		};
+		28AB94921DDB0B5900F1503B /* Websocket Manager */ = {
+			isa = PBXGroup;
+			children = (
+				28AB948A1DD8AA9300F1503B /* RPGWebsocketManager.h */,
+				28AB948B1DD8AA9300F1503B /* RPGWebsocketManager.m */,
+				281499ED1DAFC96800C26881 /* Entities */,
+			);
+			name = "Websocket Manager";
+			sourceTree = "<group>";
+		};
+		28AB94931DDB0B8700F1503B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D0819AC11DD6181E00021DB9 /* Battle ViewController */,
+				28AB94901DDA196F00F1503B /* Battle Log ViewController */,
+				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
+				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
+				283D191A1DD5FEC3008C5396 /* Skill Representation */,
+				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		28AE27161DBD161300834FBB /* Quest */ = {
@@ -1087,24 +1111,24 @@
 			name = "Battle ViewController";
 			sourceTree = "<group>";
 		};
-		D0819AC21DD6182A00021DB9 /* SkillBar ViewController */ = {
+		D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				D0819AB01DD6180100021DB9 /* RPGSkillBarViewController.h */,
 				D0819AB11DD6180100021DB9 /* RPGSkillBarViewController.m */,
 				D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */,
 			);
-			name = "SkillBar ViewController";
+			name = "Skill Bar ViewController";
 			sourceTree = "<group>";
 		};
-		D0819AC31DD6183500021DB9 /* SkillDescription ViewController */ = {
+		D0819AC31DD6183500021DB9 /* Skill Description ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				D0819AB31DD6180100021DB9 /* RPGSkillDescriptionViewController.h */,
 				D0819AB41DD6180100021DB9 /* RPGSkillDescriptionViewController.m */,
 				D0819AB51DD6180100021DB9 /* RPGSkillDescriptionViewController.xib */,
 			);
-			name = "SkillDescription ViewController";
+			name = "Skill Description ViewController";
 			sourceTree = "<group>";
 		};
 		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
