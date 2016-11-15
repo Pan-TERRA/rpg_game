@@ -75,6 +75,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [super viewDidLoad];
   self.tableViewController.questListViewController = self;
+  self.tableViewController.tableView = self.tableView;
   self.tableView.dataSource = self.tableViewController;
   self.tableView.delegate = self.tableViewController;
 }

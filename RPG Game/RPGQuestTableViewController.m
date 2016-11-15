@@ -139,6 +139,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
   cell.backgroundColor = [UIColor clearColor];
   cell.backgroundView = [[UIView new] autorelease];
   cell.selectedBackgroundView = [[UIView new] autorelease];
+  cell.tableViewController = self;
   
   switch (self.questListState)
   {
@@ -199,60 +200,18 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
   }
 }
 
-#pragma mark - Delete On Swipe
+#pragma mark - DeleteQuest
 
-- (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)anIndexPath
+- (void)deleteQuestWithID:(NSUInteger)aQuestID
 {
-  BOOL result = YES;
-  RPGQuestListState state = self.questListState;
-  if (state == kRPGQuestListDoneQuest)
-  {
-    result = NO;
-  }
-  else if (state == kRPGQuestListInProgressQuest &&
-           ((RPGQuest *)[self.inProgressQuestsMutableArray objectAtIndex:anIndexPath.row]).state == kRPGQuestStateDone)
-  {
-    result = NO;
-  }
-  return result;
-}
-
-- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)anEditingStyle forRowAtIndexPath:(NSIndexPath *)anIndexPath
-{
-  if (anEditingStyle == UITableViewCellEditingStyleDelete)
-  {
     RPGQuestListState state = self.questListState;
-    NSUInteger questID = [self getQuestIDByState:state index:anIndexPath.row];
     
     void (^handler)(NSInteger) = ^void(NSInteger status)
     {
       BOOL success = (status == 0);
       if (success)
       {
-        switch (state)
-        {
-          case kRPGQuestListTakeQuest:
-          {
-            [self.takeQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          case kRPGQuestListInProgressQuest:
-          {
-            [self.inProgressQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          case kRPGQuestListDoneQuest:
-          {
-            [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          default:
-          {
-            break;
-          }
-        }
-        
-        [aTableView reloadData];
+        [self removeQuestWithID:aQuestID forState:state];        
       }
       else
       {
@@ -261,31 +220,30 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     };
     
     NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:questID];
+    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:aQuestID];
     [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
                                                     request:request
                                           completionHandler:handler];
-  }
 }
 
-- (NSUInteger)getQuestIDByState:(RPGQuestListState)aState index:(NSUInteger)anIndex
+- (void)removeQuestWithID:(NSUInteger)aQuestID forState:(RPGQuestListState)aState
 {
-  NSUInteger questID = 0;
+  NSMutableArray *questArray = nil;
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-      questID = ((RPGQuest *)[self.takeQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.takeQuestsMutableArray;
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      questID = ((RPGQuest *)[self.inProgressQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.inProgressQuestsMutableArray;
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      questID = ((RPGQuest *)[self.doneQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.doneQuestsMutableArray;
       break;
     }
     default:
@@ -293,7 +251,18 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       break;
     }
   }
-  return questID;
+  if (questArray != nil)
+  {
+    for(RPGQuest *quest in questArray)
+    {
+      if (quest.questID == aQuestID)
+      {
+        [questArray removeObject:quest];
+        [self.tableView reloadData];
+        break;
+      }
+    }
+  }
 }
 
 @end

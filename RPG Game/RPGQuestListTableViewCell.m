@@ -13,6 +13,7 @@
 #import "RPGQuestReward.h"
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
+#import "RPGQuestTableViewController.h"
 
 static CGFloat const kBounceValue = 10.0;
 
@@ -36,6 +37,7 @@ static CGFloat const kBounceValue = 10.0;
 @property (nonatomic, assign, readwrite) CGFloat startRightConstraintConstant;
 
 @property (nonatomic, assign, readwrite) RPGQuestState questState;
+@property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
 
@@ -75,6 +77,7 @@ static CGFloat const kBounceValue = 10.0;
   self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
   self.questState = aCellContent.state;
+  self.questID = aCellContent.questID;
   
   if (aCellContent.reward.skillID != 0)
   {
@@ -147,7 +150,7 @@ static CGFloat const kBounceValue = 10.0;
 
 - (IBAction)deleteButtonOnClick:(UIButton *)sender
 {
-  
+  [self.tableViewController deleteQuestWithID:self.questID];
 }
 
 #pragma mark - Cell State
