@@ -35,6 +35,8 @@ static CGFloat const kBounceValue = 10.0;
 @property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewLeftConstraint;
 @property (nonatomic, assign, readwrite) CGFloat startRightConstraintConstant;
 
+@property (nonatomic, assign, readwrite) RPGQuestState questState;
+
 @end
 
 @implementation RPGQuestListTableViewCell
@@ -72,6 +74,7 @@ static CGFloat const kBounceValue = 10.0;
   self.descriptionLabel.text = aCellContent.questDescription;
   self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
+  self.questState = aCellContent.state;
   
   if (aCellContent.reward.skillID != 0)
   {
@@ -251,10 +254,23 @@ static CGFloat const kBounceValue = 10.0;
     UIView *cell = [panGestureRecognizer view];
     CGPoint translation = [panGestureRecognizer translationInView:[cell superview]];
     
-    if (fabs(translation.x) > fabs(translation.y))
+    if ([self canDeleteQuest] && fabs(translation.x) > fabs(translation.y))
     {
       result = YES;
     }
+  }
+  return result;
+}
+
+- (BOOL)canDeleteQuest
+{
+  BOOL result = NO;
+  RPGQuestState state = self.questState;
+  if (state == kRPGQuestStateCanTake ||
+      state == kRPGQuestStateInProgress ||
+      state == kRPGQuestStateReviewedFalse)
+  {
+    result = YES;
   }
   return result;
 }
