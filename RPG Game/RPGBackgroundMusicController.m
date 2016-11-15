@@ -136,6 +136,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
 {
   self.peacePlayer.volume = aVolume;
   self.battlePlayer.volume = aVolume;
+  [NSUserDefaults standardUserDefaults].musicVolume = aVolume;
 }
 
 - (double)volume
@@ -143,6 +144,21 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   return self.peacePlayer.volume;
 }
 
+- (void)setPlaying:(BOOL)playing
+{
+  _playing = playing;
+  [NSUserDefaults standardUserDefaults].musicPlaying = playing;
+  if (_playing)
+  {
+    [self switchToPeace];
+  }
+  else
+  {
+    [self.peacePlayer pause];
+    [self.battlePlayer pause];
+  }
+  
+}
 #pragma mark - Music Changing
 
 - (void)switchToBattle
@@ -160,20 +176,6 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
   {
     [self.battlePlayer pause];
     [self.peacePlayer play];
-  }
-}
-
-- (void)toggle:(BOOL)aState
-{
-  self.playing = aState;
-  if (self.playing)
-  {
-    [self switchToPeace];
-  }
-  else
-  {
-    [self.peacePlayer pause];
-    [self.battlePlayer pause];
   }
 }
 

@@ -21,6 +21,4 @@
 - (void)switchToBattle;
 - (void)switchToPeace;
 
-- (void)toggle:(BOOL)aState;
-
 @end
