@@ -14,7 +14,9 @@
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
 
-@interface RPGQuestListTableViewCell()
+static CGFloat const kBounceValue = 10.0;
+
+@interface RPGQuestListTableViewCell()  <UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
@@ -26,16 +28,35 @@
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *deleteButton;
+
+@property (nonatomic, retain, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewRightConstraint;
+@property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewLeftConstraint;
+@property (nonatomic, assign, readwrite) CGFloat startRightConstraintConstant;
 
 @end
 
 @implementation RPGQuestListTableViewCell
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_panGestureRecognizer release];
+  
+  [super dealloc];
+}
 
 #pragma mark - UITableViewCell
 
 - (void)awakeFromNib
 {
   [super awakeFromNib];
+  
+  self.panGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)] autorelease];
+  self.panGestureRecognizer.delegate = self;
+  [self addGestureRecognizer:self.panGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)aSelected animated:(BOOL)anAnimated
@@ -119,11 +140,19 @@
   }
 }
 
+#pragma mark - Actions
+
+- (IBAction)deleteButtonOnClick:(UIButton *)sender
+{
+  
+}
+
 #pragma mark - Cell State
 
 - (void)setStateLabelHidden:(BOOL)aFlag
 {
-  if (aFlag) {
+  if (aFlag)
+  {
     [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:NSLayoutRelationEqual
@@ -156,6 +185,78 @@
                                                                                  multiplier:1.0
                                                                                    constant:10]];
   }
+}
+
+#pragma mark - UIPanGestureRecognizer
+
+- (void)panAction:(UIPanGestureRecognizer *)aRecognizer
+{
+  switch (aRecognizer.state)
+  {
+    case UIGestureRecognizerStateBegan:
+    {
+      self.startRightConstraintConstant = self.contentViewRightConstraint.constant;
+      break;
+    }
+      
+    case UIGestureRecognizerStateChanged:
+    {
+      CGPoint currentPoint = [aRecognizer translationInView:self];
+      CGFloat shift = self.startRightConstraintConstant - currentPoint.x;
+      if (shift > 0 && shift < [self buttonWidth])
+      {
+        self.contentViewRightConstraint.constant = shift;
+        self.contentViewLeftConstraint.constant = -shift;
+      }
+      break;
+    }
+    
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateCancelled:
+    {
+      CGFloat constraintValue = 0;
+      if (self.contentViewRightConstraint.constant > [self buttonWidth] / 2.0)
+      {
+        constraintValue = [self buttonWidth];
+      }
+      [self setConstraints:constraintValue];
+      break;
+    }
+      
+    default:
+    {
+      break;
+    }
+  }
+}
+
+- (void)setConstraints:(CGFloat)aConstraintValue
+{
+  self.contentViewRightConstraint.constant = aConstraintValue;
+  self.contentViewLeftConstraint.constant = -aConstraintValue;
+}
+
+- (CGFloat)buttonWidth
+{
+  return self.deleteButton.frame.size.width + kBounceValue;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+  BOOL result = NO;
+  if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+  {
+
+    UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer*)gestureRecognizer;
+    UIView *cell = [panGestureRecognizer view];
+    CGPoint translation = [panGestureRecognizer translationInView:[cell superview]];
+    
+    if (fabs(translation.x) > fabs(translation.y))
+    {
+      result = YES;
+    }
+  }
+  return result;
 }
 
 @end
