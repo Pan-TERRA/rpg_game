@@ -12,8 +12,8 @@
 static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
 
 static NSString * const sRPGBundlePath = @"Sounds.bundle/BackGround/";
-static NSString * const sRPGPeaceMusicName = @"PeaceMusic.mp3";
-static NSString * const sRPGBattleMusicName = @"BattleMusic.mp3";
+static NSString * const sRPGPeaceMusicName = @"PeaceMusic.wav";
+static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
 
 @interface RPGBackgroundMusicController ()
 
