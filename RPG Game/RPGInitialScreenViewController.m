@@ -12,6 +12,8 @@
 #import "RPGLoginViewController.h"
   // API
 #import "RPGNetworkManager.h"
+  //Misc
+#import "RPGBackgroundMusicController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -58,6 +60,13 @@
                         animated:YES
                       completion:nil];
    }];
+}
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  [RPGBackgroundMusicController sharedBackgroundMusicController];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
