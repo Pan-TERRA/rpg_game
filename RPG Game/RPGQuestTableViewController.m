@@ -213,8 +213,6 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     RPGQuestListState state = self.questListState;
     NSUInteger questID = [self getQuestIDByState:state index:anIndexPath.row];
     
-    __block typeof(self.questListViewController) weakSelfQuestListViewController = self.questListViewController;
-    
     void (^handler)(NSInteger) = ^void(NSInteger status)
     {
       BOOL success = (status == 0);
