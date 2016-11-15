@@ -12,7 +12,6 @@
   // Misc
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
-#import "NSUserDefaults+RPGVolumeSettings.h"
 #import "RPGAlert.h"
   // Constants
 #import "RPGNibNames.h"
@@ -104,30 +103,22 @@
 
 - (IBAction)musicTurn:(UISwitch *)aSender
 {
-  [[RPGBackgroundMusicController sharedBackgroundMusicController] toggle:aSender.on];
-  BOOL isMusicPlaying = [RPGBackgroundMusicController sharedBackgroundMusicController].playing;
-  [NSUserDefaults standardUserDefaults].musicPlaying = isMusicPlaying;
+  [RPGBackgroundMusicController sharedBackgroundMusicController].playing = aSender.on;
 }
 
 - (IBAction)musicVolumeChange:(UISlider *)aSender
 {
   [RPGBackgroundMusicController sharedBackgroundMusicController].volume = aSender.value;
-  double musicVolume = [RPGBackgroundMusicController sharedBackgroundMusicController].volume;
-  [NSUserDefaults standardUserDefaults].musicVolume = musicVolume;
 }
 
 - (IBAction)soundTurn:(UISwitch *)aSender
 {
-  [[RPGSFXEngine sharedSFXEngine] toggle];
-  BOOL isSoundsPlaying = [RPGSFXEngine sharedSFXEngine].playing;
-  [NSUserDefaults standardUserDefaults].soundsPlaying = isSoundsPlaying;
+  [RPGSFXEngine sharedSFXEngine].playing = aSender.on;
 }
 
 - (IBAction)soundVolumeChange:(UISlider *)aSender
 {
   [RPGSFXEngine sharedSFXEngine].volume = aSender.value;
-  double soundsVolume = [RPGSFXEngine sharedSFXEngine].volume;
-  [NSUserDefaults standardUserDefaults].soundsVolume = soundsVolume;
 }
 
 @end

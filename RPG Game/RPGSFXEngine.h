@@ -20,6 +20,4 @@
 - (void)playSFXNamed:(NSString *)name;
 - (void)playSFXWithSpellID:(NSUInteger)identifier;
 
-- (void)toggle;
-
 @end
