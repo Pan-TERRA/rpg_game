@@ -35,6 +35,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *doneQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *reviewQuestButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
 
 @property (nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
 @property (nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
@@ -159,6 +160,11 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     
     [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState completionHandler:handler];
   }
+}
+
+- (void)setViewForNoQuests:(BOOL)aFlag
+{
+  self.messageLabel.hidden = !aFlag;
 }
 
 /**

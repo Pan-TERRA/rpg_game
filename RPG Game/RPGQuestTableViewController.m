@@ -121,6 +121,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       break;
     }
   }
+  [self.questListViewController setViewForNoQuests:(result == 0)];
   return result;
 }
 
@@ -211,7 +212,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       BOOL success = (status == 0);
       if (success)
       {
-        [self removeQuestWithID:aQuestID forState:state];        
+        [self removeQuestWithID:aQuestID forState:state];
       }
       else
       {
