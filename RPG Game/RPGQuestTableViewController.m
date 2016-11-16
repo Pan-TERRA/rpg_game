@@ -210,6 +210,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
     void (^handler)(NSInteger) = ^void(NSInteger status)
     {
       BOOL success = (status == 0);
+      
       if (success)
       {
         [self removeQuestWithID:aQuestID forState:state];
@@ -230,6 +231,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 - (void)removeQuestWithID:(NSUInteger)aQuestID forState:(RPGQuestListState)aState
 {
   NSMutableArray *questArray = nil;
+  
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
@@ -237,21 +239,25 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       questArray = self.takeQuestsMutableArray;
       break;
     }
+      
     case kRPGQuestListInProgressQuest:
     {
       questArray = self.inProgressQuestsMutableArray;
       break;
     }
+      
     case kRPGQuestListDoneQuest:
     {
       questArray = self.doneQuestsMutableArray;
       break;
     }
+      
     default:
     {
       break;
     }
   }
+  
   if (questArray != nil)
   {
     for(RPGQuest *quest in questArray)

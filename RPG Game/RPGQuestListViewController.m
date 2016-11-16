@@ -162,11 +162,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   }
 }
 
-- (void)setViewForNoQuests:(BOOL)aFlag
-{
-  self.messageLabel.hidden = !aFlag;
-}
-
 /**
  *  Define if quest array should be uploaded from server.
  *
@@ -196,6 +191,11 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [self.activityIndicator setHidden:YES];
   [self.activityIndicator stopAnimating];
+}
+
+- (void)setViewForNoQuests:(BOOL)aFlag
+{
+  self.messageLabel.hidden = !aFlag;
 }
 
 #pragma mark - Quest Data Handling
