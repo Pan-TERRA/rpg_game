@@ -120,7 +120,7 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 {
   if (anAction.skillID != 0)
   {
-    [[RPGSFXEngine sharedSFXEngine] playSFXWithSpellID:anAction.skillID];
+    [[RPGSFXEngine sharedSFXEngine] playSFXWithSkillID:anAction.skillID];
   }
 }
 
