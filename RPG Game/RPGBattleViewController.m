@@ -81,7 +81,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
                                                    name:kRPGModelDidChangeNotification
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(removeBattleInitModal:)
+                                               selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
@@ -183,6 +183,14 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)cancelBattleInit:(UIButton *)sender
+{
+  [self.battleController prepareBattleControllerForDismiss];
+  [self removeBattleInitModal];
+  [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 #pragma mark Tooltip
 
 - (void)showTooltipWithView:(UIView *)view
@@ -254,13 +262,21 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     [self.battleRewardModal didMoveToParentViewController:self];
     
     self.winnerNickNameLabel.text = playerHP == 0 ? opponentNickName : playerNickName;
-    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", battleController.rewardGold];
+    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
     
     [self.timer invalidate];
   }
+  
+    // skillbar
+  [self.skillBarViewController setButtonsEnable:self.battleController.myTurn];
 }
 
-- (void)removeBattleInitModal:(NSNotification *)aNotification
+- (void)battleInitDidEndSetUp:(NSNotification *)aNotification
+{
+  [self removeBattleInitModal];
+}
+
+- (void)removeBattleInitModal
 {
   [self restartTimer];
   [self.battleInitModal.view removeFromSuperview];

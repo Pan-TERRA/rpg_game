@@ -12,6 +12,8 @@
 
 static RPGSFXEngine *sharedSFXEngine = nil;
 
+NSString * const kRPGSoundName = @"soundName";
+
 @interface RPGSFXEngine ()
 
 @property (nonatomic, retain) CMOpenALSoundManager *soundManager;
@@ -115,15 +117,23 @@ static RPGSFXEngine *sharedSFXEngine = nil;
 {
   if (self.playing)
   {
+      //TODO: remove hardcode
     NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
     self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
     [self.soundManager playSoundWithID:0];
   }
 }
 
-- (void)playSFXWithSpellID:(NSUInteger)identifier
+- (void)playSFXWithSkillID:(NSUInteger)aSkillID
 {
-  [self playSFXNamed:[NSString stringWithFormat:@"Spell-%lu", (unsigned long)identifier]];
+    //TODO: remove hardcode
+  NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
+  NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+  NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
+  
+  NSString *soundName = skillDictionary[kRPGSoundName];
+
+  [self playSFXNamed:soundName];
 }
 
 

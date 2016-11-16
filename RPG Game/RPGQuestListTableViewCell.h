@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @class RPGQuest;
+@class RPGQuestTableViewController;
 
 @interface RPGQuestListTableViewCell : UITableViewCell
+
+@property (nonatomic, assign, readwrite) RPGQuestTableViewController *tableViewController;
 
 - (void)setCellContent:(RPGQuest *)aCellContent;
 

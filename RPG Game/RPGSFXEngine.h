@@ -18,6 +18,6 @@
 #pragma mark - API
 
 - (void)playSFXNamed:(NSString *)name;
-- (void)playSFXWithSpellID:(NSUInteger)identifier;
+- (void)playSFXWithSkillID:(NSUInteger)aSkillID;
 
 @end

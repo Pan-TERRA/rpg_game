@@ -13,8 +13,11 @@
 #import "RPGQuestReward.h"
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
+#import "RPGQuestTableViewController.h"
 
-@interface RPGQuestListTableViewCell()
+static CGFloat const kBounceValue = 10.0;
+
+@interface RPGQuestListTableViewCell()  <UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
@@ -26,16 +29,38 @@
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *deleteButton;
+
+@property (nonatomic, retain, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
+@property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewRightConstraint;
+@property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewLeftConstraint;
+@property (nonatomic, assign, readwrite) CGFloat startRightConstraintConstant;
+
+@property (nonatomic, assign, readwrite) RPGQuestState questState;
+@property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
 
 @implementation RPGQuestListTableViewCell
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_panGestureRecognizer release];
+  
+  [super dealloc];
+}
 
 #pragma mark - UITableViewCell
 
 - (void)awakeFromNib
 {
   [super awakeFromNib];
+  
+  self.panGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)] autorelease];
+  self.panGestureRecognizer.delegate = self;
+  [self addGestureRecognizer:self.panGestureRecognizer];
 }
 
 - (void)setSelected:(BOOL)aSelected animated:(BOOL)anAnimated
@@ -51,6 +76,8 @@
   self.descriptionLabel.text = aCellContent.questDescription;
   self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
+  self.questState = aCellContent.state;
+  self.questID = aCellContent.questID;
   
   if (aCellContent.reward.skillID != 0)
   {
@@ -119,11 +146,19 @@
   }
 }
 
+#pragma mark - Actions
+
+- (IBAction)deleteButtonOnClick:(UIButton *)sender
+{
+  [self.tableViewController deleteQuestWithID:self.questID];
+}
+
 #pragma mark - Cell State
 
 - (void)setStateLabelHidden:(BOOL)aFlag
 {
-  if (aFlag) {
+  if (aFlag)
+  {
     [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
                                                                        attribute:NSLayoutAttributeTrailing
                                                                        relatedBy:NSLayoutRelationEqual
@@ -156,6 +191,91 @@
                                                                                  multiplier:1.0
                                                                                    constant:10]];
   }
+}
+
+#pragma mark - UIPanGestureRecognizer
+
+- (void)panAction:(UIPanGestureRecognizer *)aRecognizer
+{
+  switch (aRecognizer.state)
+  {
+    case UIGestureRecognizerStateBegan:
+    {
+      self.startRightConstraintConstant = self.contentViewRightConstraint.constant;
+      break;
+    }
+      
+    case UIGestureRecognizerStateChanged:
+    {
+      CGPoint currentPoint = [aRecognizer translationInView:self];
+      CGFloat shift = self.startRightConstraintConstant - currentPoint.x;
+      if (shift > 0 && shift < [self buttonWidth])
+      {
+        self.contentViewRightConstraint.constant = shift;
+        self.contentViewLeftConstraint.constant = -shift;
+      }
+      break;
+    }
+    
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateCancelled:
+    {
+      CGFloat constraintValue = 0;
+      if (self.contentViewRightConstraint.constant > [self buttonWidth] / 2.0)
+      {
+        constraintValue = [self buttonWidth];
+      }
+      [self setConstraints:constraintValue];
+      break;
+    }
+      
+    default:
+    {
+      break;
+    }
+  }
+}
+
+- (void)setConstraints:(CGFloat)aConstraintValue
+{
+  self.contentViewRightConstraint.constant = aConstraintValue;
+  self.contentViewLeftConstraint.constant = -aConstraintValue;
+}
+
+- (CGFloat)buttonWidth
+{
+  return self.deleteButton.frame.size.width + kBounceValue;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+  BOOL result = NO;
+  if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+  {
+
+    UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer*)gestureRecognizer;
+    UIView *cell = [panGestureRecognizer view];
+    CGPoint translation = [panGestureRecognizer translationInView:[cell superview]];
+    
+    if ([self canDeleteQuest] && fabs(translation.x) > fabs(translation.y))
+    {
+      result = YES;
+    }
+  }
+  return result;
+}
+
+- (BOOL)canDeleteQuest
+{
+  BOOL result = NO;
+  RPGQuestState state = self.questState;
+  if (state == kRPGQuestStateCanTake ||
+      state == kRPGQuestStateInProgress ||
+      state == kRPGQuestStateReviewedFalse)
+  {
+    result = YES;
+  }
+  return result;
 }
 
 @end
