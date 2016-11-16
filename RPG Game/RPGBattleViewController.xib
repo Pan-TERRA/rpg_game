@@ -40,24 +40,47 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Battle Init" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Snp-T2-i3e">
-                                <rect key="frame" x="61" y="48" width="119" height="33"/>
+                                <rect key="frame" x="61" y="35" width="119" height="38"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="28"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3i4-Dq-KJx">
+                                <rect key="frame" x="70" y="78" width="100" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="BM0-da-7oJ"/>
+                                    <constraint firstAttribute="height" constant="30" id="mks-4p-ipe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="24"/>
+                                <state key="normal" title="Cancel" backgroundImage="main_button_active">
+                                    <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancelBattleInit:" destination="-1" eventType="touchUpInside" id="01c-oA-yVx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Snp-T2-i3e" firstAttribute="centerX" secondItem="m14-Bv-sgn" secondAttribute="centerX" id="1WN-aA-fRY"/>
+                            <constraint firstAttribute="bottom" secondItem="3i4-Dq-KJx" secondAttribute="bottom" constant="20" symbolic="YES" id="2Bw-rG-FXU"/>
                             <constraint firstItem="wSp-YY-5F4" firstAttribute="top" secondItem="m14-Bv-sgn" secondAttribute="top" id="8ta-ZH-9NY"/>
                             <constraint firstAttribute="bottom" secondItem="wSp-YY-5F4" secondAttribute="bottom" id="CZa-rJ-5TG"/>
+                            <constraint firstItem="3i4-Dq-KJx" firstAttribute="top" secondItem="Snp-T2-i3e" secondAttribute="bottom" constant="5" id="D8F-xx-vfy"/>
                             <constraint firstAttribute="width" constant="240" id="HbY-mk-VpH"/>
                             <constraint firstAttribute="trailing" secondItem="wSp-YY-5F4" secondAttribute="trailing" id="OhP-YV-Gd6"/>
-                            <constraint firstItem="Snp-T2-i3e" firstAttribute="centerY" secondItem="m14-Bv-sgn" secondAttribute="centerY" id="ZhM-GE-m2c"/>
+                            <constraint firstItem="3i4-Dq-KJx" firstAttribute="width" secondItem="Snp-T2-i3e" secondAttribute="width" id="YMk-IT-Jcj"/>
+                            <constraint firstItem="Snp-T2-i3e" firstAttribute="centerY" secondItem="m14-Bv-sgn" secondAttribute="centerY" constant="-10" id="ZhM-GE-m2c"/>
                             <constraint firstAttribute="height" constant="128" id="bf0-4M-zmI"/>
                             <constraint firstItem="wSp-YY-5F4" firstAttribute="leading" secondItem="m14-Bv-sgn" secondAttribute="leading" id="cl6-rl-gAM"/>
+                            <constraint firstItem="3i4-Dq-KJx" firstAttribute="centerX" secondItem="m14-Bv-sgn" secondAttribute="centerX" id="r1r-Ez-reV"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="YMk-IT-Jcj"/>
+                            </mask>
+                        </variation>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -458,6 +481,7 @@
         <image name="bar_left" width="519" height="124"/>
         <image name="bar_right" width="519" height="124"/>
         <image name="hp_icon" width="40" height="40"/>
+        <image name="main_button_active" width="275" height="136"/>
         <image name="main_button_inactive" width="275" height="137"/>
     </resources>
 </document>
