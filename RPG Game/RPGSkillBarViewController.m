@@ -15,8 +15,6 @@
 #import "RPGBattleViewController.h"
 #import "RPGSkillDescriptionViewController.h"
 
-static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleController.battle.currentTurn";
-
 @interface RPGSkillBarViewController ()
 
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGSkillRepresentation *> *skillRepresentations;
@@ -35,10 +33,6 @@ static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleCont
   {
     _battleController = aBattleController;
     _skillRepresentations = [NSMutableArray new];
-    [self addObserver:self
-           forKeyPath:sRPGSkillBarViewControllerKeyPathToMyTurn
-              options:NSKeyValueObservingOptionNew
-              context:nil];
   }
   
   return self;
@@ -53,7 +47,6 @@ static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleCont
 
 - (void)dealloc
 {
-  [self removeObserver:self forKeyPath:sRPGSkillBarViewControllerKeyPathToMyTurn];
   [_skillRepresentations release];
   [super dealloc];
 }
@@ -92,12 +85,13 @@ static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleCont
   }
 }
 
-- (void)setButtonsEnable:(BOOL)isEnabled
+#pragma mark - View State
+
+- (void)setButtonsEnable:(BOOL)enEnabledFlag
 {
-  for (NSInteger i = 1; i <= self.battleController.skillsCount ; i++)
+  for (NSInteger i = 1; i <= self.battleController.skillsCount; i++)
   {
-    UIButton *skillButton = (UIButton *)[self.view viewWithTag:i];
-    skillButton.enabled = isEnabled;
+    ((UIButton *)[self.view viewWithTag:i]).enabled = enEnabledFlag;
   }
 }
 
@@ -153,20 +147,4 @@ static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleCont
   }
 }
 
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
-{
-  if ([keyPath isEqualToString:sRPGSkillBarViewControllerKeyPathToMyTurn])
-  {
-    if (self.battleController.isMyTurn)
-    {
-      [self setButtonsEnable:YES];
-    }
-  }
-  else
-  {
-    [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-  }
-}
 @end

@@ -254,10 +254,13 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     [self.battleRewardModal didMoveToParentViewController:self];
     
     self.winnerNickNameLabel.text = playerHP == 0 ? opponentNickName : playerNickName;
-    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", battleController.rewardGold];
+    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
     
     [self.timer invalidate];
   }
+  
+    // skillbar
+  [self.skillBarViewController setButtonsEnable:self.battleController.myTurn];
 }
 
 - (void)removeBattleInitModal:(NSNotification *)aNotification
