@@ -9,9 +9,6 @@
 #import "RPGAppDelegate.h"
   // Views
 #import "RPGInitialScreenViewController.h"
-  // Misc
-#import "RPGBackgroundMusicController.h"
-#import "RPGSFXEngine.h"
  // Constants
 #import "RPGNibNames.h"
 
@@ -42,8 +39,6 @@
   
   self.window.backgroundColor = [UIColor whiteColor];
   [self.window makeKeyAndVisible];
-  
-  [RPGBackgroundMusicController sharedBackgroundMusicController];
   
   return YES;
 }

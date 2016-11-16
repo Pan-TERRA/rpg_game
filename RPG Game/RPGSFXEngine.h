@@ -20,6 +20,4 @@
 - (void)playSFXNamed:(NSString *)name;
 - (void)playSFXWithSkillID:(NSUInteger)aSkillID;
 
-- (void)toggle;
-
 @end

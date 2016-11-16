@@ -97,6 +97,7 @@ NSString * const kRPGSoundName = @"soundName";
 - (void)setVolume:(double)volume
 {
   self.soundManager.soundEffectsVolume = volume;
+  [NSUserDefaults standardUserDefaults].soundsVolume = volume;
 }
 
 - (double)volume
@@ -104,14 +105,13 @@ NSString * const kRPGSoundName = @"soundName";
   return self.soundManager.soundEffectsVolume;
 }
 
-#pragma mark - Actions
-
-- (void)toggle
+- (void)setPlaying:(BOOL)playing
 {
-  static BOOL state = YES;
-  state = !state;
-  self.playing = state;
+  _playing = playing;
+  [NSUserDefaults standardUserDefaults].soundsPlaying = playing;
 }
+
+#pragma mark - Actions
 
 - (void)playSFXNamed:(NSString *)name
 {
