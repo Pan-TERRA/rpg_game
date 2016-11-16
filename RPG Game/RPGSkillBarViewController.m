@@ -118,9 +118,10 @@ static NSString * const sRPGSkillBarViewControllerKeyPathToMyTurn = @"battleCont
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
     //load skillRepresentations
-  for (NSNumber *skillID in self.battleController.skillsID)
+  for (NSDictionary *skillDictionary in self.battleController.skillsID)
   {
-    RPGSkillRepresentation *representation = [RPGSkillRepresentation skillrepresentationWithSkillID:[skillID integerValue]];
+    NSInteger skillID = [[[skillDictionary allKeys] firstObject] integerValue];
+    RPGSkillRepresentation *representation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
     [self.skillRepresentations addObject:representation];
   }
   

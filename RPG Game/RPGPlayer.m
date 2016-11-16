@@ -13,8 +13,6 @@ NSString * const kRPGPlayerSkills = @"skills";
 
 @interface RPGPlayer ()
 
-@property (retain, nonatomic, readwrite) NSArray<NSNumber *> *skills;
-
 @end
 
 @implementation RPGPlayer
@@ -29,7 +27,12 @@ NSString * const kRPGPlayerSkills = @"skills";
   
   if (self != nil)
   {
-    _skills = [aSkills retain];
+    NSMutableArray *skillsArray = [NSMutableArray array];
+    for (NSNumber *skillID in aSkills)
+    {
+      [skillsArray addObject:[NSDictionary dictionaryWithObject:@(0) forKey:skillID]];
+    }
+    _skills = [skillsArray retain];
   }
   
   return self;
