@@ -92,7 +92,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   return self.battle.player.skills.count;
 }
 
-- (NSArray *)skillsID
+- (NSArray *)skills
 {
   return self.battle.player.skills;
 }

@@ -58,7 +58,7 @@
   if (self.battleController.isMyTurn && (aSender.tag <= self.battleController.skillsCount))
   {
     [self.battleController sendSkillActionRequestWithTag:aSender.tag];
-    [self setButtonsEnable:NO];
+    [self disableButtons];
   }
 }
 
@@ -87,11 +87,26 @@
 
 #pragma mark - View State
 
-- (void)setButtonsEnable:(BOOL)enEnabledFlag
+- (void)disableButtons
 {
   for (NSInteger i = 1; i <= self.battleController.skillsCount; i++)
   {
-    ((UIButton *)[self.view viewWithTag:i]).enabled = enEnabledFlag;
+    ((UIButton *)[self.view viewWithTag:i]).enabled = NO;
+  }
+}
+
+- (void)updateButtonsState
+{
+  NSArray *skills = self.battleController.skills;
+  for (NSInteger i = 1; i <= skills.count; i++)
+  {
+    BOOL active = NO;
+    NSInteger cooldown = [[[skills[i - 1] allValues] firstObject] integerValue];
+    if (cooldown == 0)
+    {
+      active = YES;
+    }
+    ((UIButton *)[self.view viewWithTag:i]).enabled = active;
   }
 }
 
@@ -112,7 +127,7 @@
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
     //load skillRepresentations
-  for (NSDictionary *skillDictionary in self.battleController.skillsID)
+  for (NSDictionary *skillDictionary in self.battleController.skills)
   {
     NSInteger skillID = [[[skillDictionary allKeys] firstObject] integerValue];
     RPGSkillRepresentation *representation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
