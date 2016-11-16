@@ -12,6 +12,7 @@
                 <outlet property="activityIndicator" destination="haj-qR-g3v" id="dNB-zM-vDd"/>
                 <outlet property="doneQuestListButton" destination="L4V-zu-eOI" id="XTX-oa-pbp"/>
                 <outlet property="inProgressQuestListButton" destination="Cjb-T6-vMT" id="XEB-Ei-MEL"/>
+                <outlet property="messageLabel" destination="R80-Hi-Pm3" id="CqU-l3-fbL"/>
                 <outlet property="reviewQuestButton" destination="Rp1-Zn-0ou" id="6hu-j8-h1x"/>
                 <outlet property="tableView" destination="u7D-Ey-t6y" id="kgl-KM-wXn"/>
                 <outlet property="takeQuestListButton" destination="Sly-hB-P6D" id="epa-tM-DP4"/>
@@ -121,6 +122,12 @@
                     <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quest list is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R80-Hi-Pm3">
+                    <rect key="frame" x="295" y="196" width="147" height="22"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -128,10 +135,12 @@
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="74q-CS-hmo"/>
                 <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="10" id="9PY-fB-QAB"/>
                 <constraint firstItem="7xu-Ph-Wpt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9sD-de-yoT"/>
+                <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CjS-j8-Vbk"/>
                 <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E8X-U2-51Y"/>
                 <constraint firstItem="7xu-Ph-Wpt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Gks-gW-m2n"/>
                 <constraint firstAttribute="trailing" secondItem="k3T-zf-arz" secondAttribute="trailing" id="QfU-8N-kln"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
+                <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Ypa-xb-unG"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="7xu-Ph-Wpt" secondAttribute="bottom" constant="10" id="k2c-eA-8bl"/>
                 <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="10" id="pP6-qO-mer"/>
                 <constraint firstAttribute="bottom" secondItem="k3T-zf-arz" secondAttribute="bottom" id="r4E-ve-Skk"/>

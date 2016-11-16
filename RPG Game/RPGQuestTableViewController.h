@@ -22,4 +22,6 @@
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *doneQuestsMutableArray;
 
+- (void)deleteQuestWithID:(NSUInteger)anID;
+
 @end

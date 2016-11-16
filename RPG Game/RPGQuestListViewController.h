@@ -26,5 +26,6 @@ extern NSString * const kRPGQuestStringStateReviewedFalse;
  */
 - (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag;
 - (void)showQuestViewWithQuest:(RPGQuest *)aQuest;
+- (void)setViewForNoQuests:(BOOL)aFlag;
 
 @end

@@ -35,6 +35,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *doneQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *reviewQuestButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
 
 @property (nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
 @property (nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
@@ -75,6 +76,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [super viewDidLoad];
   self.tableViewController.questListViewController = self;
+  self.tableViewController.tableView = self.tableView;
   self.tableView.dataSource = self.tableViewController;
   self.tableView.delegate = self.tableViewController;
 }
@@ -189,6 +191,11 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 {
   [self.activityIndicator setHidden:YES];
   [self.activityIndicator stopAnimating];
+}
+
+- (void)setViewForNoQuests:(BOOL)aFlag
+{
+  self.messageLabel.hidden = !aFlag;
 }
 
 #pragma mark - Quest Data Handling

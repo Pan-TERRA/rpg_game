@@ -21,6 +21,8 @@
 #import "RPGNibNames.h"
 #import "RPGQuestListState.h"
 
+#import "RPGAlert.h"
+
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
 @interface RPGQuestTableViewController ()
@@ -119,6 +121,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       break;
     }
   }
+  [self.questListViewController setViewForNoQuests:(result == 0)];
   return result;
 }
 
@@ -137,6 +140,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
   cell.backgroundColor = [UIColor clearColor];
   cell.backgroundView = [[UIView new] autorelease];
   cell.selectedBackgroundView = [[UIView new] autorelease];
+  cell.tableViewController = self;
   
   switch (self.questListState)
   {
@@ -197,103 +201,75 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
   }
 }
 
-#pragma mark - Delete On Swipe
+#pragma mark - DeleteQuest
 
-- (BOOL)tableView:(UITableView *)aTableView canEditRowAtIndexPath:(NSIndexPath *)anIndexPath
+- (void)deleteQuestWithID:(NSUInteger)aQuestID
 {
-  return YES;
-}
-
-- (void)tableView:(UITableView *)aTableView commitEditingStyle:(UITableViewCellEditingStyle)anEditingStyle forRowAtIndexPath:(NSIndexPath *)anIndexPath
-{
-  if (anEditingStyle == UITableViewCellEditingStyleDelete)
-  {
     RPGQuestListState state = self.questListState;
-    NSUInteger questID = [self getQuestIDByState:state index:anIndexPath.row];
-    
-    __block typeof(self.questListViewController) weakSelfQuestListViewController = self.questListViewController;
     
     void (^handler)(NSInteger) = ^void(NSInteger status)
     {
       BOOL success = (status == 0);
+      
       if (success)
       {
-        switch (state)
-        {
-          case kRPGQuestListTakeQuest:
-          {
-            [self.takeQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          case kRPGQuestListInProgressQuest:
-          {
-            [self.inProgressQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          case kRPGQuestListDoneQuest:
-          {
-            [self.doneQuestsMutableArray removeObjectAtIndex:anIndexPath.row];
-            break;
-          }
-          default:
-          {
-            break;
-          }
-        }
-        
-        [aTableView reloadData];
+        [self removeQuestWithID:aQuestID forState:state];
       }
       else
       {
-        NSString *message = @"Can't delete quest.";
-        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Delete quest"
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
-        [alert addAction:[UIAlertAction actionWithTitle:@"Cancel"
-                                                  style:UIAlertActionStyleCancel
-                                                handler:^(UIAlertAction *action)
-        {
-          [alert dismissViewControllerAnimated:YES completion:nil];
-        }]];
-        
-        [weakSelfQuestListViewController presentViewController:alert animated:YES completion:nil];
+        [RPGAlert showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
       }
     };
     
     NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:questID];
+    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:aQuestID];
     [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
                                                     request:request
                                           completionHandler:handler];
-  }
 }
 
-- (NSUInteger)getQuestIDByState:(RPGQuestListState)aState index:(NSUInteger)anIndex
+- (void)removeQuestWithID:(NSUInteger)aQuestID forState:(RPGQuestListState)aState
 {
-  NSUInteger questID = 0;
+  NSMutableArray *questArray = nil;
+  
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-      questID = ((RPGQuest *)[self.takeQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.takeQuestsMutableArray;
       break;
     }
+      
     case kRPGQuestListInProgressQuest:
     {
-      questID = ((RPGQuest *)[self.inProgressQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.inProgressQuestsMutableArray;
       break;
     }
+      
     case kRPGQuestListDoneQuest:
     {
-      questID = ((RPGQuest *)[self.doneQuestsMutableArray objectAtIndex:anIndex]).questID;
+      questArray = self.doneQuestsMutableArray;
       break;
     }
+      
     default:
     {
       break;
     }
   }
-  return questID;
+  
+  if (questArray != nil)
+  {
+    for(RPGQuest *quest in questArray)
+    {
+      if (quest.questID == aQuestID)
+      {
+        [questArray removeObject:quest];
+        [self.tableView reloadData];
+        break;
+      }
+    }
+  }
 }
 
 @end
