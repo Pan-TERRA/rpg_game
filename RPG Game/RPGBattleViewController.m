@@ -268,7 +268,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   }
   
     // skillbar
-  [self.skillBarViewController setButtonsEnable:battleController.myTurn];
+  if (self.battleController.isMyTurn)
+  {
+    [self.skillBarViewController updateButtonsState];
+  }
 }
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification

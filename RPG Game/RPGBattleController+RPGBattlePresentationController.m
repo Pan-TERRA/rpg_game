@@ -37,7 +37,7 @@
   return self.battle.player.skills.count;
 }
 
-- (NSArray *)skillsID
+- (NSArray *)skills
 {
   return self.battle.player.skills;
 }

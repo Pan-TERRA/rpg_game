@@ -13,7 +13,7 @@
   // Player
 @property (assign, nonatomic, readonly) NSString *playerNickName;
 @property (assign, nonatomic, readonly) NSInteger playerHP;
-@property (assign, nonatomic, readonly) NSArray<NSNumber *> *skillsID;
+@property (assign, nonatomic, readonly) NSArray<NSDictionary<NSNumber *, NSNumber *> *> *skills;
 @property (nonatomic, assign, readonly) NSUInteger skillsCount;
 @property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
   // Opponent

@@ -93,12 +93,14 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)sendSkillActionRequestWithTag:(NSInteger)aTag
 {
+  RPGSkillActionRequest *request = nil;
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
   NSArray *skills = self.battle.player.skills;
   NSInteger index = aTag - 1;
-  RPGSkillActionRequest *request = nil;
+    // TODO: redo
+  NSInteger skillID = [[[skills[index] allKeys] firstObject] integerValue];
   
-  request = [RPGSkillActionRequest requestWithSkillID:[skills[index] integerValue]
+  request = [RPGSkillActionRequest requestWithSkillID:skillID
                                                 token:token];
   
   if (request != nil)

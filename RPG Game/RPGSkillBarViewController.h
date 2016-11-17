@@ -16,5 +16,6 @@
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification;
-- (void)setButtonsEnable:(BOOL)isEnabled;
+
+- (void)updateButtonsState;
 @end

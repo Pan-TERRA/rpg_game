@@ -13,7 +13,7 @@ extern NSString * const kRPGPlayerSkills;
 
 @protocol RPGClientEntity <NSObject>
 
-@property (retain, nonatomic, readonly) NSArray<NSNumber *> *skills;
+@property (retain, nonatomic, readwrite) NSArray<NSDictionary<NSNumber *, NSNumber *> *> *skills;
 
 @end
 
