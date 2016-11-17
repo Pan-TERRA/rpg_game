@@ -8,8 +8,8 @@
 
 #import "RPGCharacterRequest.h"
 
-static NSString * const kRPGCharacterRequestToken = @"token";
-static NSString * const kRPGCharacterRequestCharacterID = @"char_id";
+NSString * const kRPGCharacterRequestToken = @"token";
+NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
 @implementation RPGCharacterRequest
 

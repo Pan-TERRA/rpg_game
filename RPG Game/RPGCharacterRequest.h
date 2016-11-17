@@ -9,6 +9,9 @@
 #import "RPGRequest.h"
 #import "RPGSerializable.h"
 
+extern NSString * const kRPGCharacterRequestToken;
+extern NSString * const kRPGCharacterRequestCharacterID;
+
 @interface RPGCharacterRequest : NSObject <RPGSerializable>
 
 @property (copy, nonatomic, readwrite) NSString *token;
