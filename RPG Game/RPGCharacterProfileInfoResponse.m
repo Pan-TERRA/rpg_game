@@ -50,6 +50,22 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
            activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                         skills:(NSArray *)aSkills
 {
+  self = [super init];
+  
+  if (self != nil)
+  {
+    _status = aStatus;
+    _avatar = [anAvatar copy];
+    _currentLevel = aCurrentLevel;
+    _maxExp = aMaxExp;
+    _currentExp = aCurrentExp;
+    _attack = anAttack;
+    _hp = aHp;
+    _bagSize = aBagSize;
+    _activeSkillsBagSize = anActiveSkillsBagSize;
+    _skills = [aSkills retain];
+  }
+  
   return self;
 }
 
