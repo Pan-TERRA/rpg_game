@@ -11,7 +11,7 @@
 #import "RPGBattle.h"
 #import "RPGSkillRepresentation.h"
   // Controllers
-#import "RPGBattleController.h"
+#import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGBattleViewController.h"
 #import "RPGSkillDescriptionViewController.h"
 

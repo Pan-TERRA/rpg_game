@@ -8,7 +8,7 @@
 
 #import "RPGBattleViewController.h"
   // API
-#import "RPGBattleController.h"
+#import "RPGBattleController+RPGBattlePresentationController.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -268,7 +268,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   }
   
     // skillbar
-  [self.skillBarViewController setButtonsEnable:self.battleController.myTurn];
+  [self.skillBarViewController setButtonsEnable:battleController.myTurn];
 }
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification

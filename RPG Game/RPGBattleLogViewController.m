@@ -8,7 +8,7 @@
 
 #import "RPGBattleLogViewController.h"
   // Controllers
-#import "RPGBattleController.h"
+#import "RPGBattleController+RPGBattlePresentationController.h"
   // Entities
 #import "RPGBattleAction.h"
 #import "RPGSkillRepresentation.h"
