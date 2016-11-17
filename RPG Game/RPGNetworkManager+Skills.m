@@ -8,7 +8,7 @@
 
 #import "RPGNetworkManager+Skills.h"
   // Entities
-#import "RPGSkillsRequest.h"
+#import "RPGCharacterRequest.h"
 #import "RPGSkillsResponse.h"
 #import "RPGSkillInfoResponse.h"
   // Misc
@@ -23,8 +23,8 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
   
-  RPGSkillsRequest *aRequest = [RPGSkillsRequest skillsRequestWithToken:[NSUserDefaults standardUserDefaults].sessionToken
-                                                           characterID:aCharacterID];
+  RPGCharacterRequest *aRequest = [RPGCharacterRequest characterRequestWithToken:[NSUserDefaults standardUserDefaults].sessionToken
+                                                                     characterID:aCharacterID];
   NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
