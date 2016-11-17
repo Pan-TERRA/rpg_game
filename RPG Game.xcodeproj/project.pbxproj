@@ -49,7 +49,7 @@
 		28A9155F1DC7B921001E0F51 /* RPGClassesResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A915581DC7B921001E0F51 /* RPGClassesResponse.m */; };
 		28A915611DC7B921001E0F51 /* RPGClassInfoResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9155C1DC7B921001E0F51 /* RPGClassInfoResponse.m */; };
 		28A915711DC7B94A001E0F51 /* RPGSkillInfoResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A915661DC7B94A001E0F51 /* RPGSkillInfoResponse.m */; };
-		28A915731DC7B94A001E0F51 /* RPGSkillsRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9156A1DC7B94A001E0F51 /* RPGSkillsRequest.m */; };
+		28A915731DC7B94A001E0F51 /* RPGCharacterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9156A1DC7B94A001E0F51 /* RPGCharacterRequest.m */; };
 		28A915751DC7B94A001E0F51 /* RPGSkillsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9156E1DC7B94A001E0F51 /* RPGSkillsResponse.m */; };
 		28A9157D1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */; };
 		28A9157E1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 28A9157B1DC7BCA8001E0F51 /* RPGNetworkManager+AuthorizationTests.m */; };
@@ -218,8 +218,8 @@
 		28A9155C1DC7B921001E0F51 /* RPGClassInfoResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGClassInfoResponse.m; sourceTree = "<group>"; };
 		28A915651DC7B94A001E0F51 /* RPGSkillInfoResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillInfoResponse.h; sourceTree = "<group>"; };
 		28A915661DC7B94A001E0F51 /* RPGSkillInfoResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillInfoResponse.m; sourceTree = "<group>"; };
-		28A915691DC7B94A001E0F51 /* RPGSkillsRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillsRequest.h; sourceTree = "<group>"; };
-		28A9156A1DC7B94A001E0F51 /* RPGSkillsRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillsRequest.m; sourceTree = "<group>"; };
+		28A915691DC7B94A001E0F51 /* RPGCharacterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGCharacterRequest.h; sourceTree = "<group>"; };
+		28A9156A1DC7B94A001E0F51 /* RPGCharacterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGCharacterRequest.m; sourceTree = "<group>"; };
 		28A9156D1DC7B94A001E0F51 /* RPGSkillsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillsResponse.h; sourceTree = "<group>"; };
 		28A9156E1DC7B94A001E0F51 /* RPGSkillsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillsResponse.m; sourceTree = "<group>"; };
 		28A9157A1DC7BCA8001E0F51 /* RPGNetworkManager_NoNetworkTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNetworkManager_NoNetworkTests.m; sourceTree = "<group>"; };
@@ -944,8 +944,8 @@
 		28A915781DC7B95C001E0F51 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				28A915691DC7B94A001E0F51 /* RPGSkillsRequest.h */,
-				28A9156A1DC7B94A001E0F51 /* RPGSkillsRequest.m */,
+				28A915691DC7B94A001E0F51 /* RPGCharacterRequest.h */,
+				28A9156A1DC7B94A001E0F51 /* RPGCharacterRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1573,7 +1573,7 @@
 				AEFC27B41DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
 				D0819ABD1DD6180100021DB9 /* RPGSkillBarViewController.m in Sources */,
-				28A915731DC7B94A001E0F51 /* RPGSkillsRequest.m in Sources */,
+				28A915731DC7B94A001E0F51 /* RPGCharacterRequest.m in Sources */,
 				28A5A0E51DB91878000EF49F /* RPGQuestReward.m in Sources */,
 				28A56B4E1DCA4913005846B6 /* RPGProgressBar.m in Sources */,
 				28A5A0D61DB8E95E000EF49F /* RPGNetworkManager+Quests.m in Sources */,
