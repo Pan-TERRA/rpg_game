@@ -8,6 +8,12 @@
 
 #import "RPGNetworkManager.h"
 
+@class RPGCharacterRequest;
+@class RPGCharacterProfileInfoResponse;
+
 @interface RPGNetworkManager (CharacterProfile)
+
+- (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
+                         completionHandler:(void (^)(RPGCharacterProfileInfoResponse *))callbackBlock;
 
 @end
