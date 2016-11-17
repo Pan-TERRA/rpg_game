@@ -96,6 +96,7 @@
 		AEFC27C21DDC9E9500905ADD /* RPGCharacterProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFC27C01DDC9E9500905ADD /* RPGCharacterProfileViewController.xib */; };
 		AEFC27C51DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27C41DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.m */; };
 		AEFC27C71DDCD23B00905ADD /* RPGCharacterBagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFC27C61DDCD23B00905ADD /* RPGCharacterBagCollectionViewCell.xib */; };
+		AEFC27CA1DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27C91DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.m */; };
 		D0819ABD1DD6180100021DB9 /* RPGSkillBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0819AB11DD6180100021DB9 /* RPGSkillBarViewController.m */; };
 		D0819ABE1DD6180100021DB9 /* RPGSkillBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */; };
 		D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0819AB41DD6180100021DB9 /* RPGSkillDescriptionViewController.m */; };
@@ -298,6 +299,8 @@
 		AEFC27C31DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGCharacterBagCollectionViewCell.h; sourceTree = "<group>"; };
 		AEFC27C41DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGCharacterBagCollectionViewCell.m; sourceTree = "<group>"; };
 		AEFC27C61DDCD23B00905ADD /* RPGCharacterBagCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGCharacterBagCollectionViewCell.xib; sourceTree = "<group>"; };
+		AEFC27C81DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+CharacterProfile.h"; sourceTree = "<group>"; };
+		AEFC27C91DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+CharacterProfile.m"; sourceTree = "<group>"; };
 		D0819AB01DD6180100021DB9 /* RPGSkillBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillBarViewController.h; sourceTree = "<group>"; };
 		D0819AB11DD6180100021DB9 /* RPGSkillBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillBarViewController.m; sourceTree = "<group>"; };
 		D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillBarViewController.xib; sourceTree = "<group>"; };
@@ -721,6 +724,8 @@
 				AEFC27C31DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.h */,
 				AEFC27C41DDCD20300905ADD /* RPGCharacterBagCollectionViewCell.m */,
 				AEFC27C61DDCD23B00905ADD /* RPGCharacterBagCollectionViewCell.xib */,
+				AEFC27C81DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.h */,
+				AEFC27C91DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.m */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -1560,6 +1565,7 @@
 				28A5A0E51DB91878000EF49F /* RPGQuestReward.m in Sources */,
 				28A56B4E1DCA4913005846B6 /* RPGProgressBar.m in Sources */,
 				28A5A0D61DB8E95E000EF49F /* RPGNetworkManager+Quests.m in Sources */,
+				AEFC27CA1DDDB0E700905ADD /* RPGNetworkManager+CharacterProfile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
