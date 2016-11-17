@@ -19,6 +19,7 @@
   // Views
 #import "RPGProgressBar.h"
 #import "RPGBattleLogViewController.h"
+#import "RPGQuickSettingsViewController.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBackgroundMusicController.h"
@@ -56,6 +57,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *skillBar;
   // Tooltip
 @property (nonatomic, assign, readwrite) UIView *tooltip;
+
+  // Settings
+@property (nonatomic, retain, readwrite) RPGQuickSettingsViewController *settingsViewController;
+@property (nonatomic, assign, readwrite) UIView *settingsView;
 
 @end
 
@@ -114,6 +119,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [_battleRewardModal release];
   [_battleController release];
   [_skillBarViewController release];
+  [_settingsViewController release];
   
   [super dealloc];
 }
@@ -191,6 +197,17 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)openSettings:(UIButton *)sender
+{
+  if (self.settingsViewController == nil)
+  {
+    self.settingsViewController = [[RPGQuickSettingsViewController new] autorelease];
+  }
+  self.settingsView = self.settingsViewController.view;
+  self.settingsView.frame = self.view.frame;
+  
+  [self.view addSubview:self.settingsView];
+}
 #pragma mark Tooltip
 
 - (void)showTooltipWithView:(UIView *)view
