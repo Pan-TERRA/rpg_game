@@ -19,6 +19,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
 
 @property (nonatomic, retain, readwrite) AVAudioPlayer *peacePlayer;
 @property (nonatomic, retain, readwrite) AVAudioPlayer *battlePlayer;
+@property (nonatomic, assign, readwrite) AVAudioPlayer *currentPlayer;
 
 @end
 
@@ -150,7 +151,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
   [NSUserDefaults standardUserDefaults].musicPlaying = playing;
   if (_playing)
   {
-    [self switchToPeace];
+    [self.currentPlayer play];
   }
   else
   {
@@ -163,15 +164,18 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
 
 - (void)switchToBattle
 {
+  self.currentPlayer = self.battlePlayer;
   if (self.playing)
   {
     [self.peacePlayer pause];
     [self.battlePlayer play];
+
   }
 }
 
 - (void)switchToPeace
 {
+  self.currentPlayer = self.peacePlayer;
   if (self.playing)
   {
     [self.battlePlayer pause];
