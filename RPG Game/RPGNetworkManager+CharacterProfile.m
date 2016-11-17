@@ -14,7 +14,8 @@
 
 @implementation RPGNetworkManager (CharacterProfile)
 
-- (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest completionHandler:(void (^)(RPGCharacterProfileInfoResponse *))callbackBlock
+- (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
+                         completionHandler:(void (^)(RPGCharacterProfileInfoResponse *))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
