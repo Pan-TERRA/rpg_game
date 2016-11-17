@@ -63,7 +63,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="tTF-pG-FxL">
                                                     <rect key="frame" x="0.0" y="0.0" width="467" height="50"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nlh-Zt-ZOi">
                                                     <rect key="frame" x="25" y="10" width="427" height="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -75,7 +75,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="X6M-G6-u0F"/>
-                                                        <action selector="userDoneEnteringUsername:" destination="-1" eventType="editingDidEndOnExit" id="3Kx-ka-Fez"/>
+                                                        <action selector="userDoneEnteringText:" destination="-1" eventType="editingDidEndOnExit" id="lRT-W5-D59"/>
                                                         <outlet property="delegate" destination="-1" id="VmR-Qh-qlh"/>
                                                     </connections>
                                                 </textField>
@@ -99,7 +99,7 @@
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="yyb-yE-QzR">
                                                     <rect key="frame" x="0.0" y="0.0" width="467" height="50"/>
                                                 </imageView>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
+                                                <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="3pk-zf-QCm">
                                                     <rect key="frame" x="25" y="10" width="427" height="30"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -111,7 +111,7 @@
                                                     </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="8lE-xe-KtE"/>
-                                                        <action selector="userDoneEnteringPassword:" destination="-1" eventType="editingDidEndOnExit" id="aNE-kE-vXC"/>
+                                                        <action selector="passwordTextFieldDidReturn:" destination="-1" eventType="editingDidEndOnExit" id="PwU-dn-RiS"/>
                                                         <outlet property="delegate" destination="-1" id="qol-z5-PNw"/>
                                                     </connections>
                                                 </textField>

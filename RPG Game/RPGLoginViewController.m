@@ -18,16 +18,13 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
 
-static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
-
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
-@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *loginButton;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
-@property (nonatomic, assign, readwrite) UITextField *activeField; // for observation
+
 
 @end
 
@@ -41,15 +38,7 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
   
   if (self != nil)
   {
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self
-                      selector:@selector(keyboardWillShow:)
-                          name:UIKeyboardWillShowNotification
-                        object:nil];
-    [defaultCenter addObserver:self
-                      selector:@selector(keyboardWillHide:)
-                          name:UIKeyboardWillHideNotification
-                        object:nil];
+  
   }
   
   return self;
@@ -104,65 +93,9 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
   }
 }
 
-- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
-{
-  [self.activeField endEditing:YES];
-}
-
-- (IBAction)userDoneEnteringUsername:(UITextField *)aSender
-{
-  [self.passwordInputField becomeFirstResponder];
-}
-
-  // "return key" ending editing
-- (IBAction)userDoneEnteringPassword:(UITextField *)aSender
-{
-  [self loginAction:nil];
-}
-
 - (IBAction)forgotPasswordAction:(UIButton *)sender
 {
   
-}
-
-#pragma mark - Notifications
-
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllercContentInsetsGap;
-  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
-  self.scrollView.contentInset = contentInsets;
-  self.scrollView.scrollIndicatorInsets = contentInsets;
-  
-    // Shrink view
-  CGRect viewRect = self.view.frame;
-  viewRect.size.height -= keyboardFrame.size.height;
-    // Check if input text field is not visible
-  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
-  {
-    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
-  }
-}
-
-- (void)keyboardWillHide:(NSNotification *)aNotification
-{
-  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-  self.scrollView.contentInset = contentInsets;
-  self.scrollView.scrollIndicatorInsets = contentInsets;
-}
-
-#pragma mark - UITextFieldDelegate
-
-  // First responder toggle
-- (void)textFieldDidBeginEditing:(UITextField *)aTextField
-{
-  self.activeField = aTextField;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)aTextField
-{
-  self.activeField = nil;
 }
 
 - (IBAction)signupAction:(UIButton *)aSender
@@ -226,5 +159,18 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
 }
 
 
+
+#pragma mark - RPGViewController
+
+- (IBAction)userDoneEnteringText:(UITextField *)aSender
+{
+  [[aSender.superview.superview viewWithTag:aSender.tag + 1] becomeFirstResponder];
+}
+
+- (IBAction)passwordTextFieldDidReturn:(UITextField *)aSender
+{
+  [self loginAction:nil];
+  [aSender endEditing:YES];
+}
 
 @end

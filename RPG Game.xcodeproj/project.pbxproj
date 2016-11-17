@@ -371,22 +371,6 @@
 			name = "User Defaults";
 			sourceTree = "<group>";
 		};
-		280A52301DB7C61C00FF66B8 /* Network Manager */ = {
-			isa = PBXGroup;
-			children = (
-				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
-				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
-				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
-				283D19181DD5FE95008C5396 /* Resources */,
-				28A915551DC7B8F6001E0F51 /* Classes */,
-				28A915561DC7B8FD001E0F51 /* Skills */,
-				28A915241DC76963001E0F51 /* Quests */,
-				28A915251DC76968001E0F51 /* Authorization */,
-				28A915261DC76970001E0F51 /* Registration */,
-			);
-			name = "Network Manager";
-			sourceTree = "<group>";
-		};
 		281499EA1DAFC94100C26881 /* Logout */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,7 +389,7 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
-		281499EC1DAFC95F00C26881 /* Battle Controller */ = {
+		281499EC1DAFC95F00C26881 /* Battle */ = {
 			isa = PBXGroup;
 			children = (
 				28AB94871DD8A8EB00F1503B /* RPGBattleController.h */,
@@ -414,7 +398,7 @@
 				28AB949C1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m */,
 				285231611DC0F107002F702B /* Entities */,
 			);
-			name = "Battle Controller";
+			name = Battle;
 			sourceTree = "<group>";
 		};
 		281499ED1DAFC96800C26881 /* Entities */ = {
@@ -450,9 +434,12 @@
 		28149A111DB1008100C26881 /* Battle */ = {
 			isa = PBXGroup;
 			children = (
-				28AB94931DDB0B8700F1503B /* View */,
-				281499EC1DAFC95F00C26881 /* Battle Controller */,
-				28AB94921DDB0B5900F1503B /* Websocket Manager */,
+				D0819AC11DD6181E00021DB9 /* Battle ViewController */,
+				28AB94901DDA196F00F1503B /* Battle Log ViewController */,
+				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
+				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
+				283D191A1DD5FEC3008C5396 /* Skill Representation */,
+				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -554,7 +541,15 @@
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {
 			isa = PBXGroup;
 			children = (
-				280A52301DB7C61C00FF66B8 /* Network Manager */,
+				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
+				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
+				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				283D19181DD5FE95008C5396 /* Resources */,
+				28A915551DC7B8F6001E0F51 /* Classes */,
+				28A915561DC7B8FD001E0F51 /* Skills */,
+				28A915241DC76963001E0F51 /* Quests */,
+				28A915251DC76968001E0F51 /* Authorization */,
+				28A915261DC76970001E0F51 /* Registration */,
 			);
 			name = "Network Communication";
 			sourceTree = "<group>";
@@ -694,20 +689,12 @@
 			children = (
 				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
 				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
-				28AB949E1DDDC1DC00F1503B /* RPGViewController.h */,
-				28AB949F1DDDC1DC00F1503B /* RPGViewController.m */,
-				877C86541DC8F102004B4A00 /* Initial Screen */,
-				28149A1F1DB1012200C26881 /* Registration */,
-				28149A1E1DB1011B00C26881 /* Login */,
-				28149A131DB100FB00C26881 /* Main Menu */,
-				AED6F57A1DACD89F007ED1B8 /* Quests */,
-				28149A111DB1008100C26881 /* Battle */,
-				28149A121DB100B900C26881 /* Settings */,
+				28AB94A11DDDDFD800F1503B /* View */,
+				28AB94A21DDDDFE000F1503B /* Model */,
 				283ADCF41DAD3C5000BDC706 /* Network Communication */,
+				28AB94921DDB0B5900F1503B /* Websocket Manager */,
 				D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */,
-				28A5A0E71DB918FC000EF49F /* Entities */,
 				28B4DDB01DCC971200332DCD /* Support */,
-				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				280A522E1DB7C5B500FF66B8 /* Constants */,
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
@@ -777,14 +764,14 @@
 			name = "Quest List";
 			sourceTree = "<group>";
 		};
-		28A5A0D91DB8F773000EF49F /* Table View */ = {
+		28A5A0D91DB8F773000EF49F /* Table View Cell */ = {
 			isa = PBXGroup;
 			children = (
 				AED6F5831DACDCAD007ED1B8 /* RPGQuestListTableViewCell.h */,
 				AED6F5841DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m */,
 				AED6F5851DACDCAD007ED1B8 /* RPGQuestListTableViewCell.xib */,
 			);
-			name = "Table View";
+			name = "Table View Cell";
 			sourceTree = "<group>";
 		};
 		28A5A0DA1DB8F787000EF49F /* Quest */ = {
@@ -968,17 +955,30 @@
 			name = "Websocket Manager";
 			sourceTree = "<group>";
 		};
-		28AB94931DDB0B8700F1503B /* View */ = {
+		28AB94A11DDDDFD800F1503B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				D0819AC11DD6181E00021DB9 /* Battle ViewController */,
-				28AB94901DDA196F00F1503B /* Battle Log ViewController */,
-				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
-				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
-				283D191A1DD5FEC3008C5396 /* Skill Representation */,
-				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
+				28AB949E1DDDC1DC00F1503B /* RPGViewController.h */,
+				28AB949F1DDDC1DC00F1503B /* RPGViewController.m */,
+				877C86541DC8F102004B4A00 /* Initial Screen */,
+				28149A1F1DB1012200C26881 /* Registration */,
+				28149A1E1DB1011B00C26881 /* Login */,
+				28149A131DB100FB00C26881 /* Main Menu */,
+				AED6F57A1DACD89F007ED1B8 /* Quests */,
+				28149A111DB1008100C26881 /* Battle */,
+				28149A121DB100B900C26881 /* Settings */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		28AB94A21DDDDFE000F1503B /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				281499EC1DAFC95F00C26881 /* Battle */,
+				280A522F1DB7C60B00FF66B8 /* User Defaults */,
+				28A5A0E71DB918FC000EF49F /* Entities */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		28AE27161DBD161300834FBB /* Quest */ = {
@@ -1026,7 +1026,7 @@
 			children = (
 				AEFC27871DC7A67C00905ADD /* RPGQuestTableViewController.h */,
 				AEFC27881DC7A67C00905ADD /* RPGQuestTableViewController.m */,
-				28A5A0D91DB8F773000EF49F /* Table View */,
+				28A5A0D91DB8F773000EF49F /* Table View Cell */,
 			);
 			name = "Quest Table View Controller";
 			sourceTree = "<group>";

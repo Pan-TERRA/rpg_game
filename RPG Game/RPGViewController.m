@@ -88,8 +88,12 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
 
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
-  NSInteger nextTag = aSender.tag + 1;
-  [[aSender.superview viewWithTag:nextTag] becomeFirstResponder];
+  
+}
+
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
+{
+  [self.activeField endEditing:YES];
 }
 
   // First responder toggle

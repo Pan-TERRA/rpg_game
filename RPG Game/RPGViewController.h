@@ -18,10 +18,12 @@
 @property (nonatomic, assign, readwrite) UITextField *activeField;
 
 /**
- *  Bind linked views to this method.
+ *  Template method! Bind linked views to this method with tag.
  *
- *  @param aSender A sender with tag property
+ *  @param aSender A sender
  */
 - (IBAction)userDoneEnteringText:(UITextField *)aSender;
+
+- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender;
 
 @end

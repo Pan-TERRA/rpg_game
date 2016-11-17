@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPGViewController.h"
 
-@interface RPGRegistrationViewController : UIViewController
+@interface RPGRegistrationViewController : RPGViewController
 
 @end

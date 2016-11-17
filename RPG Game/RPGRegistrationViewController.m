@@ -17,12 +17,7 @@
   // Constants
 #import "RPGNibNames.h"
 
-static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
-
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
-
-@property (nonatomic, assign, readwrite) IBOutlet UIScrollView *scrollView;
-@property (nonatomic, assign, readwrite) UITextField *activeField;
 
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *usernameTextField;
@@ -47,18 +42,7 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
   
   if (self != nil)
   {
-    //test data
     _classPickerData = [[NSArray alloc] init];
-    
-    NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-    [defaultCenter addObserver:self
-                      selector:@selector(keyboardWillShow:)
-                          name:UIKeyboardWillShowNotification
-                        object:nil];
-    [defaultCenter addObserver:self
-                      selector:@selector(keyboardWillHide:)
-                          name:UIKeyboardWillHideNotification
-                        object:nil];
   }
   
   return self;
@@ -234,58 +218,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 
-  // "return key" ending editing
+#pragma mark - RPGViewController
+
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
-  NSInteger nextTag = aSender.tag + 1;
-  UIResponder *nextResponder = [aSender.superview viewWithTag:nextTag];
-  [nextResponder becomeFirstResponder];
-}
-
-- (IBAction)userTappedView:(UITapGestureRecognizer *)aSender
-{
-  [self.activeField endEditing:YES];
-
-}
-
-#pragma mark - Notifications
-
-- (void)keyboardWillShow:(NSNotification *)aNotification
-{
-  CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllercContentInsetsGap;
-  UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
-  self.scrollView.contentInset = contentInsets;
-  self.scrollView.scrollIndicatorInsets = contentInsets;
-  
-    // Shrink view
-  CGRect viewRect = self.view.frame;
-  viewRect.size.height -= keyboardFrame.size.height;
-    // Check if input text field is not visible
-  if (!CGRectContainsPoint(viewRect, self.activeField.frame.origin))
-  {
-    [self.scrollView scrollRectToVisible:self.activeField.frame animated:YES];
-  }
-}
-
-- (void)keyboardWillHide:(NSNotification *)aNotification
-{
-  UIEdgeInsets contentInsets = UIEdgeInsetsZero;
-  self.scrollView.contentInset = contentInsets;
-  self.scrollView.scrollIndicatorInsets = contentInsets;
-}
-
-#pragma mark - UITextFieldDelegate
-
-  // First responder toggle
-- (void)textFieldDidBeginEditing:(UITextField *)aTextField
-{
-  self.activeField = aTextField;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)aTextField
-{
-  self.activeField = nil;
+  [[aSender.superview.superview viewWithTag:aSender.tag + 1] becomeFirstResponder];
 }
 
 @end
