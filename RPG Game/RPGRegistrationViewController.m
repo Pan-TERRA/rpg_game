@@ -161,7 +161,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *passwordFieldText = self.passwordTextField.text;
   NSString *confirmPasswordFieldText = self.confirmPasswordTextField.text;
   NSString *characterNameFieldText = self.characterNameTextField.text;
-  NSInteger selectedClassID = [self getSelectedClassID];
+    // TODO: remove 
+  NSInteger selectedClassID = 1;
   
   if ([self textFieldsNotEmpty])
   {
