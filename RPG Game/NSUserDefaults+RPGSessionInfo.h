@@ -13,8 +13,10 @@
 @property (nonatomic) NSString *sessionUsername;
 @property (nonatomic) NSString *sessionAvatar;
 @property (nonatomic) NSString *sessionToken;
+  // TODO: remove
 @property (nonatomic) NSInteger sessionGold;
 @property (nonatomic) NSInteger sessionCrystals;
+  // TODO: Remove hp, attack
 @property (nonatomic) NSArray *sessionCharacters;
 
 @end
