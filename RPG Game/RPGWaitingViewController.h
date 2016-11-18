@@ -10,6 +10,8 @@
 
 @interface RPGWaitingViewController : UIViewController
 
+@property (nonatomic, copy, readwrite) NSString *message;
+
 - (instancetype)initWithMessage:(NSString *)aMessage;
 
 @end
