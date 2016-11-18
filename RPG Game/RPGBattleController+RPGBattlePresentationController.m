@@ -37,7 +37,7 @@
   return self.battle.player.skills.count;
 }
 
-- (NSArray *)skills
+- (NSArray<RPGSkill *> *)skills
 {
   return self.battle.player.skills;
 }

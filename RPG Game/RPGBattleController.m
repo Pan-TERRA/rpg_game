@@ -14,6 +14,7 @@
 #import "RPGBattleLog.h"
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
+#import "RPGSkill.h"
 #import "RPGResources.h"
 #import "RPGRequest.h"
 #import "RPGSkillsRequest.h"
@@ -198,11 +199,13 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (NSArray *)convertSkillsFromArray:(NSArray *)anArray
 {
-  NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
+  NSMutableArray<RPGSkill *> *skillsArray = [NSMutableArray array];
   
   for (NSDictionary *skillDictionary in anArray)
   {
-    [skillsArray addObject:skillDictionary[kRPGBattleControllerSkillID]];
+    NSInteger skillID = [skillDictionary[kRPGBattleControllerSkillID] integerValue];
+    RPGSkill *skill = [RPGSkill skillWithSkillID:skillID];
+    [skillsArray addObject:skill];
   }
   
   return skillsArray;
