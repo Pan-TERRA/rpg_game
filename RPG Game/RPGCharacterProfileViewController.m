@@ -181,7 +181,52 @@
 
 - (IBAction)back:(UIButton *)sender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  self.waitingModal.message = @"Storing skills";
+  [self addChildViewController:self.waitingModal];
+  self.waitingModal.view.frame = self.view.frame;
+  [self.view addSubview:self.waitingModal.view];
+  [self.waitingModal didMoveToParentViewController:self];
+  
+  void (^handler)(RPGSkillsResponse *) = ^void(RPGSkillsResponse *aResponse)
+  {
+    [self.waitingModal.view removeFromSuperview];
+    [self.waitingModal removeFromParentViewController];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    switch (aResponse.status)
+    {
+      case kRPGStatusCodeOK:
+      {
+        break;
+      }
+        
+      case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't select skills.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        {
+          UIViewController *viewController = self.presentingViewController.presentingViewController;
+          [viewController dismissViewControllerAnimated:YES completion:nil];
+        }];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't select skills.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        break;
+      }
+    }
+  };
+  
+  NSUserDefaults *stansartUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = stansartUserDefaults.sessionToken;
+  NSUInteger characterID = [[[stansartUserDefaults.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+  NSArray *skills = self.skillCollectionViewController.skillsIDArray;
+  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithToken:token characterID:characterID skills:skills];
+  [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request completionHandler:handler];
 }
 
 #pragma mark - Add To Collection
