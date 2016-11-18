@@ -10,6 +10,8 @@
 #import "RPGCharacterBagCollectionViewCell.h"
 #import "RPGSkillRepresentation.h"
 #import "RPGNibNames.h"
+#import "RPGSkillDescriptionViewController.h"
+#import "RPGCharacterProfileViewController.h"
 
 @interface RPGCollectionViewController() <UIGestureRecognizerDelegate>
 
@@ -80,8 +82,8 @@
     if (index < [self.skillsIDArray count])
     {
       NSUInteger skillID = [[self.skillsIDArray objectAtIndex:index] integerValue];
-      RPGSkillRepresentation *skillRespesantation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
-      [cell setImage:[UIImage imageNamed:skillRespesantation.imageName]];
+      RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
+      [cell setImage:[UIImage imageNamed:skillRepresentation.imageName]];
     }
     else
     {
@@ -114,7 +116,15 @@
     NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:point];
     if (indexPath != nil)
     {
-      //show skill description screen
+      NSUInteger skillID = [[self.skillsIDArray objectAtIndex:indexPath.row] integerValue];
+      RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
+      RPGSkillDescriptionViewController *viewController = [[[RPGSkillDescriptionViewController alloc] initWithSkillRepresentation:skillRepresentation] autorelease];
+      
+      RPGCharacterProfileViewController *parentViewController = self.viewController;
+      [parentViewController addChildViewController:viewController];
+      viewController.view.frame = parentViewController.view.frame;
+      [parentViewController.view addSubview:viewController.view];
+      [viewController didMoveToParentViewController:parentViewController];
     }
   }
 }
