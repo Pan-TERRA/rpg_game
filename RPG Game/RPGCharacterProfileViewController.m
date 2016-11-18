@@ -9,10 +9,13 @@
 #import "RPGCharacterProfileViewController.h"
   // API
 #import "RPGNetworkManager+CharacterProfile.h"
+#import "RPGNetworkManager+Skills.h"
   // Entities
 #import "RPGCharacterRequest.h"
 #import "RPGCharacterProfileInfoResponse.h"
-#import "RPGSkill.h"
+#import "RPGCharacterProfileSkill.h"
+#import "RPGSkillsResponse.h"
+#import "RPGSkillsSelectRequest.h"
   // Views
 #import "RPGCollectionViewController.h"
 #import "RPGCharacterBagCollectionViewCell.h"
@@ -120,7 +123,7 @@
         NSArray *skillsArray = aResponse.skills;
         NSMutableArray *skillCollectionArray = [NSMutableArray array];
         NSMutableArray *bagCollectionArray = [NSMutableArray array];
-        for (RPGSkill *skill in skillsArray)
+        for (RPGCharacterProfileSkill *skill in skillsArray)
         {
           if (skill.isSelected)
           {

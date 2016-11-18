@@ -7,7 +7,7 @@
 //
 
 #import "RPGCharacterProfileInfoResponse.h"
-#import "RPGSkill.h"
+#import "RPGCharacterProfileSkill.h"
 
 NSString * const kRPGCharacterProfileInfoResponseStatus = @"status";
 NSString * const kRPGCharacterProfileInfoResponseAvatar = @"avatar";
@@ -133,7 +133,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   if (self.skills)
   {
     NSMutableArray *skillsMutableArray = [NSMutableArray array];
-    for (RPGSkill *skill in self.skills)
+    for (RPGCharacterProfileSkill *skill in self.skills)
     {
       [skillsMutableArray addObject:[skill dictionaryRepresentation]];
     }
@@ -149,7 +149,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   
   for (NSDictionary *skillDictionary in skillsDictionaryArray)
   {
-    RPGSkill *skill = [[[RPGSkill alloc] initWithDictionaryRepresentation:skillDictionary] autorelease];
+    RPGCharacterProfileSkill *skill = [[[RPGCharacterProfileSkill alloc] initWithDictionaryRepresentation:skillDictionary] autorelease];
     [skills addObject:skill];
   }
   return [self initWithStatus:[aDictionary[kRPGCharacterProfileInfoResponseStatus] integerValue]
