@@ -10,6 +10,7 @@
 
 @class RPGCharacterRequest;
 @class RPGSkillsResponse;
+@class RPGSkillsSelectRequest;
 
 @interface RPGNetworkManager (Skills)
 
@@ -32,7 +33,7 @@
 - (void)getSkillInfoByID:(NSInteger)anID
        completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
 
-- (void)selectSkillsWithRequest:(RPGCharacterRequest *)aRequest
+- (void)selectSkillsWithRequest:(RPGSkillsSelectRequest *)aRequest
               completionHandler:(void (^)(RPGSkillsResponse *))callbackBlock;
 
 @end

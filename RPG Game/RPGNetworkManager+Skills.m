@@ -12,6 +12,7 @@
 #import "RPGSkillsResponse.h"
 #import "RPGSkillInfoResponse.h"
 #import "RPGResponse.h"
+#import "RPGSkillsSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
@@ -222,7 +223,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)selectSkillsWithRequest:(RPGCharacterRequest *)aRequest
+- (void)selectSkillsWithRequest:(RPGSkillsSelectRequest *)aRequest
               completionHandler:(void (^)(RPGSkillsResponse *))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
