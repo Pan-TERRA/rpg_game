@@ -12,7 +12,7 @@
 #import "RPGBattleConditionResponse.h"
 #import "RPGTimeResponse.h"
 #import "RPGBattleInitResponse.h"
-#import "RPGPlayer.h"
+#import "RPGSkill.h"
 #import "RPGSFXEngine.h"
 #import "RPGResources.h"
 #import "RPGBattleLog.h"
@@ -72,10 +72,10 @@ const NSInteger kRPGBattleTurnDuration = 30;
   NSMutableArray *newSkills = [NSMutableArray array];
   for (NSDictionary *dictionary in aResponse.skillsCondition)
   {
-    NSNumber *skillID = dictionary[@"skill_id"];
-    NSNumber *skillCooldown = dictionary[@"cooldown"];
-    NSDictionary *skillDictionary = [NSDictionary dictionaryWithObject:skillCooldown forKey:skillID];
-    [newSkills addObject:skillDictionary];
+    NSInteger skillID = [dictionary[@"skill_id"] integerValue];
+    NSInteger skillCooldown = [dictionary[@"cooldown"] integerValue];
+    RPGSkill *skill = [RPGSkill skillWithSkillID:skillID cooldown:skillCooldown];
+    [newSkills addObject:skill];
   }
   self.player.skills = newSkills;
 }

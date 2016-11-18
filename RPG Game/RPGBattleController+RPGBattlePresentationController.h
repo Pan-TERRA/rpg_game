@@ -8,12 +8,14 @@
 
 #import "RPGBattleController.h"
 
+@class RPGSkill;
+
 @interface RPGBattleController (RPGBattlePresentationController)
 
   // Player
 @property (assign, nonatomic, readonly) NSString *playerNickName;
 @property (assign, nonatomic, readonly) NSInteger playerHP;
-@property (assign, nonatomic, readonly) NSArray<NSDictionary<NSNumber *, NSNumber *> *> *skills;
+@property (assign, nonatomic, readonly) NSArray<RPGSkill *> *skills;
 @property (nonatomic, assign, readonly) NSUInteger skillsCount;
 @property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
   // Opponent

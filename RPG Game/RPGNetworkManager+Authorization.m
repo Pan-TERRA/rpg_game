@@ -10,7 +10,7 @@
   // Entities
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGAuthorizationLoginResponse.h"
-#import "RPGAuthorizationLogoutRequest.h"
+#import "RPGBasicNetworkRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
@@ -122,12 +122,12 @@
 - (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGAuthorizationLogoutRequest *request = [RPGAuthorizationLogoutRequest requestWithToken:token];
+  RPGBasicNetworkRequest *request = [RPGBasicNetworkRequest requestWithToken:token];
   
   [self logoutWithRequest:request completionHandler:callbackBlock];
 }
 
-- (void)logoutWithRequest:(RPGAuthorizationLogoutRequest *)aRequest
+- (void)logoutWithRequest:(RPGBasicNetworkRequest *)aRequest
         completionHandler:(void (^)(NSInteger))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",

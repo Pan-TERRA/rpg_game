@@ -15,7 +15,7 @@
 
 #import <XCTest/XCTest.h>
 #import "RPGAuthorizationLoginRequest.h"
-#import "RPGAuthorizationLogoutRequest.h"
+#import "RPGBasicNetworkRequest.h"
 #import "RPGRegistrationRequest.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGNetworkManager+Registration.h"

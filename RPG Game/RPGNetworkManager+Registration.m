@@ -9,6 +9,7 @@
 #import "RPGNetworkManager+Registration.h"
   // Entities
 #import "RPGRegistrationRequest.h"
+#import "RPGBasicNetworkResponse.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
 
@@ -74,8 +75,11 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:&JSONParsingError];
-      // serialization error
-    if (responseDictionary == nil)
+    RPGBasicNetworkResponse *responseEntity = [[RPGBasicNetworkResponse alloc] initWithDictionaryRepresentation:responseDictionary];
+    [responseEntity autorelease];
+    
+      // parse error
+    if (responseEntity == nil)
     {
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
@@ -88,7 +92,7 @@
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock([responseDictionary[kRPGNetworkManagerStatus] integerValue]);
+      callbackBlock(responseEntity.status);
     });
   }];
   

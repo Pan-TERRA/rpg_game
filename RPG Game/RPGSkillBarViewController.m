@@ -9,6 +9,7 @@
 #import "RPGSkillBarViewController.h"
   // Entities
 #import "RPGBattle.h"
+#import "RPGSkill.h"
 #import "RPGSkillRepresentation.h"
   // Controllers
 #import "RPGBattleController+RPGBattlePresentationController.h"
@@ -55,18 +56,12 @@
 
 - (IBAction)skillAction:(UIButton *)aSender
 {
-  NSInteger tag = aSender.tag;
+  NSArray<RPGSkill *> *skills = self.battleController.skills;
+  NSInteger index = aSender.tag - 1;
+  NSInteger skillID = skills[index].skillID;
   
-  if (self.battleController.isMyTurn && (tag <= self.battleController.skillsCount))
-  {
-    NSArray *skills = self.battleController.skills;
-    NSInteger index = tag - 1;
-    // TODO: redo
-    NSInteger skillID = [[[skills[index] allKeys] firstObject] integerValue];
-    
-    [self.battleController sendSkillActionRequestWithSkillID:skillID];
-    [self disableButtons];
-  }
+  [self.battleController sendSkillActionRequestWithSkillID:skillID];
+  [self disableButtons];
 }
 
 - (IBAction)skillButtonLongPress:(UILongPressGestureRecognizer *)aSender
@@ -97,12 +92,12 @@
 
 - (void)updateButtonsState
 {
-  NSArray *skills = self.battleController.skills;
+  NSArray<RPGSkill *> *skills = self.battleController.skills;
   for (NSInteger i = 1; i <= skills.count; i++)
   {
     BOOL active = NO;
       // TODO: redo
-    NSInteger cooldown = [[[skills[i - 1] allValues] firstObject] integerValue];
+    NSInteger cooldown = skills[i - 1].cooldown;
     if (cooldown == 0)
     {
       active = YES;
@@ -128,9 +123,9 @@
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
     //load skillRepresentations
-  for (NSDictionary *skillDictionary in self.battleController.skills)
+  for (RPGSkill *skill in self.battleController.skills)
   {
-    NSInteger skillID = [[[skillDictionary allKeys] firstObject] integerValue];
+    NSInteger skillID = skill.skillID;
     RPGSkillRepresentation *representation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
     [self.skillRepresentations addObject:representation];
   }

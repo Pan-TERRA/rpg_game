@@ -8,6 +8,7 @@
 
 #import "RPGPlayer.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGSkill.h"
 
 NSString * const kRPGPlayerSkills = @"skills";
 
@@ -21,24 +22,19 @@ NSString * const kRPGPlayerSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithSkills:(NSArray<NSNumber *> *)aSkills
+- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills
 {
   self = [super initWithName:[NSUserDefaults standardUserDefaults].sessionUsername HP:100];
   
   if (self != nil)
   {
-    NSMutableArray *skillsArray = [NSMutableArray array];
-    for (NSNumber *skillID in aSkills)
-    {
-      [skillsArray addObject:[NSDictionary dictionaryWithObject:@(0) forKey:skillID]];
-    }
-    _skills = [skillsArray retain];
+    _skills = [aSkills retain];
   }
   
   return self;
 }
 
-+ (instancetype)playerWithSkills:(NSArray<NSNumber *> *)aSkills
++ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills
 {
   return [[[self alloc] initWithSkills:aSkills] autorelease];
 }
