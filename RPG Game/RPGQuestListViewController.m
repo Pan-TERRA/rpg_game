@@ -37,8 +37,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
 
-@property (nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
-@property (nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
 @property (nonatomic, assign, readwrite, getter=canSendRequest) BOOL sendRequest;
 
 @property (nonatomic, retain, readwrite) RPGQuestTableViewController *tableViewController;
@@ -162,23 +160,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   }
 }
 
-/**
- *  Define if quest array should be uploaded from server.
- *
- *  @param aFlag A boolean value that defines action
- */
-- (void)shouldUpdateView:(BOOL)aFlag
-{
-  if (aFlag)
-  {
-    [self.tableView reloadData];
-  }
-  else
-  {
-    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
-  }
-}
-
 #pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
@@ -262,33 +243,12 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   
   if (state != kRPGQuestListReviewQuest)
   {
+    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
     self.tableViewController.questListState = state;
   }
-  
-  switch (state)
+  else
   {
-    case kRPGQuestListTakeQuest:
-    {
-      [self.tableView reloadData];
-      break;
-    }
-    case kRPGQuestListInProgressQuest:
-    {
-      [self shouldUpdateView:self.isInProgressQuestsVisited];
-      self.inProgressQuestsVisited = YES;
-      break;
-    }
-    case kRPGQuestListDoneQuest:
-    {
-      [self shouldUpdateView:self.isDoneQuestsVisited];
-      self.doneQuestsVisited = YES;
-      break;
-    }
-    case kRPGQuestListReviewQuest:
-    {
-      [self updateViewForState:state shouldReload:NO];
-      break;
-    }
+    [self updateViewForState:state shouldReload:NO];
   }
 }
 
