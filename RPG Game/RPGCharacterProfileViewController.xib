@@ -14,7 +14,8 @@
                 <outlet property="expLabel" destination="xGc-y0-7zV" id="Cx0-Ev-aem"/>
                 <outlet property="expProgressBar" destination="fH9-MI-j9S" id="YmG-46-IJ9"/>
                 <outlet property="hpLabel" destination="itB-oS-rok" id="dRu-Sm-MR1"/>
-                <outlet property="levelLabel" destination="Bcg-NX-OBs" id="biX-rb-ryK"/>
+                <outlet property="levelLabel" destination="Bcg-NX-OBs" id="pWL-cS-agH"/>
+                <outlet property="nickNameLabel" destination="DuB-rB-F4n" id="jwV-dC-Rtc"/>
                 <outlet property="skillCollectionView" destination="Y0Y-Sy-ALI" id="CRY-ZZ-xyG"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -275,17 +276,6 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
         </view>
-        <viewController id="awO-jB-TQ3">
-            <layoutGuides>
-                <viewControllerLayoutGuide type="top" id="6Jn-QN-kiM"/>
-                <viewControllerLayoutGuide type="bottom" id="7Ad-Sl-n3T"/>
-            </layoutGuides>
-            <view key="view" contentMode="scaleToFill" id="6cv-4h-gdG">
-                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            </view>
-        </viewController>
     </objects>
     <resources>
         <image name="Character" width="300" height="315"/>

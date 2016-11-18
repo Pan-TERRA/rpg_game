@@ -7,21 +7,28 @@
 //
 
 #import "RPGCharacterProfileViewController.h"
-#import "RPGNibNames.h"
-#import "RPGCharacterBagCollectionViewCell.h"
+  // API
+#import "RPGNetworkManager+CharacterProfile.h"
+  // Entities
+#import "RPGCharacterRequest.h"
+#import "RPGCharacterProfileInfoResponse.h"
+#import "RPGSkill.h"
+  // Views
 #import "RPGCollectionViewController.h"
+#import "RPGCharacterBagCollectionViewCell.h"
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
 #import "RPGProgressBar.h"
-#import "RPGNetworkManager+CharacterProfile.h"
-#import "RPGCharacterRequest.h"
-#import "RPGCharacterProfileInfoResponse.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGWaitingViewController.h"
 #import "RPGAlert.h"
-#import "RPGSkill.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGCharacterProfileViewController ()
 
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *nickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *levelLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *expLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
@@ -33,6 +40,8 @@
 
 @property (nonatomic, retain, readwrite) RPGCollectionViewController *skillCollectionViewController;
 @property (nonatomic, retain, readwrite) RPGCollectionViewController *bagCollectionViewController;
+
+@property (nonatomic, retain, readwrite) RPGWaitingViewController *waitingModal;
 
 @end
 
@@ -48,6 +57,7 @@
   {
     _skillCollectionViewController = [[RPGSkillCollectionViewController alloc] init];
     _bagCollectionViewController = [[RPGBagCollectionViewController alloc] init];
+    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Uploading info"];
   }
   
   return self;
@@ -59,6 +69,7 @@
 {
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
+  [_waitingModal release];
 
   [super dealloc];
 }
@@ -83,12 +94,21 @@
   self.bagCollectionView.dataSource = self.bagCollectionViewController;
   self.bagCollectionView.delegate = self.bagCollectionViewController;
   
+  [self addChildViewController:self.waitingModal];
+  self.waitingModal.view.frame = self.view.frame;
+  [self.view addSubview:self.waitingModal.view];
+  [self.waitingModal didMoveToParentViewController:self];
+  
   void (^handler)(RPGCharacterProfileInfoResponse *) = ^void(RPGCharacterProfileInfoResponse *aResponse)
   {
+    [self.waitingModal.view removeFromSuperview];
+    [self.waitingModal removeFromParentViewController];
+    
     switch (aResponse.status)
     {
       case kRPGStatusCodeOK:
       {
+        self.nickNameLabel.text = [[[NSUserDefaults standardUserDefaults].sessionCharacters firstObject] objectForKey:@"name"];
         self.levelLabel.text = [NSString stringWithFormat:@"%d", aResponse.currentLevel];
         self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
         self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.hp];
