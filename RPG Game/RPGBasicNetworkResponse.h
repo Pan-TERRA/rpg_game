@@ -7,12 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGBasicNetworkResponse : NSObject
+@interface RPGBasicNetworkResponse : NSObject <RPGSerializable>
 
 @property (assign, nonatomic, readonly) NSInteger status;
 
 - (instancetype)initWithStatus:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithStatus:(NSInteger)aStatus;
++ (instancetype)responseWithStatus:(NSInteger)aStatus;
 
 @end

@@ -30,7 +30,7 @@ static NSString * const kRPGBasicNetworkResponseStatus = @"status";
   return [self initWithStatus:-1];
 }
 
-+ (instancetype)requestWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(NSInteger)aStatus
 {
   return [[[self alloc] initWithStatus:aStatus] autorelease];
 }
