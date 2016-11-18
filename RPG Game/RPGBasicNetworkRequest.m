@@ -6,17 +6,17 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAuthorizationLogoutRequest.h"
+#import "RPGBasicNetworkRequest.h"
 
-static NSString * const kRPGAuthorizationLogoutRequestToken = @"token";
+static NSString * const kRPGBasicNetworkRequestToken = @"token";
 
-@interface RPGAuthorizationLogoutRequest ()
+@interface RPGBasicNetworkRequest ()
 
 @property (nonatomic, copy, readwrite) NSString *token;
 
 @end
 
-@implementation RPGAuthorizationLogoutRequest
+@implementation RPGBasicNetworkRequest
 
 @synthesize token = _token;
 
@@ -66,14 +66,14 @@ static NSString * const kRPGAuthorizationLogoutRequestToken = @"token";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGAuthorizationLogoutRequestToken] = self.token;
+  dictionaryRepresentation[kRPGBasicNetworkRequestToken] = self.token;
   
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithToken:aDictionary[kRPGAuthorizationLogoutRequestToken]];
+  return [self initWithToken:aDictionary[kRPGBasicNetworkRequestToken]];
 }
 
 

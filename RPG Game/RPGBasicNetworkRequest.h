@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-@interface RPGAuthorizationLogoutRequest : NSObject <RPGSerializable>
+@interface RPGBasicNetworkRequest : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *token;
 
