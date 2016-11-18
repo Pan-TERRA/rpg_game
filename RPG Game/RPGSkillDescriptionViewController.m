@@ -57,9 +57,9 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidAppear:(BOOL)isAnimated
+- (void)viewWillAppear:(BOOL)isAnimated
 {
-  [super viewDidAppear:isAnimated];
+  [super viewWillAppear:isAnimated];
   
   RPGSkillRepresentation *skill = self.skillRepresentation;
   self.titleLabel.text = skill.name;
