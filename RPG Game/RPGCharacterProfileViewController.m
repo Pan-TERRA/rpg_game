@@ -124,7 +124,7 @@
         self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
         self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
         self.bagCollectionViewController.collectionSize = aResponse.bagSize;
-        self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
+        //self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
         
         NSArray *skillsArray = aResponse.skills;
         NSMutableArray *skillCollectionArray = [NSMutableArray array];
@@ -198,8 +198,6 @@
     [self.waitingModal.view removeFromSuperview];
     [self.waitingModal removeFromParentViewController];
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
     switch (aResponse.status)
     {
       case kRPGStatusCodeOK:
@@ -210,6 +208,7 @@
         [character setObject:self.skillCollectionViewController.skillsIDArray forKey:@"skills"];
         [characters insertObject:character atIndex:0];
         standardUserDefaults.sessionCharacters = characters;
+        [self dismissViewControllerAnimated:YES completion:nil];
         break;
       }
         
@@ -227,7 +226,10 @@
       default:
       {
         NSString *message = @"Can't select skills.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        {
+          [self dismissViewControllerAnimated:YES completion:nil];
+        }];
         break;
       }
     }
