@@ -243,8 +243,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   
   if (state != kRPGQuestListReviewQuest)
   {
-    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
     self.tableViewController.questListState = state;
+    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
   }
   else
   {
