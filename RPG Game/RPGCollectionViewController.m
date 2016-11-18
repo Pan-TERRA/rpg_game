@@ -25,7 +25,7 @@
   
   if (self != nil)
   {
-    _skillsIDArray = [[NSMutableArray alloc] initWithObjects:@(1), @(5), @(3), @(4), nil];
+    //_skillsIDArray = [[NSMutableArray alloc] initWithObjects:@(1), @(5), @(3), @(4), nil];
   }
   
   return self;
@@ -50,6 +50,17 @@
   gestureRecognizer.delegate = self;
   gestureRecognizer.minimumPressDuration = 1;
   [self.collectionView addGestureRecognizer:gestureRecognizer];
+}
+
+- (void)setSkillsIDArray:(NSMutableArray *)skillsIDArray
+{
+  if (_skillsIDArray != skillsIDArray)
+  {
+    [_skillsIDArray release];
+    _skillsIDArray = [skillsIDArray retain];
+  }
+  
+  [self.collectionView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource

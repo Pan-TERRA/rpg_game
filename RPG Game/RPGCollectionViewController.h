@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain, readwrite) NSMutableArray *skillsIDArray;
 @property (nonatomic, assign, readonly) CGFloat cellMultiplier;
-@property (nonatomic, assign, readonly) NSUInteger collectionSize;
+@property (nonatomic, assign, readwrite) NSUInteger collectionSize;
 
 - (void)addSkill:(NSUInteger)aSkillID;
 - (void)removeSkill:(NSUInteger)aSkillID;
