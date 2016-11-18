@@ -37,6 +37,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *attackLabel;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *expProgressBar;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *backButton;
 
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *bagCollectionView;
@@ -239,11 +240,18 @@
 - (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID
 {
   [self.skillCollectionViewController addSkill:aSkillID];
+  [self setCancelButtonState];
 }
 
 - (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
 {
   [self.bagCollectionViewController addSkill:aSkillID];
+  [self setCancelButtonState];
+}
+
+- (void)setCancelButtonState
+{
+  self.backButton.enabled = !([self.skillCollectionViewController.skillsIDArray count] == 0);
 }
 
 @end

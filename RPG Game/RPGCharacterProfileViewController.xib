@@ -10,6 +10,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGCharacterProfileViewController">
             <connections>
                 <outlet property="attackLabel" destination="GM3-XB-K5w" id="lTb-bb-gTH"/>
+                <outlet property="backButton" destination="5S1-dU-ULd" id="q2u-ha-qbg"/>
                 <outlet property="bagCollectionView" destination="Ftp-LL-ekU" id="9wR-au-5RF"/>
                 <outlet property="expLabel" destination="xGc-y0-7zV" id="Cx0-Ev-aem"/>
                 <outlet property="expProgressBar" destination="fH9-MI-j9S" id="YmG-46-IJ9"/>
