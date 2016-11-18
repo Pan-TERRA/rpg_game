@@ -12,8 +12,21 @@
 #import "RPGCollectionViewController.h"
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
+#import "RPGProgressBar.h"
+#import "RPGNetworkManager+CharacterProfile.h"
+#import "RPGCharacterRequest.h"
+#import "RPGCharacterProfileInfoResponse.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGAlert.h"
+#import "RPGSkill.h"
 
 @interface RPGCharacterProfileViewController ()
+
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *levelLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *expLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *attackLabel;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *expProgressBar;
 
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *bagCollectionView;
@@ -40,11 +53,13 @@
   return self;
 }
 
+#pragma mark - Dealloc
+
 - (void)dealloc
 {
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
-  
+
   [super dealloc];
 }
 
@@ -68,10 +83,65 @@
   self.bagCollectionView.dataSource = self.bagCollectionViewController;
   self.bagCollectionView.delegate = self.bagCollectionViewController;
   
-  //test data
-  ((RPGSkillCollectionViewController *)_skillCollectionViewController).skillColectionSize = 3;
-  ((RPGBagCollectionViewController *)_bagCollectionViewController).bagCollectionSize = 8;
+  void (^handler)(RPGCharacterProfileInfoResponse *) = ^void(RPGCharacterProfileInfoResponse *aResponse)
+  {
+    switch (aResponse.status)
+    {
+      case kRPGStatusCodeOK:
+      {
+        self.levelLabel.text = [NSString stringWithFormat:@"%d", aResponse.currentLevel];
+        self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
+        self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.hp];
+        self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
+        self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
+        self.bagCollectionViewController.collectionSize = aResponse.bagSize;
+        self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
+        
+        NSArray *skillsArray = aResponse.skills;
+        NSMutableArray *skillCollectionArray = [NSMutableArray array];
+        NSMutableArray *bagCollectionArray = [NSMutableArray array];
+        for (RPGSkill *skill in skillsArray)
+        {
+          if (skill.isSelected)
+          {
+            [skillCollectionArray addObject:@(skill.skillID)];
+          }
+          else
+          {
+            [bagCollectionArray addObject:@(skill.skillID)];
+          }
+        }
+        
+        self.skillCollectionViewController.skillsIDArray = skillCollectionArray;
+        self.bagCollectionViewController.skillsIDArray = bagCollectionArray;
+        break;
+      }
+        
+      case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+         {
+           UIViewController *viewController = self.presentingViewController.presentingViewController;
+           [viewController dismissViewControllerAnimated:YES completion:nil];
+         }];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't upload quest proof image.";
+        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        break;
+      }
+    }
+  };
   
+  NSUserDefaults *stansartUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = stansartUserDefaults.sessionToken;
+  NSUInteger characterID = [[[stansartUserDefaults.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+  RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithToken:token characterID:characterID];
+  [[RPGNetworkManager sharedNetworkManager] getCharacterProfileInfoWithRequest:request completionHandler:handler];
 }
 
 - (void)didReceiveMemoryWarning
@@ -84,19 +154,23 @@
   return UIInterfaceOrientationMaskLandscape;
 }
 
+#pragma mark - Actions
+
 - (IBAction)back:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
-{
-  [self.bagCollectionViewController addSkill:aSkillID];
-}
+#pragma mark - Add To Collection
 
 - (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID
 {
   [self.skillCollectionViewController addSkill:aSkillID];
+}
+
+- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.bagCollectionViewController addSkill:aSkillID];
 }
 
 @end

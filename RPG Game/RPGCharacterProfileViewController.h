@@ -10,7 +10,7 @@
 
 @interface RPGCharacterProfileViewController : UIViewController
 
-- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID;
 - (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID;
+- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID;
 
 @end
