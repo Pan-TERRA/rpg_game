@@ -19,6 +19,7 @@
 #import "RPGSkillActionRequest.h"
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
+#import "RPGSkill.h"
   // Misc
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -126,7 +127,16 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
       NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
       NSArray *skillsArray = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-      self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
+      
+      NSMutableArray *skills = [NSMutableArray array];
+      for (NSNumber *skillID in skillsArray)
+      {
+        RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
+        [skills addObject:skill];
+      }
+      
+      self.battle.player = [RPGPlayer playerWithSkills:skills];
+      //self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
       [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
                                                           object:self];
       [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
