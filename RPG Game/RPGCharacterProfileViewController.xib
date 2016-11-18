@@ -212,7 +212,7 @@
                             </constraints>
                             <state key="normal" backgroundImage="back_icon_inactive"/>
                             <connections>
-                                <action selector="back:" destination="-1" eventType="touchUpInside" id="IxT-iX-HxC"/>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="IpV-Xv-Xrb"/>
                             </connections>
                         </button>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Y0Y-Sy-ALI">

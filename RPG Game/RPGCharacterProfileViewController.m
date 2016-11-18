@@ -96,6 +96,11 @@
   self.bagCollectionViewController.collectionView = self.bagCollectionView;
   self.bagCollectionView.dataSource = self.bagCollectionViewController;
   self.bagCollectionView.delegate = self.bagCollectionViewController;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+  [super viewWillAppear:animated];
   
   [self addChildViewController:self.waitingModal];
   self.waitingModal.view.frame = self.view.frame;
