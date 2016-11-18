@@ -16,7 +16,6 @@
 #import "RPGPlayer.h"
 #import "RPGResources.h"
 #import "RPGRequest.h"
-#import "RPGSkillsRequest.h"
 #import "RPGSkillActionRequest.h"
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"

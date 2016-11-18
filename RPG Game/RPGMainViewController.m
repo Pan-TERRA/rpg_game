@@ -12,6 +12,7 @@
   // Views
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
+#import "RPGCharacterProfileViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -96,7 +97,9 @@
 
 - (IBAction)segueToChar
 {
+  RPGCharacterProfileViewController *characterProfileViewController = [[[RPGCharacterProfileViewController alloc] init] autorelease];
   
+  [self presentViewController:characterProfileViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToPlay
