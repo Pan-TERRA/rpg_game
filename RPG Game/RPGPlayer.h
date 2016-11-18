@@ -9,11 +9,13 @@
 #import "RPGEntity.h"
 #import "RPGSerializable.h"
 
+@class RPGSkill;
+
 extern NSString * const kRPGPlayerSkills;
 
 @protocol RPGClientEntity <NSObject>
 
-@property (retain, nonatomic, readwrite) NSArray<NSDictionary<NSNumber *, NSNumber *> *> *skills;
+@property (retain, nonatomic, readwrite) NSArray<RPGSkill *> *skills;
 
 @end
 
@@ -22,7 +24,7 @@ extern NSString * const kRPGPlayerSkills;
  */
 @interface RPGPlayer : RPGEntity <RPGClientEntity, RPGSerializable>
 
-- (instancetype)initWithSkills:(NSArray<NSNumber *> *)aSkills;
-+ (instancetype)playerWithSkills:(NSArray<NSNumber *> *)aSkills;
+- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
++ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
 
 @end

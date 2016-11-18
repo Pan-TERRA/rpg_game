@@ -61,39 +61,40 @@
   else
   {
     _progress = aProgress;
-    
-    CGFloat originX = self.frame.origin.x;
-    CGFloat originY = self.frame.origin.y;
-    CGFloat height = self.frame.size.height;
-    CGFloat pastWidth = self.frame.size.width;
-    CGFloat currentWidth = self.absoluteWidth * _progress;
-    CGRect currentProgressBarRect = CGRectZero;
-    
-    if (self.align == kRPGProgressBarRightAlign)
-    {
-      currentProgressBarRect = CGRectMake(originX,
-                                          originY,
-                                          currentWidth,
-                                          height);
-    }
-    else
-    {
-      currentProgressBarRect = CGRectMake(originX + pastWidth - currentWidth,
-                                          originY,
-                                          currentWidth,
-                                          height);
-
-    }
-    
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    [UIView setAnimationDelay:0.5];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    
-    self.frame = currentProgressBarRect;
-    
-    [UIView commitAnimations];
   }
+  
+  CGFloat originX = self.frame.origin.x;
+  CGFloat originY = self.frame.origin.y;
+  CGFloat height = self.frame.size.height;
+  CGFloat pastWidth = self.frame.size.width;
+  CGFloat currentWidth = self.absoluteWidth * _progress;
+  CGRect currentProgressBarRect = CGRectZero;
+  
+  if (self.align == kRPGProgressBarRightAlign)
+  {
+    currentProgressBarRect = CGRectMake(originX,
+                                        originY,
+                                        currentWidth,
+                                        height);
+  }
+  else
+  {
+    currentProgressBarRect = CGRectMake(originX + pastWidth - currentWidth,
+                                        originY,
+                                        currentWidth,
+                                        height);
+
+  }
+  
+  [UIView beginAnimations:nil context:nil];
+  [UIView setAnimationDuration:0.5];
+  [UIView setAnimationDelay:0.5];
+  [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+  
+  self.frame = currentProgressBarRect;
+  
+  [UIView commitAnimations];
+  
 }
 
 #pragma mark - Draw Rect
