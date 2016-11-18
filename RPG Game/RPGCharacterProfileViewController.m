@@ -43,6 +43,7 @@
 - (void)dealloc
 {
   [_skillCollectionViewController release];
+  [_bagCollectionViewController release];
   
   [super dealloc];
 }

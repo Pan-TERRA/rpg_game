@@ -17,17 +17,29 @@
 
 @implementation RPGCollectionViewController
 
+#pragma mark - Init
+
 - (instancetype)init
 {
   self = [super init];
   
   if (self != nil)
   {
-    _skillsIDArray = [[NSMutableArray alloc] initWithObjects:@(1), @(5), nil];
+    _skillsIDArray = [[NSMutableArray alloc] initWithObjects:@(1), @(5), @(3), @(4), nil];
   }
   
   return self;
 }
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_skillsIDArray release];
+  
+  [super dealloc];
+}
+
 #pragma mark - Custom Setter
 
 - (void)setCollectionView:(UICollectionView *)aCollectionView
