@@ -28,8 +28,7 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
-static NSString * const kRPGBattleControllerCharacterID = @"char_id";
-static NSString * const kRPGBattleControllerSkillID = @"skill_id";
+static NSString * const kRPGBattleControllerSkills = @"skills";
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
@@ -124,36 +123,14 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
     if (battleInitResponse != nil && battleInitResponse.status == 0)
     {
       self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
-      
-        // fetching skills
-      NSInteger characterID = [self getCharacterID];
-      [[RPGNetworkManager sharedNetworkManager] fetchSkillsByCharacterID:characterID completionHandler:
-       ^void(NSInteger statusCode, NSArray *skills)
-       {
-           // invokes on main thread
-         switch (statusCode)
-         {
-           case kRPGStatusCodeOK:
-           {
-             NSArray *skillsArray = [self convertSkillsFromArray:skills];
-             self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
-             break;
-           }
-             
-           default:
-           {
-             NSLog(@"RPGBattleController. Fetch skills unknown error");
-             self.battle.player = [RPGPlayer playerWithSkills:[NSArray array]];
-             break;
-           }
-         }
-         
-           // send notification to battle view controller
-         [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
-                                                             object:self];
-         [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
-                                                             object:self];
-       }];
+
+      NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+      NSArray *skillsArray = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
+      self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
+                                                          object:self];
+      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
+                                                          object:self];
     }
   }
   
@@ -173,38 +150,6 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 - (void)prepareBattleControllerForDismiss
 {
   [self.websocketManager close];
-}
-
-#pragma mark - Helper Methods
-
-- (NSInteger)getCharacterID
-{
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  NSDictionary *character = nil;
-  NSInteger characterID = -1;
-  
-  if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
-  {
-    character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
-  }
-  if (character)
-  {
-    characterID = [character[kRPGBattleControllerCharacterID] integerValue];
-  }
-  
-  return characterID;
-}
-
-- (NSArray *)convertSkillsFromArray:(NSArray *)anArray
-{
-  NSMutableArray<NSNumber *> *skillsArray = [NSMutableArray array];
-  
-  for (NSDictionary *skillDictionary in anArray)
-  {
-    [skillsArray addObject:skillDictionary[kRPGBattleControllerSkillID]];
-  }
-  
-  return skillsArray;
 }
 
 @end
