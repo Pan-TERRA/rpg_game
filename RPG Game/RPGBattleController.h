@@ -26,7 +26,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
 #pragma mark - API
 
-- (void)sendSkillActionRequestWithTag:(NSInteger)aTag;
+- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
 - (void)sendBattleConditionRequest;
 
 - (void)processManagerResponse:(NSDictionary *)aResponse;

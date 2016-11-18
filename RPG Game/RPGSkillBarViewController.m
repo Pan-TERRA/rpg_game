@@ -55,9 +55,16 @@
 
 - (IBAction)skillAction:(UIButton *)aSender
 {
-  if (self.battleController.isMyTurn && (aSender.tag <= self.battleController.skillsCount))
+  NSInteger tag = aSender.tag;
+  
+  if (self.battleController.isMyTurn && (tag <= self.battleController.skillsCount))
   {
-    [self.battleController sendSkillActionRequestWithTag:aSender.tag];
+    NSArray *skills = self.battleController.skills;
+    NSInteger index = tag - 1;
+    // TODO: redo
+    NSInteger skillID = [[[skills[index] allKeys] firstObject] integerValue];
+    
+    [self.battleController sendSkillActionRequestWithSkillID:skillID];
     [self disableButtons];
   }
 }
