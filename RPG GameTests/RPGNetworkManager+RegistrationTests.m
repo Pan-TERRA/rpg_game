@@ -21,6 +21,7 @@
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGRegistrationRequest.h"
 #import "RPGAuthorizationLoginRequest.h"
+#import "RPGBasicNetworkRequest.h"
 
 @interface RPGNetworkManager_RegistrationTests : XCTestCase
 
@@ -59,8 +60,8 @@
                              kRPGNetworkManagerAPIHost,
                              @DELETEROUTE];
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  NSDictionary *requestDictionary = @{@"token" : token};
-  NSURLRequest *request = [self.sharedNetworkManager requestWithObject:requestDictionary
+  RPGBasicNetworkRequest *requestObject = [RPGBasicNetworkRequest requestWithToken:token];
+  NSURLRequest *request = [self.sharedNetworkManager requestWithObject:requestObject
                                                              URLstring:requestString
                                                                 method:@"POST"];
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

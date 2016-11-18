@@ -13,6 +13,7 @@
 #import "NSObject+RPGErrorLog.h"
   // Entities
 #import "RPGResourcesResponse.h"
+#import "RPGBasicNetworkRequest.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -206,11 +207,12 @@ NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
-                             kRPGNetworkManagerAPIResourcesRoute];;
+                             kRPGNetworkManagerAPIResourcesRoute];
   
-  NSDictionary *requestDictionary = @{ @"token" : [[NSUserDefaults standardUserDefaults] sessionToken] };
+  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+  RPGBasicNetworkRequest *requestObject = [RPGBasicNetworkRequest requestWithToken:token];
   
-  NSURLRequest *request = [self requestWithObject:requestDictionary URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:requestObject URLstring:requestString method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
