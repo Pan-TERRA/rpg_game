@@ -129,8 +129,16 @@
                     <color key="value" red="0.0" green="0.0" blue="0.0" alpha="0.34714439655172413" colorSpace="calibratedRGB"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <connections>
+                <outletCollection property="gestureRecognizers" destination="1fC-C1-v8E" appends="YES" id="0Ow-e0-xwp"/>
+            </connections>
             <point key="canvasLocation" x="527" y="218"/>
         </view>
+        <tapGestureRecognizer id="1fC-C1-v8E">
+            <connections>
+                <action selector="removeViewControllerFromParent:" destination="-1" id="mLV-4r-yv4"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="Label Item Dark Brown" width="268" height="50"/>

@@ -78,4 +78,12 @@
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - Actions
+
+- (IBAction)removeViewControllerFromParent:(UITapGestureRecognizer *)recognizer
+{
+  [self.view removeFromSuperview];
+  [self removeFromParentViewController];
+}
+
 @end
