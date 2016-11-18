@@ -107,6 +107,8 @@
 		AEFC27E11DDF244500905ADD /* RPGCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27DE1DDF244500905ADD /* RPGCollectionViewController.m */; };
 		AEFC27E21DDF244500905ADD /* RPGSkillCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27E01DDF244500905ADD /* RPGSkillCollectionViewController.m */; };
 		AEFC27E51DDF246C00905ADD /* RPGBagCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27E41DDF246C00905ADD /* RPGBagCollectionViewController.m */; };
+		AEFC27EE1DDF457400905ADD /* RPGWaitingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AEFC27EC1DDF457400905ADD /* RPGWaitingViewController.m */; };
+		AEFC27EF1DDF457400905ADD /* RPGWaitingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AEFC27ED1DDF457400905ADD /* RPGWaitingViewController.xib */; };
 		D0819ABD1DD6180100021DB9 /* RPGSkillBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0819AB11DD6180100021DB9 /* RPGSkillBarViewController.m */; };
 		D0819ABE1DD6180100021DB9 /* RPGSkillBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */; };
 		D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0819AB41DD6180100021DB9 /* RPGSkillDescriptionViewController.m */; };
@@ -330,6 +332,9 @@
 		AEFC27E01DDF244500905ADD /* RPGSkillCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillCollectionViewController.m; sourceTree = "<group>"; };
 		AEFC27E31DDF246C00905ADD /* RPGBagCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBagCollectionViewController.h; sourceTree = "<group>"; };
 		AEFC27E41DDF246C00905ADD /* RPGBagCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBagCollectionViewController.m; sourceTree = "<group>"; };
+		AEFC27EB1DDF457400905ADD /* RPGWaitingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGWaitingViewController.h; sourceTree = "<group>"; };
+		AEFC27EC1DDF457400905ADD /* RPGWaitingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGWaitingViewController.m; sourceTree = "<group>"; };
+		AEFC27ED1DDF457400905ADD /* RPGWaitingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGWaitingViewController.xib; sourceTree = "<group>"; };
 		D0819AB01DD6180100021DB9 /* RPGSkillBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillBarViewController.h; sourceTree = "<group>"; };
 		D0819AB11DD6180100021DB9 /* RPGSkillBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillBarViewController.m; sourceTree = "<group>"; };
 		D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillBarViewController.xib; sourceTree = "<group>"; };
@@ -759,6 +764,9 @@
 				AEFC27CF1DDDC2BE00905ADD /* RPGSkill.m */,
 				AEFC27D11DDDF62B00905ADD /* RPGSkillsSelectRequest.h */,
 				AEFC27D21DDDF62B00905ADD /* RPGSkillsSelectRequest.m */,
+				AEFC27EB1DDF457400905ADD /* RPGWaitingViewController.h */,
+				AEFC27EC1DDF457400905ADD /* RPGWaitingViewController.m */,
+				AEFC27ED1DDF457400905ADD /* RPGWaitingViewController.xib */,
 			);
 			path = "RPG Game";
 			sourceTree = "<group>";
@@ -1382,6 +1390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */,
+				AEFC27EF1DDF457400905ADD /* RPGWaitingViewController.xib in Resources */,
 				877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */,
 				D0819AC01DD6180100021DB9 /* RPGSkillDescriptionViewController.xib in Resources */,
 				28AB94AA1DDEF8B100F1503B /* RPGQuickSettingsViewController.xib in Resources */,
@@ -1574,6 +1583,7 @@
 				28A915531DC7B8F3001E0F51 /* RPGNetworkManager+Classes.m in Sources */,
 				AEFC27E11DDF244500905ADD /* RPGCollectionViewController.m in Sources */,
 				28AB94891DD8A8EB00F1503B /* RPGBattleController.m in Sources */,
+				AEFC27EE1DDF457400905ADD /* RPGWaitingViewController.m in Sources */,
 				281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */,
 				281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */,
 				28307BE31DD21CA5002E6233 /* RPGSkillRepresentation.m in Sources */,

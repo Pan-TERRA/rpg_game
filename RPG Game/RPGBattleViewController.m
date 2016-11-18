@@ -20,6 +20,7 @@
 #import "RPGProgressBar.h"
 #import "RPGBattleLogViewController.h"
 #import "RPGQuickSettingsViewController.h"
+#import "RPGWaitingViewController.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBackgroundMusicController.h"
@@ -50,7 +51,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
 
-@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleInitModal;
+@property (nonatomic, retain, readwrite) RPGWaitingViewController *battleInitModal;
 
   // Skill bar
 @property (nonatomic, retain, readwrite) RPGSkillBarViewController *skillBarViewController;
@@ -80,6 +81,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)

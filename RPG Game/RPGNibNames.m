@@ -20,3 +20,4 @@ NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
 NSString * const kRPGInitialScreenViewControllerNIBName = @"RPGInitialScreenViewController";
 NSString * const kRPGCharacterProfileViewControllerNIBName = @"RPGCharacterProfileViewController";
 NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCollectionViewCell";
+NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
