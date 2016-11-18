@@ -77,18 +77,11 @@
     RPGSkillRepresentation *skillRepresentation = self.skillRepresentations[index];
     RPGSkillDescriptionViewController *viewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
     
-    CGFloat initialSkillViewRectWidth = viewController.view.frame.size.width;
-    CGFloat initialSkillViewRectHeight = viewController.view.frame.size.height;
-    CGSize battleViewControllerFrameSize = self.parentViewController.view.frame.size;
-    
-    CGRect centeredSkillViewRect = CGRectMake((battleViewControllerFrameSize.width - initialSkillViewRectWidth) / 2,
-                                              (battleViewControllerFrameSize.height - initialSkillViewRectHeight) / 2,
-                                              initialSkillViewRectWidth,
-                                              initialSkillViewRectHeight);
-    
-    viewController.view.frame = centeredSkillViewRect;
-    
-    [(RPGBattleViewController *)self.parentViewController showTooltipWithView:viewController.view];
+    UIViewController *parentViewController = self.parentViewController;
+    [parentViewController addChildViewController:viewController];
+    viewController.view.frame = parentViewController.view.frame;
+    [parentViewController.view addSubview:viewController.view];
+    [viewController didMoveToParentViewController:parentViewController];
   }
 }
 

@@ -14,6 +14,4 @@
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 
-- (void)showTooltipWithView:(UIView *)view;
-
 @end

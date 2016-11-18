@@ -56,8 +56,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Skill bar
 @property (nonatomic, retain, readwrite) RPGSkillBarViewController *skillBarViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *skillBar;
-  // Tooltip
-@property (nonatomic, assign, readwrite) UIView *tooltip;
 
   // Settings
 @property (nonatomic, retain, readwrite) RPGQuickSettingsViewController *settingsViewController;
@@ -209,27 +207,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   self.settingsView = self.settingsViewController.view;
   self.settingsView.frame = self.view.frame;
   [self.view addSubview:self.settingsView];
-}
-#pragma mark Tooltip
-
-- (void)showTooltipWithView:(UIView *)view
-{
-  if (self.tooltip != nil)
-  {
-    [self.tooltip removeFromSuperview];
-    self.tooltip = nil;
-  }
-    //check for correct size
-  view.frame = self.view.frame;
-  
-  self.tooltip = view;
-  [self.view addSubview:view];
-}
-
-- (IBAction)removeTooltip:(UITapGestureRecognizer *)recognizer
-{
-  [self.tooltip removeFromSuperview];
-  self.tooltip = nil;
 }
 
 #pragma mark - Timer
