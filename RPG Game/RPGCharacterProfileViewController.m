@@ -88,4 +88,14 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.bagCollectionViewController addSkill:aSkillID];
+}
+
+- (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.skillCollectionViewController addSkill:aSkillID];
+}
+
 @end
