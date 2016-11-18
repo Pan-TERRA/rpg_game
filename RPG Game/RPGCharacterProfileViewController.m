@@ -9,11 +9,17 @@
 #import "RPGCharacterProfileViewController.h"
 #import "RPGNibNames.h"
 #import "RPGCharacterBagCollectionViewCell.h"
+#import "RPGCollectionViewController.h"
+#import "RPGSkillCollectionViewController.h"
+#import "RPGBagCollectionViewController.h"
 
-@interface RPGCharacterProfileViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RPGCharacterProfileViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UIView *skillBar;
-@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *collectionView;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *bagCollectionView;
+
+@property (nonatomic, retain, readwrite) RPGCollectionViewController *skillCollectionViewController;
+@property (nonatomic, retain, readwrite) RPGCollectionViewController *bagCollectionViewController;
 
 @end
 
@@ -23,7 +29,23 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGCharacterProfileViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGCharacterProfileViewControllerNIBName bundle:nil];
+  
+  if (self != nil)
+  {
+    _skillCollectionViewController = [[RPGSkillCollectionViewController alloc] init];
+    _bagCollectionViewController = [[RPGBagCollectionViewController alloc] init];
+  }
+  
+  return self;
+}
+
+- (void)dealloc
+{
+  [_skillCollectionViewController release];
+  [_bagCollectionViewController release];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController
@@ -33,7 +55,23 @@
   [super viewDidLoad];
   
   UINib *cellNib = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
-  [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  [self.skillCollectionView registerNib:cellNib forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  [self.bagCollectionView registerNib:cellNib forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  
+  self.skillCollectionViewController.viewController = self;
+  self.skillCollectionViewController.collectionView = self.skillCollectionView;
+  self.skillCollectionView.dataSource = self.skillCollectionViewController;
+  self.skillCollectionView.delegate = self.skillCollectionViewController;
+  
+  self.bagCollectionViewController.viewController = self;
+  self.bagCollectionViewController.collectionView = self.bagCollectionView;
+  self.bagCollectionView.dataSource = self.bagCollectionViewController;
+  self.bagCollectionView.delegate = self.bagCollectionViewController;
+  
+  //test data
+  ((RPGSkillCollectionViewController *)_skillCollectionViewController).skillColectionSize = 3;
+  ((RPGBagCollectionViewController *)_bagCollectionViewController).bagCollectionSize = 8;
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,30 +84,19 @@
   return UIInterfaceOrientationMaskLandscape;
 }
 
-- (void)dealloc
-{
-  [super dealloc];
-}
-
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-  return 8;
-}
-
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-  
-  RPGCharacterBagCollectionViewCell *cell = (RPGCharacterBagCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName forIndexPath:indexPath];
-  
-  [cell setImage:[UIImage imageNamed:@"_967740272"]];
-  
-  return cell;
-}
-
 - (IBAction)back:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.bagCollectionViewController addSkill:aSkillID];
+}
+
+- (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.skillCollectionViewController addSkill:aSkillID];
 }
 
 @end
