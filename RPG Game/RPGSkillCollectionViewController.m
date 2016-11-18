@@ -8,8 +8,8 @@
 
 #import "RPGSkillCollectionViewController.h"
 #import "RPGCharacterBagCollectionViewCell.h"
+#import "RPGCharacterProfileViewController.h"
 #import "RPGNibNames.h"
-#import "RPGSkillRepresentation.h"
 
 NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
 CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
@@ -33,6 +33,11 @@ CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
 - (NSUInteger)collectionSize
 {
   return self.skillColectionSize;
+}
+
+-(void)addToOtherCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  [self.viewController addToBagCollectionSkillWithID:aSkillID];
 }
 
 @end

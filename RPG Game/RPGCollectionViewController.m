@@ -122,7 +122,7 @@
 - (void)removeSkill:(NSUInteger)aSkillID
 {
   [self.skillsIDArray removeObject:@(aSkillID)];
-  
+  [self addToOtherCollectionSkillWithID:aSkillID];
   [self.collectionView reloadData];
 }
 
@@ -134,6 +134,11 @@
     NSUInteger skillID = [[self.skillsIDArray objectAtIndex:index] integerValue];
     [self removeSkill:skillID];
   }
+}
+
+-(void)addToOtherCollectionSkillWithID:(NSUInteger)aSkillID
+{
+  
 }
 
 @end
