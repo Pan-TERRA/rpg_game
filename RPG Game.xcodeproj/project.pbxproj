@@ -59,6 +59,8 @@
 		28AB94961DDB1F0B00F1503B /* UIWindow+RPGPresentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB94951DDB1F0B00F1503B /* UIWindow+RPGPresentController.m */; };
 		28AB949D1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB949C1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m */; };
 		28AB94A01DDDC1DC00F1503B /* RPGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB949F1DDDC1DC00F1503B /* RPGViewController.m */; };
+		28AB94A91DDEF8B100F1503B /* RPGQuickSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB94A71DDEF8B100F1503B /* RPGQuickSettingsViewController.m */; };
+		28AB94AA1DDEF8B100F1503B /* RPGQuickSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AB94A81DDEF8B100F1503B /* RPGQuickSettingsViewController.xib */; };
 		28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -230,6 +232,9 @@
 		28AB949C1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGBattleController+RPGBattlePresentationController.m"; sourceTree = "<group>"; };
 		28AB949E1DDDC1DC00F1503B /* RPGViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGViewController.h; sourceTree = "<group>"; };
 		28AB949F1DDDC1DC00F1503B /* RPGViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGViewController.m; sourceTree = "<group>"; };
+		28AB94A61DDEF8B100F1503B /* RPGQuickSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuickSettingsViewController.h; sourceTree = "<group>"; };
+		28AB94A71DDEF8B100F1503B /* RPGQuickSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuickSettingsViewController.m; sourceTree = "<group>"; };
+		28AB94A81DDEF8B100F1503B /* RPGQuickSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuickSettingsViewController.xib; sourceTree = "<group>"; };
 		28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RPGErrorLog.h"; sourceTree = "<group>"; };
 		28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RPGErrorLog.m"; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -439,6 +444,7 @@
 				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
 				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
 				283D191A1DD5FEC3008C5396 /* Skill Representation */,
+				28AB94AB1DDEF90D00F1503B /* Settings Modal */,
 				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
 			name = Battle;
@@ -981,6 +987,16 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		28AB94AB1DDEF90D00F1503B /* Settings Modal */ = {
+			isa = PBXGroup;
+			children = (
+				28AB94A61DDEF8B100F1503B /* RPGQuickSettingsViewController.h */,
+				28AB94A71DDEF8B100F1503B /* RPGQuickSettingsViewController.m */,
+				28AB94A81DDEF8B100F1503B /* RPGQuickSettingsViewController.xib */,
+			);
+			name = "Settings Modal";
+			sourceTree = "<group>";
+		};
 		28AE27161DBD161300834FBB /* Quest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1317,6 +1333,7 @@
 				AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */,
 				877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */,
 				D0819AC01DD6180100021DB9 /* RPGSkillDescriptionViewController.xib in Resources */,
+				28AB94AA1DDEF8B100F1503B /* RPGQuickSettingsViewController.xib in Resources */,
 				28149A1B1DB1011300C26881 /* RPGLoginViewController.xib in Resources */,
 				AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */,
 				2A6F2AC51DDA07B70036CD2D /* RPGLogTemplates.txt in Resources */,
@@ -1545,6 +1562,7 @@
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
 				28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */,
 				AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */,
+				28AB94A91DDEF8B100F1503B /* RPGQuickSettingsViewController.m in Sources */,
 				AEFC27B41DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
 				D0819ABD1DD6180100021DB9 /* RPGSkillBarViewController.m in Sources */,

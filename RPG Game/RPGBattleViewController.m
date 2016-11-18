@@ -133,7 +133,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   self.battleLogViewController.view = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
-    //battle init modal
+    //show battle init modal
   [self addChildViewController:self.battleInitModal];
   self.battleInitModal.view.frame = self.view.frame;
   [self.view addSubview:self.battleInitModal.view];
@@ -197,15 +197,15 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)openSettings:(UIButton *)sender
+- (IBAction)showSettingsModal:(UIButton *)sender
 {
   if (self.settingsViewController == nil)
   {
     self.settingsViewController = [[RPGQuickSettingsViewController new] autorelease];
   }
+  
   self.settingsView = self.settingsViewController.view;
   self.settingsView.frame = self.view.frame;
-  
   [self.view addSubview:self.settingsView];
 }
 #pragma mark Tooltip

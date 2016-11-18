@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -41,10 +42,13 @@
                             <rect key="frame" x="77" y="138" width="361" height="87"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Sounds:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEE-C4-0Gk">
-                                    <rect key="frame" x="16" y="0.0" width="141" height="39"/>
-                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="42"/>
+                                    <rect key="frame" x="16" y="0.0" width="118" height="39"/>
+                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="35"/>
                                     <color key="textColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=compact-widthClass=compact">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="25"/>
+                                    </variation>
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7ic-br-m73">
                                     <rect key="frame" x="296" y="4" width="51" height="31"/>
@@ -70,9 +74,23 @@
                                 <constraint firstItem="fEE-C4-0Gk" firstAttribute="top" secondItem="qJ0-Cr-kRG" secondAttribute="top" id="W2i-3A-80I"/>
                                 <constraint firstItem="5CS-yW-tVz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fEE-C4-0Gk" secondAttribute="bottom" constant="16" id="XSi-tN-gD6"/>
                                 <constraint firstItem="7ic-br-m73" firstAttribute="centerY" secondItem="fEE-C4-0Gk" secondAttribute="centerY" id="bYa-p9-UTy"/>
+                                <constraint firstItem="7ic-br-m73" firstAttribute="height" secondItem="fEE-C4-0Gk" secondAttribute="height" id="ewi-ub-3VV"/>
+                                <constraint firstItem="7ic-br-m73" firstAttribute="width" secondItem="fEE-C4-0Gk" secondAttribute="height" multiplier="49:29" id="hoo-MI-ZB5"/>
                                 <constraint firstAttribute="bottom" secondItem="5CS-yW-tVz" secondAttribute="bottom" constant="8" id="iRt-WV-6m3"/>
                                 <constraint firstItem="fEE-C4-0Gk" firstAttribute="leading" secondItem="qJ0-Cr-kRG" secondAttribute="leading" constant="16" id="ttM-Bx-CgI"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="ewi-ub-3VV"/>
+                                    <exclude reference="hoo-MI-ZB5"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=compact-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="ewi-ub-3VV"/>
+                                    <exclude reference="hoo-MI-ZB5"/>
+                                </mask>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="500-sd-bP1" userLabel="Music ContentView">
                             <rect key="frame" x="77" y="43" width="361" height="87"/>
@@ -88,10 +106,13 @@
                                     </connections>
                                 </slider>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Music:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hia-Df-g6r">
-                                    <rect key="frame" x="16" y="0.0" width="120" height="39"/>
-                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="42"/>
+                                    <rect key="frame" x="16" y="0.0" width="100" height="39"/>
+                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="35"/>
                                     <color key="textColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=compact-widthClass=compact">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                    </variation>
                                 </label>
                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hj2-da-ej0">
                                     <rect key="frame" x="296" y="4" width="51" height="31"/>
@@ -104,12 +125,23 @@
                                 <constraint firstItem="Hia-Df-g6r" firstAttribute="leading" secondItem="500-sd-bP1" secondAttribute="leading" constant="16" id="CRr-ov-xi4"/>
                                 <constraint firstAttribute="bottom" secondItem="jxB-XJ-GoD" secondAttribute="bottom" constant="8" id="Ixq-xC-TDf"/>
                                 <constraint firstItem="jxB-XJ-GoD" firstAttribute="leading" secondItem="500-sd-bP1" secondAttribute="leading" constant="16" id="Klv-Jc-PbF"/>
+                                <constraint firstItem="Hj2-da-ej0" firstAttribute="height" secondItem="Hia-Df-g6r" secondAttribute="height" id="Ve4-9t-Zeu"/>
                                 <constraint firstItem="Hj2-da-ej0" firstAttribute="trailing" secondItem="jxB-XJ-GoD" secondAttribute="trailing" id="dpB-Ii-o6S"/>
                                 <constraint firstItem="Hia-Df-g6r" firstAttribute="top" secondItem="500-sd-bP1" secondAttribute="top" id="jFG-HY-RC5"/>
                                 <constraint firstItem="jxB-XJ-GoD" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Hia-Df-g6r" secondAttribute="bottom" constant="16" id="qgu-rO-MaR"/>
                                 <constraint firstAttribute="trailing" secondItem="jxB-XJ-GoD" secondAttribute="trailing" constant="16" id="rqm-2L-mEM"/>
                                 <constraint firstItem="Hj2-da-ej0" firstAttribute="centerY" secondItem="Hia-Df-g6r" secondAttribute="centerY" id="x72-y1-JaV"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Ve4-9t-Zeu"/>
+                                </mask>
+                            </variation>
+                            <variation key="heightClass=compact-widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="Ve4-9t-Zeu"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -148,6 +180,7 @@
                     <color key="value" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="526" y="347"/>
         </view>
     </objects>
     <resources>
