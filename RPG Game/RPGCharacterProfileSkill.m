@@ -6,19 +6,19 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGSkill.h"
+#import "RPGCharacterProfileSkill.h"
 
 NSString * const kRPGSkillID = @"skill_id";
 NSString * const kRPGSkillSelected = @"is_selected";
 
-@interface RPGSkill()
+@interface RPGCharacterProfileSkill()
 
 @property (nonatomic, assign, readwrite) NSUInteger skillID;
 @property (nonatomic, assign, readwrite) BOOL selected;
 
 @end
 
-@implementation RPGSkill
+@implementation RPGCharacterProfileSkill
 
 - (instancetype)initWithID:(NSUInteger)aSkillID
                   selected:(BOOL)isSelected
@@ -60,7 +60,7 @@ NSString * const kRPGSkillSelected = @"is_selected";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   return [self initWithID:[aDictionary[kRPGSkillID] integerValue]
-                 selected:[aDictionary[kRPGSkillID] boolValue]];
+                 selected:[aDictionary[kRPGSkillSelected] boolValue]];
 }
 
 @end

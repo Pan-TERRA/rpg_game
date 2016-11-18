@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-@interface RPGSkill : NSObject <RPGSerializable>
+@interface RPGCharacterProfileSkill : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSUInteger skillID;
 @property (nonatomic, assign, readonly, getter=isSelected) BOOL selected;
