@@ -10,6 +10,4 @@
 
 @interface RPGBagCollectionViewController : RPGCollectionViewController
 
-@property (nonatomic, assign, readwrite) NSUInteger bagCollectionSize;
-
 @end

@@ -10,6 +10,4 @@
 
 @interface RPGSkillCollectionViewController : RPGCollectionViewController
 
-@property (nonatomic, assign, readwrite) NSUInteger skillColectionSize;
-
 @end

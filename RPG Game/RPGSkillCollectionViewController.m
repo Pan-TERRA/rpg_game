@@ -16,6 +16,8 @@ CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
 
 @interface RPGSkillCollectionViewController()
 
+@property (nonatomic, assign, readwrite) NSUInteger skillColectionSize;
+
 @end
 
 @implementation RPGSkillCollectionViewController
@@ -33,6 +35,11 @@ CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
 - (NSUInteger)collectionSize
 {
   return self.skillColectionSize;
+}
+
+- (void)setCollectionSize:(NSUInteger)aCollectionSize
+{
+  self.skillColectionSize = aCollectionSize;
 }
 
 -(void)addToOtherCollectionSkillWithID:(NSUInteger)aSkillID

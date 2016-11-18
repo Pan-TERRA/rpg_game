@@ -14,11 +14,17 @@
 NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
 CGFloat const kRPGBagCollectionViewControllerCellWidthMultiplier = 0.25;
 
+@interface RPGBagCollectionViewController()
+
+@property (nonatomic, assign, readwrite) NSUInteger bagCollectionSize;
+
+@end
+
 @implementation RPGBagCollectionViewController
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return 8;
+  return self.bagCollectionSize;
 }
 
 - (CGFloat)cellMultiplier
@@ -29,6 +35,11 @@ CGFloat const kRPGBagCollectionViewControllerCellWidthMultiplier = 0.25;
 - (NSUInteger)collectionSize
 {
   return self.bagCollectionSize;
+}
+
+- (void)setCollectionSize:(NSUInteger)aCollectionSize
+{
+  self.bagCollectionSize = aCollectionSize;
 }
 
 -(void)addToOtherCollectionSkillWithID:(NSUInteger)aSkillID
