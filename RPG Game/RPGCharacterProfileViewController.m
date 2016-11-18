@@ -204,6 +204,12 @@
     {
       case kRPGStatusCodeOK:
       {
+        NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+        NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
+        NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
+        [character setObject:self.skillCollectionViewController.skillsIDArray forKey:@"skills"];
+        [characters insertObject:character atIndex:0];
+        standardUserDefaults.sessionCharacters = characters;
         break;
       }
         
