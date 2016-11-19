@@ -10,6 +10,8 @@
 
 @class RPGBattle;
 @class RPGWebsocketManager;
+@class RPGRequest;
+@class RPGSkill;
 
 extern NSString * const kRPGModelDidChangeNotification;
 extern NSString * const kRPGBattleInitDidEndSetUpNotification;
@@ -27,9 +29,21 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 #pragma mark - API
 
 - (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
+
+/**
+ *  May be reimplemented to send proper request
+ */
+- (RPGRequest *)createBattleInitRequest;
+
 - (void)sendBattleConditionRequest;
 
 - (void)processManagerResponse:(NSDictionary *)aResponse;
+
+/**
+ *  May be reimplemented to get player skills from other source
+ */
+- (NSArray<RPGSkill *> *)getPlayerSkills;
+
 - (void)requestBattleInit;
 - (void)prepareBattleControllerForDismiss;
 
