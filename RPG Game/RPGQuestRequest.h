@@ -9,17 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-extern NSString * const kRPGQuestRequestToken;
 extern NSString * const kRPGQuestRequestQuestID;
 
 @interface RPGQuestRequest : NSObject <RPGSerializable>
 
-@property (nonatomic, copy, readonly) NSString *token;
 @property (nonatomic, assign, readonly) NSUInteger questID;
 
-- (instancetype)initWithToken:(NSString *)aToken
-                      questID:(NSUInteger)aQuestID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)questRequestWithToken:(NSString *)aToken
-                      questID:(NSUInteger)aQuestID;
+- (instancetype)initWithQuestID:(NSUInteger)aQuestID NS_DESIGNATED_INITIALIZER;
++ (instancetype)questRequestWithQuestID:(NSUInteger)aQuestID;
 
 @end

@@ -18,11 +18,10 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 
 @implementation RPGQuestReviewRequest
 
-- (instancetype)initWithToken:(NSString *)aToken
-                      questID:(NSUInteger)aQuestID
-                       result:(BOOL)aResult
+- (instancetype)initWithQuestID:(NSUInteger)aQuestID
+                         result:(BOOL)aResult
 {
-  self = [super initWithToken:aToken questID:aQuestID];
+  self = [super initWithQuestID:aQuestID];
   
   if (self != nil)
   {
@@ -34,19 +33,18 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 
 - (instancetype)init
 {
-  return [self initWithToken:nil questID:0 result:NO];
+  return [self initWithQuestID:0 result:NO];
 }
 
-- (instancetype)initWithToken:(NSString *)aToken questID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSUInteger)aQuestID
 {
-  return [self initWithToken:nil questID:0 result:NO];
+  return [self initWithQuestID:0 result:NO];
 }
 
-+ (instancetype)questReviewRequestWithToken:(NSString *)aToken
-                                    questID:(NSUInteger)aQuestID
-                                     result:(BOOL)aResult
++ (instancetype)questReviewRequestWithQuestID:(NSUInteger)aQuestID
+                                       result:(BOOL)aResult
 {
-  return [[[self alloc] initWithToken:aToken questID:aQuestID result:aResult] autorelease];
+  return [[[self alloc] initWithQuestID:aQuestID result:aResult] autorelease];
 }
 
 #pragma mark - RPGSerializable
@@ -62,8 +60,7 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithToken:aDictionary[kRPGQuestRequestToken]
-                     questID:[aDictionary[kRPGQuestRequestQuestID] integerValue]
+  return [self initWithQuestID:[aDictionary[kRPGQuestRequestQuestID] integerValue]
                       result:[aDictionary[kRPGQuestReviewRequestResult] boolValue]];
 }
 

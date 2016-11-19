@@ -10,7 +10,6 @@
   // Entities
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGAuthorizationLoginResponse.h"
-#import "RPGBasicNetworkRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
@@ -27,8 +26,9 @@
                              kRPGNetworkManagerAPILoginRoute];
   
   NSURLRequest *request = [self requestWithObject:aRequest
-                                               URLstring:requestString
-                                                  method:@"POST"];
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:NO];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -121,22 +121,14 @@
 
 - (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
 {
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGBasicNetworkRequest *request = [RPGBasicNetworkRequest requestWithToken:token];
-  
-  [self logoutWithRequest:request completionHandler:callbackBlock];
-}
-
-- (void)logoutWithRequest:(RPGBasicNetworkRequest *)aRequest
-        completionHandler:(void (^)(NSInteger))callbackBlock
-{
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISignoutRoute];
   
-  NSURLRequest *request = [self requestWithObject:aRequest
+  NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"];
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;

@@ -11,7 +11,6 @@
 		281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F11DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m */; };
 		281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */; };
 		281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */; };
-		28149A041DAFCDE400C26881 /* RPGBasicNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A031DAFCDE400C26881 /* RPGBasicNetworkRequest.m */; };
 		28149A101DB1007400C26881 /* RPGNibNames.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A0F1DB1007400C26881 /* RPGNibNames.m */; };
 		28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28149A151DB1011300C26881 /* RPGLoginViewController.m */; };
 		28149A1B1DB1011300C26881 /* RPGLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28149A161DB1011300C26881 /* RPGLoginViewController.xib */; };
@@ -143,8 +142,6 @@
 		281499F41DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAuthorizationLogoutResponse.m; sourceTree = "<group>"; };
 		281499FB1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAuthorizationLoginRequest.h; sourceTree = "<group>"; };
 		281499FC1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAuthorizationLoginRequest.m; sourceTree = "<group>"; };
-		28149A021DAFCDE400C26881 /* RPGBasicNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBasicNetworkRequest.h; sourceTree = "<group>"; };
-		28149A031DAFCDE400C26881 /* RPGBasicNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBasicNetworkRequest.m; sourceTree = "<group>"; };
 		28149A0E1DB1007400C26881 /* RPGNibNames.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGNibNames.h; sourceTree = "<group>"; };
 		28149A0F1DB1007400C26881 /* RPGNibNames.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGNibNames.m; sourceTree = "<group>"; };
 		28149A141DB1011300C26881 /* RPGLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGLoginViewController.h; sourceTree = "<group>"; };
@@ -518,15 +515,6 @@
 			name = Response;
 			sourceTree = "<group>";
 		};
-		281723561DB5204200F74403 /* Request */ = {
-			isa = PBXGroup;
-			children = (
-				28149A021DAFCDE400C26881 /* RPGBasicNetworkRequest.h */,
-				28149A031DAFCDE400C26881 /* RPGBasicNetworkRequest.m */,
-			);
-			name = Request;
-			sourceTree = "<group>";
-		};
 		281723571DB5204900F74403 /* Response */ = {
 			isa = PBXGroup;
 			children = (
@@ -560,7 +548,6 @@
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
-				281723561DB5204200F74403 /* Request */,
 				87C8734C1DDF27DB00903193 /* Response */,
 				283D19181DD5FE95008C5396 /* Resources */,
 				28A915551DC7B8F6001E0F51 /* Classes */,
@@ -1544,7 +1531,6 @@
 				28149A1A1DB1011300C26881 /* RPGLoginViewController.m in Sources */,
 				AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */,
 				28A9155F1DC7B921001E0F51 /* RPGClassesResponse.m in Sources */,
-				28149A041DAFCDE400C26881 /* RPGBasicNetworkRequest.m in Sources */,
 				AEFC27AB1DD389C100905ADD /* RPGResources.m in Sources */,
 				2A6F2AC21DDA04E80036CD2D /* RPGBattleLog.m in Sources */,
 				28AB948C1DD8AA9300F1503B /* RPGWebsocketManager.m in Sources */,

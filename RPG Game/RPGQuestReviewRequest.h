@@ -12,11 +12,9 @@
 
 @property (nonatomic, assign, readonly) BOOL result;
 
-- (instancetype)initWithToken:(NSString *)aToken
-                      questID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSUInteger)aQuestID
                        result:(BOOL)aResult NS_DESIGNATED_INITIALIZER;
-+ (instancetype)questReviewRequestWithToken:(NSString *)aToken
-                                    questID:(NSUInteger)aQuestID
++ (instancetype)questReviewRequestWithQuestID:(NSUInteger)aQuestID
                                      result:(BOOL)aResult;
 
 @end

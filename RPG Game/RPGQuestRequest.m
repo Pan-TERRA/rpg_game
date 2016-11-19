@@ -8,12 +8,10 @@
 
 #import "RPGQuestRequest.h"
 
-NSString * const kRPGQuestRequestToken = @"token";
 NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 @interface RPGQuestRequest()
 
-@property (nonatomic, copy, readwrite) NSString *token;
 @property (nonatomic, assign, readwrite) NSUInteger questID;
 
 @end
@@ -22,14 +20,12 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 #pragma mark - Init
 
-- (instancetype)initWithToken:(NSString *)aToken
-                      questID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSUInteger)aQuestID
 {
   self = [super init];
   
   if (self != nil)
   {
-    _token = [aToken copy];
     _questID = aQuestID;
   }
   
@@ -38,20 +34,18 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 - (instancetype)init
 {
-  return [self initWithToken:nil questID:0];
+  return [self initWithQuestID:0];
 }
 
-+ (instancetype)questRequestWithToken:(NSString *)aToken
-                              questID:(NSUInteger)aQuestID
++ (instancetype)questRequestWithQuestID:(NSUInteger)aQuestID
 {
-  return [[[self alloc] initWithToken:aToken questID:aQuestID] autorelease];
+  return [[[self alloc] initWithQuestID:aQuestID] autorelease];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_token release];
   [super dealloc];
 }
 
@@ -61,7 +55,6 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGQuestRequestToken] = self.token;
   dictionaryRepresentation[kRPGQuestRequestQuestID] = @(self.questID);
   
   return dictionaryRepresentation;
@@ -69,8 +62,7 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithToken:aDictionary[kRPGQuestRequestToken]
-                     questID:[aDictionary[kRPGQuestRequestQuestID] integerValue]];
+  return [self initWithQuestID:[aDictionary[kRPGQuestRequestQuestID] integerValue]];
 }
 
 @end

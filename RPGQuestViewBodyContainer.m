@@ -221,8 +221,7 @@
   };
   
   NSData *data = UIImagePNGRepresentation(chosenImage);
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questViewController.questID];
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
   
   [aPicker dismissViewControllerAnimated:YES completion:NULL];

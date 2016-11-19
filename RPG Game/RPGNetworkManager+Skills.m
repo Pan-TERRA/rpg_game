@@ -17,15 +17,18 @@
 
 @implementation RPGNetworkManager (Skills)
 
-- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
+- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID
+               completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
   
-  RPGSkillsRequest *aRequest = [RPGSkillsRequest skillsRequestWithToken:[NSUserDefaults standardUserDefaults].sessionToken
-                                                           characterID:aCharacterID];
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+  RPGSkillsRequest *aRequest = [RPGSkillsRequest skillsRequestWithCharacterID:aCharacterID];
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
