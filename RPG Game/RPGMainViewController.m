@@ -12,6 +12,7 @@
   // Views
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
+#import "RPGCharacterProfileViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -96,7 +97,9 @@
 
 - (IBAction)segueToChar
 {
+  RPGCharacterProfileViewController *characterProfileViewController = [[[RPGCharacterProfileViewController alloc] init] autorelease];
   
+  [self presentViewController:characterProfileViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToPlay
@@ -125,8 +128,8 @@
 - (void)updateResourcesLabels
 {
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionGold];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionCrystals];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionGold];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionCrystals];
 }
 
 @end

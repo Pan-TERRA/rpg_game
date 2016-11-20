@@ -18,4 +18,6 @@ extern NSString * const kRPGQuestProofImageViewControllerNIBName;
 extern NSString * const kRPGRegistrationViewControllerNIBName;
 extern NSString * const kRPGLoginViewControllerNIBName;
 extern NSString * const kRPGInitialScreenViewControllerNIBName;
+extern NSString * const kRPGCharacterProfileViewControllerNIBName;
+extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;

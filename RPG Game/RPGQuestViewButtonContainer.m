@@ -244,8 +244,7 @@
     //self.acceptButton.enabled = YES;
     //self.denyButton.enabled = YES;
   };
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questViewController.questID result:aResult];
+  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithQuestID:self.questViewController.questID result:aResult];
   [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
 }
 

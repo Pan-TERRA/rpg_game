@@ -6,17 +6,18 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGSkillsRequest.h"
+#import "RPGCharacterRequest.h"
 
-static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
+NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
-@implementation RPGSkillsRequest
+@implementation RPGCharacterRequest
 
 #pragma mark - Init
 
 - (instancetype)initWithCharacterID:(NSInteger)characterID
 {
   self = [super init];
+  
   if (self != nil)
   {
     if (characterID >= 0)
@@ -38,7 +39,7 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
   return [self initWithCharacterID:-1];
 }
 
-+ (instancetype)skillsRequestWithCharacterID:(NSInteger)aCharacterID
++ (instancetype)characterRequestWithCharacterID:(NSInteger)aCharacterID
 {
   return [[[self alloc] initWithCharacterID:aCharacterID] autorelease];
 }
@@ -47,7 +48,6 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 - (void)dealloc
 {
-  [_token release];
   [super dealloc];
 }
 
@@ -57,14 +57,14 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   
-  dictionary[kRPGSkillsRequestCharacterID] = @(self.characterID);
+  dictionary[kRPGCharacterRequestCharacterID] = @(self.characterID);
   
   return dictionary;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithCharacterID:[aDictionary[kRPGSkillsRequestCharacterID] integerValue]];
+  return [self initWithCharacterID:[aDictionary[kRPGCharacterRequestCharacterID] integerValue]];
 }
 
 @end

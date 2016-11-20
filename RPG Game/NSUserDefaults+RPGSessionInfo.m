@@ -87,4 +87,9 @@
 
 #pragma mark -
 
+- (NSInteger)characterID
+{
+  return [[[self.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+}
+
 @end

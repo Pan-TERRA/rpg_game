@@ -12,7 +12,6 @@
 @interface RPGWaitingViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
-@property (nonatomic, copy, readwrite) NSString *message;
 
 @end
 
@@ -48,9 +47,9 @@
 
 #pragma mark - UICollectionView
 
-- (void)viewDidLoad
+- (void)viewWillAppear:(BOOL)animated
 {
-  [super viewDidLoad];
+  [super viewWillAppear:animated];
   
   self.messageLabel.text = self.message;
 }

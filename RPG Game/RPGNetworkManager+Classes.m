@@ -122,11 +122,12 @@
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIClassInfoRoute,
-                             anID];
+                             (long)anID];
   
-  NSURLRequest *request = [self requestWithObject:nil
+  NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"];
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

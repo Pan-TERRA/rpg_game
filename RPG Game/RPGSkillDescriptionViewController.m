@@ -57,13 +57,13 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidAppear:(BOOL)isAnimated
+- (void)viewWillAppear:(BOOL)isAnimated
 {
-  [super viewDidAppear:isAnimated];
+  [super viewWillAppear:isAnimated];
   
   RPGSkillRepresentation *skill = self.skillRepresentation;
   self.titleLabel.text = skill.name;
-  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", skill.absoluteCooldown];
+  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", (long)skill.absoluteCooldown];
   self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", skill.multiplier];
   self.descriptionLabel.text = skill.skillDescription;
 }
@@ -76,6 +76,14 @@
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Actions
+
+- (IBAction)removeViewControllerFromParent:(UITapGestureRecognizer *)recognizer
+{
+  [self.view removeFromSuperview];
+  [self removeFromParentViewController];
 }
 
 @end

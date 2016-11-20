@@ -9,12 +9,14 @@
 #import "RPGRequest.h"
 #import "RPGSerializable.h"
 
-@interface RPGSkillsRequest : NSObject <RPGSerializable>
+extern NSString * const kRPGCharacterRequestToken;
+extern NSString * const kRPGCharacterRequestCharacterID;
 
-@property (copy, nonatomic, readwrite) NSString *token;
+@interface RPGCharacterRequest : NSObject <RPGSerializable>
+
 @property (assign, nonatomic, readwrite) NSInteger characterID;
 
 - (instancetype)initWithCharacterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)skillsRequestWithCharacterID:(NSInteger)aCharacterID;
++ (instancetype)characterRequestWithCharacterID:(NSInteger)aCharacterID;
 
 @end

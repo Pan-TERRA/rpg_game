@@ -18,5 +18,7 @@
 @property (nonatomic) NSInteger sessionCrystals;
   // TODO: Remove hp, attack
 @property (nonatomic) NSArray *sessionCharacters;
+  // TODO: In future add characterIDbyName: or currentCharacterID
+@property (nonatomic, readonly) NSInteger characterID;
 
 @end

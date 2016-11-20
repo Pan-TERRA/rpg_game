@@ -14,13 +14,12 @@
 #import "RPGBattleLog.h"
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
-#import "RPGSkill.h"
 #import "RPGResources.h"
 #import "RPGRequest.h"
-#import "RPGSkillsRequest.h"
 #import "RPGSkillActionRequest.h"
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
+#import "RPGSkill.h"
   // Misc
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -30,8 +29,7 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
-static NSString * const kRPGBattleControllerCharacterID = @"char_id";
-static NSString * const kRPGBattleControllerSkillID = @"skill_id";
+static NSString * const kRPGBattleControllerSkills = @"skills";
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
@@ -167,40 +165,16 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (NSArray<RPGSkill *> *)getPlayerSkills
 {
-  // insert sunshine code here
-  return nil;
-}
-
-- (NSInteger)getCharacterID
-{
-  NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-  NSDictionary *character = nil;
-  NSInteger characterID = -1;
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSArray *skillsArray = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
   
-  if ([[userDefaults.sessionCharacters firstObject] isKindOfClass:[NSDictionary class]])
+  NSMutableArray *skills = [NSMutableArray array];
+  for (NSNumber *skillID in skillsArray)
   {
-    character = (NSDictionary *)[userDefaults.sessionCharacters firstObject];
+    RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
+    [skills addObject:skill];
   }
-  if (character)
-  {
-    characterID = [character[kRPGBattleControllerCharacterID] integerValue];
-  }
-  
-  return characterID;
-}
-
-- (NSArray *)convertSkillsFromArray:(NSArray *)anArray
-{
-  NSMutableArray<RPGSkill *> *skillsArray = [NSMutableArray array];
-  
-  for (NSDictionary *skillDictionary in anArray)
-  {
-    NSInteger skillID = [skillDictionary[kRPGBattleControllerSkillID] integerValue];
-    RPGSkill *skill = [RPGSkill skillWithSkillID:skillID];
-    [skillsArray addObject:skill];
-  }
-  
-  return skillsArray;
+  return skills;
 }
 
 @end
