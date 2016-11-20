@@ -1,5 +1,5 @@
 //
-//  RPGAlert.h
+//  RPGAlertController.h
 //  RPG Game
 //
 //  Created by Иван Дзюбенко on 11/18/16.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RPGAlert : NSObject
+@interface RPGAlertController : NSObject
 
 + (void)showAlertWithTitle:(NSString *)title
                    message:(NSString *)message

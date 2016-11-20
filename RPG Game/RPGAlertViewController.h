@@ -1,5 +1,5 @@
 //
-//  RPGAlert.h
+//  RPGAlertViewController.h
 //  RPG Game
 //
 //  Created by Максим Шульга on 11/1/16.

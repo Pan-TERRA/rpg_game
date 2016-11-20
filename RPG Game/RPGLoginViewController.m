@@ -18,7 +18,7 @@
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
   // Misc
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
 
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
@@ -141,7 +141,7 @@
          case kRPGStatusCodeUserDoesNotExist:
          case kRPGStatusCodeWrongPassword:
          {
-           [RPGAlert showAlertWithTitle:@"Error" message:@"Ivalid credentials" completion:nil];
+           [RPGAlertController showAlertWithTitle:@"Error" message:@"Ivalid credentials" completion:nil];
            break;
          }
          default:

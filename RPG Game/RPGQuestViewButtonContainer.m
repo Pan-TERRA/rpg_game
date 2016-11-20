@@ -17,7 +17,7 @@
 #import "RPGQuest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -150,7 +150,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
         {
           UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -160,7 +160,7 @@
       default:
       {
         NSString *message = @"Can't take quest.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
@@ -198,7 +198,7 @@
          NSString *message = @"Give this app permission to access your camera in your settings app!";
          dispatch_async(dispatch_get_main_queue(), ^
          {
-           [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+           [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
            //weakSelf.addProofButton.enabled = YES;
          });
        }
@@ -227,7 +227,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
         {
           UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -237,7 +237,7 @@
       default:
       {
         NSString *message = @"Can't send quest proof.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }

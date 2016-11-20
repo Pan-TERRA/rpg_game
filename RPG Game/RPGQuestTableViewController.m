@@ -21,7 +21,7 @@
 #import "RPGNibNames.h"
 #import "RPGQuestListState.h"
 
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
 
 CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 
@@ -217,7 +217,7 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
       }
       else
       {
-        [RPGAlert showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
       }
     };
     

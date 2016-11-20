@@ -1,5 +1,5 @@
   //
-  //  RPGAlert.m
+  //  RPGAlertViewController.m
   //  RPG Game
   //
   //  Created by Максим Шульга on 11/1/16.
@@ -43,7 +43,7 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
   if (self != nil)
   {
     _alertTitleLabelText = [aTitle copy];
-    _alertDescriptionLabelText = [aTitle copy];
+    _alertDescriptionLabelText = [aDescription copy];
     _alertActionButtonText = [anActionTitle copy];
     
     if (aCompletionHandler != nil)
@@ -92,7 +92,7 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
   
   self.alertTitleLabel.text = self.alertTitleLabelText;
   self.alertDescriptionLabel.text = self.alertDescriptionLabelText;
-  self.alertActionButton.titleLabel.text = self.alertActionButtonText;
+  [self.alertActionButton setTitle:self.alertActionButtonText forState:UIControlStateNormal];
 }
 
 #pragma mark - IBAction
@@ -101,7 +101,9 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
 {
   if (_completionHandler != nil)
   {
-    _completionHandler();
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      _completionHandler();
+    });
   }
   
   [self dismissViewControllerAnimated:YES completion:nil];

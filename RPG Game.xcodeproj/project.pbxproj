@@ -62,7 +62,7 @@
 		28AB94A91DDEF8B100F1503B /* RPGQuickSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB94A71DDEF8B100F1503B /* RPGQuickSettingsViewController.m */; };
 		28AB94AA1DDEF8B100F1503B /* RPGQuickSettingsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AB94A81DDEF8B100F1503B /* RPGQuickSettingsViewController.xib */; };
 		28AB94AE1DDF35C300F1503B /* RPGAlertViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AB94AD1DDF35C300F1503B /* RPGAlertViewController.xib */; };
-		28AB94B51DDF48E000F1503B /* RPGAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB94B41DDF48E000F1503B /* RPGAlert.m */; };
+		28AB94B51DDF48E000F1503B /* RPGAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 28AB94B41DDF48E000F1503B /* RPGAlertController.m */; };
 		28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */; };
 		28F102221DB7756500C969CA /* RPGUserSessionKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102211DB7756500C969CA /* RPGUserSessionKeys.m */; };
 		28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 28F102241DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m */; };
@@ -238,8 +238,8 @@
 		28AB94A71DDEF8B100F1503B /* RPGQuickSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuickSettingsViewController.m; sourceTree = "<group>"; };
 		28AB94A81DDEF8B100F1503B /* RPGQuickSettingsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuickSettingsViewController.xib; sourceTree = "<group>"; };
 		28AB94AD1DDF35C300F1503B /* RPGAlertViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGAlertViewController.xib; sourceTree = "<group>"; };
-		28AB94B31DDF48E000F1503B /* RPGAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAlert.h; sourceTree = "<group>"; };
-		28AB94B41DDF48E000F1503B /* RPGAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAlert.m; sourceTree = "<group>"; };
+		28AB94B31DDF48E000F1503B /* RPGAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAlertController.h; sourceTree = "<group>"; };
+		28AB94B41DDF48E000F1503B /* RPGAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAlertController.m; sourceTree = "<group>"; };
 		28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RPGErrorLog.h"; sourceTree = "<group>"; };
 		28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+RPGErrorLog.m"; sourceTree = "<group>"; };
 		28F102201DB7756500C969CA /* RPGUserSessionKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGUserSessionKeys.h; sourceTree = "<group>"; };
@@ -1012,13 +1012,13 @@
 			name = "RPGAlert ViewController";
 			sourceTree = "<group>";
 		};
-		28AB94AF1DDF36F600F1503B /* RPGAlert */ = {
+		28AB94AF1DDF36F600F1503B /* RPGAlertController */ = {
 			isa = PBXGroup;
 			children = (
-				28AB94B31DDF48E000F1503B /* RPGAlert.h */,
-				28AB94B41DDF48E000F1503B /* RPGAlert.m */,
+				28AB94B31DDF48E000F1503B /* RPGAlertController.h */,
+				28AB94B41DDF48E000F1503B /* RPGAlertController.m */,
 			);
-			name = RPGAlert;
+			name = RPGAlertController;
 			sourceTree = "<group>";
 		};
 		28AE27161DBD161300834FBB /* Quest */ = {
@@ -1051,7 +1051,7 @@
 		28B4DDB01DCC971200332DCD /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				28AB94AF1DDF36F600F1503B /* RPGAlert */,
+				28AB94AF1DDF36F600F1503B /* RPGAlertController */,
 				28AB94AC1DDF34D900F1503B /* RPGAlert ViewController */,
 				28B4DDB11DCC974B00332DCD /* NSObject+RPGErrorLog.h */,
 				28B4DDB21DCC974B00332DCD /* NSObject+RPGErrorLog.m */,
@@ -1542,7 +1542,7 @@
 				28A915531DC7B8F3001E0F51 /* RPGNetworkManager+Classes.m in Sources */,
 				28AB94891DD8A8EB00F1503B /* RPGBattleController.m in Sources */,
 				281499F51DAFCC7800C26881 /* RPGAuthorizationLogoutResponse.m in Sources */,
-				28AB94B51DDF48E000F1503B /* RPGAlert.m in Sources */,
+				28AB94B51DDF48E000F1503B /* RPGAlertController.m in Sources */,
 				281499FD1DAFCCED00C26881 /* RPGAuthorizationLoginRequest.m in Sources */,
 				28307BE31DD21CA5002E6233 /* RPGSkillRepresentation.m in Sources */,
 				D0CFEE781DB65C0100C61D0B /* CMOpenALSoundManager.m in Sources */,
