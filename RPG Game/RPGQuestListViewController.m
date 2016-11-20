@@ -18,7 +18,7 @@
 #import "RPGStatusCodes.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
 
 NSString * const kRPGQuestStringStateInProgress = @"In progress";
 NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
@@ -37,8 +37,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
 
-@property (nonatomic, assign, readwrite, getter=isInProgressQuestsVisited) BOOL inProgressQuestsVisited;
-@property (nonatomic, assign, readwrite, getter=isDoneQuestsVisited) BOOL doneQuestsVisited;
 @property (nonatomic, assign, readwrite, getter=canSendRequest) BOOL sendRequest;
 
 @property (nonatomic, retain, readwrite) RPGQuestTableViewController *tableViewController;
@@ -142,7 +140,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         case kRPGStatusCodeWrongToken:
         {
           NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-          [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+          [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
           {
             UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
             [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -152,30 +150,13 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
         default:
         {
           NSString *message = @"Can't update quest list.";
-          [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+          [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
           break;
         }
       }
     };
     
     [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState completionHandler:handler];
-  }
-}
-
-/**
- *  Define if quest array should be uploaded from server.
- *
- *  @param aFlag A boolean value that defines action
- */
-- (void)shouldUpdateView:(BOOL)aFlag
-{
-  if (aFlag)
-  {
-    [self.tableView reloadData];
-  }
-  else
-  {
-    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
   }
 }
 
@@ -236,7 +217,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       else
       {
         NSString *message = @"No quests for review.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Wow!" message:message completion:nil];
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;
@@ -263,32 +244,11 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   if (state != kRPGQuestListReviewQuest)
   {
     self.tableViewController.questListState = state;
+    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
   }
-  
-  switch (state)
+  else
   {
-    case kRPGQuestListTakeQuest:
-    {
-      [self.tableView reloadData];
-      break;
-    }
-    case kRPGQuestListInProgressQuest:
-    {
-      [self shouldUpdateView:self.isInProgressQuestsVisited];
-      self.inProgressQuestsVisited = YES;
-      break;
-    }
-    case kRPGQuestListDoneQuest:
-    {
-      [self shouldUpdateView:self.isDoneQuestsVisited];
-      self.doneQuestsVisited = YES;
-      break;
-    }
-    case kRPGQuestListReviewQuest:
-    {
-      [self updateViewForState:state shouldReload:NO];
-      break;
-    }
+    [self updateViewForState:state shouldReload:NO];
   }
 }
 

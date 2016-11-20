@@ -12,7 +12,7 @@
   // Misc
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -89,7 +89,7 @@
 
        case kRPGStatusCodeWrongJSON:
        {
-         NSLog(@"Logout: wrongJSON");
+         [RPGAlertController showAlertWithTitle:@"Error" message:@"Logout: wrongJSON" completion:nil];
          break;
        }
          

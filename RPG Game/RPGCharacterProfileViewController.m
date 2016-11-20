@@ -26,7 +26,7 @@
 #import "RPGSkillsSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -149,7 +149,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
          {
            UIViewController *viewController = self.presentingViewController.presentingViewController;
            [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -160,7 +160,7 @@
       default:
       {
         NSString *message = @"Can't upload quest proof image.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
         break;
       }
     }
@@ -229,7 +229,7 @@
       case kRPGStatusCodeWrongToken:
       {
         NSString *message = @"Can't select skills.\nWrong token error.\nTry to log in again.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
         {
           UIViewController *viewController = self.presentingViewController.presentingViewController;
           [viewController dismissViewControllerAnimated:YES completion:nil];
@@ -240,7 +240,7 @@
       default:
       {
         NSString *message = @"Can't select skills.";
-        [RPGAlert showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
         {
           [self dismissViewControllerAnimated:YES completion:nil];
         }];

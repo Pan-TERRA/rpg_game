@@ -8,16 +8,29 @@
 
 #import <Foundation/Foundation.h>
 
+/****************	Main Screens ****************/
+
 extern NSString * const kRPGMainViewNIBName;
 extern NSString * const kRPGBattleViewControllerNIBName;
 extern NSString * const kRPGSettingsViewControllerNIBName;
-extern NSString * const kRPGQuestListViewControllerNIBName;
-extern NSString * const kRPGQuestListTableViewCellNIBName;
-extern NSString * const kRPGQuestViewControllerNIBName;
-extern NSString * const kRPGQuestProofImageViewControllerNIBName;
 extern NSString * const kRPGRegistrationViewControllerNIBName;
 extern NSString * const kRPGLoginViewControllerNIBName;
 extern NSString * const kRPGInitialScreenViewControllerNIBName;
+
+/****************	Quests ****************/
+
+extern NSString * const kRPGQuestProofImageViewControllerNIBName;
+extern NSString * const kRPGQuestListViewControllerNIBName;
+extern NSString * const kRPGQuestViewControllerNIBName;
+extern NSString * const kRPGQuestListTableViewCellNIBName;
+
+/****************	Character Profile ****************/
+
 extern NSString * const kRPGCharacterProfileViewControllerNIBName;
 extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
+
+/****************	Character Profile ****************/
+
+extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
+

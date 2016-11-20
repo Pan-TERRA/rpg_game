@@ -8,16 +8,28 @@
 
 #import "RPGNibNames.h"
 
+/****************	Main Screens ****************/
+
 NSString * const kRPGMainViewNIBName = @"RPGMainView";
 NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
 NSString * const kRPGSettingsViewControllerNIBName = @"RPGSettingsViewController";
+NSString * const kRPGRegistrationViewControllerNIBName = @"RPGRegistrationViewController";
+NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
+NSString * const kRPGInitialScreenViewControllerNIBName = @"RPGInitialScreenViewController";
+
+/****************	Quests ****************/
+
 NSString * const kRPGQuestListViewControllerNIBName = @"RPGQuestListViewController";
 NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell";
 NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
-NSString * const kRPGRegistrationViewControllerNIBName = @"RPGRegistrationViewController";
-NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
-NSString * const kRPGInitialScreenViewControllerNIBName = @"RPGInitialScreenViewController";
+
+/****************	Character Profile ****************/
+
 NSString * const kRPGCharacterProfileViewControllerNIBName = @"RPGCharacterProfileViewController";
 NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCollectionViewCell";
+
+/****************	Misc ****************/
+
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
+NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
