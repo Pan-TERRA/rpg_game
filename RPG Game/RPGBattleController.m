@@ -133,6 +133,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
       {
         RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
         [skills addObject:skill];
+        [skill release];
       }
       
       self.battle.player = [RPGPlayer playerWithSkills:skills];
