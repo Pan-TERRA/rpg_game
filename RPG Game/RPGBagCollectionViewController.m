@@ -7,8 +7,11 @@
 //
 
 #import "RPGBagCollectionViewController.h"
-#import "RPGCharacterBagCollectionViewCell.h"
+  // Controllers
 #import "RPGCharacterProfileViewController.h"
+  // Views
+#import "RPGCharacterBagCollectionViewCell.h"
+  // Constants
 #import "RPGNibNames.h"
 
 NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
@@ -42,9 +45,9 @@ CGFloat const kRPGBagCollectionViewControllerCellWidthMultiplier = 0.25;
   self.bagCollectionSize = aCollectionSize;
 }
 
--(void)addToOtherCollectionSkillWithID:(NSUInteger)aSkillID
+- (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  [self.viewController addToSkillCollectionSkillWithID:aSkillID];
+  [self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
 }
 
 @end

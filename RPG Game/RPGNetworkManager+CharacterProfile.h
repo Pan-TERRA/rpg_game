@@ -7,6 +7,8 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @class RPGCharacterRequest;
 @class RPGCharacterProfileInfoResponse;
@@ -14,6 +16,7 @@
 @interface RPGNetworkManager (CharacterProfile)
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
-                         completionHandler:(void (^)(RPGCharacterProfileInfoResponse *))callbackBlock;
+                         completionHandler:(void (^)(RPGStatusCode networkStatusCode,
+                                                     RPGCharacterProfileInfoResponse *))callbackBlock;
 
 @end

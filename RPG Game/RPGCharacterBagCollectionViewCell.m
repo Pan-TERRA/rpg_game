@@ -21,4 +21,9 @@
   self.imageView.image = anImage;
 }
 
+- (UIImage *)image
+{
+  return self.imageView.image;
+}
+
 @end

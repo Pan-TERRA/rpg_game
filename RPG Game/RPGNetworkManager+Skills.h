@@ -34,6 +34,6 @@
        completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
 
 - (void)selectSkillsWithRequest:(RPGSkillsSelectRequest *)aRequest
-              completionHandler:(void (^)(RPGSkillsResponse *))callbackBlock;
+              completionHandler:(void (^)(RPGStatusCode, RPGSkillsResponse *))callbackBlock;
 
 @end

@@ -24,7 +24,6 @@
                 <constraint firstAttribute="bottom" secondItem="eAP-Xw-YK9" secondAttribute="bottom" id="uaM-I5-1TV"/>
             </constraints>
             <connections>
-                <outlet property="image" destination="eAP-Xw-YK9" id="pK7-c3-n3S"/>
                 <outlet property="imageView" destination="eAP-Xw-YK9" id="Rqc-aO-MdU"/>
             </connections>
         </view>

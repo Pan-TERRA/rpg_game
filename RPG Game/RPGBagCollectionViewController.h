@@ -10,4 +10,5 @@
 
 @interface RPGBagCollectionViewController : RPGCollectionViewController
 
+
 @end

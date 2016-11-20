@@ -7,10 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+  // Constants
+#import "RPGItemTypes.h"
 
 @interface RPGCharacterProfileViewController : UIViewController
 
-- (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID;
-- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID;
+  // must be set
+@property (nonatomic, assign, readonly) IBOutlet UICollectionView *skillCollectionView;
+@property (nonatomic, assign, readonly) IBOutlet UICollectionView *bagCollectionView;
+
+- (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
+- (void)addItemToBagCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
 
 @end

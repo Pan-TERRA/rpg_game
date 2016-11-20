@@ -7,15 +7,17 @@
 //
 
 #import "RPGNetworkManager+CharacterProfile.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
-#import "NSObject+RPGErrorLog.h"
+  // Entities
 #import "RPGCharacterProfileInfoResponse.h"
 #import "RPGCharacterRequest.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
+#import "NSObject+RPGErrorLog.h"
 
 @implementation RPGNetworkManager (CharacterProfile)
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
-                         completionHandler:(void (^)(RPGCharacterProfileInfoResponse *))callbackBlock
+                         completionHandler:(void (^)(RPGStatusCode, RPGCharacterProfileInfoResponse *))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -30,15 +32,13 @@
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-    // something went wrong
     if (error != nil)
     {
-      // no internet connection
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -48,7 +48,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -60,7 +60,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -70,7 +70,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -86,7 +86,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -100,11 +100,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        callbackBlock(responseObject);
+        callbackBlock(kRPGStatusCodeOK, responseObject);
       }
     });
     

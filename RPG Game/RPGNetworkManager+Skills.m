@@ -224,7 +224,7 @@
 }
 
 - (void)selectSkillsWithRequest:(RPGSkillsSelectRequest *)aRequest
-              completionHandler:(void (^)(RPGSkillsResponse *))callbackBlock
+              completionHandler:(void (^)(RPGStatusCode networkStatusCode, RPGSkillsResponse *))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -247,7 +247,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -257,7 +257,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -269,7 +269,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -279,7 +279,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -295,7 +295,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -309,11 +309,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        callbackBlock(responseObject);
+        callbackBlock(kRPGStatusCodeOK, responseObject);
       }
    });
     

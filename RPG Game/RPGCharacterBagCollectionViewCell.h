@@ -10,6 +10,6 @@
 
 @interface RPGCharacterBagCollectionViewCell : UICollectionViewCell
 
-- (void)setImage:(UIImage *)anImage;
+@property (nonatomic, assign, readwrite) UIImage *image;
 
 @end

@@ -10,22 +10,23 @@
   // API
 #import "RPGNetworkManager+CharacterProfile.h"
 #import "RPGNetworkManager+Skills.h"
+  // Controllers
+#import "RPGCollectionViewController.h"
+#import "RPGWaitingViewController.h"
+#import "RPGSkillCollectionViewController.h"
+#import "RPGBagCollectionViewController.h"
+  // Views
+#import "RPGCharacterBagCollectionViewCell.h"
+#import "RPGProgressBar.h"
   // Entities
 #import "RPGCharacterRequest.h"
 #import "RPGCharacterProfileInfoResponse.h"
 #import "RPGCharacterProfileSkill.h"
 #import "RPGSkillsResponse.h"
 #import "RPGSkillsSelectRequest.h"
-  // Views
-#import "RPGCollectionViewController.h"
-#import "RPGCharacterBagCollectionViewCell.h"
-#import "RPGSkillCollectionViewController.h"
-#import "RPGBagCollectionViewController.h"
-#import "RPGProgressBar.h"
-#import "RPGWaitingViewController.h"
-#import "RPGAlert.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "RPGAlert.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -84,9 +85,9 @@
 {
   [super viewDidLoad];
   
-  UINib *cellNib = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
-  [self.skillCollectionView registerNib:cellNib forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
-  [self.bagCollectionView registerNib:cellNib forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
+  [self.skillCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  [self.bagCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
   
   self.skillCollectionViewController.viewController = self;
   self.skillCollectionViewController.collectionView = self.skillCollectionView;
@@ -103,15 +104,13 @@
 {
   [super viewWillAppear:animated];
   
-  [self addChildViewController:self.waitingModal];
-  self.waitingModal.view.frame = self.view.frame;
-  [self.view addSubview:self.waitingModal.view];
-  [self.waitingModal didMoveToParentViewController:self];
+  [self setViewToWaitingState];
   
-  void (^handler)(RPGCharacterProfileInfoResponse *) = ^void(RPGCharacterProfileInfoResponse *aResponse)
+ 
+  
+  void (^handler)(RPGStatusCode, RPGCharacterProfileInfoResponse *) = ^void(RPGStatusCode networkStatusCode, RPGCharacterProfileInfoResponse *aResponse)
   {
-    [self.waitingModal.view removeFromSuperview];
-    [self.waitingModal removeFromParentViewController];
+    [self setViewToNormalState];
     
     switch (aResponse.status)
     {
@@ -122,6 +121,7 @@
         self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
         self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.hp];
         self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
+        
         self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
         self.bagCollectionViewController.collectionSize = aResponse.bagSize;
         //self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
@@ -166,9 +166,10 @@
     }
   };
   
-  NSUserDefaults *stansartUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSString *token = stansartUserDefaults.sessionToken;
-  NSUInteger characterID = [[[stansartUserDefaults.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = standardUserDefaults.sessionToken;
+  NSUInteger characterID = standardUserDefaults.characterID;
+  
   RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithToken:token characterID:characterID];
   [[RPGNetworkManager sharedNetworkManager] getCharacterProfileInfoWithRequest:request completionHandler:handler];
 }
@@ -183,21 +184,34 @@
   return UIInterfaceOrientationMaskLandscape;
 }
 
-#pragma mark - Actions
+#pragma mark - View State
 
-- (IBAction)back:(UIButton *)sender
+- (void)setViewToWaitingState
 {
   self.waitingModal.message = @"Storing skills";
   [self addChildViewController:self.waitingModal];
   self.waitingModal.view.frame = self.view.frame;
   [self.view addSubview:self.waitingModal.view];
   [self.waitingModal didMoveToParentViewController:self];
+}
+
+- (void)setViewToNormalState
+{
+  [self.waitingModal.view removeFromSuperview];
+  [self.waitingModal removeFromParentViewController];
+}
+
+#pragma mark - Actions
+
+- (IBAction)back:(UIButton *)sender
+{
+  [self setViewToWaitingState];
   
-  void (^handler)(RPGSkillsResponse *) = ^void(RPGSkillsResponse *aResponse)
+  void (^handler)(RPGStatusCode, RPGSkillsResponse *) = ^void(RPGStatusCode networkStatusCode, RPGSkillsResponse *aResponse)
   {
-    [self.waitingModal.view removeFromSuperview];
-    [self.waitingModal removeFromParentViewController];
+    [self setViewToNormalState];
     
+      // TODO: redo status validation
     switch (aResponse.status)
     {
       case kRPGStatusCodeOK:
@@ -205,8 +219,10 @@
         NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
         NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
         NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
-        [character setObject:self.skillCollectionViewController.skillsIDArray forKey:@"skills"];
-        [characters insertObject:character atIndex:0];
+        
+        character[@"skills"] = self.skillCollectionViewController.skillsIDArray;
+        characters[0] = character;
+        
         standardUserDefaults.sessionCharacters = characters;
         [self dismissViewControllerAnimated:YES completion:nil];
         break;
@@ -235,31 +251,33 @@
     }
   };
   
-  NSUserDefaults *stansartUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSString *token = stansartUserDefaults.sessionToken;
-  NSUInteger characterID = [[[stansartUserDefaults.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSString *token = standardUserDefaults.sessionToken;
+  NSUInteger characterID = standardUserDefaults.characterID;
   NSArray *skills = self.skillCollectionViewController.skillsIDArray;
+  
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithToken:token characterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request completionHandler:handler];
 }
 
 #pragma mark - Add To Collection
 
-- (void)addToSkillCollectionSkillWithID:(NSUInteger)aSkillID
+- (void)addSkillToSkillCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
 {
-  [self.skillCollectionViewController addSkill:aSkillID];
+  [self.skillCollectionViewController addItem:anItemID type:aType];
   [self setCancelButtonState];
 }
 
-- (void)addToBagCollectionSkillWithID:(NSUInteger)aSkillID
+- (void)addItemToBagCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
 {
-  [self.bagCollectionViewController addSkill:aSkillID];
+
+  [self.bagCollectionViewController addItem:aSkillID type:aType];
   [self setCancelButtonState];
 }
 
 - (void)setCancelButtonState
 {
-  self.backButton.enabled = !([self.skillCollectionViewController.skillsIDArray count] == 0);
+  self.backButton.enabled = !(self.skillCollectionViewController.skillsIDArray.count == 0);
 }
 
 @end
