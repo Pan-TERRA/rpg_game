@@ -6,16 +6,16 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGProgressBar.h"
+#import "RPGProgressBarView.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface RPGProgressBar ()
+@interface RPGProgressBarView ()
 
 @property (assign, nonatomic, readwrite) CGFloat absoluteWidth;
 
 @end
 
-@implementation RPGProgressBar
+@implementation RPGProgressBarView
 
 #pragma mark - Init
 

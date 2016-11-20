@@ -11,7 +11,7 @@
 /****************	Main Screens ****************/
 
 NSString * const kRPGMainViewNIBName = @"RPGMainView";
-NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
+
 NSString * const kRPGSettingsViewControllerNIBName = @"RPGSettingsViewController";
 NSString * const kRPGRegistrationViewControllerNIBName = @"RPGRegistrationViewController";
 NSString * const kRPGLoginViewControllerNIBName = @"RPGLoginViewController";
@@ -23,6 +23,13 @@ NSString * const kRPGQuestListViewControllerNIBName = @"RPGQuestListViewControll
 NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell";
 NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
+
+/****************	BattleViewController ****************/
+
+NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
+NSString * const kRPGSkillBarViewControllerNIBName = @"RPGSkillBarViewController";
+NSString * const kRPGSkillDescriptionViewControllerNIBName = @"RPGSkillDescriptionViewController";
+NSString * const kRPGQuickSettingsViewControllerNIBName = @"RPGQuickSettingsViewController";
 
 /****************	Character Profile ****************/
 

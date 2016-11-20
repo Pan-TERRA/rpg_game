@@ -17,7 +17,7 @@
 #import "RPGResources.h"
 #import "RPGBattleInitResponse.h"
   // Views
-#import "RPGProgressBar.h"
+#import "RPGProgressBarView.h"
 #import "RPGBattleLogViewController.h"
 #import "RPGQuickSettingsViewController.h"
 #import "RPGWaitingViewController.h"
@@ -35,10 +35,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *playerHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *opponentHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;

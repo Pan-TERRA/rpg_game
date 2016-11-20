@@ -17,7 +17,7 @@
 #import "RPGBagCollectionViewController.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
-#import "RPGProgressBar.h"
+#import "RPGProgressBarView.h"
   // Entities
 #import "RPGCharacterRequest.h"
 #import "RPGCharacterProfileInfoResponse.h"
@@ -37,7 +37,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *expLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *attackLabel;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBar *expProgressBar;
+@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *expProgressBar;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *backButton;
 
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;

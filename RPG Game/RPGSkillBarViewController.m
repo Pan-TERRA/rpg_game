@@ -15,6 +15,8 @@
 #import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGBattleViewController.h"
 #import "RPGSkillDescriptionViewController.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGSkillBarViewController ()
 
@@ -41,7 +43,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGSkillBarViewController" bundle:nil];
+  return [super initWithNibName:kRPGSkillBarViewControllerNIBName bundle:nil];
 }
 
 #pragma mark - Dealloc

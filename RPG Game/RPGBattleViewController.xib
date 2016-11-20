@@ -165,7 +165,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_left" translatesAutoresizingMaskIntoConstraints="NO" id="8Rx-ie-U3V">
                             <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyt-St-ty5" userLabel="Progress Bar" customClass="RPGProgressBar">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyt-St-ty5" userLabel="Progress Bar" customClass="RPGProgressBarView">
                             <rect key="frame" x="55" y="10" width="145" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -228,7 +228,7 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_right" translatesAutoresizingMaskIntoConstraints="NO" id="CWa-dW-Dz0">
                             <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpT-d5-5De" userLabel="Progress Bar" customClass="RPGProgressBar">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpT-d5-5De" userLabel="Progress Bar" customClass="RPGProgressBarView">
                             <rect key="frame" x="20" y="10" width="145" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>

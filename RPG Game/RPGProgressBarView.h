@@ -15,7 +15,7 @@ typedef NS_ENUM(int, RPGProgressBarAlign)
 };
 
 IB_DESIGNABLE
-@interface RPGProgressBar : UIView
+@interface RPGProgressBarView : UIView
 
 @property (nonatomic, assign, readwrite) IBInspectable int align;
 @property (nonatomic, assign, readwrite) IBInspectable CGFloat progress;

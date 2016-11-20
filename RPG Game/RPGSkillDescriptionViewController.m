@@ -7,7 +7,10 @@
 //
 
 #import "RPGSkillDescriptionViewController.h"
+  // Entities
 #import "RPGSkillRepresentation.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGSkillDescriptionViewController ()
 
@@ -38,7 +41,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGSkillDescriptionViewController" bundle:nil];
+  return [super initWithNibName:kRPGSkillDescriptionViewControllerNIBName bundle:nil];
 }
 
 + (instancetype)viewControllerWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
