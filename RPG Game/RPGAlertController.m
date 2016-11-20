@@ -18,15 +18,17 @@
                    message:(NSString *)message
                 completion:(void (^ __nullable)())completionHandler
 {
-  RPGAlertViewController *alert = [[RPGAlertViewController alloc] initWithTitle:title
+  RPGAlertViewController *alertViewController = [[RPGAlertViewController alloc] initWithTitle:title
                                                                     description:message
                                                                     actionTitle:@"OK"
                                                               completionHandler:completionHandler];
  
   
-  UIViewController *currentView = [[UIApplication sharedApplication].keyWindow visibleViewController];
- 
-  [currentView presentViewController:alert animated:YES completion:nil];
+  UIViewController *currentViewController = [[UIApplication sharedApplication].keyWindow visibleViewController];
+  alertViewController.view.frame = currentViewController.view.frame;
+  [alertViewController setModalPresentationStyle:UIModalPresentationCustom];
+  [alertViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+  [currentViewController presentViewController:alertViewController animated:YES completion:nil];
 }
 
 @end
