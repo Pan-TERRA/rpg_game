@@ -23,7 +23,10 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPICharacterProfileInfoRoute];
   
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

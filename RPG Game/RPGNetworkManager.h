@@ -15,6 +15,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString * const kRPGRequestToken;
+
 #pragma mark - API constants
 
   // General
@@ -68,7 +70,7 @@ extern NSString * const kRPGNetworkManagerStatus;
  *
  *  @return
  */
-- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod;
+- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod injectToken:(BOOL)injectToken;
 
 #pragma mark - Error Handling
 

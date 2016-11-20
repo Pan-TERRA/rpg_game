@@ -166,11 +166,9 @@
     }
   };
   
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSString *token = standardUserDefaults.sessionToken;
-  NSUInteger characterID = standardUserDefaults.characterID;
+  NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
   
-  RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithToken:token characterID:characterID];
+  RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithCharacterID:characterID];
   [[RPGNetworkManager sharedNetworkManager] getCharacterProfileInfoWithRequest:request completionHandler:handler];
 }
 
@@ -251,12 +249,10 @@
     }
   };
   
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSString *token = standardUserDefaults.sessionToken;
-  NSUInteger characterID = standardUserDefaults.characterID;
+  NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
   NSArray *skills = self.skillCollectionViewController.skillsIDArray;
   
-  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithToken:token characterID:characterID skills:skills];
+  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request completionHandler:handler];
 }
 

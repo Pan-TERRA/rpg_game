@@ -14,7 +14,7 @@
 {
   NSLog(@"%@", aTitle);
   NSLog(@"Domain: %@", anError.domain);
-  NSLog(@"Error Code: %ld", anError.code);
+  NSLog(@"Error Code: %ld", (long)anError.code);
   NSLog(@"Description: %@", anError.localizedDescription);
   NSLog(@"Reason: %@", anError.localizedFailureReason);
 }

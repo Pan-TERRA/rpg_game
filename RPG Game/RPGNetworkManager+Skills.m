@@ -19,15 +19,21 @@
 
 @implementation RPGNetworkManager (Skills)
 
-- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
+- (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID
+               completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillsRoute];
   
-  RPGCharacterRequest *aRequest = [RPGCharacterRequest characterRequestWithToken:[NSUserDefaults standardUserDefaults].sessionToken
-                                                                     characterID:aCharacterID];
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+
+  RPGCharacterRequest *aRequest = [RPGCharacterRequest characterRequestWithCharacterID:aCharacterID];
+
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:NO];
+
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -126,11 +132,12 @@
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISkillInfoRoute,
-                             anID];
+                             (long)anID];
   
   NSURLRequest *request = [self requestWithObject:nil
                                         URLstring:requestString
-                                           method:@"POST"];
+                                           method:@"GET"
+                                      injectToken:NO];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -230,7 +237,10 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPISelectSkillsRoute];
   
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

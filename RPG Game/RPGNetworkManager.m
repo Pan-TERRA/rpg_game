@@ -13,13 +13,17 @@
 #import "NSObject+RPGErrorLog.h"
   // Entities
 #import "RPGResourcesResponse.h"
-#import "RPGBasicNetworkRequest.h"
   // Constants
 #import "RPGStatusCodes.h"
+
+NSString * const kRPGRequestToken = @"token";
 
 NSString * const kRPGNetworkManagerStatus = @"status";
 
 static RPGNetworkManager *sharedNetworkManager = nil;
+
+
+
 #pragma mark - API constants
 
   // General
@@ -109,7 +113,7 @@ NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profil
 }
 
 
-- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod
+- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod injectToken:(BOOL)injectToken
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
@@ -118,21 +122,33 @@ NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profil
   
   if (anObject != nil)
   {
+    NSMutableDictionary *JSONObject = nil;
+    
     if ([anObject isKindOfClass:[NSDictionary class]])
     {
-      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:anObject
-                                                         options:NSJSONWritingPrettyPrinted
-                                                           error:&JSONSerializationError];
+      JSONObject = [anObject mutableCopy];
     }
-    
-    if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
+    else if ([anObject conformsToProtocol:@protocol(RPGSerializable)])
     {
-      request.HTTPBody = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
-                                                         options:NSJSONWritingPrettyPrinted
-                                                           error:&JSONSerializationError];
+      JSONObject = [[anObject dictionaryRepresentation] mutableCopy];
     }
     
-    if (request.HTTPBody == nil)
+    if (injectToken)
+    {
+      NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+      if (token != nil)
+      {
+        JSONObject[kRPGRequestToken] = token;
+      }
+    }
+    
+    [JSONObject autorelease];
+    
+    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:JSONObject
+                                                       options:NSJSONWritingPrettyPrinted
+                                                         error:&JSONSerializationError];
+    
+    if (request.HTTPBody == nil || JSONSerializationError)
     {
       [[NSException exceptionWithName:NSInvalidArgumentException
                                reason:@"JSON cannot be retrieved"
@@ -156,9 +172,10 @@ NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profil
                                kRPGNetworkManagerAPIHost,
                                kRPGNetworkManagerAPITokenExistsRoute];
     
-    NSURLRequest *request = [self requestWithObject:@{ @"token": token }
+    NSURLRequest *request = [self requestWithObject:@{}
                                           URLstring:requestString
-                                             method:@"POST"];
+                                             method:@"POST"
+                                        injectToken:YES];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -212,10 +229,10 @@ NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profil
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIResourcesRoute];
   
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGBasicNetworkRequest *requestObject = [RPGBasicNetworkRequest requestWithToken:token];
-  
-  NSURLRequest *request = [self requestWithObject:requestObject URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:@{}
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

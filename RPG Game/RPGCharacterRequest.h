@@ -14,12 +14,9 @@ extern NSString * const kRPGCharacterRequestCharacterID;
 
 @interface RPGCharacterRequest : NSObject <RPGSerializable>
 
-@property (copy, nonatomic, readwrite) NSString *token;
 @property (assign, nonatomic, readwrite) NSInteger characterID;
 
-- (instancetype)initWithToken:(NSString *)aToken
-                  characterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)characterRequestWithToken:(NSString *)aToken
-                              characterID:(NSInteger)aCharacterID;
+- (instancetype)initWithCharacterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
++ (instancetype)characterRequestWithCharacterID:(NSInteger)aCharacterID;
 
 @end

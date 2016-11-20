@@ -8,23 +8,20 @@
 
 #import "RPGCharacterRequest.h"
 
-NSString * const kRPGCharacterRequestToken = @"token";
 NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
 @implementation RPGCharacterRequest
 
 #pragma mark - Init
 
-- (instancetype)initWithToken:(NSString *)aToken
-                  characterID:(NSInteger)characterID
+- (instancetype)initWithCharacterID:(NSInteger)characterID
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aToken != nil && characterID >= 0)
+    if (characterID >= 0)
     {
-      _token = [aToken copy];
       _characterID = characterID;
     }
     else
@@ -39,23 +36,18 @@ NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
 - (instancetype)init
 {
-  return [self initWithToken:nil
-                 characterID:-1];
+  return [self initWithCharacterID:-1];
 }
 
-+ (instancetype)characterRequestWithToken:(NSString *)aToken
-                              characterID:(NSInteger)aCharacterID
++ (instancetype)characterRequestWithCharacterID:(NSInteger)aCharacterID
 {
-  return [[[self alloc] initWithToken:aToken
-                          characterID:aCharacterID] autorelease];
+  return [[[self alloc] initWithCharacterID:aCharacterID] autorelease];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_token release];
-  
   [super dealloc];
 }
 
@@ -65,7 +57,6 @@ NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   
-  dictionary[kRPGCharacterRequestToken] = self.token;
   dictionary[kRPGCharacterRequestCharacterID] = @(self.characterID);
   
   return dictionary;
@@ -73,8 +64,7 @@ NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithToken:aDictionary[kRPGCharacterRequestToken]
-                 characterID:[aDictionary[kRPGCharacterRequestCharacterID] integerValue]];
+  return [self initWithCharacterID:[aDictionary[kRPGCharacterRequestCharacterID] integerValue]];
 }
 
 @end

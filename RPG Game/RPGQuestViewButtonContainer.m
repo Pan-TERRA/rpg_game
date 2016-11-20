@@ -166,8 +166,8 @@
     }
     //weakSelf.acceptButton.enabled = YES;
   };
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:self.questViewController.questID];
+  
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
 }
 
@@ -244,8 +244,7 @@
     //self.acceptButton.enabled = YES;
     //self.denyButton.enabled = YES;
   };
-  NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithToken:token questID:self.questViewController.questID result:aResult];
+  RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithQuestID:self.questViewController.questID result:aResult];
   [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
 }
 

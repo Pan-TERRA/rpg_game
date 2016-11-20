@@ -63,7 +63,7 @@
   
   RPGSkillRepresentation *skill = self.skillRepresentation;
   self.titleLabel.text = skill.name;
-  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", skill.absoluteCooldown];
+  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", (long)skill.absoluteCooldown];
   self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", skill.multiplier];
   self.descriptionLabel.text = skill.skillDescription;
 }

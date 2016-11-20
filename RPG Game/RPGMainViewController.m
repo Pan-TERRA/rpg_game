@@ -128,8 +128,8 @@
 - (void)updateResourcesLabels
 {
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionGold];
-  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", standartUserDefaults.sessionCrystals];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionGold];
+  self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionCrystals];
 }
 
 @end
