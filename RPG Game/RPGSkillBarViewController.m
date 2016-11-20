@@ -147,7 +147,16 @@
     if (representation != nil)
     {
       skillButton.enabled = YES;
-      backgroundImage = [UIImage imageNamed:representation.imageName];
+      if (representation.imageName.length != 0)
+      {
+        backgroundImage = [UIImage imageNamed:representation.imageName];
+      }
+      else
+      {
+          // default image for skills/items with no image
+        backgroundImage = [UIImage imageNamed:@"battle_empty_icon_unset"];
+      }
+      
       [skillButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     }
     else
