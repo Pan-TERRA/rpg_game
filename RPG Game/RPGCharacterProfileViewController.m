@@ -154,7 +154,7 @@
 
 - (void)updateViewWithResponse:(RPGCharacterProfileInfoResponse *)aResponse
 {
-  self.nickNameLabel.text = [[[NSUserDefaults standardUserDefaults].sessionCharacters firstObject] objectForKey:@"name"];
+  self.nickNameLabel.text = [NSUserDefaults standardUserDefaults].characterNickName;
   self.levelLabel.text = [NSString stringWithFormat:@"%d", aResponse.currentLevel];
   self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
   self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.hp];

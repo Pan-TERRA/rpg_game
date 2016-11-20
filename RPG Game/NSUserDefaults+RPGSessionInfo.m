@@ -89,7 +89,11 @@
 
 - (NSInteger)characterID
 {
-  return [[[self.sessionCharacters firstObject] objectForKey:@"char_id"] integerValue];
+  return [[self.sessionCharacters firstObject][@"char_id"] integerValue];
+}
+- (NSString *)characterNickName
+{
+  return [self.sessionCharacters firstObject][@"name"];
 }
 
 @end
