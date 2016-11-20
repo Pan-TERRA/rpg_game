@@ -14,8 +14,7 @@
 @property (copy, nonatomic, readwrite) NSString *token;
 @property (assign, nonatomic, readwrite) NSInteger characterID;
 
-- (instancetype)initWithToken:(NSString *)aToken
-                  characterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)skillsRequestWithToken:(NSString *)aToken characterID:(NSInteger)aCharacterID;
+- (instancetype)initWithCharacterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
++ (instancetype)skillsRequestWithCharacterID:(NSInteger)aCharacterID;
 
 @end

@@ -23,7 +23,8 @@
   
   NSURLRequest *request = [self requestWithObject:nil
                                         URLstring:requestString
-                                           method:@"POST"];
+                                           method:@"POST"
+                                      injectToken:NO];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

@@ -12,7 +12,6 @@
 #import "RPGQuestRequest.h"
 #import "RPGQuestResponse.h"
 #import "RPGQuestReviewRequest.h"
-#import "RPGBasicNetworkRequest.h"
   //Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -22,8 +21,6 @@
 - (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock
 {
   NSString *requestString = nil;
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGBasicNetworkRequest *requestObject = [RPGBasicNetworkRequest requestWithToken:token];
   
   switch (aState)
   {
@@ -57,7 +54,10 @@
     }
   }
   
-  NSURLRequest *request = [self requestWithObject:requestObject URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:@{}
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -173,7 +173,10 @@
     }
   }
   
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -460,7 +463,10 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIReviewResultQuestRoute];
   
-  NSURLRequest *request = [self requestWithObject:aRequest URLstring:requestString method:@"POST"];
+  NSURLRequest *request = [self requestWithObject:aRequest
+                                        URLstring:requestString
+                                           method:@"POST"
+                                      injectToken:YES];
  
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

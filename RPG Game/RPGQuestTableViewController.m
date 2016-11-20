@@ -220,9 +220,8 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
         [RPGAlert showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
       }
     };
-    
-    NSString *token = [[NSUserDefaults standardUserDefaults] sessionToken];
-    RPGQuestRequest *request = [RPGQuestRequest questRequestWithToken:token questID:aQuestID];
+  
+    RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
     [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
                                                     request:request
                                           completionHandler:handler];

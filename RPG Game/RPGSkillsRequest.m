@@ -8,21 +8,19 @@
 
 #import "RPGSkillsRequest.h"
 
-static NSString * const kRPGSkillsRequestToken = @"token";
 static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 @implementation RPGSkillsRequest
 
 #pragma mark - Init
 
-- (instancetype)initWithToken:(NSString *)aToken characterID:(NSInteger)characterID
+- (instancetype)initWithCharacterID:(NSInteger)characterID
 {
   self = [super init];
   if (self != nil)
   {
-    if (aToken != nil && characterID >= 0)
+    if (characterID >= 0)
     {
-      _token = [aToken copy];
       _characterID = characterID;
     }
     else
@@ -37,12 +35,12 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 - (instancetype)init
 {
-  return [self initWithToken:nil characterID:-1];
+  return [self initWithCharacterID:-1];
 }
 
-+ (instancetype)skillsRequestWithToken:(NSString *)aToken characterID:(NSInteger)aCharacterID
++ (instancetype)skillsRequestWithCharacterID:(NSInteger)aCharacterID
 {
-  return [[[self alloc] initWithToken:aToken characterID:aCharacterID] autorelease];
+  return [[[self alloc] initWithCharacterID:aCharacterID] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -59,7 +57,6 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 {
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   
-  dictionary[kRPGSkillsRequestToken] = self.token;
   dictionary[kRPGSkillsRequestCharacterID] = @(self.characterID);
   
   return dictionary;
@@ -67,8 +64,7 @@ static NSString * const kRPGSkillsRequestCharacterID = @"char_id";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithToken:aDictionary[kRPGSkillsRequestToken]
-                 characterID:[aDictionary[kRPGSkillsRequestCharacterID] integerValue]];
+  return [self initWithCharacterID:[aDictionary[kRPGSkillsRequestCharacterID] integerValue]];
 }
 
 @end
