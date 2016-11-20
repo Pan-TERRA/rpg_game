@@ -8,7 +8,6 @@
 
 #import "RPGArenaInitRequest.h"
 
-// here, or maybe better move all types to RPGMessageTypes?
 NSString * const kRPGArenaInitRequestType = @"ARENA_INIT";
 NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
