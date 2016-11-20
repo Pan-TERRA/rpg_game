@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithTitle:(NSString *)aTitle
                   description:(NSString *)aDescription
+                  actionTitle:(NSString *)anActionTitle
             completionHandler:(void(^ __nullable)(void))aCompletionHandler;
 
 

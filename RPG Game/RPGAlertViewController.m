@@ -1,10 +1,10 @@
-//
-//  RPGAlert.m
-//  RPG Game
-//
-//  Created by Максим Шульга on 11/1/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGAlert.m
+  //  RPG Game
+  //
+  //  Created by Максим Шульга on 11/1/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGAlertViewController.h"
   // Constants
@@ -12,6 +12,7 @@
 
 static NSString * const kRPGAlertViewControllerDefaultTitle = @"Alert Title";
 static NSString * const kRPGAlertViewControllerDefaultDescription = @"Alert Title";
+static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Action";
 
 @interface RPGAlertViewController ()
 
@@ -34,7 +35,8 @@ static NSString * const kRPGAlertViewControllerDefaultDescription = @"Alert Titl
 
 - (instancetype)initWithTitle:(NSString *)aTitle
                   description:(NSString *)aDescription
-            completionHandler:(void (^)(void))aCompletionHandler
+                  actionTitle:(NSString *)anActionTitle
+            completionHandler:(void (^ __nullable)(void))aCompletionHandler
 {
   self = [super initWithNibName:kRPGAlertViewControllerNIBName bundle:nil];
   
@@ -42,8 +44,17 @@ static NSString * const kRPGAlertViewControllerDefaultDescription = @"Alert Titl
   {
     _alertTitleLabelText = [aTitle copy];
     _alertDescriptionLabelText = [aTitle copy];
-    _alertActionButtonText = [aTitle copy];
-    _completionHandler = Block_copy(aCompletionHandler);
+    _alertActionButtonText = [anActionTitle copy];
+    
+    if (aCompletionHandler != nil)
+    {
+      _completionHandler = [aCompletionHandler copy];
+    }
+    else
+    {
+        // empty block
+      _completionHandler = [^void(void){} retain];
+    }
   }
   
   return self;
@@ -53,13 +64,15 @@ static NSString * const kRPGAlertViewControllerDefaultDescription = @"Alert Titl
 {
   return [self initWithTitle:kRPGAlertViewControllerDefaultTitle
                  description:kRPGAlertViewControllerDefaultDescription
+                 actionTitle:kRPGAlertViewControllerDefaultActionTitle
            completionHandler:nil];
 }
 
-#pragma mark - I
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
+  [_completionHandler release];
   [_alertTitleLabelText release];
   [_alertDescriptionLabelText release];
   [_alertActionButtonText release];
@@ -86,7 +99,12 @@ static NSString * const kRPGAlertViewControllerDefaultDescription = @"Alert Titl
 
 - (IBAction)alertButtonAction:(UIButton *)sender
 {
+  if (_completionHandler != nil)
+  {
+    _completionHandler();
+  }
   
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

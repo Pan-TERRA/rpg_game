@@ -10,6 +10,6 @@
 
 @interface UIWindow (RPGPresentController)
 
-- (UIViewController *) visibleViewController;
+- (UIViewController *)visibleViewController;
 
 @end
