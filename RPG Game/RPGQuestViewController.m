@@ -23,7 +23,7 @@
 #import "RPGQuestReviewRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlert.h"
+#import "RPGAlertController.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGQuestAction.h"

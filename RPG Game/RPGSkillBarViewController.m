@@ -15,6 +15,8 @@
 #import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGBattleViewController.h"
 #import "RPGSkillDescriptionViewController.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGSkillBarViewController ()
 
@@ -41,7 +43,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGSkillBarViewController" bundle:nil];
+  return [super initWithNibName:kRPGSkillBarViewControllerNIBName bundle:nil];
 }
 
 #pragma mark - Dealloc
@@ -147,7 +149,16 @@
     if (representation != nil)
     {
       skillButton.enabled = YES;
-      backgroundImage = [UIImage imageNamed:representation.imageName];
+      if (representation.imageName.length != 0)
+      {
+        backgroundImage = [UIImage imageNamed:representation.imageName];
+      }
+      else
+      {
+          // default image for skills/items with no image
+        backgroundImage = [UIImage imageNamed:@"battle_empty_icon_unset"];
+      }
+      
       [skillButton setBackgroundImage:backgroundImage forState:UIControlStateNormal];
     }
     else

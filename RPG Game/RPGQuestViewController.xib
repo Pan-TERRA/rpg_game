@@ -247,7 +247,7 @@
                     </connections>
                 </scrollView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrL-iM-XQj" userLabel="Button Container" customClass="RPGQuestViewButtonContainer">
-                    <rect key="frame" x="541" y="345" width="140" height="40"/>
+                    <rect key="frame" x="55" y="345" width="626" height="40"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
                             <rect key="frame" x="50" y="0.0" width="40" height="40"/>
@@ -277,7 +277,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="grH-jv-bBd" userLabel="Back Button">
-                            <rect key="frame" x="100" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="586" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="grH-jv-bBd" secondAttribute="height" multiplier="1:1" id="fRK-Nx-EAF"/>
                             </constraints>
@@ -291,18 +291,28 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="10" id="EL0-hN-JQG"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="KS0-g5-6Yc"/>
+                        <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="O34-ew-Qtc"/>
                         <constraint firstAttribute="bottom" secondItem="grH-jv-bBd" secondAttribute="bottom" id="TbX-r4-aB7"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="V6G-04-uwO"/>
                         <constraint firstAttribute="trailing" secondItem="grH-jv-bBd" secondAttribute="trailing" id="crh-77-Ky7"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="jeN-bW-hGh"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="VrL-iM-XQj" secondAttribute="top" id="k4f-tF-XIy"/>
                         <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="qYt-11-euC"/>
+                        <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="r6c-DV-oZZ"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="trailing" constant="10" id="tf5-BI-5Hx"/>
                         <constraint firstItem="0Cf-4K-WWr" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="wmm-AH-krN"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="leading" secondItem="Bpj-c4-GjR" secondAttribute="trailing" constant="10" id="xPL-M3-pMB"/>
                         <constraint firstAttribute="height" constant="40" id="z4v-wW-Z3Z"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="O34-ew-Qtc"/>
+                            <exclude reference="jeN-bW-hGh"/>
+                            <exclude reference="tf5-BI-5Hx"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="acceptButton" destination="0Cf-4K-WWr" id="Nr6-ua-eO7"/>
                         <outlet property="addProofButton" destination="Lld-Ax-hOC" id="kKp-rt-q0Q"/>
@@ -336,6 +346,7 @@
                 <constraint firstItem="wt5-ti-Qz1" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.06" id="kQw-0n-xQn"/>
                 <constraint firstItem="SLW-hy-czC" firstAttribute="top" secondItem="VrL-iM-XQj" secondAttribute="bottom" id="lcG-hN-p9i"/>
                 <constraint firstItem="SLW-hy-czC" firstAttribute="width" secondItem="wt5-ti-Qz1" secondAttribute="width" id="n1D-Dk-Ty6"/>
+                <constraint firstItem="VrL-iM-XQj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="55" id="sEg-O0-DHi"/>
                 <constraint firstItem="tuQ-Ba-KJA" firstAttribute="leading" secondItem="WWs-qF-gcS" secondAttribute="leading" id="vAw-83-2hE"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>

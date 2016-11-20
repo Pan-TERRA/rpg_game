@@ -10,6 +10,8 @@
   // Misc
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGQuickSettingsViewController ()
 
@@ -26,7 +28,7 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:@"RPGQuickSettingsViewController" bundle:nil];
+  return [super initWithNibName:kRPGQuickSettingsViewControllerNIBName bundle:nil];
 }
 
 #pragma mark - Dealloc
