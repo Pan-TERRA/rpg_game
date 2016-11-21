@@ -16,6 +16,7 @@
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
 #import "RPGAlertController+RPGErrorHandling.h"
+#import "UIViewController+RPGChildViewController.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
 #import "RPGProgressBarView.h"
@@ -184,8 +185,8 @@
     }
   }
   
-  self.skillCollectionViewController.skillsIDArray = skillCollectionArray;
-  self.bagCollectionViewController.skillsIDArray = bagCollectionArray;
+  self.skillCollectionViewController.skillsID = skillCollectionArray;
+  self.bagCollectionViewController.skillsID = bagCollectionArray;
 }
 
 #pragma mark - Error Handling
@@ -205,10 +206,7 @@
 - (void)setViewToWaitingState
 {
   self.waitingModal.message = @"Storing skills";
-  [self addChildViewController:self.waitingModal];
-  self.waitingModal.view.frame = self.view.frame;
-  [self.view addSubview:self.waitingModal.view];
-  [self.waitingModal didMoveToParentViewController:self];
+  [self addChildViewController:self.waitingModal frame:self.view.frame];
 }
 
 - (void)setViewToNormalState
@@ -236,7 +234,7 @@
         NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
         NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
         
-        character[@"skills"] = self.skillCollectionViewController.skillsIDArray;
+        character[@"skills"] = self.skillCollectionViewController.skillsID;
         characters[0] = character;
         
         standardUserDefaults.sessionCharacters = characters;
@@ -268,7 +266,7 @@
   };
   
   NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
-  NSArray *skills = self.skillCollectionViewController.skillsIDArray;
+  NSArray *skills = self.skillCollectionViewController.skillsID;
   
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request completionHandler:handler];
@@ -279,19 +277,19 @@
 - (void)addSkillToSkillCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
 {
   [self.skillCollectionViewController addItem:anItemID type:aType];
-  [self setCancelButtonState];
+  [self setBackButtonState];
 }
 
 - (void)addItemToBagCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
 {
   
   [self.bagCollectionViewController addItem:aSkillID type:aType];
-  [self setCancelButtonState];
+  [self setBackButtonState];
 }
 
-- (void)setCancelButtonState
+- (void)setBackButtonState
 {
-  self.backButton.enabled = !(self.skillCollectionViewController.skillsIDArray.count == 0);
+  self.backButton.enabled = (self.skillCollectionViewController.skillsID.count != 0);
 }
 
 @end

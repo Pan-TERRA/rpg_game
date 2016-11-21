@@ -12,6 +12,7 @@
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
+#import "UIViewController+RPGChildViewController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGResources.h"
@@ -132,10 +133,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
     //show battle init modal
-  [self addChildViewController:self.battleInitModal];
-  self.battleInitModal.view.frame = self.view.frame;
-  [self.view addSubview:self.battleInitModal.view];
-  [self.battleInitModal didMoveToParentViewController:self];
+  [self addChildViewController:self.battleInitModal frame:self.view.frame];
   
     //skill bar view
   [self addChildViewController:self.skillBarViewController];

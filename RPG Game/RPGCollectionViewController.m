@@ -14,6 +14,8 @@
 #import "RPGCharacterBagCollectionViewCell.h"
   // Entities
 #import "RPGSkillRepresentation.h"
+  // Misc
+#import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -41,7 +43,7 @@
 
 - (void)dealloc
 {
-  [_skillsIDArray release];
+  [_skillsID release];
   
   [super dealloc];
 }
@@ -59,12 +61,12 @@
   [self.collectionView addGestureRecognizer:gestureRecognizer];
 }
 
-- (void)setSkillsIDArray:(NSMutableArray *)skillsIDArray
+- (void)setSkillsID:(NSMutableArray *)skillsIDArray
 {
-  if (_skillsIDArray != skillsIDArray)
+  if (_skillsID != skillsIDArray)
   {
-    [_skillsIDArray release];
-    _skillsIDArray = [skillsIDArray retain];
+    [_skillsID release];
+    _skillsID = [skillsIDArray retain];
   }
   
   [self.collectionView reloadData];
@@ -85,9 +87,9 @@
   NSInteger index = anIndexPath.row;
   if (index < self.collectionSize)
   {
-    if (index < self.skillsIDArray.count)
+    if (index < self.skillsID.count)
     {
-      NSUInteger skillID = [[self.skillsIDArray objectAtIndex:index] integerValue];
+      NSUInteger skillID = [self.skillsID[index] integerValue];
       RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
       
       if (skillRepresentation.imageName.length != 0)
@@ -137,17 +139,14 @@
     if (indexPath != nil)
     {
       NSInteger row = indexPath.row;
-      if (row < self.skillsIDArray.count)
+      if (row < self.skillsID.count)
       {
-        NSUInteger skillID = [[self.skillsIDArray objectAtIndex:row] integerValue];
+        NSUInteger skillID = [self.skillsID[row] integerValue];
         RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
-        RPGSkillDescriptionViewController *viewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
+        RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
         
         RPGCharacterProfileViewController *parentViewController = self.viewController;
-        [parentViewController addChildViewController:viewController];
-        viewController.view.frame = parentViewController.view.frame;
-        [parentViewController.view addSubview:viewController.view];
-        [viewController didMoveToParentViewController:parentViewController];
+        [parentViewController addChildViewController:skillDescriptionViewController frame:parentViewController.view.frame];
       }
     }
   }
@@ -159,11 +158,11 @@
   {
     case kRPGItemTypeSkill:
     {
-      if (self.skillsIDArray.count >= self.collectionSize)
+      if (self.skillsID.count >= self.collectionSize)
       {
-        [self moveItem:[[self.skillsIDArray lastObject] integerValue] type:kRPGItemTypeSkill];
+        [self moveItem:[[self.skillsID lastObject] integerValue] type:kRPGItemTypeSkill];
       }
-      [self.skillsIDArray addObject:@(anItemID)];
+      [self.skillsID addObject:@(anItemID)];
       
       break;
     }
@@ -183,7 +182,7 @@
   {
     case kRPGItemTypeSkill:
     {
-      [self.skillsIDArray removeObject:@(anItemID)];
+      [self.skillsID removeObject:@(anItemID)];
       
       break;
     }
@@ -222,9 +221,9 @@
 {
   NSInteger index = anIndexPath.row;
   
-  if (index < self.skillsIDArray.count)
+  if (index < self.skillsID.count)
   {
-    NSUInteger skillID = [self.skillsIDArray[index] integerValue];
+    NSUInteger skillID = [self.skillsID[index] integerValue];
     [self moveItem:skillID type:kRPGItemTypeSkill];
   }
 }
