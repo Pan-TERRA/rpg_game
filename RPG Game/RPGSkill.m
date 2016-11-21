@@ -50,4 +50,9 @@
   [super dealloc];
 }
 
+- (NSString *)description
+{
+  return [NSString stringWithFormat:@"%@ r\n %ld \r\n %ld", [super description], self.skillID, self.cooldown];
+}
+
 @end

@@ -65,4 +65,20 @@ NSString * const kRPGPlayerSkills = @"skills";
   self.skills = aDictionary[kRPGPlayerSkills];
   return self;
 }
+
+- (RPGSkill *)skillByID:(NSInteger)anID
+{
+  RPGSkill *result = nil;
+  
+  for (RPGSkill *skill in self.skills)
+  {
+    if (anID == skill.skillID)
+    {
+      result = skill;
+      break;
+    }
+  }
+  
+  return result;
+}
 @end

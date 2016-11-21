@@ -68,16 +68,18 @@ const NSInteger kRPGBattleTurnDuration = 30;
     self.reward = reward;
   }
   
-   //update player.skills array with new colldowns
-  NSMutableArray *newSkills = [NSMutableArray array];
   for (NSDictionary *dictionary in aResponse.skillsCondition)
   {
     NSInteger skillID = [dictionary[@"skill_id"] integerValue];
     NSInteger skillCooldown = [dictionary[@"cooldown"] integerValue];
-    RPGSkill *skill = [RPGSkill skillWithSkillID:skillID cooldown:skillCooldown];
-    [newSkills addObject:skill];
+    
+    RPGSkill *presentSkill = [self.player skillByID:skillID];
+    
+    if (presentSkill != nil)
+    {
+      presentSkill.cooldown = skillCooldown;
+    }
   }
-  self.player.skills = newSkills;
 }
 
 - (void)updateWithTimeSynchResponse:(RPGTimeResponse *)aResponse
