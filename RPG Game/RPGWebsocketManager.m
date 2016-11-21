@@ -20,7 +20,7 @@
 #import "RPGStatusCodes.h"
 
   // TODO: replace to separate header file
-static NSString * const kRPGWebsocketManagerAPI = @"ws://10.55.33.28:8888/ws";
+static NSString * const kRPGWebsocketManagerAPI = @"ws://10.55.33.28:8888/monster_battle";
 
 typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
