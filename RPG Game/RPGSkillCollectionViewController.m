@@ -30,7 +30,7 @@ NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
 
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  [self.viewController addItemToBagCollectionWithID:anItemID type:aType];
+  [(RPGCharacterProfileViewController *)self.viewController addItemToBagCollectionWithID:anItemID type:aType];
 }
 
 @end

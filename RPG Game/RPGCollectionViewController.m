@@ -9,7 +9,6 @@
 #import "RPGCollectionViewController.h"
   // Controllers
 #import "RPGSkillDescriptionViewController.h"
-#import "RPGCharacterProfileViewController.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
   // Entities
@@ -21,7 +20,7 @@
 
 @interface RPGCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
-@property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
+@property (nonatomic, assign, readwrite) UIViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
 @property (nonatomic, retain, readwrite) NSMutableArray *skillsIDMutableArray;
 
@@ -32,7 +31,7 @@
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                  parentViewController:(RPGCharacterProfileViewController *)aViewController
+                  parentViewController:(UIViewController *)aViewController
                         collectionSize:(NSUInteger)aCollectionSize
                            skillsArray:(NSArray *)aSkillsArray
 {
@@ -147,7 +146,7 @@
         RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
         RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
         
-        RPGCharacterProfileViewController *parentViewController = self.viewController;
+        UIViewController *parentViewController = self.viewController;
         [parentViewController addChildViewController:skillDescriptionViewController frame:parentViewController.view.frame];
       }
     }

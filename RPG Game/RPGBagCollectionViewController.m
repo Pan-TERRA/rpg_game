@@ -30,7 +30,7 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
 
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  [self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
+  [(RPGCharacterProfileViewController *)self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
 }
 
 @end
