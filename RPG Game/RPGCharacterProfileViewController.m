@@ -96,23 +96,13 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
   [self.skillCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
   [self.bagCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
-  
-  self.skillCollectionViewController.viewController = self;
-  self.skillCollectionViewController.collectionView = self.skillCollectionView;
-  self.skillCollectionView.dataSource = self.skillCollectionViewController;
-  self.skillCollectionView.delegate = self.skillCollectionViewController;
-  
-  self.bagCollectionViewController.viewController = self;
-  self.bagCollectionViewController.collectionView = self.bagCollectionView;
-  self.bagCollectionView.dataSource = self.bagCollectionViewController;
-  self.bagCollectionView.delegate = self.bagCollectionViewController;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
-  [self setViewToWaitingState];
+  [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageUpload];
   
   NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
   
@@ -168,9 +158,14 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
   
-  self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
-  self.bagCollectionViewController.collectionSize = aResponse.bagSize;
-    //self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
+  self.skillCollectionViewController = [[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
+                                                                                   parentViewController:self
+                                                                                         collectionSize:aResponse.activeSkillsBagSize];
+  self.bagCollectionViewController = [[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
+                                                                               parentViewController:self
+                                                                                     collectionSize:aResponse.bagSize];
+  
+  self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
   
   [self distributeSkillsToCollections:aResponse.skills];
 }
@@ -296,7 +291,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 - (void)addItemToBagCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
 {
-  
   [self.bagCollectionViewController addItem:aSkillID type:aType];
   [self setBackButtonState];
 }

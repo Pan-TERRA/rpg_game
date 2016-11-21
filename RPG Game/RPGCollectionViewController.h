@@ -12,14 +12,17 @@
 
 @class RPGCharacterProfileViewController;
 
-@interface RPGCollectionViewController : NSObject <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RPGCollectionViewController : NSObject
 
-@property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
-@property (nonatomic, assign, readwrite) UICollectionView *collectionView;
+@property (nonatomic, assign, readonly) RPGCharacterProfileViewController *viewController;
 
 @property (nonatomic, retain, readwrite) NSMutableArray *skillsID;
-@property (nonatomic, assign, readonly) CGFloat cellMultiplier;
-@property (nonatomic, assign, readwrite) NSUInteger collectionSize;
+@property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
+@property (nonatomic, assign, readonly) NSUInteger collectionSize;
+
+- (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
+                  parentViewController:(RPGCharacterProfileViewController *)aViewController
+                        collectionSize:(NSUInteger)aCollectionSize;
 
 - (void)addItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 - (void)removeItem:(NSUInteger)anItemID type:(RPGItemType)aType;

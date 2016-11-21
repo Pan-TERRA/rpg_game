@@ -19,7 +19,10 @@
   // Constants
 #import "RPGNibNames.h"
 
-@interface RPGCollectionViewController() <UIGestureRecognizerDelegate>
+@interface RPGCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
+
+@property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
+@property (nonatomic, assign, readwrite) UICollectionView *collectionView;
 
 @end
 
@@ -27,13 +30,26 @@
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
+                  parentViewController:(RPGCharacterProfileViewController *)aViewController
+                        collectionSize:(NSUInteger)aCollectionSize
 {
   self = [super init];
   
   if (self != nil)
   {
-      //_skillsIDArray = [[NSMutableArray alloc] initWithObjects:@(1), @(5), @(3), @(4), nil];
+    _collectionView = aCollectionView;
+    UILongPressGestureRecognizer *gestureRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self
+                                                                                                     action:@selector(handleLongPress:)] autorelease];
+    gestureRecognizer.delegate = self;
+    gestureRecognizer.minimumPressDuration = 1;
+    
+    [_collectionView addGestureRecognizer:gestureRecognizer];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    
+    _viewController = aViewController;
+    _collectionSize = aCollectionSize;
   }
   
   return self;
@@ -49,17 +65,6 @@
 }
 
 #pragma mark - Custom Setter
-
-- (void)setCollectionView:(UICollectionView *)aCollectionView
-{
-  _collectionView = aCollectionView;
-  UILongPressGestureRecognizer *gestureRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self
-                                                                                                   action:@selector(handleLongPress:)] autorelease];
-  gestureRecognizer.delegate = self;
-  gestureRecognizer.minimumPressDuration = 1;
-  
-  [self.collectionView addGestureRecognizer:gestureRecognizer];
-}
 
 - (void)setSkillsID:(NSMutableArray *)skillsIDArray
 {
@@ -122,7 +127,7 @@
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   CGFloat viewWidth = self.collectionView.frame.size.width;
-  CGFloat cellWidth = viewWidth * self.cellMultiplier;
+  CGFloat cellWidth = viewWidth / (CGFloat) self.numberOfCellsInRow;
   
   return CGSizeMake(cellWidth, cellWidth);
 }
