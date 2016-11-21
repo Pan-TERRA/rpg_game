@@ -15,7 +15,7 @@ NSString * const kRPGCharacterProfileInfoResponseCurrentLevel = @"current_level"
 NSString * const kRPGCharacterProfileInfoResponseMaxExp = @"max_exp";
 NSString * const kRPGCharacterProfileInfoResponseCurrentExp = @"current_exp";
 NSString * const kRPGCharacterProfileInfoResponseAttack = @"attack";
-NSString * const kRPGCharacterProfileInfoResponseHp = @"hp";
+NSString * const kRPGCharacterProfileInfoResponseHP = @"hp";
 NSString * const kRPGCharacterProfileInfoResponseBagSize = @"bag_size";
 NSString * const kRPGCharacterProfileInfoResponseActiveSkillsBagSize = @"active_skills_bag_size";
 NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
@@ -45,7 +45,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
                         maxExp:(NSUInteger)aMaxExp
                     currentExp:(NSUInteger)aCurrentExp
                         attack:(NSUInteger)anAttack
-                            hp:(NSUInteger)aHp
+                            HP:(NSUInteger)aHP
                        bagSize:(NSUInteger)aBagSize
            activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                         skills:(NSArray *)aSkills
@@ -60,7 +60,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
     _maxExp = aMaxExp;
     _currentExp = aCurrentExp;
     _attack = anAttack;
-    _hp = aHp;
+    _HP = aHP;
     _bagSize = aBagSize;
     _activeSkillsBagSize = anActiveSkillsBagSize;
     _skills = [aSkills retain];
@@ -75,7 +75,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
                                                 maxExp:(NSUInteger)aMaxExp
                                             currentExp:(NSUInteger)aCurrentExp
                                                 attack:(NSUInteger)anAttack
-                                                    hp:(NSUInteger)aHp
+                                                    HP:(NSUInteger)aHP
                                                bagSize:(NSUInteger)aBagSize
                                    activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                                                 skills:(NSArray *)aSkills
@@ -86,7 +86,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
                                 maxExp:aMaxExp
                             currentExp:aCurrentExp
                                 attack:anAttack
-                                    hp:aHp
+                                    HP:aHP
                                bagSize:aBagSize
                    activeSkillsBagSize:anActiveSkillsBagSize
                                 skills:aSkills] autorelease];
@@ -100,7 +100,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
                        maxExp:0
                    currentExp:0
                        attack:0
-                           hp:0
+                           HP:0
                       bagSize:0
           activeSkillsBagSize:0
                        skills:nil];
@@ -127,7 +127,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseMaxExp] = @(self.maxExp);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseCurrentExp] = @(self.currentExp);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseAttack] = @(self.attack);
-  dictionaryRepresentation[kRPGCharacterProfileInfoResponseHp] = @(self.hp);
+  dictionaryRepresentation[kRPGCharacterProfileInfoResponseHP] = @(self.HP);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseBagSize] = @(self.bagSize);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseActiveSkillsBagSize] = @(self.activeSkillsBagSize);
   if (self.skills)
@@ -152,13 +152,14 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
     RPGCharacterProfileSkill *skill = [[[RPGCharacterProfileSkill alloc] initWithDictionaryRepresentation:skillDictionary] autorelease];
     [skills addObject:skill];
   }
+  
   return [self initWithStatus:[aDictionary[kRPGCharacterProfileInfoResponseStatus] integerValue]
                        avatar:aDictionary[kRPGCharacterProfileInfoResponseAvatar]
                  currentLevel:[aDictionary[kRPGCharacterProfileInfoResponseCurrentLevel] integerValue]
                        maxExp:[aDictionary[kRPGCharacterProfileInfoResponseMaxExp] integerValue]
                    currentExp:[aDictionary[kRPGCharacterProfileInfoResponseCurrentExp] integerValue]
                        attack:[aDictionary[kRPGCharacterProfileInfoResponseAttack] integerValue]
-                           hp:[aDictionary[kRPGCharacterProfileInfoResponseHp] integerValue]
+                           HP:[aDictionary[kRPGCharacterProfileInfoResponseHP] integerValue]
                       bagSize:[aDictionary[kRPGCharacterProfileInfoResponseBagSize] integerValue]
           activeSkillsBagSize:[aDictionary[kRPGCharacterProfileInfoResponseActiveSkillsBagSize] integerValue]
                        skills:skills];

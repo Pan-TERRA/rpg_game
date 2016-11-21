@@ -15,6 +15,7 @@
 #import "RPGWaitingViewController.h"
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
+#import "RPGAlertController+RPGErrorHandling.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
 #import "RPGProgressBarView.h"
@@ -26,7 +27,6 @@
 #import "RPGSkillsSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlertController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -132,7 +132,7 @@
          
        default:
        {
-         [self handleDefaultError];
+         [RPGAlertController handleDefaultError];
          break;
        }
      }
@@ -157,7 +157,7 @@
   self.nickNameLabel.text = [NSUserDefaults standardUserDefaults].characterNickName;
   self.levelLabel.text = [NSString stringWithFormat:@"%d", aResponse.currentLevel];
   self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
-  self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.hp];
+  self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
   
   self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
@@ -198,12 +198,6 @@
      UIViewController *viewController = self.presentingViewController.presentingViewController;
      [viewController dismissViewControllerAnimated:YES completion:nil];
    }];
-}
-
-- (void)handleDefaultError
-{
-  NSString *message = @"Can't upload quest proof image.";
-  [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
 }
 
 #pragma mark - View State
