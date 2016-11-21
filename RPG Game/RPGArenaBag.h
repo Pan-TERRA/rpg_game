@@ -8,6 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+extern const NSUInteger kRPGArenaBagSetSize;
+
 @interface RPGArenaBag : NSObject
+
+- (instancetype)initWithArray:(NSArray<NSNumber *> *)anArray;
+
+/**
+ *  Extract next random kRPGArenaBagSetSize items from bag.
+ *  Returns nil if bag is already empty.
+ */
+- (NSArray<NSNumber *> *)getNextRandomItems;
 
 @end
