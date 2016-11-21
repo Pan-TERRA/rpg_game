@@ -17,7 +17,7 @@
 @property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
 
-@property (nonatomic, retain, readwrite) NSMutableArray *skillsIDArray;
+@property (nonatomic, retain, readwrite) NSMutableArray *skillsID;
 @property (nonatomic, assign, readonly) CGFloat cellMultiplier;
 @property (nonatomic, assign, readwrite) NSUInteger collectionSize;
 
@@ -25,14 +25,14 @@
 - (void)removeItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 
 /**
- *  Moves item to another collection.
+ *  Swaps item to another collection.
  */
 - (void)moveItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 
 /**
  *  Template mehtod. Use this method to define move logic.
  *
- *  @warning Must be override
+ *  @warning Must be overridden
  */
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
 

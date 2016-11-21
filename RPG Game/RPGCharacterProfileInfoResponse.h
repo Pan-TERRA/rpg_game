@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 @interface RPGCharacterProfileInfoResponse : NSObject <RPGSerializable>
@@ -17,7 +18,7 @@
 @property (nonatomic, assign, readonly) NSUInteger maxExp;
 @property (nonatomic, assign, readonly) NSUInteger currentExp;
 @property (nonatomic, assign, readonly) NSUInteger attack;
-@property (nonatomic, assign, readonly) NSUInteger hp;
+@property (nonatomic, assign, readonly) NSUInteger HP;
 @property (nonatomic, assign, readonly) NSUInteger bagSize;
 @property (nonatomic, assign, readonly) NSUInteger activeSkillsBagSize;
 @property (nonatomic, retain, readonly) NSArray *skills;
@@ -28,7 +29,7 @@
                         maxExp:(NSUInteger)aMaxExp
                     currentExp:(NSUInteger)aCurrentExp
                         attack:(NSUInteger)anAttack
-                            hp:(NSUInteger)aHp
+                            HP:(NSUInteger)aHP
                        bagSize:(NSUInteger)aBagSize
            activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                         skills:(NSArray *)aSkills NS_DESIGNATED_INITIALIZER;
@@ -38,7 +39,7 @@
                                                 maxExp:(NSUInteger)aMaxExp
                                             currentExp:(NSUInteger)aCurrentExp
                                                 attack:(NSUInteger)anAttack
-                                                    hp:(NSUInteger)aHp
+                                                    HP:(NSUInteger)aHP
                                                bagSize:(NSUInteger)aBagSize
                                    activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                                                 skills:(NSArray *)aSkills;

@@ -12,6 +12,7 @@
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
+#import "UIViewController+RPGChildViewController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGResources.h"
@@ -42,7 +43,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
-  // Misc
+  // Timer
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
@@ -50,13 +51,11 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
-
+  // Modals
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *battleInitModal;
-
   // Skill bar
 @property (nonatomic, retain, readwrite) RPGSkillBarViewController *skillBarViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *skillBar;
-
   // Settings
 @property (nonatomic, retain, readwrite) RPGQuickSettingsViewController *settingsViewController;
 @property (nonatomic, assign, readwrite) UIView *settingsView;
@@ -134,10 +133,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
     //show battle init modal
-  [self addChildViewController:self.battleInitModal];
-  self.battleInitModal.view.frame = self.view.frame;
-  [self.view addSubview:self.battleInitModal.view];
-  [self.battleInitModal didMoveToParentViewController:self];
+  [self addChildViewController:self.battleInitModal frame:self.view.frame];
   
     //skill bar view
   [self addChildViewController:self.skillBarViewController];
@@ -271,7 +267,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 }
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
-{
+{  
   [self removeBattleInitModal];
 }
 

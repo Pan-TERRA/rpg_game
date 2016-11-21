@@ -7,18 +7,18 @@
 //
 
 #import "RPGLoginViewController.h"
+  // API
+#import "RPGNetworkManager+Authorization.h"
+  // Controllers
+#import "RPGAlertController+RPGErrorHandling.h"
   // Views
 #import "RPGMainViewController.h"
 #import "RPGRegistrationViewController.h"
-  // API
-#import "RPGNetworkManager+Authorization.h"
   // Entities
 #import "RPGAuthorizationLoginRequest.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
-  // Misc
-#import "RPGAlertController.h"
 
 @interface RPGLoginViewController () <UITextFieldDelegate>
 
@@ -137,15 +137,28 @@
            [self.passwordInputField setText:@""];
            break;
          }
+           
          case kRPGStatusCodeWrongEmail:
-         case kRPGStatusCodeUserDoesNotExist:
-         case kRPGStatusCodeWrongPassword:
          {
-           [RPGAlertController showAlertWithTitle:@"Error" message:@"Ivalid credentials" completion:nil];
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail];
            break;
          }
+           
+         case kRPGStatusCodeUserDoesNotExist:
+         {
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist];
+           break;
+         }
+           
+         case kRPGStatusCodeWrongPassword:
+         {
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword];
+           break;
+         }
+           
          default:
          {
+           [RPGAlertController handleDefaultError];
            break;
          }
        }

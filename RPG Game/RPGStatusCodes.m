@@ -38,6 +38,7 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeQuestNotSkipped] = @"Quest is not skipped",
   [kRPGStatusCodeNoQuestForVoting] = @"No quest for voting",
   [kRPGStatusCodeClassesNotFound] = @"ClassesNotFound",
+  [kRPGStatusCodeDefaultError] = @"Something went wrong",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",
@@ -46,4 +47,86 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeNetworkManagerSerializingError] = @"Respose data serialization error",
   [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"No Internet connection",
   [kRPGStatusCodeNetworkManagerResponseObjectValidationFail] = @"Response object validation failure"
+};
+
+NSString * const RPGStatusCodeTitle[] =
+{
+    // Server Status Codes
+  [kRPGStatusCodeWrongJSON] = @"JSON Error",
+  [kRPGStatusCodeUserDoesNotExist] = @"Error",
+  [kRPGStatusCodeWrongEmail] = @"Error",
+  [kRPGStatusCodeWrongPassword] = @"Error",
+  [kRPGStatusCodeWrongToken] = @"Error",
+  [kRPGStatusCodeUsernameAlreadyTaken] = @"Registration error",
+  [kRPGStatusCodeEmailAlreadyTaken] = @"Registration error",
+  [kRPGStatusCodeQuestWithSuchIDNotFound] = @"Quest error",
+  [kRPGStatusCodeUserHasNoSuchCharacter] = @"Invalid character request",
+  [kRPGStatusCodeSkillWithSuchIDNotFound] = @"Skills error",
+  [kRPGStatusCodeNotYourTurn] = @"Battle error",
+  [kRPGStatusCodeSkillOnCooldownOrDoesNotExist] = @"Skill error",
+  [kRPGStatusCodeRunOutOfTime] = @"Battle error",
+  [kRPGStatusCodeQuestAlreadyInProgress] = @"Quest error",
+  [kRPGStatusCodeServerDidNotGetFile] = @"Server error",
+  [kRPGStatusCodeUserHasNoSuchQuest] = @"Quest error",
+  [kRPGStatusCodeNotPicture] = @"Server error",
+  [kRPGStatusCodeTooBigPicture] = @"Server error",
+  [kRPGStatusCodeTurnAction] = @"Error",
+  [kRPGStatusCodeWrongClass] = @"Registration error",
+  [kRPGStatusCodeClassNotFound] = @"Registration error",
+  [kRPGStatusCodeBattleDoesNotExist] = @"Battle error",
+  [kRPGStatusCodeQuestNotAccepted] = @"Quest error",
+  [kRPGStatusCodeQuestNotSkipped] = @"Quest error",
+  [kRPGStatusCodeNoQuestForVoting] = @"Quest error",
+  [kRPGStatusCodeClassesNotFound] = @"Class error",
+  [kRPGStatusCodeDefaultError] = @"Error",
+  
+    // RPGNetworkManager Status Codes
+  [kRPGStatusCodeNetworkManagerUnknown] = @"Network error",
+  [kRPGStatusCodeNetworkManagerEmptyResponseData] = @"Network error",
+  [kRPGStatusCodeNetworkManagerServerError] = @"Network error",
+  [kRPGStatusCodeNetworkManagerSerializingError] = @"Network error",
+  [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"Network error",
+  [kRPGStatusCodeNetworkManagerResponseObjectValidationFail] = @"Network error"
+};
+
+
+
+NSString * const RPGStatusCodeActionTitle[] =
+{
+    // Server Status Codes
+  [kRPGStatusCodeWrongJSON] = @"Go to login screen",
+  [kRPGStatusCodeUserDoesNotExist] = @"OK",
+  [kRPGStatusCodeWrongEmail] = @"OK",
+  [kRPGStatusCodeWrongPassword] = @"OK",
+  [kRPGStatusCodeWrongToken] = @"OK",
+  [kRPGStatusCodeUsernameAlreadyTaken] = @"OK",
+  [kRPGStatusCodeEmailAlreadyTaken] = @"OK",
+  [kRPGStatusCodeQuestWithSuchIDNotFound] = @"OK",
+  [kRPGStatusCodeUserHasNoSuchCharacter] = @"OK",
+  [kRPGStatusCodeSkillWithSuchIDNotFound] = @"OK",
+  [kRPGStatusCodeNotYourTurn] = @"OK",
+  [kRPGStatusCodeSkillOnCooldownOrDoesNotExist] = @"OK",
+  [kRPGStatusCodeRunOutOfTime] = @"OK",
+  [kRPGStatusCodeQuestAlreadyInProgress] = @"OK",
+  [kRPGStatusCodeServerDidNotGetFile] = @"OK",
+  [kRPGStatusCodeUserHasNoSuchQuest] = @"OK",
+  [kRPGStatusCodeNotPicture] = @"OK",
+  [kRPGStatusCodeTooBigPicture] = @"OK",
+  [kRPGStatusCodeTurnAction] = @"OK",
+  [kRPGStatusCodeWrongClass] = @"OK",
+  [kRPGStatusCodeClassNotFound] = @"OK",
+  [kRPGStatusCodeBattleDoesNotExist] = @"OK",
+  [kRPGStatusCodeQuestNotAccepted] = @"OK",
+  [kRPGStatusCodeQuestNotSkipped] = @"OK",
+  [kRPGStatusCodeNoQuestForVoting] = @"OK",
+  [kRPGStatusCodeClassesNotFound] = @"OK",
+  [kRPGStatusCodeDefaultError] = @"OK",
+  
+    // RPGNetworkManager Status Codes
+  [kRPGStatusCodeNetworkManagerUnknown] = @"OK",
+  [kRPGStatusCodeNetworkManagerEmptyResponseData] = @"OK",
+  [kRPGStatusCodeNetworkManagerServerError] = @"OK",
+  [kRPGStatusCodeNetworkManagerSerializingError] = @"OK",
+  [kRPGStatusCodeNetworkManagerNoInternetConnection] = @"OK",
+  [kRPGStatusCodeNetworkManagerResponseObjectValidationFail] = @"OK"
 };

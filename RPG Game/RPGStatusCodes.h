@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 extern NSString * const RPGStatusCodeDescription[];
+extern NSString * const RPGStatusCodeTitle[];
+extern NSString * const RPGStatusCodeActionTitle[];
 
 typedef NS_ENUM(NSInteger, RPGStatusCode)
 {
@@ -40,6 +42,7 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeQuestNotSkipped = 24,
   kRPGStatusCodeNoQuestForVoting = 25,
   kRPGStatusCodeClassesNotFound = 26,
+  kRPGStatusCodeDefaultError = 1337,
   
     // RPGNetworkManager Status Codes
   kRPGStatusCodeNetworkManagerUnknown = 1700,

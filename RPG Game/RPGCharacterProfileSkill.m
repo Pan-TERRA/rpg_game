@@ -54,6 +54,7 @@ NSString * const kRPGSkillSelected = @"is_selected";
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   dictionaryRepresentation[kRPGSkillID] = @(self.skillID);
   dictionaryRepresentation[kRPGSkillSelected] = @(self.isSelected);
+  
   return dictionaryRepresentation;
 }
 

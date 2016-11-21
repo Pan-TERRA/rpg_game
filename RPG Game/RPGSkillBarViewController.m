@@ -13,6 +13,7 @@
 #import "RPGSkillRepresentation.h"
   // Controllers
 #import "RPGBattleController+RPGBattlePresentationController.h"
+#import "UIViewController+RPGChildViewController.h"
 #import "RPGBattleViewController.h"
 #import "RPGSkillDescriptionViewController.h"
   // Constants
@@ -72,13 +73,11 @@
   {
     NSInteger index = aSender.view.tag - 1;
     RPGSkillRepresentation *skillRepresentation = self.skillRepresentations[index];
-    RPGSkillDescriptionViewController *viewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
+    RPGSkillDescriptionViewController *skillDescriptionCiewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
     
     UIViewController *parentViewController = self.parentViewController;
-    [parentViewController addChildViewController:viewController];
-    viewController.view.frame = parentViewController.view.frame;
-    [parentViewController.view addSubview:viewController.view];
-    [viewController didMoveToParentViewController:parentViewController];
+    [parentViewController addChildViewController:skillDescriptionCiewController
+                                           frame:parentViewController.view.frame];
   }
 }
 
