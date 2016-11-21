@@ -31,6 +31,13 @@
   // Constants
 #import "RPGNibNames.h"
 
+static NSString * const kRPGCharacterProfileViewControllerWaitingMessageUpload = @"Uploading info";
+static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
+static NSString * const kRPGCharacterProfileViewControllerWrongTokenMessage = @"Wrong token error.\nTry to log in again.";
+static NSString * const kRPGCharacterProfileViewControllerDefaultMessage = @"Something went wrong.";
+static NSString * const kRPGCharacterProfileViewControllerError = @"Error";
+static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
+
 @interface RPGCharacterProfileViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *nickNameLabel;
@@ -63,7 +70,7 @@
   {
     _skillCollectionViewController = [[RPGSkillCollectionViewController alloc] init];
     _bagCollectionViewController = [[RPGBagCollectionViewController alloc] init];
-    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Uploading info"];
+    _waitingModal = [[RPGWaitingViewController alloc] init];
   }
   
   return self;
@@ -89,23 +96,13 @@
   UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
   [self.skillCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
   [self.bagCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
-  
-  self.skillCollectionViewController.viewController = self;
-  self.skillCollectionViewController.collectionView = self.skillCollectionView;
-  self.skillCollectionView.dataSource = self.skillCollectionViewController;
-  self.skillCollectionView.delegate = self.skillCollectionViewController;
-  
-  self.bagCollectionViewController.viewController = self;
-  self.bagCollectionViewController.collectionView = self.bagCollectionView;
-  self.bagCollectionView.dataSource = self.bagCollectionViewController;
-  self.bagCollectionView.delegate = self.bagCollectionViewController;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
-  [self setViewToWaitingState];
+  [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageUpload];
   
   NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
   
@@ -133,7 +130,7 @@
          
        default:
        {
-         [RPGAlertController handleDefaultError];
+         [self handleDefaultError];
          break;
        }
      }
@@ -160,20 +157,12 @@
   self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
   self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
+  self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
   
-  self.skillCollectionViewController.collectionSize = aResponse.activeSkillsBagSize;
-  self.bagCollectionViewController.collectionSize = aResponse.bagSize;
-    //self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
-  
-  [self distributeSkillsToCollections:aResponse.skills];
-}
-
-- (void)distributeSkillsToCollections:(NSArray *)aSkillsArray
-{
   NSMutableArray *skillCollectionArray = [NSMutableArray array];
   NSMutableArray *bagCollectionArray = [NSMutableArray array];
   
-  for (RPGCharacterProfileSkill *skill in aSkillsArray)
+  for (RPGCharacterProfileSkill *skill in aResponse.skills)
   {
     if (skill.isSelected)
     {
@@ -185,27 +174,44 @@
     }
   }
   
-  self.skillCollectionViewController.skillsID = skillCollectionArray;
-  self.bagCollectionViewController.skillsID = bagCollectionArray;
+  self.skillCollectionViewController = [[[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
+                                                                                    parentViewController:self
+                                                                                          collectionSize:aResponse.activeSkillsBagSize
+                                                                                             skillsArray:skillCollectionArray] autorelease];
+  self.bagCollectionViewController = [[[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
+                                                                                parentViewController:self
+                                                                                      collectionSize:aResponse.bagSize
+                                                                                         skillsArray:bagCollectionArray] autorelease];
 }
 
 #pragma mark - Error Handling
 
 - (void)handleWrongTokenError
 {
-  NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-  [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
+  [RPGAlertController showAlertWithTitle:kRPGCharacterProfileViewControllerError
+                                 message:kRPGCharacterProfileViewControllerWrongTokenMessage
+                              completion:^(void)
    {
      UIViewController *viewController = self.presentingViewController.presentingViewController;
      [viewController dismissViewControllerAnimated:YES completion:nil];
    }];
 }
 
+- (void)handleDefaultError
+{
+  [RPGAlertController showAlertWithTitle:kRPGCharacterProfileViewControllerError
+                                 message:kRPGCharacterProfileViewControllerDefaultMessage
+                              completion:^
+   {
+     [self dismissViewControllerAnimated:YES completion:nil];
+   }];
+}
+
 #pragma mark - View State
 
-- (void)setViewToWaitingState
+- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
 {
-  self.waitingModal.message = @"Storing skills";
+  self.waitingModal.message = aMessage;
   [self addChildViewController:self.waitingModal frame:self.view.frame];
 }
 
@@ -219,57 +225,53 @@
 
 - (IBAction)back:(UIButton *)sender
 {
-  [self setViewToWaitingState];
+  [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
   
-  void (^handler)(RPGStatusCode, RPGSkillsResponse *) = ^void(RPGStatusCode networkStatusCode, RPGSkillsResponse *aResponse)
+  NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
+  NSArray *skills = self.skillCollectionViewController.skillsIDArray;
+  
+  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
+  [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
+                                                  completionHandler:^void(RPGStatusCode networkStatusCode, RPGSkillsResponse *aResponse)
   {
     [self setViewToNormalState];
-    
-      // TODO: redo status validation
+   
+    // TODO: redo status validation
     switch (aResponse.status)
     {
       case kRPGStatusCodeOK:
       {
-        NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-        NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
-        NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
-        
-        character[@"skills"] = self.skillCollectionViewController.skillsID;
-        characters[0] = character;
-        
-        standardUserDefaults.sessionCharacters = characters;
+        [self saveSelectedSkills];
         [self dismissViewControllerAnimated:YES completion:nil];
         break;
       }
-        
+       
       case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't select skills.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
-         {
-           UIViewController *viewController = self.presentingViewController.presentingViewController;
-           [viewController dismissViewControllerAnimated:YES completion:nil];
-         }];
-        break;
+        [self handleWrongTokenError];
       }
-        
+       
       default:
       {
-        NSString *message = @"Can't select skills.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
-         {
-           [self dismissViewControllerAnimated:YES completion:nil];
-         }];
+        [self handleDefaultError];
         break;
       }
     }
-  };
+  }];
+}
+
+#pragma mark - Save To UserDefaults
+
+- (void)saveSelectedSkills
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
+  NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
   
-  NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
-  NSArray *skills = self.skillCollectionViewController.skillsID;
+  character[kRPGCharacterProfileViewControllerSkills] = self.skillCollectionViewController.skillsIDArray;
+  characters[0] = character;
   
-  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
-  [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request completionHandler:handler];
+  standardUserDefaults.sessionCharacters = characters;
 }
 
 #pragma mark - Add To Collection
@@ -282,14 +284,13 @@
 
 - (void)addItemToBagCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
 {
-  
   [self.bagCollectionViewController addItem:aSkillID type:aType];
   [self setBackButtonState];
 }
 
 - (void)setBackButtonState
 {
-  self.backButton.enabled = (self.skillCollectionViewController.skillsID.count != 0);
+  self.backButton.enabled = (self.skillCollectionViewController.skillsIDArray.count != 0);
 }
 
 @end

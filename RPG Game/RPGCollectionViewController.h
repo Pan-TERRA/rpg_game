@@ -10,16 +10,20 @@
   // Constants
 #import "RPGItemTypes.h"
 
-@class RPGCharacterProfileViewController;
+//@class RPGCharacterProfileViewController;
 
-@interface RPGCollectionViewController : NSObject <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface RPGCollectionViewController : NSObject
 
-@property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
-@property (nonatomic, assign, readwrite) UICollectionView *collectionView;
+@property (nonatomic, assign, readonly) UIViewController *viewController;
 
-@property (nonatomic, retain, readwrite) NSMutableArray *skillsID;
-@property (nonatomic, assign, readonly) CGFloat cellMultiplier;
-@property (nonatomic, assign, readwrite) NSUInteger collectionSize;
+@property (nonatomic, retain, readonly) NSArray *skillsIDArray;
+@property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
+@property (nonatomic, assign, readonly) NSUInteger collectionSize;
+
+- (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
+                  parentViewController:(UIViewController *)aViewController
+                        collectionSize:(NSUInteger)aCollectionSize
+                           skillsArray:(NSArray *)aSkillsArray;
 
 - (void)addItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 - (void)removeItem:(NSUInteger)anItemID type:(RPGItemType)aType;

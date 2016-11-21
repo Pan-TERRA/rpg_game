@@ -15,13 +15,6 @@
 #import "RPGNibNames.h"
 
 NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
-CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
-
-@interface RPGSkillCollectionViewController()
-
-@property (nonatomic, assign, readwrite) NSUInteger skillColectionSize;
-
-@end
 
 @implementation RPGSkillCollectionViewController
 
@@ -30,24 +23,14 @@ CGFloat const kRPGSkillCollectionViewControllerCellWidthMultiplier = 0.2;
   return kRPGSkillCollectionViewControllerMaxSize;
 }
 
-- (CGFloat)cellMultiplier
+- (NSUInteger)numberOfCellsInRow
 {
-  return kRPGSkillCollectionViewControllerCellWidthMultiplier;
+  return kRPGSkillCollectionViewControllerMaxSize;
 }
 
-- (NSUInteger)collectionSize
+- (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  return self.skillColectionSize;
-}
-
-- (void)setCollectionSize:(NSUInteger)aCollectionSize
-{
-  self.skillColectionSize = aCollectionSize;
-}
-
--(void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
-{
-  [self.viewController addItemToBagCollectionWithID:anItemID type:aType];
+  [(RPGCharacterProfileViewController *)self.viewController addItemToBagCollectionWithID:anItemID type:aType];
 }
 
 @end
