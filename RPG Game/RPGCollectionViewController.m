@@ -23,6 +23,7 @@
 
 @property (nonatomic, assign, readwrite) RPGCharacterProfileViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
+@property (nonatomic, retain, readwrite) NSMutableArray *skillsIDMutableArray;
 
 @end
 
@@ -33,6 +34,7 @@
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(RPGCharacterProfileViewController *)aViewController
                         collectionSize:(NSUInteger)aCollectionSize
+                           skillsArray:(NSArray *)aSkillsArray
 {
   self = [super init];
   
@@ -50,6 +52,7 @@
     
     _viewController = aViewController;
     _collectionSize = aCollectionSize;
+    _skillsIDMutableArray = [aSkillsArray mutableCopy];
   }
   
   return self;
@@ -59,22 +62,16 @@
 
 - (void)dealloc
 {
-  [_skillsID release];
+  [_skillsIDMutableArray release];
   
   [super dealloc];
 }
 
-#pragma mark - Custom Setter
+#pragma mark - Custom Getter
 
-- (void)setSkillsID:(NSMutableArray *)skillsIDArray
+- (NSArray *)skillsIDArray
 {
-  if (_skillsID != skillsIDArray)
-  {
-    [_skillsID release];
-    _skillsID = [skillsIDArray retain];
-  }
-  
-  [self.collectionView reloadData];
+  return self.skillsIDMutableArray;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -92,9 +89,9 @@
   NSInteger index = anIndexPath.row;
   if (index < self.collectionSize)
   {
-    if (index < self.skillsID.count)
+    if (index < self.skillsIDArray.count)
     {
-      NSUInteger skillID = [self.skillsID[index] integerValue];
+      NSUInteger skillID = [self.skillsIDArray[index] integerValue];
       RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
       
       if (skillRepresentation.imageName.length != 0)
@@ -144,9 +141,9 @@
     if (indexPath != nil)
     {
       NSInteger row = indexPath.row;
-      if (row < self.skillsID.count)
+      if (row < self.skillsIDArray.count)
       {
-        NSUInteger skillID = [self.skillsID[row] integerValue];
+        NSUInteger skillID = [self.skillsIDArray[row] integerValue];
         RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
         RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
         
@@ -163,11 +160,11 @@
   {
     case kRPGItemTypeSkill:
     {
-      if (self.skillsID.count >= self.collectionSize)
+      if (self.skillsIDArray.count >= self.collectionSize)
       {
-        [self moveItem:[[self.skillsID lastObject] integerValue] type:kRPGItemTypeSkill];
+        [self moveItem:[[self.skillsIDArray lastObject] integerValue] type:kRPGItemTypeSkill];
       }
-      [self.skillsID addObject:@(anItemID)];
+      [self.skillsIDMutableArray addObject:@(anItemID)];
       
       break;
     }
@@ -187,7 +184,7 @@
   {
     case kRPGItemTypeSkill:
     {
-      [self.skillsID removeObject:@(anItemID)];
+      [self.skillsIDMutableArray removeObject:@(anItemID)];
       
       break;
     }
@@ -226,9 +223,9 @@
 {
   NSInteger index = anIndexPath.row;
   
-  if (index < self.skillsID.count)
+  if (index < self.skillsIDArray.count)
   {
-    NSUInteger skillID = [self.skillsID[index] integerValue];
+    NSUInteger skillID = [self.skillsIDArray[index] integerValue];
     [self moveItem:skillID type:kRPGItemTypeSkill];
   }
 }

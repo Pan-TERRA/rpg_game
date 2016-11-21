@@ -157,25 +157,12 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
   self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
-  
-  self.skillCollectionViewController = [[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
-                                                                                   parentViewController:self
-                                                                                         collectionSize:aResponse.activeSkillsBagSize];
-  self.bagCollectionViewController = [[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
-                                                                               parentViewController:self
-                                                                                     collectionSize:aResponse.bagSize];
-  
   self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
   
-  [self distributeSkillsToCollections:aResponse.skills];
-}
-
-- (void)distributeSkillsToCollections:(NSArray *)aSkillsArray
-{
   NSMutableArray *skillCollectionArray = [NSMutableArray array];
   NSMutableArray *bagCollectionArray = [NSMutableArray array];
   
-  for (RPGCharacterProfileSkill *skill in aSkillsArray)
+  for (RPGCharacterProfileSkill *skill in aResponse.skills)
   {
     if (skill.isSelected)
     {
@@ -187,8 +174,14 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
     }
   }
   
-  self.skillCollectionViewController.skillsID = skillCollectionArray;
-  self.bagCollectionViewController.skillsID = bagCollectionArray;
+  self.skillCollectionViewController = [[[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
+                                                                                    parentViewController:self
+                                                                                          collectionSize:aResponse.activeSkillsBagSize
+                                                                                             skillsArray:skillCollectionArray] autorelease];
+  self.bagCollectionViewController = [[[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
+                                                                                parentViewController:self
+                                                                                      collectionSize:aResponse.bagSize
+                                                                                         skillsArray:bagCollectionArray] autorelease];
 }
 
 #pragma mark - Error Handling
@@ -235,7 +228,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
   
   NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
-  NSArray *skills = self.skillCollectionViewController.skillsID;
+  NSArray *skills = self.skillCollectionViewController.skillsIDArray;
   
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
@@ -275,7 +268,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
   NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
   
-  character[kRPGCharacterProfileViewControllerSkills] = self.skillCollectionViewController.skillsID;
+  character[kRPGCharacterProfileViewControllerSkills] = self.skillCollectionViewController.skillsIDArray;
   characters[0] = character;
   
   standardUserDefaults.sessionCharacters = characters;
@@ -297,7 +290,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 - (void)setBackButtonState
 {
-  self.backButton.enabled = (self.skillCollectionViewController.skillsID.count != 0);
+  self.backButton.enabled = (self.skillCollectionViewController.skillsIDArray.count != 0);
 }
 
 @end

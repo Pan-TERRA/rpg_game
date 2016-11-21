@@ -16,13 +16,14 @@
 
 @property (nonatomic, assign, readonly) RPGCharacterProfileViewController *viewController;
 
-@property (nonatomic, retain, readwrite) NSMutableArray *skillsID;
+@property (nonatomic, retain, readonly) NSArray *skillsIDArray;
 @property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
 @property (nonatomic, assign, readonly) NSUInteger collectionSize;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(RPGCharacterProfileViewController *)aViewController
-                        collectionSize:(NSUInteger)aCollectionSize;
+                        collectionSize:(NSUInteger)aCollectionSize
+                           skillsArray:(NSArray *)aSkillsArray;
 
 - (void)addItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 - (void)removeItem:(NSUInteger)anItemID type:(RPGItemType)aType;
