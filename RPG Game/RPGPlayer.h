@@ -27,4 +27,6 @@ extern NSString * const kRPGPlayerSkills;
 - (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
 + (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
 
+- (RPGSkill *)skillByID:(NSInteger)anID;
+
 @end
