@@ -12,7 +12,7 @@
 
 @interface RPGAlertController (RPGErrorHandling)
 
-+ (void)showErrorWithStatusCode:(RPGStatusCode)aStatusCode;
++ (void)showErrorWithStatusCode:(RPGStatusCode)aStatusCode completionHandler:(void(^ __nullable)())completionHandler;
 
 + (void)handleDefaultError;
 

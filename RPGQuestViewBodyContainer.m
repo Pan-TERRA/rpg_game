@@ -17,7 +17,7 @@
 #import "RPGQuestRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlertController.h"
+#import "RPGAlertController+RPGErrorHandling.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -203,18 +203,23 @@
       }
       case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't upload proof image.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
+        [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
         {
-          UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
+          dispatch_async(dispatch_get_main_queue(), ^
+          {
+            UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+            [viewController dismissViewControllerAnimated:YES completion:nil];
+          });
         }];
         break;
       }
       default:
       {
         NSString *message = @"Can't upload proof image.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
         break;
       }
     }
@@ -247,10 +252,14 @@
         self.proofImageView.image = [UIImage imageWithData:imageData];
         break;
       }
+        
       default:
       {
         NSString *message = @"Can't upload quest proof image.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
         break;
       }
     }

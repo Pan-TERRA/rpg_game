@@ -33,9 +33,6 @@
 
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageUpload = @"Uploading info";
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
-static NSString * const kRPGCharacterProfileViewControllerWrongTokenMessage = @"Wrong token error.\nTry to log in again.";
-static NSString * const kRPGCharacterProfileViewControllerDefaultMessage = @"Something went wrong.";
-static NSString * const kRPGCharacterProfileViewControllerError = @"Error";
 static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 @interface RPGCharacterProfileViewController ()
@@ -138,6 +135,32 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 }
 
+#pragma mark - Error Handling
+
+- (void)handleWrongTokenError
+{
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
+   {
+     dispatch_async(dispatch_get_main_queue(), ^
+     {
+       UIViewController *viewController = self.presentingViewController.presentingViewController;
+       [viewController dismissViewControllerAnimated:YES completion:nil];
+     });
+   }];
+}
+
+- (void)handleDefaultError
+{
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
+   {
+     dispatch_async(dispatch_get_main_queue(), ^
+     {
+       [self dismissViewControllerAnimated:YES completion:nil];
+     });
+   }];
+}
+
+
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -184,35 +207,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
                                                                                          skillsArray:bagCollectionArray] autorelease];
 }
 
-#pragma mark - Error Handling
-
-- (void)handleWrongTokenError
-{
-  [RPGAlertController showAlertWithTitle:kRPGCharacterProfileViewControllerError
-                                 message:kRPGCharacterProfileViewControllerWrongTokenMessage
-                              completion:^(void)
-   {
-     dispatch_async(dispatch_get_main_queue(), ^
-     {
-       UIViewController *viewController = self.presentingViewController.presentingViewController;
-       [viewController dismissViewControllerAnimated:YES completion:nil];
-     });
-   }];
-}
-
-- (void)handleDefaultError
-{
-  [RPGAlertController showAlertWithTitle:kRPGCharacterProfileViewControllerError
-                                 message:kRPGCharacterProfileViewControllerDefaultMessage
-                              completion:^
-   {
-     dispatch_async(dispatch_get_main_queue(), ^
-     {
-       [self dismissViewControllerAnimated:YES completion:nil];
-     });
-   }];
-}
-
 #pragma mark - View State
 
 - (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
@@ -225,6 +219,11 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 {
   [self.waitingModal.view removeFromSuperview];
   [self.waitingModal removeFromParentViewController];
+}
+
+- (void)setBackButtonState
+{
+  self.backButton.enabled = (self.skillCollectionViewController.skillsIDArray.count != 0);
 }
 
 #pragma mark - Actions
@@ -242,7 +241,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   {
     [self setViewToNormalState];
    
-    // TODO: redo status validation
     switch (aResponse.status)
     {
       case kRPGStatusCodeOK:
@@ -292,11 +290,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 {
   [self.bagCollectionViewController addItem:aSkillID type:aType];
   [self setBackButtonState];
-}
-
-- (void)setBackButtonState
-{
-  self.backButton.enabled = (self.skillCollectionViewController.skillsIDArray.count != 0);
 }
 
 @end

@@ -140,19 +140,22 @@
            
          case kRPGStatusCodeWrongEmail:
          {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail];
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
+                                     completionHandler:nil];
            break;
          }
            
          case kRPGStatusCodeUserDoesNotExist:
          {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist];
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist
+                                     completionHandler:nil];
            break;
          }
            
          case kRPGStatusCodeWrongPassword:
          {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword];
+           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword
+                                     completionHandler:nil];
            break;
          }
            

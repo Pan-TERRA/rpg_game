@@ -137,20 +137,29 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
           }
           break;
         }
+          
         case kRPGStatusCodeWrongToken:
         {
           NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-          [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
+          [RPGAlertController showAlertWithTitle:nil
+                                         message:message
+                                     actionTitle:nil completion:^(void)
           {
-            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-            [viewController dismissViewControllerAnimated:YES completion:nil];
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
           }];
           break;
         }
+          
         default:
         {
           NSString *message = @"Can't update quest list.";
-          [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
+          [RPGAlertController showAlertWithTitle:nil
+                                         message:message
+                                     actionTitle:nil completion:nil];
           break;
         }
       }
@@ -217,7 +226,10 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
       else
       {
         NSString *message = @"No quests for review.";
-        [RPGAlertController showAlertWithTitle:@"Wow!" message:message completion:nil];
+        [RPGAlertController showAlertWithTitle:@"Wow"
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;

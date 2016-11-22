@@ -817,7 +817,7 @@
 			name = "Bag Collection ViewController";
 			sourceTree = "<group>";
 		};
-		289C42E61DE20CC800E35506 /* Character Profile ViewController */ = {
+		289C42E61DE20CC800E35506 /* Character Profile */ = {
 			isa = PBXGroup;
 			children = (
 				289C42C11DE20C4000E35506 /* RPGCharacterProfileViewController.h */,
@@ -825,7 +825,7 @@
 				289C42CA1DE20C6700E35506 /* RPGCharacterProfileViewController.xib */,
 				289C42E41DE20C8A00E35506 /* Collection */,
 			);
-			name = "Character Profile ViewController";
+			name = "Character Profile";
 			sourceTree = "<group>";
 		};
 		289C42E71DE20CE900E35506 /* Skill Collection */ = {
@@ -1149,7 +1149,7 @@
 				28149A1E1DB1011B00C26881 /* Login */,
 				28149A131DB100FB00C26881 /* Main Menu */,
 				AED6F57A1DACD89F007ED1B8 /* Quests */,
-				289C42E61DE20CC800E35506 /* Character Profile ViewController */,
+				289C42E61DE20CC800E35506 /* Character Profile */,
 				28149A111DB1008100C26881 /* Battle */,
 				28149A121DB100B900C26881 /* Settings */,
 			);

@@ -206,25 +206,25 @@ CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30;
 - (void)deleteQuestWithID:(NSUInteger)aQuestID
 {
     RPGQuestListState state = self.questListState;
-    
-    void (^handler)(NSInteger) = ^void(NSInteger status)
-    {
-      BOOL success = (status == 0);
-      
-      if (success)
-      {
-        [self removeQuestWithID:aQuestID forState:state];
-      }
-      else
-      {
-        [RPGAlertController showAlertWithTitle:@"Delete quest" message:@"Can't delete quest." completion:nil];
-      }
-    };
   
     RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
     [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
                                                     request:request
-                                          completionHandler:handler];
+                                          completionHandler:^void(NSInteger status)
+     {
+       BOOL success = (status == 0);
+       
+       if (success)
+       {
+         [self removeQuestWithID:aQuestID forState:state];
+       }
+       else
+       {
+         [RPGAlertController showAlertWithTitle:@"Delete quest"
+                                        message:@"Can't delete quest."
+                                    actionTitle:nil completion:nil];
+       }
+     }];
 }
 
 - (void)removeQuestWithID:(NSUInteger)aQuestID forState:(RPGQuestListState)aState

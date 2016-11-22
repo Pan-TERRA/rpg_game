@@ -9,6 +9,8 @@
 #import "RPGSettingsViewController.h"
   // API
 #import "RPGNetworkManager+Authorization.h"
+  // Controllers
+#import "RPGAlertController+RPGErrorHandling.h"
   // Misc
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
@@ -72,10 +74,17 @@
    {
      switch (status)
      {
-      
        case kRPGStatusCodeWrongToken:
        {
-         NSLog(@"Logout: wrongJSON");
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+              [rootViewController dismissViewControllerAnimated:YES
+                                                     completion:nil];
+            });
+          }];
          break;
        }
          
@@ -89,7 +98,7 @@
 
        case kRPGStatusCodeWrongJSON:
        {
-         [RPGAlertController showAlertWithTitle:@"Error" message:@"Logout: wrongJSON" completion:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON completionHandler:nil];
          break;
        }
          

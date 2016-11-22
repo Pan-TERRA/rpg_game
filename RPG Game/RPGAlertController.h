@@ -12,8 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface RPGAlertController : NSObject
 
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
++ (void)showAlertWithTitle:(NSString * __nullable)aTitle
+                   message:(NSString * __nullable)aMessage
+               actionTitle:(NSString * __nullable)anActionTitle
                 completion:(void (^ __nullable)())completionHandler;
 
 @end
