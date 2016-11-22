@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Constants
+#import "RPGBattleStatus.h"
 
 @class RPGEntity;
 @class RPGPlayer;
@@ -28,6 +30,7 @@ extern const NSInteger kRPGBattleTurnDuration;
 @property (retain, nonatomic, readonly) RPGEntity *opponent;
 @property (assign, nonatomic, readonly) NSInteger startTime;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
+@property (assign, nonatomic, readonly) RPGBattleStatus battleStatus;
 @property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
 @property (retain, nonatomic, readonly) RPGResources *reward;
 @property (retain, nonatomic, readonly) RPGBattleLog *battleLog;

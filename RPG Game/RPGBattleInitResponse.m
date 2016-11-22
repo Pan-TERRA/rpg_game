@@ -1,16 +1,19 @@
 
-//  RPGBattleInitResponse.m
-//  RPG Game
-//
-//  Created by Иван Дзюбенко on 10/11/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //  RPGBattleInitResponse.m
+  //  RPG Game
+  //
+  //  Created by Иван Дзюбенко on 10/11/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGBattleInitResponse.h"
-#import "RPGEntity.h"
+  // Entities
+#import "RPGPlayer.h"
+  // Constants
 #import "RPGMessageTypes.h"
 
 static NSString * const kRPGBattleInitResponseOpponentInfo = @"opponent_info";
+static NSString * const kRPGBattleInitResponsePlayerInfo = @"player_info";
 static NSString * const kRPGBattleInitResponseOpponentTime = @"time";
 static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 
@@ -27,6 +30,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 #pragma mark - Init
 
 - (instancetype)initWithOpponentInfo:(RPGEntity *)anOpponentInfo
+                          playerInfo:(RPGPlayer *)aPlayerInfo
                          currentTurn:(BOOL)aCurrentTurn
                                 time:(NSInteger)aTime
                               status:(NSInteger)aStatus
@@ -44,6 +48,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
     else
     {
       _time = aTime;
+      _playerInfo = [aPlayerInfo retain];
       _opponentInfo = [anOpponentInfo retain];
       _currentTurn = aCurrentTurn;
     }
@@ -53,11 +58,13 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 }
 
 + (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
+                                        playerInfo:(RPGPlayer *)aPlayerInfo
                                        currentTurn:(BOOL)aCurrentTurn
                                               time:(NSInteger)aTime
                                             status:(NSInteger)aStatus
 {
   return [[[RPGBattleInitResponse alloc] initWithOpponentInfo:anOpponentInfo
+                                                   playerInfo:aPlayerInfo
                                                   currentTurn:aCurrentTurn
                                                          time:aTime
                                                        status:aStatus] autorelease];
@@ -67,7 +74,8 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
                       status:(NSInteger)aStatus
 {
   return [self initWithOpponentInfo:nil
-                        currentTurn:0
+                         playerInfo:nil
+                        currentTurn:NO
                                time:0
                              status:-1];
 }
@@ -77,6 +85,8 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 - (void)dealloc
 {
   [_opponentInfo release];
+  [_playerInfo release];
+  
   [super dealloc];
 }
 
@@ -86,7 +96,6 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 {
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGBattleInitResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
   dictionaryRepresentation[kRPGBattleInitResponseCurrentTurn] = [NSNumber numberWithBool:self.isCurrentTurn];
   dictionaryRepresentation[kRPGBattleInitResponseOpponentTime] = @(self.time);
   
@@ -96,11 +105,14 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   RPGEntity *opponentInfo = [[RPGEntity alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponseOpponentInfo]];
+  RPGPlayer *playerInfo = [[RPGPlayer alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponsePlayerInfo]];
+  
   BOOL currentTurn = [aDictionary[kRPGBattleInitResponseCurrentTurn] boolValue];
   NSInteger status = [aDictionary[kRPGResponseSerializationStatus] integerValue];
   NSInteger time = [aDictionary[kRPGBattleInitResponseOpponentTime] integerValue];
   
   return [self initWithOpponentInfo:[opponentInfo autorelease]
+                         playerInfo:[playerInfo autorelease]
                         currentTurn:currentTurn
                                time:time status:status];
 }

@@ -24,8 +24,17 @@ extern NSString * const kRPGPlayerSkills;
  */
 @interface RPGPlayer : RPGEntity <RPGClientEntity, RPGSerializable>
 
-- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
-+ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                      skills:(NSArray<RPGSkill *> *)aSkills;
+
++ (instancetype)playerWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                      skills:(NSArray<RPGSkill *> *)aSkills;
+//- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
+//+ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
 
 - (RPGSkill *)skillByID:(NSInteger)anID;
 

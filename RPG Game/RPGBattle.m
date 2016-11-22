@@ -24,6 +24,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
 @property (assign, nonatomic, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 @property (retain, nonatomic, readwrite) RPGResources *reward;
 @property (retain, nonatomic, readwrite) RPGBattleLog *battleLog;
+@property (assign, nonatomic, readwrite) RPGBattleStatus battleStatus;
 
 @end
 
@@ -37,7 +38,8 @@ const NSInteger kRPGBattleTurnDuration = 30;
   
   if (self != nil)
   {
-//    _player = nil;
+    _battleStatus = kRPGBattleStatusBattleInProgress;
+    _player = [aResponse.playerInfo retain];
     _opponent = [aResponse.opponentInfo retain];
     _startTime = aResponse.time;
     _currentTime = aResponse.time;
@@ -61,6 +63,7 @@ const NSInteger kRPGBattleTurnDuration = 30;
   self.player.HP = aResponse.HP;
   self.opponent.HP = aResponse.opponentHP;
   self.currentTurn = aResponse.currentTurn;
+  self.battleStatus = aResponse.battleStatus;
   
   RPGResources *reward = aResponse.reward;
   if (reward != nil)

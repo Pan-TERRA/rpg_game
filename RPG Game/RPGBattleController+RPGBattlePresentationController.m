@@ -27,6 +27,11 @@
   return self.battle.player.HP;
 }
 
+- (NSInteger)playerMaxHP
+{
+  return self.battle.player.maxHP;
+}
+
 - (BOOL)isMyTurn
 {
   return self.battle.isCurrentTurn;
@@ -54,6 +59,11 @@
   return self.battle.opponent.HP;
 }
 
+- (NSInteger)opponentMaxHP
+{
+  return self.battle.opponent.maxHP;
+}
+
 #pragma mark  General
 
 - (NSInteger)rewardGold
@@ -74,6 +84,11 @@
 - (NSString *)defenderNickName
 {
   return !self.myTurn ? self.playerNickName : self.opponentNickName;
+}
+
+- (RPGBattleStatus)battleStatus
+{
+  return self.battle.battleStatus;
 }
 
 @end

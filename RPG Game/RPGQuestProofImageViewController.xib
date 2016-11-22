@@ -3,12 +3,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestProofImageViewController">
             <connections>
+                <outlet property="bottomImageViewConstraint" destination="Eyb-Ty-2Li" id="GEu-3q-aNi"/>
+                <outlet property="leadingImageViewConstraint" destination="b6i-9F-8e0" id="uPn-Qr-nrW"/>
                 <outlet property="proofImageView" destination="7RI-nE-XDX" id="Njr-7c-JsJ"/>
+                <outlet property="topImageViewConstraint" destination="qQE-CN-Qlt" id="NwW-go-lsQ"/>
+                <outlet property="trailingImageViewConstraint" destination="vJ1-Ek-wBj" id="t92-GI-knl"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,10 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7RI-nE-XDX">
-                    <rect key="frame" x="124" y="0.0" width="320" height="320"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="7RI-nE-XDX" secondAttribute="height" multiplier="1:1" id="MZk-PW-G55"/>
-                    </constraints>
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                 </imageView>
                 <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1y-z2-CQS">
                     <rect key="frame" x="0.0" y="250" width="568" height="70"/>
@@ -50,13 +50,13 @@
             </subviews>
             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
             <constraints>
-                <constraint firstItem="7RI-nE-XDX" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="1fe-64-AKt"/>
-                <constraint firstItem="7RI-nE-XDX" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9J9-E5-0b2"/>
+                <constraint firstAttribute="bottom" secondItem="7RI-nE-XDX" secondAttribute="bottom" id="Eyb-Ty-2Li"/>
                 <constraint firstAttribute="trailing" secondItem="V1y-z2-CQS" secondAttribute="trailing" id="H9G-Wh-Zff"/>
                 <constraint firstItem="V1y-z2-CQS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NTw-dN-cCK"/>
-                <constraint firstAttribute="bottom" secondItem="7RI-nE-XDX" secondAttribute="bottom" id="mbl-SM-jeC"/>
+                <constraint firstItem="7RI-nE-XDX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b6i-9F-8e0"/>
                 <constraint firstAttribute="bottom" secondItem="V1y-z2-CQS" secondAttribute="bottom" id="mk3-NF-sSI"/>
-                <constraint firstItem="7RI-nE-XDX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z3E-Hs-jTH"/>
+                <constraint firstItem="7RI-nE-XDX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qQE-CN-Qlt"/>
+                <constraint firstAttribute="trailing" secondItem="7RI-nE-XDX" secondAttribute="trailing" id="vJ1-Ek-wBj"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
