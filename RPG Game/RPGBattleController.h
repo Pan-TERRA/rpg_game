@@ -31,7 +31,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 - (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
 
 /**
- *  May be reimplemented to send proper request
+ *  May be overriden to send proper request
  */
 - (RPGRequest *)createBattleInitRequest;
 
@@ -40,9 +40,10 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 - (void)processManagerResponse:(NSDictionary *)aResponse;
 
 /**
- *  May be reimplemented to get player skills from other source
+ *  May be overriden to get player skills from other source.
+ *  These skills will be used in battle.
  */
-- (NSArray<RPGSkill *> *)getPlayerSkills;
+- (NSArray<NSNumber *> *)getPlayerSkillIDs;
 
 - (void)requestBattleInit;
 - (void)prepareBattleControllerForDismiss;
