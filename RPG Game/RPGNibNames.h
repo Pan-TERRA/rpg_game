@@ -31,6 +31,10 @@ extern NSString * const kRPGSkillBarViewControllerNIBName;
 extern NSString * const kRPGSkillDescriptionViewControllerNIBName;
 extern NSString * const kRPGQuickSettingsViewControllerNIBName;
 
+/****************	ArenaViewController ****************/
+
+extern NSString * const kRPGArenaSkillDrawViewControllerNIBName;
+
 /****************	Character Profile ****************/
 
 extern NSString * const kRPGCharacterProfileViewControllerNIBName;
