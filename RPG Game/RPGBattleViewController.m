@@ -9,6 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
+#import "RPGArenaController.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -66,6 +67,44 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @implementation RPGBattleViewController
 
 #pragma mark - Init
+
+// TODO: remove this unpleasantness
+// builder?
+- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController
+{
+  self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
+  
+  if (self != nil)
+  {
+    _battleController = [anArenaController retain];
+    _timerCounter = kRPGBattleTurnDuration;
+    if (_battleController != nil)
+    {
+      _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
+      _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(modelDidChange:)
+                                                   name:kRPGModelDidChangeNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [_battleController addObserver:self
+                          forKeyPath:@"battle.currentTurn"
+                             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+    }
+  }
+  
+  return self;
+}
 
 - (instancetype)init
 {
