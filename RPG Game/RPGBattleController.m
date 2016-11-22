@@ -136,8 +136,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
         [skill release];
       }
       
-      self.battle.player = [RPGPlayer playerWithSkills:skills];
-      //self.battle.player = [RPGPlayer playerWithSkills:skillsArray];
+      self.battle.player.skills = skills;
+      
       [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
                                                           object:self];
       [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
