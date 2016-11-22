@@ -186,7 +186,7 @@
 
 - (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
-  UIImage *chosenImage = anInfo[UIImagePickerControllerEditedImage];
+  UIImage *chosenImage = anInfo[UIImagePickerControllerOriginalImage];
   // !!!: leak
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
@@ -220,7 +220,7 @@
     }
   };
   
-  NSData *data = UIImagePNGRepresentation(chosenImage);
+  NSData *data = UIImageJPEGRepresentation(chosenImage, 0.7);
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
   
