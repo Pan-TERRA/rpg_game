@@ -46,6 +46,8 @@ extern NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute;
 extern NSString * const kRPGNetworkManagerAPISelectSkillsRoute;
   // Constants
 extern NSString * const kRPGNetworkManagerStatus;
+extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
+extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 @class RPGResources;
 
@@ -63,7 +65,7 @@ extern NSString * const kRPGNetworkManagerStatus;
 
 /**
  *  Helper method. Returns request with specific URL and HTTP method, body is JSON
- *  presentaion of an object. Raises exception if serialization fails.
+ *  presentation of an object. Raises exception if serialization fails.
  *
  *  @param anObject Serializable object or NSDictionary instance
  *  @param aMethod  HTTP method
