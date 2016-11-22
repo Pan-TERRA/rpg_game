@@ -118,7 +118,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
-  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType])
+  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType] ||
+      [aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGArenInitMessageType])
   {
     RPGBattleInitResponse *response = [[[RPGBattleInitResponse alloc]
                                         initWithDictionaryRepresentation:aResponse]
