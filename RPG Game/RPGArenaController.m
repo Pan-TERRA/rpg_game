@@ -8,24 +8,55 @@
 
 #import "RPGArenaController.h"
 #import "RPGArenaInitRequest.h"
-#import "RPGSkill.h"
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBattleInitResponse.h"
 
+@interface RPGArenaController ()
+
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillIDs;
+
+@end
+
 @implementation RPGArenaController
+
+#pragma mark - Init
+
+- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs
+{
+  self = [super init];
+  
+  if (self != nil)
+  {
+    _skillIDs = [aSkillIDs retain];
+  }
+  
+  return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_skillIDs release];
+  
+  [super dealloc];
+}
+
+#pragma mark - Actions
 
 - (RPGRequest *)createBattleInitRequest
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  NSArray *skillIDs = [self.skills valueForKeyPath:@"@unionOfObjects.skillID"];
-  return [RPGArenaInitRequest requestWithSkillIDs:skillIDs token:token];
+  return [RPGArenaInitRequest requestWithSkillIDs:self.skillIDs token:token];
 }
 
-- (NSArray<RPGSkill *> *)getPlayerSkills
+// TODO: maybe pass skillIDs not with RPGArenaController, but using NSUserDefaults (default
+// behavior for RPGBattleController)
+- (NSArray<NSNumber *> *)getPlayerSkillIDs
 {
-  return self.skills;
+  return self.skillIDs;
 }
 
 @end

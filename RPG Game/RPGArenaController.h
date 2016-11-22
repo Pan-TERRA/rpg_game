@@ -8,10 +8,10 @@
 
 #import "RPGBattleController.h"
 
-@class RPGSkill;
-
 @interface RPGArenaController : RPGBattleController
 
-@property (nonatomic, retain, readwrite) NSArray<RPGSkill *> *skills;
+@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skillIDs;
+
+- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs;
 
 @end
