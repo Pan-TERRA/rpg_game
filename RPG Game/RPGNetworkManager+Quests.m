@@ -271,24 +271,8 @@
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIProofQuestRoute];
-  
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:requestString]];
-  
-  NSError *JSONSerializationError = nil;
-  request.HTTPMethod = @"POST";
-  
-  NSMutableDictionary *requestDictionary = [[aRequest dictionaryRepresentation] mutableCopy];
-  NSString *t = [NSUserDefaults standardUserDefaults].sessionToken;
-  requestDictionary[kRPGRequestToken] = t;
-  NSData *requestJSONData = [NSJSONSerialization dataWithJSONObject:requestDictionary
-                                                        options:NSJSONWritingPrettyPrinted
-                                                          error:&JSONSerializationError];
-  if (requestJSONData == nil)
-  {
-    [[NSException exceptionWithName:NSInvalidArgumentException
-                             reason:@"JSON cannot be retrieved from request"
-                           userInfo:nil] raise];
-  }
+
+  NSMutableURLRequest *request = [[self requestWithObject:aRequest URLstring:requestString method:@"POST" injectToken:YES] mutableCopy];
 
     // build HTTP body
   NSString *boundary = @"---------------------------Boundary Line---------------------------";
@@ -299,7 +283,7 @@
   
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[@"Content-Disposition: form-data; name=\"json\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-  [body appendData:requestJSONData];
+  [body appendData:request.HTTPBody];
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[@"Content-Disposition: form-data; name=\"prove_image\"; filename=\"file.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
