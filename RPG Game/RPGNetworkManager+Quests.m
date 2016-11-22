@@ -277,7 +277,9 @@
   NSError *JSONSerializationError = nil;
   request.HTTPMethod = @"POST";
   
-  NSDictionary *requestDictionary = [aRequest dictionaryRepresentation];
+  NSMutableDictionary *requestDictionary = [[aRequest dictionaryRepresentation] mutableCopy];
+  NSString *t = [NSUserDefaults standardUserDefaults].sessionToken;
+  requestDictionary[kRPGRequestToken] = t;
   NSData *requestJSONData = [NSJSONSerialization dataWithJSONObject:requestDictionary
                                                         options:NSJSONWritingPrettyPrinted
                                                           error:&JSONSerializationError];
