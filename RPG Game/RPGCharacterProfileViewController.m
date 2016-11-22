@@ -153,10 +153,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 - (void)updateViewWithResponse:(RPGCharacterProfileInfoResponse *)aResponse
 {
   self.nickNameLabel.text = [NSUserDefaults standardUserDefaults].characterNickName;
-  self.levelLabel.text = [NSString stringWithFormat:@"%d", aResponse.currentLevel];
-  self.expLabel.text = [NSString stringWithFormat:@"%d/%d", aResponse.currentExp, aResponse.maxExp];
-  self.hpLabel.text = [NSString stringWithFormat:@"%d", aResponse.HP];
-  self.attackLabel.text = [NSString stringWithFormat:@"%d", aResponse.attack];
+  self.levelLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.currentLevel];
+  self.expLabel.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)aResponse.currentExp, (unsigned long)aResponse.maxExp];
+  self.hpLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.HP];
+  self.attackLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.attack];
   self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
   
   NSMutableArray *skillCollectionArray = [NSMutableArray array];
@@ -192,8 +192,11 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
                                  message:kRPGCharacterProfileViewControllerWrongTokenMessage
                               completion:^(void)
    {
-     UIViewController *viewController = self.presentingViewController.presentingViewController;
-     [viewController dismissViewControllerAnimated:YES completion:nil];
+     dispatch_async(dispatch_get_main_queue(), ^
+     {
+       UIViewController *viewController = self.presentingViewController.presentingViewController;
+       [viewController dismissViewControllerAnimated:YES completion:nil];
+     });
    }];
 }
 
@@ -203,7 +206,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
                                  message:kRPGCharacterProfileViewControllerDefaultMessage
                               completion:^
    {
-     [self dismissViewControllerAnimated:YES completion:nil];
+     dispatch_async(dispatch_get_main_queue(), ^
+     {
+       [self dismissViewControllerAnimated:YES completion:nil];
+     });
    }];
 }
 
