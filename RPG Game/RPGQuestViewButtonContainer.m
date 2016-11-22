@@ -1,14 +1,16 @@
-//
-//  RPGQuestViewButtonContainerController.m
-//  RPG Game
-//
-//  Created by Максим Шульга on 11/10/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGQuestViewButtonContainerController.m
+  //  RPG Game
+  //
+  //  Created by Максим Шульга on 11/10/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGQuestViewButtonContainer.h"
   // API
 #import "RPGNetworkManager+Quests.h"
+  // Controllers
+#import "RPGAlertController+RPGErrorHandling.h"
   // Views
 #import "RPGQuestViewController.h"
   // Entities
@@ -17,10 +19,8 @@
 #import "RPGQuest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGAlertController.h"
   // Constants
 #import "RPGStatusCodes.h"
-
 #import <AVFoundation/AVFoundation.h>
 
 @interface RPGQuestViewButtonContainer()
@@ -62,7 +62,7 @@
       [self setStateReviewedQuest:NO];
       break;
     }
-
+      
     case kRPGQuestStateForReview:
     {
       [self setStateForReviewQuest];
@@ -134,48 +134,50 @@
 
 - (void)takeQuest
 {
-  //self.acceptButton.enabled = NO;
-  
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        [weakQuestViewController dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't take quest.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
-        {
-          UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't take quest.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
-        break;
-      }
-    }
-    //weakSelf.acceptButton.enabled = YES;
-  };
-  
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
-  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:handler];
+  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:^void(NSInteger statusCode)
+  {
+     switch (statusCode)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [weakQuestViewController dismissViewControllerAnimated:YES completion:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+                           {
+                             UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+                             [viewController dismissViewControllerAnimated:YES completion:nil];
+                           });
+          }];
+         break;
+       }
+         
+       default:
+       {
+         NSString *message = @"Can't take quest.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+     }
+   }];
 }
 
 #pragma mark - Add Proof With Camera
 
 - (void)addProofWithCamera
 {
-  //self.addProofButton.enabled = NO;
+    //self.addProofButton.enabled = NO;
   if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType:completionHandler:)])
   {
     __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
@@ -189,18 +191,16 @@
            dispatch_async(dispatch_get_main_queue(), ^
            {
              [weakQuestViewController presentViewController:weakQuestViewController.imagePickerController animated:NO completion:nil];
-             //weakSelf.addProofButton.enabled = YES;
+              //weakSelf.addProofButton.enabled = YES;
            });
          }
        }
        else
        {
          NSString *message = @"Give this app permission to access your camera in your settings app!";
-         dispatch_async(dispatch_get_main_queue(), ^
-         {
-           [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
-           //weakSelf.addProofButton.enabled = YES;
-         });
+         
+         [RPGAlertController showAlertWithTitle:nil message:message actionTitle:nil completion:nil];
+         
        }
      }];
   }
@@ -210,42 +210,47 @@
 
 - (void)sendQuestProofWithResult:(BOOL)aResult
 {
-  //self.acceptButton.enabled = NO;
-  //self.denyButton.enabled = NO;
-  
+
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        [weakQuestViewController dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
-        {
-          UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-          [viewController dismissViewControllerAnimated:YES completion:nil];
-        }];
-        break;
-      }
-      default:
-      {
-        NSString *message = @"Can't send quest proof.";
-        [RPGAlertController showAlertWithTitle:@"Error" message:message completion:nil];
-        break;
-      }
-    }
-    //self.acceptButton.enabled = YES;
-    //self.denyButton.enabled = YES;
-  };
   RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithQuestID:self.questViewController.questID result:aResult];
-  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:handler];
+  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:^void(NSInteger statusCode)
+   {
+     switch (statusCode)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [weakQuestViewController dismissViewControllerAnimated:YES completion:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         NSString *message = @"Can't send quest proof.\nWrong token error.\nTry to log in again.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil completion:^(void)
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
+          }];
+         break;
+       }
+         
+       default:
+       {
+         NSString *message = @"Can't send quest proof.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+     }
+   }];
 }
 
 @end

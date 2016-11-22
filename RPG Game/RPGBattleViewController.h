@@ -9,9 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class RPGBattleController;
+@class RPGArenaController;
 
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
+
+- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController;
 
 @end

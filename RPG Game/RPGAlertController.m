@@ -12,17 +12,35 @@
   // Misc
 #import "UIWindow+RPGPresentController.h"
 
-static NSString * const kRPGAlertControllerDefaultActionTitle = @"OK";
+static NSString * const kRPGAlertControllerDefaultTitle = @"Error";
+static NSString * const kRPGAlertControllerDefaultMessage = @"Error message";
+static NSString * const kRPGAlertControllerDefaultActionTitle = @"Ok";
 
 @implementation RPGAlertController
 
-+ (void)showAlertWithTitle:(NSString *)title
-                   message:(NSString *)message
++ (void)showAlertWithTitle:(NSString * __nullable)aTitle
+                   message:(NSString * __nullable)aMessage
+               actionTitle:(NSString * __nullable)anActionTitle
                 completion:(void (^ __nullable)())completionHandler
 {
-  RPGAlertViewController *alertViewController = [[RPGAlertViewController alloc] initWithTitle:title
-                                                                    description:message
-                                                                    actionTitle:kRPGAlertControllerDefaultActionTitle
+  if (aTitle == nil)
+  {
+    aTitle = kRPGAlertControllerDefaultTitle;
+  }
+  
+  if (aMessage == nil)
+  {
+    aTitle = kRPGAlertControllerDefaultMessage;
+  }
+  
+  if (anActionTitle == nil)
+  {
+    aTitle = kRPGAlertControllerDefaultActionTitle;
+  }
+  
+  RPGAlertViewController *alertViewController = [[RPGAlertViewController alloc] initWithTitle:aTitle
+                                                                    description:aMessage
+                                                                    actionTitle:anActionTitle
                                                               completionHandler:completionHandler];
  
   

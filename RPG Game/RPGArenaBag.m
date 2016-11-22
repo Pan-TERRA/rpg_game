@@ -18,6 +18,8 @@ const NSUInteger kRPGArenaBagSetSize = 3;
 
 @implementation RPGArenaBag
 
+#pragma mark - Init
+
 - (instancetype)initWithArray:(NSArray *)anArray
 {
   self = [super init];
@@ -38,12 +40,23 @@ const NSUInteger kRPGArenaBagSetSize = 3;
   return self;
 }
 
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_bag release];
+  
+  [super dealloc];
+}
+
+#pragma mark - Actions
+
 - (NSArray *)getNextRandomItems
 {
   NSArray *result = nil;
   NSIndexSet *randomIndices = [self getNextRandomItemIndices];
   
-  if (randomIndices.count != 0)
+  if (randomIndices != nil)
   {
     result = [self.bag objectsAtIndexes:randomIndices];
     [self.bag removeObjectsAtIndexes:randomIndices];
@@ -54,18 +67,22 @@ const NSUInteger kRPGArenaBagSetSize = 3;
 
 - (NSIndexSet *)getNextRandomItemIndices
 {
-  NSMutableIndexSet *result = [NSMutableIndexSet indexSet];
+  NSMutableIndexSet *result = nil;
   NSUInteger bagCount = self.bag.count;
   
-  for (int i = 0; i < kRPGArenaBagSetSize; i++)
+  if (bagCount != 0)
   {
-    NSUInteger randomIndex = 0;
-    do
+    result = [NSMutableIndexSet indexSet];
+    for (int i = 0; i < kRPGArenaBagSetSize; i++)
     {
-      randomIndex = arc4random() % bagCount;
+      NSUInteger randomIndex = 0;
+      do
+      {
+        randomIndex = arc4random() % bagCount;
+      }
+      while ([result containsIndex:randomIndex]);
+      [result addIndex:randomIndex];
     }
-    while ([result containsIndex:randomIndex]);
-    [result addIndex:randomIndex];
   }
   
   return result;

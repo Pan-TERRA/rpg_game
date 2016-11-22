@@ -8,7 +8,7 @@
 
 #import "RPGViewController.h"
 
-static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
+static CGFloat kRPGViewControllerContentInsetsGap = 10.0;
 
 @interface RPGViewController ()
 
@@ -62,7 +62,7 @@ static CGFloat kRPGViewControllercContentInsetsGap = 10.0;
 - (void)keyboardWillShow:(NSNotification *)aNotification
 {
   CGRect keyboardFrame = [aNotification.userInfo[UIKeyboardFrameBeginUserInfoKey] CGRectValue];
-  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllercContentInsetsGap;
+  CGFloat adjustmentHeight = keyboardFrame.size.height + kRPGViewControllerContentInsetsGap;
   UIEdgeInsets contentInsets = UIEdgeInsetsMake(0.0, 0.0, adjustmentHeight, 0.0);
   self.scrollView.contentInset = contentInsets;
   self.scrollView.scrollIndicatorInsets = contentInsets;

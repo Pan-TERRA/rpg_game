@@ -11,7 +11,7 @@
 static NSString * const kRPGArenaSkillsResponseStatus = @"status";
 static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
-@implementation RPGSkillsResponse
+@implementation RPGArenaSkillsResponse
 
 #pragma mark - Init
 

@@ -9,6 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
+#import "RPGArenaController.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -25,6 +26,7 @@
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBackgroundMusicController.h"
+#import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -65,6 +67,43 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 @implementation RPGBattleViewController
 
 #pragma mark - Init
+
+// TODO: remove this unpleasantness
+- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController
+{
+  self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
+  
+  if (self != nil)
+  {
+    _battleController = [anArenaController retain];
+    _timerCounter = kRPGBattleTurnDuration;
+    if (_battleController != nil)
+    {
+      _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
+      _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(modelDidChange:)
+                                                   name:kRPGModelDidChangeNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [_battleController addObserver:self
+                          forKeyPath:@"battle.currentTurn"
+                             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+    }
+  }
+  
+  return self;
+}
 
 - (instancetype)init
 {
@@ -238,22 +277,24 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   NSInteger playerHP = battleController.playerHP;
   NSString *playerNickName = battleController.playerNickName;
   self.playerNickName.text = playerNickName;
-  self.playerHPBar.progress = ((float)playerHP / 100.0);
+  self.playerHPBar.progress = ((float)playerHP / battleController.playerMaxHP);
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
   NSString *opponentNickName = battleController.opponentNickName;
   self.opponentNickName.text = opponentNickName;
-  self.opponentHPBar.progress = ((float)opponentHP / 100.0);
+  self.opponentHPBar.progress = ((float)opponentHP / battleController.opponentMaxHP);
   
     // fight end
-  if (playerHP == 0 || opponentHP == 0)
+  if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
   {
-    [self addChildViewController:self.battleRewardModal];
-    self.battleRewardModal.view.frame = self.view.frame;
-    [self.view addSubview:self.battleRewardModal.view];
-    [self.battleRewardModal didMoveToParentViewController:self];
+//    [self addChildViewController:self.battleRewardModal];
+//    self.battleRewardModal.view.frame = self.view.frame;
+//    [self.view addSubview:self.battleRewardModal.view];
+//    [self.battleRewardModal didMoveToParentViewController:self];
     
-    self.winnerNickNameLabel.text = playerHP == 0 ? opponentNickName : playerNickName;
+    [self addChildViewController:self.battleRewardModal frame:self.view.frame];
+    
+    self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
     self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
     
     [self.timer invalidate];

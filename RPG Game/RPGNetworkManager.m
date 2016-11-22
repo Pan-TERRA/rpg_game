@@ -123,6 +123,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
+  // ? ніл обєкт без токену
   if (anObject != nil)
   {
     NSMutableDictionary *JSONObject = nil;

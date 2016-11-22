@@ -13,6 +13,7 @@
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
+#import "RPGArenaSkillDrawViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -116,7 +117,9 @@
 
 - (IBAction)segueToArena
 {
-  
+  [self presentViewController:[[[RPGArenaSkillDrawViewController alloc] init] autorelease]
+                     animated:YES
+                   completion:nil];
 }
 
 - (IBAction)segueToSettings

@@ -98,7 +98,6 @@
 {
   if (aQuest != nil)
   {
-      //  RPGQuestState state = aQuest.state;
     self.state = aQuest.state;
     self.questID = aQuest.questID;
     self.proofImageStringURL = aQuest.proofImageStringURL;
@@ -117,7 +116,6 @@
   {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
     picker.delegate = self.bodyContainer;
-    picker.allowsEditing = YES;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imagePickerController = [picker retain];
   }

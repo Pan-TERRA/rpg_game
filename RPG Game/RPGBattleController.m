@@ -139,7 +139,18 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   if (aResponse != nil && aResponse.status == 0)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:aResponse];
-    self.battle.player.skills = [self getPlayerSkills];
+    
+    NSArray<NSNumber *> *skillIDs = [self getPlayerSkillIDs];
+    
+    NSMutableArray *skills = [NSMutableArray array];
+    for (NSNumber *skillID in skillIDs)
+    {
+      RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
+      [skills addObject:skill];
+      [skill release];
+    }
+    self.battle.player.skills = skills;
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
                                                         object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
@@ -163,19 +174,11 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 #pragma mark - Helper Methods
 
-- (NSArray<RPGSkill *> *)getPlayerSkills
+- (NSArray<NSNumber *> *)getPlayerSkillIDs
 {
   NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSArray *skillsArray = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-  
-  NSMutableArray *skills = [NSMutableArray array];
-  for (NSNumber *skillID in skillsArray)
-  {
-    RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
-    [skills addObject:skill];
-    [skill release];
-  }
-  return skills;
+  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
+  return skillIDs;
 }
 
 @end

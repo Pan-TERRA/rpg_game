@@ -7,6 +7,8 @@
 //
 
 #import "RPGBattleController.h"
+  // Constants
+#import "RPGBattleStatus.h"
 
 @class RPGSkill;
 
@@ -15,13 +17,16 @@
   // Player
 @property (assign, nonatomic, readonly) NSString *playerNickName;
 @property (assign, nonatomic, readonly) NSInteger playerHP;
+@property (assign, nonatomic, readonly) NSInteger playerMaxHP;
 @property (assign, nonatomic, readonly) NSArray<RPGSkill *> *skills;
 @property (nonatomic, assign, readonly) NSUInteger skillsCount;
 @property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
   // Opponent
 @property (assign, nonatomic, readonly) NSString *opponentNickName;
 @property (assign, nonatomic, readonly) NSInteger opponentHP;
+@property (assign, nonatomic, readonly) NSInteger opponentMaxHP;
   // General
+@property (assign, nonatomic, readonly) RPGBattleStatus battleStatus;
 @property (assign, nonatomic, readonly) NSString *attackerNickName;
 @property (assign, nonatomic, readonly) NSString *defenderNickName;
 @property (assign, nonatomic, readonly) NSInteger rewardGold;

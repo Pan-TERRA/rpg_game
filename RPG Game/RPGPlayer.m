@@ -22,9 +22,12 @@ NSString * const kRPGPlayerSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                      skills:(NSArray<RPGSkill *> *)aSkills
 {
-  self = [super initWithName:[NSUserDefaults standardUserDefaults].sessionUsername HP:100];
+  self = [super initWithName:aName HP:aHP maxHP:aMaxHP];
   
   if (self != nil)
   {
@@ -34,9 +37,15 @@ NSString * const kRPGPlayerSkills = @"skills";
   return self;
 }
 
-+ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills
++ (instancetype)playerWithName:(NSString *)aName
+                            HP:(NSInteger)aHP
+                         maxHP:(NSInteger)aMaxHP
+                        skills:(NSArray<RPGSkill *> *)aSkills
 {
-  return [[[self alloc] initWithSkills:aSkills] autorelease];
+  return [[[self alloc] initWithName:aName
+                                  HP:aHP
+                               maxHP:aMaxHP
+                              skills:aSkills] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -61,9 +70,13 @@ NSString * const kRPGPlayerSkills = @"skills";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  self = [super initWithDictionaryRepresentation:aDictionary];
-  self.skills = aDictionary[kRPGPlayerSkills];
-  return self;
+    // TODO: redo, choose in characters profile
+  NSString *charNickName = [NSUserDefaults standardUserDefaults].characterNickName;
+  
+  return [self initWithName:charNickName
+                  HP:[aDictionary[kRPGEntityHP] integerValue]
+               maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
+              skills:aDictionary[kRPGPlayerSkills]];
 }
 
 - (RPGSkill *)skillByID:(NSInteger)anID

@@ -12,6 +12,7 @@
 #import "RPGNetworkManager+Skills.h"
   // Controllers
 #import "RPGBattleController.h"
+#import "RPGArenaController.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
@@ -20,7 +21,8 @@
 #import "RPGStatusCodes.h"
 
   // TODO: replace to separate header file
-static NSString * const kRPGWebsocketManagerAPI = @"ws://10.55.33.28:8888/monster_battle";
+static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.28:8888/monster_battle";
+static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.28:8888/arena_battle";
 
 typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
@@ -39,7 +41,17 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 - (instancetype)initWithBattleController:(id)aBattleController
 {
-  self = [super initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPI]];
+  NSString *URLString = nil;
+  if ([aBattleController isMemberOfClass:[RPGBattleController class]])
+  {
+    URLString = kRPGWebsocketManagerAPIMonsterBattle;
+  }
+  else if ([aBattleController isMemberOfClass:[RPGArenaController class]])
+  {
+    URLString = kRPGWebsocketManagerAPIArenaBattle;
+  }
+  
+  self = [super initWithURL:[NSURL URLWithString:URLString]];
   
   if (self != nil)
   {

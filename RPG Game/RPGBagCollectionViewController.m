@@ -9,8 +9,6 @@
 #import "RPGBagCollectionViewController.h"
   // Controllers
 #import "RPGCharacterProfileViewController.h"
-  // Views
-#import "RPGCharacterBagCollectionViewCell.h"
   // Constants
 #import "RPGNibNames.h"
 
