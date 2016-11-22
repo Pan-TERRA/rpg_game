@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 extern NSString * const kRPGEntityName;
 extern NSString * const kRPGEntityHP;
+extern NSString * const kRPGEntityMaxHP;
 
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
@@ -20,8 +22,9 @@ extern NSString * const kRPGEntityHP;
 
 @property (copy, nonatomic, readwrite) NSString *name;
 @property (assign, nonatomic, readwrite) NSInteger HP;
+@property (assign, nonatomic, readwrite) NSInteger maxHP;
 
-- (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP;
-+ (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP;
+- (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP;
++ (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP;
 
 @end
