@@ -15,39 +15,22 @@
 #import "RPGNibNames.h"
 
 NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
-CGFloat const kRPGBagCollectionViewControllerCellWidthMultiplier = 0.25;
-
-@interface RPGBagCollectionViewController()
-
-@property (nonatomic, assign, readwrite) NSUInteger bagCollectionSize;
-
-@end
 
 @implementation RPGBagCollectionViewController
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return self.bagCollectionSize;
+  return self.collectionSize;
 }
 
-- (CGFloat)cellMultiplier
+- (NSUInteger)numberOfCellsInRow
 {
-  return kRPGBagCollectionViewControllerCellWidthMultiplier;
-}
-
-- (NSUInteger)collectionSize
-{
-  return self.bagCollectionSize;
-}
-
-- (void)setCollectionSize:(NSUInteger)aCollectionSize
-{
-  self.bagCollectionSize = aCollectionSize;
+  return kRPGBagCollectionViewControllerCellInRow;
 }
 
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  [self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
+  [(RPGCharacterProfileViewController *)self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
 }
 
 @end
