@@ -8,6 +8,7 @@
 
 #import "RPGMessageTypes.h"
 
+NSString * const kRPGArenaInitMessageType = @"ARENA_INIT";
 NSString * const kRPGBattleInitMessageType = @"BATTLE_INIT";
 NSString * const kRPGBattleConditionMessageType = @"BATTLE_CONDITION";
 NSString * const kRPGSkillActionMessageType = @"SKILL_ACTION";

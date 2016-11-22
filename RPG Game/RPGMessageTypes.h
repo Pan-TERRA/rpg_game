@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const kRPGArenaInitMessageType;
 extern NSString * const kRPGBattleInitMessageType;
 extern NSString * const kRPGBattleConditionMessageType;
 extern NSString * const kRPGSkillActionMessageType;
