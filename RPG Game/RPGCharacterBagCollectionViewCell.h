@@ -10,6 +10,7 @@
 
 @interface RPGCharacterBagCollectionViewCell : UICollectionViewCell
 
+@property (retain, nonatomic, readwrite) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, assign, readwrite) UIImage *image;
 
 @end

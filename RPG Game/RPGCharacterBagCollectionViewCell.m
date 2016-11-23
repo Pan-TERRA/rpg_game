@@ -26,4 +26,9 @@
   return self.imageView.image;
 }
 
+- (void)dealloc
+{
+    [_backgroundImageView release];
+    [super dealloc];
+}
 @end

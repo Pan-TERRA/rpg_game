@@ -9,18 +9,18 @@
 #import "RPGArenaBagCollectionViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
 
-NSUInteger const kRPGBagCollectionViewControllerCellInRow = 3;
+NSUInteger const kRPGArenaBagCollectionViewControllerCellInRow = 3;
 
 @implementation RPGArenaBagCollectionViewController
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return kRPGBagCollectionViewControllerCellInRow;
+  return kRPGArenaBagCollectionViewControllerCellInRow;
 }
 
 - (NSUInteger)numberOfCellsInRow
 {
-  return kRPGBagCollectionViewControllerCellInRow;
+  return kRPGArenaBagCollectionViewControllerCellInRow;
 }
 
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
