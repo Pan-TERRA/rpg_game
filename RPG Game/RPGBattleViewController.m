@@ -289,6 +289,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
     
     [self.timer invalidate];
+    [self.battleController prepareBattleControllerForDismiss];
   }
   
     // skillbar
