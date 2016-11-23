@@ -115,11 +115,6 @@
   [super viewDidLoad];
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//  [self disableButtons];
-//}
-
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
@@ -173,6 +168,8 @@
       [skillButton setBackgroundImage:backgroundImage forState:UIControlStateDisabled];
     }
   }
+  
+  [self disableButtons];
 }
 
 @end
