@@ -138,7 +138,7 @@
   }
   
     //update view with button's images
-  for (NSUInteger i = 0; i < 7; i++)
+  for (NSUInteger i = 0; i < 5; i++)
   {
     RPGSkillRepresentation *representation = nil;
     UIImage *backgroundImage = nil;
