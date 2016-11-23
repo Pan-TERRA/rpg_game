@@ -39,6 +39,10 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeNoQuestForVoting] = @"No quest for voting",
   [kRPGStatusCodeClassesNotFound] = @"ClassesNotFound",
   [kRPGStatusCodeDefaultError] = @"Something went wrong",
+  [kRPGStatusCodeEmptySkillsToSelect] = @"Empty skills",
+  [kRPGStatusCodeHasNoSuchSkills] = @"Has no such skills",
+  [kRPGStatusCodeHasNoAnySkills] = @"Has no such skills",
+  [kRPGStatusCodeExceedActiveSkillsBagSize] = @"Exceed bag size",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",
@@ -79,6 +83,10 @@ NSString * const RPGStatusCodeTitle[] =
   [kRPGStatusCodeNoQuestForVoting] = @"Quest error",
   [kRPGStatusCodeClassesNotFound] = @"Class error",
   [kRPGStatusCodeDefaultError] = @"Error",
+  [kRPGStatusCodeEmptySkillsToSelect] = @"Character profile error",
+  [kRPGStatusCodeHasNoSuchSkills] = @"Character profile error",
+  [kRPGStatusCodeHasNoAnySkills] = @"Character profile error",
+  [kRPGStatusCodeExceedActiveSkillsBagSize] = @"Character profile error",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Network error",
@@ -121,6 +129,11 @@ NSString * const RPGStatusCodeActionTitle[] =
   [kRPGStatusCodeNoQuestForVoting] = @"OK",
   [kRPGStatusCodeClassesNotFound] = @"OK",
   [kRPGStatusCodeDefaultError] = @"OK",
+  
+  [kRPGStatusCodeEmptySkillsToSelect] = @"OK",
+  [kRPGStatusCodeHasNoSuchSkills] = @"OK",
+  [kRPGStatusCodeHasNoAnySkills] = @"OK",
+  [kRPGStatusCodeExceedActiveSkillsBagSize] = @"OK",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"OK",

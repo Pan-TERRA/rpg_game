@@ -42,6 +42,10 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeQuestNotSkipped = 24,
   kRPGStatusCodeNoQuestForVoting = 25,
   kRPGStatusCodeClassesNotFound = 26,
+  kRPGStatusCodeEmptySkillsToSelect = 29,
+  kRPGStatusCodeHasNoSuchSkills = 30,
+  kRPGStatusCodeHasNoAnySkills = 31,
+  kRPGStatusCodeExceedActiveSkillsBagSize = 33,
   kRPGStatusCodeDefaultError = 1337,
   
     // RPGNetworkManager Status Codes
