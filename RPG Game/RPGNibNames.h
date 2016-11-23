@@ -41,3 +41,10 @@ extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
 extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
 
+/********************* Shop ***********************/
+
+extern NSString * const kRPGShopViewControllerNIBName;
+extern NSString * const kRPGShopCollectionViewNIBName;
+extern NSString * const kRPGShopCollectionViewCellNIBName;
+
+
