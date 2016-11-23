@@ -17,8 +17,11 @@
 #import "RPGLoginViewController.h"
   // Entities
 #import "RPGRegistrationRequest.h"
+#import "RPGClassInfoRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
+
+
 
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
@@ -33,6 +36,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
 
+@property (nonatomic, retain, readwrite) RPGClassInfoRepresentation *classInfo;
+
 @end
 
 @implementation RPGRegistrationViewController
@@ -45,7 +50,8 @@
   
   if (self != nil)
   {
-    _classPickerData = [[NSArray alloc] init];
+    _classInfo = [[RPGClassInfoRepresentation alloc] init];
+    _classPickerData = [NSArray array];
   }
   
   return self;
@@ -67,37 +73,7 @@
 {
   [super viewDidLoad];
   
-  [[RPGNetworkManager sharedNetworkManager] getClassInfoByID:1 completionHandler:
-   ^(NSInteger statusCode, NSDictionary *skillInfo)
-  {
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        self.classPickerData = [NSArray arrayWithObject:skillInfo];
-        [self.classPicker reloadAllComponents];
-        break;
-      }
-      case kRPGStatusCodeWrongEmail:
-      case kRPGStatusCodeUserDoesNotExist:
-      case kRPGStatusCodeWrongPassword:
-      {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Error"
-                                                                                 message:@"Invalid credentials"
-                                                                          preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                           style:UIAlertActionStyleDefault
-                                                         handler:nil];
-        [alertController addAction:okAction];
-        [self presentViewController:alertController animated:YES completion:nil];
-        break;
-      }
-      default:
-      {
-        break;
-      }
-    }
-  }];
+  self.classPickerData = self.classInfo.classNames;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -122,7 +98,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
              titleForRow:(NSInteger)aRow
             forComponent:(NSInteger)aComponent
 {
-  return self.classPickerData[aRow][@"name"];
+  return self.classPickerData[aRow];
 }
 
 #pragma mark View State
@@ -153,8 +129,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *passwordFieldText = self.passwordTextField.text;
   NSString *confirmPasswordFieldText = self.confirmPasswordTextField.text;
   NSString *characterNameFieldText = self.characterNameTextField.text;
-    // TODO: remove 
-  NSInteger selectedClassID = 1;
+  NSInteger classNameIndex = [self.classPicker selectedRowInComponent:0];
+  NSInteger selectedClassID = [self.classInfo classIDByName:self.classPickerData[classNameIndex]];
   
   if ([self textFieldsNotEmpty])
   {
