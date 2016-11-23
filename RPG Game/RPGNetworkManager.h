@@ -83,6 +83,8 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
 - (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock;
+- (void)getImageDataFromPath:(NSString *)aPath
+               completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))callbackBlock;
 
 @end
 
