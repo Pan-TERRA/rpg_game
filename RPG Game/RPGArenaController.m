@@ -7,11 +7,13 @@
 //
 
 #import "RPGArenaController.h"
+  // Entities
 #import "RPGArenaInitRequest.h"
+#import "RPGBattleInitResponse.h"
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "RPGBattleInitResponse.h"
 
 @interface RPGArenaController ()
 
