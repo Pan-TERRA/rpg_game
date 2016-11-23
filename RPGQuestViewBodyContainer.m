@@ -243,13 +243,13 @@
 - (void)uploadImage
 {
   // !!!: SELF not WEAKSELF
-  void (^handler)(RPGStatusCode, NSData *) = ^void(RPGStatusCode statusCode, NSData *imageData)
+  void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
   {
-    switch (statusCode)
+    switch (aStatusCode)
     {
       case kRPGStatusCodeOK:
       {
-        self.proofImageView.image = [UIImage imageWithData:imageData];
+        self.proofImageView.image = [UIImage imageWithData:anImageData];
         break;
       }
         
@@ -263,11 +263,10 @@
         break;
       }
     }
-    
   };
   
-  NSURL *imageURL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", kRPGNetworkManagerAPIHost, self.questViewController.proofImageStringURL]];
-  [[RPGNetworkManager sharedNetworkManager] getImageProofDataFromURL:imageURL completionHandler:handler];
+  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
+                                               completionHandler:handler];
 }
 
 @end
