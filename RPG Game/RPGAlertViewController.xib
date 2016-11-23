@@ -49,7 +49,7 @@
                                 <constraint firstAttribute="height" constant="40" id="pqr-zF-Vki"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="15"/>
-                            <state key="normal" title="Button" backgroundImage="main_button_active">
+                            <state key="normal" title="Button" backgroundImage="main_button_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -101,6 +101,6 @@
     </objects>
     <resources>
         <image name="Label Item Dark Brown" width="268" height="50"/>
-        <image name="main_button_active" width="275" height="136"/>
+        <image name="main_button_inactive" width="275" height="137"/>
     </resources>
 </document>
