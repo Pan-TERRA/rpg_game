@@ -30,12 +30,12 @@ static NSString * const kRPGAlertControllerDefaultActionTitle = @"Ok";
   
   if (aMessage == nil)
   {
-    aTitle = kRPGAlertControllerDefaultMessage;
+    aMessage = kRPGAlertControllerDefaultMessage;
   }
   
   if (anActionTitle == nil)
   {
-    aTitle = kRPGAlertControllerDefaultActionTitle;
+    anActionTitle = kRPGAlertControllerDefaultActionTitle;
   }
   
   RPGAlertViewController *alertViewController = [[RPGAlertViewController alloc] initWithTitle:aTitle
