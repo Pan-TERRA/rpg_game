@@ -24,9 +24,6 @@
 - (void)addProofWithRequest:(RPGQuestRequest *)aRequest imageData:(NSData *)imageData
           completionHandler:(void (^)(NSInteger status))callbackBlock;
 
-- (void)getImageProofDataFromURL:(NSURL *)url
-               completionHandler:(void (^)(RPGStatusCode statusCode, NSData *imageData))callbackBlock;
-
 - (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
                 completionHandler:(void (^)(NSInteger status))callbackBlock;
 

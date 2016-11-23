@@ -43,6 +43,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *attackLabel;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *expProgressBar;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *avatarImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *backButton;
 
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;
@@ -80,7 +81,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
   [_waitingModal release];
-  
+
   [super dealloc];
 }
 
@@ -101,7 +102,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageUpload];
   
-  NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSInteger characterID = standardUserDefaults.characterID;
   
   RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithCharacterID:characterID];
   
@@ -156,6 +158,29 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
        }
      }
    }];
+  
+  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:standardUserDefaults.sessionAvatar
+                                               completionHandler:^(NSInteger aStatusCode, NSData * anImageData)
+  {
+    switch (aStatusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        self.avatarImageView.image = [UIImage imageWithData:anImageData];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't upload avatar.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+    }
+  }];
 }
 
 
