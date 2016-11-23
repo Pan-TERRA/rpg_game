@@ -52,6 +52,8 @@
   return [RPGArenaInitRequest requestWithSkillIDs:self.skillIDs token:token];
 }
 
+// TODO: maybe pass skillIDs not with RPGArenaController, but using NSUserDefaults (default
+// behavior for RPGBattleController)
 - (NSArray<NSNumber *> *)getPlayerSkillIDs
 {
   return self.skillIDs;

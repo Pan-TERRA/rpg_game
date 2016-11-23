@@ -24,7 +24,7 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
     if (status != -1 && skills != nil)
     {
       _status = status;
-      _skills = [[NSArray alloc] initWithArray:skills];
+      _skills = [skills retain];
     }
     else
     {

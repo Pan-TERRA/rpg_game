@@ -11,8 +11,8 @@
 
 @interface RPGArenaSkillsResponse : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readwrite) NSInteger status;
-@property (copy, nonatomic, readwrite) NSArray *skills;
+@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, retain, readwrite) NSArray *skills;
 
 - (instancetype)initWithStatus:(NSInteger)status skills:(NSArray *)skills;
 

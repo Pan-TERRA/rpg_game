@@ -41,6 +41,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 - (instancetype)initWithBattleController:(id)aBattleController
 {
+  // TODO: fix this unpleasantness
   NSString *URLString = nil;
   if ([aBattleController isMemberOfClass:[RPGBattleController class]])
   {

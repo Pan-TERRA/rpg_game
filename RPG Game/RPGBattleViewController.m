@@ -69,6 +69,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 #pragma mark - Init
 
 // TODO: remove this unpleasantness
+// builder?
 - (instancetype)initWithArenaController:(RPGArenaController *)anArenaController
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];

@@ -29,6 +29,8 @@
 #import "RPGNibNames.h"
 #import "RPGItemTypes.h"
 
+NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetching skills";
+
 @interface RPGArenaSkillDrawViewController ()
 
 @property (nonatomic, retain, readwrite) RPGArenaBagCollectionViewController *bagSetCollectionViewController;
@@ -48,6 +50,8 @@
 
 @implementation RPGArenaSkillDrawViewController
 
+#pragma mark - Init
+
 - (instancetype)init
 {
   self = [super initWithNibName:kRPGArenaSkillDrawViewControllerNIBName bundle:nil];
@@ -56,7 +60,7 @@
   {
     _bagSetCollectionViewController = [[RPGArenaBagCollectionViewController alloc] init];
     _skillsCollectionViewController = [[RPGArenaSkillCollectionViewController alloc] init];
-    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Uploading info"];
+    _waitingModal = [[RPGWaitingViewController alloc] init];
   }
   
   return self;
@@ -90,7 +94,7 @@
 {
   [super viewWillAppear:animated];
   
-  [self setViewToWaitingState];
+  [self setViewToWaitingStateWithMessage:kRPGArenaSkillDrawViewControllerWaitingMessageFetching];
 
   RPGNetworkManager *sharedNetworkManager = [RPGNetworkManager sharedNetworkManager];
   [sharedNetworkManager fetchSkillsWithCompletionHandler:^(RPGStatusCode networkStatusCode,
@@ -114,7 +118,7 @@
       
       default:
       {
-        [self handleWrongTokenError];
+        [self handleDefaultError];
         break;
       }
     }
@@ -155,19 +159,36 @@
 
 - (void)handleWrongTokenError
 {
-  NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-  [RPGAlertController showAlertWithTitle:@"Error" message:message completion:^(void)
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
   {
-    UIViewController *viewController = self.presentingViewController.presentingViewController;
-    [viewController dismissViewControllerAnimated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      // TODO: here and in RPGChracterProfileViewController:
+      // in this method we call -dismiss... on self.presentingVC.presentingVC,
+      // but in the method below we call -dismiss... on self.
+      // figure this out
+      UIViewController *viewController = self.presentingViewController.presentingViewController;
+      [viewController dismissViewControllerAnimated:YES completion:nil];
+    });
+  }];
+}
+
+- (void)handleDefaultError
+{
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
+  {
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      [self dismissViewControllerAnimated:YES completion:nil];
+    });
   }];
 }
 
 #pragma mark - View State
 
-- (void)setViewToWaitingState
+- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
 {
-  self.waitingModal.message = @"Fetching";
+  self.waitingModal.message = aMessage;
   [self addChildViewController:self.waitingModal frame:self.view.frame];
 }
 
@@ -179,10 +200,10 @@
 
 #pragma mark - Actions
 
-//- (IBAction)back:(UIButton *)sender
-//{
-//  [self dismissViewControllerAnimated:YES completion:nil];
-//}
+- (IBAction)back:(UIButton *)sender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
 
 #pragma mark - Add To Collection
 
@@ -212,7 +233,7 @@
 
 - (void)completeSkillSelection
 {
-  self.skillsCollectionView.hidden = YES;
+  self.bagSetCollectionView.hidden = YES;
   self.startBattleButton.enabled = YES;
 }
 
@@ -225,10 +246,7 @@
   RPGBattleViewController *viewController = [[[RPGBattleViewController alloc]
                                               initWithArenaController:arenaController]
                                              autorelease];
-  
-  [self presentViewController:viewController animated:YES completion:nil];
-  //[self dismissViewControllerAnimated:NO completion:nil];
-  
+  [self.delegate dismissCurrentAndPresentViewController:viewController];
 }
 
 @end
