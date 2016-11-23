@@ -82,7 +82,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:nil];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
+        [self.battleController prepareBattleControllerForDismiss];
+        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+      }];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
