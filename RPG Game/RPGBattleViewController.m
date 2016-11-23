@@ -32,6 +32,9 @@
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
+static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
+static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
+
 @interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleController *battleController;
@@ -47,6 +50,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
@@ -289,6 +293,15 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   self.opponentNickName.text = opponentNickName;
   self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
   self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
+  
+  if (battleController.isMyTurn)
+  {
+    self.turnLabel.text = kRPGBattleViewControllerMyTurn;
+  }
+  else
+  {
+    self.turnLabel.text = kRPGBattleViewControllerNotMyTurn;
+  }
   
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
