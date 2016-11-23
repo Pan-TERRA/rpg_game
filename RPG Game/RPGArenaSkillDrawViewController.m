@@ -60,7 +60,7 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   {
     _bagSetCollectionViewController = [[RPGArenaBagCollectionViewController alloc] init];
     _skillsCollectionViewController = [[RPGArenaSkillCollectionViewController alloc] init];
-    _waitingModal = [[RPGWaitingViewController alloc] init];
+    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Fetching skills" completion:nil];
   }
   
   return self;

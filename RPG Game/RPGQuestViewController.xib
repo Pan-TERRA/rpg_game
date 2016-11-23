@@ -281,7 +281,11 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
                             <rect key="frame" x="0.0" y="1" width="40" height="40"/>
-                            <state key="normal" backgroundImage="plus_icon_inactive">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="cDX-sa-6Jp"/>
+                                <constraint firstAttribute="width" constant="40" id="ncw-BG-sXB"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="photo-camera">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
@@ -351,7 +355,7 @@
         <image name="cancel_icon_inactive" width="40" height="41"/>
         <image name="char_icon" width="40" height="41"/>
         <image name="confirm_icon_inactive" width="40" height="40"/>
-        <image name="plus_icon_inactive" width="40" height="40"/>
+        <image name="photo-camera" width="64" height="64"/>
         <image name="start_icon" width="40" height="38"/>
         <image name="table_item_bg" width="551" height="150"/>
     </resources>

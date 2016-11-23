@@ -69,9 +69,21 @@
     }
       
     case kRPGQuestStateInProgress:
+    {
+      self.stateImageView.image = [UIImage imageNamed:@"timer"];
+      [self setStateItemsHidden:NO];
+      break;
+    }
+      
     case kRPGQuestStateDone:
+    {
+      self.stateImageView.image = [UIImage imageNamed:@"user-review"];
+      [self setStateItemsHidden:NO];
+      break;
+    }
     case kRPGQuestStateReviewedFalse:
     {
+      self.stateImageView.image = [UIImage imageNamed:@"forbidden"];
       [self setStateItemsHidden:NO];
       break;
     }

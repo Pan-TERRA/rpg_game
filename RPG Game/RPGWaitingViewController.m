@@ -1,4 +1,4 @@
-//
+ //
 //  RPGWaitingViewController.m
 //  RPG Game
 //
@@ -69,11 +69,13 @@
 
 - (IBAction)back:(UIButton *)sender
 {
-  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+  if (self.completionHandler != nil)
   {
-     _completionHandler();
-  });
-  
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+      _completionHandler();
+    });
+  }
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
