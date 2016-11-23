@@ -11,9 +11,11 @@
             <connections>
                 <outlet property="battleRewardModal" destination="W8p-8V-Xoo" id="awx-Fz-7wA"/>
                 <outlet property="battleTextView" destination="2cd-xD-wsS" id="9yA-Xb-8C9"/>
-                <outlet property="opponentHPBar" destination="bpT-d5-5De" id="rk9-MT-cPP"/>
+                <outlet property="opponentHPBar" destination="A9l-bg-n4q" id="jvw-lA-2DF"/>
+                <outlet property="opponentHPLabel" destination="N8y-KF-2mI" id="5uf-bR-0bM"/>
                 <outlet property="opponentNickName" destination="T2l-ok-lRD" id="sU1-pm-5HX"/>
-                <outlet property="playerHPBar" destination="Kyt-St-ty5" id="j40-WC-kcl"/>
+                <outlet property="playerHPBar" destination="GlP-X7-1qi" id="szw-8B-MJy"/>
+                <outlet property="playerHPLabel" destination="5R1-da-Gza" id="tgn-EH-FqG"/>
                 <outlet property="playerNickName" destination="285-ls-YlH" id="qYn-3b-Enw"/>
                 <outlet property="playerRewardLabel" destination="roZ-dN-Hpn" id="FXV-84-bkF"/>
                 <outlet property="skillBar" destination="TmA-7m-uPF" id="aqT-jf-LTa"/>
@@ -165,24 +167,40 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_left" translatesAutoresizingMaskIntoConstraints="NO" id="8Rx-ie-U3V">
                             <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyt-St-ty5" userLabel="Progress Bar" customClass="RPGProgressBarView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kyt-St-ty5" userLabel="Progress Bar">
                             <rect key="frame" x="55" y="10" width="145" height="30"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GlP-X7-1qi" customClass="RPGProgressBarView">
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="align">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="GlP-X7-1qi" firstAttribute="top" secondItem="Kyt-St-ty5" secondAttribute="top" id="aPq-iG-DgU"/>
+                                <constraint firstItem="GlP-X7-1qi" firstAttribute="leading" secondItem="Kyt-St-ty5" secondAttribute="leading" id="g7c-kd-cWk"/>
+                                <constraint firstAttribute="bottom" secondItem="GlP-X7-1qi" secondAttribute="bottom" id="hmv-CY-61q"/>
                                 <constraint firstAttribute="height" constant="30" id="hqD-XU-4j3"/>
                                 <constraint firstAttribute="width" constant="146" id="iKf-Ku-d0u"/>
+                                <constraint firstAttribute="trailing" secondItem="GlP-X7-1qi" secondAttribute="trailing" id="zxd-sa-zgL"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="align">
-                                    <integer key="value" value="0"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="iKf-Ku-d0u"/>
                                 </mask>
                             </variation>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5R1-da-Gza">
+                            <rect key="frame" x="55" y="15" width="56" height="20"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="bqY-M8-bsP" userLabel="bar_icon">
                             <rect key="frame" x="10" y="10" width="30" height="30"/>
                             <constraints>
@@ -198,8 +216,10 @@
                         <constraint firstItem="bqY-M8-bsP" firstAttribute="centerY" secondItem="Fo0-pu-vx9" secondAttribute="centerY" id="ArU-Eu-ctX"/>
                         <constraint firstItem="8Rx-ie-U3V" firstAttribute="top" secondItem="Fo0-pu-vx9" secondAttribute="top" id="GgL-e6-5uC"/>
                         <constraint firstAttribute="trailing" secondItem="Kyt-St-ty5" secondAttribute="trailing" constant="20" id="KGJ-hE-6F0"/>
+                        <constraint firstItem="5R1-da-Gza" firstAttribute="leading" secondItem="Kyt-St-ty5" secondAttribute="leading" id="L6q-ai-Yzn"/>
                         <constraint firstItem="8Rx-ie-U3V" firstAttribute="leading" secondItem="Fo0-pu-vx9" secondAttribute="leading" id="Psi-E8-mjk"/>
                         <constraint firstAttribute="height" constant="50" id="ShY-Lf-Uk6"/>
+                        <constraint firstItem="5R1-da-Gza" firstAttribute="centerY" secondItem="Kyt-St-ty5" secondAttribute="centerY" id="aYG-OT-aJP"/>
                         <constraint firstItem="bqY-M8-bsP" firstAttribute="top" secondItem="Fo0-pu-vx9" secondAttribute="top" constant="10" id="eDl-4I-32j"/>
                         <constraint firstItem="Kyt-St-ty5" firstAttribute="centerY" secondItem="Fo0-pu-vx9" secondAttribute="centerY" id="qEP-Hx-Swl"/>
                         <constraint firstAttribute="bottom" secondItem="8Rx-ie-U3V" secondAttribute="bottom" id="rmo-Q5-yYX"/>
@@ -228,18 +248,34 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_right" translatesAutoresizingMaskIntoConstraints="NO" id="CWa-dW-Dz0">
                             <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
                         </imageView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpT-d5-5De" userLabel="Progress Bar" customClass="RPGProgressBarView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpT-d5-5De" userLabel="Progress Bar">
                             <rect key="frame" x="20" y="10" width="145" height="30"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A9l-bg-n4q" customClass="RPGProgressBarView">
+                                    <rect key="frame" x="0.0" y="0.0" width="145" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="align">
+                                            <integer key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="A9l-bg-n4q" firstAttribute="top" secondItem="bpT-d5-5De" secondAttribute="top" id="Eaz-4d-ovA"/>
+                                <constraint firstAttribute="bottom" secondItem="A9l-bg-n4q" secondAttribute="bottom" id="Q8i-wN-gGM"/>
+                                <constraint firstItem="A9l-bg-n4q" firstAttribute="leading" secondItem="bpT-d5-5De" secondAttribute="leading" id="RP1-ON-rEO"/>
+                                <constraint firstAttribute="trailing" secondItem="A9l-bg-n4q" secondAttribute="trailing" id="b3W-YH-rqM"/>
                                 <constraint firstAttribute="height" constant="30" id="frJ-TF-LMF"/>
                             </constraints>
-                            <userDefinedRuntimeAttributes>
-                                <userDefinedRuntimeAttribute type="number" keyPath="align">
-                                    <integer key="value" value="1"/>
-                                </userDefinedRuntimeAttribute>
-                            </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N8y-KF-2mI">
+                            <rect key="frame" x="109" y="15" width="56" height="20"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="7i2-c0-NYM" userLabel="bar_icon">
                             <rect key="frame" x="180" y="10" width="30" height="30"/>
                             <constraints>
@@ -251,6 +287,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="2Yi-L9-rUK"/>
+                        <constraint firstItem="N8y-KF-2mI" firstAttribute="centerY" secondItem="bpT-d5-5De" secondAttribute="centerY" id="3gn-D6-cXs"/>
                         <constraint firstAttribute="width" constant="240" id="4Sd-a7-6Pi"/>
                         <constraint firstItem="bpT-d5-5De" firstAttribute="centerY" secondItem="8c7-Al-VCY" secondAttribute="centerY" id="4Vt-yW-OKY"/>
                         <constraint firstAttribute="trailing" secondItem="7i2-c0-NYM" secondAttribute="trailing" constant="10" id="5w0-Tb-Ec0"/>
@@ -260,6 +297,7 @@
                         <constraint firstAttribute="trailing" secondItem="bpT-d5-5De" secondAttribute="trailing" constant="20" id="Kmm-IH-rSg"/>
                         <constraint firstItem="7i2-c0-NYM" firstAttribute="top" secondItem="8c7-Al-VCY" secondAttribute="top" constant="10" id="NjM-Tb-vhv"/>
                         <constraint firstItem="7i2-c0-NYM" firstAttribute="leading" secondItem="8c7-Al-VCY" secondAttribute="leading" constant="13" id="OyL-eq-VZ8"/>
+                        <constraint firstItem="N8y-KF-2mI" firstAttribute="trailing" secondItem="bpT-d5-5De" secondAttribute="trailing" id="PsY-fM-TzH"/>
                         <constraint firstAttribute="height" constant="50" id="VdV-tb-VdZ"/>
                         <constraint firstItem="bpT-d5-5De" firstAttribute="leading" secondItem="7i2-c0-NYM" secondAttribute="trailing" constant="15" id="XDE-si-3jC"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="240" id="f4N-gW-8um"/>

@@ -39,9 +39,11 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -162,7 +164,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
-  
+
   [super dealloc];
 }
 
