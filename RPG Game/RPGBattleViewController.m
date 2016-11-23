@@ -32,6 +32,9 @@
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
+static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
+static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
+
 @interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleController *battleController;
@@ -39,12 +42,15 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
@@ -165,7 +171,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
-  
+
   [super dealloc];
 }
 
@@ -274,14 +280,31 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   
     // client
   NSInteger playerHP = battleController.playerHP;
+  NSInteger playerMaxHP = battleController.playerMaxHP;
+  playerHP = (playerHP >= 0) ? playerHP : 100;
+  playerMaxHP = (playerMaxHP > 0) ? playerMaxHP : 100;
   NSString *playerNickName = battleController.playerNickName;
   self.playerNickName.text = playerNickName;
-  self.playerHPBar.progress = ((float)playerHP / battleController.playerMaxHP);
+  self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
+  self.playerHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)playerHP, (long)playerMaxHP];
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
+  NSInteger opponentMaxHP = battleController.opponentMaxHP;
+  opponentHP = (opponentHP >= 0) ? opponentHP : 100;
+  opponentMaxHP = (opponentMaxHP > 0) ? opponentMaxHP : 100;
   NSString *opponentNickName = battleController.opponentNickName;
   self.opponentNickName.text = opponentNickName;
-  self.opponentHPBar.progress = ((float)opponentHP / battleController.opponentMaxHP);
+  self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
+  self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
+  
+  if (battleController.isMyTurn)
+  {
+    self.turnLabel.text = kRPGBattleViewControllerMyTurn;
+  }
+  else
+  {
+    self.turnLabel.text = kRPGBattleViewControllerNotMyTurn;
+  }
   
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
