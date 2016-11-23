@@ -7,11 +7,14 @@
 //
 
 #import "RPGRegistrationViewController.h"
-  // Views
-#import "RPGLoginViewController.h"
   // API
 #import "RPGNetworkManager+Registration.h"
 #import "RPGNetworkManager+Classes.h"
+  // Controllers
+#import "RPGAlertController+RPGErrorHandling.h"
+#import "RPGLoginViewController.h"
+  // Views
+#import "RPGLoginViewController.h"
   // Entities
 #import "RPGRegistrationRequest.h"
   // Constants
@@ -123,16 +126,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return self.classPickerData[aRow][@"name"];
 }
 
-#pragma mark Error Representation
-
-  // TODO: Redo
-- (void)showErrorText:(NSString *)aText
-{
-//  self.errorLabel.text = aText;
-//  [self.errorLabel setHidden:NO];
-//  [self.errorLabel sizeToFit];
-}
-
 #pragma mark View State
 
 - (void)setViewToWaitingForServerResponseState
@@ -181,35 +174,84 @@ numberOfRowsInComponent:(NSInteger)aComponent
        {
          [self setViewToNormalState];
          
-         BOOL success = (statusCode == 0);
-         if (success)
+         switch (statusCode)
          {
-           [self dismissViewControllerAnimated:YES completion:nil];
-         }
-         else
-         {
-           [self showErrorText:@"SOMETHING WENT WRONG"];
+           case kRPGStatusCodeOK:
+           {
+             RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
+             [self presentViewController:loginViewController animated:YES completion:^
+             {
+               [loginViewController loginActionWithEmail:self.emailTextField.text
+                                                password:self.passwordTextField.text];
+             }];
+             break;
+           }
+             
+           case kRPGStatusCodeWrongEmail:
+           {
+             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
+                                       completionHandler:nil];
+             break;
+           }
+             
+           case kRPGStatusCodeWrongJSON:
+           {
+             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON
+                                       completionHandler:nil];
+             break;
+           }
+             
+           case kRPGStatusCodeEmailAlreadyTaken:
+           {
+             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmailAlreadyTaken
+                                       completionHandler:nil];
+             break;
+           }
+             
+           case kRPGStatusCodeUsernameAlreadyTaken:
+           {
+             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUsernameAlreadyTaken
+                                       completionHandler:nil];
+             break;
+           }
+             
+           default:
+           {
+             [RPGAlertController handleDefaultError];
+             break;
+           }
          }
        }];
     }
     else
     {
-      [self showErrorText:@"Password doesn't match. Lorem ipsum if the message is too large."];
+      NSString *message = @"Password doesn't match. Lorem ipsum if the message is too large.";
+      [RPGAlertController showAlertWithTitle:nil
+                                     message:message
+                                 actionTitle:nil
+                                  completion:^
+      {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          [self fillEmptyAllRegistrationFields];
+        });
+      }];
     }
   }
   else
   {
-    [self showErrorText:@"Please fill in all required fields."];
+    NSString *message = @"Please fill in all required fields.";
+    [RPGAlertController showAlertWithTitle:nil
+                                   message:message
+                               actionTitle:nil
+                                completion:^
+     {
+       dispatch_async(dispatch_get_main_queue(), ^
+        {
+          [self fillEmptyAllRegistrationFields];
+        });
+     }];
   }
-}
-
-- (BOOL)textFieldsNotEmpty
-{
-  return self.emailTextField.text.length != 0 &&
-         self.usernameTextField.text.length != 0 &&
-         self.passwordTextField.text.length != 0 &&
-         self.confirmPasswordTextField.text.length != 0 &&
-         self.characterNameTextField.text.length != 0;
 }
 
 - (NSInteger)getSelectedClassID
@@ -224,6 +266,28 @@ numberOfRowsInComponent:(NSInteger)aComponent
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
   [[aSender.superview.superview viewWithTag:aSender.tag + 1] becomeFirstResponder];
+}
+
+
+#pragma mark - Helper Methods
+
+- (BOOL)textFieldsNotEmpty
+{
+  return self.emailTextField.text.length != 0 &&
+  self.usernameTextField.text.length != 0 &&
+  self.passwordTextField.text.length != 0 &&
+  self.confirmPasswordTextField.text.length != 0 &&
+  self.characterNameTextField.text.length != 0;
+}
+
+- (void)fillEmptyAllRegistrationFields
+{
+  NSString *emptyString = @"";
+  self.emailTextField.text = emptyString;
+  self.usernameTextField.text = emptyString;
+  self.passwordTextField.text = emptyString;
+  self.confirmPasswordTextField.text = emptyString;
+  self.characterNameTextField.text = emptyString;
 }
 
 @end
