@@ -7,6 +7,8 @@
   //
 
 #import "RPGSkillBarViewController.h"
+// Frameworks
+#import <QuartzCore/QuartzCore.h>
   // Entities
 #import "RPGBattle.h"
 #import "RPGSkill.h"
@@ -18,6 +20,10 @@
 #import "RPGSkillDescriptionViewController.h"
   // Constants
 #import "RPGNibNames.h"
+
+// Constants
+
+static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 
 @interface RPGSkillBarViewController ()
 
@@ -152,6 +158,10 @@
       if (representation.imageName.length != 0)
       {
         backgroundImage = [UIImage imageNamed:representation.imageName];
+        [skillButton setImage:[UIImage imageNamed:@"battle_empty_icon_inactive"]
+                     forState:UIControlStateNormal];
+        skillButton.layer.cornerRadius = kRPGSkillBarViewControllerSkillButtonCornerRadius;
+        skillButton.layer.masksToBounds = YES;
       }
       else
       {

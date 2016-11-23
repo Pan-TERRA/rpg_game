@@ -18,6 +18,10 @@
   // Constants
 #import "RPGNibNames.h"
 
+// Constants
+
+static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
+
 @interface RPGCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readwrite) UIViewController *viewController;
@@ -95,24 +99,30 @@
       
       if (skillRepresentation.imageName.length != 0)
       {
-        cell.image = [UIImage imageNamed:skillRepresentation.imageName];
+        cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
+        cell.backgroundImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
+        cell.backgroundImageView.layer.cornerRadius = kRPGCollectionViewControllerSkillButtonCornerRadius;
+        cell.backgroundImageView.layer.masksToBounds = YES;
       }
       else
       {
           // default image for skills/items with no image
         cell.image = [UIImage imageNamed:@"battle_empty_icon_unset"];
+        cell.backgroundImageView.image = nil;
       }
     }
     else
     {
         // unset skills or empty bag cells
       [cell setImage:[UIImage imageNamed:@"battle_empty_icon_inactive"]];
+      cell.backgroundImageView.image = nil;
     }
   }
   else
   {
       // locked bag cells/skills
     [cell setImage:[UIImage imageNamed:@"battle_empty_icon_lock"]];
+    cell.backgroundImageView.image = nil;
   }
   
   return cell;
