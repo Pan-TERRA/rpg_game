@@ -9,14 +9,16 @@
 #import "RPGRegistrationViewController.h"
   // API
 #import "RPGNetworkManager+Registration.h"
+#import "RPGNetworkManager+Authorization.h"
 #import "RPGNetworkManager+Classes.h"
   // Controllers
 #import "RPGAlertController+RPGErrorHandling.h"
-#import "RPGLoginViewController.h"
   // Views
 #import "RPGLoginViewController.h"
+#import "RPGMainViewController.h"
   // Entities
 #import "RPGRegistrationRequest.h"
+#import "RPGAuthorizationLoginRequest.h"
 #import "RPGClassInfoRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
@@ -153,12 +155,31 @@ numberOfRowsInComponent:(NSInteger)aComponent
          {
            case kRPGStatusCodeOK:
            {
-             RPGLoginViewController *loginViewController = [[[RPGLoginViewController alloc] init] autorelease];
-             [self presentViewController:loginViewController animated:YES completion:^
-             {
-               [loginViewController loginActionWithEmail:self.emailTextField.text
-                                                password:self.passwordTextField.text];
-             }];
+             RPGAuthorizationLoginRequest *loginRequest = [[RPGAuthorizationLoginRequest alloc] initWithEmail:emailFieldText
+                                                                                                     password:passwordFieldText];
+             [loginRequest autorelease];
+             [[RPGNetworkManager sharedNetworkManager] loginWithRequest:loginRequest
+                                                      completionHandler:^(NSInteger statusCode)
+              {
+                switch (statusCode)
+                {
+                  case kRPGStatusCodeOK:
+                  {
+                    
+                    RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
+                    [self presentViewController:mainViewController animated:YES completion:nil];
+                    break;
+                  }
+                    
+                  default:
+                  {
+                    [self presentViewController:[[[RPGLoginViewController alloc] init] autorelease]
+                                       animated:YES
+                                     completion:nil];
+                    break;
+                  }
+                }
+              }];
              break;
            }
              
