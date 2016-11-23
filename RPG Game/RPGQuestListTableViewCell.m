@@ -14,6 +14,7 @@
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
 #import "RPGQuestTableViewController.h"
+#import "RPGSkillRepresentation.h"
 
 static CGFloat const kBounceValue = 10.0;
 
@@ -81,7 +82,8 @@ static CGFloat const kBounceValue = 10.0;
   
   if (aCellContent.reward.skillID != 0)
   {
-    
+    RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:aCellContent.reward.skillID];
+    self.skillRewardImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
   }
   else
   {

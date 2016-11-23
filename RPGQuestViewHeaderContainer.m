@@ -10,6 +10,7 @@
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
+#import "RPGSkillRepresentation.h"
   // View
 #import "RPGQuestViewController.h"
 
@@ -36,7 +37,8 @@
   
   if (aQuestReward.skillID != 0)
   {
-    
+    RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:aQuestReward.skillID];
+    self.skillRewardImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
   }
   else
   {
