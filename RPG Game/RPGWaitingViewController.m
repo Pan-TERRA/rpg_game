@@ -13,6 +13,7 @@
 @interface RPGWaitingViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
+@property (nonatomic, copy, nullable) void (^completionHandler)(void);
 
 @end
 
@@ -25,12 +26,20 @@
   return [super initWithNibName:kRPGWaitingViewControllerNIBName bundle:nil];
 }
 
-- (instancetype)initWithMessage:(NSString *)aMessage
+- (instancetype)initWithMessage:(NSString *)aMessage completion:(void (^ _Nullable)())completionHandler
 {
   self = [self init];
   
   if (self != nil)
   {
+    if (completionHandler != nil)
+    {
+      _completionHandler = [completionHandler copy];
+    }
+    else
+    {
+      _completionHandler = [^void(void){} retain];
+    }
     _message = [aMessage copy];
   }
   
@@ -41,6 +50,7 @@
 
 - (void)dealloc
 {
+  [_completionHandler release];
   [_message release];
   
   [super dealloc];
@@ -59,6 +69,11 @@
 
 - (IBAction)back:(UIButton *)sender
 {
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+  {
+     _completionHandler();
+  });
+  
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 

@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface RPGWaitingViewController : UIViewController
 
 @property (nonatomic, copy, readwrite) NSString *message;
 
-- (instancetype)initWithMessage:(NSString *)aMessage;
+- (instancetype)initWithMessage:(NSString *)aMessage completion:(void (^ __nullable)())completionHandler;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -82,7 +82,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:nil];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -118,7 +118,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
+        [self.battleController prepareBattleControllerForDismiss];
+        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+      }];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -225,14 +228,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)cancelBattleInit:(UIButton *)sender
-{
-  [self.battleController prepareBattleControllerForDismiss];
-  [self removeBattleInitModal];
-  [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)showSettingsModal:(UIButton *)sender
 {
   if (self.settingsViewController == nil)
@@ -287,12 +282,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
-  {
-//    [self addChildViewController:self.battleRewardModal];
-//    self.battleRewardModal.view.frame = self.view.frame;
-//    [self.view addSubview:self.battleRewardModal.view];
-//    [self.battleRewardModal didMoveToParentViewController:self];
-    
+  {    
     [self addChildViewController:self.battleRewardModal frame:self.view.frame];
     
     self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
