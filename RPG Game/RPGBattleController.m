@@ -132,7 +132,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 //                                             initWithDictionaryRepresentation:aResponse] autorelease];
 //    [self processArenaConditionResponse:response];
 //  }
-  else if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType])
+  else if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleConditionMessageType])
   {
     RPGBattleConditionResponse *response = [[[RPGBattleConditionResponse alloc]
                                              initWithDictionaryRepresentation:aResponse] autorelease];

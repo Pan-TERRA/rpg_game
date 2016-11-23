@@ -7,9 +7,9 @@
 //
 
 #import "RPGArenaSkillDrawViewController.h"
-// API
+  // API
 #import "RPGNetworkManager+Arena.h"
-// Controllers
+  // Controllers
 #import "RPGArenaCollectionViewController.h"
 #import "RPGWaitingViewController.h"
 #import "RPGArenaSkillCollectionViewController.h"
@@ -17,15 +17,15 @@
 #import "RPGAlertController+RPGErrorHandling.h"
 #import "UIViewController+RPGChildViewController.h"
 #import "RPGBattleViewController.h"
-// Views
+  // Views
 #import "RPGCharacterBagCollectionViewCell.h"
-// Entities
+  // Entities
 #import "RPGArenaSkillsResponse.h"
 #import "RPGArenaController.h"
 #import "RPGArenaBag.h"
-// Misc
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-// Constants
+  // Constants
 #import "RPGNibNames.h"
 #import "RPGItemTypes.h"
 
@@ -147,8 +147,7 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
                                           initWithCollectionView:self.skillsCollectionView
                                           parentViewController:self
                                           collectionSize:skillCollectionSize
-                                          skillsArray:[NSArray array]]
-                                         autorelease];
+                                          skillsArray:[NSArray array]] autorelease];
 
   self.bag = [[[RPGArenaBag alloc] initWithArray:skillIDs] autorelease];
   

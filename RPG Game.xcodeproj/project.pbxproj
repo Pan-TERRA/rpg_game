@@ -626,11 +626,8 @@
 			children = (
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
-				2A6F2ADF1DE219BD0036CD2D /* RPGArenaSkillsResponse.h */,
-				2A6F2AE01DE219BD0036CD2D /* RPGArenaSkillsResponse.m */,
-				2A6F2AE11DE219BD0036CD2D /* RPGNetworkManager+Arena.h */,
-				2A6F2AE21DE219BD0036CD2D /* RPGNetworkManager+Arena.m */,
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				28E9D9111DE59D0F006C7688 /* Arena */,
 				289C42E91DE20D5900E35506 /* Character Profile */,
 				87C8734C1DDF27DB00903193 /* Response */,
 				283D19181DD5FE95008C5396 /* Resources */,
@@ -1182,18 +1179,7 @@
 			isa = PBXGroup;
 			children = (
 				28AB949E1DDDC1DC00F1503B /* RPGViewController.h */,
-				2A6F2AF51DE242520036CD2D /* RPGArenaBag.h */,
-				2A6F2AF61DE242520036CD2D /* RPGArenaBag.m */,
 				28AB949F1DDDC1DC00F1503B /* RPGViewController.m */,
-				2A32D3321DE35E5700F6CA7C /* RPGArenaCollectionViewController.h */,
-				2A32D3331DE35E5700F6CA7C /* RPGArenaCollectionViewController.m */,
-				2A32D32F1DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.h */,
-				2A32D3301DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.m */,
-				2A32D32C1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.h */,
-				2A32D32D1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.m */,
-				2A6F2AEA1DE21A250036CD2D /* RPGArenaSkillDrawViewController.h */,
-				2A6F2AEB1DE21A250036CD2D /* RPGArenaSkillDrawViewController.m */,
-				2A6F2AEC1DE21A250036CD2D /* RPGArenaSkillDrawViewController.xib */,
 				877C86541DC8F102004B4A00 /* Initial Screen */,
 				28149A1F1DB1012200C26881 /* Registration */,
 				28149A1E1DB1011B00C26881 /* Login */,
@@ -1201,6 +1187,7 @@
 				AED6F57A1DACD89F007ED1B8 /* Quests */,
 				289C42E61DE20CC800E35506 /* Character Profile */,
 				28149A111DB1008100C26881 /* Battle */,
+				28E9D90C1DE59C55006C7688 /* Arena */,
 				28149A121DB100B900C26881 /* Settings */,
 			);
 			name = View;
@@ -1321,6 +1308,83 @@
 				28C576AB1DE3130A008DCB88 /* UIViewController+RPGChildViewController.m */,
 			);
 			name = "Add Child ViewController";
+			sourceTree = "<group>";
+		};
+		28E9D90C1DE59C55006C7688 /* Arena */ = {
+			isa = PBXGroup;
+			children = (
+				28E9D90E1DE59C6B006C7688 /* Collections */,
+				28E9D90D1DE59C5E006C7688 /* Skill Draw ViewController */,
+			);
+			name = Arena;
+			sourceTree = "<group>";
+		};
+		28E9D90D1DE59C5E006C7688 /* Skill Draw ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2A6F2AEA1DE21A250036CD2D /* RPGArenaSkillDrawViewController.h */,
+				2A6F2AEB1DE21A250036CD2D /* RPGArenaSkillDrawViewController.m */,
+				2A6F2AEC1DE21A250036CD2D /* RPGArenaSkillDrawViewController.xib */,
+			);
+			name = "Skill Draw ViewController";
+			sourceTree = "<group>";
+		};
+		28E9D90E1DE59C6B006C7688 /* Collections */ = {
+			isa = PBXGroup;
+			children = (
+				2A32D3321DE35E5700F6CA7C /* RPGArenaCollectionViewController.h */,
+				2A32D3331DE35E5700F6CA7C /* RPGArenaCollectionViewController.m */,
+				28E9D9101DE59C91006C7688 /* Arena Skill Collection */,
+				28E9D90F1DE59C82006C7688 /* Arena Bag Collection */,
+			);
+			name = Collections;
+			sourceTree = "<group>";
+		};
+		28E9D90F1DE59C82006C7688 /* Arena Bag Collection */ = {
+			isa = PBXGroup;
+			children = (
+				2A6F2AF51DE242520036CD2D /* RPGArenaBag.h */,
+				2A6F2AF61DE242520036CD2D /* RPGArenaBag.m */,
+				2A32D32C1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.h */,
+				2A32D32D1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.m */,
+			);
+			name = "Arena Bag Collection";
+			sourceTree = "<group>";
+		};
+		28E9D9101DE59C91006C7688 /* Arena Skill Collection */ = {
+			isa = PBXGroup;
+			children = (
+				2A32D32F1DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.h */,
+				2A32D3301DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.m */,
+			);
+			name = "Arena Skill Collection";
+			sourceTree = "<group>";
+		};
+		28E9D9111DE59D0F006C7688 /* Arena */ = {
+			isa = PBXGroup;
+			children = (
+				2A6F2AE11DE219BD0036CD2D /* RPGNetworkManager+Arena.h */,
+				2A6F2AE21DE219BD0036CD2D /* RPGNetworkManager+Arena.m */,
+				28E9D9121DE59D21006C7688 /* Arena Skills */,
+			);
+			name = Arena;
+			sourceTree = "<group>";
+		};
+		28E9D9121DE59D21006C7688 /* Arena Skills */ = {
+			isa = PBXGroup;
+			children = (
+				28E9D9131DE59D2F006C7688 /* Response */,
+			);
+			name = "Arena Skills";
+			sourceTree = "<group>";
+		};
+		28E9D9131DE59D2F006C7688 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2A6F2ADF1DE219BD0036CD2D /* RPGArenaSkillsResponse.h */,
+				2A6F2AE01DE219BD0036CD2D /* RPGArenaSkillsResponse.m */,
+			);
+			name = Response;
 			sourceTree = "<group>";
 		};
 		28F1021E1DB7719100C969CA /* Quest List */ = {
