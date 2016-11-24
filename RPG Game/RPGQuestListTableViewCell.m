@@ -118,32 +118,34 @@ static CGFloat const kBounceValue = 10.0;
       [self setStateLabelHidden:YES];
       break;
     }
+      
     case kRPGQuestStateInProgress:
     {
       self.stateImageView.image = [UIImage imageNamed:@"timer"];
       [self setStateLabelHidden:NO];
-      //self.stateLabel.text = kRPGQuestStringStateInProgress;
       break;
     }
+      
     case kRPGQuestStateDone:
     {
       self.stateImageView.image = [UIImage imageNamed:@"user-review"];
       [self setStateLabelHidden:NO];
-      //self.stateLabel.text = kRPGQuestStringStateNotReviewed;
       break;
     }
+      
     case kRPGQuestStateReviewedFalse:
     {
       self.stateImageView.image = [UIImage imageNamed:@"forbidden"];
       [self setStateLabelHidden:NO];
-      //self.stateLabel.text = kRPGQuestStringStateReviewedFalse;
       break;
     }
+      
     case kRPGQuestStateReviewedTrue:
     {
       [self setStateLabelHidden:YES];
       break;
     }
+      
     default:
     {
       break;
