@@ -272,7 +272,10 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIProofQuestRoute];
 
-  NSMutableURLRequest *request = [[self requestWithObject:aRequest URLstring:requestString method:@"POST" injectToken:YES] mutableCopy];
+  NSMutableURLRequest *request = [[[self requestWithObject:aRequest
+                                                 URLstring:requestString
+                                                    method:@"POST"
+                                               injectToken:YES] mutableCopy] autorelease];
 
     // build HTTP body
   NSString *boundary = @"---------------------------Boundary Line---------------------------";
