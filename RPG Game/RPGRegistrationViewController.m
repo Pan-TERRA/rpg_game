@@ -7,20 +7,20 @@
 //
 
 #import "RPGRegistrationViewController.h"
-  // API
+// API
 #import "RPGNetworkManager+Registration.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGNetworkManager+Classes.h"
-  // Controllers
+// Controllers
 #import "RPGAlertController+RPGErrorHandling.h"
-  // Views
+// Views
 #import "RPGLoginViewController.h"
 #import "RPGMainViewController.h"
-  // Entities
+// Entities
 #import "RPGRegistrationRequest.h"
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGClassInfoRepresentation.h"
-  // Constants
+// Constants
 #import "RPGNibNames.h"
 
 
@@ -183,70 +183,43 @@ numberOfRowsInComponent:(NSInteger)aComponent
              break;
            }
              
-           case kRPGStatusCodeWrongEmail:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeWrongJSON:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeEmailAlreadyTaken:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmailAlreadyTaken
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeUsernameAlreadyTaken:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUsernameAlreadyTaken
-                                       completionHandler:nil];
-             break;
-           }
-             
            default:
            {
-             [RPGAlertController handleDefaultError];
-             break;
+             if (statusCode == kRPGStatusCodeWrongEmail
+                 || statusCode == kRPGStatusCodeWrongJSON
+                 || statusCode == kRPGStatusCodeEmailAlreadyTaken
+                 || statusCode == kRPGStatusCodeUsernameAlreadyTaken
+                 || statusCode == kRPGStatusCodeTooShortUsername
+                 || statusCode == kRPGStatusCodeTooLongUsername
+                 || statusCode == kRPGStatusCodeTooShortPassword
+                 || statusCode == kRPGStatusCodeTooLongPassword
+                 || statusCode == kRPGStatusCodeTooShortCharacterName
+                 || statusCode == kRPGStatusCodeTooLongCharacterName
+                 || statusCode == kRPGStatusCodeInvalidUsername
+                 || statusCode == kRPGStatusCodeInvalidCharacterName
+                 || statusCode == kRPGStatusCodeUndefinedSymbolsInUsername
+                 || statusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName)
+             {
+               [RPGAlertController showErrorWithStatusCode:statusCode
+                                         completionHandler:nil];
+             }
+             else
+             {
+               [RPGAlertController handleDefaultError];
+             }
            }
+             break;
          }
        }];
     }
     else
     {
-      NSString *message = @"Password doesn't match. Lorem ipsum if the message is too large.";
-      [RPGAlertController showAlertWithTitle:nil
-                                     message:message
-                                 actionTitle:nil
-                                  completion:^
-      {
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [self fillEmptyAllRegistrationFields];
-        });
-      }];
+      [self showErrorWithMessage:@"Password doesn't match."];
     }
   }
   else
   {
-    NSString *message = @"Please fill in all required fields.";
-    [RPGAlertController showAlertWithTitle:nil
-                                   message:message
-                               actionTitle:nil
-                                completion:^
-     {
-       dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [self fillEmptyAllRegistrationFields];
-        });
-     }];
+    [self showErrorWithMessage:@"Please fill in all required fields."];
   }
 }
 
@@ -267,6 +240,14 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 #pragma mark - Helper Methods
 
+- (void)showErrorWithMessage:(NSString *)message
+{
+  [RPGAlertController showAlertWithTitle:nil
+                                 message:message
+                             actionTitle:nil
+                              completion:nil];
+}
+
 - (BOOL)textFieldsNotEmpty
 {
   return self.emailTextField.text.length != 0 &&
@@ -274,16 +255,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.passwordTextField.text.length != 0 &&
   self.confirmPasswordTextField.text.length != 0 &&
   self.characterNameTextField.text.length != 0;
-}
-
-- (void)fillEmptyAllRegistrationFields
-{
-  NSString *emptyString = @"";
-  self.emailTextField.text = emptyString;
-  self.usernameTextField.text = emptyString;
-  self.passwordTextField.text = emptyString;
-  self.confirmPasswordTextField.text = emptyString;
-  self.characterNameTextField.text = emptyString;
 }
 
 @end
