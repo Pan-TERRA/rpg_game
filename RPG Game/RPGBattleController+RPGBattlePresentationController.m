@@ -11,7 +11,7 @@
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
 #import "RPGBattleLog.h"
-#import "RPGResources.h"
+#import "RPGBattleReward.h"
 
 @implementation RPGBattleController (RPGBattlePresentationController)
 
@@ -69,6 +69,16 @@
 - (NSInteger)rewardGold
 {
   return self.battle.reward.gold;
+}
+
+- (NSInteger)rewardCrystals
+{
+  return self.battle.reward.crystals;
+}
+
+- (NSInteger)rewardExp
+{
+  return self.battle.reward.exp;
 }
 
 - (NSArray *)actions

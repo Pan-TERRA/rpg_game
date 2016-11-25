@@ -30,6 +30,8 @@
 @property (assign, nonatomic, readonly) NSString *attackerNickName;
 @property (assign, nonatomic, readonly) NSString *defenderNickName;
 @property (assign, nonatomic, readonly) NSInteger rewardGold;
+@property (assign, nonatomic, readonly) NSInteger rewardCrystals;
+@property (assign, nonatomic, readonly) NSInteger rewardExp;
 @property (assign, nonatomic, readonly) NSArray *actions;
 
 @end
