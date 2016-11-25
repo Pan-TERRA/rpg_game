@@ -31,6 +31,8 @@
 
 @property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
 
+@property (nonatomic, assign, readwrite, getter=shouldDownloadImageProof) BOOL downloadImageProof;
+
 @end
 
 @implementation RPGQuestViewBodyContainer
@@ -45,6 +47,7 @@
   
   [super dealloc];
 }
+
 #pragma mark - Custom Getter
 
 - (NSLayoutConstraint *)descriptionBottomConstraint
@@ -83,6 +86,7 @@
 {
   self.titleLabel.text = aQuest.name;
   self.descriptionLabel.text = aQuest.questDescription;
+  self.downloadImageProof = YES;
 }
 
 #pragma mark - View State
@@ -245,34 +249,38 @@
 
 - (void)downloadImage
 {
-  [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
-  // !!!: SELF not WEAKSELF
-  void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
+  if (self.shouldDownloadImageProof)
   {
-    [self.questViewController setViewToNormalState];
-    
-    switch (aStatusCode)
+    [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
+    // !!!: SELF not WEAKSELF
+    void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
     {
-      case kRPGStatusCodeOK:
+      [self.questViewController setViewToNormalState];
+      
+      switch (aStatusCode)
       {
-        self.proofImageView.image = [UIImage imageWithData:anImageData];
-        break;
+        case kRPGStatusCodeOK:
+        {
+          self.proofImageView.image = [UIImage imageWithData:anImageData];
+          self.downloadImageProof = NO;
+          break;
+        }
+          
+        default:
+        {
+          NSString *message = @"Can't download quest proof image.";
+          [RPGAlertController showAlertWithTitle:nil
+                                         message:message
+                                     actionTitle:nil
+                                      completion:nil];
+          break;
+        }
       }
-        
-      default:
-      {
-        NSString *message = @"Can't download quest proof image.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:nil];
-        break;
-      }
-    }
-  };
-  
-  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
-                                               completionHandler:handler];
+    };
+    
+    [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
+                                                 completionHandler:handler];
+  }
 }
 
 @end
