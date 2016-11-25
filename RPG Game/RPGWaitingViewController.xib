@@ -17,21 +17,21 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhI-bc-UU4" userLabel="Modal View Container">
-                    <rect key="frame" x="180" y="229" width="240" height="143"/>
+                    <rect key="frame" x="150" y="229" width="300" height="143"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="Kaf-ti-pp5" userLabel="Modal View Background">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="143"/>
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="143"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-nc-JZ9">
-                            <rect key="frame" x="70" y="25" width="101" height="33"/>
+                            <rect key="frame" x="100" y="25" width="101" height="33"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="28"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqS-XL-gYU">
-                            <rect key="frame" x="70" y="78" width="100" height="40"/>
+                            <rect key="frame" x="100" y="78" width="100" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="100" id="6z4-mD-Sq5"/>
                                 <constraint firstAttribute="height" constant="40" id="BXf-N1-MGH"/>
@@ -47,23 +47,17 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="240" id="EkK-rf-cva"/>
+                        <constraint firstAttribute="width" constant="300" id="EkK-rf-cva"/>
                         <constraint firstAttribute="trailing" secondItem="Kaf-ti-pp5" secondAttribute="trailing" id="Go4-aN-3aE"/>
                         <constraint firstAttribute="bottom" secondItem="TqS-XL-gYU" secondAttribute="bottom" constant="25" id="RAd-XJ-JxC"/>
                         <constraint firstItem="ngF-nc-JZ9" firstAttribute="centerX" secondItem="RhI-bc-UU4" secondAttribute="centerX" id="amy-wt-aRM"/>
                         <constraint firstItem="TqS-XL-gYU" firstAttribute="centerX" secondItem="RhI-bc-UU4" secondAttribute="centerX" id="bc1-Ry-v3u"/>
                         <constraint firstItem="Kaf-ti-pp5" firstAttribute="leading" secondItem="RhI-bc-UU4" secondAttribute="leading" id="cUh-Fg-usz"/>
                         <constraint firstItem="ngF-nc-JZ9" firstAttribute="top" secondItem="RhI-bc-UU4" secondAttribute="top" constant="25" id="f9t-YA-inR"/>
-                        <constraint firstAttribute="bottom" secondItem="TqS-XL-gYU" secondAttribute="bottom" constant="20" symbolic="YES" id="iL1-WZ-3Fc"/>
                         <constraint firstItem="TqS-XL-gYU" firstAttribute="top" secondItem="ngF-nc-JZ9" secondAttribute="bottom" constant="20" id="ja5-xb-HsW"/>
                         <constraint firstAttribute="bottom" secondItem="Kaf-ti-pp5" secondAttribute="bottom" id="m9i-67-hL3"/>
                         <constraint firstItem="Kaf-ti-pp5" firstAttribute="top" secondItem="RhI-bc-UU4" secondAttribute="top" id="vYa-l7-9CD"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="iL1-WZ-3Fc"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
