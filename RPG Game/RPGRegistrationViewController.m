@@ -207,8 +207,9 @@ numberOfRowsInComponent:(NSInteger)aComponent
              {
                [RPGAlertController handleDefaultError];
              }
-           }
+             
              break;
+           }
          }
        }];
     }
