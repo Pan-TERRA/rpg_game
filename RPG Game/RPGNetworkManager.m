@@ -55,6 +55,9 @@ NSString * const kRPGNetworkManagerAPIClassesRoute = @"/classes";
 NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   // Character Profile
 NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profile";
+  // Shop
+NSString * const kRPGNetworkManagerAPIShopUnitsRoute = @"/shop";
+NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute = @"/unit_buy";
 
 #pragma mark -
 
