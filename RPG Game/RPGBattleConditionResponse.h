@@ -10,7 +10,7 @@
   // Constants
 #import "RPGBattleStatus.h"
 
-@class RPGResources;
+@class RPGBattleReward;
 
 @interface RPGBattleConditionResponse : RPGResponse
 
@@ -18,7 +18,7 @@
 @property (nonatomic, assign, readonly) NSInteger opponentHP;
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
 @property (nonatomic, retain, readonly) NSDictionary *skillsDamage;
-@property (nonatomic, retain, readonly) RPGResources *reward;
+@property (nonatomic, retain, readonly) RPGBattleReward *reward;
 @property (nonatomic, assign, readonly) RPGBattleStatus battleStatus;
 @property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 
@@ -28,16 +28,16 @@
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSDictionary *)aSkillsDamage
-               battleStatus:(RPGBattleStatus)aBattleStatus
-                    reward:(RPGResources *)aReward
+              battleStatus:(RPGBattleStatus)aBattleStatus
+                    reward:(RPGBattleReward *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSDictionary *)aSkillsDamage
-                                  battleStatus:(RPGBattleStatus)aBattleStatus
-                                       reward:(RPGResources *)aReward
+                                 battleStatus:(RPGBattleStatus)aBattleStatus
+                                       reward:(RPGBattleReward *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn;
 
