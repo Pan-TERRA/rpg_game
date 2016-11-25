@@ -8,9 +8,7 @@
 
 #import "RPGQuestReward.h"
 
-NSString * const kRPGQuestRewardGold = @"gold";
-NSString * const kRPGQuestRewardCrystals = @"crystals";
-NSString * const kRPGQuestRewardSkillId = @"skill_id";
+static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 @interface RPGQuestReward()
 
