@@ -9,15 +9,36 @@
 #import "RPGShopViewController.h"
   //view
 #import "RPGShopCollectionViewController.h"
+#import "RPGWaitingViewController.h"
   //support
 #import "UIViewController+RPGChildViewController.h"
-  //constants
+  // API
+#import "RPGNetworkManager+Shop.h"
+#import "RPGShopUnitsResponse.h"
+  //Entity
+#import "RPGShopUnit.h"
+  // Constants
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
+  //Misc
+#import "RPGAlertController.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
+
+
+typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode networkStatusCode, RPGShopUnitsResponse *response);
+typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
+
 
 @interface RPGShopViewController ()
 
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *crystallLabel;
+
+  //Views
 @property (nonatomic, assign, readwrite) IBOutlet UIView *collectionViewContainer;
-@property(nonatomic, retain, readwrite) RPGShopCollectionViewController *collectionViewController;
+@property (nonatomic, retain, readwrite) RPGShopCollectionViewController *collectionViewController;
+  // Modals
+@property (nonatomic, retain, readwrite) RPGWaitingViewController *shopInitModal;
 
 @end
 
@@ -31,6 +52,7 @@
   if (self != nil)
   {
     _collectionViewController = [RPGShopCollectionViewController new];
+    _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Loading..."];
   }
   return self;
 }
@@ -39,6 +61,9 @@
 
 - (void)dealloc
 {
+  [_collectionViewController release];
+  [_shopInitModal release];
+  
   [super dealloc];
 }
 
@@ -53,7 +78,16 @@
 {
   [super viewWillAppear:animated];
   
-  [self addChildViewController:self.collectionViewController frame:self.collectionViewContainer.frame];
+  [self updateViewsWithWaitingModal];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+  [super viewDidAppear:animated];
+  
+  NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+  self.goldLabel.text = [@(userDefault.sessionGold) stringValue];
+  self.crystallLabel.text = [@(userDefault.sessionCrystals) stringValue];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,5 +102,157 @@
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)removeShopInitModal
+{
+  [self.shopInitModal.view removeFromSuperview];
+  [self.shopInitModal removeFromParentViewController];
+}
+
+- (void)updateViewsWithWaitingModal
+{
+  [self addChildViewController:self.collectionViewController frame:self.collectionViewContainer.frame];
+  
+  [self addChildViewController:self.shopInitModal frame:self.view.frame];
+  
+  [self fetchShopUnits];
+}
+
+#pragma mark - Network
+
+- (void)fetchShopUnits
+{
+  __block typeof(self) weakSelf = self;
+  
+  fetchShopUnitsCompletionHandler handler= ^void(RPGStatusCode networkStatusCode, RPGShopUnitsResponse *response)
+  {
+    
+    switch (networkStatusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        NSLog(@"Shop Download Status - OK");
+        if (response.shopUnits != nil)
+        {
+          NSMutableArray *shopUnits = [NSMutableArray array];
+          for (NSDictionary *shopUnitDictionary in response.shopUnits)
+          {
+            RPGShopUnit *shopUnit = [[[RPGShopUnit alloc] initWithDictionaryRepresentation:shopUnitDictionary] autorelease];
+            [shopUnits addObject:shopUnit];
+          }
+          self.collectionViewController.shopUnits = shopUnits;
+        }
+        break;
+      }
+        case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't update shop.\nWrong token error.\nTry to log in again.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:^(void)
+         {
+           dispatch_async(dispatch_get_main_queue(), ^
+                          {
+                            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+                            [viewController dismissViewControllerAnimated:YES completion:nil];
+                          });
+         }];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't update quest list.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+    }
+    [weakSelf.collectionViewController.collectionView reloadData];
+    
+    [weakSelf removeShopInitModal];
+  };
+  [[RPGNetworkManager sharedNetworkManager] fetchShopUnitsWithCompletionHandler:handler];
+}
+
+- (void)buyShopUnitWithID:(NSInteger)anUnitID
+{
+  __block typeof(self) weakSelf = self;
+  
+  buyShopUnitCompletionHandler handler= ^void(RPGStatusCode networkStatusCode)
+  {
+    
+    switch (networkStatusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        [self  updateViewsWithWaitingModal];
+        
+        NSString *message = @"You bought this unit";
+        [RPGAlertController showAlertWithTitle:@"Success"
+                                       message:message
+                                   actionTitle:@"OK"
+                                    completion:nil];
+        break;
+      }
+        
+      case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't update shop.\nWrong token error.\nTry to log in again.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:^(void)
+         {
+           dispatch_async(dispatch_get_main_queue(), ^
+                          {
+                            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+                            [viewController dismissViewControllerAnimated:YES completion:nil];
+                          });
+         }];
+        break;
+      }
+        
+      case kRPGStatusCodeNotEnoughMoney:
+      {
+        NSString *message = @"Not enough money";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+        
+      case kRPGStatusCodeUnitIsAlreadyBought:
+      {
+        NSString *message = @"This unit is already bought";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't buy this unit";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+    }
+    [weakSelf.collectionViewController.collectionView reloadData];
+    
+    [weakSelf removeShopInitModal];
+  };
+  
+  [[RPGNetworkManager sharedNetworkManager] buyShopUnitWithUnitID:anUnitID completionHandler:handler];
+}
+
+#pragma mark - Helper Methods
 
 @end

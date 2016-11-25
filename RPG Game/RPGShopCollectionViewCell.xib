@@ -29,10 +29,13 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm_icon_empty" translatesAutoresizingMaskIntoConstraints="NO" id="Uff-dc-nGt">
                         <rect key="frame" x="15" y="37" width="120" height="163"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M6z-i8-NbT">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="M6z-i8-NbT">
                         <rect key="frame" x="15" y="208" width="120" height="34"/>
                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                        <state key="normal" title="777" image="Ruby" backgroundImage="Label Item Dark Brown"/>
+                        <state key="normal" image="Ruby" backgroundImage="Label Item Dark Brown"/>
+                        <connections>
+                            <action selector="buyAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="eIs-PB-Ddy"/>
+                        </connections>
                     </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -53,6 +56,11 @@
                 <constraint firstAttribute="bottom" secondItem="M6z-i8-NbT" secondAttribute="bottom" constant="8" id="lIf-mJ-yQc"/>
                 <constraint firstItem="SPT-FE-Bve" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="vZ7-kB-ThT"/>
             </constraints>
+            <connections>
+                <outlet property="buyButton" destination="M6z-i8-NbT" id="Vov-c5-PPl"/>
+                <outlet property="titleLabel" destination="SPT-FE-Bve" id="dYz-EW-tkP"/>
+                <outlet property="unitUmageView" destination="Uff-dc-nGt" id="tds-pN-hpE"/>
+            </connections>
         </collectionViewCell>
     </objects>
     <resources>

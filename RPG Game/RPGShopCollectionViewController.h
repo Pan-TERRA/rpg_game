@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class RPGShopUnit;
+
 @interface RPGShopCollectionViewController : UICollectionViewController
+
+@property (nonatomic, retain, readwrite) NSArray<RPGShopUnit *> *shopUnits;
 
 @end

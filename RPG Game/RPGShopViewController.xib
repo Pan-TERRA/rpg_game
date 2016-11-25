@@ -10,6 +10,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGShopViewController">
             <connections>
                 <outlet property="collectionViewContainer" destination="kky-Fg-Lkw" id="dCA-tj-nln"/>
+                <outlet property="crystallLabel" destination="WvH-2Q-ptY" id="mOD-il-9yd"/>
+                <outlet property="goldLabel" destination="X6e-AF-pyV" id="POx-3b-IhC"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -22,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kky-Fg-Lkw" userLabel="CollectionView Container">
-                    <rect key="frame" x="60" y="120" width="480" height="360"/>
+                    <rect key="frame" x="60" y="75" width="480" height="450"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eb-2T-iTd" userLabel="Gold Content View">
-                    <rect key="frame" x="60" y="62" width="210" height="42"/>
+                    <rect key="frame" x="60" y="25" width="210" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gold" translatesAutoresizingMaskIntoConstraints="NO" id="Ea7-jV-9Ek">
                             <rect key="frame" x="8" y="4" width="34" height="34"/>
@@ -50,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Z1-pF-ATk" userLabel="Crystall Content View">
-                    <rect key="frame" x="330" y="62" width="210" height="42"/>
+                    <rect key="frame" x="330" y="25" width="210" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ruby" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-PK-laZ">
                             <rect key="frame" x="168" y="4" width="34" height="34"/>
@@ -88,13 +90,13 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kky-Fg-Lkw" firstAttribute="top" secondItem="2eb-2T-iTd" secondAttribute="bottom" constant="16" id="1tE-7j-tqw"/>
+                <constraint firstItem="kky-Fg-Lkw" firstAttribute="top" secondItem="2eb-2T-iTd" secondAttribute="bottom" constant="8" id="1tE-7j-tqw"/>
                 <constraint firstAttribute="bottom" secondItem="VtP-Za-rzk" secondAttribute="bottom" constant="30" id="8dM-Wm-5Dh"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="centerY" secondItem="2eb-2T-iTd" secondAttribute="centerY" id="KeY-nf-psV"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MOw-qS-YZs"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="width" secondItem="2eb-2T-iTd" secondAttribute="width" id="O8b-P8-cDJ"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OHe-x4-TV3"/>
-                <constraint firstItem="kky-Fg-Lkw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.6" id="RaY-JC-sbz"/>
+                <constraint firstItem="kky-Fg-Lkw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.75" id="RaY-JC-sbz"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="trailing" secondItem="kky-Fg-Lkw" secondAttribute="trailing" id="SbU-dS-kMC"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Spv-8g-AYm"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="leading" secondItem="kky-Fg-Lkw" secondAttribute="leading" id="Vbp-7h-47N"/>

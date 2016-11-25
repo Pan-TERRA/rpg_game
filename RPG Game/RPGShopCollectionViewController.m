@@ -7,16 +7,23 @@
 //
 
 #import "RPGShopCollectionViewController.h"
+  //View
+#import "RPGShopViewController.h"
 #import "RPGShopCollectionViewCell.h"
+  //Entity
+#import "RPGShopUnit.h"
+  //Constants
 #import "RPGNibNames.h"
 
-@interface RPGShopCollectionViewController () <UICollectionViewDelegateFlowLayout>
+@interface RPGShopCollectionViewController () <UICollectionViewDelegateFlowLayout, RPGShopCollectionViewCellDelegate>
 
 @end
 
 @implementation RPGShopCollectionViewController
 
 static NSString * const reuseIdentifier = @"shopCollectionViewCell";
+
+#pragma mark - Init
 
 - (instancetype)init
 {
@@ -26,6 +33,8 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   self = [super initWithCollectionViewLayout:flowLayout];
   if (self != nil)
   {
+    _shopUnits = [NSMutableArray new];
+    
     [self.collectionView registerClass:[RPGShopCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 
     UINib *nib = [UINib nibWithNibName:kRPGShopCollectionViewCellNIBName bundle: nil];
@@ -35,9 +44,23 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   return self;
 }
 
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_shopUnits release];
+  
+  [super dealloc];
+}
+
+#pragma mark - UIVIewController
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [self.collectionView setNeedsUpdateConstraints];
+  [self.collectionView setNeedsDisplay];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -48,6 +71,7 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
+  
   self.view.backgroundColor = [UIColor clearColor];
   self.collectionView.backgroundColor = [UIColor clearColor];
 }
@@ -67,7 +91,7 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-  return 20;
+  return self.shopUnits.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -76,8 +100,11 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   
   if (cell == nil)
   {
-    cell = [[RPGShopCollectionViewCell alloc] init];
+    cell = [[RPGShopCollectionViewCell new] autorelease];
   }
+  
+  cell.shopUnit = self.shopUnits[indexPath.item];
+  cell.delegate = self;
   
   return cell;
 }
@@ -116,10 +143,30 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 #pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+  //TODO: remove this shit
   CGSize size = self.view.frame.size;
-  size.height = size.height * 0.9;
   size.width = size.width / 3.25;
   return size;
 }
 
+- (void)buyButtonDidPressOnCell:(RPGShopCollectionViewCell *)aCell
+{
+  NSIndexPath *indexPath = [self.collectionView indexPathForCell:aCell];
+  NSInteger shopUnitID = self.shopUnits[indexPath.item].unitID;
+  
+  RPGShopViewController *shopViewController = (RPGShopViewController *)self.parentViewController;
+  [shopViewController buyShopUnitWithID:shopUnitID];
+  
+}
+
+#pragma mark - Accessors
+- (void)setShopUnits:(NSArray<RPGShopUnit *> *)shopUnits
+{
+  if (_shopUnits != shopUnits)
+  {
+    [_shopUnits release];
+    _shopUnits = [shopUnits retain];
+    [self.collectionView reloadData];
+  }
+}
 @end
