@@ -186,12 +186,17 @@
 
 - (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageUpload];
+  
   UIImage *chosenImage = anInfo[UIImagePickerControllerOriginalImage];
   // !!!: leak
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
   void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
+    [self.questViewController setViewToNormalState];
+    
     switch (statusCode)
     {
       case kRPGStatusCodeOK:
@@ -228,8 +233,6 @@
   NSData *data = UIImageJPEGRepresentation(chosenImage, 0.7);
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
-  
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
@@ -242,9 +245,12 @@
 
 - (void)uploadImage
 {
+  [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
   // !!!: SELF not WEAKSELF
   void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
   {
+    [self.questViewController setViewToNormalState];
+    
     switch (aStatusCode)
     {
       case kRPGStatusCodeOK:

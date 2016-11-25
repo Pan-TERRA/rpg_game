@@ -16,6 +16,8 @@
 #import "RPGQuestViewHeaderContainer.h"
 #import "RPGQuestViewBodyContainer.h"
 #import "RPGQuestViewButtonContainer.h"
+#import "RPGWaitingViewController.h"
+#import "UIViewController+RPGChildViewController.h"
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
@@ -28,6 +30,9 @@
 #import "RPGNibNames.h"
 #import "RPGQuestAction.h"
 
+NSString * const kRPGQuestViewControllerWaitingMessageDownload = @"Downloading image";
+NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image";
+
 @interface RPGQuestViewController () 
 
 @property (nonatomic, assign, readwrite) NSUInteger questID;
@@ -39,6 +44,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewBodyContainer *bodyContainer;
 @property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewButtonContainer *buttonContainer;
 
+@property (nonatomic, retain, readwrite) RPGWaitingViewController *waitingModal;
+
 @end
 
 @implementation RPGQuestViewController
@@ -47,8 +54,15 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGQuestViewControllerNIBName
+  self = [super initWithNibName:kRPGQuestViewControllerNIBName
                          bundle:nil];
+  
+  if (self != nil)
+  {
+    _waitingModal = [[RPGWaitingViewController alloc] init];
+  }
+  
+  return self;
 }
 
 #pragma mark - Dealloc
@@ -57,6 +71,7 @@
 {
   [_imagePickerController release];
   [_proofImageStringURL release];
+  [_waitingModal release];
 
   [super dealloc];
 }
@@ -72,7 +87,7 @@
   self.bodyContainer.questViewController = self;
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
   
@@ -105,6 +120,20 @@
     [self.headerContainer setViewContent:aQuest.reward];
     [self.bodyContainer setViewContent:aQuest];
   }
+}
+
+#pragma mark - View State
+
+- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
+{
+  self.waitingModal.message = aMessage;
+  [self addChildViewController:self.waitingModal frame:self.view.frame];
+}
+
+- (void)setViewToNormalState
+{
+  [self.waitingModal.view removeFromSuperview];
+  [self.waitingModal removeFromParentViewController];
 }
 
 #pragma mark - Image Picker Controller
