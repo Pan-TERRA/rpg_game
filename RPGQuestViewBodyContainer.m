@@ -243,7 +243,7 @@
 
 #pragma mark - Upload Image
 
-- (void)uploadImage
+- (void)downloadImage
 {
   [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
   // !!!: SELF not WEAKSELF
@@ -261,7 +261,7 @@
         
       default:
       {
-        NSString *message = @"Can't upload quest proof image.";
+        NSString *message = @"Can't download quest proof image.";
         [RPGAlertController showAlertWithTitle:nil
                                        message:message
                                    actionTitle:nil

@@ -93,7 +93,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
   
   if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
   {
-    [self.bodyContainer uploadImage];
+    [self.bodyContainer downloadImage];
   }
 }
 
