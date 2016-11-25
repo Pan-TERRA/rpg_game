@@ -7,7 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGShopUnitsResponse : NSObject
+@interface RPGShopUnitsResponse : NSObject <RPGSerializable>
+
+@property (assign, nonatomic, readwrite) NSInteger status;
+@property (copy, nonatomic, readwrite) NSArray *shopUnits;
+
+- (instancetype)initWithStatus:(NSInteger)aStatus shopUnits:(NSArray *)aShopUnits NS_DESIGNATED_INITIALIZER;
 
 @end

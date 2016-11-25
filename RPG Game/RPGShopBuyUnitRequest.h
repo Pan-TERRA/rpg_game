@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "RPGSerializable.h"
 
-@interface RPGShopBuyUnitRequest : NSObject
+@interface RPGShopBuyUnitRequest : NSObject <RPGSerializable>
+
+@property (assign, nonatomic, readwrite) NSInteger shopUnitID;
+
+- (instancetype)initWithShopUnitID:(NSInteger)aShopUnitID NS_DESIGNATED_INITIALIZER;
 
 @end

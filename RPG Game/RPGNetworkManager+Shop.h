@@ -6,8 +6,17 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "RPGNetworkManager.h"
+#import "RPGStatusCodes.h"
 
-@interface RPGNetworkManager_Shop : NSObject
+@class RPGShopUnitsResponse;
+
+@interface RPGNetworkManager (Shop)
+
+- (void)fetchShopUnitsWithCompletionHandler:(void (^)(RPGStatusCode networkStatusCode,
+                            RPGShopUnitsResponse *))callbackBlock;
+
+- (void)buyShopUnitWithUnitID:(NSInteger)unitID
+            completionHandler:(void (^)(NSInteger))callbackBlock;
 
 @end

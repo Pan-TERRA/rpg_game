@@ -46,6 +46,9 @@ extern NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute;
 extern NSString * const kRPGNetworkManagerAPISelectSkillsRoute;
   // Constants
 extern NSString * const kRPGNetworkManagerStatus;
+  // Shop
+extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
+extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
 
 @class RPGResources;
 
