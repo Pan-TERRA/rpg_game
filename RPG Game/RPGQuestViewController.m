@@ -89,7 +89,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 
 - (void)viewWillAppear:(BOOL)animated
 {
-  [super viewDidAppear:animated];
+  [super viewWillAppear:animated];
   
   if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
   {
