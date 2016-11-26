@@ -39,7 +39,7 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
                         collectionSize:(NSUInteger)aCollectionSize
                            skillsArray:(NSArray *)aSkillsArray
 {
-  self = [super init];
+  self = [self init];
   
   if (self != nil)
   {

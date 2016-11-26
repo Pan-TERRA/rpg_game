@@ -58,7 +58,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   // Reward
 @property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerRewardLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardGoldLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardCrystalsLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardExpLabel;
   // Modals
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *battleInitModal;
   // Skill bar
@@ -281,8 +283,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     // client
   NSInteger playerHP = battleController.playerHP;
   NSInteger playerMaxHP = battleController.playerMaxHP;
-  playerHP = (playerHP >= 0) ? playerHP : 100;
-  playerMaxHP = (playerMaxHP > 0) ? playerMaxHP : 100;
+  playerHP = (playerHP <= playerMaxHP) ? playerHP : playerMaxHP;
   NSString *playerNickName = battleController.playerNickName;
   self.playerNickName.text = playerNickName;
   self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
@@ -290,8 +291,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
   NSInteger opponentMaxHP = battleController.opponentMaxHP;
-  opponentHP = (opponentHP >= 0) ? opponentHP : 100;
-  opponentMaxHP = (opponentMaxHP > 0) ? opponentMaxHP : 100;
+  opponentHP = (opponentHP <= opponentMaxHP) ? opponentHP : opponentMaxHP;
   NSString *opponentNickName = battleController.opponentNickName;
   self.opponentNickName.text = opponentNickName;
   self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
@@ -312,7 +312,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     [self addChildViewController:self.battleRewardModal frame:self.view.frame];
     
     self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
-    self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
+    self.rewardGoldLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
+    self.rewardCrystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardCrystals];
+    self.rewardExpLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardExp];
     
     [self.timer invalidate];
     [self.battleController prepareBattleControllerForDismiss];

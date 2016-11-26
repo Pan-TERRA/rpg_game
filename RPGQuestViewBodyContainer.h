@@ -17,6 +17,6 @@
 
 - (void)setViewContent:(RPGQuest *)aQuest;
 - (void)updateView;
-- (void)uploadImage;
+- (void)downloadImage;
 
 @end

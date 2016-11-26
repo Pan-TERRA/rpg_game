@@ -8,7 +8,7 @@
 
 #import "RPGBattleConditionResponse.h"
 #import "RPGMessageTypes.h"
-#import "RPGResources.h"
+#import "RPGBattleReward.h"
 
 NSString * const kRPGBattleConditionResponseHP = @"hp";
 NSString * const kRPGBattleConditionResponseOpponentHP = @"opponent_hp";
@@ -26,7 +26,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *mutableSkillsDamage;
 @property (nonatomic, assign, readwrite) RPGBattleStatus battleStatus;
-@property (nonatomic, retain, readwrite) RPGResources *reward;
+@property (nonatomic, retain, readwrite) RPGBattleReward *reward;
 @property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 
 @end
@@ -40,7 +40,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSDictionary *)aSkillsDamage
               battleStatus:(RPGBattleStatus)aBattleStatus
-                    reward:(RPGResources *)aReward
+                    reward:(RPGBattleReward *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn
 {
@@ -89,7 +89,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSDictionary *)aSkillsDamage
                                  battleStatus:(RPGBattleStatus)aBattleStatus
-                                       reward:(RPGResources *)aReward
+                                       reward:(RPGBattleReward *)aReward
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn
 {
@@ -146,7 +146,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  RPGResources *reward = [[[RPGResources alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseReward]] autorelease];
+  RPGBattleReward *reward = [[[RPGBattleReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseReward]] autorelease];
   return [self initWithHP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
                opponentHP:[aDictionary[kRPGBattleConditionResponseOpponentHP] integerValue]
           skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]

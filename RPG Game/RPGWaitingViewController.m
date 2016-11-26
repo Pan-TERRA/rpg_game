@@ -56,11 +56,23 @@
   [super dealloc];
 }
 
-#pragma mark - UICollectionView
+#pragma mark - Custom Setter
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)setMessage:(NSString *)aMessage
 {
-  [super viewWillAppear:animated];
+  if (_message != aMessage)
+  {
+    [_message release];
+    _message = [aMessage retain];
+    self.messageLabel.text = _message;
+  }
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
   
   self.messageLabel.text = self.message;
 }
