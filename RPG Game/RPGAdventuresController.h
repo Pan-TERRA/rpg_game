@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Controllers
+#import "RPGBattleController.h"
 
-@interface RPGAdventuresController : NSObject
+@interface RPGAdventuresController : RPGBattleController
+
+@property (retain, nonatomic, readonly) RPGWebsocketManager *webSocketManager;
 
 @end
