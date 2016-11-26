@@ -7,20 +7,20 @@
 //
 
 #import "RPGRegistrationViewController.h"
-// API
+  // API
 #import "RPGNetworkManager+Registration.h"
 #import "RPGNetworkManager+Authorization.h"
 #import "RPGNetworkManager+Classes.h"
-// Controllers
+  // Controllers
 #import "RPGAlertController+RPGErrorHandling.h"
-// Views
+  // Views
 #import "RPGLoginViewController.h"
 #import "RPGMainViewController.h"
-// Entities
+  // Entities
 #import "RPGRegistrationRequest.h"
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGClassInfoRepresentation.h"
-// Constants
+  // Constants
 #import "RPGNibNames.h"
 
 
@@ -69,20 +69,6 @@
   [super dealloc];
 }
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  self.classPickerData = self.classInfo.classNames;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
@@ -101,6 +87,20 @@ numberOfRowsInComponent:(NSInteger)aComponent
             forComponent:(NSInteger)aComponent
 {
   return self.classPickerData[aRow];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.classPickerData = self.classInfo.classNames;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark View State
@@ -185,20 +185,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
              
            default:
            {
-             if (statusCode == kRPGStatusCodeWrongEmail
-                 || statusCode == kRPGStatusCodeWrongJSON
-                 || statusCode == kRPGStatusCodeEmailAlreadyTaken
-                 || statusCode == kRPGStatusCodeUsernameAlreadyTaken
-                 || statusCode == kRPGStatusCodeTooShortUsername
-                 || statusCode == kRPGStatusCodeTooLongUsername
-                 || statusCode == kRPGStatusCodeTooShortPassword
-                 || statusCode == kRPGStatusCodeTooLongPassword
-                 || statusCode == kRPGStatusCodeTooShortCharacterName
-                 || statusCode == kRPGStatusCodeTooLongCharacterName
-                 || statusCode == kRPGStatusCodeInvalidUsername
-                 || statusCode == kRPGStatusCodeInvalidCharacterName
-                 || statusCode == kRPGStatusCodeUndefinedSymbolsInUsername
-                 || statusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName)
+             if ([self canHandleStatusCode:statusCode])
              {
                [RPGAlertController showErrorWithStatusCode:statusCode
                                          completionHandler:nil];
@@ -207,7 +194,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
              {
                [RPGAlertController handleDefaultError];
              }
-             
              break;
            }
          }
@@ -224,20 +210,12 @@ numberOfRowsInComponent:(NSInteger)aComponent
   }
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
-
 #pragma mark - RPGViewController
 
 - (IBAction)userDoneEnteringText:(UITextField *)aSender
 {
   [[aSender.superview.superview viewWithTag:aSender.tag + 1] becomeFirstResponder];
 }
-
 
 #pragma mark - Helper Methods
 
@@ -256,6 +234,31 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.passwordTextField.text.length != 0 &&
   self.confirmPasswordTextField.text.length != 0 &&
   self.characterNameTextField.text.length != 0;
+}
+
+- (NSInteger)getSelectedClassID
+{
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
+}
+
+- (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
+{
+  return aStatusCode == kRPGStatusCodeWrongEmail
+  || aStatusCode == kRPGStatusCodeWrongJSON
+  || aStatusCode == kRPGStatusCodeEmailAlreadyTaken
+  || aStatusCode == kRPGStatusCodeUsernameAlreadyTaken
+  || aStatusCode == kRPGStatusCodeTooShortUsername
+  || aStatusCode == kRPGStatusCodeTooLongUsername
+  || aStatusCode == kRPGStatusCodeTooShortPassword
+  || aStatusCode == kRPGStatusCodeTooLongPassword
+  || aStatusCode == kRPGStatusCodeTooShortCharacterName
+  || aStatusCode == kRPGStatusCodeTooLongCharacterName
+  || aStatusCode == kRPGStatusCodeInvalidUsername
+  || aStatusCode == kRPGStatusCodeInvalidCharacterName
+  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
+  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
 }
 
 @end
