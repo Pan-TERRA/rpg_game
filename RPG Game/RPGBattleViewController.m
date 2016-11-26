@@ -37,7 +37,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @interface RPGBattleViewController ()
 
-@property(nonatomic, retain, readwrite) RPGBattleController *battleController;
+@property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
+@property (nonatomic, retain, readwrite) RPGBattleController *battleController;
 
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
@@ -76,59 +77,23 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 #pragma mark - Init
 
-// TODO: remove this unpleasantness
-// builder?
-- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController
+- (instancetype)initWithBattleControllerGenerator:(RPGBattleControllerGenerator *)aBattleControllerGenerator
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
-    _battleController = [anArenaController retain];
-    _timerCounter = kRPGBattleTurnDuration;
-    if (_battleController != nil)
-    {
-      _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
-      _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
-        [self.battleController prepareBattleControllerForDismiss];
-        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-      }];
-      
-      [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(modelDidChange:)
-                                                   name:kRPGModelDidChangeNotification
-                                                 object:_battleController];
-      [[NSNotificationCenter defaultCenter] addObserver:self
-                                               selector:@selector(battleInitDidEndSetUp:)
-                                                   name:kRPGBattleInitDidEndSetUpNotification
-                                                 object:_battleController];
-      [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
-                                               selector:@selector(battleInitDidEndSetUp:)
-                                                   name:kRPGBattleInitDidEndSetUpNotification
-                                                 object:_battleController];
-      [_battleController addObserver:self
-                          forKeyPath:@"battle.currentTurn"
-                             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
-    }
-  }
-  
-  return self;
-}
+    _battleControllerGenerator = [aBattleControllerGenerator retain];
+    _battleController = [[_battleControllerGenerator battleController] retain];
 
-- (instancetype)init
-{
-  self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
-  
-  if (self != nil)
-  {
-    _battleController = [[RPGBattleController alloc] init];
     _timerCounter = kRPGBattleTurnDuration;
+    
     if (_battleController != nil)
     {
+        // internal view controllers
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+     
       _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
         [self.battleController prepareBattleControllerForDismiss];
         [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
@@ -195,6 +160,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.skillBarViewController.view.frame = CGRectMake(0, 0, size.width, size.height);
   [self.skillBar addSubview:self.skillBarViewController.view];
   [self.skillBarViewController didMoveToParentViewController:self];
+  
+  [self.battleController openBattleControllerWebSocket];
 }
 
 - (void)viewWillAppear:(BOOL)animated
