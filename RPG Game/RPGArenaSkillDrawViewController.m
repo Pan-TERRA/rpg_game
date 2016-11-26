@@ -10,13 +10,14 @@
   // API
 #import "RPGNetworkManager+Arena.h"
   // Controllers
-#import "RPGArenaCollectionViewController.h"
+#import "RPGArenaControllerGenerator.h"
+//#import "RPGArenaCollectionViewController.h"
 #import "RPGWaitingViewController.h"
 #import "RPGArenaSkillCollectionViewController.h"
 #import "RPGArenaBagCollectionViewController.h"
-#import "RPGAlertController+RPGErrorHandling.h"
 #import "UIViewController+RPGChildViewController.h"
 #import "RPGBattleViewController.h"
+#import "RPGAlertController+RPGErrorHandling.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
   // Entities
@@ -236,15 +237,14 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   self.startBattleButton.enabled = YES;
 }
 
+#pragma mark - IBActions
+
 - (IBAction)handleStartBattleButton
 {
-  NSArray *skillIDs = self.skillsCollectionViewController.skillsIDArray;
-  RPGArenaController *arenaController = [[[RPGArenaController alloc]
-                                          initWithSkillIDs:skillIDs]
-                                         autorelease];
-  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc]
-                                              initWithArenaController:arenaController]
-                                             autorelease];
+  NSArray *skillsID = self.skillsCollectionViewController.skillsIDArray;
+  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] initWithSkillsID:skillsID] autorelease];
+  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:arenaControllerGenerator] autorelease];
+  
   [self.delegate dismissCurrentAndPresentViewController:viewController];
 }
 
