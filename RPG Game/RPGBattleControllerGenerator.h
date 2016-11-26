@@ -1,5 +1,5 @@
 //
-//  RPGBattleControllerFactory.h
+//  RPGBattleControllerGenerator.h
 //  RPG Game
 //
 //  Created by Иван Дзюбенко on 11/26/16.
@@ -10,7 +10,7 @@
   // Controllers
 @class RPGBattleController;
 
-@interface RPGBattleControllerFactory : NSObject
+@interface RPGBattleControllerGenerator : NSObject
 
 - (RPGBattleController *)battleController;
 

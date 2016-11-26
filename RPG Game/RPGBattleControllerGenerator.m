@@ -1,22 +1,16 @@
 //
-//  RPGBattleControllerFactory.m
+//  RPGBattleControllerGenerator.m
 //  RPG Game
 //
 //  Created by Иван Дзюбенко on 11/26/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGBattleControllerFactory.h"
+#import "RPGBattleControllerGenerator.h"
   // Controllers
 #import "RPGBattleController.h"
 
-@implementation RPGBattleControllerFactory
-
-#pragma mark - Init
-
-#pragma mark - Dealloc
-
-#pragma mark - Factory
+@implementation RPGBattleControllerGenerator
 
 - (RPGBattleController *)battleController
 {
