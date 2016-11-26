@@ -10,8 +10,7 @@
 
 @interface RPGArenaController : RPGBattleController
 
-@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skillIDs;
-
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs;
+@property (retain, nonatomic, readwrite) RPGWebsocketManager *webSocketManager;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
 
 @end
