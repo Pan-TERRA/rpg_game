@@ -9,35 +9,49 @@
 #import <Foundation/Foundation.h>
 
 @class RPGBattle;
-@class RPGWebsocketManager;
 @class RPGRequest;
-@class RPGSkill;
+@class RPGWebsocketManager;
 
 extern NSString * const kRPGModelDidChangeNotification;
 extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
 @interface RPGBattleController : NSObject
 
-@property (retain, nonatomic, readonly) RPGBattle *battle;
+@property (retain, nonatomic, readwrite) RPGBattle *battle;
 
-/**
- *  Prime initializer. Inits RPGBattle instance.
- *
- */
+@property (copy, nonatomic, readonly) NSString *battleInitWebSocketMessageType;
+@property (copy, nonatomic, readonly) NSString *battleConditionWebSocketMessageType;
+
 - (instancetype)init;
 
 #pragma mark - API
 
-- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
+- (void)processManagerResponse:(NSDictionary *)aResponse;
+
+#pragma mark Battle Init
+
+- (void)registerWebSocketMessageTypeForBattleInitResponse:(NSString *)aMessageType;
+- (void)processBattleInitResponse:(NSDictionary *)aResponse;
 
 /**
  *  May be overriden to send proper request
  */
 - (RPGRequest *)createBattleInitRequest;
 
+/**
+ *  Request for battle init. Usually invoked by WebSocket Manager.
+ */
+- (void)requestBattleInit;
+
+#pragma mark Battle Condtion
+
+- (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType;
+- (void)processBattleConditionResponse:(NSDictionary *)aResponse;
 - (void)sendBattleConditionRequest;
 
-- (void)processManagerResponse:(NSDictionary *)aResponse;
+#pragma mark Skill Action
+
+- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
 
 /**
  *  May be overriden to get player skills from other source.
@@ -45,7 +59,13 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
  */
 - (NSArray<NSNumber *> *)getPlayerSkillIDs;
 
-- (void)requestBattleInit;
+#pragma mark Misc
+
+- (void)openBattleControllerWebSocket;
+
+/**
+ *  Inoke it when dismissing view controller.
+ */
 - (void)prepareBattleControllerForDismiss;
 
 @end
