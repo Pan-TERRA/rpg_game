@@ -20,10 +20,6 @@
 #import "RPGMessageTypes.h"
 #import "RPGStatusCodes.h"
 
-  // TODO: replace to separate header file
-static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.28:8888/monster_battle";
-static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.28:8888/arena_battle";
-
 typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGWebsocketManager () <SRWebSocketDelegate>
@@ -39,20 +35,9 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleController:(id)aBattleController
+- (instancetype)initWithBattleController:(id)aBattleController URL:(NSURL *)anURL
 {
-  // TODO: fix this unpleasantness
-  NSString *URLString = nil;
-  if ([aBattleController isMemberOfClass:[RPGBattleController class]])
-  {
-    URLString = kRPGWebsocketManagerAPIMonsterBattle;
-  }
-  else if ([aBattleController isMemberOfClass:[RPGArenaController class]])
-  {
-    URLString = kRPGWebsocketManagerAPIArenaBattle;
-  }
-  
-  self = [super initWithURL:[NSURL URLWithString:URLString]];
+  self = [super initWithURL:anURL];
   
   if (self != nil)
   {
@@ -76,7 +61,6 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 #pragma mark - Actions
 
 #pragma mark  Message Send
-
 
 #pragma mark  API
 
