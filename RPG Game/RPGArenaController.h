@@ -7,10 +7,11 @@
 //
 
 #import "RPGBattleController.h"
+  // Controllers
+#import "RPGAdventuresController.h"
 
-@interface RPGArenaController : RPGBattleController
+@interface RPGArenaController : RPGAdventuresController
 
-@property (retain, nonatomic, readwrite) RPGWebsocketManager *webSocketManager;
 @property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
 
 @end
