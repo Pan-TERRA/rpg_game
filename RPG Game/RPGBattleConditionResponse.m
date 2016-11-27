@@ -35,7 +35,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 #pragma mark - Init
 
-- (instancetype)initWithHP:(NSInteger)aHP
+- (instancetype)initWithType:(NSString *)aType
+                          HP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSDictionary *)aSkillsDamage
@@ -44,7 +45,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn
 {
-  self = [super initWithType:kRPGBattleConditionMessageType
+  self = [super initWithType:aType
                       status:aStatus];
   
   if (self != nil)
@@ -74,7 +75,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithType:(NSString *)aType
                       status:(NSInteger)aStatus
 {
-  return [self initWithHP:-1
+  return [self initWithType:aType
+                         HP:-1
                opponentHP:-1
           skillsCondition:nil
              skillsDamage:nil
@@ -84,7 +86,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
               currentTurn:NO];
 }
 
-+ (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
++ (instancetype)battleConditionResponseWithType:(NSString *)aType
+                                             HP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSDictionary *)aSkillsDamage
@@ -93,7 +96,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                                        status:(NSInteger)aStatus
                                   currentTurn:(BOOL)aCurrentTurn
 {
-  return [[[self alloc] initWithHP:aHP
+  return [[[self alloc] initWithType:aType
+                                  HP:aHP
                         opponentHP:anOpponentHP
                    skillsCondition:aSkillsCondition
                       skillsDamage:aSkillsDamage
@@ -147,7 +151,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   RPGBattleReward *reward = [[[RPGBattleReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseReward]] autorelease];
-  return [self initWithHP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
+  return [self initWithType:aDictionary[kRPGResponseSerializationType]
+                         HP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
                opponentHP:[aDictionary[kRPGBattleConditionResponseOpponentHP] integerValue]
           skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
              skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]

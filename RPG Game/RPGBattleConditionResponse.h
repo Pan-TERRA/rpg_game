@@ -24,7 +24,8 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithHP:(NSInteger)aHP
+- (instancetype)initWithType:(NSString *)aType
+                          HP:(NSInteger)aHP
                 opponentHP:(NSInteger)anOpponentHP
            skillsCondition:(NSArray *)aSkillsCondition
               skillsDamage:(NSDictionary *)aSkillsDamage
@@ -32,7 +33,8 @@
                     reward:(RPGBattleReward *)aReward
                     status:(NSInteger)aStatus
                currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
-+ (instancetype)battleConditionResponseWithHP:(NSInteger)aHP
++ (instancetype)battleConditionResponseWithType:(NSString *)aType
+                                             HP:(NSInteger)aHP
                                    opponentHP:(NSInteger)anOpponentHP
                               skillsCondition:(NSArray *)aSkillsCondition
                                  skillsDamage:(NSDictionary *)aSkillsDamage
