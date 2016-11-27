@@ -8,20 +8,13 @@
 
 #import "RPGBattleController.h"
   // API
-#import "RPGWebsocketManager.h"
-#import "RPGNetworkManager+Skills.h"
   // Entities
-#import "RPGBattleLog.h"
 #import "RPGBattle.h"
-#import "RPGPlayer.h"
-#import "RPGSkill.h"
-#import "RPGResources.h"
 #import "RPGRequest.h"
 #import "RPGSkillActionRequest.h"
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
   // Misc
-#import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
@@ -68,36 +61,19 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   [super dealloc];
 }
 
-#pragma mark - API
-
-- (void)requestBattleInit
-{
-  
-}
+#pragma mark - Creating Request
 
 - (RPGRequest *)createBattleInitRequest
 {
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  return [RPGRequest requestWithType:kRPGBattleInitMessageType
-                               token:token];
+  return nil;
 }
 
-- (void)sendBattleInitRequest
+- (RPGRequest *)createBattleConditionRequest
 {
-
+  return nil;
 }
 
-- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID
-{
-
-}
-
-- (void)sendBattleConditionRequest
-{
-  // TODO: send after timeout
-}
-
-#pragma mark Process Manager Response
+#pragma mark  - Process Manager Response
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
@@ -113,6 +89,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   }
 }
 
+#pragma mark Battle Init Response
+
 - (void)registerWebSocketMessageTypeForBattleInitResponse:(NSString *)aMessageType
 {
   if (aMessageType != nil)
@@ -125,6 +103,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 {
 
 }
+
+#pragma mark Battle Condition Response
 
 - (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType
 {
@@ -139,6 +119,15 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 }
 
+#pragma mark - Actions
+
+- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID
+{
+  
+}
+
+#pragma mark - Misc
+
 - (void)prepareBattleControllerForDismiss
 {
 
@@ -149,7 +138,10 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 }
 
-#pragma mark - Helper Methods
+- (void)requestBattleInit
+{
+  
+}
 
 - (NSArray<NSNumber *> *)getPlayerSkillIDs
 {

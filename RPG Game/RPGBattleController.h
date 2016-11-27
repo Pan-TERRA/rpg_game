@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
-
+  // API
+@class RPGWebsocketManager;
+  // Entities
 @class RPGBattle;
 @class RPGRequest;
-@class RPGWebsocketManager;
 
+  // Notifications
 extern NSString * const kRPGModelDidChangeNotification;
 extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
@@ -19,53 +21,62 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
 @property (retain, nonatomic, readwrite) RPGBattle *battle;
 
+  // supported websocket messages
 @property (copy, nonatomic, readonly) NSString *battleInitWebSocketMessageType;
 @property (copy, nonatomic, readonly) NSString *battleConditionWebSocketMessageType;
 
-- (instancetype)init;
+#pragma mark - Creating Request
 
-#pragma mark - API
-
-- (void)processManagerResponse:(NSDictionary *)aResponse;
-
-#pragma mark Battle Init
-
-- (void)registerWebSocketMessageTypeForBattleInitResponse:(NSString *)aMessageType;
-- (void)processBattleInitResponse:(NSDictionary *)aResponse;
-
-/**
- *  May be overriden to send proper request
- */
+  // must be overriden to send proper request
 - (RPGRequest *)createBattleInitRequest;
 
+  // must be overriden to send proper request
+- (RPGRequest *)createBattleConditionRequest;
+
+#pragma mark - Proccess Manager Response
+
 /**
- *  Request for battle init. Usually invoked by WebSocket Manager.
+ *  Process websocket message.
+ *
+ *  @param aResponse A websocket message represented as dictionar
+ */
+- (void)processManagerResponse:(NSDictionary *)aResponse;
+
+#pragma mark Battle Init Response
+
+- (void)registerWebSocketMessageTypeForBattleInitResponse:(NSString *)aMessageType;
+
+  // template method
+- (void)processBattleInitResponse:(NSDictionary *)aResponse;
+
+#pragma mark Battle Condtion Response
+
+- (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType;
+
+  // template method
+- (void)processBattleConditionResponse:(NSDictionary *)aResponse;
+
+#pragma mark  - Actions
+
+- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
+
+#pragma mark - Misc
+
+/**
+ *  Request for battle init. Usually invoked by WebSocket Manager after socket opening.
  */
 - (void)requestBattleInit;
 
-#pragma mark Battle Condtion
+  //  invoke it when showing view controller
+- (void)openBattleControllerWebSocket;
 
-- (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType;
-- (void)processBattleConditionResponse:(NSDictionary *)aResponse;
-- (void)sendBattleConditionRequest;
-
-#pragma mark Skill Action
-
-- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID;
+  //  invoke it when dismissing view controller
+- (void)prepareBattleControllerForDismiss;
 
 /**
  *  May be overriden to get player skills from other source.
  *  These skills will be used in battle.
  */
 - (NSArray<NSNumber *> *)getPlayerSkillIDs;
-
-#pragma mark Misc
-
-- (void)openBattleControllerWebSocket;
-
-/**
- *  Inoke it when dismissing view controller.
- */
-- (void)prepareBattleControllerForDismiss;
 
 @end
