@@ -14,7 +14,7 @@ extern NSString * const kRPGSkillActionRequestType;
 
 @property (assign, nonatomic, readonly) NSInteger skillID;
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID token:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithSkillID:(NSInteger)aSkillID token:(NSString *)aToken;
+- (instancetype)initWithSkillID:(NSInteger)aSkillID NS_DESIGNATED_INITIALIZER;
++ (instancetype)requestWithSkillID:(NSInteger)aSkillID;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "RPGSkillActionRequest.h"
+  // Entities
 #import "RPGRequest.h"
 
 NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
@@ -15,9 +16,9 @@ NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID token:(NSString *)aToken
+- (instancetype)initWithSkillID:(NSInteger)aSkillID
 {
-  self = [super initWithType:kRPGSkillActionRequestType token:aToken];
+  self = [super initWithType:kRPGSkillActionRequestType];
   
   if (self != nil)
   {
@@ -27,14 +28,14 @@ NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
   return self;
 }
 
-+ (instancetype)requestWithSkillID:(NSInteger)aSkillID token:(NSString *)aToken
++ (instancetype)requestWithSkillID:(NSInteger)aSkillID
 {
-  return [[[self alloc] initWithSkillID:aSkillID token:aToken] autorelease];
+  return [[[self alloc] initWithSkillID:aSkillID] autorelease];
 }
 
-- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken
+- (instancetype)initWithType:(NSString *)aType
 {
-  return [self initWithSkillID:-1 token:nil];
+  return [self initWithSkillID:-1];
 }
 
 #pragma mark - Dealloc
@@ -59,7 +60,7 @@ NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   NSInteger skllID = [aDictionary[@"skill_id"] integerValue];
-  return [self initWithSkillID:skllID token:aDictionary[kRPGRequestSerializationToken]];
+  return [self initWithSkillID:skllID];
 }
 
 @end
