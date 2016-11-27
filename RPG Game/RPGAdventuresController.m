@@ -18,15 +18,15 @@
 #import "RPGResources.h"
 #import "RPGRequest.h"
 #import "RPGSkillActionRequest.h"
-#import "RPGBattleInitResponse.h"
-#import "RPGBattleConditionResponse.h"
+#import "RPGAdventuresInitResponse.h"
+#import "RPGAdventuresConditionResponse.h"
   // Misc
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
 
-static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.28:8888/monster_battle";
+
 
 static NSString * const kRPGBattleControllerSkills = @"skills";
 
@@ -40,17 +40,21 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager
 {
   self = [super init];
   
   if (self != nil)
   {
-    _webSocketManager = [[RPGWebsocketManager alloc] initWithBattleController:self
-                                                                          URL:[NSURL URLWithString:kRPGWebsocketManagerAPIMonsterBattle]];
+    _webSocketManager = [aManager retain];
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithWebSocketManager:[[[RPGWebsocketManager alloc] init] autorelease]];
 }
 
 #pragma mark - Dealloc
@@ -62,74 +66,25 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
   [super dealloc];
 }
 
-#pragma mark - API
-
-- (void)prepareBattleControllerForDismiss
-{
-  [self.webSocketManager close];
-}
-
-- (void)openBattleControllerWebSocket
-{
-  [self.webSocketManager open];
-}
-
-- (void)requestBattleInit
-{
-  [self sendBattleInitRequest];
-}
+#pragma mark - Creating Request
 
 - (RPGRequest *)createBattleInitRequest
 {
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  return [RPGRequest requestWithType:kRPGBattleInitMessageType
-                               token:token];
+  return [RPGRequest requestWithType:kRPGAdventuresInitMessageType];
 }
 
-- (void)sendBattleInitRequest
-{
-  id request = [self createBattleInitRequest];
-  
-  if (request != nil)
-  {
-    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
-  }
-  else
-  {
-    NSLog(@"Request is nil");
-  }
-}
-
-- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID
-{
-  NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGSkillActionRequest *request = [RPGSkillActionRequest requestWithSkillID:aSkillID token:token];
-  
-  if (request != nil)
-  {
-    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
-  }
-  else
-  {
-    NSLog(@"Request is nil");
-  }
-}
-
-- (void)sendBattleConditionRequest
-{
-    // TODO: send after timeout
-}
-
-#pragma mark Process Manager Response
+#pragma mark - Process Manager Response
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
   [super processManagerResponse:aResponse];
 }
 
+#pragma mark - Battle Init Response
+
 - (void)processBattleInitResponse:(NSDictionary *)aResponse
 {
-  RPGBattleInitResponse *battleInitResponse = [[[RPGBattleInitResponse alloc]
+  RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
                                                 initWithDictionaryRepresentation:aResponse]
                                                autorelease];
   
@@ -155,9 +110,11 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
   }
 }
 
+#pragma mark - Battle Condition Response
+
 - (void)processBattleConditionResponse:(NSDictionary *)aResponse
 {
-  RPGBattleConditionResponse *battleConditionResponse = [[[RPGBattleConditionResponse alloc]
+  RPGAdventuresConditionResponse *battleConditionResponse = [[[RPGAdventuresConditionResponse alloc]
                                                           initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
@@ -165,6 +122,54 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
     [self.battle updateWithBattleConditionResponse:battleConditionResponse];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
   }
+}
+
+#pragma mark - Actions
+
+
+- (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID
+{
+  RPGSkillActionRequest *request = [RPGSkillActionRequest requestWithSkillID:aSkillID];
+  
+  if (request != nil)
+  {
+    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
+}
+
+- (void)sendBattleInitRequest
+{
+  id request = [self createBattleInitRequest];
+  
+  if (request != nil)
+  {
+    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
+}
+
+#pragma mark - Misc
+
+- (void)prepareBattleControllerForDismiss
+{
+  [self.webSocketManager close];
+}
+
+- (void)openBattleControllerWebSocket
+{
+  [self.webSocketManager open];
+}
+
+- (void)requestBattleInit
+{
+  [self sendBattleInitRequest];
 }
 
 #pragma mark - Helper Methods
