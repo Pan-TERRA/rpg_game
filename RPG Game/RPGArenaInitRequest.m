@@ -21,9 +21,9 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs token:(NSString *)aToken
+- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs
 {
-  self = [super initWithType:kRPGArenaInitRequestType token:aToken];
+  self = [super initWithType:kRPGArenaInitRequestType];
   
   if (self != nil)
   {
@@ -33,14 +33,14 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
   return self;
 }
 
-+ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs token:(NSString *)aToken
++ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs
 {
-  return [[[self alloc] initWithSkillIDs:aSkillIDs token:aToken] autorelease];
+  return [[[self alloc] initWithSkillIDs:aSkillIDs] autorelease];
 }
 
-- (instancetype)initWithType:(NSString *)aType token:(NSString *)aToken
+- (instancetype)initWithType:(NSString *)aType
 {
-  return [self initWithSkillIDs:nil token:nil];
+  return [self initWithSkillIDs:nil];
 }
 
 #pragma mark - Dealloc
@@ -66,7 +66,7 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   NSArray *skillIDs = aDictionary[kRPGArenaInitRequestSerializationSkills];
-  return [self initWithSkillIDs:skillIDs token:aDictionary[kRPGRequestSerializationToken]];
+  return [self initWithSkillIDs:skillIDs];
 }
 
 @end

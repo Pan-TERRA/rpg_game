@@ -12,7 +12,7 @@
 
 @property (nonatomic, retain, readonly) NSArray *skillIDs;
 
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs token:(NSString *)aToken NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs token:(NSString *)aToken;
+- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs NS_DESIGNATED_INITIALIZER;
++ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs;
 
 @end
