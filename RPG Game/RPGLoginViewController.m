@@ -56,30 +56,17 @@
           break;
         }
           
-        case kRPGStatusCodeWrongEmail:
-        {
-          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
-                                    completionHandler:nil];
-          break;
-        }
-          
-        case kRPGStatusCodeUserDoesNotExist:
-        {
-          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist
-                                    completionHandler:nil];
-          break;
-        }
-          
-        case kRPGStatusCodeWrongPassword:
-        {
-          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword
-                                    completionHandler:nil];
-          break;
-        }
-          
         default:
         {
-          [RPGAlertController handleDefaultError];
+          if ([self canHandleStatusCode:statusCode])
+          {
+            [RPGAlertController showErrorWithStatusCode:statusCode
+                                      completionHandler:nil];
+          }
+          else
+          {
+            [RPGAlertController handleDefaultError];
+          }
           break;
         }
       }
@@ -195,6 +182,15 @@
   
   [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
                                            completionHandler:self.loginCompletionHandler];
+}
+
+#pragma mark - Helper Methods
+
+- (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
+{
+  return aStatusCode == kRPGStatusCodeWrongEmail
+  || aStatusCode == kRPGStatusCodeUserDoesNotExist
+  || aStatusCode == kRPGStatusCodeWrongPassword;
 }
 
 @end

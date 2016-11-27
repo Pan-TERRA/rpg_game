@@ -152,10 +152,10 @@
          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
-                           {
-                             UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-                             [viewController dismissViewControllerAnimated:YES completion:nil];
-                           });
+            {
+              UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
           }];
          break;
        }
