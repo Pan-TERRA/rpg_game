@@ -8,8 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+  // Arena
 extern NSString * const kRPGArenaInitMessageType;
-extern NSString * const kRPGBattleInitMessageType;
-extern NSString * const kRPGBattleConditionMessageType;
+extern NSString * const kRPGArenaConditionMessageType;
+  // Adventures
+extern NSString * const kRPGAdventuresInitMessageType;
+extern NSString * const kRPGAdventuresConditionMessageType;
+  // General
 extern NSString * const kRPGSkillActionMessageType;
 extern NSString * const kRPGTimeRequestMessageType;
