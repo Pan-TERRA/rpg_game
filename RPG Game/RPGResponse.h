@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
+extern NSString * const kRPGResponseSerializationType;
 extern NSString * const kRPGResponseSerializationStatus;
 
 /**
