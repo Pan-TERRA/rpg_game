@@ -7,19 +7,26 @@
 //
 
 #import "RPGAdventuresControllerGenerator.h"
+  // API
+#import "RPGWebsocketManager.h"
   // Controllers
 #import "RPGAdventuresController.h"
+  // Constants
+#import "RPGMessageTypes.h"
 
-static NSString * const kRPGAdventuresControllerBattleInitMessageType = @"BATTLE_INIT";
-static NSString * const kRPGAdventuresControllerBattleConditionMessageType = @"BATTLE_CONDITION";
+static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.28:8888/monster_battle";
 
 @implementation RPGAdventuresControllerGenerator
 
 - (RPGBattleController *)battleController
 {
-  RPGAdventuresController *controller = [[[RPGAdventuresController alloc] init] autorelease];
-  [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGAdventuresControllerBattleInitMessageType];
-  [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGAdventuresControllerBattleConditionMessageType];
+  RPGWebsocketManager *manager = [[RPGWebsocketManager alloc] initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPIMonsterBattle]];
+  RPGAdventuresController *controller = [[[RPGAdventuresController alloc] initWithWebSocketManager:manager] autorelease];
+  manager.battleController = controller;
+  [manager release];
+  
+  [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGAdventuresInitMessageType];
+  [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGAdventuresConditionMessageType];
   
   return controller;
 }

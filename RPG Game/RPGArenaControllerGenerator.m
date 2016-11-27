@@ -7,12 +7,16 @@
 //
 
 #import "RPGArenaControllerGenerator.h"
+  // API
+#import "RPGWebsocketManager.h"
   // Controllers
 #import "RPGArenaController.h"
+  // Constants
+#import "RPGMessageTypes.h"
 
-static NSString * const kRPGArenaControllerBattleInitMessageType = @"ARENA_INIT";
-// TODO: Change To ArenaCondition
+// TODO: Change to arena condition message
 static NSString * const kRPGArenaControllerBattleConditionMessageType = @"BATTLE_CONDITION";
+static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.28:8888/arena_battle";
 
 @interface RPGArenaControllerGenerator ()
 
@@ -47,8 +51,12 @@ static NSString * const kRPGArenaControllerBattleConditionMessageType = @"BATTLE
 
 - (RPGBattleController *)battleController
 {
-  RPGArenaController *controller = [[[RPGArenaController alloc] init] autorelease];
-  [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGArenaControllerBattleInitMessageType];
+  RPGWebsocketManager *manager = [[RPGWebsocketManager alloc] initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPIArenaBattle]];
+  RPGArenaController *controller = [[[RPGArenaController alloc] initWithWebSocketManager:manager] autorelease];
+  manager.battleController = controller;
+  [manager release];
+  
+  [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGArenaInitMessageType];
   [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGArenaControllerBattleConditionMessageType];
   controller.skillsID = self.skillsID;
   
