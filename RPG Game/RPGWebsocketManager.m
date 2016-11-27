@@ -1,10 +1,10 @@
-//
-//  RPGWebsocketManager.m
-//  RPG Game
-//
-//  Created by Иван Дзюбенко on 11/13/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGWebsocketManager.m
+  //  RPG Game
+  //
+  //  Created by Иван Дзюбенко on 11/13/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGWebsocketManager.h"
   // API
@@ -24,7 +24,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGWebsocketManager () <SRWebSocketDelegate>
 
-@property (assign, nonatomic, readwrite) RPGBattleController *battleController;
+
 @property (copy, nonatomic, readwrite) NSString *token;
 
 @end
@@ -35,13 +35,12 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleController:(id)aBattleController URL:(NSURL *)anURL
+- (instancetype)initWithURL:(NSURL *)anURL
 {
   self = [super initWithURL:anURL];
   
   if (self != nil)
   {
-    _battleController = aBattleController;
     _delegate = self;
     _token = [[NSUserDefaults standardUserDefaults].sessionToken copy];
   }
@@ -64,15 +63,33 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 
 #pragma mark  API
 
-- (void)sendWebsocketManagerMessageWithObject:(id<RPGSerializable>)anObject
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject
+{
+  [self sendWebsocketManagerMessageWithObject:anObject shouldInjectToken:YES];
+}
+
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject shouldInjectToken:(BOOL)anInjectTokenFlag
 {
     // logging
   NSLog(@"\r\nRequest:\r\n %@", [anObject dictionaryRepresentation]);
   
   NSError *JSONError = nil;
-  NSData *data = [NSJSONSerialization dataWithJSONObject:[anObject dictionaryRepresentation]
-                                                 options:NSJSONWritingPrettyPrinted
-                                                   error:&JSONError];
+  NSData *data = nil;
+  NSMutableDictionary *JSONObject = [[[anObject dictionaryRepresentation] mutableCopy] autorelease];
+  
+  if (anInjectTokenFlag)
+  {
+    NSString *token = self.token;
+    if (token != nil)
+    {
+      JSONObject[kRPGRequestToken] = token;
+    }
+  }
+  
+  
+  data = [NSJSONSerialization dataWithJSONObject:JSONObject
+                                         options:NSJSONWritingPrettyPrinted
+                                           error:&JSONError];
   
   if (data == nil)
   {
@@ -104,7 +121,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
   {
       // logging
     NSLog(@"\r\nResponse:\r\n %@", responseDictionary);
-  
+    
     [self.battleController processManagerResponse:responseDictionary];
   }
   else
@@ -136,6 +153,5 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 {
   NSLog(@"Websocket did close \r\nWith code: %ld\r\nReason: %@", (long)code, reason);
 }
-
 
 @end

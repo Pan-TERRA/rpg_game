@@ -7,16 +7,23 @@
 //
 
 #import <SocketRocket/SocketRocket.h>
+  // Controllers
+@class RPGBattleController;
   // Misc
 #import "RPGSerializable.h"
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface RPGWebsocketManager : SRWebSocket
 
+@property (assign, nonatomic, readwrite) RPGBattleController *battleController;
 @property (nonatomic, assign) id<SRWebSocketDelegate> delegate;
 
-- (instancetype)initWithBattleController:(id)aBattleController URL:(NSURL *)anURL;
+- (instancetype)initWithURL:(NSURL *)anURL;
 
-- (void)sendWebsocketManagerMessageWithObject:(id<RPGSerializable>)anObject;
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject;
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject shouldInjectToken:(BOOL)anInjectTokenFlag;
 
 @end
+
+NS_ASSUME_NONNULL_END
