@@ -85,6 +85,13 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [super dealloc];
 }
 
+#pragma mark - Custom Getter
+
+- (NSUInteger)characterLevel
+{
+  return [self.levelLabel.text integerValue];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
