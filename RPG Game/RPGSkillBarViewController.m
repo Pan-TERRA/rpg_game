@@ -100,18 +100,12 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 - (void)updateButtonsState
 {
   NSArray<RPGSkill *> *skills = self.battleController.skills;
-  for (NSInteger i = 1; i <= skills.count; i++)
-  {
-    BOOL active = NO;
-      // TODO: redo
-    NSInteger cooldown = skills[i - 1].cooldown;
-    if (cooldown == 0)
-    {
-      active = YES;
-    }
   
-    ((UIButton *)[self.view viewWithTag:i]).enabled = active;
-  }
+  for (NSInteger i = 0; i < skills.count; i++)
+  {
+    BOOL isSkillActive = (skills[i].cooldown == 0) ? YES : NO;
+    ((UIButton *)[self.view viewWithTag:(i + 1)]).enabled = isSkillActive;
+  } 
 }
 
 #pragma mark - UIViewController
