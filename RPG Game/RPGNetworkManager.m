@@ -27,7 +27,7 @@ static RPGNetworkManager *sharedNetworkManager = nil;
 #pragma mark - API constants
 
   // General
-NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.28:8000";
+NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.15:8000";
 static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/token_exists";
   // Resources
 static NSString * const kRPGNetworkManagerAPIResourcesRoute = @"/resources";

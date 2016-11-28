@@ -24,7 +24,7 @@
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(UIViewController *)aViewController
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSArray *)aSkillsArray;
+                           skillsArray:(NSArray *)aSkillsArray NS_DESIGNATED_INITIALIZER;
 
 - (void)addItem:(NSUInteger)anItemID type:(RPGItemType)aType;
 - (void)removeItem:(NSUInteger)anItemID type:(RPGItemType)aType;

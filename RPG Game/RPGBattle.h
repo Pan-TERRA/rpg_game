@@ -16,7 +16,7 @@
 @class RPGBattleInitResponse;
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
-@class RPGResources;
+@class RPGBattleReward;
 
 extern const NSInteger kRPGBattleTurnDuration;
 
@@ -32,7 +32,7 @@ extern const NSInteger kRPGBattleTurnDuration;
 @property (assign, nonatomic, readonly) NSInteger currentTime;
 @property (assign, nonatomic, readonly) RPGBattleStatus battleStatus;
 @property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
-@property (retain, nonatomic, readonly) RPGResources *reward;
+@property (retain, nonatomic, readonly) RPGBattleReward *reward;
 @property (retain, nonatomic, readonly) RPGBattleLog *battleLog;
 
 /**

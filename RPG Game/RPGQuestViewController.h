@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RPGQuest.h"
 
+extern NSString * const kRPGQuestViewControllerWaitingMessageDownload;
+extern NSString * const kRPGQuestViewControllerWaitingMessageUpload;
+
 @interface RPGQuestViewController : UIViewController
 
 @property (nonatomic, copy, readonly) NSString *proofImageStringURL;
@@ -17,5 +20,7 @@
 @property (nonatomic, retain, readonly) UIImagePickerController *imagePickerController;
 
 - (void)setViewContent:(RPGQuest *)aQuest;
+- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage;
+- (void)setViewToNormalState;
 
 @end

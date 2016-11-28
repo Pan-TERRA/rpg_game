@@ -31,6 +31,8 @@
 
 @property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
 
+@property (nonatomic, assign, readwrite, getter=shouldDownloadImageProof) BOOL downloadImageProof;
+
 @end
 
 @implementation RPGQuestViewBodyContainer
@@ -45,6 +47,7 @@
   
   [super dealloc];
 }
+
 #pragma mark - Custom Getter
 
 - (NSLayoutConstraint *)descriptionBottomConstraint
@@ -83,6 +86,7 @@
 {
   self.titleLabel.text = aQuest.name;
   self.descriptionLabel.text = aQuest.questDescription;
+  self.downloadImageProof = YES;
 }
 
 #pragma mark - View State
@@ -186,12 +190,17 @@
 
 - (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
+  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageUpload];
+  
   UIImage *chosenImage = anInfo[UIImagePickerControllerOriginalImage];
   // !!!: leak
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
   void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
+    [self.questViewController setViewToNormalState];
+    
     switch (statusCode)
     {
       case kRPGStatusCodeOK:
@@ -228,8 +237,6 @@
   NSData *data = UIImageJPEGRepresentation(chosenImage, 0.7);
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
-  
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
@@ -240,33 +247,40 @@
 
 #pragma mark - Upload Image
 
-- (void)uploadImage
+- (void)downloadImage
 {
-  // !!!: SELF not WEAKSELF
-  void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
+  if (self.shouldDownloadImageProof)
   {
-    switch (aStatusCode)
+    [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
+    // !!!: SELF not WEAKSELF
+    void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
     {
-      case kRPGStatusCodeOK:
+      [self.questViewController setViewToNormalState];
+      
+      switch (aStatusCode)
       {
-        self.proofImageView.image = [UIImage imageWithData:anImageData];
-        break;
+        case kRPGStatusCodeOK:
+        {
+          self.proofImageView.image = [UIImage imageWithData:anImageData];
+          self.downloadImageProof = NO;
+          break;
+        }
+          
+        default:
+        {
+          NSString *message = @"Can't download quest proof image.";
+          [RPGAlertController showAlertWithTitle:nil
+                                         message:message
+                                     actionTitle:nil
+                                      completion:nil];
+          break;
+        }
       }
-        
-      default:
-      {
-        NSString *message = @"Can't upload quest proof image.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:nil];
-        break;
-      }
-    }
-  };
-  
-  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
-                                               completionHandler:handler];
+    };
+    
+    [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
+                                                 completionHandler:handler];
+  }
 }
 
 @end

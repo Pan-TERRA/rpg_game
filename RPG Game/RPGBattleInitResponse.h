@@ -21,16 +21,18 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                          playerInfo:(RPGPlayer *)aPlayerInfo
-                         currentTurn:(BOOL)aCurrentTurn
-                                time:(NSInteger)aTime
-                              status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithType:(NSString *)aType
+                opponentInfo:(RPGEntity *)anOpponentInfo
+                  playerInfo:(RPGPlayer *)aPlayerInfo
+                 currentTurn:(BOOL)aCurrentTurn
+                        time:(NSInteger)aTime
+                      status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 
-+ (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                                        playerInfo:(RPGPlayer *)aPlayerInfo
-                                       currentTurn:(BOOL)aCurrentTurn
-                                              time:(NSInteger)aTime
-                                            status:(NSInteger)aStatus;
++ (instancetype)battleInitResponseWithType:(NSString *)aType
+                              opponentInfo:(RPGEntity *)anOpponentInfo
+                                playerInfo:(RPGPlayer *)aPlayerInfo
+                               currentTurn:(BOOL)aCurrentTurn
+                                      time:(NSInteger)aTime
+                                    status:(NSInteger)aStatus;
 
 @end

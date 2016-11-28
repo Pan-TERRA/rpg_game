@@ -162,7 +162,7 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
         
       default:
       {
-        NSString *message = @"Can't update quest list.";
+        NSString *message = @"Can't update shop.";
         [RPGAlertController showAlertWithTitle:nil
                                        message:message
                                    actionTitle:nil

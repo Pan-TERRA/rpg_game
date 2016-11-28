@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class RPGBattleControllerGenerator;
 @class RPGBattleController;
-@class RPGArenaController;
 
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 
-- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController;
+- (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
 
 @end
+
+NS_ASSUME_NONNULL_END

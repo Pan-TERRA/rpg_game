@@ -12,10 +12,6 @@
 
 @class RPGQuest;
 
-extern NSString * const kRPGQuestStringStateInProgress;
-extern NSString * const kRPGQuestStringStateNotReviewed;
-extern NSString * const kRPGQuestStringStateReviewedFalse;
-
 @interface RPGQuestListViewController : UIViewController
 /**
  *  Update the quest list table view.

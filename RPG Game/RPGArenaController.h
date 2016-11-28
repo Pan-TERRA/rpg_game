@@ -7,11 +7,11 @@
 //
 
 #import "RPGBattleController.h"
+  // Controllers
+#import "RPGAdventuresController.h"
 
-@interface RPGArenaController : RPGBattleController
+@interface RPGArenaController : RPGAdventuresController
 
-@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skillIDs;
-
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
 
 @end

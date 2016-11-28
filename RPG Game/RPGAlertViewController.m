@@ -95,7 +95,7 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
   [self.alertActionButton setTitle:self.alertActionButtonText forState:UIControlStateNormal];
 }
 
-#pragma mark - IBAction
+#pragma mark - IBActions
 
 - (IBAction)alertButtonAction:(UIButton *)sender
 {

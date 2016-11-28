@@ -9,12 +9,10 @@
 #import "RPGRequest.h"
 
 NSString *const kRPGRequestSerializationType = @"type";
-NSString *const kRPGRequestSerializationToken = @"token";
 
 @interface RPGRequest ()
 
 @property (nonatomic, copy, readwrite) NSString *type;
-@property (nonatomic, copy, readwrite) NSString *token;
 
 @end
 
@@ -23,22 +21,12 @@ NSString *const kRPGRequestSerializationToken = @"token";
 #pragma mark - Init
 
 - (instancetype)initWithType:(NSString *)aType
-                       token:(NSString *)aToken
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aType == nil || aToken == nil)
-    {
-      [self release];
-      self = nil;
-    }
-    else
-    {
-      _type = [aType copy];
-      _token = [aToken copy];
-    }
+    _type = [aType copy];
   }
   
   return self;
@@ -46,14 +34,12 @@ NSString *const kRPGRequestSerializationToken = @"token";
 
 - (instancetype)init
 {
-  return [self initWithType:nil token:nil];
+  return [self initWithType:nil];
 }
 
 + (instancetype)requestWithType:(NSString *)aType
-                          token:(NSString *)aToken
 {
-  return [[[self alloc] initWithType:aType
-                               token:aToken] autorelease];
+  return [[[self alloc] initWithType:aType] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -61,7 +47,7 @@ NSString *const kRPGRequestSerializationToken = @"token";
 - (void)dealloc
 {
   [_type release];
-  [_token release];
+  
   [super dealloc];
 }
 
@@ -72,15 +58,13 @@ NSString *const kRPGRequestSerializationToken = @"token";
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
   dictionaryRepresentation[kRPGRequestSerializationType] = self.type;
-  dictionaryRepresentation[kRPGRequestSerializationToken] = self.token;
   
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithType:aDictionary[kRPGRequestSerializationType]
-                      token:aDictionary[kRPGRequestSerializationToken]];
+  return [self initWithType:aDictionary[kRPGRequestSerializationType]];
 }
 
 @end

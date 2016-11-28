@@ -1,54 +1,54 @@
 //
-//  RPGQuestReward.m
+//  RPGBattleReward.m
 //  RPG Game
 //
-//  Created by Максим Шульга on 10/19/16.
+//  Created by Максим Шульга on 11/25/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGQuestReward.h"
+#import "RPGBattleReward.h"
 
-static NSString * const kRPGQuestRewardSkillId = @"skill_id";
+static NSString * const kRPGBattleRewardExp = @"exp";
 
-@interface RPGQuestReward()
+@interface RPGBattleReward()
 
-@property (nonatomic, assign, readwrite) NSUInteger skillID;
+@property (nonatomic, assign, readwrite) NSUInteger exp;
 
 @end
 
-@implementation RPGQuestReward
+@implementation RPGBattleReward
 
 #pragma mark - Init
 
 - (instancetype)initWithGold:(NSInteger)aGold
                     crystals:(NSInteger)aCrystals
-                     skillID:(NSUInteger)aSkillID
+                         exp:(NSUInteger)anExp
 {
   self = [super initWithGold:aGold crystals:aCrystals];
   
   if (self != nil)
   {
-    _skillID = aSkillID;
+    _exp = anExp;
   }
   
   return self;
 }
 
-+ (instancetype)questRewardWithGold:(NSInteger)aGold
-                           crystals:(NSInteger)aCrystals
-                            skillID:(NSUInteger)aSkillID
++ (instancetype)battleRewardWithGold:(NSInteger)aGold
+                            crystals:(NSInteger)aCrystals
+                                 exp:(NSUInteger)anExp
 {
-  return [[[self alloc] initWithGold:aGold crystals:aCrystals skillID:aSkillID] autorelease];
+  return [[[self alloc] initWithGold:aGold crystals:aCrystals exp:anExp] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithGold:0 crystals:0 skillID:0];
+  return [self initWithGold:0 crystals:0 exp:0];
 }
 
 - (instancetype)initWithGold:(NSInteger)aGold crystals:(NSInteger)aCrystals
 {
-  return [self initWithGold:0 crystals:0 skillID:0];
+  return [self initWithGold:0 crystals:0 exp:0];
 }
 
 #pragma mark - Dealloc
@@ -64,7 +64,7 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 {
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGQuestRewardSkillId] = @(self.skillID);
+  dictionaryRepresentation[kRPGBattleRewardExp] = @(self.exp);
   
   return dictionaryRepresentation;
 }
@@ -73,7 +73,7 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 {
   return [self initWithGold:[aDictionary[kRPGResourcesGold] integerValue]
                    crystals:[aDictionary[kRPGResourcesCrystals] integerValue]
-                    skillID:[aDictionary[kRPGQuestRewardSkillId] integerValue]];
+                        exp:[aDictionary[kRPGBattleRewardExp] integerValue]];
 }
 
 @end

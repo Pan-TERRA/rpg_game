@@ -8,8 +8,12 @@
 
 #import "RPGMessageTypes.h"
 
+  // Arena
 NSString * const kRPGArenaInitMessageType = @"ARENA_INIT";
-NSString * const kRPGBattleInitMessageType = @"BATTLE_INIT";
-NSString * const kRPGBattleConditionMessageType = @"BATTLE_CONDITION";
+NSString * const kRPGArenaConditionMessageType = @"ARENA_CONDITION";
+  // Adventures
+NSString * const kRPGAdventuresInitMessageType = @"BATTLE_INIT";
+NSString * const kRPGAdventuresConditionMessageType = @"BATTLE_CONDITION";
+  // General
 NSString * const kRPGSkillActionMessageType = @"SKILL_ACTION";
 NSString * const kRPGTimeRequestMessageType = @"TIME_REQUEST";

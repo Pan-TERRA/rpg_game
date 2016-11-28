@@ -20,16 +20,11 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlertController.h"
 
-NSString * const kRPGQuestStringStateInProgress = @"In progress";
-NSString * const kRPGQuestStringStateNotReviewed = @"Not reviewed";
-NSString * const kRPGQuestStringStateReviewedFalse = @"Reviewed false";
-
 typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 
 @interface RPGQuestListViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
-
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *takeQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *inProgressQuestListButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *doneQuestListButton;
@@ -73,15 +68,15 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.tableViewController.questListViewController = self;
-  self.tableViewController.tableView = self.tableView;
-  self.tableView.dataSource = self.tableViewController;
-  self.tableView.delegate = self.tableViewController;
+  
+  self.tableViewController = [[[RPGQuestTableViewController alloc] initWithTableView:self.tableView
+                                                                parentViewController:self] autorelease];
 }
 
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];
+  
   [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:NO];
   RPGQuestListState state = self.tableViewController.questListState;
   [self setActiveButtonForState:state];
@@ -143,7 +138,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
           NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
           [RPGAlertController showAlertWithTitle:nil
                                          message:message
-                                     actionTitle:nil completion:^(void)
+                                     actionTitle:nil
+                                      completion:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
@@ -159,7 +155,8 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
           NSString *message = @"Can't update quest list.";
           [RPGAlertController showAlertWithTitle:nil
                                          message:message
-                                     actionTitle:nil completion:nil];
+                                     actionTitle:nil
+                                      completion:nil];
           break;
         }
       }
@@ -203,18 +200,17 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
   {
     case kRPGQuestListTakeQuest:
     {
-      // ???: Tramper question
-      self.tableViewController.takeQuestsMutableArray = (NSMutableArray *)aData;
+      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListTakeQuest];
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      self.tableViewController.inProgressQuestsMutableArray = (NSMutableArray *)aData;
+      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListInProgressQuest];
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      self.tableViewController.doneQuestsMutableArray = (NSMutableArray *)aData;
+      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListDoneQuest];
       break;
     }
     case kRPGQuestListReviewQuest:
@@ -317,7 +313,6 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
                      forState:UIControlStateNormal];
   [aButton setBackgroundImage:(!anActiveFlag ? activeButtonImage : inactiveButtonImage)
                      forState:UIControlStateSelected | UIControlStateHighlighted];
- 
 }
 
 @end

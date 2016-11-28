@@ -31,7 +31,7 @@
   // Constants
 #import "RPGNibNames.h"
 
-static NSString * const kRPGCharacterProfileViewControllerWaitingMessageUpload = @"Uploading info";
+static NSString * const kRPGCharacterProfileViewControllerWaitingMessageDownload = @"Downloading info";
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
 static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
@@ -100,7 +100,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 {
   [super viewWillAppear:animated];
   
-  [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageUpload];
+  [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageDownload];
   
   NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
   NSInteger characterID = standardUserDefaults.characterID;

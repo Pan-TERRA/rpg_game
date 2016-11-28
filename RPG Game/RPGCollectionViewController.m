@@ -61,6 +61,11 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return self;
 }
 
+- (instancetype)init
+{
+  return [self initWithCollectionView:nil parentViewController:nil collectionSize:0 skillsArray:nil];
+}
+
 #pragma mark - Dealloc
 
 - (void)dealloc

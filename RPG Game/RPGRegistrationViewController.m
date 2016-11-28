@@ -69,20 +69,6 @@
   [super dealloc];
 }
 
-#pragma mark - UIViewController
-
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-  
-  self.classPickerData = self.classInfo.classNames;
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
-}
-
 #pragma mark - UIPickerViewDataSource
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)aPickerView
@@ -101,6 +87,20 @@ numberOfRowsInComponent:(NSInteger)aComponent
             forComponent:(NSInteger)aComponent
 {
   return self.classPickerData[aRow];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+  
+  self.classPickerData = self.classInfo.classNames;
+}
+
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark View State
@@ -183,37 +183,17 @@ numberOfRowsInComponent:(NSInteger)aComponent
              break;
            }
              
-           case kRPGStatusCodeWrongEmail:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeWrongJSON:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeEmailAlreadyTaken:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmailAlreadyTaken
-                                       completionHandler:nil];
-             break;
-           }
-             
-           case kRPGStatusCodeUsernameAlreadyTaken:
-           {
-             [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUsernameAlreadyTaken
-                                       completionHandler:nil];
-             break;
-           }
-             
            default:
            {
-             [RPGAlertController handleDefaultError];
+             if ([self canHandleStatusCode:statusCode])
+             {
+               [RPGAlertController showErrorWithStatusCode:statusCode
+                                         completionHandler:nil];
+             }
+             else
+             {
+               [RPGAlertController handleDefaultError];
+             }
              break;
            }
          }
@@ -221,40 +201,13 @@ numberOfRowsInComponent:(NSInteger)aComponent
     }
     else
     {
-      NSString *message = @"Password doesn't match. Lorem ipsum if the message is too large.";
-      [RPGAlertController showAlertWithTitle:nil
-                                     message:message
-                                 actionTitle:nil
-                                  completion:^
-      {
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [self fillEmptyAllRegistrationFields];
-        });
-      }];
+      [self showErrorWithMessage:@"Password doesn't match."];
     }
   }
   else
   {
-    NSString *message = @"Please fill in all required fields.";
-    [RPGAlertController showAlertWithTitle:nil
-                                   message:message
-                               actionTitle:nil
-                                completion:^
-     {
-       dispatch_async(dispatch_get_main_queue(), ^
-        {
-          [self fillEmptyAllRegistrationFields];
-        });
-     }];
+    [self showErrorWithMessage:@"Please fill in all required fields."];
   }
-}
-
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
 }
 
 #pragma mark - RPGViewController
@@ -264,8 +217,15 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [[aSender.superview.superview viewWithTag:aSender.tag + 1] becomeFirstResponder];
 }
 
-
 #pragma mark - Helper Methods
+
+- (void)showErrorWithMessage:(NSString *)message
+{
+  [RPGAlertController showAlertWithTitle:nil
+                                 message:message
+                             actionTitle:nil
+                              completion:nil];
+}
 
 - (BOOL)textFieldsNotEmpty
 {
@@ -276,14 +236,29 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.characterNameTextField.text.length != 0;
 }
 
-- (void)fillEmptyAllRegistrationFields
+- (NSInteger)getSelectedClassID
 {
-  NSString *emptyString = @"";
-  self.emailTextField.text = emptyString;
-  self.usernameTextField.text = emptyString;
-  self.passwordTextField.text = emptyString;
-  self.confirmPasswordTextField.text = emptyString;
-  self.characterNameTextField.text = emptyString;
+  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
+  
+  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
+}
+
+- (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
+{
+  return aStatusCode == kRPGStatusCodeWrongEmail
+  || aStatusCode == kRPGStatusCodeWrongJSON
+  || aStatusCode == kRPGStatusCodeEmailAlreadyTaken
+  || aStatusCode == kRPGStatusCodeUsernameAlreadyTaken
+  || aStatusCode == kRPGStatusCodeTooShortUsername
+  || aStatusCode == kRPGStatusCodeTooLongUsername
+  || aStatusCode == kRPGStatusCodeTooShortPassword
+  || aStatusCode == kRPGStatusCodeTooLongPassword
+  || aStatusCode == kRPGStatusCodeTooShortCharacterName
+  || aStatusCode == kRPGStatusCodeTooLongCharacterName
+  || aStatusCode == kRPGStatusCodeInvalidUsername
+  || aStatusCode == kRPGStatusCodeInvalidCharacterName
+  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
+  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
 }
 
 @end
