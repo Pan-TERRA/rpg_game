@@ -44,8 +44,6 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 @property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewBodyContainer *bodyContainer;
 @property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewButtonContainer *buttonContainer;
 
-@property (nonatomic, retain, readwrite) RPGWaitingViewController *waitingModal;
-
 @end
 
 @implementation RPGQuestViewController
@@ -54,15 +52,8 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGQuestViewControllerNIBName
+  return [super initWithNibName:kRPGQuestViewControllerNIBName
                          bundle:nil];
-  
-  if (self != nil)
-  {
-    _waitingModal = [[RPGWaitingViewController alloc] init];
-  }
-  
-  return self;
 }
 
 #pragma mark - Dealloc
@@ -71,7 +62,6 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 {
   [_imagePickerController release];
   [_proofImageStringURL release];
-  [_waitingModal release];
 
   [super dealloc];
 }
@@ -120,20 +110,6 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
     [self.headerContainer setViewContent:aQuest.reward];
     [self.bodyContainer setViewContent:aQuest];
   }
-}
-
-#pragma mark - View State
-
-- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
-{
-  self.waitingModal.message = aMessage;
-  [self addChildViewController:self.waitingModal frame:self.view.frame];
-}
-
-- (void)setViewToNormalState
-{
-  [self.waitingModal.view removeFromSuperview];
-  [self.waitingModal removeFromParentViewController];
 }
 
 #pragma mark - Image Picker Controller

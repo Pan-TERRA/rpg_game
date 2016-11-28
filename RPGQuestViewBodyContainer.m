@@ -29,6 +29,8 @@
 @property (nonatomic, retain, readwrite) IBOutlet UILabel *proofLabel;
 @property (nonatomic, retain, readwrite) IBOutlet UIImageView *proofImageView;
 
+@property (nonatomic, retain, readwrite) IBOutlet UIActivityIndicatorView *indicatorView;
+
 @property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
 
 @property (nonatomic, assign, readwrite, getter=shouldDownloadImageProof) BOOL downloadImageProof;
@@ -119,12 +121,14 @@
   UILabel *proofLabel = self.proofLabel;
   UIImageView *proofImageView = self.proofImageView;
   UILabel *descriptionLabel = self.descriptionLabel;
+  UIActivityIndicatorView *indicatorView = self.indicatorView;
   UIView *superview = descriptionLabel.superview;
   
   if (aFlag)
   {
     [proofImageView removeFromSuperview];
     [proofLabel removeFromSuperview];
+    [indicatorView removeFromSuperview];
     [superview addConstraint:self.descriptionBottomConstraint];
   }
   else
@@ -172,6 +176,20 @@
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:0]];
+      [indicatorView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+                                                                attribute:NSLayoutAttributeLeading
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:proofImageView
+                                                                attribute:NSLayoutAttributeLeading
+                                                               multiplier:1.0
+                                                                 constant:0]];
+      [indicatorView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+                                                                attribute:NSLayoutAttributeTop
+                                                                relatedBy:NSLayoutRelationEqual
+                                                                   toItem:proofImageView
+                                                                attribute:NSLayoutAttributeTop
+                                                               multiplier:1.0
+                                                                 constant:0]];
     }
   }
 }
@@ -191,7 +209,8 @@
 - (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
-  [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageUpload];
+  self.questViewController.state = kRPGQuestStateDone;
+  [self setViewToWaitingState];
   
   UIImage *chosenImage = anInfo[UIImagePickerControllerOriginalImage];
   // !!!: leak
@@ -199,14 +218,12 @@
   
   void (^handler)(NSInteger) = ^void(NSInteger statusCode)
   {
-    [self.questViewController setViewToNormalState];
+    [self setViewToNormalState];
     
     switch (statusCode)
     {
       case kRPGStatusCodeOK:
       {
-        weakQuestViewController.state = kRPGQuestStateDone;
-        //weakSelf.stateLabel.text = kRPGQuestStringStateNotReviewed;
         self.proofImageView.image = chosenImage;
         break;
       }
@@ -224,6 +241,7 @@
       }
       default:
       {
+        self.questViewController.state = kRPGQuestStateInProgress;
         NSString *message = @"Can't upload proof image.";
         [RPGAlertController showAlertWithTitle:nil
                                        message:message
@@ -251,11 +269,11 @@
 {
   if (self.shouldDownloadImageProof)
   {
-    [self.questViewController setViewToWaitingStateWithMessage:kRPGQuestViewControllerWaitingMessageDownload];
+    [self setViewToWaitingState];
     // !!!: SELF not WEAKSELF
     void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
     {
-      [self.questViewController setViewToNormalState];
+      [self setViewToNormalState];
       
       switch (aStatusCode)
       {
@@ -281,6 +299,18 @@
     [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
                                                  completionHandler:handler];
   }
+}
+
+- (void)setViewToWaitingState
+{
+  self.indicatorView.hidden = NO;
+  [self.indicatorView startAnimating];
+}
+
+- (void)setViewToNormalState
+{
+  self.indicatorView.hidden = YES;
+  [self.indicatorView stopAnimating];
 }
 
 @end
