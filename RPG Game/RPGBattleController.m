@@ -74,11 +74,16 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   [self sendBattleInitRequest];
 }
 
-- (void)sendBattleInitRequest
+- (RPGRequest *)createBattleInitRequest
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-  RPGRequest *request = [RPGRequest requestWithType:kRPGBattleInitMessageType
-                                              token:token];
+  return [RPGRequest requestWithType:kRPGBattleInitMessageType
+                               token:token];
+}
+
+- (void)sendBattleInitRequest
+{
+  RPGRequest *request = [self createBattleInitRequest];
   
   if (request != nil)
   {
@@ -113,54 +118,73 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)processManagerResponse:(NSDictionary *)aResponse
 {
-  RPGBattleInitResponse *battleInitResponse = nil;
-  RPGBattleConditionResponse *battleConditionResponse = nil;
-  
-    // battle init
-  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType])
+  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleInitMessageType] ||
+      [aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGArenaInitMessageType])
   {
-    battleInitResponse = [[[RPGBattleInitResponse alloc] initWithDictionaryRepresentation:aResponse] autorelease];
-    
-    if (battleInitResponse != nil && battleInitResponse.status == 0)
-    {
-      self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
-
-      NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-      NSArray *skillsArray = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-      
-      NSMutableArray *skills = [NSMutableArray array];
-      for (NSNumber *skillID in skillsArray)
-      {
-        RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
-        [skills addObject:skill];
-        [skill release];
-      }
-      
-      self.battle.player.skills = skills;
-      
-      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
-                                                          object:self];
-      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
-                                                          object:self];
-    }
+    RPGBattleInitResponse *response = [[[RPGBattleInitResponse alloc]
+                                        initWithDictionaryRepresentation:aResponse]
+                                       autorelease];
+    [self processBattleInitResponse:response];
   }
-  
-  
-  if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleConditionMessageType])
+//  else if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGArenaConditionMessageType])
+//  {
+//    RPGArenaConditionResponse *response = [[[RPGArenaConditionResponse alloc]
+//                                             initWithDictionaryRepresentation:aResponse] autorelease];
+//    [self processArenaConditionResponse:response];
+//  }
+  else if ([aResponse[kRPGBattleControllerResponseType] isEqualToString:kRPGBattleConditionMessageType])
   {
-    battleConditionResponse = [[[RPGBattleConditionResponse alloc] initWithDictionaryRepresentation:aResponse] autorelease];
+    RPGBattleConditionResponse *response = [[[RPGBattleConditionResponse alloc]
+                                             initWithDictionaryRepresentation:aResponse] autorelease];
+    [self processBattleConditionResponse:response];
+  }
+}
+
+- (void)processBattleInitResponse:(RPGBattleInitResponse *)aResponse
+{
+  if (aResponse != nil && aResponse.status == 0)
+  {
+    self.battle = [RPGBattle battleWithBattleInitResponse:aResponse];
     
-    if (battleConditionResponse != nil && battleConditionResponse.status == 0)
+    NSArray<NSNumber *> *skillIDs = [self getPlayerSkillIDs];
+    
+    NSMutableArray *skills = [NSMutableArray array];
+    for (NSNumber *skillID in skillIDs)
     {
-      [self.battle updateWithBattleConditionResponse:battleConditionResponse];
-      [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
+      RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
+      [skills addObject:skill];
+      [skill release];
     }
+    self.battle.player.skills = skills;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
+                                                        object:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
+                                                        object:self];
+  }
+}
+
+- (void)processBattleConditionResponse:(RPGBattleConditionResponse *)aResponse
+{
+  if (aResponse != nil && aResponse.status == 0)
+  {
+    [self.battle updateWithBattleConditionResponse:aResponse];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
   }
 }
 
 - (void)prepareBattleControllerForDismiss
 {
   [self.websocketManager close];
+}
+
+#pragma mark - Helper Methods
+
+- (NSArray<NSNumber *> *)getPlayerSkillIDs
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
+  return skillIDs;
 }
 
 @end

@@ -10,6 +10,7 @@
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
+#import "RPGSkillRepresentation.h"
   // View
 #import "RPGQuestViewController.h"
 
@@ -36,7 +37,8 @@
   
   if (aQuestReward.skillID != 0)
   {
-    
+    RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:aQuestReward.skillID];
+    self.skillRewardImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
   }
   else
   {
@@ -69,9 +71,21 @@
     }
       
     case kRPGQuestStateInProgress:
+    {
+      self.stateImageView.image = [UIImage imageNamed:@"timer"];
+      [self setStateItemsHidden:NO];
+      break;
+    }
+      
     case kRPGQuestStateDone:
+    {
+      self.stateImageView.image = [UIImage imageNamed:@"user-review"];
+      [self setStateItemsHidden:NO];
+      break;
+    }
     case kRPGQuestStateReviewedFalse:
     {
+      self.stateImageView.image = [UIImage imageNamed:@"forbidden"];
       [self setStateItemsHidden:NO];
       break;
     }

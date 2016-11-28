@@ -113,7 +113,14 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
                        (long)anAction.damage];
   
   UITextView *textView = (UITextView *)self.view;
-  [textView.textStorage appendAttributedString:[[[NSAttributedString alloc] initWithString:message] autorelease]];
+  UIFont *textFont = [UIFont fontWithName:@"Cochin" size:19.0];
+  UIColor *textColor = [UIColor colorWithRed:104.0/255.0 green:54.0/255.0 blue:52.0/255.0 alpha:1.0];
+  NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:message
+                                                                              attributes:@{
+                                                                                           NSFontAttributeName:textFont,
+                                                                                           NSForegroundColorAttributeName:textColor
+                                                                                           }] autorelease];
+  [textView.textStorage appendAttributedString:string];
 }
 
 - (void)playSkillSFXWithAction:(RPGBattleAction *)anAction

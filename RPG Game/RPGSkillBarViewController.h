@@ -18,4 +18,5 @@
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification;
 
 - (void)updateButtonsState;
+
 @end

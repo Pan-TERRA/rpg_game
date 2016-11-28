@@ -26,7 +26,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *passwordInputField;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *loginActivityIndicator;
-
+@property (nonatomic, copy, readwrite) void (^loginCompletionHandler)(RPGStatusCode);
 
 @end
 
@@ -40,7 +40,50 @@
   
   if (self != nil)
   {
-  
+    __block typeof(self) weakSelf = self;
+    _loginCompletionHandler = [^(RPGStatusCode statusCode)
+    {
+      [self setViewToNormalState];
+      
+      switch (statusCode)
+      {
+        case kRPGStatusCodeOK:
+        {
+          RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
+          [weakSelf presentViewController:mainViewController animated:YES completion:nil];
+          [weakSelf.emailInputField setText:@""];
+          [weakSelf.passwordInputField setText:@""];
+          break;
+        }
+          
+        case kRPGStatusCodeWrongEmail:
+        {
+          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
+                                    completionHandler:nil];
+          break;
+        }
+          
+        case kRPGStatusCodeUserDoesNotExist:
+        {
+          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist
+                                    completionHandler:nil];
+          break;
+        }
+          
+        case kRPGStatusCodeWrongPassword:
+        {
+          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword
+                                    completionHandler:nil];
+          break;
+        }
+          
+        default:
+        {
+          [RPGAlertController handleDefaultError];
+          break;
+        }
+      }
+    } copy];
   }
   
   return self;
@@ -51,6 +94,7 @@
 - (void)dealloc
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  [_loginCompletionHandler release];
   
   [super dealloc];
 }
@@ -123,53 +167,9 @@
                                              password:password];
     
     [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
-                                             completionHandler:^(NSInteger statusCode)
-     {
-       [self setViewToNormalState];
-       
-       switch (statusCode)
-       {
-         case kRPGStatusCodeOK:
-         {
-           RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
-           [self presentViewController:mainViewController animated:YES completion:nil];
-           [self.emailInputField setText:@""];
-           [self.passwordInputField setText:@""];
-           break;
-         }
-           
-         case kRPGStatusCodeWrongEmail:
-         {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongEmail
-                                     completionHandler:nil];
-           break;
-         }
-           
-         case kRPGStatusCodeUserDoesNotExist:
-         {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeUserDoesNotExist
-                                     completionHandler:nil];
-           break;
-         }
-           
-         case kRPGStatusCodeWrongPassword:
-         {
-           [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongPassword
-                                     completionHandler:nil];
-           break;
-         }
-           
-         default:
-         {
-           [RPGAlertController handleDefaultError];
-           break;
-         }
-       }
-     }];
+                                             completionHandler:self.loginCompletionHandler];
   }
 }
-
-
 
 #pragma mark - RPGViewController
 
@@ -182,6 +182,19 @@
 {
   [self loginAction:nil];
   [aSender endEditing:YES];
+}
+
+#pragma mark - API
+
+- (void)loginActionWithEmail:(NSString *)anEmail password:(NSString *)aPassword
+{
+  
+  RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest
+                                           authorizationRequestWithEmail:anEmail
+                                           password:aPassword];
+  
+  [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
+                                           completionHandler:self.loginCompletionHandler];
 }
 
 @end

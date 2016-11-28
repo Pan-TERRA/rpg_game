@@ -19,6 +19,7 @@
 @property (nonatomic, retain, readonly) NSArray *skillsIDArray;
 @property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
 @property (nonatomic, assign, readonly) NSUInteger collectionSize;
+@property (nonatomic, assign, readonly) UICollectionView *collectionView;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(UIViewController *)aViewController

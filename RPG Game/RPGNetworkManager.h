@@ -49,6 +49,9 @@ extern NSString * const kRPGNetworkManagerStatus;
   // Shop
 extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
 extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
+  //Arena
+extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
+extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 @class RPGResources;
 
@@ -66,7 +69,7 @@ extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
 
 /**
  *  Helper method. Returns request with specific URL and HTTP method, body is JSON
- *  presentaion of an object. Raises exception if serialization fails.
+ *  presentation of an object. Raises exception if serialization fails.
  *
  *  @param anObject Serializable object or NSDictionary instance
  *  @param aMethod  HTTP method
@@ -84,6 +87,8 @@ extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
 - (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock;
+- (void)getImageDataFromPath:(NSString *)aPath
+               completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))callbackBlock;
 
 @end
 

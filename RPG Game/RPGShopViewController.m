@@ -52,7 +52,7 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
   if (self != nil)
   {
     _collectionViewController = [RPGShopCollectionViewController new];
-    _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Loading..."];
+    _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Loading..." completion:nil];
   }
   return self;
 }

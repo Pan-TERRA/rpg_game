@@ -7,6 +7,8 @@
   //
 
 #import "RPGSkillBarViewController.h"
+// Frameworks
+#import <QuartzCore/QuartzCore.h>
   // Entities
 #import "RPGBattle.h"
 #import "RPGSkill.h"
@@ -18,6 +20,10 @@
 #import "RPGSkillDescriptionViewController.h"
   // Constants
 #import "RPGNibNames.h"
+
+// Constants
+
+static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 
 @interface RPGSkillBarViewController ()
 
@@ -103,6 +109,7 @@
     {
       active = YES;
     }
+  
     ((UIButton *)[self.view viewWithTag:i]).enabled = active;
   }
 }
@@ -132,7 +139,7 @@
   }
   
     //update view with button's images
-  for (NSUInteger i = 0; i < 7; i++)
+  for (NSUInteger i = 0; i < 5; i++)
   {
     RPGSkillRepresentation *representation = nil;
     UIImage *backgroundImage = nil;
@@ -151,6 +158,10 @@
       if (representation.imageName.length != 0)
       {
         backgroundImage = [UIImage imageNamed:representation.imageName];
+        [skillButton setImage:[UIImage imageNamed:@"battle_empty_icon_inactive"]
+                     forState:UIControlStateNormal];
+        skillButton.layer.cornerRadius = kRPGSkillBarViewControllerSkillButtonCornerRadius;
+        skillButton.layer.masksToBounds = YES;
       }
       else
       {
@@ -167,6 +178,8 @@
       [skillButton setBackgroundImage:backgroundImage forState:UIControlStateDisabled];
     }
   }
+  
+  [self disableButtons];
 }
 
 @end

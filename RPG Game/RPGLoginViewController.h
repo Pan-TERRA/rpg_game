@@ -11,4 +11,6 @@
 
 @interface RPGLoginViewController : RPGViewController
 
+- (void)loginActionWithEmail:(NSString *)anEmail password:(NSString *)aPassword;
+
 @end

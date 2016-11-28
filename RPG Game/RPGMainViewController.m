@@ -14,6 +14,7 @@
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
 #import "RPGShopViewController.h"
+#import "RPGArenaSkillDrawViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -23,7 +24,7 @@
 #import "RPGNetworkManager.h"
 #import "RPGResources.h"
 
-@interface RPGMainViewController ()
+@interface RPGMainViewController () <RPGPresentingViewController>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
@@ -81,6 +82,16 @@
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - RPGPresentingViewController
+
+- (void)dismissCurrentAndPresentViewController:(UIViewController *)aViewController
+{
+  [self dismissViewControllerAnimated:NO completion:^
+  {
+    [self presentViewController:aViewController animated:YES completion:nil];
+  }];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)segueToQuests
@@ -119,7 +130,9 @@
 
 - (IBAction)segueToArena
 {
-  
+  RPGArenaSkillDrawViewController *viewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
+  viewController.delegate = self;
+  [self presentViewController:viewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToSettings

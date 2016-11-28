@@ -272,7 +272,10 @@
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIProofQuestRoute];
 
-  NSMutableURLRequest *request = [[self requestWithObject:aRequest URLstring:requestString method:@"POST" injectToken:YES] mutableCopy];
+  NSMutableURLRequest *request = [[[self requestWithObject:aRequest
+                                                 URLstring:requestString
+                                                    method:@"POST"
+                                               injectToken:YES] mutableCopy] autorelease];
 
     // build HTTP body
   NSString *boundary = @"---------------------------Boundary Line---------------------------";
@@ -372,70 +375,6 @@
       }
     });
 
-  }];
-  
-  [task resume];
-  
-  [session finishTasksAndInvalidate];
-}
-
-- (void)getImageProofDataFromURL:(NSURL *)url completionHandler:(void (^)(RPGStatusCode statusCode, NSData *imageData))callbackBlock
-{
-  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
-  request.HTTPMethod = @"GET";
-
-  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-  // ???: Tramper quetion. downloadTask
-  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
-                                          completionHandler:^(NSData * _Nullable data,
-                                                              NSURLResponse * _Nullable response,
-                                                              NSError * _Nullable error)
-  {
-    if (error != nil)
-    {
-      if ([self isNoInternerConnection:error])
-      {
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
-        });
-        return;
-      }
-      
-      [self logError:error withTitle:@"Network error"];
-      
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
-      });
-      return;
-    }
-    
-    if ([self isResponseCodeNot200:response])
-    {
-      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
-      
-      dispatch_async(dispatch_get_main_queue(), ^
-      {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
-      });
-      return;
-    }
-    
-   
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-      if (data == nil)
-      {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
-      }
-      else
-      {
-        callbackBlock(kRPGStatusCodeOK, data);
-      }
-    });
-      
   }];
   
   [task resume];

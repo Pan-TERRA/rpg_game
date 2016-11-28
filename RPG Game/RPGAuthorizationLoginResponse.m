@@ -57,6 +57,7 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
       [self release];
       self = nil;
     }
+    //?
     else if (aStatus != 0 &&
              (aUsername == nil ||
               aToken == nil ||

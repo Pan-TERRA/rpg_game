@@ -9,6 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
+#import "RPGArenaController.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -31,6 +32,9 @@
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
+static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
+static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
+
 @interface RPGBattleViewController ()
 
 @property(nonatomic, retain, readwrite) RPGBattleController *battleController;
@@ -38,12 +42,15 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   // Player 1
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
 @property (nonatomic, retain, readwrite) NSTimer *timer;
@@ -67,6 +74,47 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
 #pragma mark - Init
 
+// TODO: remove this unpleasantness
+// builder?
+- (instancetype)initWithArenaController:(RPGArenaController *)anArenaController
+{
+  self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
+  
+  if (self != nil)
+  {
+    _battleController = [anArenaController retain];
+    _timerCounter = kRPGBattleTurnDuration;
+    if (_battleController != nil)
+    {
+      _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
+      _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
+        [self.battleController prepareBattleControllerForDismiss];
+        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+      }];
+      
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(modelDidChange:)
+                                                   name:kRPGModelDidChangeNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:self
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
+                                               selector:@selector(battleInitDidEndSetUp:)
+                                                   name:kRPGBattleInitDidEndSetUpNotification
+                                                 object:_battleController];
+      [_battleController addObserver:self
+                          forKeyPath:@"battle.currentTurn"
+                             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
+                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+    }
+  }
+  
+  return self;
+}
+
 - (instancetype)init
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
@@ -79,7 +127,10 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
     {
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"];
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
+        [self.battleController prepareBattleControllerForDismiss];
+        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+      }];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -120,7 +171,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
-  
+
   [super dealloc];
 }
 
@@ -186,14 +237,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)cancelBattleInit:(UIButton *)sender
-{
-  [self.battleController prepareBattleControllerForDismiss];
-  [self removeBattleInitModal];
-  [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (IBAction)showSettingsModal:(UIButton *)sender
 {
   if (self.settingsViewController == nil)
@@ -237,29 +280,42 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
   
     // client
   NSInteger playerHP = battleController.playerHP;
+  NSInteger playerMaxHP = battleController.playerMaxHP;
+  playerHP = (playerHP >= 0) ? playerHP : 100;
+  playerMaxHP = (playerMaxHP > 0) ? playerMaxHP : 100;
   NSString *playerNickName = battleController.playerNickName;
   self.playerNickName.text = playerNickName;
-  self.playerHPBar.progress = ((float)playerHP / battleController.playerMaxHP);
+  self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
+  self.playerHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)playerHP, (long)playerMaxHP];
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
+  NSInteger opponentMaxHP = battleController.opponentMaxHP;
+  opponentHP = (opponentHP >= 0) ? opponentHP : 100;
+  opponentMaxHP = (opponentMaxHP > 0) ? opponentMaxHP : 100;
   NSString *opponentNickName = battleController.opponentNickName;
   self.opponentNickName.text = opponentNickName;
-  self.opponentHPBar.progress = ((float)opponentHP / battleController.opponentMaxHP);
+  self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
+  self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
+  
+  if (battleController.isMyTurn)
+  {
+    self.turnLabel.text = kRPGBattleViewControllerMyTurn;
+  }
+  else
+  {
+    self.turnLabel.text = kRPGBattleViewControllerNotMyTurn;
+  }
   
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
-  {
-//    [self addChildViewController:self.battleRewardModal];
-//    self.battleRewardModal.view.frame = self.view.frame;
-//    [self.view addSubview:self.battleRewardModal.view];
-//    [self.battleRewardModal didMoveToParentViewController:self];
-    
+  {    
     [self addChildViewController:self.battleRewardModal frame:self.view.frame];
     
     self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
     self.playerRewardLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
     
     [self.timer invalidate];
+    [self.battleController prepareBattleControllerForDismiss];
   }
   
     // skillbar

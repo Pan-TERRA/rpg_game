@@ -43,6 +43,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *hpLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *attackLabel;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *expProgressBar;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *avatarImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *backButton;
 
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillCollectionView;
@@ -80,7 +81,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
   [_waitingModal release];
-  
+
   [super dealloc];
 }
 
@@ -101,7 +102,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageUpload];
   
-  NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSInteger characterID = standardUserDefaults.characterID;
   
   RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithCharacterID:characterID];
   
@@ -125,6 +127,30 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
          break;
        }
          
+       case kRPGStatusCodeEmptySkillsToSelect:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmptySkillsToSelect completionHandler:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeHasNoSuchSkills:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoSuchSkills completionHandler:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeHasNoAnySkills:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoAnySkills completionHandler:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeExceedActiveSkillsBagSize:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeExceedActiveSkillsBagSize completionHandler:nil];
+         break;
+       }
+         
        default:
        {
          [self handleDefaultError];
@@ -132,8 +158,34 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
        }
      }
    }];
-
+  
+  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:standardUserDefaults.sessionAvatar
+                                               completionHandler:^(NSInteger aStatusCode, NSData * anImageData)
+  {
+    switch (aStatusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        self.avatarImageView.image = [UIImage imageWithData:anImageData];
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't upload avatar.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+    }
+  }];
 }
+
+
+
+
 
 #pragma mark - Error Handling
 
@@ -142,10 +194,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
-     {
-       UIViewController *viewController = self.presentingViewController.presentingViewController;
-       [viewController dismissViewControllerAnimated:YES completion:nil];
-     });
+                    {
+                      UIViewController *viewController = self.presentingViewController.presentingViewController;
+                      [viewController dismissViewControllerAnimated:YES completion:nil];
+                    });
    }];
 }
 
@@ -154,9 +206,9 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
-     {
-       [self dismissViewControllerAnimated:YES completion:nil];
-     });
+                    {
+                      [self dismissViewControllerAnimated:YES completion:nil];
+                    });
    }];
 }
 
@@ -238,30 +290,30 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
                                                   completionHandler:^void(RPGStatusCode networkStatusCode, RPGSkillsResponse *aResponse)
-  {
-    [self setViewToNormalState];
-   
-    switch (aResponse.status)
-    {
-      case kRPGStatusCodeOK:
-      {
-        [self saveSelectedSkills];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        break;
-      }
-       
-      case kRPGStatusCodeWrongToken:
-      {
-        [self handleWrongTokenError];
-      }
-       
-      default:
-      {
-        [self handleDefaultError];
-        break;
-      }
-    }
-  }];
+   {
+     [self setViewToNormalState];
+     
+     switch (aResponse.status)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [self saveSelectedSkills];
+         [self dismissViewControllerAnimated:YES completion:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         [self handleWrongTokenError];
+       }
+         
+       default:
+       {
+         [self handleDefaultError];
+         break;
+       }
+     }
+   }];
 }
 
 #pragma mark - Save To UserDefaults

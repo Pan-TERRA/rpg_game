@@ -58,6 +58,9 @@ NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profil
   // Shop
 NSString * const kRPGNetworkManagerAPIShopUnitsRoute = @"/shop";
 NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute = @"/unit_buy";
+  // Arena
+NSString * const kRPGNetworkManagerAPIArenaSkillsRoute = @"/arena_skills";
+NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
 
 #pragma mark -
 
@@ -123,6 +126,7 @@ NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute = @"/unit_buy";
   request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
+  // ? ніл обєкт без токену
   if (anObject != nil)
   {
     NSMutableDictionary *JSONObject = nil;
@@ -324,6 +328,74 @@ NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute = @"/unit_buy";
         callbackBlock(responseObject.status, responseObject.resources);
       });
     }
+  }];
+  
+  [task resume];
+  
+  [session finishTasksAndInvalidate];
+}
+
+- (void)getImageDataFromPath:(NSString *)aPath completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))callbackBlock
+{
+  NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
+                                          kRPGNetworkManagerAPIHost,
+                                          aPath]];
+  
+  NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
+  request.HTTPMethod = @"GET";
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  // ???: Tramper quetion. downloadTask
+  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                          completionHandler:^(NSData * _Nullable data,
+                                                              NSURLResponse * _Nullable response,
+                                                              NSError * _Nullable error)
+  {
+    if (error != nil)
+    {
+      if ([self isNoInternerConnection:error])
+      {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
+        return;
+      }
+      
+      [self logError:error withTitle:@"Network error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
+      return;
+    }
+    
+    if ([self isResponseCodeNot200:response])
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
+      return;
+    }
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      if (data == nil)
+      {
+        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      }
+      else
+      {
+        callbackBlock(kRPGStatusCodeOK, data);
+      }
+    });
+    
   }];
   
   [task resume];
