@@ -9,6 +9,8 @@
 #import "RPGBagCollectionViewController.h"
   // Controllers
 #import "RPGCharacterProfileViewController.h"
+  // Entities
+#import "RPGSkillRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -29,6 +31,21 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
   [(RPGCharacterProfileViewController *)self.viewController addSkillToSkillCollectionWithID:anItemID type:aType];
+}
+
+- (void)collectionView:(UICollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)anIndexPath
+{
+  NSInteger index = anIndexPath.row;
+  
+  if (index < self.skillsIDArray.count)
+  {
+    NSUInteger skillID = [self.skillsIDArray[index] integerValue];
+    RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
+    if (skillRepresentation.requiredLevel < ((RPGCharacterProfileViewController *)self.viewController).characterLevel)
+    {
+      [self moveItem:skillID type:kRPGItemTypeSkill];
+    }
+  }
 }
 
 @end
