@@ -14,7 +14,7 @@
   // Constants
 #import "RPGMessageTypes.h"
 
-static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.28:8888/monster_battle";
+static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.15:8888/monster_battle";
 
 @implementation RPGAdventuresControllerGenerator
 
