@@ -41,7 +41,7 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
   {
     NSUInteger skillID = [self.skillsIDArray[index] integerValue];
     RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
-    if (skillRepresentation.requiredLevel < ((RPGCharacterProfileViewController *)self.viewController).characterLevel)
+    if (skillRepresentation.requiredLevel <= ((RPGCharacterProfileViewController *)self.viewController).characterLevel)
     {
       [self moveItem:skillID type:kRPGItemTypeSkill];
     }
