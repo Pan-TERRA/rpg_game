@@ -16,7 +16,7 @@
 
 // TODO: Change to arena condition message
 static NSString * const kRPGArenaControllerBattleConditionMessageType = @"BATTLE_CONDITION";
-static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.28:8888/arena_battle";
+static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:8888/arena_battle";
 
 @interface RPGArenaControllerGenerator ()
 
