@@ -140,6 +140,7 @@
       
       [superview addSubview:proofLabel];
       [superview addSubview:proofImageView];
+      [superview addSubview:indicatorView];
       
       [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
                                                             attribute:NSLayoutAttributeBottom
@@ -176,20 +177,20 @@
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:0]];
-      [indicatorView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                                attribute:NSLayoutAttributeLeading
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:proofImageView
-                                                                attribute:NSLayoutAttributeLeading
-                                                               multiplier:1.0
-                                                                 constant:0]];
-      [indicatorView addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
-                                                                attribute:NSLayoutAttributeTop
-                                                                relatedBy:NSLayoutRelationEqual
-                                                                   toItem:proofImageView
-                                                                attribute:NSLayoutAttributeTop
-                                                               multiplier:1.0
-                                                                 constant:0]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+                                                            attribute:NSLayoutAttributeLeading
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:proofImageView
+                                                            attribute:NSLayoutAttributeLeading
+                                                           multiplier:1.0
+                                                             constant:0]];
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+                                                            attribute:NSLayoutAttributeTop
+                                                            relatedBy:NSLayoutRelationEqual
+                                                               toItem:proofImageView
+                                                            attribute:NSLayoutAttributeTop
+                                                           multiplier:1.0
+                                                             constant:0]];
     }
   }
 }
