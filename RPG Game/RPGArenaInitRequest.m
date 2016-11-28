@@ -7,8 +7,9 @@
 //
 
 #import "RPGArenaInitRequest.h"
+  //
+#import "RPGMessageTypes.h"
 
-NSString * const kRPGArenaInitRequestType = @"ARENA_INIT";
 NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
 @interface RPGArenaInitRequest ()
@@ -23,7 +24,7 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
 - (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs
 {
-  self = [super initWithType:kRPGArenaInitRequestType];
+  self = [super initWithType:kRPGArenaInitMessageType];
   
   if (self != nil)
   {
