@@ -210,12 +210,15 @@
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lai-1W-qG8">
                                     <rect key="frame" x="0.0" y="177" width="250" height="250"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="lai-1W-qG8" secondAttribute="height" multiplier="1:1" id="HCE-pu-0fK"/>
                                         <constraint firstAttribute="width" constant="250" id="bAb-Lh-pzW"/>
                                     </constraints>
                                 </imageView>
+                                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RaA-ox-Pu9">
+                                    <rect key="frame" x="0.0" y="177" width="20" height="20"/>
+                                </activityIndicatorView>
                             </subviews>
                             <constraints>
                                 <constraint firstItem="O1w-X6-j7o" firstAttribute="top" secondItem="myW-ff-wcL" secondAttribute="bottom" constant="10" id="Ans-ba-jc4"/>
@@ -228,7 +231,9 @@
                                 <constraint firstItem="lai-1W-qG8" firstAttribute="leading" secondItem="1Yi-cw-St8" secondAttribute="leading" id="iJT-j6-JBk"/>
                                 <constraint firstItem="1Yi-cw-St8" firstAttribute="top" secondItem="bpB-1Z-c9g" secondAttribute="top" id="pNy-jl-c8x"/>
                                 <constraint firstItem="myW-ff-wcL" firstAttribute="leading" secondItem="1Yi-cw-St8" secondAttribute="leading" id="peY-XK-KTz"/>
+                                <constraint firstItem="lai-1W-qG8" firstAttribute="leading" secondItem="RaA-ox-Pu9" secondAttribute="leading" id="qeS-2e-Out"/>
                                 <constraint firstItem="lai-1W-qG8" firstAttribute="top" secondItem="O1w-X6-j7o" secondAttribute="bottom" constant="5" id="z7U-8Y-5Xv"/>
+                                <constraint firstItem="lai-1W-qG8" firstAttribute="top" secondItem="RaA-ox-Pu9" secondAttribute="top" id="zyL-Lx-Z8S"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -241,6 +246,7 @@
                     </constraints>
                     <connections>
                         <outlet property="descriptionLabel" destination="myW-ff-wcL" id="mWE-29-XHm"/>
+                        <outlet property="indicatorView" destination="RaA-ox-Pu9" id="ZYu-2s-50d"/>
                         <outlet property="proofImageView" destination="lai-1W-qG8" id="RxL-dS-F90"/>
                         <outlet property="proofLabel" destination="O1w-X6-j7o" id="K1W-Zb-sjp"/>
                         <outlet property="titleLabel" destination="1Yi-cw-St8" id="7FQ-wG-Wit"/>
