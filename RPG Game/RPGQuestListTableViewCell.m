@@ -154,7 +154,7 @@ static CGFloat const kBounceValue = 10.0;
     }
   }
   
-  if (state == kRPGQuestStateReviewedTrue)
+  if (state == kRPGQuestStateReviewedTrue && aCellContent.hasGotReward == NO)
   {
     self.getRewardButton.hidden = NO;
   }
@@ -173,7 +173,7 @@ static CGFloat const kBounceValue = 10.0;
 
 - (IBAction)getRewardButtonOnClick:(UIButton *)aSender
 {
-  
+  [self.tableViewController getRewardForQuestWithID:self.questID];
 }
 
 #pragma mark - Cell State

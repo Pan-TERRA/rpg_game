@@ -78,7 +78,7 @@
     }
   }
   
-  if (state == kRPGQuestStateReviewedTrue)
+  if (state == kRPGQuestStateReviewedTrue && self.questViewController.hasGotReward == NO)
   {
     self.getRewardButton.hidden = NO;
   }
@@ -143,7 +143,43 @@
 
 - (IBAction)getRewardButtonOnClick:(UIButton *)aSender
 {
-
+  __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
+  
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
+  [[RPGNetworkManager sharedNetworkManager] getQuestRewardWithRequest:request completionHandler:^void(NSInteger statusCode)
+   {
+     switch (statusCode)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [weakQuestViewController dismissViewControllerAnimated:YES completion:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
+          }];
+         break;
+       }
+         
+       default:
+       {
+         NSString *message = @"Can't get reward.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+     }
+   }];
 }
 
 #pragma mark - Take Quest
