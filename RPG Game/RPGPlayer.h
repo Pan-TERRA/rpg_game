@@ -27,12 +27,14 @@ extern NSString * const kRPGPlayerSkills;
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel
                       skills:(NSArray<RPGSkill *> *)aSkills;
 
 + (instancetype)playerWithName:(NSString *)aName
-                          HP:(NSInteger)aHP
-                       maxHP:(NSInteger)aMaxHP
-                      skills:(NSArray<RPGSkill *> *)aSkills;
+                            HP:(NSInteger)aHP
+                         maxHP:(NSInteger)aMaxHP
+                         level:(NSInteger)aLevel
+                        skills:(NSArray<RPGSkill *> *)aSkills;
 //- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
 //+ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
 

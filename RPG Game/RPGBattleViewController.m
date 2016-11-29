@@ -31,6 +31,7 @@
 #import "RPGNibNames.h"
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
+static NSInteger kRPGBattleViewControllerLevelViewCornerRadius = 8;
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -44,10 +45,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *playerLevelView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerLevelLabel;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *opponentLevelView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentLevelLabel;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -161,6 +166,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.skillBar addSubview:self.skillBarViewController.view];
   [self.skillBarViewController didMoveToParentViewController:self];
   
+  self.playerLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
+  self.playerLevelView.layer.masksToBounds = YES;
+  self.opponentLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
+  self.opponentLevelView.layer.masksToBounds = YES;
+  
   [self.battleController openBattleControllerWebSocket];
 }
 
@@ -255,6 +265,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.playerNickName.text = playerNickName;
   self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
   self.playerHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)playerHP, (long)playerMaxHP];
+  self.playerLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.playerLevel];
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
   NSInteger opponentMaxHP = battleController.opponentMaxHP;
@@ -263,6 +274,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.opponentNickName.text = opponentNickName;
   self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
   self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
+  self.opponentLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.opponentLevel];
   
   if (battleController.isMyTurn)
   {
