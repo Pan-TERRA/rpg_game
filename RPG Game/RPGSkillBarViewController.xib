@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -27,22 +26,16 @@
                             <rect key="frame" x="56" y="13" width="50" height="50"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="5xH-Nr-u1Q"/>
-                                <constraint firstAttribute="width" constant="50" id="9B8-uN-ZdH"/>
-                                <constraint firstAttribute="width" secondItem="ckf-aH-uwn" secondAttribute="height" multiplier="1:1" id="Med-3R-mKl"/>
-                                <constraint firstAttribute="height" constant="50" id="Tbg-af-Qd1"/>
-                                <constraint firstAttribute="height" constant="40" id="yLi-5m-cJD"/>
+                                <constraint firstAttribute="width" constant="50" id="9B8-uN-ZdH">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="50" id="Tbg-af-Qd1">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="battle_empty_icon_inactive">
                                 <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="5xH-Nr-u1Q"/>
-                                    <exclude reference="Med-3R-mKl"/>
-                                    <exclude reference="yLi-5m-cJD"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="0qs-ZD-OvB"/>
                                 <outletCollection property="gestureRecognizers" destination="5qz-Qu-Pqx" appends="YES" id="hAW-Ba-4Yh"/>
@@ -52,22 +45,16 @@
                             <rect key="frame" x="128" y="13" width="50" height="50"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="PkY-y3-cRZ" secondAttribute="height" multiplier="1:1" id="1A4-Zd-WoP"/>
-                                <constraint firstAttribute="width" constant="40" id="9xC-SH-5i0"/>
-                                <constraint firstAttribute="width" constant="50" id="CH6-q6-D9C"/>
-                                <constraint firstAttribute="height" constant="40" id="jVg-Va-VMG"/>
-                                <constraint firstAttribute="height" constant="50" id="sFY-XD-po6"/>
+                                <constraint firstAttribute="width" constant="50" id="CH6-q6-D9C">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="50" id="sFY-XD-po6">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="battle_empty_icon_inactive">
                                 <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="1A4-Zd-WoP"/>
-                                    <exclude reference="9xC-SH-5i0"/>
-                                    <exclude reference="jVg-Va-VMG"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="dFJ-78-bUm"/>
                                 <outletCollection property="gestureRecognizers" destination="qIw-7z-5rg" appends="YES" id="CoY-Ob-KRb"/>
@@ -77,22 +64,16 @@
                             <rect key="frame" x="272" y="13" width="50" height="50"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="02g-Y9-8aT"/>
-                                <constraint firstAttribute="height" constant="50" id="7RQ-Mg-J6V"/>
-                                <constraint firstAttribute="width" constant="40" id="V2f-ys-k7i"/>
-                                <constraint firstAttribute="height" constant="40" id="tew-38-r1B"/>
-                                <constraint firstAttribute="width" secondItem="SoY-o7-apr" secondAttribute="height" multiplier="1:1" id="xpw-7g-cff"/>
+                                <constraint firstAttribute="width" constant="50" id="02g-Y9-8aT">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="50" id="7RQ-Mg-J6V">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="battle_empty_icon_lock">
                                 <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="V2f-ys-k7i"/>
-                                    <exclude reference="tew-38-r1B"/>
-                                    <exclude reference="xpw-7g-cff"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="oi5-kQ-US4"/>
                                 <outletCollection property="gestureRecognizers" destination="TGS-F3-slf" appends="YES" id="uN8-BI-7eW"/>
@@ -102,22 +83,16 @@
                             <rect key="frame" x="344" y="13" width="50" height="50"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="50" id="1mK-eG-A8k"/>
-                                <constraint firstAttribute="width" secondItem="8Fc-jY-HAl" secondAttribute="height" multiplier="1:1" id="QNc-2J-GoY"/>
-                                <constraint firstAttribute="width" constant="40" id="aSu-TC-QZ3"/>
-                                <constraint firstAttribute="height" constant="50" id="drU-El-6h2"/>
-                                <constraint firstAttribute="height" constant="40" id="meK-fI-7jk"/>
+                                <constraint firstAttribute="width" constant="50" id="1mK-eG-A8k">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="50" id="drU-El-6h2">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="battle_empty_icon_lock">
                                 <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="QNc-2J-GoY"/>
-                                    <exclude reference="aSu-TC-QZ3"/>
-                                    <exclude reference="meK-fI-7jk"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="cs9-ur-iPP"/>
                                 <outletCollection property="gestureRecognizers" destination="1Vy-jY-FC0" appends="YES" id="VNV-iK-ebz"/>
@@ -127,22 +102,16 @@
                             <rect key="frame" x="200" y="13" width="50" height="50"/>
                             <gestureRecognizers/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="31k-wW-fwK"/>
-                                <constraint firstAttribute="height" constant="40" id="DWV-MX-f3E"/>
-                                <constraint firstAttribute="width" constant="50" id="h0o-kx-Kjz"/>
-                                <constraint firstAttribute="width" secondItem="sl9-4K-4m8" secondAttribute="height" multiplier="1:1" id="hcx-8f-7fq"/>
-                                <constraint firstAttribute="height" constant="50" id="ixn-ug-Waw"/>
+                                <constraint firstAttribute="width" constant="50" id="h0o-kx-Kjz">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="50" id="ixn-ug-Waw">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="battle_empty_icon_inactive">
                                 <color key="titleColor" red="0.56231745389999999" green="0.49745047840000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="31k-wW-fwK"/>
-                                    <exclude reference="DWV-MX-f3E"/>
-                                    <exclude reference="hcx-8f-7fq"/>
-                                </mask>
-                            </variation>
                             <connections>
                                 <action selector="skillAction:" destination="-1" eventType="touchUpInside" id="I4N-eA-gLu"/>
                                 <outletCollection property="gestureRecognizers" destination="ecA-pP-NsX" appends="YES" id="6CI-ix-nsa"/>

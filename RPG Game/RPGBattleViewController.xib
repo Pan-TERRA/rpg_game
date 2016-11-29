@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -353,7 +353,9 @@
                     <rect key="frame" x="184" y="334" width="368" height="75"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="75" id="CwV-O9-dSn"/>
+                        <constraint firstAttribute="height" constant="75" id="CwV-O9-dSn">
+                            <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                        </constraint>
                     </constraints>
                 </view>
                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cd-xD-wsS">
@@ -405,7 +407,9 @@
                 <constraint firstItem="T2l-ok-lRD" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="5" id="BgQ-Dy-FEi"/>
                 <constraint firstItem="TmA-7m-uPF" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="D0I-Ut-hN5"/>
                 <constraint firstItem="eGV-R3-AZJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="DLW-NX-OkS"/>
-                <constraint firstItem="TmA-7m-uPF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="DPa-PB-xfn"/>
+                <constraint firstItem="TmA-7m-uPF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" constant="50" id="DPa-PB-xfn">
+                    <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                </constraint>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="centerX" secondItem="Lez-UF-BPa" secondAttribute="centerX" id="FDh-dD-u5U"/>
                 <constraint firstItem="8c7-Al-VCY" firstAttribute="trailing" secondItem="T2l-ok-lRD" secondAttribute="trailing" id="Gla-Vw-pMG"/>
                 <constraint firstItem="Fo0-pu-vx9" firstAttribute="top" secondItem="285-ls-YlH" secondAttribute="bottom" id="HKG-8b-VJK"/>
