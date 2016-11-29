@@ -28,7 +28,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
-
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *getRewardButton;
 @end
 
 @implementation RPGQuestViewButtonContainer
@@ -37,7 +37,9 @@
 
 - (void)updateView
 {
-  switch (self.questViewController.state)
+  RPGQuestState state = self.questViewController.state;
+  
+  switch (state)
   {
     case kRPGQuestStateCanTake:
     {
@@ -74,6 +76,15 @@
       [self setStateReviewedQuest:YES];
       break;
     }
+  }
+  
+  if (state == kRPGQuestStateReviewedTrue)
+  {
+    self.getRewardButton.hidden = NO;
+  }
+  else
+  {
+    self.getRewardButton.hidden = YES;
   }
 }
 
@@ -128,6 +139,11 @@
 - (IBAction)backButtonOnClick:(UIButton *)aSender
 {
   [self.questViewController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)getRewardButtonOnClick:(UIButton *)aSender
+{
+
 }
 
 #pragma mark - Take Quest
