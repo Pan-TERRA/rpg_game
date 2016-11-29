@@ -35,6 +35,7 @@ extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
 extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute;
   // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
