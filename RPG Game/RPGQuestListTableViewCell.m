@@ -31,6 +31,7 @@ static CGFloat const kBounceValue = 10.0;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *deleteButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *getRewardButton;
 
 @property (nonatomic, retain, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewRightConstraint;
@@ -49,7 +50,7 @@ static CGFloat const kBounceValue = 10.0;
 - (void)dealloc
 {
   [_panGestureRecognizer release];
-  
+
   [super dealloc];
 }
 
@@ -73,11 +74,12 @@ static CGFloat const kBounceValue = 10.0;
 
 - (void)setCellContent:(RPGQuest *)aCellContent
 {
+  RPGQuestState state = aCellContent.state;
   self.titleLabel.text = aCellContent.name;
   self.descriptionLabel.text = aCellContent.questDescription;
   self.crystalsRewardLabel.text = [@(aCellContent.reward.crystals) stringValue];
   self.goldRewardLabel.text = [@(aCellContent.reward.gold) stringValue];
-  self.questState = aCellContent.state;
+  self.questState = state;
   self.questID = aCellContent.questID;
   
   if (aCellContent.reward.skillID != 0)
@@ -111,7 +113,7 @@ static CGFloat const kBounceValue = 10.0;
                                                                                 constant:10]];
   }
 
-  switch (aCellContent.state)
+  switch (state)
   {
     case kRPGQuestStateCanTake:
     {
@@ -151,13 +153,27 @@ static CGFloat const kBounceValue = 10.0;
       break;
     }
   }
+  
+  if (state == kRPGQuestStateReviewedTrue)
+  {
+    self.getRewardButton.hidden = NO;
+  }
+  else
+  {
+    self.getRewardButton.hidden = YES;
+  }
 }
 
 #pragma mark - Actions
 
-- (IBAction)deleteButtonOnClick:(UIButton *)sender
+- (IBAction)deleteButtonOnClick:(UIButton *)aSender
 {
   [self.tableViewController deleteQuestWithID:self.questID];
+}
+
+- (IBAction)getRewardButtonOnClick:(UIButton *)aSender
+{
+  
 }
 
 #pragma mark - Cell State
