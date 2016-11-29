@@ -265,6 +265,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.playerNickName.text = playerNickName;
   self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
   self.playerHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)playerHP, (long)playerMaxHP];
+  self.playerLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.playerLevel];
     // opponent
   NSInteger opponentHP = battleController.opponentHP;
   NSInteger opponentMaxHP = battleController.opponentMaxHP;
@@ -273,6 +274,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.opponentNickName.text = opponentNickName;
   self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
   self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
+  self.opponentLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.opponentLevel];
   
   if (battleController.isMyTurn)
   {
