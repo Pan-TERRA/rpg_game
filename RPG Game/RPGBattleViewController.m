@@ -228,6 +228,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.view addSubview:self.settingsView];
 }
 
+- (IBAction)restartBattle:(id)aSender
+{
+  [self.delegate restartBattle:self];
+}
+
 #pragma mark - Timer
 
 - (void)restartTimer

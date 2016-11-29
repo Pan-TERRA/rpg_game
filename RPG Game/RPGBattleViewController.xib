@@ -158,17 +158,31 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zur-Ea-Scc">
-                                <rect key="frame" x="110" y="184" width="80" height="35"/>
+                                <rect key="frame" x="185" y="184" width="80" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="35" id="3nF-yq-gjk"/>
                                     <constraint firstAttribute="width" constant="80" id="lwz-Hf-dxN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                                <state key="normal" title="OK" backgroundImage="main_button_inactive">
+                                <state key="normal" title="Exit" backgroundImage="main_button_inactive">
                                     <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="back:" destination="-1" eventType="touchUpInside" id="EW7-Ha-vzx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A2o-I8-9jG">
+                                <rect key="frame" x="35" y="184" width="80" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="D2h-RG-sHT"/>
+                                    <constraint firstAttribute="height" constant="35" id="Ryl-Qt-LJQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                <state key="normal" title="Restart" backgroundImage="main_button_inactive">
+                                    <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="restartBattle:" destination="-1" eventType="touchUpInside" id="jna-tp-D86"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -176,13 +190,15 @@
                         <constraints>
                             <constraint firstItem="vDf-Sx-y60" firstAttribute="top" secondItem="DPT-Zk-iE1" secondAttribute="top" constant="20" id="56L-cJ-nnS"/>
                             <constraint firstItem="O7y-eW-1ED" firstAttribute="centerX" secondItem="DPT-Zk-iE1" secondAttribute="centerX" id="5kr-qH-Io1"/>
-                            <constraint firstItem="zur-Ea-Scc" firstAttribute="centerX" secondItem="DPT-Zk-iE1" secondAttribute="centerX" id="7UZ-D0-R2b"/>
+                            <constraint firstItem="zur-Ea-Scc" firstAttribute="centerX" secondItem="DPT-Zk-iE1" secondAttribute="centerX" multiplier="3:2" id="7UZ-D0-R2b"/>
                             <constraint firstItem="pOo-29-xQ8" firstAttribute="top" secondItem="DPT-Zk-iE1" secondAttribute="top" id="93q-IB-qpd"/>
                             <constraint firstItem="vDf-Sx-y60" firstAttribute="centerX" secondItem="DPT-Zk-iE1" secondAttribute="centerX" id="FHf-06-GgK"/>
                             <constraint firstItem="zur-Ea-Scc" firstAttribute="top" secondItem="CC0-dX-zZB" secondAttribute="bottom" constant="10" id="Xow-Cj-fHT"/>
                             <constraint firstItem="pOo-29-xQ8" firstAttribute="leading" secondItem="DPT-Zk-iE1" secondAttribute="leading" id="Yc9-td-7Up"/>
                             <constraint firstAttribute="bottom" secondItem="zur-Ea-Scc" secondAttribute="bottom" constant="20" id="ccC-vl-Kg3"/>
                             <constraint firstAttribute="width" constant="300" id="f9u-y5-L1y"/>
+                            <constraint firstItem="zur-Ea-Scc" firstAttribute="baseline" secondItem="A2o-I8-9jG" secondAttribute="baseline" id="fJg-w6-v3i"/>
+                            <constraint firstItem="A2o-I8-9jG" firstAttribute="centerX" secondItem="DPT-Zk-iE1" secondAttribute="centerX" multiplier="1:2" id="fxG-Vs-Gr7"/>
                             <constraint firstItem="CC0-dX-zZB" firstAttribute="top" secondItem="O7y-eW-1ED" secondAttribute="bottom" constant="10" id="qqr-qM-lYu"/>
                             <constraint firstAttribute="bottom" secondItem="pOo-29-xQ8" secondAttribute="bottom" id="ul6-fa-Sh3"/>
                             <constraint firstItem="O7y-eW-1ED" firstAttribute="top" secondItem="vDf-Sx-y60" secondAttribute="bottom" constant="10" id="vSc-Fw-Qr3"/>
