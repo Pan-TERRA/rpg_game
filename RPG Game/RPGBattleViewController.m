@@ -31,6 +31,7 @@
 #import "RPGNibNames.h"
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
+static NSInteger kRPGBattleViewControllerLevelViewCornerRadius = 8;
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -44,10 +45,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *playerLevelView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerLevelLabel;
   // Player 2
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *opponentLevelView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentLevelLabel;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -160,6 +165,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.skillBarViewController.view.frame = CGRectMake(0, 0, size.width, size.height);
   [self.skillBar addSubview:self.skillBarViewController.view];
   [self.skillBarViewController didMoveToParentViewController:self];
+  
+  self.playerLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
+  self.playerLevelView.layer.masksToBounds = YES;
+  self.opponentLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
+  self.opponentLevelView.layer.masksToBounds = YES;
   
   [self.battleController openBattleControllerWebSocket];
 }
