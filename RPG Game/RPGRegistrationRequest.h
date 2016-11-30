@@ -16,16 +16,19 @@
 @property (nonatomic, copy, readonly) NSString *password;
 @property (nonatomic, copy, readonly) NSString *characterName;
 @property (nonatomic, assign, readonly) NSInteger characterType;
+@property (nonatomic, assign, readonly) NSInteger avatarID;
 
 - (instancetype)initWithEmail:(NSString *)anEmail
                      password:(NSString *)aPassword
                      username:(NSString *)aUsername
                 characterName:(NSString *)aCharacterName
-                characterType:(NSInteger)aCharacterType NS_DESIGNATED_INITIALIZER;
+                characterType:(NSInteger)aCharacterType
+                     avatarID:(NSInteger)anAvatarID NS_DESIGNATED_INITIALIZER;
 + (instancetype)registrationRequestWithEmail:(NSString *)anEmail
                                     password:(NSString *)aPassword
                                     username:(NSString *)aUsername
                                characterName:(NSString *)aCharacterName
-                               characterType:(NSInteger)aCharacterType;
+                               characterType:(NSInteger)aCharacterType
+                                    avatarID:(NSInteger)anAvatarID;
 
 @end

@@ -140,6 +140,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger classNameIndex = [self.classPicker selectedRowInComponent:0];
   NSInteger selectedClassID = [self.classInfo classIDByName:self.classPickerData[classNameIndex]];
+  NSInteger selectedAvatarIndex = self.avatarCollectionViewController.selectedAvatarIndex;
   
   if ([self textFieldsNotEmpty])
   {
@@ -151,7 +152,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
                                                                                                 password:passwordFieldText
                                                                                                 username:usernameFieldText
                                                                                            characterName:characterNameFieldText
-                                                                                           characterType:selectedClassID];
+                                                                                           characterType:selectedClassID
+                                                                                                avatarID:selectedAvatarIndex];
       
       [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
                                                   completionHandler:^(NSInteger statusCode)
