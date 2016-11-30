@@ -4,6 +4,8 @@
 <dict>
 	<key>37</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Scream and shoot&quot;</string>
 		<key>name</key>
@@ -19,6 +21,8 @@
 	</dict>
 	<key>36</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>9</integer>
 		<key>description</key>
 		<string>Confuses enemy</string>
 		<key>name</key>
@@ -34,6 +38,8 @@
 	</dict>
 	<key>35</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>Lay your enemy down</string>
 		<key>name</key>
@@ -49,6 +55,8 @@
 	</dict>
 	<key>34</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Bite your opponent</string>
 		<key>name</key>
@@ -64,6 +72,8 @@
 	</dict>
 	<key>33</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Attack with the spirit of pokemon</string>
 		<key>name</key>
@@ -79,6 +89,8 @@
 	</dict>
 	<key>32</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Powerful attack</string>
 		<key>name</key>
@@ -94,6 +106,8 @@
 	</dict>
 	<key>31</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Scratch your opponent!</string>
 		<key>name</key>
@@ -109,6 +123,8 @@
 	</dict>
 	<key>30</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Shake your booty</string>
 		<key>name</key>
@@ -124,6 +140,8 @@
 	</dict>
 	<key>29</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>The shopping time!</string>
 		<key>name</key>
@@ -139,6 +157,8 @@
 	</dict>
 	<key>28</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Increase your health and beauty</string>
 		<key>name</key>
@@ -154,6 +174,8 @@
 	</dict>
 	<key>27</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Break out the sky with your tears</string>
 		<key>name</key>
@@ -169,6 +191,8 @@
 	</dict>
 	<key>26</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>Throw your opponent to friend zone</string>
 		<key>name</key>
@@ -184,6 +208,8 @@
 	</dict>
 	<key>25</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>Show your opponent check from Spa-Salon</string>
 		<key>name</key>
@@ -199,6 +225,8 @@
 	</dict>
 	<key>24</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>Ignoring the opponent</string>
 		<key>name</key>
@@ -214,6 +242,8 @@
 	</dict>
 	<key>23</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Slap that bag guy in the face</string>
 		<key>name</key>
@@ -229,6 +259,8 @@
 	</dict>
 	<key>22</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Wake up in 6 o&apos;clock and run</string>
 		<key>name</key>
@@ -244,6 +276,8 @@
 	</dict>
 	<key>21</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Make a selfie with your opponent</string>
 		<key>name</key>
@@ -259,6 +293,8 @@
 	</dict>
 	<key>20</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Drink fresh orange juice</string>
 		<key>name</key>
@@ -274,6 +310,8 @@
 	</dict>
 	<key>19</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Paint your nails and scratch your opponent</string>
 		<key>name</key>
@@ -289,6 +327,8 @@
 	</dict>
 	<key>18</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Smash your opponent with a pigtail</string>
 		<key>name</key>
@@ -304,6 +344,8 @@
 	</dict>
 	<key>17</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Throw a lollipop in opponent</string>
 		<key>name</key>
@@ -319,6 +361,8 @@
 	</dict>
 	<key>16</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Blind your opponent with a smile</string>
 		<key>name</key>
@@ -334,6 +378,8 @@
 	</dict>
 	<key>15</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Gently lay your opponent on the ground</string>
 		<key>name</key>
@@ -349,6 +395,8 @@
 	</dict>
 	<key>14</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Predict your opponent move and attack</string>
 		<key>name</key>
@@ -364,6 +412,8 @@
 	</dict>
 	<key>13</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Have a rest and heal yourself</string>
 		<key>name</key>
@@ -379,6 +429,8 @@
 	</dict>
 	<key>12</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>10</integer>
 		<key>description</key>
 		<string>Call to a great power and make a super punch!</string>
 		<key>name</key>
@@ -394,6 +446,8 @@
 	</dict>
 	<key>11</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>Make a series of jab strikes</string>
 		<key>name</key>
@@ -409,6 +463,8 @@
 	</dict>
 	<key>10</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>A vertical, rising punch thrown with the rear hand</string>
 		<key>name</key>
@@ -424,6 +480,8 @@
 	</dict>
 	<key>9</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>7</integer>
 		<key>description</key>
 		<string>A semi-circular punch thrown with the lead hand to the side of the opponent&apos;s head</string>
 		<key>name</key>
@@ -439,6 +497,8 @@
 	</dict>
 	<key>8</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>Make a series of punches</string>
 		<key>name</key>
@@ -454,6 +514,8 @@
 	</dict>
 	<key>7</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>A powerful, straight punch thrown with the rear hand</string>
 		<key>name</key>
@@ -469,6 +531,8 @@
 	</dict>
 	<key>6</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>5</integer>
 		<key>description</key>
 		<string>A quick, straight punch thrown with the lead hand from the guard position</string>
 		<key>name</key>
@@ -484,6 +548,8 @@
 	</dict>
 	<key>5</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Recover your ass with a bottle of beer!</string>
 		<key>name</key>
@@ -499,6 +565,8 @@
 	</dict>
 	<key>4</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Rotates the body slightly so that an incoming punch passes harmlessly next to the head</string>
 		<key>name</key>
@@ -514,6 +582,8 @@
 	</dict>
 	<key>3</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Do push-ups and make yout opponent shy</string>
 		<key>name</key>
@@ -529,6 +599,8 @@
 	</dict>
 	<key>2</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Kill everyone with a fire</string>
 		<key>name</key>
@@ -544,6 +616,8 @@
 	</dict>
 	<key>1</key>
 	<dict>
+		<key>requiredLevel</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Attack on every turn</string>
 		<key>name</key>
