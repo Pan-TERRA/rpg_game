@@ -30,6 +30,7 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(UIViewController *)aViewController
+                   selectedAvatarIndex:(NSUInteger)anIndex
 {
   self = [super init];
   
@@ -40,7 +41,7 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
     _collectionView.dataSource = self;
     
     _viewController = aViewController;
-    _selectedAvatarIndex = 0;
+    _selectedAvatarIndex = anIndex;
   }
   
   return self;
@@ -49,7 +50,8 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 - (instancetype)init
 {
   return [self initWithCollectionView:nil
-                 parentViewController:nil];
+                 parentViewController:nil
+                  selectedAvatarIndex:-1];
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -63,9 +65,9 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 {
   RPGAvatarCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName
                                                                                  forIndexPath:anIndexPath];
-  
+  //check if index in [0..9]
   NSInteger index = anIndexPath.row;
-  [cell setImage:[UIImage imageNamed:@"battle_empty_icon_lock"]];
+  [cell setImage:[UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)self.characterClassIndex, (long)index]]];
   [cell setChosenFlagImageViewHidden:!(index == self.selectedAvatarIndex)];
 
   return cell;
