@@ -91,9 +91,20 @@
 {
   return [[self.sessionCharacters firstObject][@"char_id"] integerValue];
 }
+
 - (NSString *)characterNickName
 {
   return [self.sessionCharacters firstObject][@"name"];
+}
+
+- (NSInteger)characterClassID
+{
+  return [[self.sessionCharacters firstObject][@"class_id"] integerValue];
+}
+
+- (NSInteger)characterAvatarID
+{
+  return [[self.sessionCharacters firstObject][@"avatar_id"] integerValue];
 }
 
 @end
