@@ -13,6 +13,9 @@
                 <outlet property="avatarImageView" destination="lW4-qC-hb0" id="AT0-m7-2oI"/>
                 <outlet property="backButton" destination="5S1-dU-ULd" id="q2u-ha-qbg"/>
                 <outlet property="bagCollectionView" destination="Ftp-LL-ekU" id="9wR-au-5RF"/>
+                <outlet property="chooseAvatarButton" destination="MYm-X1-JVP" id="PC3-x6-xEk"/>
+                <outlet property="chooseAvatarCollectionView" destination="qmJ-hX-Xlz" id="U6u-Qn-MUC"/>
+                <outlet property="chooseAvatarView" destination="7pw-Oi-5PZ" id="6Xg-D1-uOt"/>
                 <outlet property="expLabel" destination="xGc-y0-7zV" id="Cx0-Ev-aem"/>
                 <outlet property="expProgressBar" destination="7DI-ci-Vg1" id="XDg-Jd-9YD"/>
                 <outlet property="hpLabel" destination="itB-oS-rok" id="dRu-Sm-MR1"/>
@@ -333,12 +336,99 @@
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
         </view>
+        <viewController id="7pw-Oi-5PZ">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="BU1-nC-dm7"/>
+                <viewControllerLayoutGuide type="bottom" id="faj-wl-BUR"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="YpD-5j-l22">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cxx-aZ-knY">
+                        <rect key="frame" x="75" y="200" width="450" height="200"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="yGv-vL-HLR">
+                                <rect key="frame" x="0.0" y="0.0" width="450" height="200"/>
+                            </imageView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="qmJ-hX-Xlz">
+                                <rect key="frame" x="34" y="62" width="382" height="63"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="DVy-jd-1ML"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="h44-iS-BTB">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="DVy-jd-1ML"/>
+                                    </mask>
+                                </variation>
+                            </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYm-X1-JVP">
+                                <rect key="frame" x="185" y="145" width="80" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="CY9-Ip-wns"/>
+                                    <constraint firstAttribute="height" constant="35" id="jNF-wL-VYW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                                <state key="normal" title="Choose" backgroundImage="main_button_inactive">
+                                    <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseAvatarButtonOnClick:" destination="-1" eventType="touchUpInside" id="HMJ-yw-uZP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avatar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8y-jc-eoX">
+                                <rect key="frame" x="198" y="20" width="54" height="22"/>
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qmJ-hX-Xlz" firstAttribute="width" secondItem="Cxx-aZ-knY" secondAttribute="width" multiplier="0.85" id="1qY-k3-hxr"/>
+                            <constraint firstItem="qmJ-hX-Xlz" firstAttribute="top" secondItem="v8y-jc-eoX" secondAttribute="bottom" constant="20" id="4EJ-K9-7qB"/>
+                            <constraint firstItem="yGv-vL-HLR" firstAttribute="top" secondItem="Cxx-aZ-knY" secondAttribute="top" id="7bg-UY-aDP"/>
+                            <constraint firstItem="v8y-jc-eoX" firstAttribute="top" secondItem="Cxx-aZ-knY" secondAttribute="top" constant="20" id="9b2-lv-HDe"/>
+                            <constraint firstAttribute="trailing" secondItem="yGv-vL-HLR" secondAttribute="trailing" id="DZZ-Ew-T62"/>
+                            <constraint firstItem="MYm-X1-JVP" firstAttribute="centerX" secondItem="Cxx-aZ-knY" secondAttribute="centerX" id="Hph-u1-0Vv"/>
+                            <constraint firstAttribute="bottom" secondItem="MYm-X1-JVP" secondAttribute="bottom" constant="20" id="LBB-Ch-mQ7"/>
+                            <constraint firstItem="yGv-vL-HLR" firstAttribute="leading" secondItem="Cxx-aZ-knY" secondAttribute="leading" id="NOU-4k-tCZ"/>
+                            <constraint firstItem="MYm-X1-JVP" firstAttribute="top" secondItem="qmJ-hX-Xlz" secondAttribute="bottom" constant="20" id="NYD-87-qb2"/>
+                            <constraint firstAttribute="height" constant="200" id="XxI-YJ-ID6"/>
+                            <constraint firstAttribute="width" constant="450" id="did-OI-eNB"/>
+                            <constraint firstItem="v8y-jc-eoX" firstAttribute="centerX" secondItem="Cxx-aZ-knY" secondAttribute="centerX" id="o42-oI-jDo"/>
+                            <constraint firstItem="qmJ-hX-Xlz" firstAttribute="centerX" secondItem="Cxx-aZ-knY" secondAttribute="centerX" id="oEU-kH-a3r"/>
+                            <constraint firstAttribute="bottom" secondItem="yGv-vL-HLR" secondAttribute="bottom" id="y3l-K9-cRG"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="Cxx-aZ-knY" firstAttribute="centerY" secondItem="YpD-5j-l22" secondAttribute="centerY" id="LTN-PY-zsJ"/>
+                    <constraint firstItem="Cxx-aZ-knY" firstAttribute="centerX" secondItem="YpD-5j-l22" secondAttribute="centerX" id="aJu-9w-ICG"/>
+                </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                        <color key="value" red="0.49803921568627452" green="0.49803921568627452" blue="0.49803921568627452" alpha="0.69999999999999996" colorSpace="calibratedRGB"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
+            </view>
+        </viewController>
     </objects>
     <resources>
         <image name="Character" width="300" height="315"/>
+        <image name="Label Item Dark Brown" width="268" height="50"/>
         <image name="Label Item Light Brown" width="151" height="50"/>
         <image name="back_icon_inactive" width="40" height="40"/>
         <image name="bar_left" width="519" height="124"/>
+        <image name="main_button_inactive" width="275" height="137"/>
         <image name="start_icon" width="40" height="38"/>
         <image name="table_item_bg" width="551" height="150"/>
     </resources>

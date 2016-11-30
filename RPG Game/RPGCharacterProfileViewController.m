@@ -15,6 +15,7 @@
 #import "RPGWaitingViewController.h"
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
+#import "RPGAvatarCollectionViewController.h"
 #import "RPGAlertController+RPGErrorHandling.h"
 #import "UIViewController+RPGChildViewController.h"
   // Views
@@ -26,6 +27,7 @@
 #import "RPGCharacterProfileSkill.h"
 #import "RPGSkillsResponse.h"
 #import "RPGSkillsSelectRequest.h"
+#import "RPGCharacterAvatarSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
@@ -34,6 +36,7 @@
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageDownload = @"Downloading info";
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
 static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
+static NSString * const kRPGCharacterProfileViewControllerAvatarID = @"avatar_id";
 
 @interface RPGCharacterProfileViewController ()
 
@@ -53,6 +56,12 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 @property (nonatomic, retain, readwrite) RPGCollectionViewController *bagCollectionViewController;
 
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *waitingModal;
+
+  //Choose avatar view
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *chooseAvatarView;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *chooseAvatarCollectionView;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *chooseAvatarButton;
+@property (nonatomic, retain, readwrite) RPGAvatarCollectionViewController *avatarCollectionViewController;
 
 @end
 
@@ -81,7 +90,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
   [_waitingModal release];
-
+  [_chooseAvatarView release];
+  
   [super dealloc];
 }
 
@@ -101,6 +111,18 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
   [self.skillCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
   [self.bagCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  
+  UINib *avatarCellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
+  [self.chooseAvatarCollectionView registerNib:avatarCellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.chooseAvatarCollectionView
+                                                                                      parentViewController:self
+                                                                                       selectedAvatarIndex:[NSUserDefaults standardUserDefaults].characterAvatarID] autorelease];
+  self.avatarCollectionViewController.characterClassIndex = [NSUserDefaults standardUserDefaults].characterClassID;
+  
+  UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
+  tapGesture.numberOfTapsRequired = 1;
+  [self.avatarImageView setUserInteractionEnabled:YES];
+  [self.avatarImageView addGestureRecognizer:tapGesture];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -166,33 +188,32 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
      }
    }];
   
-  [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:standardUserDefaults.sessionAvatar
-                                               completionHandler:^(NSInteger aStatusCode, NSData * anImageData)
-  {
-    switch (aStatusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        self.avatarImageView.image = [UIImage imageWithData:anImageData];
-        break;
-      }
-        
-      default:
-      {
-        NSString *message = @"Can't upload avatar.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:nil];
-        break;
-      }
-    }
-  }];
+  NSInteger characterClassID = standardUserDefaults.characterClassID;
+  NSInteger characterAvatarID = standardUserDefaults.characterAvatarID - 1;
+  
+  self.avatarImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)characterClassID, (long)characterAvatarID]];
 }
 
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
+}
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations
+{
+  return UIInterfaceOrientationMaskLandscape;
+}
 
+#pragma mark - Show ChooseAvatarView
 
+- (void)handleTapGesture
+{
+  [self addChildViewController:self.chooseAvatarView frame:self.view.frame];
+//  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
+//  [self.questViewController presentViewController:questProofImageViewController animated:YES completion:nil];
+//  [questProofImageViewController setImage:self.proofImageView.image];
+//  [questProofImageViewController release];
+}
 
 #pragma mark - Error Handling
 
@@ -217,17 +238,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
        [self dismissViewControllerAnimated:YES completion:nil];
      });
    }];
-}
-
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-}
-
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations
-{
-  return UIInterfaceOrientationMaskLandscape;
 }
 
 #pragma mark - Update View
@@ -287,6 +297,41 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 #pragma mark - Actions
 
+- (IBAction)chooseAvatarButtonOnClick:(UIButton *)sender
+{
+  NSInteger index = self.avatarCollectionViewController.selectedAvatarIndex + 1;
+  RPGCharacterAvatarSelectRequest *request = [RPGCharacterAvatarSelectRequest characterAvatarSelectRequestWithAvatarID:index];
+  [[RPGNetworkManager sharedNetworkManager] characterAvatarSelectWithRequest:request
+                                                           completionHandler:^(RPGStatusCode networkStatusCode)
+  {
+    switch (networkStatusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        [self saveSelectedAvatarID];
+        
+        //[self saveSelectedSkills];
+        //[self dismissViewControllerAnimated:YES completion:nil];
+        break;
+      }
+       
+      case kRPGStatusCodeWrongToken:
+      {
+        [self handleWrongTokenError];
+      }
+       
+      default:
+      {
+        [self handleDefaultError];
+        break;
+      }
+   }
+    
+  }];
+  [self.chooseAvatarView.view removeFromSuperview];
+  [self.chooseAvatarView removeFromParentViewController];
+}
+
 - (IBAction)back:(UIButton *)sender
 {
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
@@ -296,11 +341,11 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
-                                                  completionHandler:^void(RPGStatusCode networkStatusCode, RPGSkillsResponse *aResponse)
+                                                  completionHandler:^void(RPGStatusCode networkStatusCode)
    {
      [self setViewToNormalState];
      
-     switch (aResponse.status)
+     switch (networkStatusCode)
      {
        case kRPGStatusCodeOK:
        {
@@ -335,6 +380,20 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   characters[0] = character;
   
   standardUserDefaults.sessionCharacters = characters;
+}
+
+- (void)saveSelectedAvatarID
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
+  NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
+  
+  character[kRPGCharacterProfileViewControllerAvatarID] = @(self.avatarCollectionViewController.selectedAvatarIndex + 1);
+  characters[0] = character;
+  
+  standardUserDefaults.sessionCharacters = characters;
+  
+  self.avatarImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)standardUserDefaults.characterClassID, (long)standardUserDefaults.characterAvatarID]];
 }
 
 #pragma mark - Add To Collection
