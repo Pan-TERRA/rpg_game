@@ -10,6 +10,12 @@
 
 NSString * const kRPGCharacterRequestCharacterID = @"char_id";
 
+@interface RPGCharacterRequest()
+
+@property (nonatomic, assign, readwrite) NSInteger characterID;
+
+@end
+
 @implementation RPGCharacterRequest
 
 #pragma mark - Init
