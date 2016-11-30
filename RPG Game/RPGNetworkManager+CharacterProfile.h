@@ -12,11 +12,14 @@
 
 @class RPGCharacterRequest;
 @class RPGCharacterProfileInfoResponse;
+@class RPGCharacterAvatarSelectRequest;
 
 @interface RPGNetworkManager (CharacterProfile)
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
                          completionHandler:(void (^)(RPGStatusCode networkStatusCode,
                                                      RPGCharacterProfileInfoResponse *))callbackBlock;
+- (void)characterAvatarSelectWithRequest:(RPGCharacterAvatarSelectRequest *)aRequest
+                       completionHandler:(void (^)(RPGStatusCode networkStatusCode))callbackBlock;
 
 @end
