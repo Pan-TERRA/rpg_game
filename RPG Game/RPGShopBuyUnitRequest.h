@@ -14,5 +14,6 @@
 @property (assign, nonatomic, readwrite) NSInteger shopUnitID;
 
 - (instancetype)initWithShopUnitID:(NSInteger)aShopUnitID NS_DESIGNATED_INITIALIZER;
++ (instancetype)shopBuyUnitRequestWithShopUnitID:(NSInteger)aShopUnitID;
 
 @end

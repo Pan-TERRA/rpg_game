@@ -14,8 +14,6 @@
   // Constants
 #import "RPGMessageTypes.h"
 
-// TODO: Change to arena condition message
-static NSString * const kRPGArenaControllerBattleConditionMessageType = @"BATTLE_CONDITION";
 static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:8888/arena_battle";
 
 @interface RPGArenaControllerGenerator ()
@@ -57,7 +55,7 @@ static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:
   [manager release];
   
   [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGArenaInitMessageType];
-  [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGArenaControllerBattleConditionMessageType];
+  [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGArenaConditionMessageType];
   controller.skillsID = self.skillsID;
   
   return controller;

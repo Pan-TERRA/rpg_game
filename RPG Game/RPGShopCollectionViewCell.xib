@@ -30,7 +30,7 @@
                         <rect key="frame" x="15" y="37" width="120" height="163"/>
                     </imageView>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="M6z-i8-NbT">
-                        <rect key="frame" x="15" y="208" width="120" height="34"/>
+                        <rect key="frame" x="15" y="206" width="120" height="38"/>
                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
                         <state key="normal" image="Ruby" backgroundImage="Label Item Dark Brown"/>
                         <connections>
@@ -50,12 +50,20 @@
                 <constraint firstItem="M6z-i8-NbT" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="JBE-hk-Wy9"/>
                 <constraint firstItem="M6z-i8-NbT" firstAttribute="top" secondItem="Uff-dc-nGt" secondAttribute="bottom" constant="8" id="Nqu-0A-kHr"/>
                 <constraint firstItem="Uff-dc-nGt" firstAttribute="height" secondItem="h47-ES-0Td" secondAttribute="height" multiplier="0.65" id="Sb1-hF-WxK"/>
+                <constraint firstItem="M6z-i8-NbT" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" multiplier="1.8" id="SrO-Q4-Q1X"/>
                 <constraint firstItem="h47-ES-0Td" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="bPr-yd-cmr"/>
+                <constraint firstItem="M6z-i8-NbT" firstAttribute="height" secondItem="h47-ES-0Td" secondAttribute="height" multiplier="0.15" id="bZ0-Z2-F1g"/>
                 <constraint firstItem="Uff-dc-nGt" firstAttribute="top" secondItem="SPT-FE-Bve" secondAttribute="bottom" constant="8" id="eFj-7x-5CZ"/>
                 <constraint firstAttribute="bottom" secondItem="h47-ES-0Td" secondAttribute="bottom" id="kzi-kZ-XPu"/>
                 <constraint firstAttribute="bottom" secondItem="M6z-i8-NbT" secondAttribute="bottom" constant="8" id="lIf-mJ-yQc"/>
                 <constraint firstItem="SPT-FE-Bve" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="vZ7-kB-ThT"/>
             </constraints>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Nqu-0A-kHr"/>
+                    <exclude reference="lIf-mJ-yQc"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="buyButton" destination="M6z-i8-NbT" id="Vov-c5-PPl"/>
                 <outlet property="titleLabel" destination="SPT-FE-Bve" id="dYz-EW-tkP"/>

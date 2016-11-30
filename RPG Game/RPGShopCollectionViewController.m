@@ -29,7 +29,7 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 {
   UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout new] autorelease];
   flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-  
+
   self = [super initWithCollectionViewLayout:flowLayout];
   if (self != nil)
   {
@@ -58,9 +58,6 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
-  [self.collectionView setNeedsUpdateConstraints];
-  [self.collectionView setNeedsDisplay];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -109,44 +106,23 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   return cell;
 }
 
-#pragma mark <UICollectionViewDelegate>
+#pragma mark - UICollectionViewDelegateFlowLayout
 
-/*
- // Uncomment this method to specify if the specified item should be highlighted during tracking
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
- }
- */
-
-/*
- // Uncomment this method to specify if the specified item should be selected
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
- return YES;
- }
- */
-
-/*
- // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
- - (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
- }
- 
- - (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
- }
- 
- - (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
- }
- */
-
-#pragma mark - <UICollectionViewDelegateFlowLayout>
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-  //TODO: remove this shit
-  CGSize size = self.view.frame.size;
-  size.width = size.width / 3.25;
-  return size;
+  CGSize collectionViewSize = self.collectionView.frame.size;
+  CGSize cellSize = CGSizeZero;
+  
+  if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
+  {
+    cellSize = CGSizeMake(collectionViewSize.width / 5.25, collectionViewSize.height / 2.35);
+  }
+  else
+  {
+    cellSize = CGSizeMake(collectionViewSize.width / 3.25, collectionViewSize.height / 1.05);
+  }
+  
+  return cellSize;
 }
 
 - (void)buyButtonDidPressOnCell:(RPGShopCollectionViewCell *)aCell
@@ -156,7 +132,6 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   
   RPGShopViewController *shopViewController = (RPGShopViewController *)self.parentViewController;
   [shopViewController buyShopUnitWithID:shopUnitID];
-  
 }
 
 #pragma mark - Accessors
@@ -166,7 +141,6 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   {
     [_shopUnits release];
     _shopUnits = [shopUnits retain];
-    [self.collectionView reloadData];
   }
 }
 @end

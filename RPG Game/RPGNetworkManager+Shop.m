@@ -128,7 +128,7 @@
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIShopBuyUnitRoute];
-  RPGShopBuyUnitRequest *shopUnitRequest = [[RPGShopBuyUnitRequest alloc] initWithShopUnitID:unitID];
+  RPGShopBuyUnitRequest *shopUnitRequest = [RPGShopBuyUnitRequest shopBuyUnitRequestWithShopUnitID:unitID];
   
   NSURLRequest *request = [self requestWithObject:shopUnitRequest
                                         URLstring:requestString

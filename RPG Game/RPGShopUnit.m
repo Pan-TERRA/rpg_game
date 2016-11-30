@@ -117,7 +117,7 @@ NSString * const kRPGShopUnitSkillID = @"skill_id";
   {
     unitType = kRPGShopUnitTypeBagSlot;
   }
-  else if ([aDictionary[kRPGShopUnitUnitType] isEqualToString:@"active_slots"])
+  else if ([aDictionary[kRPGShopUnitUnitType] isEqualToString:@"active_slot"])
   {
     unitType = kRPGShopUnitTypeActiveSlot;
   }

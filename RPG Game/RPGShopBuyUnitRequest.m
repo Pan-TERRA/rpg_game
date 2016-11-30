@@ -26,6 +26,11 @@ static NSString * const kRPGShopBuyUnitRequestUnitID = @"unit_id";
   return self;
 }
 
++ (instancetype)shopBuyUnitRequestWithShopUnitID:(NSInteger)aShopUnitID
+{
+  return [[[self alloc] initWithShopUnitID:aShopUnitID] autorelease];
+}
+
 - (instancetype)init
 {
   return [self initWithShopUnitID:-1];

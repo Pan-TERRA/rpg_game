@@ -24,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kky-Fg-Lkw" userLabel="CollectionView Container">
-                    <rect key="frame" x="60" y="75" width="480" height="450"/>
+                    <rect key="frame" x="60" y="60" width="480" height="480"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2eb-2T-iTd" userLabel="Gold Content View">
-                    <rect key="frame" x="60" y="25" width="210" height="42"/>
+                    <rect key="frame" x="60" y="9" width="210" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gold" translatesAutoresizingMaskIntoConstraints="NO" id="Ea7-jV-9Ek">
                             <rect key="frame" x="8" y="4" width="34" height="34"/>
@@ -38,7 +38,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1488" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X6e-AF-pyV">
                             <rect key="frame" x="46" y="9" width="156" height="25"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="21"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -52,7 +52,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Z1-pF-ATk" userLabel="Crystall Content View">
-                    <rect key="frame" x="330" y="25" width="210" height="42"/>
+                    <rect key="frame" x="330" y="9" width="210" height="42"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ruby" translatesAutoresizingMaskIntoConstraints="NO" id="hpk-PK-laZ">
                             <rect key="frame" x="168" y="4" width="34" height="34"/>
@@ -63,7 +63,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="228" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WvH-2Q-ptY">
                             <rect key="frame" x="8" y="9" width="156" height="25"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="21"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -77,12 +77,19 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VtP-Za-rzk">
-                    <rect key="frame" x="530" y="530" width="40" height="40"/>
+                    <rect key="frame" x="544" y="544" width="48" height="48"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="KoF-a1-Vv1"/>
                         <constraint firstAttribute="height" constant="40" id="XJc-hL-u4k"/>
+                        <constraint firstAttribute="width" secondItem="VtP-Za-rzk" secondAttribute="height" multiplier="1:1" id="XKA-6z-rjn"/>
                     </constraints>
-                    <state key="normal" image="back_icon_inactive"/>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="KoF-a1-Vv1"/>
+                            <exclude reference="XJc-hL-u4k"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="Cpd-73-qJ9"/>
                     </connections>
@@ -90,28 +97,35 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="kky-Fg-Lkw" firstAttribute="top" secondItem="2eb-2T-iTd" secondAttribute="bottom" constant="8" id="1tE-7j-tqw"/>
-                <constraint firstAttribute="bottom" secondItem="VtP-Za-rzk" secondAttribute="bottom" constant="30" id="8dM-Wm-5Dh"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="centerY" secondItem="2eb-2T-iTd" secondAttribute="centerY" id="KeY-nf-psV"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MOw-qS-YZs"/>
+                <constraint firstAttribute="trailing" secondItem="VtP-Za-rzk" secondAttribute="trailing" constant="8" id="Mmk-dV-HQA"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="width" secondItem="2eb-2T-iTd" secondAttribute="width" id="O8b-P8-cDJ"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OHe-x4-TV3"/>
-                <constraint firstItem="kky-Fg-Lkw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.75" id="RaY-JC-sbz"/>
+                <constraint firstItem="kky-Fg-Lkw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.8" id="RaY-JC-sbz"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="trailing" secondItem="kky-Fg-Lkw" secondAttribute="trailing" id="SbU-dS-kMC"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Spv-8g-AYm"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="leading" secondItem="kky-Fg-Lkw" secondAttribute="leading" id="Vbp-7h-47N"/>
-                <constraint firstAttribute="trailing" secondItem="VtP-Za-rzk" secondAttribute="trailing" constant="30" id="YuP-tG-Nc4"/>
+                <constraint firstAttribute="bottom" secondItem="VtP-Za-rzk" secondAttribute="bottom" constant="8" id="Xl1-Qd-ExS"/>
+                <constraint firstItem="VtP-Za-rzk" firstAttribute="width" secondItem="rVz-hJ-VS6" secondAttribute="width" multiplier="0.08" id="ZSf-Vd-7Ox"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="width" secondItem="rVz-hJ-VS6" secondAttribute="width" multiplier="0.35" id="d6S-HG-cNe"/>
+                <constraint firstItem="2eb-2T-iTd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.1" id="gFm-WO-dhm"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="gJ1-Lr-YYv"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="height" secondItem="rVz-hJ-VS6" secondAttribute="height" multiplier="0.07" id="idU-Ks-YLv"/>
                 <constraint firstAttribute="trailing" secondItem="rVz-hJ-VS6" secondAttribute="trailing" id="nv8-xB-Qw8"/>
-                <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="oAG-CD-3B5"/>
+                <constraint firstItem="VtP-Za-rzk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="pUp-5v-jOe"/>
+                <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="qNR-mx-A1g"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="height" secondItem="2eb-2T-iTd" secondAttribute="height" id="sc7-ss-AQl"/>
                 <constraint firstAttribute="bottom" secondItem="rVz-hJ-VS6" secondAttribute="bottom" id="xhY-I9-WBv"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="pUp-5v-jOe"/>
+                </mask>
+            </variation>
         </view>
     </objects>
     <resources>

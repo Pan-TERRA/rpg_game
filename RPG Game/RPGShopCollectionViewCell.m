@@ -18,6 +18,7 @@
 - (void)dealloc
 {
   [_shopUnit release];
+  
   [super dealloc];
 }
 

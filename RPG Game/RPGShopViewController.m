@@ -17,6 +17,7 @@
 #import "RPGShopUnitsResponse.h"
   //Entity
 #import "RPGShopUnit.h"
+#import "RPGResources.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -33,7 +34,6 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystallLabel;
-
   //Views
 @property (nonatomic, assign, readwrite) IBOutlet UIView *collectionViewContainer;
 @property (nonatomic, retain, readwrite) RPGShopCollectionViewController *collectionViewController;
@@ -72,12 +72,14 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [self addChildViewController:self.collectionViewController frame:self.collectionViewContainer.frame];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
-  
+
   [self updateViewsWithWaitingModal];
 }
 
@@ -88,6 +90,8 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
   NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
   self.goldLabel.text = [@(userDefault.sessionGold) stringValue];
   self.crystallLabel.text = [@(userDefault.sessionCrystals) stringValue];
+  
+  self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,8 +114,6 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 
 - (void)updateViewsWithWaitingModal
 {
-  [self addChildViewController:self.collectionViewController frame:self.collectionViewContainer.frame];
-  
   [self addChildViewController:self.shopInitModal frame:self.view.frame];
   
   [self fetchShopUnits];
@@ -174,6 +176,7 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
     
     [weakSelf removeShopInitModal];
   };
+  
   [[RPGNetworkManager sharedNetworkManager] fetchShopUnitsWithCompletionHandler:handler];
 }
 
@@ -245,7 +248,17 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
         break;
       }
     }
-    [weakSelf.collectionViewController.collectionView reloadData];
+    
+    [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(NSInteger aStatusCode, RPGResources *aResources)
+     {
+       if (aStatusCode == 0)
+       {
+         NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+         standartUserDefaults.sessionGold = aResources.gold;
+         standartUserDefaults.sessionCrystals = aResources.crystals;
+         [self updateResourcesLabels];
+       }
+     }];
     
     [weakSelf removeShopInitModal];
   };
@@ -254,5 +267,12 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 }
 
 #pragma mark - Helper Methods
+
+- (void)updateResourcesLabels
+{
+  NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+  self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionGold];
+  self.crystallLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionCrystals];
+}
 
 @end
