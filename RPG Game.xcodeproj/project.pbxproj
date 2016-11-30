@@ -1372,6 +1372,7 @@
 		28AB94A21DDDDFE000F1503B /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D08406111DEF341F00CBB9EE /* Shop */,
 				281499EC1DAFC95F00C26881 /* Battle */,
 				280A522F1DB7C60B00FF66B8 /* User Defaults */,
 				28A5A0E71DB918FC000EF49F /* Entities */,
@@ -1671,14 +1672,9 @@
 		D0760C561DE8A11200A8D8EB /* Shop */ = {
 			isa = PBXGroup;
 			children = (
-				D0760C5B1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.h */,
-				D0760C5C1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.m */,
-				D0760C5D1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.xib */,
-				D0760C5E1DE8A13A00A8D8EB /* RPGShopCollectionViewController.h */,
-				D0760C5F1DE8A13A00A8D8EB /* RPGShopCollectionViewController.m */,
-				D0760C641DE8A13A00A8D8EB /* RPGShopViewController.h */,
-				D0760C651DE8A13A00A8D8EB /* RPGShopViewController.m */,
-				D0760C661DE8A13A00A8D8EB /* RPGShopViewController.xib */,
+				D084060C1DEF33CA00CBB9EE /* CollectionView Cell */,
+				D084060D1DEF33E600CBB9EE /* Collection View Controller */,
+				D084060E1DEF33F800CBB9EE /* Shop View Controller */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -1688,12 +1684,8 @@
 			children = (
 				D0760C571DE8A13A00A8D8EB /* RPGNetworkManager+Shop.h */,
 				D0760C581DE8A13A00A8D8EB /* RPGNetworkManager+Shop.m */,
-				D0760C591DE8A13A00A8D8EB /* RPGShopBuyUnitRequest.h */,
-				D0760C5A1DE8A13A00A8D8EB /* RPGShopBuyUnitRequest.m */,
-				D0760C601DE8A13A00A8D8EB /* RPGShopUnit.h */,
-				D0760C611DE8A13A00A8D8EB /* RPGShopUnit.m */,
-				D0760C621DE8A13A00A8D8EB /* RPGShopUnitsResponse.h */,
-				D0760C631DE8A13A00A8D8EB /* RPGShopUnitsResponse.m */,
+				D084060F1DEF340E00CBB9EE /* Request */,
+				D08406101DEF341500CBB9EE /* Response */,
 			);
 			name = Shop;
 			sourceTree = "<group>";
@@ -1726,6 +1718,62 @@
 				D0819AB51DD6180100021DB9 /* RPGSkillDescriptionViewController.xib */,
 			);
 			name = "Skill Description ViewController";
+			sourceTree = "<group>";
+		};
+		D084060C1DEF33CA00CBB9EE /* CollectionView Cell */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C5B1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.h */,
+				D0760C5C1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.m */,
+				D0760C5D1DE8A13A00A8D8EB /* RPGShopCollectionViewCell.xib */,
+			);
+			name = "CollectionView Cell";
+			sourceTree = "<group>";
+		};
+		D084060D1DEF33E600CBB9EE /* Collection View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C5E1DE8A13A00A8D8EB /* RPGShopCollectionViewController.h */,
+				D0760C5F1DE8A13A00A8D8EB /* RPGShopCollectionViewController.m */,
+			);
+			name = "Collection View Controller";
+			sourceTree = "<group>";
+		};
+		D084060E1DEF33F800CBB9EE /* Shop View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C641DE8A13A00A8D8EB /* RPGShopViewController.h */,
+				D0760C651DE8A13A00A8D8EB /* RPGShopViewController.m */,
+				D0760C661DE8A13A00A8D8EB /* RPGShopViewController.xib */,
+			);
+			name = "Shop View Controller";
+			sourceTree = "<group>";
+		};
+		D084060F1DEF340E00CBB9EE /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C591DE8A13A00A8D8EB /* RPGShopBuyUnitRequest.h */,
+				D0760C5A1DE8A13A00A8D8EB /* RPGShopBuyUnitRequest.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		D08406101DEF341500CBB9EE /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C621DE8A13A00A8D8EB /* RPGShopUnitsResponse.h */,
+				D0760C631DE8A13A00A8D8EB /* RPGShopUnitsResponse.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		D08406111DEF341F00CBB9EE /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				D0760C601DE8A13A00A8D8EB /* RPGShopUnit.h */,
+				D0760C611DE8A13A00A8D8EB /* RPGShopUnit.m */,
+			);
+			name = Shop;
 			sourceTree = "<group>";
 		};
 		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
