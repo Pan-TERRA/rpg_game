@@ -101,8 +101,10 @@ numberOfRowsInComponent:(NSInteger)aComponent
   
   UINib *cellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
   [self.avatarCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
-  self.avatarCollectionViewController = [[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
-                                                                                     parentViewController:self];
+  self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
+                                                                                      parentViewController:self
+                                                                                       selectedAvatarIndex:0] autorelease];
+  self.avatarCollectionViewController.characterClassIndex = [self.classPicker selectedRowInComponent:0];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
