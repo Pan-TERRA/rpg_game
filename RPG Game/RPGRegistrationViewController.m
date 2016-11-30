@@ -13,6 +13,8 @@
 #import "RPGNetworkManager+Classes.h"
   // Controllers
 #import "RPGAlertController+RPGErrorHandling.h"
+#import "RPGCollectionViewController.h"
+#import "RPGAvatarCollectionViewController.h"
   // Views
 #import "RPGLoginViewController.h"
 #import "RPGMainViewController.h"
@@ -23,8 +25,6 @@
   // Constants
 #import "RPGNibNames.h"
 
-
-
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
@@ -34,6 +34,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
 @property (nonatomic, retain, readwrite) NSArray *classPickerData;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *avatarCollectionView;
+@property (nonatomic, retain, readwrite) RPGAvatarCollectionViewController *avatarCollectionViewController;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
@@ -65,7 +67,7 @@
 {
   [_classPickerData release];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
+
   [super dealloc];
 }
 
@@ -96,6 +98,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [super viewDidLoad];
   
   self.classPickerData = self.classInfo.classNames;
+  
+  UINib *cellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
+  [self.avatarCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  self.avatarCollectionViewController = [[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
+                                                                                     parentViewController:self];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
