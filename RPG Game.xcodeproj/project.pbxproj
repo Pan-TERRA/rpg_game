@@ -109,6 +109,7 @@
 		877C86581DC8F132004B4A00 /* RPGInitialScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */; };
 		877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877C86571DC8F132004B4A00 /* RPGInitialScreenViewController.xib */; };
 		87C8734B1DDF27D300903193 /* RPGBasicNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C8734A1DDF27D300903193 /* RPGBasicNetworkResponse.m */; };
+		AE5E468A1DEF438900546256 /* RPGCharacterAvatarSelectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46891DEF438900546256 /* RPGCharacterAvatarSelectRequest.m */; };
 		AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68001DBA773100715480 /* RPGQuestRequest.m */; };
 		AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */; };
 		AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */; };
@@ -368,6 +369,8 @@
 		87C8734A1DDF27D300903193 /* RPGBasicNetworkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBasicNetworkResponse.m; sourceTree = "<group>"; };
 		9864644C8038713EF8524DC8 /* Pods-RPG Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG Game.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game.release.xcconfig"; sourceTree = "<group>"; };
 		9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG Game.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE5E46881DEF438900546256 /* RPGCharacterAvatarSelectRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGCharacterAvatarSelectRequest.h; sourceTree = "<group>"; };
+		AE5E46891DEF438900546256 /* RPGCharacterAvatarSelectRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGCharacterAvatarSelectRequest.m; sourceTree = "<group>"; };
 		AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestRequest.h; sourceTree = "<group>"; };
 		AE5E68001DBA773100715480 /* RPGQuestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestRequest.m; sourceTree = "<group>"; };
 		AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestResponse.h; sourceTree = "<group>"; };
@@ -1046,6 +1049,7 @@
 			children = (
 				289C42C61DE20C4E00E35506 /* RPGNetworkManager+CharacterProfile.h */,
 				289C42D21DE20C6700E35506 /* RPGNetworkManager+CharacterProfile.m */,
+				AE5E46861DEF434E00546256 /* Character Avatar */,
 				289C42F01DE210C000E35506 /* Character Info */,
 				289C42ED1DE20E5C00E35506 /* Character */,
 			);
@@ -1089,8 +1093,8 @@
 		289C42EE1DE20E8C00E35506 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				289C42D01DE20C6700E35506 /* RPGCharacterRequest.m */,
 				289C42C21DE20C4000E35506 /* RPGCharacterRequest.h */,
+				289C42D01DE20C6700E35506 /* RPGCharacterRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1601,6 +1605,23 @@
 				87C8734A1DDF27D300903193 /* RPGBasicNetworkResponse.m */,
 			);
 			name = Response;
+			sourceTree = "<group>";
+		};
+		AE5E46861DEF434E00546256 /* Character Avatar */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E46871DEF436B00546256 /* Request */,
+			);
+			name = "Character Avatar";
+			sourceTree = "<group>";
+		};
+		AE5E46871DEF436B00546256 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E46881DEF438900546256 /* RPGCharacterAvatarSelectRequest.h */,
+				AE5E46891DEF438900546256 /* RPGCharacterAvatarSelectRequest.m */,
+			);
+			name = Request;
 			sourceTree = "<group>";
 		};
 		AE87B59B1DE861830019E416 /* Battle Reward */ = {
