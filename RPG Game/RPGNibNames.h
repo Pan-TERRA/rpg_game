@@ -40,6 +40,7 @@ extern NSString * const kRPGArenaSkillDrawViewControllerNIBName;
 extern NSString * const kRPGCharacterProfileViewControllerNIBName;
 extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
 extern NSString * const kRPGAvatarCollectionViewCellNIBName;
+extern NSString * const kRPGAvatarSelectViewControllerNIBName;
 
 /****************	Character Profile ****************/
 
