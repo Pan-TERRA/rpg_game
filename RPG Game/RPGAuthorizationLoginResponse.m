@@ -49,7 +49,6 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
         aStatus == 0 &&
         (aUsername == nil ||
         aToken == nil ||
-        anAvatar == nil ||
         aGold < 0 ||
         aCrystals < 0 ||
         aCharacter == nil))
@@ -61,7 +60,6 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
     else if (aStatus != 0 &&
              (aUsername == nil ||
               aToken == nil ||
-              anAvatar == nil ||
               aGold < 0 ||
               aCrystals < 0 ||
               aCharacter == nil))
