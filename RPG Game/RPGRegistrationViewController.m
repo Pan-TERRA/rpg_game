@@ -55,7 +55,8 @@
   if (self != nil)
   {
     _classInfo = [[RPGClassInfoRepresentation alloc] init];
-    _classPickerData = [NSArray array];
+    _classPickerData = [[NSArray alloc] init];
+    _avatarCollectionViewController = [[RPGAvatarCollectionViewController alloc] init];
   }
   
   return self;
@@ -66,6 +67,8 @@
 - (void)dealloc
 {
   [_classPickerData release];
+  [_avatarCollectionViewController release];
+  [_classInfo release];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
 
   [super dealloc];
@@ -91,6 +94,13 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return self.classPickerData[aRow];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
+{
+  [self updateAvatarCollection];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -104,7 +114,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
                                                                                       parentViewController:self
                                                                                        selectedAvatarIndex:0] autorelease];
-  self.avatarCollectionViewController.characterClassIndex = [self.classPicker selectedRowInComponent:0];
+  [self updateAvatarCollection];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -112,7 +122,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return UIInterfaceOrientationMaskLandscape;
 }
 
-#pragma mark View State
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -126,7 +136,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [self.submitActivityIndicator stopAnimating];
 }
 
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction)cancelButtonAction:(UIButton *)aSender
 {
@@ -142,7 +152,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger classNameIndex = [self.classPicker selectedRowInComponent:0];
   NSInteger selectedClassID = [self.classInfo classIDByName:self.classPickerData[classNameIndex]];
-  NSInteger selectedAvatarIndex = self.avatarCollectionViewController.selectedAvatarIndex;
+  NSInteger selectedAvatarIndex = self.avatarCollectionViewController.selectedAvatarIndex + 1;
   
   if ([self textFieldsNotEmpty])
   {
@@ -247,13 +257,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.characterNameTextField.text.length != 0;
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
-
 - (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
 {
   return aStatusCode == kRPGStatusCodeWrongEmail
@@ -270,6 +273,12 @@ numberOfRowsInComponent:(NSInteger)aComponent
   || aStatusCode == kRPGStatusCodeInvalidCharacterName
   || aStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
   || aStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
+}
+
+- (void)updateAvatarCollection
+{
+  NSInteger index = [self.classPicker selectedRowInComponent:0] + 1;
+  self.avatarCollectionViewController.characterClassIndex = index;
 }
 
 @end
