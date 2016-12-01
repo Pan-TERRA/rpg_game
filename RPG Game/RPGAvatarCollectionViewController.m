@@ -20,7 +20,7 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 
 @property (nonatomic, assign, readwrite) UIViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-@property (nonatomic, assign, readwrite) NSUInteger selectedAvatarIndex;
+@property (nonatomic, assign, readwrite) NSInteger selectedAvatarIndex;
 
 @end
 
@@ -30,7 +30,7 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(UIViewController *)aViewController
-                   selectedAvatarIndex:(NSUInteger)anIndex
+                   selectedAvatarIndex:(NSInteger)anIndex
 {
   self = [super init];
   

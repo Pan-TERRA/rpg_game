@@ -10,11 +10,11 @@
 
 @interface RPGAvatarCollectionViewController : NSObject
 
-@property (nonatomic, assign, readonly) NSUInteger selectedAvatarIndex;
-@property (nonatomic, assign, readwrite) NSUInteger characterClassIndex;
+@property (nonatomic, assign, readonly) NSInteger selectedAvatarIndex;
+@property (nonatomic, assign, readwrite) NSInteger characterClassIndex;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                   parentViewController:(UIViewController *)aViewController
-                   selectedAvatarIndex:(NSUInteger)anIndex;
+                   selectedAvatarIndex:(NSInteger)anIndex;
 
 @end
