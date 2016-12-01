@@ -17,9 +17,9 @@
 @interface RPGNetworkManager (CharacterProfile)
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
-                         completionHandler:(void (^)(RPGStatusCode networkStatusCode,
-                                                     RPGCharacterProfileInfoResponse *))callbackBlock;
+                         completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                     RPGCharacterProfileInfoResponse *aResponse))aCallbackBlock;
 - (void)characterAvatarSelectWithRequest:(RPGCharacterAvatarSelectRequest *)aRequest
-                       completionHandler:(void (^)(RPGStatusCode networkStatusCode))callbackBlock;
+                       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallbackBlock;
 
 @end
