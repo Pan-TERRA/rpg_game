@@ -7,19 +7,20 @@
   //
 
 #import <UIKit/UIKit.h>
-  // Controllers
-@class RPGBattleController;
+  // Entity
+@class RPGEntity;
   // Views
 #import "RPGProgressBarView.h"
 
 @interface RPGEntityViewController : UIViewController
 
-- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
-                                   align:(RPGProgressBarAlign)anAlignFlag;
+@property (nonatomic, assign, readwrite) RPGEntity *entity;
 
-- (void)registerObservationEntityByKeyPath:(NSString *)aKeyPath;
+- (instancetype)initWithAlign:(RPGProgressBarAlign)anAlignFlag;
 
-- (void)updateViewWithKeyPath:(NSString *)aKeyPath;
+- (instancetype)initWithEntity:(RPGEntity *)anEntity
+                         align:(RPGProgressBarAlign)anAlignFlag NS_DESIGNATED_INITIALIZER;
 
+- (void)updateView;
 
 @end

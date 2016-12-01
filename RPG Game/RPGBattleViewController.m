@@ -34,9 +34,6 @@
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
-static NSString * const kRPGEntityViewControllerPlayerKeyPath = @"battleController.battle.player";
-static NSString * const kRPGEntityViewControllerOpponentKeyPath = @"battleController.battle.opponent";
-
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
@@ -46,10 +43,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
 @property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
-@property (nonatomic, retain, readonly) RPGEntityViewController *playerViewController;
+@property (nonatomic, retain, readwrite) RPGEntityViewController *playerViewController;
   // Opponent
 @property (assign, nonatomic) IBOutlet UIView *opponentViewContainer;
-@property (nonatomic, retain, readonly) RPGEntityViewController *opponentViewController;
+@property (nonatomic, retain, readwrite) RPGEntityViewController *opponentViewController;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -97,14 +94,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
         // player view controller
-      _playerViewController = [[RPGEntityViewController alloc] initWithBattleController:_battleController
-                                                                                  align:kRPGProgressBarLeftAlign];
-      [_playerViewController registerObservationEntityByKeyPath:kRPGEntityViewControllerPlayerKeyPath];
-      
+      _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
+
         // opponent view controller
-      _opponentViewController = [[RPGEntityViewController alloc] initWithBattleController:_battleController
-                                                                                    align:kRPGProgressBarRightAlign];
-      [_opponentViewController registerObservationEntityByKeyPath:kRPGEntityViewControllerOpponentKeyPath];
+      _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarRightAlign];
+
       
       _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^
                           {
@@ -124,6 +118,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
                                                selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
+    
       [_battleController addObserver:self
                           forKeyPath:@"battle.currentTurn"
                              options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
@@ -267,6 +262,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   RPGBattleController *battleController = self.battleController;
   
+  [self.playerViewController updateView];
+  [self.opponentViewController updateView];
+  
   if (battleController.isMyTurn)
   {
     self.turnLabel.text = kRPGBattleViewControllerMyTurn;
@@ -310,6 +308,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
   [self removeBattleInitModal];
+  [self setUpEntityViewControllers];
 }
 
 - (void)removeBattleInitModal
@@ -317,6 +316,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self restartTimer];
   [self.battleInitModal.view removeFromSuperview];
   [self.battleInitModal removeFromParentViewController];
+}
+
+- (void)setUpEntityViewControllers
+{
+  self.playerViewController.entity = self.battleController.battle.player;
+  self.opponentViewController.entity = self.battleController.battle.opponent;
 }
 
 #pragma mark - KVO

@@ -18,10 +18,6 @@ static int sEntityViewContollerBattleEntityContext;
 
 @interface RPGEntityViewController ()
 
-@property (nonatomic, assign, readwrite) RPGBattleController *battleController;
-
-@property (nonatomic, copy, readwrite) NSString *entityObservationKeyPath;
-
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *entityNickName;
 @property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *entityHPBar;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *entityHPLabel;
@@ -34,12 +30,12 @@ static int sEntityViewContollerBattleEntityContext;
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
+- (instancetype)initWithEntity:(RPGEntity *)anEntity
                                    align:(RPGProgressBarAlign)anAlignFlag
 {
   NSString *NIBName = nil;
   
-  if (anAlignFlag)
+  if (anAlignFlag == kRPGProgressBarLeftAlign)
   {
     NIBName = kRPGEntityViewLeftNIBName;
   }
@@ -52,26 +48,31 @@ static int sEntityViewContollerBattleEntityContext;
   
   if (self != nil)
   {
-    _battleController = aBattleController;
-    _entityObservationKeyPath = nil;
+    _entity = anEntity;
   }
   
   return self;
 }
 
-#pragma mark - Dealloc
+- (instancetype)initWithAlign:(RPGProgressBarAlign)anAlignFlag
+{
+  return [self initWithEntity:nil align:anAlignFlag];
+}
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+  return [self initWithEntity:nil align:kRPGProgressBarLeftAlign];
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+  return [self initWithEntity:nil align:kRPGProgressBarLeftAlign];
+}
+
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
-  if (_entityObservationKeyPath != nil)
-  {
-    [_battleController removeObserver:self
-                           forKeyPath:_entityObservationKeyPath
-                              context:&sEntityViewContollerBattleEntityContext];
-  }
-  
-  [_entityObservationKeyPath release];
   [super dealloc];
 }
 
@@ -80,7 +81,6 @@ static int sEntityViewContollerBattleEntityContext;
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  
   
     //  self.entityLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
     //  self.entityLevelView.layer.masksToBounds = YES;
@@ -96,46 +96,15 @@ static int sEntityViewContollerBattleEntityContext;
 
 - (void)updateView
 {
-  RPGEntity *entity = [self valueForKeyPath:self.entityObservationKeyPath];
-  
-  if (entity != nil)
+  if (self.entity != nil)
   {
-    NSInteger entityHP = entity.HP;
-    NSInteger entityMaxHP = entity.maxHP;
+    NSInteger entityHP = self.entity.HP;
+    NSInteger entityMaxHP = self.entity.maxHP;
     entityHP = (entityHP <= entityMaxHP) ? entityHP : entityMaxHP;
-    self.entityNickName.text = entity.name;
+    self.entityNickName.text = self.entity.name;
     self.entityHPBar.progress = ((float)entityHP / entityMaxHP);
     self.entityHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)entityHP, (long)entityMaxHP];
-    self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)entity.level];
-  }
-}
-
-#pragma mark - Entity Observation Register
-
-- (void)registerObservationEntityByKeyPath:(NSString *)aKeyPath
-{
-  self.entityObservationKeyPath = aKeyPath;
-  
-  [self addObserver:self
-         forKeyPath:[NSString stringWithFormat:@"%@MasterProperty",aKeyPath]
-            options:(NSKeyValueObservingOptionNew & NSKeyValueObservingOptionOld)
-            context:&sEntityViewContollerBattleEntityContext];
-}
-
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)aKeyPath
-                      ofObject:(id)anObject
-                        change:(NSDictionary<NSString *,id> *)aChange
-                       context:(void *)aContext
-{
-  if (aContext == &sEntityViewContollerBattleEntityContext)
-  {
-    [self updateView];
-  }
-  else
-  {
-    [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
+    self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
   }
 }
 

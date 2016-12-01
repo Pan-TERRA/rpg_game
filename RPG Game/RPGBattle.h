@@ -26,10 +26,6 @@ extern const NSInteger kRPGBattleTurnDuration;
  */
 @interface RPGBattle : NSObject
 
-  // for KVO observing
-@property(nonatomic, assign) id playerMasterProperty;
-@property(nonatomic, assign) id opponentMasterProperty;
-
 @property (retain, nonatomic, readwrite) RPGPlayer *player;
 @property (retain, nonatomic, readonly) RPGEntity *opponent;
 @property (assign, nonatomic, readonly) NSInteger startTime;
