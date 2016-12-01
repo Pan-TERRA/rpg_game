@@ -277,8 +277,10 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 - (void)updateAvatarCollection
 {
-  NSInteger index = [self.classPicker selectedRowInComponent:0] + 1;
-  self.avatarCollectionViewController.characterClassIndex = index;
+  NSInteger i = [self.classPicker selectedRowInComponent:0];
+  NSString *characterClassName = self.classPickerData[i];
+  NSInteger characterClassID = [self.classInfo classIDByName:characterClassName];
+  self.avatarCollectionViewController.characterClassID = characterClassID;
 }
 
 @end
