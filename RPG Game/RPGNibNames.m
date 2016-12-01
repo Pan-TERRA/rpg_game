@@ -40,6 +40,10 @@ NSString * const kRPGArenaSkillDrawViewControllerNIBName = @"RPGArenaSkillDrawVi
 NSString * const kRPGCharacterProfileViewControllerNIBName = @"RPGCharacterProfileViewController";
 NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCollectionViewCell";
 
+/****************	Adventure Maps ****************/
+
+NSString * const kRPGAdventureGlobalMapViewControllerNIBName = @"RPGAdventureGlobalMapViewController";
+
 /****************	Misc ****************/
 
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";

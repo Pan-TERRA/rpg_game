@@ -12,6 +12,7 @@
   // Controllers
 #import "RPGArenaControllerGenerator.h"
 #import "RPGAdventuresControllerGenerator.h"
+#import "RPGAdventureGlobalMapViewController.h"
   // Views
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
@@ -123,10 +124,15 @@
 
 - (IBAction)segueToAdventures
 {
-  RPGBattleControllerGenerator *adventuresControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
-  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:adventuresControllerGenerator] autorelease];
-
-  [self presentViewController:battleViewController
+//  RPGBattleControllerGenerator *adventuresControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
+//  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:adventuresControllerGenerator] autorelease];
+//
+//  [self presentViewController:battleViewController
+//                     animated:YES
+//                   completion:nil];
+  
+  RPGAdventureGlobalMapViewController *adventureGlobalMapViewController = [[RPGAdventureGlobalMapViewController alloc] init];
+  [self presentViewController:[adventureGlobalMapViewController autorelease]
                      animated:YES
                    completion:nil];
 }

@@ -45,3 +45,6 @@ extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
 extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
 
+/****************	Adventure Maps ****************/
+
+extern NSString * const kRPGAdventureGlobalMapViewControllerNIBName;
