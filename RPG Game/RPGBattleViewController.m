@@ -14,8 +14,10 @@
   // Controllers
 #import "RPGSkillBarViewController.h"
 #import "UIViewController+RPGChildViewController.h"
+#import "RPGEntityViewController.h"
   // Entities
 #import "RPGBattle.h"
+#import "RPGPlayer.h"
 #import "RPGResources.h"
 #import "RPGBattleInitResponse.h"
   // Views
@@ -31,7 +33,9 @@
 #import "RPGNibNames.h"
 
 static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
-static NSInteger kRPGBattleViewControllerLevelViewCornerRadius = 8;
+
+static NSString * const kRPGEntityViewControllerPlayerKeyPath = @"battleController.battle.player";
+static NSString * const kRPGEntityViewControllerOpponentKeyPath = @"battleController.battle.opponent";
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -40,19 +44,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
-
-  // Player 1
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerNickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *playerHPBar;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerHPLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIView *playerLevelView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *playerLevelLabel;
-  // Player 2
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentNickName;
-@property (nonatomic, assign, readwrite) IBOutlet RPGProgressBarView *opponentHPBar;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentHPLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIView *opponentLevelView;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *opponentLevelLabel;
+  // Player
+@property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
+@property (nonatomic, retain, readonly) RPGEntityViewController *playerViewController;
+  // Opponent
+@property (assign, nonatomic) IBOutlet UIView *opponentViewContainer;
+@property (nonatomic, retain, readonly) RPGEntityViewController *opponentViewController;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -99,10 +96,21 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^{
-        [self.battleController prepareBattleControllerForDismiss];
-        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-      }];
+        // player view controller
+      _playerViewController = [[RPGEntityViewController alloc] initWithBattleController:_battleController
+                                                                                  align:kRPGProgressBarLeftAlign];
+      [_playerViewController registerObservationEntityByKeyPath:kRPGEntityViewControllerPlayerKeyPath];
+      
+        // opponent view controller
+      _opponentViewController = [[RPGEntityViewController alloc] initWithBattleController:_battleController
+                                                                                    align:kRPGProgressBarRightAlign];
+      [_opponentViewController registerObservationEntityByKeyPath:kRPGEntityViewControllerOpponentKeyPath];
+      
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^
+                          {
+                            [self.battleController prepareBattleControllerForDismiss];
+                            [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+                          }];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -121,6 +129,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
                              options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                              context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
       
+      
     }
     
   }
@@ -134,9 +143,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [[NSNotificationCenter defaultCenter] removeObserver:_skillBar];
+  
   [_battleController removeObserver:self
                          forKeyPath:@"battle.currentTurn"
                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
+  
   [_battleInitModal release];
   [_battleLogViewController release];
   [_battleRewardModal release];
@@ -166,10 +177,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.skillBar addSubview:self.skillBarViewController.view];
   [self.skillBarViewController didMoveToParentViewController:self];
   
-  self.playerLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
-  self.playerLevelView.layer.masksToBounds = YES;
-  self.opponentLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
-  self.opponentLevelView.layer.masksToBounds = YES;
+    // player view controller set up
+  [self addChildViewController:self.playerViewController frame:self.playerViewContainer.frame];
+    // opponent view controller set up
+  [self addChildViewController:self.opponentViewController frame:self.opponentViewContainer.frame];
   
   [self.battleController openBattleControllerWebSocket];
 }
@@ -182,7 +193,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 - (void)viewDidAppear:(BOOL)animated
 {
   [super viewDidAppear:animated];
-  
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -257,11 +267,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   RPGBattleController *battleController = self.battleController;
   
-    // client
-  [self updatePlayer];
-    // opponent
-  [self updateOpponent];
-  
   if (battleController.isMyTurn)
   {
     self.turnLabel.text = kRPGBattleViewControllerMyTurn;
@@ -287,32 +292,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   {
     [self.skillBarViewController updateButtonsState];
   }
-}
-
-- (void)updatePlayer
-{
-  RPGBattleController *battleController = self.battleController;
-  
-  NSInteger playerHP = battleController.playerHP;
-  NSInteger playerMaxHP = battleController.playerMaxHP;
-  playerHP = (playerHP <= playerMaxHP) ? playerHP : playerMaxHP;
-  self.playerNickName.text = battleController.playerNickName;
-  self.playerHPBar.progress = ((float)playerHP / playerMaxHP);
-  self.playerHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)playerHP, (long)playerMaxHP];
-  self.playerLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.playerLevel];
-}
-
-- (void)updateOpponent
-{
-  RPGBattleController *battleController = self.battleController;
-  
-  NSInteger opponentHP = battleController.opponentHP;
-  NSInteger opponentMaxHP = battleController.opponentMaxHP;
-  opponentHP = (opponentHP <= opponentMaxHP) ? opponentHP : opponentMaxHP;
-  self.opponentNickName.text =  battleController.opponentNickName;
-  self.opponentHPBar.progress = ((float)opponentHP / opponentMaxHP);
-  self.opponentHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)opponentHP, (long)opponentMaxHP];
-  self.opponentLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.opponentLevel];
 }
 
 - (void)updateRewardModal

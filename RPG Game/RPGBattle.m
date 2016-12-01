@@ -102,4 +102,15 @@ const NSInteger kRPGBattleTurnDuration = 30;
   [super dealloc];
 }
 
+#pragma mark - KVO
+
++ (NSSet *)keyPathsForValuesAffectingPlayerMasterProperty
+{
+  return [NSSet setWithObject:@"player.HP"];
+}
+
++ (NSSet *)keyPathsForValuesAffectingOpponentMasterProperty
+{
+  return [NSSet setWithObject:@"opponent.HP"];
+}
 @end
