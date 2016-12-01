@@ -54,9 +54,17 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
                   selectedAvatarIndex:-1];
 }
 
+#pragma mark - Custom Setter
+
+- (void)setCharacterClassIndex:(NSInteger)aCharacterClassIndex
+{
+  _characterClassIndex = aCharacterClassIndex;
+  [self.collectionView reloadData];
+}
+
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return kRPGAvatarCollectionViewControllerSize;
 }
@@ -65,17 +73,26 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 {
   RPGAvatarCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName
                                                                                  forIndexPath:anIndexPath];
-  //check if index in [0..9]
   NSInteger index = anIndexPath.row;
-  [cell setImage:[UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)self.characterClassIndex, (long)index]]];
+  
+  UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)self.characterClassIndex, (long)index]];
+  if (image != nil)
+  {
+    [cell setImage:image];
+  }
+  else
+  {
+    [cell setImage:[UIImage imageNamed:@"battle_empty_icon_lock"]];
+  }
+  
   [cell setChosenFlagImageViewHidden:!(index == self.selectedAvatarIndex)];
 
   return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)aCollectionView
+                  layout:(UICollectionViewLayout *)aCollectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   CGFloat viewHeight = self.collectionView.frame.size.height;
   return CGSizeMake(viewHeight, viewHeight);
