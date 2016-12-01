@@ -24,7 +24,7 @@
   CGContextRelease(context);
   CGColorSpaceRelease(colorSpace);
   
-  NSLog(@"pixel: %d %d %d %d", pixel[0], pixel[1], pixel[2], pixel[3]);
+//  NSLog(@"pixel: %d %d %d %d", pixel[0], pixel[1], pixel[2], pixel[3]);
   
   UIColor *color = [UIColor colorWithRed:pixel[0] / 255.0
                                    green:pixel[1] / 255.0
