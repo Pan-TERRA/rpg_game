@@ -21,5 +21,6 @@
 - (void)deleteQuestWithID:(NSUInteger)anID;
 - (void)setQuestArray:(NSArray *)aQuestArray
     forQuestListState:(RPGQuestListState)aState;
+- (void)getRewardForQuestWithID:(NSUInteger)anID;
 
 @end

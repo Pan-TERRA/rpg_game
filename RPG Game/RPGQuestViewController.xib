@@ -265,7 +265,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
-                            <rect key="frame" x="50" y="0.0" width="40" height="41"/>
+                            <rect key="frame" x="50" y="0.0" width="40" height="40"/>
                             <state key="normal" backgroundImage="cancel_icon_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
@@ -286,7 +286,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
-                            <rect key="frame" x="0.0" y="1" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="cDX-sa-6Jp"/>
                                 <constraint firstAttribute="width" constant="40" id="ncw-BG-sXB"/>
@@ -298,24 +298,59 @@
                                 <action selector="addProofButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="Vna-fC-13M"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcu-b6-fYI">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="gcu-b6-fYI" secondAttribute="height" multiplier="2.5:1" id="Mc8-kV-UvK"/>
+                                <constraint firstAttribute="width" constant="46" id="Pj3-J5-4Iz"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                            <state key="normal" title="Get reward" backgroundImage="main_button_inactive">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Pj3-J5-4Iz"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="getRewardButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="P5T-DL-dgB"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="width" id="0Jl-Zt-CFX"/>
+                        <constraint firstItem="gcu-b6-fYI" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="3GV-GW-GlF"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="Bpj-c4-GjR" secondAttribute="height" id="7aP-Zd-064"/>
                         <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="EbL-WY-Cdc"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Bpj-c4-GjR" secondAttribute="width" id="Efk-ub-uCG"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="FsD-VS-Wat"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="KS0-g5-6Yc"/>
                         <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="Q5E-bv-8ez"/>
                         <constraint firstAttribute="bottom" secondItem="grH-jv-bBd" secondAttribute="bottom" id="TbX-r4-aB7"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="V6G-04-uwO"/>
+                        <constraint firstItem="gcu-b6-fYI" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="leading" id="aw6-Fg-tFn"/>
                         <constraint firstAttribute="trailing" secondItem="grH-jv-bBd" secondAttribute="trailing" id="crh-77-Ky7"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="cvq-3B-AcD"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="width" id="hpR-9t-oJE"/>
+                        <constraint firstItem="gcu-b6-fYI" firstAttribute="centerY" secondItem="0Cf-4K-WWr" secondAttribute="centerY" id="inY-UB-K5T"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="VrL-iM-XQj" secondAttribute="top" id="k4f-tF-XIy"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="gcu-b6-fYI" secondAttribute="height" id="r4x-fj-NdR"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="Lld-Ax-hOC" secondAttribute="height" id="sAZ-Ec-NWl"/>
                         <constraint firstItem="0Cf-4K-WWr" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="wmm-AH-krN"/>
                         <constraint firstAttribute="height" constant="40" id="z4v-wW-Z3Z"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="3GV-GW-GlF"/>
+                        </mask>
+                    </variation>
                     <connections>
                         <outlet property="acceptButton" destination="0Cf-4K-WWr" id="Nr6-ua-eO7"/>
                         <outlet property="addProofButton" destination="Lld-Ax-hOC" id="kKp-rt-q0Q"/>
                         <outlet property="denyButton" destination="Bpj-c4-GjR" id="zQo-t8-Y1l"/>
+                        <outlet property="getRewardButton" destination="gcu-b6-fYI" id="VBf-V3-HyD"/>
                     </connections>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLW-hy-czC" userLabel="Bottom Resizable Container">
@@ -361,6 +396,7 @@
         <image name="cancel_icon_inactive" width="40" height="41"/>
         <image name="char_icon" width="40" height="41"/>
         <image name="confirm_icon_inactive" width="40" height="40"/>
+        <image name="main_button_inactive" width="275" height="137"/>
         <image name="photo-camera" width="64" height="64"/>
         <image name="start_icon" width="40" height="38"/>
         <image name="table_item_bg" width="551" height="150"/>

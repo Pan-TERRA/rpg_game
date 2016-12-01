@@ -36,6 +36,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 @interface RPGQuestViewController () 
 
 @property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, assign, readwrite, getter=hasGotReward) BOOL getReward;
 
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 @property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
@@ -103,9 +104,10 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 {
   if (aQuest != nil)
   {
-    self.state = aQuest.state;
     self.questID = aQuest.questID;
+    self.getReward = aQuest.hasGotReward;
     self.proofImageStringURL = aQuest.proofImageStringURL;
+    self.state = aQuest.state;
     
     [self.headerContainer setViewContent:aQuest.reward];
     [self.bodyContainer setViewContent:aQuest];
