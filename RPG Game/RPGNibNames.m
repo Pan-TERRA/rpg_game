@@ -49,3 +49,4 @@ NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 
 NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
 NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
+NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";

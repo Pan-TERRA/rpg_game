@@ -15,6 +15,7 @@
 #import "RPGSkillBarViewController.h"
 #import "UIViewController+RPGChildViewController.h"
 #import "RPGEntityViewController.h"
+#import "RPGRewardViewController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
@@ -37,6 +38,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
+
 @interface RPGBattleViewController ()
 
 @property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
@@ -56,11 +58,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
   // Reward
-@property (nonatomic, retain, readwrite) IBOutlet UIViewController *battleRewardModal;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *winnerNickNameLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardGoldLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardCrystalsLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardExpLabel;
+@property (nonatomic, retain, readwrite) IBOutlet RPGRewardViewController *battleRewardViewController;
   // Modals
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *battleInitModal;
   // Skill bar
@@ -90,6 +88,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     if (_battleController != nil)
     {
         // internal view controllers
+      _battleRewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+      _battleRewardViewController.delegate = self;
+      
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
@@ -145,7 +146,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   
   [_battleInitModal release];
   [_battleLogViewController release];
-  [_battleRewardModal release];
+  [_battleRewardViewController release];
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
@@ -277,9 +278,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
   {
-    [self addChildViewController:self.battleRewardModal frame:self.view.frame];
-    
-    [self updateRewardModal];
+    [self.battleRewardViewController updateView];
+    [self addChildViewController:self.battleRewardViewController frame:self.view.frame];
     
     [self.timer invalidate];
     [self.battleController prepareBattleControllerForDismiss];
@@ -290,19 +290,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   {
     [self.skillBarViewController updateButtonsState];
   }
-}
-
-- (void)updateRewardModal
-{
-  RPGBattleController *battleController = self.battleController;
-  
-  NSString *playerNickName = battleController.playerNickName;
-  NSString *opponentNickName = battleController.opponentNickName;
-  
-  self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
-  self.rewardGoldLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
-  self.rewardCrystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardCrystals];
-  self.rewardExpLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardExp];
 }
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
@@ -345,6 +332,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   {
     [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
   }
+}
+
+#pragma mark - RPGRewardModalDelegate
+
+- (void)dismissRewardModal:(RPGRewardViewController *)aRewardModal
+{
+  [aRewardModal.view removeFromSuperview];
+  [aRewardModal removeFromParentViewController];
 }
 
 @end

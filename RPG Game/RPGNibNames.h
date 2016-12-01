@@ -49,3 +49,4 @@ extern NSString * const kRPGWaitingViewControllerNIBName;
 
 extern NSString * const kRPGEntityViewLeftNIBName;
 extern NSString * const kRPGEntityViewRightNIBName;
+extern NSString * const kRPGRewardViewControllerNIBName;
