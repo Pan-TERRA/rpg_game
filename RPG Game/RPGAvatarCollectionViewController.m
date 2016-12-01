@@ -56,9 +56,9 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 
 #pragma mark - Custom Setter
 
-- (void)setCharacterClassIndex:(NSInteger)aCharacterClassIndex
+- (void)setCharacterClassID:(NSInteger)aCharacterClassID
 {
-  _characterClassIndex = aCharacterClassIndex;
+  _characterClassID = aCharacterClassID;
   [self.collectionView reloadData];
 }
 
@@ -75,7 +75,7 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
                                                                                  forIndexPath:anIndexPath];
   NSInteger index = anIndexPath.row;
   
-  UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)self.characterClassIndex, (long)index]];
+  UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)self.characterClassID, (long)index]];
   if (image != nil)
   {
     [cell setImage:image];
