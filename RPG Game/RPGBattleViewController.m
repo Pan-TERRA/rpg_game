@@ -16,6 +16,7 @@
 #import "UIViewController+RPGChildViewController.h"
 #import "RPGEntityViewController.h"
 #import "RPGRewardViewController.h"
+#import "RPGBattleTimerViewController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
@@ -32,8 +33,6 @@
 #import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
-
-static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -53,9 +52,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *timerLabel;
-@property (nonatomic, retain, readwrite) NSTimer *timer;
-@property (nonatomic, assign, readwrite) NSInteger timerCounter;
+@property (nonatomic, retain, readwrite) RPGBattleTimerViewController *timerViewController;
+@property (retain, nonatomic) IBOutlet UIView *timerContainer;
   // Reward
 @property (nonatomic, retain, readwrite) RPGRewardViewController *battleRewardViewController;
   // Modals
@@ -82,7 +80,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     _battleControllerGenerator = [aBattleControllerGenerator retain];
     _battleController = [[_battleControllerGenerator battleController] retain];
     
-    _timerCounter = kRPGBattleTurnDuration;
+    _timerViewController = [[RPGBattleTimerViewController alloc] initWithBattleController:_battleController
+                                                                             turnDuration:kRPGBattleTurnDuration];
+    [_timerViewController registerTimerObservationKeyPath:@"battle.currentTime"];
     
     if (_battleController != nil)
     {
@@ -95,10 +95,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       
         // player view controller
       _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
-
+      
         // opponent view controller
       _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarRightAlign];
-
+      
       
       _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^
                           {
@@ -113,17 +113,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
+       
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
                                                selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
-    
-      [_battleController addObserver:self
-                          forKeyPath:@"battle.currentTurn"
-                             options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
-                             context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
-      
       
     }
     
@@ -139,10 +134,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [[NSNotificationCenter defaultCenter] removeObserver:_skillBar];
   
-  [_battleController removeObserver:self
-                         forKeyPath:@"battle.currentTurn"
-                            context:&sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext];
-  
   [_battleInitModal release];
   [_battleLogViewController release];
   [_battleRewardViewController release];
@@ -150,6 +141,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [_skillBarViewController release];
   [_settingsViewController release];
   
+  [_timerContainer release];
   [super dealloc];
 }
 
@@ -162,20 +154,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.battleLogViewController.view = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
-    //show battle init modal
-  [self addChildViewController:self.battleInitModal frame:self.view.frame];
-  
-    //skill bar view
-  [self addChildViewController:self.skillBarViewController];
-  CGSize size = self.skillBar.frame.size;
-  self.skillBarViewController.view.frame = CGRectMake(0, 0, size.width, size.height);
-  [self.skillBar addSubview:self.skillBarViewController.view];
-  [self.skillBarViewController didMoveToParentViewController:self];
-  
-    // player view controller set up
-  [self addChildViewController:self.playerViewController frame:self.playerViewContainer.frame];
-    // opponent view controller set up
-  [self addChildViewController:self.opponentViewController frame:self.opponentViewContainer.frame];
+  [self addChildViewController:self.timerViewController view:self.timerContainer];
+  [self addChildViewController:self.battleInitModal view:self.view];
+  [self addChildViewController:self.skillBarViewController view:self.skillBar];
+  [self addChildViewController:self.playerViewController view:self.playerViewContainer];
+  [self addChildViewController:self.opponentViewController view:self.opponentViewContainer];
   
   [self.battleController openBattleControllerWebSocket];
 }
@@ -233,34 +216,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.view addSubview:self.settingsView];
 }
 
-#pragma mark - Timer
-
-- (void)restartTimer
-{
-  [self.timer invalidate];
-  self.timerCounter = kRPGBattleTurnDuration;
-  self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0
-                                                target:self
-                                              selector:@selector(updateTimerLabel:)
-                                              userInfo:nil
-                                               repeats:YES];
-  [self updateTimerLabel:nil];
-}
-
-- (void)updateTimerLabel:(NSTimer *)aTimer
-{
-  self.timerLabel.text = [@(self.timerCounter) stringValue];
-  if (self.timerCounter > 0)
-  {
-    self.timerCounter -= 1;
-  }
-}
-
 #pragma mark - Notifications
 
 - (void)modelDidChange:(NSNotification *)aNotification
 {
   RPGBattleController *battleController = self.battleController;
+  
+  [self.timerViewController restartTimer];
   
   [self.playerViewController updateView];
   [self.opponentViewController updateView];
@@ -280,7 +242,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     [self addChildViewController:self.battleRewardViewController frame:self.view.frame];
     [self.battleRewardViewController updateView];
     
-    [self.timer invalidate];
+    [self.timerViewController invalidateTimer];
     [self.battleController prepareBattleControllerForDismiss];
   }
   
@@ -299,7 +261,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 - (void)removeBattleInitModal
 {
-  [self restartTimer];
+  [self.timerViewController restartTimer];
   [self.battleInitModal.view removeFromSuperview];
   [self.battleInitModal removeFromParentViewController];
 }
@@ -308,29 +270,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   self.playerViewController.entity = self.battleController.battle.player;
   self.opponentViewController.entity = self.battleController.battle.opponent;
-}
-
-#pragma mark - KVO
-
-- (void)observeValueForKeyPath:(NSString *)aKeyPath
-                      ofObject:(id)anObject
-                        change:(NSDictionary<NSString *,id> *)aChange
-                       context:(void *)aContext
-{
-  if (aContext == &sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext)
-  {
-    BOOL oldCurrentTurn = [aChange[NSKeyValueChangeOldKey] boolValue];
-    BOOL newCurrentTurn = [aChange[NSKeyValueChangeNewKey] boolValue];
-    
-    if (oldCurrentTurn != newCurrentTurn)
-    {
-      [self restartTimer];
-    }
-  }
-  else
-  {
-    [super observeValueForKeyPath:aKeyPath ofObject:anObject change:aChange context:aContext];
-  }
 }
 
 #pragma mark - RPGRewardModalDelegate
