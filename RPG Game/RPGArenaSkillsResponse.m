@@ -15,16 +15,16 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)status skills:(NSArray *)skills
+- (instancetype)initWithStatus:(NSInteger)aStatus skills:(NSArray *)aSkills
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (status != -1 && skills != nil)
+    if (aStatus != -1 && aSkills != nil)
     {
-      _status = status;
-      _skills = [skills retain];
+      _status = aStatus;
+      _skills = [aSkills retain];
     }
     else
     {
