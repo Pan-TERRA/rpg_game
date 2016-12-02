@@ -17,6 +17,7 @@
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
+#import "RPGFriendsViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -119,6 +120,13 @@
 - (IBAction)segueToPlay
 {
   
+}
+
+- (IBAction)segueToFriends
+{
+  RPGFriendsViewController *friendsViewController = [[RPGFriendsViewController new] autorelease];
+  
+  [self presentViewController:friendsViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToAdventures
