@@ -44,3 +44,10 @@ NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCo
 
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
 NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
+
+/****************	Friends ****************/
+
+NSString * const kRPGFriendsViewControllerNIBName = @"RPGFriendsViewController";
+NSString * const kRPGFriendsTableViewCellInFriendsNIBName = @"RPGFriendsTableViewCellInFriends";
+NSString * const kRPGFriendsTableViewCellIncomingNIBName = @"RPGFriendsTableViewCellIncoming";
+NSString * const kRPGFriendsTableViewCellOutgoingNIBName = @"RPGFriendsTableViewCellOutgoing";
