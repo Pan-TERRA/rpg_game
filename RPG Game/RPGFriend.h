@@ -21,6 +21,7 @@ typedef NS_ENUM(NSUInteger, RPGFriendState)
 @property (nonatomic, assign, readonly) NSUInteger friendID;
 @property (nonatomic, copy, readonly) NSString *userName;
 @property (nonatomic, copy, readonly) NSString *characterName;
+@property (nonatomic, copy, readonly) NSString *avatar;
 @property (nonatomic, assign, readonly) RPGFriendState state;
 @property (nonatomic, assign, readonly) NSInteger level;
 @property (nonatomic, assign, readonly, getter=isOnline) BOOL online;
@@ -28,6 +29,7 @@ typedef NS_ENUM(NSUInteger, RPGFriendState)
 - (instancetype)initWithID:(NSUInteger)aFriendID
                   userName:(NSString *)aUserName
              characterName:(NSString *)aCharacterName
+                    avatar:(NSString *)anAvatar
                      state:(RPGFriendState)aState
                      level:(NSInteger)aLevel
                     online:(BOOL)isOnline NS_DESIGNATED_INITIALIZER;
@@ -35,6 +37,7 @@ typedef NS_ENUM(NSUInteger, RPGFriendState)
 + (instancetype)friendWithID:(NSUInteger)aFriendID
                     userName:(NSString *)aUserName
                characterName:(NSString *)aCharacterName
+                      avatar:(NSString *)anAvatar
                        state:(RPGFriendState)aState
                        level:(NSInteger)aLevel
                       online:(BOOL)isOnline;
