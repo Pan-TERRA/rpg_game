@@ -38,7 +38,7 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
-@interface RPGBattleViewController ()
+@interface RPGBattleViewController () <RPGRewardModalDelegate>
 
 @property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
@@ -277,8 +277,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     // fight end
   if (battleController.battleStatus != kRPGBattleStatusBattleInProgress)
   {
-    [self.battleRewardViewController updateView];
     [self addChildViewController:self.battleRewardViewController frame:self.view.frame];
+    [self.battleRewardViewController updateView];
     
     [self.timer invalidate];
     [self.battleController prepareBattleControllerForDismiss];
