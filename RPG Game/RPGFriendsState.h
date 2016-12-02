@@ -6,8 +6,10 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#ifndef RPGFriendsState_h
-#define RPGFriendsState_h
-
-
-#endif /* RPGFriendsState_h */
+typedef NS_ENUM(NSUInteger, RPGFriendsListState)
+{
+  kRPGFriendListAllFriends = 1,
+  kRPGFriendListOnlineFriends = 2,
+  kRPGFriendListIncomingFriends = 3,
+  kRPGFriendListOutgoingFriends = 4
+};
