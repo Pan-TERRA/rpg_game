@@ -14,7 +14,7 @@
   // Constants
 #import "RPGNibNames.h"
 
-static int sEntityViewContollerBattleEntityContext;
+static CGFloat kRPGBattleViewControllerLevelViewCornerRadius = 8.0;
 
 @interface RPGEntityViewController ()
 
@@ -69,21 +69,14 @@ static int sEntityViewContollerBattleEntityContext;
   return [self initWithEntity:nil align:kRPGProgressBarLeftAlign];
 }
 
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
-}
-
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
   
-    //  self.entityLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
-    //  self.entityLevelView.layer.masksToBounds = YES;
+  self.entityLevelView.layer.cornerRadius = kRPGBattleViewControllerLevelViewCornerRadius;
+  self.entityLevelView.layer.masksToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning
