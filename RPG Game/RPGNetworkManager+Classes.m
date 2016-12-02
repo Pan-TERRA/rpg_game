@@ -15,7 +15,7 @@
 
 @implementation RPGNetworkManager (Classes)
 
-- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger status, NSArray *classes))callbackBlock;
+- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger status, NSArray *classes))aCallback;
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -40,7 +40,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -50,7 +50,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -62,7 +62,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -73,7 +73,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -89,7 +89,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -102,11 +102,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        callbackBlock(responseObject.status, responseObject.classes);
+        aCallback(responseObject.status, responseObject.classes);
       }
     });
     
@@ -117,7 +117,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)getClassInfoByID:(NSInteger)anID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock
+- (void)getClassInfoByID:(NSInteger)anID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
@@ -143,7 +143,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -153,7 +153,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -165,7 +165,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -175,7 +175,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -192,7 +192,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -205,11 +205,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        callbackBlock(responseObject.status, responseObject.classInfo);
+        aCallback(responseObject.status, responseObject.classInfo);
       }
     });
     

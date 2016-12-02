@@ -16,15 +16,17 @@
 @interface RPGNetworkManager (Quests)
 
 - (void)fetchQuestsByState:(RPGQuestListState)aState
-         completionHandler:(void (^)(NSInteger status, NSArray *quests))callbackBlock;
+         completionHandler:(void (^)(NSInteger status, NSArray *quests))aCallback;
 
-- (void)doQuestAction:(RPGQuestAction)anAction request:(RPGQuestRequest *)aRequest
-    completionHandler:(void (^)(NSInteger status))callbackBlock;
+- (void)doQuestAction:(RPGQuestAction)anAction
+              request:(RPGQuestRequest *)aRequest
+    completionHandler:(void (^)(NSInteger status))aCallback;
 
-- (void)addProofWithRequest:(RPGQuestRequest *)aRequest imageData:(NSData *)imageData
-          completionHandler:(void (^)(NSInteger status))callbackBlock;
+- (void)addProofWithRequest:(RPGQuestRequest *)aRequest
+                  imageData:(NSData *)anImageData
+          completionHandler:(void (^)(NSInteger status))aCallback;
 
 - (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))callbackBlock;
+                completionHandler:(void (^)(NSInteger status))aCallback;
 
 @end

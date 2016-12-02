@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 @interface RPGQuestListResponse : NSObject <RPGSerializable>
