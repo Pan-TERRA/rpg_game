@@ -38,7 +38,6 @@ static int sRPGBattleViewContollerBattleControllerBattleCurrentTurnContext;
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
-
 @interface RPGBattleViewController ()
 
 @property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
