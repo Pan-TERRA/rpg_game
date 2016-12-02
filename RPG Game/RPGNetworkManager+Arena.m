@@ -7,16 +7,16 @@
 //
 
 #import "RPGNetworkManager+Arena.h"
-// Entities
+  // Entities
 #import "RPGArenaSkillsResponse.h"
 #import "RPGBasicNetworkResponse.h"
-// Misc
+  // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
 
 @implementation RPGNetworkManager (Arena)
 
-- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))callbackBlock
+- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -41,7 +41,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -51,7 +51,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -64,7 +64,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -74,7 +74,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -91,7 +91,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -105,11 +105,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        callbackBlock(responseObject.status, responseObject);
+        aCallback(responseObject.status, responseObject);
       }
     });
   }];
@@ -119,7 +119,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))callbackBlock
+- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -143,8 +143,9 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
+        
         return;
       }
       
@@ -152,8 +153,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
+      
       return;
     }
     
@@ -163,8 +165,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
+      
       return;
     }
     
@@ -172,8 +175,9 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
+      
       return;
     }
     
@@ -188,8 +192,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
+      
       return;
     }
     
@@ -198,7 +203,7 @@
                                                autorelease];
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock(responseEntity.status);
+      aCallback(responseEntity.status);
     });
     
   }];
