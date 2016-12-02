@@ -44,3 +44,9 @@ NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCo
 
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
 NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
+
+/****************	Battle ****************/
+
+NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
+NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
+NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
