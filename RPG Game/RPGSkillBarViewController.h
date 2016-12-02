@@ -18,5 +18,6 @@
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification;
 
 - (void)updateButtonsState;
+- (void)lockSkillBar;
 
 @end

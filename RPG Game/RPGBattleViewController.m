@@ -57,7 +57,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, retain, readwrite) NSTimer *timer;
 @property (nonatomic, assign, readwrite) NSInteger timerCounter;
   // Reward
-@property (nonatomic, retain, readwrite) IBOutlet RPGRewardViewController *battleRewardViewController;
+@property (nonatomic, retain, readwrite) RPGRewardViewController *battleRewardViewController;
   // Modals
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *battleInitModal;
   // Skill bar
@@ -337,6 +337,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 - (void)dismissRewardModal:(RPGRewardViewController *)aRewardModal
 {
+  [self.skillBarViewController lockSkillBar];
+  
   [aRewardModal.view removeFromSuperview];
   [aRewardModal removeFromParentViewController];
 }

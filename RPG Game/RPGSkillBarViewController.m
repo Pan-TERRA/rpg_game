@@ -70,7 +70,7 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
   NSInteger skillID = skills[index].skillID;
   
   [self.battleController sendSkillActionRequestWithSkillID:skillID];
-  [self disableButtons];
+  [self lockSkillBar];
 }
 
 - (IBAction)skillButtonLongPress:(UILongPressGestureRecognizer *)aSender
@@ -89,7 +89,7 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 
 #pragma mark - View State
 
-- (void)disableButtons
+- (void)lockSkillBar
 {
   for (NSInteger i = 1; i <= self.battleController.skillsCount; i++)
   {
@@ -173,7 +173,7 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
     }
   }
   
-  [self disableButtons];
+  [self lockSkillBar];
 }
 
 @end
