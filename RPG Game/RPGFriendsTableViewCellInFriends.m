@@ -10,4 +10,9 @@
 
 @implementation RPGFriendsTableViewCellInFriends
 
+
+- (void)dealloc
+{
+  [super dealloc];
+}
 @end

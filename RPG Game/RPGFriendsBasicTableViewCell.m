@@ -7,18 +7,87 @@
 //
 
 #import "RPGFriendsBasicTableViewCell.h"
+  // Entity
+#import "RPGFriend.h"
+
+@interface RPGFriendsBasicTableViewCell ()
+
+@end
 
 @implementation RPGFriendsBasicTableViewCell
 
-- (void)awakeFromNib {
-    [super awakeFromNib];
-    // Initialization code
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_currentFriend release];
+  
+  [super dealloc];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+#pragma mark - UITableViewCell
 
-    // Configure the view for the selected state
+- (void)awakeFromNib
+{
+  [super awakeFromNib];
+  self.backgroundColor = [UIColor clearColor];
+}
+
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+{
+  [super setSelected:selected animated:animated];
+}
+
+#pragma mark - Accessors
+
+- (void)setCurrentFriend:(RPGFriend *)aFriend
+{
+  if (_currentFriend != aFriend)
+  {
+    [_currentFriend release];
+    _currentFriend = [aFriend retain];
+    
+    self.avatar.image = [UIImage imageNamed:aFriend.avatar];
+    
+    UIImage *onlineStatus = nil;
+    switch (aFriend.state)
+    {
+      case kRPGFriendStateAccept:
+      {
+        if (aFriend.isOnline)
+        {
+          onlineStatus = [UIImage imageNamed:@"online"];
+        }
+        else
+        {
+          onlineStatus = [UIImage imageNamed:@"offline"];
+        }
+        break;
+      }
+      case kRPGFriendStateIncoming:
+      {
+        onlineStatus = [UIImage imageNamed:@"incoming"];
+        break;
+      }
+      case kRPGFriendStateOutgoing:
+      {
+        onlineStatus = [UIImage imageNamed:@"outgoing"];
+        break;
+      }
+      default:
+      {
+        break;
+      }
+    }
+   
+    self.onlineImage.image = onlineStatus;
+    
+    self.levelLabel.text = [@(aFriend.level) stringValue];
+    
+    NSString *nickName = [NSString stringWithFormat:@"%@ - %@", aFriend.userName, aFriend.characterName];
+    
+    self.nicknameLabel.text = nickName;
+  }
 }
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPGFriendsBasicTableViewCell.h"
 
-@interface RPGFriendsTableViewCellInFriends : UITableViewCell
+@interface RPGFriendsTableViewCellInFriends : RPGFriendsBasicTableViewCell
 
 @end
