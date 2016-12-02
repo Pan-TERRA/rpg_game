@@ -36,7 +36,7 @@ static NSString * const kRPGCharacterProfileViewControllerWaitingMessageDownload
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
 static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
-@interface RPGCharacterProfileViewController ()
+@interface RPGCharacterProfileViewController () <RPGCollectionViewControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *nickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *levelLabel;
@@ -231,30 +231,17 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   self.hpLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.attack];
   self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
-  
-  NSMutableArray *skillCollectionArray = [NSMutableArray array];
-  NSMutableArray *bagCollectionArray = [NSMutableArray array];
-  
-  for (RPGCharacterProfileSkill *skill in aResponse.skills)
-  {
-    if (skill.isSelected)
-    {
-      [skillCollectionArray addObject:@(skill.skillID)];
-    }
-    else
-    {
-      [bagCollectionArray addObject:@(skill.skillID)];
-    }
-  }
-  
+
+  NSMutableArray *skillsArray = [[aResponse.skills mutableCopy] autorelease];
   self.skillCollectionViewController = [[[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
-                                                                                    parentViewController:self
                                                                                           collectionSize:aResponse.activeSkillsBagSize
-                                                                                             skillsArray:skillCollectionArray] autorelease];
+                                                                                             skillsArray:skillsArray
+                                                                           shouldUseValidatedSkillsArray:YES] autorelease];
   self.bagCollectionViewController = [[[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
-                                                                                parentViewController:self
                                                                                       collectionSize:aResponse.bagSize
-                                                                                         skillsArray:bagCollectionArray] autorelease];
+                                                                                         skillsArray:skillsArray] autorelease];
+  self.skillCollectionViewController.delegate = self;
+  self.bagCollectionViewController.delegate = self;
 }
 
 #pragma mark - View State
@@ -283,9 +270,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
   
   NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
-  NSArray *skills = self.skillCollectionViewController.skillsIDArray;
+  NSArray *skillsArray = self.skillCollectionViewController.skillsIDArray;
   
-  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skills];
+  
+  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skillsArray];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
                                                   completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
@@ -332,20 +320,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   }
 }
 
-#pragma mark - Add To Collection
-
-- (void)addSkillToSkillCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
-{
-  [self.skillCollectionViewController addItem:anItemID type:aType];
-  [self setBackButtonState];
-}
-
-- (void)addItemToBagCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
-{
-  [self.bagCollectionViewController addItem:aSkillID type:aType];
-  [self setBackButtonState];
-}
-
 #pragma mark - Update Avatar
 
 - (void)updateCharacterAvatar
@@ -362,6 +336,27 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   {
     self.avatarImageView.image = [UIImage imageNamed:@"battle_empty_icon_lock"];
   }
+}
+
+#pragma mark - RPGCollectionViewControllerDelegate
+
+- (void)reloadCollection:(RPGCollectionViewController *)aCollectionViewController
+{
+  if (aCollectionViewController != nil)
+  {
+    [aCollectionViewController.collectionView reloadData];
+  }
+  else
+  {
+    [self.skillCollectionView reloadData];
+    [self.bagCollectionView reloadData];
+  }
+  [self setBackButtonState];
+}
+
+- (BOOL)canAddToCollectionWithCurrentSize:(NSInteger)aSize
+{
+  return (aSize < self.skillCollectionViewController.collectionSize);
 }
 
 @end
