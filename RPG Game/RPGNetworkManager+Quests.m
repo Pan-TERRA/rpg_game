@@ -56,8 +56,7 @@
   
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -175,8 +174,7 @@
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -274,8 +272,7 @@
 
   NSMutableURLRequest *request = [[[self requestWithObject:aRequest
                                                  URLstring:requestString
-                                                    method:@"POST"
-                                               injectToken:YES] mutableCopy] autorelease];
+                                                    method:@"POST"] mutableCopy] autorelease];
 
     // build HTTP body
   NSString *boundary = @"---------------------------Boundary Line---------------------------";
@@ -390,8 +387,7 @@
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
  
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

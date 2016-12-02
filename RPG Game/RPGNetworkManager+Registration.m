@@ -25,7 +25,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:NO];
+                                shouldInjectToken:NO];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
