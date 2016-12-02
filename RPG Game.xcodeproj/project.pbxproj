@@ -565,11 +565,8 @@
 			isa = PBXGroup;
 			children = (
 				D0819AC11DD6181E00021DB9 /* Battle ViewController */,
-				28AB94901DDA196F00F1503B /* Battle Log ViewController */,
-				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
 				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
 				283D191A1DD5FEC3008C5396 /* Skill Representation */,
-				28AB94AB1DDEF90D00F1503B /* Settings Modal */,
 				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
 			name = Battle;
@@ -1679,9 +1676,12 @@
 			children = (
 				AED6F56E1DACD641007ED1B8 /* RPGBattleViewController.h */,
 				AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */,
-				28A6F9C01DF08A5D008519AA /* Reward ViewController */,
-				28A6F9B61DF0295B008519AA /* Entity ViewController */,
 				AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */,
+				28AB94901DDA196F00F1503B /* Battle Log ViewController */,
+				28A6F9B61DF0295B008519AA /* Entity ViewController */,
+				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
+				28A6F9C01DF08A5D008519AA /* Reward ViewController */,
+				28AB94AB1DDEF90D00F1503B /* Settings Modal */,
 			);
 			name = "Battle ViewController";
 			sourceTree = "<group>";
