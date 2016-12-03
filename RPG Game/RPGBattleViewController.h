@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RPGBattlePresentingViewControllerProtocol.h"
+#import "RPGPresentingViewControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
-@property (nonatomic, assign, readwrite) id<RPGBattlePresentingViewController> delegate;
+@property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
 
 - (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
 

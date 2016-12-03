@@ -19,7 +19,7 @@
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
-#import "RPGBattlePresentingViewControllerProtocol.h"
+#import "RPGPresentingViewControllerProtocol.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -29,7 +29,7 @@
 #import "RPGNetworkManager.h"
 #import "RPGResources.h"
 
-@interface RPGMainViewController () <RPGBattlePresentingViewController>
+@interface RPGMainViewController () <RPGPresentingViewController>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
@@ -97,22 +97,6 @@
   }];
 }
 
-- (void)restartBattle:(RPGBattleViewController *)battleViewController
-{
-  [self dismissViewControllerAnimated:YES completion:^
-  {
-    RPGBattleController *battleController = battleViewController.battleController;
-    if ([battleController isMemberOfClass:[RPGAdventuresController class]])
-    {
-      [self segueToAdventures];
-    }
-    else if ([battleController isMemberOfClass:[RPGArenaController class]])
-    {
-      [self segueToArena];
-    }
-  }];
-}
-
 #pragma mark - IBActions
 
 - (IBAction)segueToQuests
@@ -144,7 +128,6 @@
 {
   RPGBattleControllerGenerator *adventuresControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
   RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:adventuresControllerGenerator] autorelease];
-  battleViewController.delegate = self;
   
   [self presentViewController:battleViewController
                      animated:YES

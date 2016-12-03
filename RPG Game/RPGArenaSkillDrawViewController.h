@@ -7,11 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RPGBattlePresentingViewControllerProtocol.h"
+#import "RPGPresentingViewControllerProtocol.h"
 
 @interface RPGArenaSkillDrawViewController : UIViewController
 
-@property (nonatomic, assign, readwrite) id<RPGBattlePresentingViewController> delegate;
+@property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
 
 - (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID;
 
