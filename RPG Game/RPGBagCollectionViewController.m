@@ -31,8 +31,11 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
 
 - (BOOL)canSelectItem:(RPGCharacterProfileSkill *)anItem
 {
-  RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:anItem.skillID];
-  return (skillRepresentation.requiredLevel <= ((RPGCharacterProfileViewController *)self.delegate).characterLevel);
+  NSInteger requiredLevel = [RPGSkillRepresentation skillrepresentationWithSkillID:anItem.skillID].requiredLevel;
+  RPGCharacterProfileViewController *characterProfileViewController = (RPGCharacterProfileViewController *)self.delegate;
+  NSUInteger currentLevel = characterProfileViewController.characterLevel;
+  
+  return requiredLevel <= currentLevel;
 }
 
 - (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
@@ -41,16 +44,20 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
   {
     case kRPGItemTypeSkill:
     {
-      NSArray *array = [self validatedSkillsArray:YES];
+      NSArray *validatedSkills = self.validatedSkills;
+      
       if (!anItem.isSelected)
       {
-        if (![self.delegate canAddToCollectionWithCurrentSize:array.count])
+        if ([self.delegate canAddToCollectionWithCurrentSize:validatedSkills.count])
         {
-          RPGCharacterProfileSkill *skill = [array lastObject];
+          RPGCharacterProfileSkill *skill = [validatedSkills lastObject];
+          
           skill.selected = !skill.isSelected;
         }
       }
+      
       anItem.selected = !anItem.isSelected;
+      
       break;
     }
       

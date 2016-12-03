@@ -1,17 +1,18 @@
-//
-//  RPGCollectionController.h
-//  RPG Game
-//
-//  Created by Максим Шульга on 11/17/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGCollectionController.h
+  //  RPG Game
+  //
+  //  Created by Максим Шульга on 11/17/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import <UIKit/UIKit.h>
+  // Controllers
+@class RPGCollectionViewController;
+  // Entities
+@class RPGCharacterProfileSkill;
   // Constants
 #import "RPGItemTypes.h"
-
-@class RPGCollectionViewController;
-@class RPGCharacterProfileSkill;
 
 @protocol RPGCollectionViewControllerDelegate <NSObject>
 
@@ -26,25 +27,25 @@ extern NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius;
 
 @property (nonatomic, assign, readwrite) id<RPGCollectionViewControllerDelegate> delegate;
 
-@property (nonatomic, assign, readonly) NSArray *skillsIDArray;
-@property (nonatomic, assign, readonly) NSArray *skillsArray;
-@property (nonatomic, assign, readonly) NSArray *validatedSkillsArray;
+@property (nonatomic, assign, readonly) NSArray<NSNumber *> *skillIDArray;
+@property (nonatomic, assign, readonly) NSArray<RPGCharacterProfileSkill *> *skills;
+@property (nonatomic, assign, readonly) NSArray<RPGCharacterProfileSkill *> *validatedSkills;
 
-@property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
-@property (nonatomic, assign, readonly) NSUInteger collectionSize;
 @property (nonatomic, assign, readonly) UICollectionView *collectionView;
+@property (nonatomic, assign, readonly) NSUInteger collectionSize;
+@property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray;
+                                skills:(NSMutableArray *)aSkills;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray
-         shouldUseValidatedSkillsArray:(BOOL)aValidateSkillsArrayFlag NS_DESIGNATED_INITIALIZER;
+                                skills:(NSMutableArray *)aSkills
+                  shouldValidateSkills:(BOOL)aShouldValidateSkills NS_DESIGNATED_INITIALIZER;
 
-- (NSArray *)validatedSkillsArray:(BOOL)aFlag;
-- (BOOL)canSelectItem:(RPGCharacterProfileSkill *)anItem;
+  // template method
+- (BOOL)validateSkill:(RPGCharacterProfileSkill *)aSkill;
 
 /**
  *  Swaps item to another collection.
