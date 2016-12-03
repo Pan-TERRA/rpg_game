@@ -82,7 +82,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     
     _timerViewController = [[RPGBattleTimerViewController alloc] initWithBattleController:_battleController
                                                                              turnDuration:kRPGBattleTurnDuration];
-    [_timerViewController registerTimerObservationKeyPath:@"battle.currentTime"];
+    [_timerViewController registerTimerObservationKeyPath:@"battle.currentTurn"];
     
     if (_battleController != nil)
     {
@@ -240,8 +240,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 - (void)modelDidChange:(NSNotification *)aNotification
 {
   RPGBattleController *battleController = self.battleController;
-  
-  [self.timerViewController restartTimer];
   
   [self.playerViewController updateView];
   [self.opponentViewController updateView];
