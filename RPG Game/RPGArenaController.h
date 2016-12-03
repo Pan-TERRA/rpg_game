@@ -12,6 +12,4 @@
 
 @interface RPGArenaController : RPGAdventuresController
 
-@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
-
 @end

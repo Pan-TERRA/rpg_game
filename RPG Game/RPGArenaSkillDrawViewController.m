@@ -198,13 +198,6 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   [self.waitingModal removeFromParentViewController];
 }
 
-#pragma mark - Actions
-
-- (IBAction)back:(UIButton *)sender
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Add To Collection
 
 - (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID;
@@ -237,15 +230,27 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   self.startBattleButton.enabled = YES;
 }
 
-#pragma mark - IBActions
+#pragma mark - Actions
 
 - (IBAction)handleStartBattleButton
 {
-  NSArray *skillsID = self.skillsCollectionViewController.skillsIDArray;
-  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] initWithSkillsID:skillsID] autorelease];
+  [self saveSelectedSkills];
+
+  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] init] autorelease];
   RPGBattleViewController *viewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:arenaControllerGenerator] autorelease];
   
   [self.delegate dismissCurrentAndPresentViewController:viewController];
+}
+
+- (IBAction)back:(UIButton *)sender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveSelectedSkills
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  standardUserDefaults.selectedArenaSkills = self.skillsCollectionViewController.skillsIDArray;
 }
 
 @end

@@ -25,10 +25,7 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
-
-
-
-static NSString * const kRPGBattleControllerSkills = @"skills";
+#import "RPGUserSessionKeys.h"
 
 @interface RPGAdventuresController ()
 
@@ -92,7 +89,8 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     
-    NSArray<NSNumber *> *skillIDs = [self getPlayerSkillIDs];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *skillIDs = standardUserDefaults.sessionCharacters.firstObject[kRPGUserSessionKeyCharacterSkills];
     
     NSMutableArray *skills = [NSMutableArray array];
     for (NSNumber *skillID in skillIDs)
@@ -170,15 +168,6 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 - (void)requestBattleInit
 {
   [self sendBattleInitRequest];
-}
-
-#pragma mark - Helper Methods
-
-- (NSArray<NSNumber *> *)getPlayerSkillIDs
-{
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-  return skillIDs;
 }
 
 @end

@@ -96,4 +96,16 @@
   return [self.sessionCharacters firstObject][@"name"];
 }
 
+#pragma mark Selected arena skills
+
+- (void)setSelectedArenaSkills:(NSArray *)selectedArenaSkills
+{
+  [self setObject:selectedArenaSkills forKey:kRPGUserSessionKeySelectedArenaSkills];
+}
+
+- (NSArray *)selectedArenaSkills
+{
+  return [self objectForKey:kRPGUserSessionKeySelectedArenaSkills];
+}
+
 @end

@@ -372,6 +372,7 @@
 		2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGTimeResponse.m; sourceTree = "<group>"; };
 		2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRegistrationRequest.h; sourceTree = "<group>"; };
 		2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRegistrationRequest.m; sourceTree = "<group>"; };
+		2ABAB2861DEDF21F00BF9E95 /* RPGPresentingViewControllerProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGPresentingViewControllerProtocol.h; sourceTree = "<group>"; };
 		48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		810370191D8BD309214BF556 /* Pods-RPG GameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.release.xcconfig"; sourceTree = "<group>"; };
 		877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGSkillsInfo.plist; sourceTree = "<group>"; };
@@ -1380,6 +1381,7 @@
 			children = (
 				28AB949E1DDDC1DC00F1503B /* RPGViewController.h */,
 				28AB949F1DDDC1DC00F1503B /* RPGViewController.m */,
+				2ABAB2861DEDF21F00BF9E95 /* RPGPresentingViewControllerProtocol.h */,
 				877C86541DC8F102004B4A00 /* Initial Screen */,
 				28149A1F1DB1012200C26881 /* Registration */,
 				28149A1E1DB1011B00C26881 /* Login */,

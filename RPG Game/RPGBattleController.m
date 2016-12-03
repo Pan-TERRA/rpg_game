@@ -22,7 +22,6 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
-static NSString * const kRPGBattleControllerSkills = @"skills";
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
@@ -141,13 +140,6 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 - (void)requestBattleInit
 {
   
-}
-
-- (NSArray<NSNumber *> *)getPlayerSkillIDs
-{
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-  return skillIDs;
 }
 
 @end

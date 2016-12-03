@@ -13,6 +13,7 @@
 #import "RPGArenaInitRequest.h"
   // Misc
 #import "RPGSerializable.h"
+#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
 
@@ -22,20 +23,14 @@
 
 @implementation RPGArenaController
 
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [_skillsID release];
-  
-  [super dealloc];
-}
-
 #pragma mark - Creating Request
 
 - (RPGRequest *)createBattleInitRequest
 {
-  return [RPGArenaInitRequest requestWithSkillIDs:self.skillsID];
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSArray *skillIDs = standardUserDefaults.selectedArenaSkills;
+  
+  return [RPGArenaInitRequest requestWithSkillIDs:skillIDs];
 }
 
 #pragma mark Process Manager Response
@@ -58,17 +53,6 @@
   {
     NSLog(@"Request is nil");
   }
-}
-
-#pragma mark - Misc
-
-#pragma mark - Helper Methods
-
-// TODO: maybe pass skillIDs not with RPGArenaController, but using NSUserDefaults (default
-// behavior for RPGBattleController)
-- (NSArray<NSNumber *> *)getPlayerSkillIDs
-{
-  return self.skillsID;
 }
 
 @end
