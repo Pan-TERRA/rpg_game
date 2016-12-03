@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const kRPGSkillRepresentationName;
-extern NSString * const kRPGSkillRepresentationSpecification;
-extern NSString * const kRPGSkillRepresentationMultiplier;
-extern NSString * const kRPGSkillRepresentationAbsoluteCooldown;
-extern NSString * const kRPGSkillRepresentationImageName;
-extern NSString * const kRPGSkillRepresentationSoundName;
-
 @interface RPGSkillRepresentation : NSObject
 
 @property (nonatomic, copy, readonly) NSString *name;
@@ -24,6 +17,7 @@ extern NSString * const kRPGSkillRepresentationSoundName;
 @property (nonatomic, assign, readwrite) NSInteger remainingCooldown;
 @property (nonatomic, copy, readonly) NSString *imageName;
 @property (nonatomic, copy, readonly) NSString *soundName;
+@property (nonatomic, assign, readonly) NSInteger requiredLevel;
 
 - (instancetype)initWithSkillID:(NSInteger)aSkillID;
 + (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID;

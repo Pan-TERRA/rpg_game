@@ -51,4 +51,8 @@ extern NSString * const kRPGShopViewControllerNIBName;
 extern NSString * const kRPGShopCollectionViewNIBName;
 extern NSString * const kRPGShopCollectionViewCellNIBName;
 
+/****************	Battle ****************/
 
+extern NSString * const kRPGEntityViewLeftNIBName;
+extern NSString * const kRPGEntityViewRightNIBName;
+extern NSString * const kRPGRewardViewControllerNIBName;

@@ -7,6 +7,7 @@
 //
 
 #import "RPGResourcesResponse.h"
+  // Entities
 #import "RPGResources.h"
 
 NSString * const kRPGResourcesResponseStatus = @"status";

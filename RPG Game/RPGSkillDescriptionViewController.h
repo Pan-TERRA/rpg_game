@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+  // Entities
 @class RPGSkillRepresentation;
 
 @interface RPGSkillDescriptionViewController : UIViewController

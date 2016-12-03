@@ -20,7 +20,5 @@ extern NSString * const kRPGQuestViewControllerWaitingMessageUpload;
 @property (nonatomic, retain, readonly) UIImagePickerController *imagePickerController;
 
 - (void)setViewContent:(RPGQuest *)aQuest;
-- (void)setViewToWaitingStateWithMessage:(NSString *)aMessage;
-- (void)setViewToNormalState;
 
 @end

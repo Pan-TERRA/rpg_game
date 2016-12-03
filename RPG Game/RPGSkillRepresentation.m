@@ -14,6 +14,7 @@ NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
 NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
+NSString * const kRPGSkillRepresentationRequiredLevel = @"requiredLevel";
 
 static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
 
@@ -39,6 +40,7 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
     _remainingCooldown = 0;
     _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
     _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
+    _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
   }
   
   return self;
@@ -57,6 +59,7 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
   [_skillDescription release];
   [_imageName release];
   [_soundName release];
+  
   [super dealloc];
 }
 

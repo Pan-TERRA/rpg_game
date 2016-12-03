@@ -85,6 +85,13 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [super dealloc];
 }
 
+#pragma mark - Custom Getter
+
+- (NSUInteger)characterLevel
+{
+  return [self.levelLabel.text integerValue];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -194,10 +201,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
-                    {
-                      UIViewController *viewController = self.presentingViewController.presentingViewController;
-                      [viewController dismissViewControllerAnimated:YES completion:nil];
-                    });
+     {
+       UIViewController *viewController = self.presentingViewController.presentingViewController;
+       [viewController dismissViewControllerAnimated:YES completion:nil];
+     });
    }];
 }
 
@@ -206,9 +213,9 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
-                    {
-                      [self dismissViewControllerAnimated:YES completion:nil];
-                    });
+     {
+       [self dismissViewControllerAnimated:YES completion:nil];
+     });
    }];
 }
 

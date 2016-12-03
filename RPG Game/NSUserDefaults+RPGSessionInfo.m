@@ -27,9 +27,9 @@
 
 #pragma mark Avatar
 
-- (void)setSessionAvatar:(NSString *)sessionAvatar
+- (void)setSessionAvatar:(NSString *)aSessionAvatar
 {
-  [self setObject:sessionAvatar forKey:kRPGUserSessionKeyAvatar];
+  [self setObject:aSessionAvatar forKey:kRPGUserSessionKeyAvatar];
 }
 
 - (NSString *)sessionAvatar
@@ -39,9 +39,9 @@
 
 #pragma mark Token
 
-- (void)setSessionToken:(NSString *)sessionToken
+- (void)setSessionToken:(NSString *)aSessionToken
 {
-  [self setObject:sessionToken forKey:kRPGUserSessionKeyToken];
+  [self setObject:aSessionToken forKey:kRPGUserSessionKeyToken];
 }
 
 - (NSString *)sessionToken
@@ -51,9 +51,9 @@
 
 #pragma mark Gold
 
-- (void)setSessionGold:(NSInteger)sessionGold
+- (void)setSessionGold:(NSInteger)aSessionGold
 {
-  [self setInteger:sessionGold forKey:kRPGUserSessionKeyGold];
+  [self setInteger:aSessionGold forKey:kRPGUserSessionKeyGold];
 }
 
 - (NSInteger)sessionGold
@@ -63,9 +63,9 @@
 
 #pragma mark Crystals
 
-- (void)setSessionCrystals:(NSInteger)sessionCrystals
+- (void)setSessionCrystals:(NSInteger)aSessionCrystals
 {
-  [self setInteger:sessionCrystals forKey:kRPGUserSessionKeyCrystals];
+  [self setInteger:aSessionCrystals forKey:kRPGUserSessionKeyCrystals];
 }
 
 - (NSInteger)sessionCrystals
@@ -75,9 +75,9 @@
 
 #pragma mark Characters
 
-- (void)setSessionCharacters:(NSArray *)sessionCharacters
+- (void)setSessionCharacters:(NSArray *)aSessionCharacters
 {
-  [self setObject:sessionCharacters forKey:kRPGUserSessionKeyCharacters];
+  [self setObject:aSessionCharacters forKey:kRPGUserSessionKeyCharacters];
 }
 
 - (NSArray *)sessionCharacters

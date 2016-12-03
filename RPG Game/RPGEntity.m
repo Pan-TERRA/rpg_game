@@ -11,12 +11,16 @@
 NSString * const kRPGEntityName = @"name";
 NSString * const kRPGEntityHP = @"current_hp";
 NSString * const kRPGEntityMaxHP = @"max_hp";
+NSString * const kRPGEntityLevel = @"lvl";
 
 @implementation RPGEntity
 
 #pragma mark - Init
 
-- (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel
 {
   self = [super init];
   
@@ -25,14 +29,21 @@ NSString * const kRPGEntityMaxHP = @"max_hp";
     _name = [aName copy];
     _HP = aHP;
     _maxHP = aMaxHP;
+    _level = aLevel;
   }
   
   return self;
 }
 
-+ (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP
++ (instancetype)entityWithName:(NSString *)aName
+                            HP:(NSInteger)aHP
+                         maxHP:(NSInteger)aMaxHP
+                         level:(NSInteger)aLevel
 {
-  return [[[self alloc] initWithName:aName HP:aHP maxHP:aMaxHP] autorelease];
+  return [[[self alloc] initWithName:aName
+                                  HP:aHP
+                               maxHP:aMaxHP
+                               level:aLevel] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -53,6 +64,7 @@ NSString * const kRPGEntityMaxHP = @"max_hp";
   dictionaryRepresentation[kRPGEntityName] = self.name;
   dictionaryRepresentation[kRPGEntityHP] = @(self.HP);
   dictionaryRepresentation[kRPGEntityMaxHP] = @(self.maxHP);
+  dictionaryRepresentation[kRPGEntityLevel] = @(self.level);
   
   return dictionaryRepresentation;
 }
@@ -61,7 +73,8 @@ NSString * const kRPGEntityMaxHP = @"max_hp";
 {
   return [self initWithName:aDictionary[kRPGEntityName]
                          HP:[aDictionary[kRPGEntityHP] integerValue]
-                      maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]];
+                      maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
+                      level:[aDictionary[kRPGEntityLevel] integerValue]];
 }
 
 @end

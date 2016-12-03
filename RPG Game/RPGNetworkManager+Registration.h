@@ -7,12 +7,12 @@
 //
 
 #import "RPGNetworkManager.h"
-
+  // Entities
 @class RPGRegistrationRequest;
 
 @interface RPGNetworkManager (Registration)
 
 - (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
-          completionHandler:(void (^)(NSInteger))callbackBlock;
+          completionHandler:(void (^)(NSInteger))aCallback;
 
 @end

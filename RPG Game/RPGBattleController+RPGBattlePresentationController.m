@@ -32,6 +32,11 @@
   return self.battle.player.maxHP;
 }
 
+- (NSInteger)playerLevel
+{
+  return self.battle.player.level;
+}
+
 - (BOOL)isMyTurn
 {
   return self.battle.isCurrentTurn;
@@ -62,6 +67,11 @@
 - (NSInteger)opponentMaxHP
 {
   return self.battle.opponent.maxHP;
+}
+
+- (NSInteger)opponentLevel
+{
+  return self.battle.opponent.level;
 }
 
 #pragma mark  General
