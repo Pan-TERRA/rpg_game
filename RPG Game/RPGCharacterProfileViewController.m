@@ -30,10 +30,10 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGUserSessionKeys.h"
 
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageDownload = @"Downloading info";
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
-static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 @interface RPGCharacterProfileViewController ()
 
@@ -331,7 +331,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
   NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
   
-  character[kRPGCharacterProfileViewControllerSkills] = self.skillCollectionViewController.skillsIDArray;
+  character[kRPGUserSessionKeyCharacterSkills] = self.skillCollectionViewController.skillsIDArray;
   characters[0] = character;
   
   standardUserDefaults.sessionCharacters = characters;

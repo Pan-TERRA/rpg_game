@@ -113,7 +113,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
-       
                                                  object:_battleController];
       [[NSNotificationCenter defaultCenter] addObserver:_skillBarViewController
                                                selector:@selector(battleInitDidEndSetUp:)
@@ -140,8 +139,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
-  
   [_timerContainer release];
+  
   [super dealloc];
 }
 
@@ -160,7 +159,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self addChildViewController:self.playerViewController view:self.playerViewContainer];
   [self addChildViewController:self.opponentViewController view:self.opponentViewContainer];
   
-  [self.battleController openBattleControllerWebSocket];
+  [self.battleController fireUpBattleController];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -195,7 +194,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   return UIInterfaceOrientationMaskLandscape;
 }
 
-#pragma mark - IBAction
+#pragma mark - Action
 
 - (IBAction)back:(id)aSender
 {
@@ -216,9 +215,24 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.view addSubview:self.settingsView];
 }
 
-- (IBAction)restartBattle:(id)aSender
+  // TODO: move this to appropriate category over UIViewController
+- (void)rpg_removeChildViewController:(UIViewController *)aChildViewController
 {
-  [self.delegate restartBattle:self];
+  [aChildViewController.view removeFromSuperview];
+  [aChildViewController removeFromParentViewController];
+}
+
+- (void)removeBattleInitModal
+{
+  [self.timerViewController restartTimer];
+  [self.battleInitModal.view removeFromSuperview];
+  [self.battleInitModal removeFromParentViewController];
+}
+
+- (void)setUpEntityViewControllers
+{
+  self.playerViewController.entity = self.battleController.battle.player;
+  self.opponentViewController.entity = self.battleController.battle.opponent;
 }
 
 #pragma mark - Notifications
@@ -248,7 +262,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     [self.battleRewardViewController updateView];
     
     [self.timerViewController invalidateTimer];
-    [self.battleController prepareBattleControllerForDismiss];
+    [self.battleController prepareBattleControllerForDismissWithCompletionHandler:^
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        self.battleRewardViewController.restartButton.enabled = YES;
+      });
+    }];
   }
   
     // skillbar
@@ -264,19 +284,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self setUpEntityViewControllers];
 }
 
-- (void)removeBattleInitModal
-{
-  [self.timerViewController restartTimer];
-  [self.battleInitModal.view removeFromSuperview];
-  [self.battleInitModal removeFromParentViewController];
-}
-
-- (void)setUpEntityViewControllers
-{
-  self.playerViewController.entity = self.battleController.battle.player;
-  self.opponentViewController.entity = self.battleController.battle.opponent;
-}
-
 #pragma mark - RPGRewardModalDelegate
 
 - (void)dismissRewardModal:(RPGRewardViewController *)aRewardModal
@@ -285,6 +292,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   
   [aRewardModal.view removeFromSuperview];
   [aRewardModal removeFromParentViewController];
+}
+
+- (void)restartBattle:(RPGRewardViewController *)aRewardModal
+{
+  [self rpg_removeChildViewController:aRewardModal];
+  [self.battleController fireUpBattleController];
 }
 
 @end

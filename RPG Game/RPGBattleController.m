@@ -29,6 +29,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 @property (copy, nonatomic, readwrite) NSString *battleInitWebSocketMessageType;
 @property (copy, nonatomic, readwrite) NSString *battleConditionWebSocketMessageType;
 
+@property (copy, nonatomic, readwrite) void (^onBattleDismissCompletionHandler)(void);
+
 @end
 
 @implementation RPGBattleController
@@ -127,12 +129,18 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 #pragma mark - Misc
 
+- (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock
+{
+  [self prepareBattleControllerForDismiss];
+  self.onBattleDismissCompletionHandler = callbackBlock;
+}
+
 - (void)prepareBattleControllerForDismiss
 {
 
 }
 
-- (void)openBattleControllerWebSocket
+- (void)fireUpBattleController
 {
 
 }
@@ -140,6 +148,17 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 - (void)requestBattleInit
 {
   
+}
+
+- (void)dismissalDidFinish
+{
+  if (_onBattleDismissCompletionHandler != nil)
+  {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+      _onBattleDismissCompletionHandler();
+    });
+  }
 }
 
 @end

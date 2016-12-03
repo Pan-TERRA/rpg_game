@@ -160,7 +160,7 @@
   [self.webSocketManager close];
 }
 
-- (void)openBattleControllerWebSocket
+- (void)fireUpBattleController
 {
   [self.webSocketManager open];
 }

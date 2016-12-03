@@ -68,15 +68,15 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 - (void)requestBattleInit;
 
   //  invoke it when showing view controller
-- (void)openBattleControllerWebSocket;
+- (void)fireUpBattleController;
 
   //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismiss;
 
-/**
- *  May be overriden to get player skills from other source.
- *  These skills will be used in battle.
- */
-- (NSArray<NSNumber *> *)getPlayerSkillIDs;
+  //  invoke it when dismissing view controller
+- (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock;
+
+  //  invoked by WebSocketManager delegate
+- (void)dismissalDidFinish;
 
 @end
