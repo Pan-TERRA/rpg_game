@@ -84,6 +84,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="map_mask" width="735" height="735"/>
+        <image name="map_mask" width="2205" height="2205"/>
     </resources>
 </document>
