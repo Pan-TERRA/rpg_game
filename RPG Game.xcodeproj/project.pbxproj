@@ -105,6 +105,7 @@
 		2A8D9B9F1DB14B5A0026A5AB /* RPGTimeResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */; };
 		2A8D9BA61DB164520026A5AB /* RPGRegistrationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */; };
 		580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */; };
+		873E9C7E1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.m in Sources */ = {isa = PBXBuildFile; fileRef = 873E9C7D1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.m */; };
 		877C86531DC8CF61004B4A00 /* RPGSkillsInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */; };
 		877C86581DC8F132004B4A00 /* RPGInitialScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */; };
 		877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877C86571DC8F132004B4A00 /* RPGInitialScreenViewController.xib */; };
@@ -360,6 +361,8 @@
 		2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRegistrationRequest.m; sourceTree = "<group>"; };
 		48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		810370191D8BD309214BF556 /* Pods-RPG GameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.release.xcconfig"; sourceTree = "<group>"; };
+		873E9C7C1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+RPGColorEquality.h"; sourceTree = "<group>"; };
+		873E9C7D1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RPGColorEquality.m"; sourceTree = "<group>"; };
 		877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGSkillsInfo.plist; sourceTree = "<group>"; };
 		877C86551DC8F132004B4A00 /* RPGInitialScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGInitialScreenViewController.h; sourceTree = "<group>"; };
 		877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGInitialScreenViewController.m; sourceTree = "<group>"; };
@@ -1409,6 +1412,7 @@
 				28C576A91DE312E3008DCB88 /* Add Child ViewController */,
 				28C576A81DE312DC008DCB88 /* Present Controller */,
 				87AC813B1DF05AB50074E04C /* UIView categories */,
+				873E9C7B1DF30EBE00D4E1C6 /* UIColor */,
 			);
 			name = Support;
 			sourceTree = "<group>";
@@ -1583,6 +1587,15 @@
 				48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		873E9C7B1DF30EBE00D4E1C6 /* UIColor */ = {
+			isa = PBXGroup;
+			children = (
+				873E9C7C1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.h */,
+				873E9C7D1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.m */,
+			);
+			name = UIColor;
 			sourceTree = "<group>";
 		};
 		877C86541DC8F102004B4A00 /* Initial Screen */ = {
@@ -1848,7 +1861,7 @@
 				TargetAttributes = {
 					288E85C91DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S62KPRX8XQ;
+						DevelopmentTeam = 3Y2KLSJ79X;
 					};
 					288E85E21DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2138,6 +2151,7 @@
 				284DFDB61DE9C26900EE759F /* RPGBattleControllerGenerator.m in Sources */,
 				877C86581DC8F132004B4A00 /* RPGInitialScreenViewController.m in Sources */,
 				28A309621DBF81DC0026459F /* NSUserDefaults+RPGVolumeSettings.m in Sources */,
+				873E9C7E1DF30EDD00D4E1C6 /* UIColor+RPGColorEquality.m in Sources */,
 				28149A101DB1007400C26881 /* RPGNibNames.m in Sources */,
 				28A9152A1DC77299001E0F51 /* RPGMessageTypes.m in Sources */,
 				28A915711DC7B94A001E0F51 /* RPGSkillInfoResponse.m in Sources */,
@@ -2309,7 +2323,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2326,7 +2340,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game-1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
