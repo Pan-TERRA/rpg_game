@@ -13,7 +13,7 @@
 - (BOOL)isEqualToColor:(UIColor *)anOtherColor
 {
   BOOL result = NO;
-  CGFloat tolerance = 0.01;
+  CGFloat tolerance = 0.0001;
   
   const CGFloat *selfComponents = CGColorGetComponents(self.CGColor);
   const CGFloat *otherColorComponents = CGColorGetComponents(anOtherColor.CGColor);
