@@ -7,6 +7,8 @@
 //
 
 #import "RPGAdventureGlobalMapViewController.h"
+  // View controllers
+#import "RPGLocationMapViewController.h"
   // Misc
 #import "UIView+RPGColorOfPoint.h"
 #import "UIColor+RPGColorEquality.h"
@@ -56,6 +58,16 @@
   CGPoint tapLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
   UIColor *tappedLocationColor = [self.maskImageView colorOfPoint:tapLocation];
   NSInteger tappedLocationID = [self getMapLocationIDWithColor:tappedLocationColor];
+  RPGLocationMapViewController *locationMapViewController = [[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID];
+  
+  if (locationMapViewController != nil)
+  {
+    [self presentViewController:locationMapViewController
+                       animated:YES
+                     completion:nil];
+  }
+  
+  [locationMapViewController release];
 
   NSLog(@"%ld", tappedLocationID);
 }
