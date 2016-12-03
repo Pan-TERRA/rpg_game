@@ -20,28 +20,26 @@
 #import "RPGMessageTypes.h"
 #import "RPGStatusCodes.h"
 
-typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
-
 @interface RPGWebsocketManager () <SRWebSocketDelegate>
 
-
 @property (copy, nonatomic, readwrite) NSString *token;
+@property (retain, nonatomic, readwrite) SRWebSocket *webSocket;
 
 @end
 
 @implementation RPGWebsocketManager
 
-@synthesize delegate = _delegate;
-
 #pragma mark - Init
 
 - (instancetype)initWithURL:(NSURL *)anURL
 {
-  self = [super initWithURL:anURL];
+  self = [super init];
   
   if (self != nil)
   {
-    _delegate = self;
+    _URL = [anURL copy];
+    _webSocket = [[SRWebSocket alloc] initWithURL:anURL];
+    _webSocket.delegate = self;
     _token = [[NSUserDefaults standardUserDefaults].sessionToken copy];
   }
   
@@ -53,6 +51,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 - (void)dealloc
 {
   [_token release];
+  [_webSocket release];
   
   [super dealloc];
 }
@@ -62,6 +61,23 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
 #pragma mark  Message Send
 
 #pragma mark  API
+
+- (void)open
+{
+  if (self.webSocket == nil)
+  {
+      // Create new webSocket
+    self.webSocket = [[[SRWebSocket alloc] initWithURL:self.URL] autorelease];
+    self.webSocket.delegate = self;
+  }
+  
+  [self.webSocket open];
+}
+
+- (void)close
+{
+  [self.webSocket close];
+}
 
 - (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject
 {
@@ -99,7 +115,7 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
   }
   else
   {
-    [self send:data];
+    [self.webSocket send:data];
   }
 }
 
@@ -152,6 +168,8 @@ typedef void (^fetchSkillsCompletionHandler)(NSInteger, NSArray *);
          wasClean:(BOOL)wasClean
 {
   NSLog(@"Websocket did close \r\nWith code: %ld\r\nReason: %@", (long)code, reason);
+  self.webSocket = nil;
+  [self.battleController dismissalDidFinish];
 }
 
 @end

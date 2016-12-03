@@ -14,12 +14,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RPGWebsocketManager : SRWebSocket
+@interface RPGWebsocketManager : NSObject
 
 @property (assign, nonatomic, readwrite) RPGBattleController *battleController;
-@property (nonatomic, assign) id<SRWebSocketDelegate> delegate;
+@property (retain, nonatomic, readonly) NSURL *URL;
 
 - (instancetype)initWithURL:(NSURL *)anURL;
+
+- (void)open;
+- (void)close;
 
 - (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject;
 - (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject shouldInjectToken:(BOOL)anInjectTokenFlag;
