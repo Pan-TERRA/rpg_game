@@ -14,6 +14,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readwrite) NSString *message;
 
+/**
+ *  Init modal window. 
+ *  Completion handler is called on premature closing (when user closes window with a button)
+ *
+ *  @param aMessage          A message
+ *  @param completionHandler A handler to call on premature window closing
+ *
+ *  @return An instanse
+ */
 - (instancetype)initWithMessage:(NSString *)aMessage completion:(void (^ __nullable)())completionHandler;
 
 @end
