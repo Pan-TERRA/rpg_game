@@ -4,10 +4,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGRewardViewController">
             <connections>
+                <outlet property="restartButton" destination="ucg-9I-2Is" id="PBD-jE-fpJ"/>
                 <outlet property="rewardCrystalsLabel" destination="fW8-5g-3Nj" id="rNB-1P-kgP"/>
                 <outlet property="rewardExpLabel" destination="xIq-ud-Qyg" id="LFN-Oj-18h"/>
                 <outlet property="rewardGoldLabel" destination="E0S-MP-026" id="VU3-C0-Pve"/>
@@ -20,13 +22,13 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Amz-fb-vFN">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Amz-fb-vFN">
                     <rect key="frame" x="150" y="181" width="300" height="239"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-nF-g30">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-nF-g30">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="239"/>
                         </imageView>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-2f-P4d" userLabel="Reward Container">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qRU-2f-P4d" userLabel="Reward Container">
                             <rect key="frame" x="62" y="84" width="176" height="90"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="jvD-LR-UP8">
@@ -124,30 +126,45 @@
                                 <constraint firstAttribute="trailing" secondItem="jvD-LR-UP8" secondAttribute="trailing" id="wlO-LT-oLu"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKR-tW-Fcv">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKR-tW-Fcv">
                             <rect key="frame" x="96" y="20" width="108" height="22"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQS-vT-cbh" userLabel="NickName">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQS-vT-cbh" userLabel="NickName">
                             <rect key="frame" x="107" y="52" width="87" height="22"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdM-kj-YL2">
-                            <rect key="frame" x="110" y="184" width="80" height="35"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdM-kj-YL2">
+                            <rect key="frame" x="185" y="184" width="80" height="35"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="80" id="DDD-pf-6MX"/>
                                 <constraint firstAttribute="height" constant="35" id="eI0-Fc-lVP"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                            <state key="normal" title="OK" backgroundImage="main_button_inactive">
+                            <state key="normal" title="Exit" backgroundImage="main_button_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="buttonOKAction:" destination="-1" eventType="touchUpInside" id="9nR-x5-hh3"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucg-9I-2Is">
+                            <rect key="frame" x="35" y="184" width="80" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="80" id="a9X-Og-fqd"/>
+                                <constraint firstAttribute="height" constant="35" id="jzf-xw-kLy"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <state key="normal" title="Restart" backgroundImage="main_button_inactive">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="buttonOKAction:" destination="-1" eventType="touchUpInside" id="5dR-VH-bpL"/>
+                                <action selector="restartButtonAction:" destination="-1" eventType="touchUpInside" id="9ke-nP-AMg"/>
                             </connections>
                         </button>
                     </subviews>
@@ -157,13 +174,15 @@
                         <constraint firstItem="JdM-kj-YL2" firstAttribute="top" secondItem="qRU-2f-P4d" secondAttribute="bottom" constant="10" id="9zD-wd-dKl"/>
                         <constraint firstItem="EQS-vT-cbh" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" id="DkR-kK-nHq"/>
                         <constraint firstItem="qRU-2f-P4d" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" id="NsY-HO-e2o"/>
+                        <constraint firstItem="ucg-9I-2Is" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" multiplier="1:2" id="Ore-xA-m07"/>
                         <constraint firstItem="dKR-tW-Fcv" firstAttribute="top" secondItem="Amz-fb-vFN" secondAttribute="top" constant="20" id="Qwg-zh-3eQ"/>
                         <constraint firstAttribute="trailing" secondItem="2jD-nF-g30" secondAttribute="trailing" id="R9w-aA-8Mp"/>
                         <constraint firstItem="2jD-nF-g30" firstAttribute="leading" secondItem="Amz-fb-vFN" secondAttribute="leading" id="RDc-Ce-HTm"/>
                         <constraint firstItem="qRU-2f-P4d" firstAttribute="top" secondItem="EQS-vT-cbh" secondAttribute="bottom" constant="10" id="TNz-KS-ndG"/>
                         <constraint firstAttribute="bottom" secondItem="JdM-kj-YL2" secondAttribute="bottom" constant="20" id="U86-xp-DaH"/>
                         <constraint firstItem="EQS-vT-cbh" firstAttribute="top" secondItem="dKR-tW-Fcv" secondAttribute="bottom" constant="10" id="Y6a-uh-84b"/>
-                        <constraint firstItem="JdM-kj-YL2" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" id="aJa-hF-lUh"/>
+                        <constraint firstItem="JdM-kj-YL2" firstAttribute="baseline" secondItem="ucg-9I-2Is" secondAttribute="baseline" id="ZuK-Ca-jqz"/>
+                        <constraint firstItem="JdM-kj-YL2" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" multiplier="3:2" id="aJa-hF-lUh"/>
                         <constraint firstAttribute="bottom" secondItem="2jD-nF-g30" secondAttribute="bottom" id="bBJ-QQ-9x1"/>
                         <constraint firstItem="dKR-tW-Fcv" firstAttribute="centerX" secondItem="Amz-fb-vFN" secondAttribute="centerX" id="jvz-tE-udu"/>
                         <constraint firstItem="2jD-nF-g30" firstAttribute="top" secondItem="Amz-fb-vFN" secondAttribute="top" id="xSb-SO-Ufg"/>
@@ -183,7 +202,7 @@
                     <color key="value" white="0.0" alpha="0.61662176724137929" colorSpace="calibratedWhite"/>
                 </userDefinedRuntimeAttribute>
             </userDefinedRuntimeAttributes>
-            <point key="canvasLocation" x="68" y="455"/>
+            <point key="canvasLocation" x="-113" y="310"/>
         </view>
     </objects>
     <resources>

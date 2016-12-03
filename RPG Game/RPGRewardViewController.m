@@ -21,6 +21,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardCrystalsLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardExpLabel;
 
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *restartButton;
+
 @end
 
 @implementation RPGRewardViewController
@@ -65,6 +67,11 @@
 - (IBAction)buttonOKAction:(UIButton *)sender
 {
   [self.delegate dismissRewardModal:self];
+}
+
+- (IBAction)restartButtonAction:(UIButton *)sender
+{
+  [self.delegate restartBattle:self];
 }
 
 @end
