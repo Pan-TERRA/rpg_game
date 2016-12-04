@@ -40,7 +40,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
  *
  *  @param aResponse A websocket message represented as dictionar
  */
-- (void)processManagerResponse:(NSDictionary *)aResponse;
+- (void)processManagerResponse:(NSDictionary *)aResponse __attribute__((objc_requires_super));
 
 #pragma mark Battle Init Response
 
@@ -49,7 +49,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
   // template method
 - (void)processBattleInitResponse:(NSDictionary *)aResponse;
 
-#pragma mark Battle Condtion Response
+#pragma mark Battle Condition Response
 
 - (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType;
 

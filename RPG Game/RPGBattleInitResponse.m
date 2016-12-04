@@ -117,9 +117,10 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
   
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
                opponentInfo:[opponentInfo autorelease]
-                         playerInfo:[playerInfo autorelease]
-                        currentTurn:currentTurn
-                               time:time status:status];
+                 playerInfo:[playerInfo autorelease]
+                currentTurn:currentTurn
+                       time:time
+                     status:status];
 }
 
 

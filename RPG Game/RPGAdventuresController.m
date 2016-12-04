@@ -139,20 +139,6 @@
   }
 }
 
-- (void)sendBattleInitRequest
-{
-  id request = [self createBattleInitRequest];
-  
-  if (request != nil)
-  {
-    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
-  }
-  else
-  {
-    NSLog(@"Request is nil");
-  }
-}
-
 #pragma mark - Misc
 
 - (void)prepareBattleControllerForDismiss
@@ -167,7 +153,16 @@
 
 - (void)requestBattleInit
 {
-  [self sendBattleInitRequest];
+  id request = [self createBattleInitRequest];
+  
+  if (request != nil)
+  {
+    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
 }
 
 @end

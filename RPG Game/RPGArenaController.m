@@ -41,18 +41,4 @@
 
 #pragma mark - Actions
 
-- (void)sendBattleInitRequest
-{
-  id request = [self createBattleInitRequest];
-  
-  if (request != nil)
-  {
-    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
-  }
-  else
-  {
-    NSLog(@"Request is nil");
-  }
-}
-
 @end
