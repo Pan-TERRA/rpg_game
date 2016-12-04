@@ -11,6 +11,7 @@
 #import "RPGSkill.h"
 
 NSString * const kRPGPlayerSkills = @"skills";
+NSString * const kRPGPlayerCurrentWinCount = @"current_win_count";
 
 @interface RPGPlayer ()
 
@@ -27,6 +28,7 @@ NSString * const kRPGPlayerSkills = @"skills";
                        maxHP:(NSInteger)aMaxHP
                        level:(NSInteger)aLevel
                       skills:(NSArray<RPGSkill *> *)aSkills
+             currentWinCount:(NSInteger)aCurrentWinCount;
 {
   self = [super initWithName:aName
                           HP:aHP
@@ -36,6 +38,7 @@ NSString * const kRPGPlayerSkills = @"skills";
   if (self != nil)
   {
     _skills = [aSkills retain];
+    _currentWinCount = aCurrentWinCount;
   }
   
   return self;
@@ -46,12 +49,14 @@ NSString * const kRPGPlayerSkills = @"skills";
                          maxHP:(NSInteger)aMaxHP
                          level:(NSInteger)aLevel
                         skills:(NSArray<RPGSkill *> *)aSkills
+               currentWinCount:(NSInteger)aCurrentWinCount;
 {
   return [[[self alloc] initWithName:aName
                                   HP:aHP
                                maxHP:aMaxHP
                                level:aLevel
-                              skills:aSkills] autorelease];
+                              skills:aSkills
+                     currentWinCount:aCurrentWinCount] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -70,6 +75,7 @@ NSString * const kRPGPlayerSkills = @"skills";
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   
   dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
+  dictionaryRepresentation[kRPGPlayerCurrentWinCount] = @(self.currentWinCount);
   
   return [dictionaryRepresentation autorelease];
 }
@@ -83,7 +89,8 @@ NSString * const kRPGPlayerSkills = @"skills";
                          HP:[aDictionary[kRPGEntityHP] integerValue]
                       maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
                       level:[aDictionary[kRPGEntityLevel] integerValue]
-                     skills:aDictionary[kRPGPlayerSkills]];
+                     skills:aDictionary[kRPGPlayerSkills]
+            currentWinCount:[aDictionary[kRPGPlayerCurrentWinCount] integerValue]];
 }
 
 - (RPGSkill *)skillByID:(NSInteger)anID
