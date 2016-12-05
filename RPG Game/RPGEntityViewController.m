@@ -30,8 +30,7 @@ static CGFloat kRPGBattleViewControllerLevelViewCornerRadius = 8.0;
 
 #pragma mark - Init
 
-- (instancetype)initWithEntity:(RPGEntity *)anEntity
-                                   align:(RPGProgressBarAlign)anAlignFlag
+- (instancetype)initWithEntity:(RPGEntity *)anEntity align:(RPGProgressBarAlign)anAlignFlag
 {
   NSString *NIBName = nil;
   
