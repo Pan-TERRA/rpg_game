@@ -302,6 +302,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 - (void)restartBattle:(RPGRewardViewController *)aRewardModal
 {
   [self rpg_removeChildViewController:aRewardModal];
+  [self addChildViewController:self.battleInitModal view:self.view];
+  
   [self.battleController fireUpBattleController];
 }
 
