@@ -67,9 +67,13 @@
                         <constraint firstAttribute="bottom" secondItem="Vvf-MO-rdu" secondAttribute="bottom" id="qTq-tP-Sf8"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-Xg-I18">
-                    <rect key="frame" x="35" y="8" width="34" height="30"/>
-                    <state key="normal" title="Back"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-Xg-I18" userLabel="Back button">
+                    <rect key="frame" x="30" y="8" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="epU-T7-nd5"/>
+                        <constraint firstAttribute="height" constant="40" id="pwK-7x-Hub"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="7kF-GM-dLH"/>
                     </connections>
@@ -84,7 +88,7 @@
                 <constraint firstItem="BHx-Xg-I18" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="VYK-WH-r3c"/>
                 <constraint firstAttribute="trailing" secondItem="lHe-40-tg5" secondAttribute="trailing" id="aC5-7q-buI"/>
                 <constraint firstItem="M92-u3-eeQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bq9-DC-ICJ"/>
-                <constraint firstItem="BHx-Xg-I18" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="dQx-gj-AB6"/>
+                <constraint firstItem="BHx-Xg-I18" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="dQx-gj-AB6"/>
                 <constraint firstAttribute="trailing" secondItem="M92-u3-eeQ" secondAttribute="trailing" id="eZ7-Gz-9PQ"/>
                 <constraint firstItem="lHe-40-tg5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="iDY-fd-bKd"/>
                 <constraint firstItem="M92-u3-eeQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lud-Dg-afo"/>
@@ -100,6 +104,7 @@
     </objects>
     <resources>
         <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
         <image name="map_mask" width="2205" height="2205"/>
     </resources>
 </document>

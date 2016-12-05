@@ -140,9 +140,13 @@
                         <constraint firstItem="S1T-9N-S1b" firstAttribute="top" secondItem="JtV-u2-yeJ" secondAttribute="top" id="bQm-NE-FuC"/>
                     </constraints>
                 </scrollView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-xJ-hhb">
-                    <rect key="frame" x="14" y="17" width="34" height="30"/>
-                    <state key="normal" title="Back"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-xJ-hhb" userLabel="Back button">
+                    <rect key="frame" x="20" y="20" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Kbr-AD-vbH"/>
+                        <constraint firstAttribute="width" constant="40" id="NY7-p9-bZS"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
                         <action selector="backAction:" destination="-1" eventType="touchUpInside" id="IkT-4z-M9i"/>
                     </connections>
@@ -164,36 +168,21 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="S1T-9N-S1b" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="8kC-f1-wDQ"/>
                 <constraint firstAttribute="trailing" secondItem="JtV-u2-yeJ" secondAttribute="trailing" id="Azg-KO-hNw"/>
                 <constraint firstItem="JtV-u2-yeJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H2c-Qy-oUU"/>
-                <constraint firstItem="S1T-9N-S1b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JIb-9D-8XZ"/>
-                <constraint firstItem="S1T-9N-S1b" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="NeV-Xo-2S2"/>
                 <constraint firstItem="gZQ-vn-Eyb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Rka-tQ-fJt"/>
-                <constraint firstItem="S1T-9N-S1b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TWB-W6-7L7"/>
-                <constraint firstAttribute="bottom" secondItem="S1T-9N-S1b" secondAttribute="bottom" id="U7b-xT-g1u"/>
-                <constraint firstItem="ahm-xJ-hhb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="V7I-Eq-bFB"/>
-                <constraint firstItem="ahm-xJ-hhb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="Ykw-ed-Fgm"/>
+                <constraint firstItem="ahm-xJ-hhb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="V7I-Eq-bFB"/>
+                <constraint firstItem="ahm-xJ-hhb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Ykw-ed-Fgm"/>
                 <constraint firstItem="gZQ-vn-Eyb" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="btd-hN-8og"/>
-                <constraint firstAttribute="trailing" secondItem="S1T-9N-S1b" secondAttribute="trailing" id="cTA-eC-zGD"/>
                 <constraint firstItem="JtV-u2-yeJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fwI-aT-9lW"/>
                 <constraint firstAttribute="bottom" secondItem="JtV-u2-yeJ" secondAttribute="bottom" id="zpl-PC-jOe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="8kC-f1-wDQ"/>
-                    <exclude reference="JIb-9D-8XZ"/>
-                    <exclude reference="NeV-Xo-2S2"/>
-                    <exclude reference="TWB-W6-7L7"/>
-                    <exclude reference="U7b-xT-g1u"/>
-                    <exclude reference="cTA-eC-zGD"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="331" y="247.5"/>
         </view>
     </objects>
     <resources>
+        <image name="back_icon_inactive" width="40" height="40"/>
         <image name="location_background_1" width="443" height="312"/>
         <image name="main_button_inactive" width="275" height="137"/>
         <image name="red_circle" width="200" height="200"/>
