@@ -21,15 +21,6 @@
 
 @implementation RPGShopCollectionViewCell
 
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [_shopUnit release];
-  
-  [super dealloc];
-}
-
 #pragma mark - Accessors
 
 - (void)setShopUnit:(RPGShopUnit *)aShopUnit

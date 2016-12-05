@@ -25,8 +25,7 @@
   
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -132,8 +131,7 @@
   
   NSURLRequest *request = [self requestWithObject:shopUnitRequest
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

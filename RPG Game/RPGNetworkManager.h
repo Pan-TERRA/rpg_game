@@ -15,12 +15,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString * const kRPGRequestToken;
-
 #pragma mark - API constants
 
   // General
 extern NSString * const kRPGNetworkManagerAPIHost;
+extern NSString * const kRPGNetworkManagerAPITokenExistsRoute;
+  // Resources
+extern NSString * const kRPGNetworkManagerAPIResourcesRoute;
   // Authorization
 extern NSString * const kRPGNetworkManagerAPILoginRoute;
 extern NSString * const kRPGNetworkManagerAPISignoutRoute;
@@ -45,6 +46,7 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
 extern NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute;
 extern NSString * const kRPGNetworkManagerAPISelectSkillsRoute;
   // Constants
+extern NSString * const kRPGRequestToken;
 extern NSString * const kRPGNetworkManagerStatus;
   // Shop
 extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
@@ -76,7 +78,15 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
  *
  *  @return
  */
-- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod injectToken:(BOOL)injectToken;
+- (NSURLRequest *)requestWithObject:(nullable id)anObject
+                          URLstring:(NSString *)aString
+                             method:(NSString *)aMethod
+                  shouldInjectToken:(BOOL)anInjectTokenFlag;
+
+  // Invokes requestWithObject:URLstring:method:shouldInjectToken: with anInjectTokenFlag = YES
+- (NSURLRequest *)requestWithObject:(nullable id)anObject
+                          URLstring:(NSString *)aString
+                             method:(NSString *)aMethod;
 
 #pragma mark - Error Handling
 
@@ -85,10 +95,10 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 #pragma mark - General Requests
 
-- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock;
-- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock;
+- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))aCallback;
+- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))aCallback;
 - (void)getImageDataFromPath:(NSString *)aPath
-               completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))callbackBlock;
+               completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))aCallback;
 
 @end
 

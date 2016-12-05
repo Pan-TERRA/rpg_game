@@ -19,7 +19,7 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(NSInteger))callbackBlock
+       completionHandler:(void (^)(NSInteger))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -28,7 +28,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:NO];
+                                shouldInjectToken:NO];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -43,8 +43,9 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
+        
         return;
       }
       
@@ -52,8 +53,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
+      
       return;
     }
     
@@ -63,8 +65,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
+      
       return;
     }
     
@@ -72,8 +75,9 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
+      
       return;
     }
     
@@ -87,8 +91,9 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
+      
       return;
     }
     
@@ -99,16 +104,16 @@
       {
         if (responseObject == nil)
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+          aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
         }
         else if (responseObject.status == kRPGStatusCodeOK)
         {
           [responseObject store];
-          callbackBlock(responseObject.status);
+          aCallback(responseObject.status);
         }
         else
         {
-          callbackBlock(responseObject.status);
+          aCallback(responseObject.status);
         }
       });
   
@@ -119,7 +124,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock
+- (void)logoutWithCompletionHandler:(void (^)(NSInteger))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -127,8 +132,7 @@
   
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   configuration.networkServiceType = NSURLNetworkServiceTypeDefault;
@@ -146,7 +150,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
         return;
       }
@@ -155,7 +159,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
       return;
     }
@@ -166,7 +170,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
       return;
     }
@@ -175,7 +179,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
       return;
     }
@@ -190,14 +194,14 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
       return;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      callbackBlock([responseDictionary[kRPGNetworkManagerStatus] integerValue]);
+      aCallback([responseDictionary[kRPGNetworkManagerStatus] integerValue]);
     });
     
   }];

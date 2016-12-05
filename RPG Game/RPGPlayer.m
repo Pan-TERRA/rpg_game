@@ -25,9 +25,13 @@ NSString * const kRPGPlayerSkills = @"skills";
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel
                       skills:(NSArray<RPGSkill *> *)aSkills
 {
-  self = [super initWithName:aName HP:aHP maxHP:aMaxHP];
+  self = [super initWithName:aName
+                          HP:aHP
+                       maxHP:aMaxHP
+                       level:aLevel];
   
   if (self != nil)
   {
@@ -40,11 +44,13 @@ NSString * const kRPGPlayerSkills = @"skills";
 + (instancetype)playerWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP
+                         level:(NSInteger)aLevel
                         skills:(NSArray<RPGSkill *> *)aSkills
 {
   return [[[self alloc] initWithName:aName
                                   HP:aHP
                                maxHP:aMaxHP
+                               level:aLevel
                               skills:aSkills] autorelease];
 }
 
@@ -74,9 +80,10 @@ NSString * const kRPGPlayerSkills = @"skills";
   NSString *charNickName = [NSUserDefaults standardUserDefaults].characterNickName;
   
   return [self initWithName:charNickName
-                  HP:[aDictionary[kRPGEntityHP] integerValue]
-               maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
-              skills:aDictionary[kRPGPlayerSkills]];
+                         HP:[aDictionary[kRPGEntityHP] integerValue]
+                      maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
+                      level:[aDictionary[kRPGEntityLevel] integerValue]
+                     skills:aDictionary[kRPGPlayerSkills]];
 }
 
 - (RPGSkill *)skillByID:(NSInteger)anID
@@ -94,4 +101,6 @@ NSString * const kRPGPlayerSkills = @"skills";
   
   return result;
 }
+
+
 @end

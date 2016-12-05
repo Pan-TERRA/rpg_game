@@ -20,15 +20,15 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
   return [self initWithStatus:-1 classes:nil];
 }
 
-- (instancetype)initWithStatus:(NSInteger)status classes:(NSArray *)classes
+- (instancetype)initWithStatus:(NSInteger)aStatus classes:(NSArray *)aClasses
 {
   self = [super init];
   if (self != nil)
   {
-    _status = status;
-    if (classes != nil)
+    _status = aStatus;
+    if (aClasses != nil)
     {
-    _classes = [[NSArray alloc] initWithArray:classes];
+    _classes = [[NSArray alloc] initWithArray:aClasses];
     }
     else
     {
@@ -44,6 +44,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
 - (void)dealloc
 {
   [_classes release];
+  
   [super dealloc];
 }
 

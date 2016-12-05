@@ -13,6 +13,7 @@
 extern NSString * const kRPGEntityName;
 extern NSString * const kRPGEntityHP;
 extern NSString * const kRPGEntityMaxHP;
+extern NSString * const kRPGEntityLevel;
 
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
@@ -23,8 +24,15 @@ extern NSString * const kRPGEntityMaxHP;
 @property (copy, nonatomic, readwrite) NSString *name;
 @property (assign, nonatomic, readwrite) NSInteger HP;
 @property (assign, nonatomic, readwrite) NSInteger maxHP;
+@property (assign, nonatomic, readwrite) NSInteger level;
 
-- (instancetype)initWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP;
-+ (instancetype)entityWithName:(NSString *)aName HP:(NSInteger)aHP maxHP:(NSInteger)aMaxHP;
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel;
++ (instancetype)entityWithName:(NSString *)aName
+                            HP:(NSInteger)aHP
+                         maxHP:(NSInteger)aMaxHP
+                         level:(NSInteger)aLevel;
 
 @end

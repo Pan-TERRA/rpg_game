@@ -7,6 +7,7 @@
 //
 
 #import "RPGQuestListResponse.h"
+  // Entities
 #import "RPGQuest.h"
 
 NSString * const kRPGQuestListResponseStatus = @"status";

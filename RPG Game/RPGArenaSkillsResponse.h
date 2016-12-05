@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 @interface RPGArenaSkillsResponse : NSObject <RPGSerializable>
@@ -14,7 +15,7 @@
 @property (nonatomic, assign, readwrite) NSInteger status;
 @property (nonatomic, retain, readwrite) NSArray *skills;
 
-- (instancetype)initWithStatus:(NSInteger)status skills:(NSArray *)skills;
+- (instancetype)initWithStatus:(NSInteger)aStatus skills:(NSArray *)aSkills;
 
 @end
 

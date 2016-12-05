@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 @interface RPGClassInfoResponse : NSObject <RPGSerializable>
@@ -14,6 +15,6 @@
 @property (assign, nonatomic, readwrite) NSInteger status;
 @property (copy, nonatomic, readwrite) NSDictionary *classInfo;
 
-- (instancetype)initWithStatus:(NSInteger)status classInfo:(NSDictionary *)classInfo;
+- (instancetype)initWithStatus:(NSInteger)aStatus classInfo:(NSDictionary *)aClassInfo;
 
 @end
