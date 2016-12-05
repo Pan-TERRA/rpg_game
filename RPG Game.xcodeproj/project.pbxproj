@@ -115,6 +115,7 @@
 		87AC81401DF070E40074E04C /* RPGAdventureGlobalMapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87AC813E1DF070E40074E04C /* RPGAdventureGlobalMapViewController.xib */; };
 		87C8734B1DDF27D300903193 /* RPGBasicNetworkResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87C8734A1DDF27D300903193 /* RPGBasicNetworkResponse.m */; };
 		87DD218D1DF5B81400A4194F /* RPGLocationMap-1.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87DD218C1DF5B81400A4194F /* RPGLocationMap-1.xib */; };
+		87DD21911DF5EFC400A4194F /* RPGBattleplaceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87DD21901DF5EFC400A4194F /* RPGBattleplaceView.m */; };
 		AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68001DBA773100715480 /* RPGQuestRequest.m */; };
 		AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */; };
 		AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */; };
@@ -379,6 +380,8 @@
 		87C873491DDF27D300903193 /* RPGBasicNetworkResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBasicNetworkResponse.h; sourceTree = "<group>"; };
 		87C8734A1DDF27D300903193 /* RPGBasicNetworkResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBasicNetworkResponse.m; sourceTree = "<group>"; };
 		87DD218C1DF5B81400A4194F /* RPGLocationMap-1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "RPGLocationMap-1.xib"; sourceTree = "<group>"; };
+		87DD218F1DF5EFC400A4194F /* RPGBattleplaceView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleplaceView.h; sourceTree = "<group>"; };
+		87DD21901DF5EFC400A4194F /* RPGBattleplaceView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleplaceView.m; sourceTree = "<group>"; };
 		9864644C8038713EF8524DC8 /* Pods-RPG Game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG Game.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG Game/Pods-RPG Game.release.xcconfig"; sourceTree = "<group>"; };
 		9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG Game.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestRequest.h; sourceTree = "<group>"; };
@@ -1663,9 +1666,19 @@
 		87DD218E1DF5B82000A4194F /* Locations */ = {
 			isa = PBXGroup;
 			children = (
+				87DD21931DF5EFDA00A4194F /* Views */,
 				87DD218C1DF5B81400A4194F /* RPGLocationMap-1.xib */,
 			);
 			name = Locations;
+			sourceTree = "<group>";
+		};
+		87DD21931DF5EFDA00A4194F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				87DD218F1DF5EFC400A4194F /* RPGBattleplaceView.h */,
+				87DD21901DF5EFC400A4194F /* RPGBattleplaceView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		AE87B59B1DE861830019E416 /* Battle Reward */ = {
@@ -2099,6 +2112,7 @@
 				D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */,
 				AEFC27B11DD4956900905ADD /* RPGQuestViewButtonContainer.m in Sources */,
 				D0CFEE761DB65C0100C61D0B /* AppleOpenALSupport.c in Sources */,
+				87DD21911DF5EFC400A4194F /* RPGBattleplaceView.m in Sources */,
 				281499F21DAFCC6200C26881 /* RPGAuthorizationLoginResponse.m in Sources */,
 				2A6F2AF41DE21A5E0036CD2D /* RPGArenaController.m in Sources */,
 				283ADCF81DAD3CAB00BDC706 /* RPGRequest.m in Sources */,
