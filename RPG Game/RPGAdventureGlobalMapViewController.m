@@ -27,31 +27,26 @@
 
   // View outlets
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *maskImageView;
-@property (readwrite, assign, nonatomic) IBOutlet UIImageView *displayImageView;
-  // Constraint outlets
-@property (readwrite, assign, nonatomic) IBOutlet NSLayoutConstraint *contentViewWidthConstraint;
-@property (readwrite, assign, nonatomic) IBOutlet NSLayoutConstraint *contentViewHeightConstraint;
 
 @end
 
 @implementation RPGAdventureGlobalMapViewController
 
-#pragma mark Init
+#pragma mark - Init
 
 - (instancetype)init
 {
   return [self initWithNibName:kRPGAdventureGlobalMapViewControllerNIBName bundle:nil];
 }
 
-#pragma mark - UIViewController
+#pragma mark - Actions
 
-- (void)viewDidLayoutSubviews
+- (IBAction)backAction:(UIButton *)sender
 {
-  self.contentViewWidthConstraint.constant = self.maskImageView.frame.size.width;
-  self.contentViewHeightConstraint.constant = self.maskImageView.frame.size.height;
+  [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - Map
+#pragma mark Map
 
 - (IBAction)mapTappedAction:(UITapGestureRecognizer *)gestureRecognizer
 {
