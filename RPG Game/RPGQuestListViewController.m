@@ -20,8 +20,6 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlertController.h"
 
-typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
-
 @interface RPGQuestListViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
@@ -111,16 +109,18 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
     
     __block typeof(self) weakSelf = self;
     
-    fetchQuestsCompletionHandler handler = ^void(NSInteger statusCode, NSArray *questList)
+    [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
+                                               completionHandler:^void(RPGStatusCode aNetworkStatusCode,
+                                                                       NSArray<RPGQuest *> *aQuestList)
     {
       self.sendRequest = YES;
       [weakSelf setViewToNormalState];
       
-      switch (statusCode)
+      switch (aNetworkStatusCode)
       {
         case kRPGStatusCodeOK:
         {
-          [weakSelf processQuestsData:questList byState:aState];
+          [weakSelf processQuestsData:aQuestList byState:aState];
           
           if (aShouldReloadFlag)
           {
@@ -160,9 +160,7 @@ typedef void (^fetchQuestsCompletionHandler)(NSInteger, NSArray *);
           break;
         }
       }
-    };
-    
-    [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState completionHandler:handler];
+    }];
   }
 }
 
