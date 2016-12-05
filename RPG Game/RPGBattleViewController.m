@@ -44,6 +44,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   // Player
 @property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *playerViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *currentWinCountBadgeViewContainer;
   // Opponent
 @property (assign, nonatomic) IBOutlet UIView *opponentViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *opponentViewController;
@@ -235,6 +236,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.opponentViewController.entity = self.battleController.battle.opponent;
 }
 
+- (void)processModelChanges
+{
+  
+}
+
 #pragma mark - Notifications
 
 - (void)modelDidChange:(NSNotification *)aNotification
@@ -274,6 +280,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   {
     [self.skillBarViewController updateButtonsState];
   }
+  
+  [self processModelChanges];
 }
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification

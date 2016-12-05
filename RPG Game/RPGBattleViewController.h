@@ -18,8 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 @property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
+  // Containers
+@property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 
 - (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
+
+  // template method
+- (void)processModelChanges;
 
 @end
 
