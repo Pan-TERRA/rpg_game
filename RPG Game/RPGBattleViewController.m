@@ -240,6 +240,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   
 }
 
+- (void)processBattleInitCompletion
+{
+  
+}
+
 #pragma mark - Notifications
 
 - (void)modelDidChange:(NSNotification *)aNotification
@@ -287,6 +292,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [self removeBattleInitModal];
   [self setUpEntityViewControllers];
+  
+  [self processBattleInitCompletion];
 }
 
 #pragma mark - RPGRewardModalDelegate

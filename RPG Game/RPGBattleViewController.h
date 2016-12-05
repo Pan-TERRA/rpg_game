@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
   // template method
 - (void)processModelChanges;
 
+  // template method
+- (void)processBattleInitCompletion;
+
 @end
 
 NS_ASSUME_NONNULL_END

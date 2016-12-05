@@ -15,22 +15,14 @@
 @interface RPGCurrentWinCountBadgeViewController ()
 
 @property (assign, nonatomic, readwrite) IBOutlet UILabel *currentWinCountLabel;
-@property (assign, nonatomic, readwrite) RPGPlayer *player;
 
 @end
 
 @implementation RPGCurrentWinCountBadgeViewController
 
-- (instancetype)initWithPlayer:(RPGPlayer *)aPlayer
+- (instancetype)init
 {
-  self = [super initWithNibName:kRPGCurrentWinCountBadgeViewControllerNIBName bundle:nil];
-  
-  if (self != nil)
-  {
-    _player = aPlayer;
-  }
-  
-  return self;
+  return [super initWithNibName:kRPGCurrentWinCountBadgeViewControllerNIBName bundle:nil];
 }
 
 - (void)updateView

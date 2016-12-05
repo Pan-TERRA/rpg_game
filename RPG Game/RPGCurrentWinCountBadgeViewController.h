@@ -12,7 +12,7 @@
 
 @interface RPGCurrentWinCountBadgeViewController : UIViewController
 
-- (instancetype)initWithPlayer:(RPGPlayer *)aPlayer;
+@property (assign, nonatomic, readwrite) RPGPlayer *player;
 
 - (void)updateView;
 
