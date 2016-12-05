@@ -34,14 +34,6 @@
                         <constraint firstAttribute="width" constant="260" id="STS-Zy-m35"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54H-QH-HGt" userLabel="Player CurrentWinCount Container">
-                    <rect key="frame" x="33" y="142" width="69" height="38"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="69" id="9ZL-ZT-xnT"/>
-                        <constraint firstAttribute="height" constant="38" id="EV4-va-0fR"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zD6-yY-vsP" userLabel="Opponent View Container">
                     <rect key="frame" x="466" y="10" width="260" height="124"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -110,6 +102,14 @@
                         </mask>
                     </variation>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="54H-QH-HGt" userLabel="Player CurrentWinCount Container">
+                    <rect key="frame" x="16" y="120" width="54" height="30"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="54" id="9ZL-ZT-xnT"/>
+                        <constraint firstAttribute="height" constant="30" id="EV4-va-0fR"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.94268612490000003" green="1" blue="0.32916141329999998" alpha="0.21303879310000001" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
@@ -130,7 +130,7 @@
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="bottom" secondItem="yJI-3R-cgF" secondAttribute="bottom" id="F3K-iz-d6A"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="yJI-3R-cgF" secondAttribute="top" id="Hdk-pG-8yV"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" id="JcC-vF-rE1"/>
-                <constraint firstItem="54H-QH-HGt" firstAttribute="top" secondItem="yJI-3R-cgF" secondAttribute="bottom" constant="8" id="OP7-4a-btK"/>
+                <constraint firstItem="54H-QH-HGt" firstAttribute="top" secondItem="yJI-3R-cgF" secondAttribute="bottom" constant="-14" id="OP7-4a-btK"/>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="centerX" secondItem="Wq0-if-ML3" secondAttribute="centerX" id="Rfu-aa-sNy"/>
                 <constraint firstAttribute="bottom" secondItem="eGV-R3-AZJ" secondAttribute="bottom" id="UEN-nD-Yl2"/>
                 <constraint firstAttribute="bottom" secondItem="wCY-p1-9Mh" secondAttribute="bottom" constant="30" id="Yrk-th-T2f"/>
@@ -149,7 +149,7 @@
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" constant="-15" id="mCv-wr-9eA"/>
                 <constraint firstItem="yJI-3R-cgF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="nYk-cp-imb"/>
                 <constraint firstAttribute="trailing" secondItem="eGV-R3-AZJ" secondAttribute="trailing" id="ncA-3f-713"/>
-                <constraint firstItem="54H-QH-HGt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="33" id="nmA-Jt-Gtk"/>
+                <constraint firstItem="54H-QH-HGt" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="16" id="nmA-Jt-Gtk"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" id="qna-jm-j6W"/>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="top" secondItem="Wq0-if-ML3" secondAttribute="bottom" constant="7" id="uIX-9X-TcR"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" id="vm2-et-pwb"/>
