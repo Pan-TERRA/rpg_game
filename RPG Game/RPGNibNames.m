@@ -43,6 +43,7 @@ NSString * const kRPGCharacterBagCollectionViewCellNIBName = @"RPGCharacterBagCo
 /****************	Adventure Maps ****************/
 
 NSString * const kRPGAdventureGlobalMapViewControllerNIBName = @"RPGAdventureGlobalMapViewController";
+NSString * const kRPGLocationMapSuffixlessNIBName = @"RPGLocationMap-";
 
 /****************	Misc ****************/
 

@@ -48,3 +48,4 @@ extern NSString * const kRPGWaitingViewControllerNIBName;
 /****************	Adventure Maps ****************/
 
 extern NSString * const kRPGAdventureGlobalMapViewControllerNIBName;
+extern NSString * const kRPGLocationMapSuffixlessNIBName;

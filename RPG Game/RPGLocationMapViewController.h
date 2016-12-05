@@ -8,7 +8,7 @@
 
 #import "RPGViewController.h"
 
-@interface RPGLocationMapViewController : RPGViewController
+@interface RPGLocationMapViewController : UIViewController
 
 - (instancetype)initWithLocationID:(NSInteger)locationID;
 

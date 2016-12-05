@@ -7,6 +7,8 @@
 //
 
 #import "RPGLocationMapViewController.h"
+  // Constants
+#import "RPGNibNames.h"
 
 @interface RPGLocationMapViewController ()
 
@@ -19,20 +21,27 @@
 
 - (instancetype)initWithLocationID:(NSInteger)locationID
 {
-  self = [super init];
-  if (self != nil)
+  if (locationID > 0 && locationID <= 1)
   {
-    if (locationID >= 0)
+    NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, locationID];
+    self = [super initWithNibName:NIBName bundle:nil];
+    if (self != nil)
     {
       _locationID = locationID;
     }
-    else
-    {
-      [self release];
-      self = nil;
-    }
   }
+  else
+  {
+    [self release];
+    self = nil;
+  }
+  
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithLocationID:-1];
 }
 
 - (void)viewDidLoad

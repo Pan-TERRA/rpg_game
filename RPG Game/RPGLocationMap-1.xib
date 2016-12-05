@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGLocationMapViewController">
+            <connections>
+                <outlet property="label" destination="nqD-e1-2l9" id="nLt-Fk-OXx"/>
+                <outlet property="view" destination="iN0-l3-epB" id="271-ST-VZK"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqD-e1-2l9">
+                    <rect key="frame" x="279" y="290" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-xJ-hhb">
+                    <rect key="frame" x="14" y="17" width="34" height="30"/>
+                    <state key="normal" title="Back"/>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="IkT-4z-M9i"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="nqD-e1-2l9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="E70-9A-Dcp"/>
+                <constraint firstItem="ahm-xJ-hhb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="V7I-Eq-bFB"/>
+                <constraint firstItem="ahm-xJ-hhb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="Ykw-ed-Fgm"/>
+                <constraint firstItem="nqD-e1-2l9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z5C-FW-L5L"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
