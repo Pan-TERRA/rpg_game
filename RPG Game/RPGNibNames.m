@@ -30,8 +30,9 @@ NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
 NSString * const kRPGSkillBarViewControllerNIBName = @"RPGSkillBarViewController";
 NSString * const kRPGSkillDescriptionViewControllerNIBName = @"RPGSkillDescriptionViewController";
 NSString * const kRPGQuickSettingsViewControllerNIBName = @"RPGQuickSettingsViewController";
+NSString * const kRPGCurrentWinCountBadgeViewControllerNIBName = @"RPGCurrentWinCountBadgeViewController";
 
-/****************	ArenaViewController ****************/
+/****************	Arena ****************/
 
 NSString * const kRPGArenaSkillDrawViewControllerNIBName = @"RPGArenaSkillDrawViewController";
 

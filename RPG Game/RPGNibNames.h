@@ -1,5 +1,5 @@
 //
-//  NibNames.h
+//  RPGNibNames.h
 //  RPG Game
 //
 //  Created by Владислав Крут on 10/11/16.
@@ -30,8 +30,9 @@ extern NSString * const kRPGBattleViewControllerNIBName;
 extern NSString * const kRPGSkillBarViewControllerNIBName;
 extern NSString * const kRPGSkillDescriptionViewControllerNIBName;
 extern NSString * const kRPGQuickSettingsViewControllerNIBName;
+extern NSString * const kRPGCurrentWinCountBadgeViewControllerNIBName;
 
-/****************	ArenaViewController ****************/
+/****************	Arena ****************/
 
 extern NSString * const kRPGArenaSkillDrawViewControllerNIBName;
 
