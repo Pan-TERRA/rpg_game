@@ -17,6 +17,7 @@
 @class RPGBattleConditionResponse;
 @class RPGTimeResponse;
 @class RPGBattleReward;
+@class RPGSkillEffect;
 
 extern const NSInteger kRPGBattleTurnDuration;
 
@@ -34,6 +35,9 @@ extern const NSInteger kRPGBattleTurnDuration;
 @property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
 @property (retain, nonatomic, readonly) RPGBattleReward *reward;
 @property (retain, nonatomic, readonly) RPGBattleLog *battleLog;
+
+@property (retain, nonatomic, readonly) NSArray<RPGSkillEffect *> *playerSkillsEffects;
+@property (retain, nonatomic, readonly) NSArray<RPGSkillEffect *> *opponentSkillsEffects;
 
 /**
  *  Inits model. Sets startTime, general player info.

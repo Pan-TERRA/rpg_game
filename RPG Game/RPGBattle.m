@@ -16,6 +16,7 @@
 #import "RPGSFXEngine.h"
 #import "RPGBattleReward.h"
 #import "RPGBattleLog.h"
+#import "RPGPlayerInfo.h"
 
 const NSInteger kRPGBattleTurnDuration = 30;
 
@@ -25,6 +26,8 @@ const NSInteger kRPGBattleTurnDuration = 30;
 @property (retain, nonatomic, readwrite) RPGBattleReward *reward;
 @property (retain, nonatomic, readwrite) RPGBattleLog *battleLog;
 @property (assign, nonatomic, readwrite) RPGBattleStatus battleStatus;
+@property (retain, nonatomic, readwrite) NSArray<RPGSkillEffect *> *playerSkillsEffects;
+@property (retain, nonatomic, readwrite) NSArray<RPGSkillEffect *> *opponentSkillsEffects;
 
 @end
 
@@ -46,6 +49,8 @@ const NSInteger kRPGBattleTurnDuration = 30;
     _currentTurn = aResponse.currentTurn;
     _reward = [[RPGBattleReward alloc] init];
     _battleLog = [[RPGBattleLog alloc] init];
+    _playerSkillsEffects = [[NSArray alloc] init];
+    _opponentSkillsEffects = [[NSArray alloc] init];
   }
   
   return self;
@@ -60,10 +65,12 @@ const NSInteger kRPGBattleTurnDuration = 30;
 {
   [self.battleLog updateWithBattleConditionResponse:aResponse];
   
-  self.player.HP = aResponse.HP;
-  self.opponent.HP = aResponse.opponentHP;
+  self.player.HP = aResponse.playerInfo.HP;
+  self.opponent.HP = aResponse.opponentInfo.HP;
   self.currentTurn = aResponse.currentTurn;
   self.battleStatus = aResponse.battleStatus;
+  self.playerSkillsEffects = aResponse.playerInfo.skillsEffects;
+  self.opponentSkillsEffects = aResponse.opponentInfo.skillsEffects;
   
   RPGBattleReward *reward = aResponse.reward;
   if (reward != nil)
@@ -98,6 +105,8 @@ const NSInteger kRPGBattleTurnDuration = 30;
   [_opponent release];
   [_reward release];
   [_battleLog release];
+  [_playerSkillsEffects release];
+  [_opponentSkillsEffects release];
   
   [super dealloc];
 }
