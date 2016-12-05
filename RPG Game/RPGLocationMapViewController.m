@@ -15,9 +15,14 @@
 @interface RPGLocationMapViewController ()
 
 @property (readonly, assign, nonatomic) NSInteger locationID;
+@property (readwrite, assign, nonatomic) NSInteger chosenBattleplaceID;
 @property (readwrite, retain, nonatomic) NSMutableArray<RPGBattleplaceView *> *battleplaceViews;
 
-// Battleplace views
+#pragma mark Outlets
+
+@property (readwrite, assign, nonatomic) IBOutlet UIButton *toBattleButton;
+
+  // Battleplace views
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView1;
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView2;
 
@@ -34,6 +39,7 @@
   {
     NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, locationID];
     self = [super initWithNibName:NIBName bundle:nil];
+    
     if (self != nil)
     {
       _locationID = locationID;
@@ -52,10 +58,14 @@
                          bundle:(NSBundle *)nibBundleOrNil
 {
   self = [super initWithNibName:nibNameOrNil bundle:nil];
+  
   if (self != nil)
   {
     _battleplaceViews = [NSMutableArray new];
+    _chosenBattleplaceID = -1;
+    _locationID = -1;
   }
+  
   return self;
 }
 
@@ -77,9 +87,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.battleplaceViews = [[NSMutableArray alloc] initWithObjects:
-                                                   self.battleplaceView1,
-                                                   self.battleplaceView2,
+  self.battleplaceViews = [NSMutableArray arrayWithObjects:
+                                           self.battleplaceView1,
+                                           self.battleplaceView2,
                            nil];
 }
 
@@ -88,6 +98,12 @@
 - (IBAction)backAction:(UIButton *)sender
 {
   [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)toBattleAction:(UIButton *)sender
+{
+  //TODO: battle init with location id and battleplace id (no API yet)
+  NSLog(@"Battle!");
 }
 
 #pragma mark Battleplace actions
@@ -100,9 +116,15 @@
     battleplaceView.selectedMarkImageView.hidden = YES;
   }
   
-  RPGBattleplaceView *clickedBattleplaceView = (RPGBattleplaceView *)sender.superview;
   // Set selection
+  RPGBattleplaceView *clickedBattleplaceView = (RPGBattleplaceView *)sender.superview;
   clickedBattleplaceView.selectedMarkImageView.hidden = NO;
+  
+  // Get battleplace ID and set it to property
+  NSInteger clickedBattleplaceID = clickedBattleplaceView.tag;
+  self.chosenBattleplaceID = clickedBattleplaceID;
+  
+  self.toBattleButton.enabled = YES;
 }
 
 
