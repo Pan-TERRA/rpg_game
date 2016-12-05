@@ -12,7 +12,7 @@
 
 @interface RPGSkillsEffectsViewController : UIViewController
 
-@property (retain, nonatomic, readonly) RPGBattleController *battleController;
+@property (nonatomic, retain, readonly) RPGBattleController *battleController;
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 

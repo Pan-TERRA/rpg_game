@@ -7,9 +7,11 @@
 //
 
 #import "RPGSkillsEffectsViewController.h"
-
+  // Controller
 #import "RPGBattleController.h"
+  // Entities
 #import "RPGBattle.h"
+#import "RPGSkillEffect.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
   // Constants
@@ -17,11 +19,12 @@
 
 static int sRPGSkillsEffectsViewControllerSkillsEffects;
 static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
+static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20;
 
 @interface RPGSkillsEffectsViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
-@property (retain, nonatomic) IBOutlet UICollectionView *skillsEffectsCollectionView;
+@property (nonatomic, retain, readwrite) RPGBattleController *battleController;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillsEffectsCollectionView;
 
 @end
 
@@ -57,7 +60,6 @@ static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
                             context:&sRPGSkillsEffectsViewControllerSkillsEffects];
   [_battleController release];
   
-  [_skillsEffectsCollectionView release];
   [super dealloc];
 }
 
@@ -76,6 +78,8 @@ static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
     [super didReceiveMemoryWarning];
 }
 
+#pragma mark - UICollectionView
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
   return kRPGSkillsEffectsViewControllerCollectionSize;
@@ -86,48 +90,25 @@ static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
   RPGCharacterBagCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName
                                                                                        forIndexPath:anIndexPath];
   
-//  NSInteger index = anIndexPath.row;
-//  NSArray *skillsEffects = self.battleController.battle;
-//  if (index < self.collectionSize)
-//  {
-//    if (index < self.skillsIDArray.count)
-//    {
-//      NSUInteger skillID = [self.skillsIDArray[index] integerValue];
-//      RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
-//      
-//      if (skillRepresentation.imageName.length != 0)
-//      {
-//        cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
-//        cell.backgroundImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
-//        cell.backgroundImageView.layer.cornerRadius = kRPGCollectionViewControllerSkillButtonCornerRadius;
-//        cell.backgroundImageView.layer.masksToBounds = YES;
-//      }
-//      else
-//      {
-//        // default image for skills/items with no image
-//        cell.image = [UIImage imageNamed:@"battle_empty_icon_unset"];
-//        cell.backgroundImageView.image = nil;
-//      }
-//    }
-//    else
-//    {
-//      // unset skills or empty bag cells
-//      [cell setImage:[UIImage imageNamed:@"battle_empty_icon_inactive"]];
-//      cell.backgroundImageView.image = nil;
-//    }
-//  }
-//  else
-//  {
-//    // locked bag cells/skills
-//    [cell setImage:[UIImage imageNamed:@"battle_empty_icon_lock"]];
-//    cell.backgroundImageView.image = nil;
-//  }
-//  
+  NSInteger index = anIndexPath.row;
+  NSArray *skillsEffects = self.battleController.battle.playerSkillsEffects;
+  if (index < skillsEffects.count)
+  {
+    RPGSkillEffect *skillEffect = skillsEffects[index];
+    
+    cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
+    cell.backgroundImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
+    cell.backgroundImageView.layer.cornerRadius = kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius;
+    cell.backgroundImageView.layer.masksToBounds = YES;
+  }
+  else
+  {
+    [cell setImage:[UIImage imageNamed:@"battle_empty_icon_unset"]];
+    cell.backgroundImageView.image = nil;
+  }
+  
   return cell;
 }
-
-
-
 
 #pragma mark - Notifications
 
@@ -138,13 +119,9 @@ static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
 {
   if (aContext == &sRPGSkillsEffectsViewControllerSkillsEffects)
   {
-    if ([aChange[NSKeyValueChangeKindKey] unsignedIntegerValue] == NSKeyValueChangeInsertion)
+    if ([aChange[NSKeyValueChangeKindKey] unsignedIntegerValue] == NSKeyValueChangeSetting)
     {
-      NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
-//      RPGBattleAction *battleAction = self.battleController.actions[newObjectIndices.firstIndex];
-//      [self addMessageWithAction:battleAction];
-//      [self playSkillSFXWithAction:battleAction];
-//      [self scrollViewToBottom];
+      [self.skillsEffectsCollectionView reloadData];
     }
   }
   else
