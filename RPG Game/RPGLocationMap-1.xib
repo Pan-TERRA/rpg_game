@@ -7,7 +7,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGLocationMapViewController">
             <connections>
-                <outlet property="label" destination="nqD-e1-2l9" id="nLt-Fk-OXx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="271-ST-VZK"/>
             </connections>
         </placeholder>
@@ -16,12 +15,44 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nqD-e1-2l9">
-                    <rect key="frame" x="279" y="290" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-u2-yeJ">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1T-9N-S1b" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_background_1" translatesAutoresizingMaskIntoConstraints="NO" id="bse-qr-thi" userLabel="Background image">
+                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1000" id="QSr-lo-Jfa"/>
+                                        <constraint firstAttribute="width" constant="1000" id="WLz-lz-EQ8"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="QSr-lo-Jfa"/>
+                                            <exclude reference="WLz-lz-EQ8"/>
+                                        </mask>
+                                    </variation>
+                                </imageView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1000" id="5gd-4b-Okr"/>
+                                <constraint firstAttribute="bottom" secondItem="bse-qr-thi" secondAttribute="bottom" id="9hY-c3-EpP"/>
+                                <constraint firstItem="bse-qr-thi" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" id="CaB-gu-tbg"/>
+                                <constraint firstItem="bse-qr-thi" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" id="gY1-ld-VVk"/>
+                                <constraint firstAttribute="width" constant="1000" id="tbd-jk-vWR"/>
+                                <constraint firstAttribute="trailing" secondItem="bse-qr-thi" secondAttribute="trailing" id="zBg-Ag-lF6"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="S1T-9N-S1b" secondAttribute="bottom" id="2yM-nC-mh8"/>
+                        <constraint firstItem="S1T-9N-S1b" firstAttribute="leading" secondItem="JtV-u2-yeJ" secondAttribute="leading" id="33h-xu-zol"/>
+                        <constraint firstAttribute="trailing" secondItem="S1T-9N-S1b" secondAttribute="trailing" id="3fC-xR-B8b"/>
+                        <constraint firstItem="S1T-9N-S1b" firstAttribute="top" secondItem="JtV-u2-yeJ" secondAttribute="top" id="bQm-NE-FuC"/>
+                    </constraints>
+                </scrollView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-xJ-hhb">
                     <rect key="frame" x="14" y="17" width="34" height="30"/>
                     <state key="normal" title="Back"/>
@@ -32,11 +63,33 @@
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="nqD-e1-2l9" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="E70-9A-Dcp"/>
+                <constraint firstItem="S1T-9N-S1b" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" id="8kC-f1-wDQ"/>
+                <constraint firstAttribute="trailing" secondItem="JtV-u2-yeJ" secondAttribute="trailing" id="Azg-KO-hNw"/>
+                <constraint firstItem="JtV-u2-yeJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H2c-Qy-oUU"/>
+                <constraint firstItem="S1T-9N-S1b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="JIb-9D-8XZ"/>
+                <constraint firstItem="S1T-9N-S1b" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="NeV-Xo-2S2"/>
+                <constraint firstItem="S1T-9N-S1b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TWB-W6-7L7"/>
+                <constraint firstAttribute="bottom" secondItem="S1T-9N-S1b" secondAttribute="bottom" id="U7b-xT-g1u"/>
                 <constraint firstItem="ahm-xJ-hhb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="V7I-Eq-bFB"/>
                 <constraint firstItem="ahm-xJ-hhb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="17" id="Ykw-ed-Fgm"/>
-                <constraint firstItem="nqD-e1-2l9" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="Z5C-FW-L5L"/>
+                <constraint firstAttribute="trailing" secondItem="S1T-9N-S1b" secondAttribute="trailing" id="cTA-eC-zGD"/>
+                <constraint firstItem="JtV-u2-yeJ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="fwI-aT-9lW"/>
+                <constraint firstAttribute="bottom" secondItem="JtV-u2-yeJ" secondAttribute="bottom" id="zpl-PC-jOe"/>
             </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="8kC-f1-wDQ"/>
+                    <exclude reference="JIb-9D-8XZ"/>
+                    <exclude reference="NeV-Xo-2S2"/>
+                    <exclude reference="TWB-W6-7L7"/>
+                    <exclude reference="U7b-xT-g1u"/>
+                    <exclude reference="cTA-eC-zGD"/>
+                </mask>
+            </variation>
         </view>
     </objects>
+    <resources>
+        <image name="location_background_1" width="443" height="312"/>
+    </resources>
 </document>

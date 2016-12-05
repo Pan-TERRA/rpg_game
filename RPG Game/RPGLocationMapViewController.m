@@ -12,7 +12,6 @@
 
 @interface RPGLocationMapViewController ()
 
-@property (readwrite, assign, nonatomic) IBOutlet UILabel *label;
 @property (readonly, assign, nonatomic) NSInteger locationID;
 
 @end
@@ -47,7 +46,6 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-  self.label.text = [NSString stringWithFormat:@"%ld", self.locationID];
 }
 
 - (IBAction)backAction:(UIButton *)sender
