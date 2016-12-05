@@ -17,6 +17,7 @@
 #import "RPGEntityViewController.h"
 #import "RPGRewardViewController.h"
 #import "RPGBattleTimerViewController.h"
+#import "RPGSkillsEffectsViewController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
@@ -65,6 +66,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, retain, readwrite) RPGQuickSettingsViewController *settingsViewController;
 @property (nonatomic, assign, readwrite) UIView *settingsView;
 
+@property (nonatomic, retain, readwrite) RPGSkillsEffectsViewController *skillsEffectsViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *skillsEffectsViewContainer;
+
 @end
 
 @implementation RPGBattleViewController
@@ -92,6 +96,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
+      _skillsEffectsViewController = [[RPGSkillsEffectsViewController alloc] initWithBattleController:_battleController];
       
         // player view controller
       _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
@@ -101,10 +106,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       
       
       _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^
-                          {
-                            [self.battleController prepareBattleControllerForDismiss];
-                            [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-                          }];
+      {
+        [self.battleController prepareBattleControllerForDismiss];
+        [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+      }];
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -119,7 +124,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
                                                selector:@selector(battleInitDidEndSetUp:)
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
-      
     }
     
   }
@@ -140,6 +144,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
+  [_skillsEffectsViewController release];
   
   [_timerContainer release];
   [super dealloc];
@@ -159,6 +164,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self addChildViewController:self.skillBarViewController view:self.skillBar];
   [self addChildViewController:self.playerViewController view:self.playerViewContainer];
   [self addChildViewController:self.opponentViewController view:self.opponentViewContainer];
+  [self addChildViewController:self.skillsEffectsViewController view:self.skillsEffectsViewContainer];
   
   [self.battleController openBattleControllerWebSocket];
 }
