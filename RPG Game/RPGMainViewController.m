@@ -14,12 +14,15 @@
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGAdventuresController.h"
 #import "RPGArenaController.h"
+#import "RPGTournamentController.h"
+#import "RPGTournamentControllerGenerator.h"
   // Views
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
 #import "RPGPresentingViewControllerProtocol.h"
+#import "RPGTournamentViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -121,7 +124,12 @@
 
 - (IBAction)segueToPlay
 {
+  RPGBattleControllerGenerator *tournamentControllerGenerator = [[[RPGTournamentControllerGenerator alloc] init] autorelease];
+  RPGTournamentViewController *tournamentViewController = [[[RPGTournamentViewController alloc]
+                                                            initWithBattleControllerGenerator:tournamentControllerGenerator]
+                                                           autorelease];
   
+  [self presentViewController:tournamentViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToAdventures
