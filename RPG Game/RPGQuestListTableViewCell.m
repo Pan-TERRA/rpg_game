@@ -157,7 +157,7 @@ static CGFloat const kBounceValue = 10.0;
 
 - (IBAction)deleteButtonOnClick:(UIButton *)sender
 {
-  [self.tableViewController deleteQuestWithID:self.questID];
+  [self.delegate deleteQuestWithID:self.questID];
 }
 
 #pragma mark - Cell State

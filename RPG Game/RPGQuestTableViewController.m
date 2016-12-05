@@ -26,7 +26,7 @@
 static CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30.0;
 static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
 
-@interface RPGQuestTableViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface RPGQuestTableViewController () <UITableViewDelegate, UITableViewDataSource, RPGTableViewCellDelegate>
 
 @property (nonatomic, retain, readwrite) NSMutableArray *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray *inProgressQuestsMutableArray;
@@ -168,7 +168,7 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
   cell.backgroundColor = [UIColor clearColor];
   cell.backgroundView = [[UIView new] autorelease];
   cell.selectedBackgroundView = [[UIView new] autorelease];
-  cell.tableViewController = self;
+  cell.delegate = self;
   
   RPGQuest *cellContent = nil;
   NSInteger index = anIndexPath.row;
