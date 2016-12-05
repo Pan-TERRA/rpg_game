@@ -11,8 +11,8 @@
 
 @interface RPGShopUnitsResponse : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readwrite) NSInteger status;
-@property (copy, nonatomic, readwrite) NSArray *shopUnits;
+@property (assign, nonatomic, readonly) NSInteger status;
+@property (copy, nonatomic, readonly) NSArray *shopUnits;
 
 - (instancetype)initWithStatus:(NSInteger)aStatus shopUnits:(NSArray *)aShopUnits NS_DESIGNATED_INITIALIZER;
 

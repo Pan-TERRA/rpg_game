@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+  // Entities
 @class RPGShopUnit;
+  // Views
 @class RPGShopCollectionViewCell;
 
 @protocol RPGShopCollectionViewCellDelegate <NSObject>
@@ -19,12 +21,8 @@
 
 @interface RPGShopCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *unitUmageView;
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *buyButton;
-
 @property (nonatomic, assign, readwrite) id<RPGShopCollectionViewCellDelegate> delegate;
 
-@property (nonatomic, retain, readwrite) RPGShopUnit *shopUnit;
+@property (nonatomic, assign, readwrite) RPGShopUnit *shopUnit;
 
 @end

@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-@interface RPGShopBuyUnitRequest : NSObject <RPGSerializable>
+@interface RPGShopUnitRequest : NSObject <RPGSerializable>
 
 @property (assign, nonatomic, readwrite) NSInteger shopUnitID;
 
 - (instancetype)initWithShopUnitID:(NSInteger)aShopUnitID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)shopBuyUnitRequestWithShopUnitID:(NSInteger)aShopUnitID;
++ (instancetype)shopUnitRequestWithShopUnitID:(NSInteger)aShopUnitID;
 
 @end

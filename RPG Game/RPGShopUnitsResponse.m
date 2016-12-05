@@ -28,7 +28,7 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
     _status = aStatus;
     if (aShopUnits != nil)
     {
-      _shopUnits = [[NSArray alloc] initWithArray:aShopUnits];
+      _shopUnits = [aShopUnits retain];
     }
     else
     {

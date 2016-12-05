@@ -7,21 +7,21 @@
 //
 
 #import "RPGShopViewController.h"
-  //view
+  // Views
 #import "RPGShopCollectionViewController.h"
 #import "RPGWaitingViewController.h"
-  //support
+  // Support
 #import "UIViewController+RPGChildViewController.h"
   // API
 #import "RPGNetworkManager+Shop.h"
 #import "RPGShopUnitsResponse.h"
-  //Entity
+  // Entity
 #import "RPGShopUnit.h"
 #import "RPGResources.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
-  //Misc
+  // Misc
 #import "RPGAlertController.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
@@ -29,12 +29,13 @@
 typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode networkStatusCode, RPGShopUnitsResponse *response);
 typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 
+static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
 
 @interface RPGShopViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystallLabel;
-  //Views
+  // Views
 @property (nonatomic, assign, readwrite) IBOutlet UIView *collectionViewContainer;
 @property (nonatomic, retain, readwrite) RPGShopCollectionViewController *collectionViewController;
   // Modals
@@ -49,11 +50,13 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
 - (instancetype)init
 {
   self = [self initWithNibName:kRPGShopViewControllerNIBName bundle:nil];
+  
   if (self != nil)
   {
     _collectionViewController = [RPGShopCollectionViewController new];
-    _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Loading..." completion:nil];
+    _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:sRPGShopViewControllerLoadingMessage completion:nil];
   }
+  
   return self;
 }
 
@@ -94,11 +97,6 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
   self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 }
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-}
-
 #pragma mark - IBActions
 
 - (IBAction)back:(UIButton *)sender
@@ -132,17 +130,16 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
     {
       case kRPGStatusCodeOK:
       {
-        NSLog(@"Shop Download Status - OK");
-        if (response.shopUnits != nil)
+        NSMutableArray *shopUnits = [NSMutableArray array];
+        
+        for (NSDictionary *shopUnitDictionary in response.shopUnits)
         {
-          NSMutableArray *shopUnits = [NSMutableArray array];
-          for (NSDictionary *shopUnitDictionary in response.shopUnits)
-          {
-            RPGShopUnit *shopUnit = [[[RPGShopUnit alloc] initWithDictionaryRepresentation:shopUnitDictionary] autorelease];
-            [shopUnits addObject:shopUnit];
-          }
-          self.collectionViewController.shopUnits = shopUnits;
+          RPGShopUnit *shopUnit = [[[RPGShopUnit alloc] initWithDictionaryRepresentation:shopUnitDictionary] autorelease];
+          [shopUnits addObject:shopUnit];
         }
+        
+        self.collectionViewController.shopUnits = shopUnits;
+        
         break;
       }
         case kRPGStatusCodeWrongToken:
@@ -154,11 +151,12 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
                                     completion:^(void)
          {
            dispatch_async(dispatch_get_main_queue(), ^
-                          {
-                            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-                            [viewController dismissViewControllerAnimated:YES completion:nil];
-                          });
+            {
+              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
          }];
+        
         break;
       }
         
@@ -169,6 +167,7 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
                                        message:message
                                    actionTitle:nil
                                     completion:nil];
+    
         break;
       }
     }
@@ -210,10 +209,10 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
                                     completion:^(void)
          {
            dispatch_async(dispatch_get_main_queue(), ^
-                          {
-                            UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-                            [viewController dismissViewControllerAnimated:YES completion:nil];
-                          });
+            {
+              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
          }];
         break;
       }
@@ -256,6 +255,7 @@ typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode networkStatusCode);
          NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
          standartUserDefaults.sessionGold = aResources.gold;
          standartUserDefaults.sessionCrystals = aResources.crystals;
+         
          [self updateResourcesLabels];
        }
      }];

@@ -7,6 +7,7 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Constants
 #import "RPGStatusCodes.h"
 
 @class RPGShopUnitsResponse;
@@ -14,9 +15,9 @@
 @interface RPGNetworkManager (Shop)
 
 - (void)fetchShopUnitsWithCompletionHandler:(void (^)(RPGStatusCode networkStatusCode,
-                            RPGShopUnitsResponse *))callbackBlock;
+                            RPGShopUnitsResponse *shopUnitResponse))aCallbackBlock;
 
 - (void)buyShopUnitWithUnitID:(NSInteger)unitID
-            completionHandler:(void (^)(NSInteger))callbackBlock;
+            completionHandler:(void (^)(RPGStatusCode networkStatusCode))aCallbackBlock;
 
 @end

@@ -6,11 +6,11 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGShopBuyUnitRequest.h"
+#import "RPGShopUnitRequest.h"
 
 static NSString * const kRPGShopBuyUnitRequestUnitID = @"unit_id";
 
-@implementation RPGShopBuyUnitRequest
+@implementation RPGShopUnitRequest
 
 #pragma mark - Init
 
@@ -26,7 +26,7 @@ static NSString * const kRPGShopBuyUnitRequestUnitID = @"unit_id";
   return self;
 }
 
-+ (instancetype)shopBuyUnitRequestWithShopUnitID:(NSInteger)aShopUnitID
++ (instancetype)shopUnitRequestWithShopUnitID:(NSInteger)aShopUnitID
 {
   return [[[self alloc] initWithShopUnitID:aShopUnitID] autorelease];
 }
@@ -34,13 +34,6 @@ static NSString * const kRPGShopBuyUnitRequestUnitID = @"unit_id";
 - (instancetype)init
 {
   return [self initWithShopUnitID:-1];
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
 }
 
 #pragma mark - RPGSerializable

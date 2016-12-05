@@ -67,7 +67,7 @@
             <connections>
                 <outlet property="buyButton" destination="M6z-i8-NbT" id="Vov-c5-PPl"/>
                 <outlet property="titleLabel" destination="SPT-FE-Bve" id="dYz-EW-tkP"/>
-                <outlet property="unitUmageView" destination="Uff-dc-nGt" id="tds-pN-hpE"/>
+                <outlet property="unitImageView" destination="Uff-dc-nGt" id="98I-rj-RiA"/>
             </connections>
         </collectionViewCell>
     </objects>

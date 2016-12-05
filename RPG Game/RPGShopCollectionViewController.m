@@ -31,13 +31,14 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
   self = [super initWithCollectionViewLayout:flowLayout];
+  
   if (self != nil)
   {
     _shopUnits = [NSMutableArray new];
     
     [self.collectionView registerClass:[RPGShopCollectionViewCell class] forCellWithReuseIdentifier:reuseIdentifier];
 
-    UINib *nib = [UINib nibWithNibName:kRPGShopCollectionViewCellNIBName bundle: nil];
+    UINib *nib = [UINib nibWithNibName:kRPGShopCollectionViewCellNIBName bundle:nil];
     
     [self.collectionView registerNib:nib forCellWithReuseIdentifier:reuseIdentifier];
   }
@@ -55,27 +56,12 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 
 #pragma mark - UIVIewController
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
   self.view.backgroundColor = [UIColor clearColor];
   self.collectionView.backgroundColor = [UIColor clearColor];
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
 }
 
 #pragma mark <UICollectionViewDataSource>
@@ -134,13 +120,6 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   [shopViewController buyShopUnitWithID:shopUnitID];
 }
 
-#pragma mark - Accessors
-- (void)setShopUnits:(NSArray<RPGShopUnit *> *)shopUnits
-{
-  if (_shopUnits != shopUnits)
-  {
-    [_shopUnits release];
-    _shopUnits = [shopUnits retain];
-  }
-}
+
+
 @end
