@@ -6,7 +6,7 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGArenaControllerGenerator.h"
+#import "RPGTournamentControllerGenerator.h"
 // API
 #import "RPGWebsocketManager.h"
 // Controllers
