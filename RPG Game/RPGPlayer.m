@@ -11,7 +11,7 @@
 #import "RPGSkill.h"
 
 NSString * const kRPGPlayerSkills = @"skills";
-NSString * const kRPGPlayerCurrentWinCount = @"current_win_count";
+NSString * const kRPGPlayerCurrentWinCount = @"win_count";
 
 @interface RPGPlayer ()
 
