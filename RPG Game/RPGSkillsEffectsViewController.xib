@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGSkillsEffectsViewController">
@@ -17,41 +16,27 @@
             <rect key="frame" x="0.0" y="0.0" width="113" height="276"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xan-AW-3pU">
-                    <rect key="frame" x="7" y="63" width="100" height="150"/>
-                    <subviews>
-                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9KK-zu-th5">
-                            <rect key="frame" x="0.0" y="0.0" width="100" height="150"/>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="100" id="79Y-IS-8q4"/>
-                                <constraint firstAttribute="width" secondItem="9KK-zu-th5" secondAttribute="height" multiplier="2:3" id="x2q-vE-lPO"/>
-                            </constraints>
-                            <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aKH-y4-Lwf">
-                                <size key="itemSize" width="50" height="50"/>
-                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                            </collectionViewFlowLayout>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="OEK-Zf-Obn"/>
-                                <outlet property="delegate" destination="-1" id="6Ky-xs-00W"/>
-                            </connections>
-                        </collectionView>
-                    </subviews>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="9KK-zu-th5">
+                    <rect key="frame" x="0.0" y="0.0" width="113" height="276"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="9KK-zu-th5" secondAttribute="trailing" id="PmT-CO-5Kb"/>
-                        <constraint firstItem="9KK-zu-th5" firstAttribute="top" secondItem="xan-AW-3pU" secondAttribute="top" id="pTm-fG-Str"/>
-                        <constraint firstAttribute="bottom" secondItem="9KK-zu-th5" secondAttribute="bottom" id="xnj-0X-LX2"/>
-                        <constraint firstItem="9KK-zu-th5" firstAttribute="leading" secondItem="xan-AW-3pU" secondAttribute="leading" id="yHb-XZ-xXL"/>
-                    </constraints>
-                </view>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="aKH-y4-Lwf">
+                        <size key="itemSize" width="10" height="10"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="OEK-Zf-Obn"/>
+                        <outlet property="delegate" destination="-1" id="6Ky-xs-00W"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="xan-AW-3pU" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="nTP-zG-rfn"/>
-                <constraint firstItem="xan-AW-3pU" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="zca-qC-oNQ"/>
+                <constraint firstItem="9KK-zu-th5" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DiK-gP-cjd"/>
+                <constraint firstItem="9KK-zu-th5" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" id="H2w-wI-vDZ"/>
+                <constraint firstItem="9KK-zu-th5" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="KdW-Ia-d5O"/>
+                <constraint firstItem="9KK-zu-th5" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="cOa-5p-6up"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

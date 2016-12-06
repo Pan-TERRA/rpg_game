@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RPGPlayerType.h"
 
 @class RPGBattleController;
 
@@ -14,6 +15,7 @@
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 
-- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
+                              playerType:(RPGPlayerType)aPlayerType;
 
 @end

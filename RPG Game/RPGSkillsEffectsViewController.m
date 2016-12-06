@@ -13,22 +13,27 @@
 #import "RPGBattle.h"
 #import "RPGSkillEffect.h"
   // Views
-#import "RPGCharacterBagCollectionViewCell.h"
+#import "RPGSkillsEffectsCollectionViewCell.h"
   // Constants
 #import "RPGNibNames.h"
 
 static int sRPGSkillsEffectsViewControllerSkillsEffects;
-static NSInteger kRPGSkillsEffectsViewControllerCollectionSize = 6;
-static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20;
+static NSUInteger const kRPGSkillsEffectsViewControllerCollectionSize = 6;
+static NSUInteger const kRPGSkillsEffectsViewControllerNumberOfCellsInRow = 2;
+static NSUInteger const kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20;
+static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCornerRadiusMultiplier = 0.5;
 
 @interface RPGSkillsEffectsViewController () <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillsEffectsCollectionView;
+@property (nonatomic, assign, readwrite) RPGPlayerType playerType;
 
 @end
 
 @implementation RPGSkillsEffectsViewController
+
+#pragma mark - Init
 
 - (instancetype)init
 {
@@ -36,16 +41,15 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
 }
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
+                              playerType:(RPGPlayerType)aPlayerType
 {
   self = [super initWithNibName:kRPGSkillsEffectsViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
     _battleController = [aBattleController retain];
-    [_battleController addObserver:self
-                        forKeyPath:@"battle.playerSkillsEffects"
-                           options:(NSKeyValueObservingOptionNew)
-                           context:&sRPGSkillsEffectsViewControllerSkillsEffects];
+    _playerType = kRPGPlayerTypeNull;
+    [self setPlayerType:aPlayerType];
   }
   
   return self;
@@ -55,12 +59,32 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
 
 - (void)dealloc
 {
-  [_battleController removeObserver:self
-                         forKeyPath:@"battle.playerSkillsEffects"
-                            context:&sRPGSkillsEffectsViewControllerSkillsEffects];
+  _playerType = kRPGPlayerTypeNull;
   [_battleController release];
   
   [super dealloc];
+}
+
+#pragma mark - Custom Setter
+
+- (void)setPlayerType:(RPGPlayerType)playerType
+{
+  if (_playerType != kRPGPlayerTypeNull)
+  {
+    NSString *keyPathToRemoveObserver = [self keyPathForPlayerType:_playerType];
+    [_battleController removeObserver:self
+                           forKeyPath:keyPathToRemoveObserver
+                              context:&sRPGSkillsEffectsViewControllerSkillsEffects];
+  }
+  _playerType = playerType;
+  if (_playerType != kRPGPlayerTypeNull)
+  {
+    NSString *keyPathToAddObserver = [self keyPathForPlayerType:_playerType];
+    [_battleController addObserver:self
+                        forKeyPath:keyPathToAddObserver
+                           options:(NSKeyValueObservingOptionNew)
+                           context:&sRPGSkillsEffectsViewControllerSkillsEffects];
+  }
 }
 
 #pragma mark - UIViewController
@@ -69,8 +93,8 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
 {
   [super viewDidLoad];
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
-  [self.skillsEffectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
+  [self.skillsEffectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
 }
 
 - (void)didReceiveMemoryWarning
@@ -87,11 +111,11 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGCharacterBagCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName
+  RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
                                                                                        forIndexPath:anIndexPath];
-  
   NSInteger index = anIndexPath.row;
-  NSArray *skillsEffects = self.battleController.battle.playerSkillsEffects;
+  NSArray *skillsEffects = [self getSkillsEffectsForPlayerType:self.playerType];
+
   if (index < skillsEffects.count)
   {
     RPGSkillEffect *skillEffect = skillsEffects[index];
@@ -100,14 +124,31 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
     cell.backgroundImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
     cell.backgroundImageView.layer.cornerRadius = kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius;
     cell.backgroundImageView.layer.masksToBounds = YES;
+    
+    cell.durationHidden = NO;
+    cell.duration = skillEffect.duration;
+    cell.durationView.layer.cornerRadius = cell.durationView.frame.size.height * kRPGSkillsEffectsViewControllerSkillEffectDurationViewCornerRadiusMultiplier;
+    cell.durationView.layer.masksToBounds = YES;
   }
   else
   {
     [cell setImage:[UIImage imageNamed:@"battle_empty_icon_unset"]];
     cell.backgroundImageView.image = nil;
+    
+    cell.durationHidden = YES;
   }
   
   return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  CGFloat viewWidth = self.skillsEffectsCollectionView.frame.size.width;
+  CGFloat cellWidth = viewWidth / (CGFloat) kRPGSkillsEffectsViewControllerNumberOfCellsInRow;
+  
+  return CGSizeMake(cellWidth, cellWidth);
 }
 
 #pragma mark - Notifications
@@ -131,6 +172,39 @@ static NSInteger kRPGSkillsEffectsViewControllerSkillEffectCellCornerRadius = 20
                            change:aChange
                           context:aContext];
   }
+}
+
+#pragma mark - Helpful Method
+
+- (NSString *)keyPathForPlayerType:(RPGPlayerType)aPlayerType
+{
+  NSString *keyPathToRemoveObserver = nil;
+  if (aPlayerType == kRPGPlayerTypePlayer)
+  {
+    keyPathToRemoveObserver = @"battle.playerSkillsEffects";
+  }
+  else if (aPlayerType == kRPGPlayerTypeOpponent)
+  {
+    keyPathToRemoveObserver = @"battle.opponentSkillsEffects";
+  }
+  return keyPathToRemoveObserver;
+}
+
+- (NSArray *)getSkillsEffectsForPlayerType:(RPGPlayerType)aPlayerType
+{
+  NSArray *skillsEffects = nil;
+  RPGBattle *battle = self.battleController.battle;
+  
+  if (self.playerType == kRPGPlayerTypePlayer)
+  {
+    skillsEffects = battle.playerSkillsEffects;
+  }
+  else if (self.playerType == kRPGPlayerTypeOpponent)
+  {
+    skillsEffects = battle.opponentSkillsEffects;
+  }
+  
+  return skillsEffects;
 }
 
 @end
