@@ -69,7 +69,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 
 #pragma mark - Custom Setter
 
-- (void)setPlayerType:(RPGPlayerType)playerType
+- (void)setPlayerType:(RPGPlayerType)aPlayerType
 {
   if (_playerType != kRPGPlayerTypeNull)
   {
@@ -78,7 +78,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
                            forKeyPath:keyPathToRemoveObserver
                               context:&sRPGSkillsEffectsViewControllerSkillsEffects];
   }
-  _playerType = playerType;
+  _playerType = aPlayerType;
   if (_playerType != kRPGPlayerTypeNull)
   {
     NSString *keyPathToAddObserver = [self keyPathForPlayerType:_playerType];
@@ -106,7 +106,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 
 #pragma mark - UICollectionView
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return kRPGSkillsEffectsViewControllerCollectionSize;
 }
@@ -143,9 +143,9 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
   return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)aCollectionView
+                  layout:(UICollectionViewLayout *)aCollectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   CGFloat viewWidth = self.skillsEffectsCollectionView.frame.size.width;
   CGFloat cellWidth = viewWidth / (CGFloat) kRPGSkillsEffectsViewControllerNumberOfCellsInRow;
