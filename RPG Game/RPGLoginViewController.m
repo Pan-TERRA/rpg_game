@@ -41,11 +41,11 @@
   if (self != nil)
   {
     __block typeof(self) weakSelf = self;
-    _loginCompletionHandler = [^(RPGStatusCode statusCode)
+    _loginCompletionHandler = [^(RPGStatusCode aNetworkStatusCode)
     {
       [self setViewToNormalState];
       
-      switch (statusCode)
+      switch (aNetworkStatusCode)
       {
         case kRPGStatusCodeOK:
         {
@@ -58,9 +58,9 @@
           
         default:
         {
-          if ([self canHandleStatusCode:statusCode])
+          if ([self canHandleStatusCode:aNetworkStatusCode])
           {
-            [RPGAlertController showErrorWithStatusCode:statusCode
+            [RPGAlertController showErrorWithStatusCode:aNetworkStatusCode
                                       completionHandler:nil];
           }
           else

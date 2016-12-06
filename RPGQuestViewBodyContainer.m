@@ -217,45 +217,46 @@
   // !!!: leak
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
-  void (^handler)(NSInteger) = ^void(NSInteger statusCode)
-  {
-    [self setViewToNormalState];
-    
-    switch (statusCode)
-    {
-      case kRPGStatusCodeOK:
-      {
-        self.proofImageView.image = chosenImage;
-        break;
-      }
-      case kRPGStatusCodeWrongToken:
-      {
-        [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
-        {
-          dispatch_async(dispatch_get_main_queue(), ^
-          {
-            UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-            [viewController dismissViewControllerAnimated:YES completion:nil];
-          });
-        }];
-        break;
-      }
-      default:
-      {
-        self.questViewController.state = kRPGQuestStateInProgress;
-        NSString *message = @"Can't upload proof image.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:nil];
-        break;
-      }
-    }
-  };
-  
   NSData *data = UIImageJPEGRepresentation(chosenImage, 0.7);
+  
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
-  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request imageData:data completionHandler:handler];
+  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request
+                                                      imageData:data
+                                              completionHandler:^void(RPGStatusCode aNetworkStatusCode)
+   {
+     [self setViewToNormalState];
+     
+     switch (aNetworkStatusCode)
+     {
+       case kRPGStatusCodeOK:
+       {
+         self.proofImageView.image = chosenImage;
+         break;
+       }
+       case kRPGStatusCodeWrongToken:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
+          }];
+         break;
+       }
+       default:
+       {
+         self.questViewController.state = kRPGQuestStateInProgress;
+         NSString *message = @"Can't upload proof image.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+     }
+   }];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
@@ -272,33 +273,33 @@
   {
     [self setViewToWaitingState];
     // !!!: SELF not WEAKSELF
-    void (^handler)(RPGStatusCode, NSData *) = ^void(NSInteger aStatusCode, NSData *anImageData)
-    {
-      [self setViewToNormalState];
-      
-      switch (aStatusCode)
-      {
-        case kRPGStatusCodeOK:
-        {
-          self.proofImageView.image = [UIImage imageWithData:anImageData];
-          self.downloadImageProof = NO;
-          break;
-        }
-          
-        default:
-        {
-          NSString *message = @"Can't download quest proof image.";
-          [RPGAlertController showAlertWithTitle:nil
-                                         message:message
-                                     actionTitle:nil
-                                      completion:nil];
-          break;
-        }
-      }
-    };
     
     [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
-                                                 completionHandler:handler];
+                                                 completionHandler:^void(RPGStatusCode aNetworkStatusCode,
+                                                                         NSData *anImageData)
+     {
+       [self setViewToNormalState];
+       
+       switch (aNetworkStatusCode)
+       {
+         case kRPGStatusCodeOK:
+         {
+           self.proofImageView.image = [UIImage imageWithData:anImageData];
+           self.downloadImageProof = NO;
+           break;
+         }
+           
+         default:
+         {
+           NSString *message = @"Can't download quest proof image.";
+           [RPGAlertController showAlertWithTitle:nil
+                                          message:message
+                                      actionTitle:nil
+                                       completion:nil];
+           break;
+         }
+       }
+     }];
   }
 }
 

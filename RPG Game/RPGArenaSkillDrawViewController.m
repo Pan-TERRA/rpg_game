@@ -98,16 +98,16 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   [self setViewToWaitingStateWithMessage:kRPGArenaSkillDrawViewControllerWaitingMessageFetching];
 
   RPGNetworkManager *sharedNetworkManager = [RPGNetworkManager sharedNetworkManager];
-  [sharedNetworkManager fetchSkillsWithCompletionHandler:^(RPGStatusCode networkStatusCode,
-                                                           RPGArenaSkillsResponse *response)
+  [sharedNetworkManager fetchSkillsWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode,
+                                                           RPGArenaSkillsResponse *aResponse)
   {
     [self setViewToNormalState];
     
-    switch (response.status)
+    switch (aNetworkStatusCode)
     {
       case kRPGStatusCodeOK:
       {
-        [self updateViewWithResponse:response];
+        [self updateViewWithResponse:aResponse];
         break;
       }
       

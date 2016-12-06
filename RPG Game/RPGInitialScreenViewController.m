@@ -43,11 +43,11 @@
 {
   [super viewDidAppear:animated];
   
-  [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL isValid)
+  [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL anIsValidFlag)
    {
      UIViewController *viewControllerToBePresented = nil;
      
-     if (isValid)
+     if (anIsValidFlag)
      {
        viewControllerToBePresented = [[RPGMainViewController alloc] init];
      }

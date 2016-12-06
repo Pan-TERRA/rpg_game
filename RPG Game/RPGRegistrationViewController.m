@@ -147,11 +147,11 @@ numberOfRowsInComponent:(NSInteger)aComponent
                                                                                            characterType:selectedClassID];
       
       [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
-                                                  completionHandler:^(NSInteger statusCode)
+                                                  completionHandler:^(RPGStatusCode aNetworkStatusCode)
        {
          [self setViewToNormalState];
          
-         switch (statusCode)
+         switch (aNetworkStatusCode)
          {
            case kRPGStatusCodeOK:
            {
@@ -159,9 +159,9 @@ numberOfRowsInComponent:(NSInteger)aComponent
                                                                                                      password:passwordFieldText];
              [loginRequest autorelease];
              [[RPGNetworkManager sharedNetworkManager] loginWithRequest:loginRequest
-                                                      completionHandler:^(NSInteger statusCode)
+                                                      completionHandler:^(RPGStatusCode aNetworkStatusCode)
               {
-                switch (statusCode)
+                switch (aNetworkStatusCode)
                 {
                   case kRPGStatusCodeOK:
                   {
@@ -185,9 +185,9 @@ numberOfRowsInComponent:(NSInteger)aComponent
              
            default:
            {
-             if ([self canHandleStatusCode:statusCode])
+             if ([self canHandleStatusCode:aNetworkStatusCode])
              {
-               [RPGAlertController showErrorWithStatusCode:statusCode
+               [RPGAlertController showErrorWithStatusCode:aNetworkStatusCode
                                          completionHandler:nil];
              }
              else

@@ -70,9 +70,9 @@
 - (IBAction)logOut
 {
   RPGNetworkManager *networkManager = [RPGNetworkManager sharedNetworkManager];
-  [networkManager logoutWithCompletionHandler:^(NSInteger status)
+  [networkManager logoutWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode)
    {
-     switch (status)
+     switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeWrongToken:
        {

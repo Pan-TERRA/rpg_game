@@ -13,6 +13,8 @@
 #import "RPGQuestTableViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
+  // Entities
+#import "RPGQuestListResponse.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -111,7 +113,7 @@
     
     [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
                                                completionHandler:^void(RPGStatusCode aNetworkStatusCode,
-                                                                       NSArray<RPGQuest *> *aQuestList)
+                                                                       RPGQuestListResponse *aResponse)
     {
       self.sendRequest = YES;
       [weakSelf setViewToNormalState];
@@ -120,7 +122,7 @@
       {
         case kRPGStatusCodeOK:
         {
-          [weakSelf processQuestsData:aQuestList byState:aState];
+          [weakSelf processQuestsData:aResponse.quests byState:aState];
           
           if (aShouldReloadFlag)
           {

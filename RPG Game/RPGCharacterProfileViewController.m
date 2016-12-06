@@ -167,9 +167,10 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
    }];
   
   [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:standardUserDefaults.sessionAvatar
-                                               completionHandler:^(NSInteger aStatusCode, NSData * anImageData)
+                                               completionHandler:^(RPGStatusCode aNetworkStatusCode,
+                                                                   NSData * anImageData)
   {
-    switch (aStatusCode)
+    switch (aNetworkStatusCode)
     {
       case kRPGStatusCodeOK:
       {

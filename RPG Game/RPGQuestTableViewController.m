@@ -19,6 +19,7 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 #import "RPGQuestListState.h"
 
 #import "RPGAlertController.h"
@@ -260,9 +261,9 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
   [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
                                                   request:request
-                                        completionHandler:^void(NSInteger status)
+                                        completionHandler:^void(RPGStatusCode aNetworkStatusCode)
   {
-    BOOL success = (status == 0);
+    BOOL success = (aNetworkStatusCode == kRPGStatusCodeOK);
     
     if (success)
     {

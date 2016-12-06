@@ -137,9 +137,11 @@
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
-  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest request:request completionHandler:^void(NSInteger statusCode)
+  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest
+                                                  request:request
+                                        completionHandler:^void(RPGStatusCode aNetworkStatusCode)
   {
-     switch (statusCode)
+     switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeOK:
        {
@@ -214,9 +216,10 @@
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
   RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithQuestID:self.questViewController.questID result:aResult];
-  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request completionHandler:^void(NSInteger statusCode)
+  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request
+                                                    completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
-     switch (statusCode)
+     switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeOK:
        {

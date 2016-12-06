@@ -67,9 +67,10 @@
   [super viewWillAppear:anAnimated];
   [self updateResourcesLabels];
   
-  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(NSInteger aStatusCode, RPGResources *aResources)
+  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode,
+                                                                                RPGResources *aResources)
   {
-    if (aStatusCode == 0)
+    if (aNetworkStatusCode == kRPGStatusCodeOK)
     {
       NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
       standartUserDefaults.sessionGold = aResources.gold;
