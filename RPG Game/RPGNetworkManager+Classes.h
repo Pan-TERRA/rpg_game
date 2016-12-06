@@ -13,17 +13,17 @@
 /**
  *  Fetches class identifiers.
  *
- *  @param callbackBlock A completion handler
+ *  @param aCallback A completion handler
  */
-- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger status, NSArray *classes))callbackBlock;
+- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger, NSArray *))aCallback;
 
 /**
  *  Fetches class info such as name and description.
  *
  *  @param anID          A class ID.
- *  @param callbackBlock A completion handler.
+ *  @param aCallback A completion handler.
  */
 - (void)getClassInfoByID:(NSInteger)anID
-       completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
+       completionHandler:(void (^)(NSInteger, NSDictionary *))aCallback;
 
 @end

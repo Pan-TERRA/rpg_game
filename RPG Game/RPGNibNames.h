@@ -52,3 +52,9 @@ extern NSString * const kRPGFriendsTableViewCellInFriendsNIBName;
 extern NSString * const kRPGFriendsTableViewCellIncomingNIBName;
 extern NSString * const kRPGFriendsTableViewCellOutgoingNIBName;
 
+/****************	Battle ****************/
+
+extern NSString * const kRPGEntityViewLeftNIBName;
+extern NSString * const kRPGEntityViewRightNIBName;
+extern NSString * const kRPGRewardViewControllerNIBName;
+

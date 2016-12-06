@@ -32,7 +32,7 @@
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:YES];
+                                      shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -136,7 +136,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:YES];
+                                      shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -236,7 +236,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:YES];
+                                      shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -336,7 +336,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:YES];
+                                      shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -436,7 +436,7 @@
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      injectToken:YES];
+                                      shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];

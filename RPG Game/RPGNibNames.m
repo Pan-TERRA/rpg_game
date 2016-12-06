@@ -51,3 +51,9 @@ NSString * const kRPGFriendsViewControllerNIBName = @"RPGFriendsViewController";
 NSString * const kRPGFriendsTableViewCellInFriendsNIBName = @"RPGFriendsTableViewCellInFriends";
 NSString * const kRPGFriendsTableViewCellIncomingNIBName = @"RPGFriendsTableViewCellIncoming";
 NSString * const kRPGFriendsTableViewCellOutgoingNIBName = @"RPGFriendsTableViewCellOutgoing";
+
+/****************	Battle ****************/
+
+NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
+NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
+NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";

@@ -7,13 +7,14 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Constants
 #import "RPGStatusCodes.h"
-
+  // Entities
 @class RPGArenaSkillsResponse;
 
 @interface RPGNetworkManager (Arena)
 
-- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))callbackBlock;
-- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))callbackBlock;
+- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))aCallback;
+- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))aCallback;
 
 @end

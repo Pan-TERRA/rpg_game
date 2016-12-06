@@ -42,13 +42,6 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
   return [[[self alloc] initWithQuestID:aQuestID] autorelease];
 }
 
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
-}
-
 #pragma mark - RPGSerializable
 
 - (NSDictionary *)dictionaryRepresentation

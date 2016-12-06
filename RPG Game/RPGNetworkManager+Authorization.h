@@ -7,13 +7,13 @@
 //
 
 #import "RPGNetworkManager.h"
-
+  // Entities
 @class RPGAuthorizationLoginRequest;
 
 @interface RPGNetworkManager (Authorization)
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(NSInteger))callbackBlock;
-- (void)logoutWithCompletionHandler:(void (^)(NSInteger))callbackBlock;
+       completionHandler:(void (^)(NSInteger))aCallback;
+- (void)logoutWithCompletionHandler:(void (^)(NSInteger))aCallback;
 
 @end
