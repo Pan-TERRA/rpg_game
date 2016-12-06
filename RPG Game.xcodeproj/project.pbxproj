@@ -120,6 +120,8 @@
 		AE5E46961DF5B06F00546256 /* RPGSkillsEffectsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5E46941DF5B06F00546256 /* RPGSkillsEffectsViewController.xib */; };
 		AE5E46991DF5B54C00546256 /* RPGSkillEffect.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46981DF5B54C00546256 /* RPGSkillEffect.m */; };
 		AE5E469D1DF5CA1500546256 /* RPGPlayerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E469C1DF5CA1500546256 /* RPGPlayerInfo.m */; };
+		AE5E46A31DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46A11DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.m */; };
+		AE5E46A41DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5E46A21DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.xib */; };
 		AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68001DBA773100715480 /* RPGQuestRequest.m */; };
 		AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */; };
 		AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */; };
@@ -393,6 +395,10 @@
 		AE5E46981DF5B54C00546256 /* RPGSkillEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillEffect.m; sourceTree = "<group>"; };
 		AE5E469B1DF5CA1500546256 /* RPGPlayerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGPlayerInfo.h; sourceTree = "<group>"; };
 		AE5E469C1DF5CA1500546256 /* RPGPlayerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGPlayerInfo.m; sourceTree = "<group>"; };
+		AE5E469E1DF6B34800546256 /* RPGPlayerType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGPlayerType.h; sourceTree = "<group>"; };
+		AE5E46A01DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillsEffectsCollectionViewCell.h; sourceTree = "<group>"; };
+		AE5E46A11DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillsEffectsCollectionViewCell.m; sourceTree = "<group>"; };
+		AE5E46A21DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillsEffectsCollectionViewCell.xib; sourceTree = "<group>"; };
 		AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestRequest.h; sourceTree = "<group>"; };
 		AE5E68001DBA773100715480 /* RPGQuestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestRequest.m; sourceTree = "<group>"; };
 		AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestResponse.h; sourceTree = "<group>"; };
@@ -1664,11 +1670,23 @@
 		AE5E46911DF5B02800546256 /* Skills Effects ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				AE5E469E1DF6B34800546256 /* RPGPlayerType.h */,
 				AE5E46921DF5B06F00546256 /* RPGSkillsEffectsViewController.h */,
 				AE5E46931DF5B06F00546256 /* RPGSkillsEffectsViewController.m */,
 				AE5E46941DF5B06F00546256 /* RPGSkillsEffectsViewController.xib */,
+				AE5E469F1DF6B9E800546256 /* Collection Cell */,
 			);
 			name = "Skills Effects ViewController";
+			sourceTree = "<group>";
+		};
+		AE5E469F1DF6B9E800546256 /* Collection Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E46A01DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.h */,
+				AE5E46A11DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.m */,
+				AE5E46A21DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.xib */,
+			);
+			name = "Collection Cell";
 			sourceTree = "<group>";
 		};
 		AE87B59B1DE861830019E416 /* Battle Reward */ = {
@@ -1930,6 +1948,7 @@
 				877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */,
 				2A6F2AEE1DE21A250036CD2D /* RPGArenaSkillDrawViewController.xib in Resources */,
 				D0819AC01DD6180100021DB9 /* RPGSkillDescriptionViewController.xib in Resources */,
+				AE5E46A41DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.xib in Resources */,
 				AE5E46961DF5B06F00546256 /* RPGSkillsEffectsViewController.xib in Resources */,
 				28AB94AA1DDEF8B100F1503B /* RPGQuickSettingsViewController.xib in Resources */,
 				28149A1B1DB1011300C26881 /* RPGLoginViewController.xib in Resources */,
@@ -2186,6 +2205,7 @@
 				28149A101DB1007400C26881 /* RPGNibNames.m in Sources */,
 				28A9152A1DC77299001E0F51 /* RPGMessageTypes.m in Sources */,
 				28A915711DC7B94A001E0F51 /* RPGSkillInfoResponse.m in Sources */,
+				AE5E46A31DF6BA8000546256 /* RPGSkillsEffectsCollectionViewCell.m in Sources */,
 				28A915751DC7B94A001E0F51 /* RPGSkillsResponse.m in Sources */,
 				289C42DC1DE20C6700E35506 /* RPGCharacterProfileViewController.m in Sources */,
 				D0EA315F1DDF5CE70062AB28 /* RPGSkill.m in Sources */,
