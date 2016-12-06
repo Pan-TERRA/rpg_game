@@ -34,6 +34,7 @@
 #import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGPlayerType.h"
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -45,9 +46,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   // Player
 @property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *playerViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *playerSkillsEffectsViewContainer;
+@property (nonatomic, retain, readwrite) RPGSkillsEffectsViewController *playerSkillsEffectsViewController;
   // Opponent
 @property (assign, nonatomic) IBOutlet UIView *opponentViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *opponentViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *opponentSkillsEffectsViewContainer;
+@property (nonatomic, retain, readwrite) RPGSkillsEffectsViewController *opponentSkillsEffectsViewController;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
@@ -65,9 +70,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   // Settings
 @property (nonatomic, retain, readwrite) RPGQuickSettingsViewController *settingsViewController;
 @property (nonatomic, assign, readwrite) UIView *settingsView;
-
-@property (nonatomic, retain, readwrite) RPGSkillsEffectsViewController *skillsEffectsViewController;
-@property (nonatomic, assign, readwrite) IBOutlet UIView *skillsEffectsViewContainer;
 
 @end
 
@@ -96,7 +98,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
-      _skillsEffectsViewController = [[RPGSkillsEffectsViewController alloc] initWithBattleController:_battleController];
+      _playerSkillsEffectsViewController = [[RPGSkillsEffectsViewController alloc] initWithBattleController:_battleController
+                                                                                                 playerType:kRPGPlayerTypePlayer];
+      _opponentSkillsEffectsViewController = [[RPGSkillsEffectsViewController alloc] initWithBattleController:_battleController
+                                                                                                   playerType:kRPGPlayerTypeOpponent];
       
         // player view controller
       _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
@@ -144,7 +149,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [_battleController release];
   [_skillBarViewController release];
   [_settingsViewController release];
-  [_skillsEffectsViewController release];
+  [_playerSkillsEffectsViewController release];
+  [_opponentSkillsEffectsViewController release];
   
   [_timerContainer release];
   [super dealloc];
@@ -164,7 +170,8 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self addChildViewController:self.skillBarViewController view:self.skillBar];
   [self addChildViewController:self.playerViewController view:self.playerViewContainer];
   [self addChildViewController:self.opponentViewController view:self.opponentViewContainer];
-  [self addChildViewController:self.skillsEffectsViewController view:self.skillsEffectsViewContainer];
+  [self addChildViewController:self.playerSkillsEffectsViewController view:self.playerSkillsEffectsViewContainer];
+  [self addChildViewController:self.opponentSkillsEffectsViewController view:self.opponentSkillsEffectsViewContainer];
   
   [self.battleController openBattleControllerWebSocket];
 }
