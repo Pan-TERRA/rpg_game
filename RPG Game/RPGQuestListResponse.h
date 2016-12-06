@@ -18,6 +18,6 @@
 - (instancetype)initWithStatus:(NSInteger)aStatus
                         quests:(NSArray *)aQuests NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithStatus:(NSInteger)aStatus
-                        quests:(NSArray *)aQuests;
+                            quests:(NSArray *)aQuests;
 
 @end

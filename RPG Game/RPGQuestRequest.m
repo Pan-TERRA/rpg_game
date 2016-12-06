@@ -12,7 +12,7 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 @interface RPGQuestRequest()
 
-@property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, assign, readwrite) NSInteger questID;
 
 @end
 
@@ -20,13 +20,21 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 #pragma mark - Init
 
-- (instancetype)initWithQuestID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSInteger)aQuestID
 {
   self = [super init];
   
   if (self != nil)
   {
-    _questID = aQuestID;
+    if (aQuestID < 1)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _questID = aQuestID;
+    }
   }
   
   return self;
@@ -34,10 +42,10 @@ NSString * const kRPGQuestRequestQuestID = @"quest_id";
 
 - (instancetype)init
 {
-  return [self initWithQuestID:0];
+  return [self initWithQuestID:-1];
 }
 
-+ (instancetype)questRequestWithQuestID:(NSUInteger)aQuestID
++ (instancetype)questRequestWithQuestID:(NSInteger)aQuestID
 {
   return [[[self alloc] initWithQuestID:aQuestID] autorelease];
 }

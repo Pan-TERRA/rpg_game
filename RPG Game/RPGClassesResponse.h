@@ -12,9 +12,12 @@
 
 @interface RPGClassesResponse : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readwrite) NSInteger status;
-@property (copy, nonatomic, readwrite) NSArray *classes;
+@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, retain, readonly) NSArray *classes;
 
-- (instancetype)initWithStatus:(NSInteger)status classes:(NSArray *)aClasses;
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                       classes:(NSArray *)aClasses NS_DESIGNATED_INITIALIZER;
++ (instancetype)responseWithStatus:(NSInteger)aStatus
+                           classes:(NSArray *)aClasses;
 
 @end

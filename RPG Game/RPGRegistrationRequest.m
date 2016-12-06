@@ -89,6 +89,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
   [_email release];
   [_password release];
   [_characterName release];
+  
   [super dealloc];
 }
 
@@ -98,11 +99,23 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGRegistrationRequestUsername] = self.username;
-  dictionaryRepresentation[kRPGRegistrationRequestEmail] = self.email;
-  dictionaryRepresentation[kRPGRegistrationRequestPassword] = self.password;
-  dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
-                                                                 kRPGRegistrationRequestCharacterType : @(self.characterType)};
+  if (self.username != nil)
+  {
+    dictionaryRepresentation[kRPGRegistrationRequestUsername] = self.username;
+  }
+  if (self.email != nil)
+  {
+    dictionaryRepresentation[kRPGRegistrationRequestEmail] = self.email;
+  }
+  if (self.password != nil)
+  {
+    dictionaryRepresentation[kRPGRegistrationRequestPassword] = self.password;
+  }
+  if (self.characterName != nil)
+  {
+    dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
+                                                                   kRPGRegistrationRequestCharacterType : @(self.characterType)};
+  }
   
   return dictionaryRepresentation;
 }
@@ -115,4 +128,5 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
                characterName:aDictionary[kRPGRegistrationRequestCharacterName]
                characterType:[aDictionary[kRPGRegistrationRequestCharacterType] integerValue]];
 }
+
 @end
