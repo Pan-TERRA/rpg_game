@@ -6,12 +6,12 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "RPGSerializable.h"
+#import "RPGFriendRequest.h"
 
-@interface RPGFriendConfirmRequest : NSObject <RPGSerializable>
+extern NSString * const kRPGFriendConfirmRequestResult;
 
-@property (nonatomic, assign, readonly) NSInteger friendID;
+@interface RPGFriendConfirmRequest : RPGFriendRequest <RPGSerializable>
+
 @property (nonatomic, assign, readonly) BOOL result;
 
 - (instancetype)initWithFriendID:(NSInteger)aFriendID

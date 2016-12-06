@@ -8,12 +8,10 @@
 
 #import "RPGFriendConfirmRequest.h"
 
-NSString * const kRPGFriendConfirmRequestQuestID = @"friend_id";
 NSString * const kRPGFriendConfirmRequestResult = @"result";
 
 @interface RPGFriendConfirmRequest()
 
-@property (nonatomic, assign, readwrite) NSInteger friendID;
 @property (nonatomic, assign, readwrite) BOOL result;
 
 @end
@@ -25,15 +23,19 @@ NSString * const kRPGFriendConfirmRequestResult = @"result";
 - (instancetype)initWithFriendID:(NSInteger)aFriendID
                           result:(BOOL)aResult
 {
-  self = [super init];
+  self = [super initWithFriendID:aFriendID];
   
   if (self != nil)
   {
-    _friendID = aFriendID;
     _result = aResult;
   }
   
   return self;
+}
+
+- (instancetype)initWithFriendID:(NSInteger)aFriendID
+{
+  return [self initWithFriendID:-1 result:NO];
 }
 
 - (instancetype)init
@@ -58,17 +60,16 @@ NSString * const kRPGFriendConfirmRequestResult = @"result";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   
-  dictionaryRepresentation[kRPGFriendConfirmRequestQuestID] = @(self.friendID);
   dictionaryRepresentation[kRPGFriendConfirmRequestResult] = @(self.result);
   
-  return dictionaryRepresentation;
+  return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  return [self initWithFriendID:[aDictionary[kRPGFriendConfirmRequestQuestID] integerValue]
+  return [self initWithFriendID:[aDictionary[kRPGFriendRequestFriendID] integerValue]
                          result:[aDictionary[kRPGFriendConfirmRequestResult] boolValue]];
 }
 

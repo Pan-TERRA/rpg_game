@@ -8,18 +8,12 @@
 
 #import "RPGNetworkManager+Friends.h"
   // Entity
+#import "RPGBasicNetworkResponse.h"
 #import "RPGFriendListResponse.h"
-#import "RPGFriendAddRequest.h"
-#import "RPGFriendAddResponse.h"
+#import "RPGFriendRequest.h"
 #import "RPGFriendConfirmRequest.h"
-#import "RPGFriendConfirmResponse.h"
-#import "RPGQuestChallengeRequest.h"
-#import "RPGQuestChallengeResponse.h"
-#import "RPGConfirmChallengeRequest.h"
-#import "RPGConfirmChallengeResponse.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
-
 
 @implementation RPGNetworkManager (Friends)
 
@@ -48,9 +42,9 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
-                       });
+         {
+           callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+         });
         
         return;
       }
@@ -58,9 +52,9 @@
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+       });
       
       return;
     }
@@ -70,9 +64,9 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+       });
       
       return;
     }
@@ -80,9 +74,9 @@
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+       });
       
       return;
     }
@@ -96,9 +90,9 @@
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+       });
       
       return;
     }
@@ -108,16 +102,16 @@
                        initWithDictionaryRepresentation:responseDictionary] autorelease];
     
     dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                     if (responseObject == nil)
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-                     }
-                     else
-                     {
-                       callbackBlock(responseObject.status, responseObject.friends);
-                     }
-                   });
+     {
+       if (responseObject == nil)
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+       }
+       else
+       {
+         callbackBlock(responseObject.status, responseObject.friends);
+       }
+     });
     
   }];
   
@@ -126,7 +120,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)addPlayerToFriendsWithRequest:(RPGFriendAddRequest *)aRequest
+- (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
@@ -151,18 +145,18 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
-                       });
+         {
+           callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+         });
         return;
       }
       
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+       });
       return;
     }
     
@@ -171,18 +165,18 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+       });
       return;
     }
     
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+       });
       return;
     }
     
@@ -195,29 +189,29 @@
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+       });
       
       return;
     }
     
-    RPGFriendAddResponse *responseObject = [[[RPGFriendAddResponse alloc]
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
                                          initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+       });
     }
     else
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status);
-                     });
+       {
+         callbackBlock(responseObject.status);
+       });
     }
   }];
   
@@ -251,18 +245,18 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
-                       });
+         {
+           callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+         });
         return;
       }
       
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+       });
       return;
     }
     
@@ -271,18 +265,18 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+       });
       return;
     }
     
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+       });
       return;
     }
     
@@ -295,29 +289,29 @@
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+       });
       
       return;
     }
     
-    RPGFriendConfirmResponse *responseObject = [[[RPGFriendConfirmResponse alloc]
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
                                              initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+       });
     }
     else
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status);
-                     });
+       {
+         callbackBlock(responseObject.status);
+       });
     }
   }];
   
@@ -326,7 +320,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)postQuestChallengeWith:(RPGQuestChallengeRequest *)aRequest
+- (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
              completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
@@ -351,18 +345,18 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
-                       });
+         {
+           callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+         });
         return;
       }
       
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+       });
       return;
     }
     
@@ -371,18 +365,18 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+       });
       return;
     }
     
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+       });
       return;
     }
     
@@ -395,29 +389,29 @@
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+       });
       
       return;
     }
     
-    RPGQuestChallengeResponse *responseObject = [[[RPGQuestChallengeResponse alloc]
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
                                              initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+       });
     }
     else
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status);
-                     });
+       {
+         callbackBlock(responseObject.status);
+       });
     }
   }];
   
@@ -426,7 +420,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)confirmQuestChallengeWith:(RPGConfirmChallengeRequest *)aRequest
+- (void)confirmQuestChallengeWith:(RPGFriendConfirmRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
@@ -451,18 +445,18 @@
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
-                       {
-                         callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
-                       });
+         {
+           callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+         });
         return;
       }
       
       [self logError:error withTitle:@"Network error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+       });
       return;
     }
     
@@ -471,18 +465,18 @@
       NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerServerError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+       });
       return;
     }
     
     if (data == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+       });
       return;
     }
     
@@ -495,36 +489,35 @@
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+       });
       
       return;
     }
     
-    RPGConfirmChallengeResponse *responseObject = [[[RPGConfirmChallengeResponse alloc]
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
                                                  initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-                     });
+       {
+         callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+       });
     }
     else
     {
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(responseObject.status);
-                     });
+       {
+         callbackBlock(responseObject.status);
+       });
     }
   }];
   
   [task resume];
   
   [session finishTasksAndInvalidate];
-
 }
 
 @end

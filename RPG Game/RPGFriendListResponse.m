@@ -10,12 +10,10 @@
   // Entity
 #import "RPGFriend.h"
 
-NSString * const kRPGFriendsListResponseStatus = @"status";
 NSString * const kRPGFriendsListResponseFriends = @"friends";
 
 @interface RPGFriendListResponse ()
 
-@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, retain, readwrite) NSArray *friends;
 
 @end
@@ -27,7 +25,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
 - (instancetype)initWithStatus:(RPGStatusCode)aStatus
                         friends:(NSArray *)aFriends
 {
-  self = [super init];
+  self = [super initWithStatus:aStatus];
   
   if (self != nil)
   {
@@ -42,7 +40,6 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
     }
     else
     {
-      _status = aStatus;
       _friends = [aFriends retain];
     }
   }
@@ -63,6 +60,11 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
                        friends:nil];
 }
 
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
+{
+  return [self initWithStatus:kRPGStatusCodeDefaultError friends:nil];
+}
+
 #pragma mark - Dealloc
 
 - (void)dealloc
@@ -76,8 +78,8 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
-  dictionaryRepresentation[kRPGFriendsListResponseStatus] = @(self.status);
+  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  
   if (self.friends)
   {
     NSMutableArray *friendsMutableArray = [NSMutableArray array];
@@ -85,15 +87,18 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
     {
       [friendsMutableArray addObject:[aFriend dictionaryRepresentation]];
     }
+    
     dictionaryRepresentation[kRPGFriendsListResponseFriends] = friendsMutableArray;
   }
-  return dictionaryRepresentation;
+  return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger status = [aDictionary[kRPGFriendsListResponseStatus] integerValue];
+  NSInteger status = [aDictionary[kRPGBasicNetworkResponseStatus] integerValue];
+  
   NSArray *friendsDictionaryArray = aDictionary[kRPGFriendsListResponseFriends];
+  
   NSMutableArray *friends  =[NSMutableArray array];
   
   for (NSDictionary *friendDictionary in friendsDictionaryArray)
@@ -101,6 +106,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
     RPGFriend *aFriend = [[[RPGFriend alloc] initWithDictionaryRepresentation:friendDictionary] autorelease];
     [friends addObject:aFriend];
   }
+  
   return [self initWithStatus:status friends:friends];
 }
 

@@ -10,25 +10,22 @@
 
 #import "RPGStatusCodes.h"
 
-@class RPGFriendAddRequest;
+@class RPGFriendRequest;
 @class RPGFriendConfirmRequest;
-@class RPGQuestChallengeRequest;
-@class RPGConfirmChallengeRequest;
-
 
 @interface RPGNetworkManager (Friends)
 
 - (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode status, NSArray *friends))callbackBlock;
 
-- (void)addPlayerToFriendsWithRequest:(RPGFriendAddRequest *)aRequest
+- (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
 - (void)confirmFriendWithRequest:(RPGFriendConfirmRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
-- (void)postQuestChallengeWith:(RPGQuestChallengeRequest *)aRequest
+- (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
          completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
-- (void)confirmQuestChallengeWith:(RPGConfirmChallengeRequest *)aRequest
+- (void)confirmQuestChallengeWith:(RPGFriendConfirmRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 @end

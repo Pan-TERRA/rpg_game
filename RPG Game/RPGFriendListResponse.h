@@ -6,13 +6,12 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "RPGSerializable.h"
-#import "RPGStatusCodes.h"
+#import "RPGBasicNetworkResponse.h"
 
-@interface RPGFriendListResponse : NSObject <RPGSerializable>
+extern NSString * const kRPGFriendsListResponseFriends;
 
-@property (nonatomic, assign, readonly) RPGStatusCode status;
+@interface RPGFriendListResponse : RPGBasicNetworkResponse <RPGSerializable>
+
 @property (nonatomic, retain, readonly) NSArray *friends;
 
 - (instancetype)initWithStatus:(RPGStatusCode)aStatus

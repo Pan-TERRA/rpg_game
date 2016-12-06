@@ -1,17 +1,17 @@
 //
-//  RPGFriendAddRequest.h
+//  RPGFriendRequest.h
 //  RPG Game
 //
-//  Created by Владислав Крут on 11/30/16.
+//  Created by Владислав Крут on 12/6/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-extern NSString * const kRPGFriendAddRequestFriendID;
+extern NSString * const kRPGFriendRequestFriendID;
 
-@interface RPGFriendAddRequest : NSObject <RPGSerializable>
+@interface RPGFriendRequest : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger friendID;
 
