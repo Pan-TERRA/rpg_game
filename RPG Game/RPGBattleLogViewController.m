@@ -15,9 +15,10 @@
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGSFXEngine.h"
+  // Constants
+#import "RPGResourceNames.h"
 
 static int sRPGBattleLogViewControllerBattleBattleLogAction;
-NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 @interface RPGBattleLogViewController ()
 
@@ -36,8 +37,8 @@ NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
   
   if (self != nil)
   {
-    NSString *logTemplatesFile = [[NSBundle mainBundle] pathForResource:kRPGLogTemplatesFile
-                                                                 ofType:nil];
+    NSString *logTemplatesFile = [[NSBundle mainBundle] pathForResource:kRPGLogTemplatesFileName
+                                                                 ofType:@"txt"];
     NSString *templatesString = [NSString stringWithContentsOfFile:logTemplatesFile
                                                           encoding:NSUTF8StringEncoding
                                                              error:nil];

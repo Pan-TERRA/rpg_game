@@ -23,11 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
 
-  // template method
-- (void)processModelChanges;
-
-  // template method
-- (void)processBattleInitCompletion;
+- (void)modelDidChange:(NSNotification *)aNotification NS_REQUIRES_SUPER;
 
 @end
 

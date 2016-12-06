@@ -10,4 +10,6 @@
 
 @interface RPGTournamentController : RPGAdventuresController
 
+@property (assign, nonatomic, readonly) NSArray *winsForRanks;
+
 @end

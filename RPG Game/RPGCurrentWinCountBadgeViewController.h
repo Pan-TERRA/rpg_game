@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class RPGPlayer;
+@class RPGBattleController;
 
 @interface RPGCurrentWinCountBadgeViewController : UIViewController
 
-@property (assign, nonatomic, readwrite) RPGPlayer *player;
+@property (assign, nonatomic, readonly) RPGBattleController *battleController;
+
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 
 - (void)updateView;
 

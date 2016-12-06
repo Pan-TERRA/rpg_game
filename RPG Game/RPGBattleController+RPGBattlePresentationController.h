@@ -22,6 +22,7 @@
 @property (assign, nonatomic, readonly) NSArray<RPGSkill *> *skills;
 @property (nonatomic, assign, readonly) NSUInteger skillsCount;
 @property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
+@property (assign, nonatomic, readonly) NSInteger playerCurrentWinCount;
   // Opponent
 @property (assign, nonatomic, readonly) NSString *opponentNickName;
 @property (assign, nonatomic, readonly) NSInteger opponentHP;

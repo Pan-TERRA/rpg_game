@@ -152,8 +152,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 {
   RPGBattleReward *reward = [[[RPGBattleReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseReward]] autorelease];
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
-                         HP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
-               opponentHP:[aDictionary[kRPGBattleConditionResponseOpponentHP] integerValue]
+                         HP:[aDictionary[@"player_info"][@"current_hp"] integerValue]
+               opponentHP:[aDictionary[@"opponent_info"][@"current_hp"] integerValue]
           skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
              skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]
              battleStatus:[aDictionary[kRPGBattleConditionResponseBattleStatus] integerValue]

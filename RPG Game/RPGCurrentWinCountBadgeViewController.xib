@@ -8,8 +8,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGCurrentWinCountBadgeViewController">
             <connections>
-                <outlet property="currentWinCountLabel" destination="fDM-zX-Qie" id="cdo-sb-doZ"/>
                 <outlet property="view" destination="iN0-l3-epB" id="uFF-ad-mdH"/>
+                <outlet property="winCountLabel" destination="fDM-zX-Qie" id="9S5-vV-Qgl"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -42,7 +42,7 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="74" y="71.5"/>
+            <point key="canvasLocation" x="-13" y="127.5"/>
         </view>
     </objects>
     <resources>

@@ -31,7 +31,7 @@
   
   if (self != nil)
   {
-    _badgeViewController = [[RPGCurrentWinCountBadgeViewController alloc] init];
+    _badgeViewController = [[RPGCurrentWinCountBadgeViewController alloc] initWithBattleController:self.battleController];
   }
   
   return self;
@@ -48,13 +48,10 @@
 
 #pragma mark - RPGBattleViewController
 
-- (void)processBattleInitCompletion
+- (void)modelDidChange:(NSNotification *)aNotification
 {
-  self.badgeViewController.player = self.battleController.battle.player;
-}
-
-- (void)processModelChanges
-{
+  [super modelDidChange:aNotification];
+  
   [self.badgeViewController updateView];
 }
 

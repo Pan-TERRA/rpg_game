@@ -26,6 +26,6 @@
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 
-- (void)updateView;
+- (void)updateView NS_REQUIRES_SUPER;
 
 @end

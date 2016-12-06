@@ -7,8 +7,9 @@
 //
 
 #import "RPGClassInfoRepresentation.h"
+  // Constants
+#import "RPGResourceNames.h"
 
-static NSString * const kRPGClassInfoRepresentationResourcePath = @"RPGClassInfo";
 static NSString * const kRPGClassInfoRepresentationResourceKeyID = @"id";
 //static NSString * const kRPGClassInfoRepresentationResourceKeyDescription = @"description";
 
@@ -26,7 +27,7 @@ static NSString * const kRPGClassInfoRepresentationResourceKeyID = @"id";
   
   if (self != nil)
   {
-    NSString *path = [[NSBundle mainBundle] pathForResource:kRPGClassInfoRepresentationResourcePath
+    NSString *path = [[NSBundle mainBundle] pathForResource:kRPGClassInfoPlistName
                                                      ofType:@"plist"];
     _classInfoDictionary = [[NSDictionary dictionaryWithContentsOfFile:path] retain];
   }

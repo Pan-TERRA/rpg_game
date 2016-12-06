@@ -18,8 +18,25 @@
   // Constants
 #import "RPGMessageTypes.h"
 #import "RPGUserSessionKeys.h"
+#import "RPGResourceNames.h"
 
 @implementation RPGTournamentController
+
+#pragma mark - Init
+
+- (instancetype)init
+{
+  self = [super init];
+  
+  if (self != nil)
+  {
+    NSString *ranksPlistPath = [[NSBundle mainBundle] pathForResource:kRPGRanksPlistName
+                                                               ofType:@"plist"];
+    _winsForRanks = [[NSArray alloc] initWithContentsOfFile:ranksPlistPath];
+  }
+  
+  return self;
+}
 
 #pragma mark - Creating request
 
