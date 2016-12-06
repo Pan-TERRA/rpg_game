@@ -37,13 +37,15 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGSkillsEffectsViewControllerNIBName bundle:nil];
+  return [super initWithNibName:kRPGSkillsEffectsViewControllerNIBName
+                         bundle:nil];
 }
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
                               playerType:(RPGPlayerType)aPlayerType
 {
-  self = [super initWithNibName:kRPGSkillsEffectsViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGSkillsEffectsViewControllerNIBName
+                         bundle:nil];
   
   if (self != nil)
   {
@@ -59,7 +61,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 
 - (void)dealloc
 {
-  _playerType = kRPGPlayerTypeNull;
+  [self setPlayerType:kRPGPlayerTypeNull];
   [_battleController release];
   
   [super dealloc];
@@ -112,7 +114,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 - (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
-                                                                                       forIndexPath:anIndexPath];
+                                                                                        forIndexPath:anIndexPath];
   NSInteger index = anIndexPath.row;
   NSArray *skillsEffects = [self getSkillsEffectsForPlayerType:self.playerType];
 
@@ -179,6 +181,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
 - (NSString *)keyPathForPlayerType:(RPGPlayerType)aPlayerType
 {
   NSString *keyPathToRemoveObserver = nil;
+  
   if (aPlayerType == kRPGPlayerTypePlayer)
   {
     keyPathToRemoveObserver = @"battle.playerSkillsEffects";
@@ -187,6 +190,7 @@ static CGFloat const kRPGSkillsEffectsViewControllerSkillEffectDurationViewCorne
   {
     keyPathToRemoveObserver = @"battle.opponentSkillsEffects";
   }
+  
   return keyPathToRemoveObserver;
 }
 
