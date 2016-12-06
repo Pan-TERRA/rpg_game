@@ -17,6 +17,8 @@
   // Constants
 #import "RPGNibNames.h"
 #import "RPGFriendsState.h"
+  // Misc
+#import "UIViewController+RPGChildViewController.h"
 
 static NSString * const sInFriendsCellReusableIdentifier = @"inFriendsIdentifier";
 static NSString * const sIncomingCellReusableIdentifier = @"incomingIdentifier";
@@ -24,23 +26,22 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 
 @interface RPGFriendsViewController () <UITableViewDelegate, UITableViewDataSource>
 
+  // TableView controls
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *allFriendButton;
 @property (nonatomic, assign, readwrite)IBOutlet UIButton *onlineFriendButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *incomingRequestsButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *outgoingRequestsButton;
-
-@property (nonatomic, assign, readwrite) IBOutlet UIView *addFriendContainer;
+  // add friend
+@property (nonatomic, retain, readwrite) IBOutlet UIViewController *addFriendViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *friendNickNameTextField;
-
-
-@property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
-
-@property (nonatomic, assign, readwrite) RPGFriendsListState activeState;
-
+  // dataSource
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGFriend *> *allFriends;
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGFriend *> *onlineFriends;
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGFriend *> *incomingRequest;
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGFriend *> *outgoingRequest;
+
+@property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
+@property (nonatomic, assign, readwrite) RPGFriendsListState activeState;
 
 @end
 
@@ -75,6 +76,7 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
   [_incomingRequest release];
   [_outgoingRequest release];
 
+  [_addFriendViewController release];
   [super dealloc];
 }
 
@@ -84,7 +86,8 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 {
   [super viewDidLoad];
   
-  self.addFriendContainer.hidden = YES;
+  [self.addFriendViewController.view removeFromSuperview];
+  [self.addFriendViewController removeFromParentViewController];
   
   [self setActiveButtonForState:self.activeState];
 }
@@ -119,7 +122,8 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 
 - (IBAction)showAddFriendView:(UIButton *)sender
 {
-  self.addFriendContainer.hidden = NO;
+  [self addChildViewController:self.addFriendViewController view:self.view];
+  [self.friendNickNameTextField becomeFirstResponder];
 }
 
 - (IBAction)confirmAddFriend:(UIButton *)sender
@@ -129,7 +133,8 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 
 - (IBAction)closeAddFriendView:(UIButton *)sender
 {
-  self.addFriendContainer.hidden = YES;
+  [self.addFriendViewController.view removeFromSuperview];
+  [self.addFriendViewController removeFromParentViewController];
 }
 
 #pragma mark - UITableViewDataSourse
@@ -142,24 +147,28 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
     case kRPGFriendListAllFriends:
     {
       numberOfRow = self.allFriends.count;
+      
       break;
     }
       
     case kRPGFriendListOnlineFriends:
     {
       numberOfRow = self.onlineFriends.count;
+      
       break;
     }
       
     case kRPGFriendListIncomingFriends:
     {
       numberOfRow = self.incomingRequest.count;
+      
       break;
     }
       
     case kRPGFriendListOutgoingFriends:
     {
       numberOfRow = self.outgoingRequest.count;
+      
       break;
     }
     default:
@@ -238,24 +247,28 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
     case kRPGFriendListAllFriends:
     {
       [self toggleButtonBackground:self.allFriendButton active:YES];
+      
       break;
     }
       
     case kRPGFriendListOnlineFriends:
     {
       [self toggleButtonBackground:self.onlineFriendButton active:YES];
+      
       break;
     }
       
     case kRPGFriendListIncomingFriends:
     {
       [self toggleButtonBackground:self.incomingRequestsButton active:YES];
+      
       break;
     }
       
     case kRPGFriendListOutgoingFriends:
     {
       [self toggleButtonBackground:self.outgoingRequestsButton active:YES];
+      
       break;
     }
       
