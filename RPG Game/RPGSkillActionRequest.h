@@ -12,7 +12,7 @@ extern NSString * const kRPGSkillActionRequestType;
 
 @interface RPGSkillActionRequest : RPGRequest
 
-@property (assign, nonatomic, readonly) NSInteger skillID;
+@property (nonatomic, assign, readonly) NSInteger skillID;
 
 - (instancetype)initWithSkillID:(NSInteger)aSkillID NS_DESIGNATED_INITIALIZER;
 + (instancetype)requestWithSkillID:(NSInteger)aSkillID;
