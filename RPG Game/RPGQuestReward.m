@@ -28,7 +28,7 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
   
   if (self != nil)
   {
-    if (aSkillID < 1)
+    if (aSkillID < 0)
     {
       [self release];
       self = nil;
