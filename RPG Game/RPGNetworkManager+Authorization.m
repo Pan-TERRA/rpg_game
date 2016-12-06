@@ -19,7 +19,7 @@
 #pragma mark - Authorization API
 
 - (void)loginWithRequest:(RPGAuthorizationLoginRequest *)aRequest
-       completionHandler:(void (^)(NSInteger))aCallback
+       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -99,23 +99,23 @@
     
     RPGAuthorizationLoginResponse *responseObject = [[[RPGAuthorizationLoginResponse alloc]
                                                       initWithDictionaryRepresentation:responseDictionary] autorelease];
-      // validation error
-      dispatch_async(dispatch_get_main_queue(), ^
+    // validation error
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      if (responseObject == nil)
       {
-        if (responseObject == nil)
-        {
-          aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
-        }
-        else if (responseObject.status == kRPGStatusCodeOK)
-        {
-          [responseObject store];
-          aCallback(responseObject.status);
-        }
-        else
-        {
-          aCallback(responseObject.status);
-        }
-      });
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+      }
+      else if (responseObject.status == kRPGStatusCodeOK)
+      {
+        [responseObject store];
+        aCallback(responseObject.status);
+      }
+      else
+      {
+        aCallback(responseObject.status);
+      }
+    });
   
   }];
   
@@ -124,7 +124,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)logoutWithCompletionHandler:(void (^)(NSInteger))aCallback
+- (void)logoutWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,

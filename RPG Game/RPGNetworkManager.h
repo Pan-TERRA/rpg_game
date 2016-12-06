@@ -91,10 +91,12 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 #pragma mark - General Requests
 
-- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))aCallback;
-- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))aCallback;
+- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL anIsValidFlag))aCallback;
+- (void)getResourcesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                    RPGResources *aResources))aCallback;
 - (void)getImageDataFromPath:(NSString *)aPath
-               completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))aCallback;
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                       NSData *anImageData))aCallback;
 
 @end
 

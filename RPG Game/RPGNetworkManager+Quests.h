@@ -12,21 +12,23 @@
 
 @class RPGQuestRequest;
 @class RPGQuestReviewRequest;
+@class RPGQuestListResponse;
 
 @interface RPGNetworkManager (Quests)
 
 - (void)fetchQuestsByState:(RPGQuestListState)aState
-         completionHandler:(void (^)(NSInteger status, NSArray *quests))aCallback;
+         completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                     RPGQuestListResponse *aResponse))aCallback;
 
 - (void)doQuestAction:(RPGQuestAction)anAction
               request:(RPGQuestRequest *)aRequest
-    completionHandler:(void (^)(NSInteger status))aCallback;
+    completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 - (void)addProofWithRequest:(RPGQuestRequest *)aRequest
                   imageData:(NSData *)anImageData
-          completionHandler:(void (^)(NSInteger status))aCallback;
+          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 - (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))aCallback;
+                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 @end
