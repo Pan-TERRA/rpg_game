@@ -21,15 +21,15 @@ extern NSString * const kRPGEntityLevel;
  */
 @interface RPGEntity : NSObject <RPGSerializable>
 
-@property (copy, nonatomic, readwrite) NSString *name;
-@property (assign, nonatomic, readwrite) NSInteger HP;
-@property (assign, nonatomic, readwrite) NSInteger maxHP;
-@property (assign, nonatomic, readwrite) NSInteger level;
+@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, assign, readwrite) NSInteger HP;
+@property (nonatomic, assign, readwrite) NSInteger maxHP;
+@property (nonatomic, assign, readwrite) NSInteger level;
 
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
-                       level:(NSInteger)aLevel;
+                       level:(NSInteger)aLevel NS_DESIGNATED_INITIALIZER;
 + (instancetype)entityWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP

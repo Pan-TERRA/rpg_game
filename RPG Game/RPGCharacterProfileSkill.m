@@ -13,28 +13,36 @@ NSString * const kRPGSkillSelected = @"is_selected";
 
 @interface RPGCharacterProfileSkill()
 
-@property (nonatomic, assign, readwrite) NSUInteger skillID;
+@property (nonatomic, assign, readwrite) NSInteger skillID;
 @property (nonatomic, assign, readwrite) BOOL selected;
 
 @end
 
 @implementation RPGCharacterProfileSkill
 
-- (instancetype)initWithID:(NSUInteger)aSkillID
+- (instancetype)initWithID:(NSInteger)aSkillID
                   selected:(BOOL)isSelected
 {
   self = [super init];
   
   if (self != nil)
   {
-    _skillID = aSkillID;
-    _selected = isSelected;
+    if (aSkillID < 1)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _skillID = aSkillID;
+      _selected = isSelected;
+    }
   }
   
   return self;
 }
 
-+ (instancetype)skillWithID:(NSUInteger)aSkillID
++ (instancetype)skillWithID:(NSInteger)aSkillID
                    selected:(BOOL)isSelected
 {
   return [[[self alloc] initWithID:aSkillID
@@ -43,7 +51,7 @@ NSString * const kRPGSkillSelected = @"is_selected";
 
 - (instancetype)init
 {
-  return [self initWithID:0
+  return [self initWithID:-1
                  selected:NO];
 }
 
@@ -52,6 +60,7 @@ NSString * const kRPGSkillSelected = @"is_selected";
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
   dictionaryRepresentation[kRPGSkillID] = @(self.skillID);
   dictionaryRepresentation[kRPGSkillSelected] = @(self.isSelected);
   

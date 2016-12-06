@@ -16,7 +16,7 @@ NSString * const kRPGBattleLogDamage = @"damage";
 
 @interface RPGBattleLog ()
 
-@property (retain, nonatomic, readwrite) NSMutableArray<RPGBattleAction *> *mutableActions;
+@property (nonatomic, retain, readwrite) NSMutableArray<RPGBattleAction *> *mutableActions;
 
 @end
 

@@ -35,6 +35,14 @@ NSString * const kRPGEntityLevel = @"lvl";
   return self;
 }
 
+- (instancetype)init
+{
+  return [self initWithName:nil
+                         HP:-1
+                      maxHP:-1
+                      level:-1];
+}
+
 + (instancetype)entityWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP
@@ -61,7 +69,10 @@ NSString * const kRPGEntityLevel = @"lvl";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGEntityName] = self.name;
+  if (self.name != nil)
+  {
+    dictionaryRepresentation[kRPGEntityName] = self.name;
+  }
   dictionaryRepresentation[kRPGEntityHP] = @(self.HP);
   dictionaryRepresentation[kRPGEntityMaxHP] = @(self.maxHP);
   dictionaryRepresentation[kRPGEntityLevel] = @(self.level);

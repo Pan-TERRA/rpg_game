@@ -29,8 +29,16 @@ NSString * const kRPGResourcesCrystals = @"crystals";
   
   if (self != nil)
   {
-    _gold = aGold;
-    _crystals = aCrystals;
+    if (aGold < 0 || aCrystals < 0)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _gold = aGold;
+      _crystals = aCrystals;
+    }
   }
   
   return self;
@@ -39,26 +47,25 @@ NSString * const kRPGResourcesCrystals = @"crystals";
 + (instancetype)resourcesWithGold:(NSInteger)aGold
                          crystals:(NSInteger)aCrystals
 {
-  return [[[self alloc] initWithGold:aGold crystals:aCrystals] autorelease];
+  return [[[self alloc] initWithGold:aGold
+                            crystals:aCrystals] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithGold:0 crystals:0];
+  return [self initWithGold:-1
+                   crystals:-1];
 }
 
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
-}
+#pragma mark - RPGSerializable
 
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
   dictionaryRepresentation[kRPGResourcesGold] = @(self.gold);
   dictionaryRepresentation[kRPGResourcesCrystals] = @(self.crystals);
+  
   return dictionaryRepresentation;
 }
 
@@ -67,7 +74,8 @@ NSString * const kRPGResourcesCrystals = @"crystals";
   NSUInteger gold = [aDictionary[kRPGResourcesGold] integerValue];
   NSUInteger crystals = [aDictionary[kRPGResourcesCrystals] integerValue];
   
-  return [self initWithGold:gold crystals:crystals];
+  return [self initWithGold:gold
+                   crystals:crystals];
 }
 
 @end

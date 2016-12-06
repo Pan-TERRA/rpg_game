@@ -10,15 +10,9 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGSkill.h"
 
-NSString * const kRPGPlayerSkills = @"skills";
-
-@interface RPGPlayer ()
-
-@end
+static NSString * const kRPGPlayerSkills = @"skills";
 
 @implementation RPGPlayer
-
-@synthesize skills = _skills;
 
 #pragma mark - Init
 
@@ -39,6 +33,27 @@ NSString * const kRPGPlayerSkills = @"skills";
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithName:nil
+                         HP:-1
+                      maxHP:-1
+                      level:-1
+                     skills:nil];
+}
+
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel
+{
+  return [self initWithName:aName
+                         HP:aHP
+                      maxHP:aMaxHP
+                      level:aLevel
+                     skills:nil];
 }
 
 + (instancetype)playerWithName:(NSString *)aName
@@ -69,7 +84,10 @@ NSString * const kRPGPlayerSkills = @"skills";
 {
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   
-  dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
+  if (self.skills)
+  {
+    dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
+  }
   
   return [dictionaryRepresentation autorelease];
 }
@@ -86,6 +104,8 @@ NSString * const kRPGPlayerSkills = @"skills";
                      skills:aDictionary[kRPGPlayerSkills]];
 }
 
+#pragma mark - Heplful Method
+
 - (RPGSkill *)skillByID:(NSInteger)anID
 {
   RPGSkill *result = nil;
@@ -101,6 +121,5 @@ NSString * const kRPGPlayerSkills = @"skills";
   
   return result;
 }
-
 
 @end

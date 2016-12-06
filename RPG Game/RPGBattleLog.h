@@ -16,7 +16,7 @@
  */
 @interface RPGBattleLog : NSObject
 
-@property (retain, nonatomic, readonly) NSArray<RPGBattleAction *> *actions;
+@property (nonatomic, retain, readonly) NSArray<RPGBattleAction *> *actions;
 
 /**
  *  Updates model.

@@ -12,13 +12,13 @@
 
 @interface RPGQuestReward : RPGResources <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSUInteger skillID;
+@property (nonatomic, assign, readonly) NSInteger skillID;
 
 - (instancetype)initWithGold:(NSInteger)aGold
                     crystals:(NSInteger)aCrystals
-                     skillID:(NSUInteger)aSkillID NS_DESIGNATED_INITIALIZER;
+                     skillID:(NSInteger)aSkillID NS_DESIGNATED_INITIALIZER;
 + (instancetype)questRewardWithGold:(NSInteger)aGold
                            crystals:(NSInteger)aCrystals
-                            skillID:(NSUInteger)aSkillID;
+                            skillID:(NSInteger)aSkillID;
 
 @end

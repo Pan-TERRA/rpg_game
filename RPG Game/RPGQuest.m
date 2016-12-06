@@ -9,16 +9,16 @@
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
 
-NSString * const kRPGQuestID = @"quest_id";
-NSString * const kRPGQuestName = @"name";
-NSString * const kRPGQuestDescription = @"description";
-NSString * const kRPGQuestState = @"state";
-NSString * const kRPGQuestReward = @"reward";
-NSString * const kRPGQuestProofImageStringURL = @"prove_image";
+static NSString * const kRPGQuestID = @"quest_id";
+static NSString * const kRPGQuestName = @"name";
+static NSString * const kRPGQuestDescription = @"description";
+static NSString * const kRPGQuestState = @"state";
+static NSString * const kRPGQuestReward = @"reward";
+static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 
 @interface RPGQuest()
 
-@property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, assign, readwrite) NSInteger questID;
 @property (nonatomic, copy, readwrite) NSString *name;
 @property (nonatomic, copy, readwrite) NSString *questDescription;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
@@ -31,7 +31,7 @@ NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 
 #pragma mark - Init
 
-- (instancetype)initWithID:(NSUInteger)aQuestID
+- (instancetype)initWithID:(NSInteger)aQuestID
                       name:(NSString *)aName
                description:(NSString *)aQuestDescription
                      state:(NSUInteger)aState
@@ -42,18 +42,26 @@ NSString * const kRPGQuestProofImageStringURL = @"prove_image";
   
   if (self != nil)
   {
-    _questID = aQuestID;
-    _name = [aName copy];
-    _questDescription = [aQuestDescription copy];
-    _state = aState;
-    _reward = [aReward retain];
-    _proofImageStringURL = [aStringURL copy];
+    if (aQuestID < 1)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _questID = aQuestID;
+      _name = [aName copy];
+      _questDescription = [aQuestDescription copy];
+      _state = aState;
+      _reward = [aReward retain];
+      _proofImageStringURL = [aStringURL copy];
+    }
   }
   
   return self;
 }
 
-+ (instancetype)questWithID:(NSUInteger)aQuestID
++ (instancetype)questWithID:(NSInteger)aQuestID
                        name:(NSString *)aName
                 description:(NSString *)aQuestDescription
                       state:(NSUInteger)aState
@@ -70,7 +78,12 @@ NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 
 - (instancetype)init
 {
-  return [self initWithID:0 name:nil description:nil state:0 reward:nil proofImageStringURL:nil];
+  return [self initWithID:-1
+                     name:nil
+              description:nil
+                    state:0
+                   reward:nil
+      proofImageStringURL:nil];
 }
 
 #pragma mark - Dealloc
@@ -90,34 +103,39 @@ NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 - (NSDictionary *)dictionaryRepresentation
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
+  
   dictionaryRepresentation[kRPGQuestID] = @(self.questID);
-  dictionaryRepresentation[kRPGQuestName] = self.name;
-  dictionaryRepresentation[kRPGQuestDescription] = self.questDescription;
+  if (self.name != nil)
+  {
+    dictionaryRepresentation[kRPGQuestName] = self.name;
+  }
+  if (self.questDescription != nil)
+  {
+    dictionaryRepresentation[kRPGQuestDescription] = self.questDescription;
+  }
   dictionaryRepresentation[kRPGQuestState] = @(self.state);
-  dictionaryRepresentation[kRPGQuestReward] = [self.reward dictionaryRepresentation];
+  if (self.reward != nil)
+  {
+    dictionaryRepresentation[kRPGQuestReward] = [self.reward dictionaryRepresentation];
+  }
   if (self.proofImageStringURL)
   {
     dictionaryRepresentation[kRPGQuestProofImageStringURL] = self.proofImageStringURL;
   }
+  
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSUInteger questID = [aDictionary[kRPGQuestID] integerValue];
-  NSString *name = aDictionary[kRPGQuestName];
-  NSString *questDescription = aDictionary[kRPGQuestDescription];
-  NSUInteger state = [aDictionary[kRPGQuestState] integerValue];
-  NSString *proofImageStringURL = aDictionary[kRPGQuestProofImageStringURL];
-  
   RPGQuestReward *reward = [[[RPGQuestReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGQuestReward]] autorelease];
   
-  return [self initWithID:questID
-                     name:name
-              description:questDescription
-                    state:state
+  return [self initWithID:[aDictionary[kRPGQuestID] integerValue]
+                     name:aDictionary[kRPGQuestName]
+              description:aDictionary[kRPGQuestDescription]
+                    state:[aDictionary[kRPGQuestState] integerValue]
                    reward:reward
-      proofImageStringURL:proofImageStringURL];
+      proofImageStringURL:aDictionary[kRPGQuestProofImageStringURL]];
 }
 
 @end
