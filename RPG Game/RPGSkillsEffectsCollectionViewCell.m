@@ -28,16 +28,6 @@
   return self.imageView.image;
 }
 
-- (void)setDurationHidden:(BOOL)aDurationHiddenFlag
-{
-  self.durationContainerView.hidden = aDurationHiddenFlag;
-}
-
-- (BOOL)isDurationHidden
-{
-  return self.durationContainerView.hidden;
-}
-
 - (void)setDuration:(NSInteger)aDuration
 {
   self.durationLabel.text = [NSString stringWithFormat:@"%ld", (long)aDuration];
@@ -45,7 +35,17 @@
 
 - (NSInteger)duration
 {
-  return  [self.durationLabel.text integerValue];
+  return [self.durationLabel.text integerValue];
+}
+
+- (void)setTransformEnabled:(BOOL)aTransformEnabled
+{
+  _transformEnabled = aTransformEnabled;
+  
+  if (_transformEnabled)
+  {
+    self.transform = CGAffineTransformMakeScale(-1, 1);
+  }
 }
 
 @end
