@@ -10,7 +10,7 @@
 
   // Arena
 NSString * const kRPGArenaInitMessageType = @"ARENA_BATTLE_INIT";
-NSString * const kRPGArenaConditionMessageType = @"PVP_BATTLE_CONDITION";
+NSString * const kRPGArenaConditionMessageType = @"ARENA_BATTLE_CONDITION";
   // Adventures
 NSString * const kRPGAdventuresInitMessageType = @"ADVENTURE_BATTLE_INIT";
 NSString * const kRPGAdventuresConditionMessageType = @"ADVENTURE_BATTLE_CONDITION";

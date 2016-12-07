@@ -17,6 +17,7 @@
 #import "RPGSkillCollectionViewController.h"
 #import "RPGBagCollectionViewController.h"
 #import "RPGAlertController+RPGErrorHandling.h"
+#import "UIViewController+RPGChildViewController.h"
   // Views
 #import "RPGCharacterBagCollectionViewCell.h"
 #import "RPGProgressBarView.h"
@@ -28,7 +29,6 @@
 #import "RPGSkillsSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
-#import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -83,15 +83,14 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 {
   [_skillCollectionViewController release];
   [_bagCollectionViewController release];
-  [_avatarSelectViewController release];
   [_waitingModal release];
+  [_avatarSelectViewController release];
   
   [super dealloc];
 }
 
 #pragma mark - Custom Getter
 
-  // used
 - (NSUInteger)characterLevel
 {
   return [self.levelLabel.text integerValue];
@@ -120,7 +119,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageDownload];
   
-  NSInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  NSInteger characterID = standardUserDefaults.characterID;
   
   RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithCharacterID:characterID];
   
@@ -235,11 +235,11 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSMutableArray *skillsArray = [[aResponse.skills mutableCopy] autorelease];
   self.skillCollectionViewController = [[[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
                                                                                           collectionSize:aResponse.activeSkillsBagSize
-                                                                                             skills:skillsArray
-                                                                           shouldValidateSkills:YES] autorelease];
+                                                                                             skillsArray:skillsArray
+                                                                           shouldUseValidatedSkillsArray:YES] autorelease];
   self.bagCollectionViewController = [[[RPGBagCollectionViewController alloc] initWithCollectionView:self.bagCollectionView
                                                                                       collectionSize:aResponse.bagSize
-                                                                                              skills:skillsArray] autorelease];
+                                                                                         skillsArray:skillsArray] autorelease];
   self.skillCollectionViewController.delegate = self;
   self.bagCollectionViewController.delegate = self;
 }
@@ -260,7 +260,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 - (void)setBackButtonState
 {
-  self.backButton.enabled = (self.skillCollectionViewController.skillIDArray.count != 0);
+  self.backButton.enabled = (self.skillCollectionViewController.skillsIDArray.count != 0);
 }
 
 #pragma mark - Actions
@@ -270,7 +270,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
   
   NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
-  NSArray *skillsArray = self.skillCollectionViewController.skillIDArray;
+  NSArray *skillsArray = self.skillCollectionViewController.skillsIDArray;
   
   
   RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skillsArray];
@@ -310,7 +310,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSMutableArray *characters = [[standardUserDefaults.sessionCharacters mutableCopy] autorelease];
   NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
   
-  NSArray *skillsIDArray = self.skillCollectionViewController.skillIDArray;
+  NSArray *skillsIDArray = self.skillCollectionViewController.skillsIDArray;
   if (skillsIDArray != nil)
   {
     character[kRPGCharacterProfileViewControllerSkills] = skillsIDArray;
@@ -351,7 +351,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
     [self.skillCollectionView reloadData];
     [self.bagCollectionView reloadData];
   }
-  
   [self setBackButtonState];
 }
 

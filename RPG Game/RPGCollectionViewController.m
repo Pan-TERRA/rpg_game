@@ -19,16 +19,15 @@
   // Constants
 #import "RPGNibNames.h"
 
-  // Constants
+// Constants
 
 NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 @interface RPGCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-
-@property (nonatomic, retain, readwrite) NSMutableArray *mutableSkills;
-@property (nonatomic, assign, readwrite, getter=shouldValidateSkills) BOOL validateSkills;
+@property (nonatomic, retain, readwrite) NSMutableArray *skillsMutableArray;
+@property (nonatomic, assign, readwrite, getter=shouldValidateSkillsArray) BOOL validateSkillsArray;
 
 @end
 
@@ -38,19 +37,18 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                                skills:(NSMutableArray *)aSkills
-
+                           skillsArray:(NSMutableArray *)aSkillsArray
 {
   return [self initWithCollectionView:aCollectionView
                        collectionSize:aCollectionSize
-                               skills:aSkills
-                shouldValidateSkills:NO];
+                          skillsArray:aSkillsArray
+        shouldUseValidatedSkillsArray:NO];
 }
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                                skills:(NSMutableArray *)aSkills
-                  shouldValidateSkills:(BOOL)aShouldValidateSkills
+                           skillsArray:(NSMutableArray *)aSkillsArray
+         shouldUseValidatedSkillsArray:(BOOL)aValidateSkillsArrayFlag
 {
   self = [super init];
   
@@ -67,8 +65,8 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
     _collectionView.dataSource = self;
     
     _collectionSize = aCollectionSize;
-    _mutableSkills = [aSkills retain];
-    _validateSkills = aShouldValidateSkills;
+    _skillsMutableArray = [aSkillsArray retain];
+    _validateSkillsArray = aValidateSkillsArrayFlag;
   }
   
   return self;
@@ -78,68 +76,39 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 {
   return [self initWithCollectionView:nil
                        collectionSize:0
-                          skills:nil
-                shouldValidateSkills:NO];
+                          skillsArray:nil
+        shouldUseValidatedSkillsArray:NO];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_mutableSkills release];
+  [_skillsMutableArray release];
   
   [super dealloc];
 }
 
 #pragma mark - Custom Getter
 
-- (NSArray *)skillIDArray
+- (NSArray *)skillsIDArray
 {
   NSMutableArray *skills = [NSMutableArray array];
-  
-  for (RPGCharacterProfileSkill *skill in self.validatedSkills)
+  for (RPGCharacterProfileSkill *skill in self.validatedSkillsArray)
   {
     [skills addObject:@(skill.skillID)];
   }
-  
   return skills;
 }
 
-- (NSArray *)skills
+- (NSArray *)skillsArray
 {
-  return self.mutableSkills;
+  return self.skillsMutableArray;
 }
 
-- (NSArray *)validatedSkills
+- (NSArray *)validatedSkillsArray
 {
-  NSArray *validatedSkills = self.skills;
-  
-  if (self.shouldValidateSkills)
-  {
-    NSMutableArray *newValidatedSkills = [NSMutableArray array];
-    
-    for (RPGCharacterProfileSkill *skill in validatedSkills)
-    {
-      if ([self validateSkill:skill])
-      {
-        [newValidatedSkills addObject:skill];
-      }
-    }
-    
-    validatedSkills = newValidatedSkills;
-  }
-  
-  return validatedSkills;
-}
-
-- (BOOL)validateSkill:(RPGCharacterProfileSkill *)aSkill
-{
-  return aSkill.isSelected;
-}
-
-- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
-{
-  [self.collectionView reloadData];
+  return [self validatedSkillsArray:self.shouldValidateSkillsArray];
 }
 
 - (BOOL)canSelectItem:(RPGCharacterProfileSkill *)anItem
@@ -147,58 +116,24 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return YES;
 }
 
-#pragma mark - UICollectionViewDelegate
+#pragma mark - Heplful Method
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (NSArray *)validatedSkillsArray:(BOOL)aFlag
 {
-  CGFloat viewWidth = self.collectionView.frame.size.width;
-  CGFloat cellWidth = viewWidth / (CGFloat) self.numberOfCellsInRow;
-  
-  return CGSizeMake(cellWidth, cellWidth);
-}
-
-- (void)collectionView:(UICollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)anIndexPath
-{
-  NSInteger index = anIndexPath.row;
-  NSArray *validatedSkills = self.validatedSkills;
-  
-  if (index < validatedSkills.count)
+  NSArray *array = self.skillsArray;
+  if (aFlag)
   {
-    RPGCharacterProfileSkill *skill = validatedSkills[index];
-    
-    if ([self canSelectItem:skill])
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    for (RPGCharacterProfileSkill *skill in array)
     {
-      [self moveItem:skill type:kRPGItemTypeSkill];
-    }
-  }
-}
-
-#pragma mark - Action Long Press
-
-- (void)handleLongPress:(UILongPressGestureRecognizer *)aGestureRecognizer
-{
-  if (aGestureRecognizer.state == UIGestureRecognizerStateBegan)
-  {
-    CGPoint clickedPoint = [aGestureRecognizer locationInView:self.collectionView];
-    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:clickedPoint];
-    
-    if (indexPath != nil)
-    {
-      NSInteger row = indexPath.row;
-      NSArray *array = self.validatedSkills;
-      if (row < array.count)
+      if (skill.isSelected)
       {
-        RPGCharacterProfileSkill *skill = array[row];
-        RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skill.skillID];
-        RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
-        
-        UIViewController *parentViewController = (UIViewController *)self.delegate;
-        [parentViewController addChildViewController:skillDescriptionViewController frame:parentViewController.view.frame];
+        [mutableArray addObject:skill];
       }
     }
+    array = mutableArray;
   }
+  return array;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -208,30 +143,24 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return 0;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   RPGCharacterBagCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName
                                                                                        forIndexPath:anIndexPath];
-  cell.backgroundImageView.layer.cornerRadius = kRPGCollectionViewControllerSkillButtonCornerRadius;
-  cell.backgroundImageView.layer.masksToBounds = YES;
   
   NSInteger index = anIndexPath.row;
   
   if (index < self.collectionSize)
   {
-    NSArray *validatedSkills = self.validatedSkills;
-    
-    if (index < validatedSkills.count)
+    NSArray *array = self.validatedSkillsArray;
+    if (index < array.count)
     {
-      RPGCharacterProfileSkill *skill = validatedSkills[index];
+      RPGCharacterProfileSkill *skill = array[index];
       RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skill.skillID];
       
       if (skillRepresentation.imageName.length != 0)
       {
-        cell.backgroundImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
         
-          // overlay transparent image
         if (skill.isSelected)
         {
           cell.image = [UIImage imageNamed:@"skill_selected"];
@@ -240,6 +169,9 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
         {
           cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
         }
+        cell.backgroundImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
+        cell.backgroundImageView.layer.cornerRadius = kRPGCollectionViewControllerSkillButtonCornerRadius;
+        cell.backgroundImageView.layer.masksToBounds = YES;
       }
       else
       {
@@ -263,6 +195,62 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   }
   
   return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+  CGFloat viewWidth = self.collectionView.frame.size.width;
+  CGFloat cellWidth = viewWidth / (CGFloat) self.numberOfCellsInRow;
+  
+  return CGSizeMake(cellWidth, cellWidth);
+}
+
+#pragma mark - Action Long Press
+
+- (void)handleLongPress:(UILongPressGestureRecognizer *)aGestureRecognizer
+{
+  if (aGestureRecognizer.state == UIGestureRecognizerStateBegan)
+  {
+    CGPoint clickedPoint = [aGestureRecognizer locationInView:self.collectionView];
+    NSIndexPath *indexPath = [self.collectionView indexPathForItemAtPoint:clickedPoint];
+    
+    if (indexPath != nil)
+    {
+      NSInteger row = indexPath.row;
+      NSArray *array = self.validatedSkillsArray;
+      if (row < array.count)
+      {
+        RPGCharacterProfileSkill *skill = array[row];
+        RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skill.skillID];
+        RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
+        
+        UIViewController *parentViewController = (UIViewController *)self.delegate;
+        [parentViewController addChildViewController:skillDescriptionViewController frame:parentViewController.view.frame];
+      }
+    }
+  }
+}
+
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
+{
+  
+  [self.collectionView reloadData];
+}
+
+- (void)collectionView:(UICollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)anIndexPath
+{
+  NSInteger index = anIndexPath.row;
+  NSArray *array = self.validatedSkillsArray;
+  if (index < array.count)
+  {
+    RPGCharacterProfileSkill *skill = array[index];
+    if ([self canSelectItem:skill])
+    {
+      [self moveItem:skill type:kRPGItemTypeSkill];
+    }
+  }
 }
 
 @end
