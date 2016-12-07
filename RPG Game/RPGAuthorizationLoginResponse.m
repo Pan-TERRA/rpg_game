@@ -12,9 +12,6 @@
 static NSString * const kRPGAuthorizationLoginResponseStatus = @"status";
 static NSString * const kRPGAuthorizationLoginResponseUsername = @"username";
 static NSString * const kRPGAuthorizationLoginResponseToken = @"token";
-static NSString * const kRPGAuthorizationLoginResponseAvatar = @"avatar";
-static NSString * const kRPGAuthorizationLoginResponseGold = @"gold";
-static NSString * const kRPGAuthorizationLoginResponseCrystals = @"crystals";
 static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 @interface RPGAuthorizationLoginResponse ()
@@ -22,9 +19,6 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 @property (nonatomic, assign, readwrite) NSInteger status;
 @property (nonatomic, copy, readwrite) NSString *username;
 @property (nonatomic, copy, readwrite) NSString *token;
-@property (nonatomic, copy, readwrite) NSString *avatar;
-@property (nonatomic, assign, readwrite) NSInteger gold;
-@property (nonatomic, assign, readwrite) NSInteger crystals;
 @property (nonatomic, retain, readwrite) NSDictionary *character;
 
 @end
@@ -113,9 +107,6 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
   standartUserDefaults.sessionToken = self.token;
   standartUserDefaults.sessionUsername = self.username;
-  standartUserDefaults.sessionAvatar = self.avatar;
-  standartUserDefaults.sessionGold = self.gold;
-  standartUserDefaults.sessionCrystals = self.crystals;
   // TODO: characters array instead of one character
   standartUserDefaults.sessionCharacters = [NSArray arrayWithObject:self.character];
 }
