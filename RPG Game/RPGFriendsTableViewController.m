@@ -48,8 +48,6 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 
 - (void)dealloc
 {
-  [_friendsModelController release];
-  
   [super dealloc];
 }
 
