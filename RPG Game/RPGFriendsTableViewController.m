@@ -22,6 +22,8 @@ static NSString * const sInFriendsCellReusableIdentifier = @"inFriendsIdentifier
 static NSString * const sIncomingCellReusableIdentifier = @"incomingIdentifier";
 static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 
+static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
+
 @interface RPGFriendsTableViewController ()
 
 @end
@@ -36,6 +38,7 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
   if (self != nil)
   {
     _friendsModelController = aModelController;
+    self.tableView.rowHeight = sRPGFriendsTableViewControllerRowHeight;
   }
   return self;
 }
@@ -64,17 +67,7 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
   self.tableView.backgroundColor = [UIColor clearColor];
 }
 
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-}
-
 #pragma mark - TableViewDataSource
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {

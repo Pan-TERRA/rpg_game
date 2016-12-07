@@ -33,7 +33,6 @@
     _onlineFriendsMutable = [NSMutableArray new];
     _incomingRequestsMutable = [NSMutableArray new];
     _outgoingRequestsMutable = [NSMutableArray new];
-
   }
   
   return self;
@@ -138,21 +137,21 @@
 - (void)sortAllFriendsMutableArray
 {
   NSArray *sortedArray = [self.allFriendsMutable sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2)
-                          {
-                            NSNumber *first = @(((RPGFriend *)obj1).state);
-                            NSNumber *second = @(((RPGFriend *)obj2).state);
-                            NSComparisonResult result = [first compare:second];
-                            
-                            //if state is equal - check for online
-                            if (result == NSOrderedSame)
-                            {
-                              first = @(((RPGFriend *)obj1).online);
-                              second = @(((RPGFriend *)obj2).online);
-                              result = [second compare:first];
-                            }
-                            
-                            return result;
-                          }];
+    {
+      NSNumber *first = @(((RPGFriend *)obj1).state);
+      NSNumber *second = @(((RPGFriend *)obj2).state);
+      NSComparisonResult result = [first compare:second];
+      
+      //if state is equal - check for online
+      if (result == NSOrderedSame)
+      {
+        first = @(((RPGFriend *)obj1).online);
+        second = @(((RPGFriend *)obj2).online);
+        result = [second compare:first];
+      }
+      
+      return result;
+    }];
   
   self.allFriendsMutable = [NSMutableArray arrayWithArray:sortedArray];
 }

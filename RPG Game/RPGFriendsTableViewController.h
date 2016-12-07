@@ -16,11 +16,6 @@
 
 @property (nonatomic, assign, readonly) RPGFriendsListState activeState;
 
-/*
- * Network Manager's methods
- *
- */
-
 @end
 
 
