@@ -47,6 +47,12 @@ extern NSString * const kRPGAvatarSelectViewControllerNIBName;
 extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
 
+/********************* Shop ***********************/
+
+extern NSString * const kRPGShopViewControllerNIBName;
+extern NSString * const kRPGShopCollectionViewNIBName;
+extern NSString * const kRPGShopCollectionViewCellNIBName;
+
 /****************	Battle ****************/
 
 extern NSString * const kRPGEntityViewLeftNIBName;
@@ -54,3 +60,4 @@ extern NSString * const kRPGEntityViewRightNIBName;
 extern NSString * const kRPGRewardViewControllerNIBName;
 extern NSString * const kRPGSkillsEffectsViewControllerNIBName;
 extern NSString * const kRPGSkillsEffectsCollectionViewCellNIBName;
+

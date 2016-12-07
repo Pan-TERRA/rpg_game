@@ -50,6 +50,10 @@ extern NSString * const kRPGNetworkManagerAPICharacterAvatarSelectRoute;
   // Constants
 extern NSString * const kRPGRequestToken;
 extern NSString * const kRPGNetworkManagerStatus;
+  // Shop
+extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
+extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
+  //Arena
 extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
 extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 

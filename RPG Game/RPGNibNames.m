@@ -47,6 +47,12 @@ NSString * const kRPGAvatarSelectViewControllerNIBName = @"RPGAvatarSelectViewCo
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
 NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 
+/********************* Shop ***********************/
+
+NSString * const kRPGShopViewControllerNIBName = @"RPGShopViewController";
+NSString * const kRPGShopCollectionViewNIBName = @"RPGShopCollectionView";
+NSString * const kRPGShopCollectionViewCellNIBName = @"RPGShopCollectionViewCell";
+
 /****************	Battle ****************/
 
 NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
@@ -54,3 +60,4 @@ NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
 NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
 NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
 NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
+

@@ -16,6 +16,7 @@
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
+#import "RPGShopViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
@@ -106,7 +107,9 @@
 
 - (IBAction)segueToShop
 {
+  RPGShopViewController *shopViewController = [[RPGShopViewController new] autorelease];
   
+  [self presentViewController:shopViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToChar

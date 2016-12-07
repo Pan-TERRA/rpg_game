@@ -9,5 +9,6 @@
 typedef NS_ENUM(NSInteger, RPGItemType)
 {
   kRPGItemTypeSkill = 0,
-  kRPGItemTypeBagItem = 1
+  kRPGItemTypeBagItem = 1,
+  kRPGItemTypeActiveSlot = 2
 };
