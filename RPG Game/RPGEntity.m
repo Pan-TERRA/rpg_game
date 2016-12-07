@@ -30,6 +30,7 @@ NSString * const kRPGEntityLevel = @"lvl";
     _HP = aHP;
     _maxHP = aMaxHP;
     _level = aLevel;
+    _skillsEffects = [[NSArray alloc] init];
   }
   
   return self;
@@ -51,6 +52,7 @@ NSString * const kRPGEntityLevel = @"lvl";
 - (void)dealloc
 {
   [_name release];
+  [_skillsEffects release];
   
   [super dealloc];
 }
