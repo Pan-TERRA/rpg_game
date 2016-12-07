@@ -15,13 +15,13 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)status classInfo:(NSDictionary *)classInfo
+- (instancetype)initWithStatus:(NSInteger)aStatus classInfo:(NSDictionary *)aClassInfo
 {
   self = [super init];
   if (self != nil)
   {
-    _status = status;
-    _classInfo = [[NSDictionary alloc] initWithDictionary:classInfo];
+    _status = aStatus;
+    _classInfo = [[NSDictionary alloc] initWithDictionary:aClassInfo];
   }
   return self;
 }

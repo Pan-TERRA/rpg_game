@@ -16,22 +16,15 @@
   // Constants
 #import "RPGStatusCodes.h"
 
-NSString * const kRPGRequestToken = @"token";
-
-NSString * const kRPGNetworkManagerStatus = @"status";
-
 static RPGNetworkManager *sharedNetworkManager = nil;
-
-
 
 #pragma mark - API constants
 
   // General
 NSString * const kRPGNetworkManagerAPIHost = @"http://10.55.33.15:8000";
-static NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/token_exists";
+NSString * const kRPGNetworkManagerAPITokenExistsRoute = @"/token_exists";
   // Resources
-static NSString * const kRPGNetworkManagerAPIResourcesRoute = @"/resources";
-
+NSString * const kRPGNetworkManagerAPIResourcesRoute = @"/resources";
   // Authorization
 NSString * const kRPGNetworkManagerAPILoginRoute = @"/login";
 NSString * const kRPGNetworkManagerAPISignoutRoute = @"/signout";
@@ -60,6 +53,10 @@ NSString * const kRPGNetworkManagerAPICharacterAvatarSelectRoute = @"/change_ava
   // Arena
 NSString * const kRPGNetworkManagerAPIArenaSkillsRoute = @"/arena_skills";
 NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
+
+  // Constants
+NSString * const kRPGRequestToken = @"token";
+NSString * const kRPGNetworkManagerStatus = @"status";
 
 #pragma mark -
 
@@ -117,19 +114,35 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   return self;
 }
 
+#pragma mark - API
 
-- (NSURLRequest *)requestWithObject:(nullable id)anObject URLstring:(NSString *)aString method:(NSString *)aMethod injectToken:(BOOL)injectToken
+- (NSURLRequest *)requestWithObject:(nullable id)anObject
+                          URLstring:(NSString *)aString
+                             method:(NSString *)aMethod
+{
+  return [self requestWithObject:anObject
+                URLstring:aString
+                   method:aMethod
+              shouldInjectToken:YES];
+}
+
+- (NSURLRequest *)requestWithObject:(nullable id)anObject
+                          URLstring:(NSString *)aString
+                             method:(NSString *)aMethod
+                        shouldInjectToken:(BOOL)anInjectTokenFlag
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
   request.HTTPBody = nil;
   NSError *JSONSerializationError = nil;
   
-  // ? ніл обєкт без токену
-  if (anObject != nil)
+  NSMutableDictionary *JSONObject = nil;
+  if (anObject == nil)
   {
-    NSMutableDictionary *JSONObject = nil;
-    
+    JSONObject = [[NSMutableDictionary alloc] init];
+  }
+  else
+  {
     if ([anObject isKindOfClass:[NSDictionary class]])
     {
       JSONObject = [anObject mutableCopy];
@@ -138,30 +151,31 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
     {
       JSONObject = [[anObject dictionaryRepresentation] mutableCopy];
     }
-    
-    if (injectToken)
-    {
-      NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
-      if (token != nil)
-      {
-        JSONObject[kRPGRequestToken] = token;
-      }
-    }
-    
-    [JSONObject autorelease];
-    
-    request.HTTPBody = [NSJSONSerialization dataWithJSONObject:JSONObject
-                                                       options:NSJSONWritingPrettyPrinted
-                                                         error:&JSONSerializationError];
-    
-    if (request.HTTPBody == nil || JSONSerializationError)
-    {
-      [[NSException exceptionWithName:NSInvalidArgumentException
-                               reason:@"JSON cannot be retrieved"
-                             userInfo:nil] raise];
-    }
-    
   }
+  
+  if (anInjectTokenFlag)
+  {
+    NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
+    if (token != nil)
+    {
+      JSONObject[kRPGRequestToken] = token;
+    }
+  }
+  
+  [JSONObject autorelease];
+  
+  request.HTTPBody = [NSJSONSerialization dataWithJSONObject:JSONObject
+                                                     options:NSJSONWritingPrettyPrinted
+                                                       error:&JSONSerializationError];
+  
+  if (request.HTTPBody == nil || JSONSerializationError)
+  {
+    [[NSException exceptionWithName:NSInvalidArgumentException
+                             reason:@"JSON cannot be retrieved"
+                           userInfo:nil] raise];
+  }
+  
+  
   
   return request;
 }
@@ -180,8 +194,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
     
     NSURLRequest *request = [self requestWithObject:@{}
                                           URLstring:requestString
-                                             method:@"POST"
-                                        injectToken:YES];
+                                             method:@"POST"];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -189,36 +202,36 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
                                             completionHandler:^(NSData * _Nullable data,
                                                                 NSURLResponse * _Nullable response,
                                                                 NSError * _Nullable error)
+    {
+      BOOL result = NO;
+      
+      if (error == nil && data != nil)
       {
-        BOOL result = NO;
+        NSError *JSONError = nil;
+        NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                           options:0
+                                                                             error:&JSONError];
         
-        if (error == nil && data != nil)
+        if (responseDictionary == nil)
         {
-          NSError *JSONError = nil;
-          NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                                             options:0
-                                                                               error:&JSONError];
-
-          if (responseDictionary == nil)
-          {
-            [self logError:JSONError withTitle:@"JSON parsing error"];
-          }
-          else if ([responseDictionary[@"status"] integerValue] == 0)
-          {
-            result = YES;
-          }
+          [self logError:JSONError withTitle:@"JSON parsing error"];
         }
-        else
+        else if ([responseDictionary[@"status"] integerValue] == 0)
         {
-          [self logError:error withTitle:@"Network error"];
+          result = YES;
         }
-        
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-          callbackBlock(result);
-        });
-        
-      }];
+      }
+      else
+      {
+        [self logError:error withTitle:@"Network error"];
+      }
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+                     {
+                       callbackBlock(result);
+                     });
+      
+    }];
     
     [task resume];
     [session finishTasksAndInvalidate];
@@ -229,7 +242,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   }
 }
 
-- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))callbackBlock
+- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -237,8 +250,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
-                                           method:@"POST"
-                                      injectToken:YES];
+                                           method:@"POST"];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -247,15 +259,15 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
                                                               NSURLResponse * _Nullable response,
                                                               NSError * _Nullable error)
   {
-    // something went wrong
+      // something went wrong
     if (error != nil)
     {
-      // no internet connection
+        // no internet connection
       if ([self isNoInternerConnection:error])
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -265,7 +277,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -277,7 +289,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -287,7 +299,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -303,7 +315,7 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -312,21 +324,18 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
     RPGResourcesResponse *responseObject = nil;
     responseObject = [[[RPGResourcesResponse alloc]
                        initWithDictionaryRepresentation:responseDictionary] autorelease];
-    // validation error
-    if (responseObject == nil)
+      // validation error
+    dispatch_async(dispatch_get_main_queue(), ^
     {
-      dispatch_async(dispatch_get_main_queue(), ^
+      if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
-      });
-    }
-    else
-    {
-      dispatch_async(dispatch_get_main_queue(), ^
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      }
+      else
       {
-        callbackBlock(responseObject.status, responseObject.resources);
-      });
-    }
+        aCallback(responseObject.status, responseObject.resources);
+      }
+    });
   }];
   
   [task resume];
@@ -334,18 +343,19 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   [session finishTasksAndInvalidate];
 }
 
-- (void)getImageDataFromPath:(NSString *)aPath completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))callbackBlock
+- (void)getImageDataFromPath:(NSString *)aPath
+           completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))aCallback
 {
   NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
-                                          kRPGNetworkManagerAPIHost,
-                                          aPath]];
+                                     kRPGNetworkManagerAPIHost,
+                                     aPath]];
   
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:URL];
   request.HTTPMethod = @"GET";
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
-  // ???: Tramper quetion. downloadTask
+    // ???: Tramper quetion. downloadTask
   NSURLSessionDataTask *task = [session dataTaskWithRequest:request
                                           completionHandler:^(NSData * _Nullable data,
                                                               NSURLResponse * _Nullable response,
@@ -357,8 +367,9 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
+        
         return;
       }
       
@@ -366,8 +377,9 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
+      
       return;
     }
     
@@ -377,8 +389,9 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
+      
       return;
     }
     
@@ -387,11 +400,11 @@ NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
     {
       if (data == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       }
       else
       {
-        callbackBlock(kRPGStatusCodeOK, data);
+        aCallback(kRPGStatusCodeOK, data);
       }
     });
     

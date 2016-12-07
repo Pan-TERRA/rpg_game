@@ -47,3 +47,8 @@ extern NSString * const kRPGAvatarSelectViewControllerNIBName;
 extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
 
+/****************	Battle ****************/
+
+extern NSString * const kRPGEntityViewLeftNIBName;
+extern NSString * const kRPGEntityViewRightNIBName;
+extern NSString * const kRPGRewardViewControllerNIBName;

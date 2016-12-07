@@ -150,6 +150,4 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   return skillIDs;
 }
 
-
-
 @end
