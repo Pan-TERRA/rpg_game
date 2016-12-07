@@ -164,13 +164,16 @@
 
 - (void)toggleButtonBackground:(UIButton *)aButton active:(BOOL)anActiveFlag
 {
-  UIImage *activeButtonImage = [UIImage imageNamed:@"main_button_active"];
-  UIImage *inactiveButtonImage = [UIImage imageNamed:@"main_button_inactive"];
-  
-  [aButton setBackgroundImage:(anActiveFlag ? activeButtonImage : inactiveButtonImage)
-                     forState:UIControlStateNormal];
-  [aButton setBackgroundImage:(!anActiveFlag ? activeButtonImage : inactiveButtonImage)
-                     forState:UIControlStateSelected | UIControlStateHighlighted];
+  if (anActiveFlag)
+  {
+    UIImage *activeButtonImage = [UIImage imageNamed:@"main_button_active"];
+    [aButton setBackgroundImage:activeButtonImage forState:UIControlStateNormal];
+  }
+  else
+  {
+    UIImage *inactiveButtonImage = [UIImage imageNamed:@"main_button_inactive"];
+    [aButton setBackgroundImage:inactiveButtonImage forState:UIControlStateNormal];
+  }
 }
 
 #pragma mark - Helper Methods
