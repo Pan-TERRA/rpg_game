@@ -24,22 +24,22 @@
                         <rect key="frame" x="150" y="115" width="149" height="114"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SpO-qP-BK3">
-                                <rect key="frame" x="22" y="17" width="104" height="79"/>
+                                <rect key="frame" x="14" y="11" width="120" height="91"/>
                                 <color key="backgroundColor" red="1" green="0.90128232279999998" blue="0.27193265329999999" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="9" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fJ-MF-6Tf">
-                                <rect key="frame" x="71" y="48" width="8" height="18"/>
+                                <rect key="frame" x="71" y="50" width="7" height="15"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="13"/>
                                 <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="SpO-qP-BK3" firstAttribute="width" secondItem="ZpT-cK-RWk" secondAttribute="width" multiplier="0.7" id="0nP-9m-Cee"/>
+                            <constraint firstItem="SpO-qP-BK3" firstAttribute="width" secondItem="ZpT-cK-RWk" secondAttribute="width" multiplier="0.8" id="0nP-9m-Cee"/>
                             <constraint firstItem="SpO-qP-BK3" firstAttribute="centerY" secondItem="ZpT-cK-RWk" secondAttribute="centerY" id="GlJ-S9-C0u"/>
-                            <constraint firstItem="SpO-qP-BK3" firstAttribute="height" secondItem="ZpT-cK-RWk" secondAttribute="height" multiplier="0.7" id="HEA-7v-pqz"/>
+                            <constraint firstItem="SpO-qP-BK3" firstAttribute="height" secondItem="ZpT-cK-RWk" secondAttribute="height" multiplier="0.8" id="HEA-7v-pqz"/>
                             <constraint firstItem="SpO-qP-BK3" firstAttribute="centerX" secondItem="ZpT-cK-RWk" secondAttribute="centerX" id="KJI-wd-3tY"/>
                             <constraint firstItem="2fJ-MF-6Tf" firstAttribute="centerY" secondItem="ZpT-cK-RWk" secondAttribute="centerY" id="bUI-79-lWp"/>
                             <constraint firstItem="2fJ-MF-6Tf" firstAttribute="centerX" secondItem="ZpT-cK-RWk" secondAttribute="centerX" id="ztF-10-zsE"/>
