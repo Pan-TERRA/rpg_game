@@ -25,6 +25,13 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="eGV-R3-AZJ">
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cd-xD-wsS">
+                    <rect key="frame" x="110" y="111" width="516" height="213"/>
+                    <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="0.16602909482758621" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="light"/>
+                </textView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yJI-3R-cgF" userLabel="Player View Container">
                     <rect key="frame" x="10" y="10" width="260" height="124"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -59,13 +66,6 @@
                         </constraint>
                     </constraints>
                 </view>
-                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2cd-xD-wsS">
-                    <rect key="frame" x="110" y="111" width="516" height="213"/>
-                    <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="0.16602909482758621" colorSpace="calibratedRGB"/>
-                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
-                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="light"/>
-                </textView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wCY-p1-9Mh">
                     <rect key="frame" x="666" y="344" width="40" height="40"/>
                     <constraints>
@@ -109,7 +109,6 @@
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3tE-yC-EQw"/>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="top" secondItem="Wq0-if-ML3" secondAttribute="bottom" constant="7" id="4oM-yU-gLF"/>
                 <constraint firstAttribute="trailing" secondItem="wCY-p1-9Mh" secondAttribute="trailing" constant="30" id="6fm-aW-df9"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="30" id="6yD-1j-TOR"/>
                 <constraint firstItem="2cd-xD-wsS" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="BI1-EJ-heE"/>
                 <constraint firstItem="yJI-3R-cgF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="Bai-e6-SxW"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="leading" secondItem="yJI-3R-cgF" secondAttribute="trailing" id="CSP-jt-7b2"/>
@@ -118,24 +117,16 @@
                 <constraint firstItem="TmA-7m-uPF" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" constant="50" id="DPa-PB-xfn">
                     <variation key="heightClass=regular-widthClass=regular" constant="200"/>
                 </constraint>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="bottom" secondItem="yJI-3R-cgF" secondAttribute="bottom" id="F3K-iz-d6A"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="yJI-3R-cgF" secondAttribute="top" id="Hdk-pG-8yV"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" id="JcC-vF-rE1"/>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="centerX" secondItem="Wq0-if-ML3" secondAttribute="centerX" id="Rfu-aa-sNy"/>
                 <constraint firstAttribute="bottom" secondItem="eGV-R3-AZJ" secondAttribute="bottom" id="UEN-nD-Yl2"/>
                 <constraint firstAttribute="bottom" secondItem="wCY-p1-9Mh" secondAttribute="bottom" constant="30" id="Yrk-th-T2f"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="yJI-3R-cgF" secondAttribute="top" id="ZBc-WP-xe5"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="cEb-ga-b0O"/>
                 <constraint firstAttribute="bottom" secondItem="sTE-FK-DER" secondAttribute="bottom" constant="30" id="cHB-ki-7XF"/>
                 <constraint firstItem="eGV-R3-AZJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="f2j-ht-OwG"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" id="fwV-Nl-pza"/>
                 <constraint firstItem="zD6-yY-vsP" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="iRe-Mg-mWy"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="jBv-IO-eSU"/>
                 <constraint firstAttribute="trailing" secondItem="zD6-yY-vsP" secondAttribute="trailing" constant="10" id="jhz-wx-X05"/>
                 <constraint firstItem="tsP-2f-Jsw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ji8-hS-XLq"/>
                 <constraint firstAttribute="bottom" secondItem="TmA-7m-uPF" secondAttribute="bottom" constant="5" id="kKn-cv-dTf"/>
                 <constraint firstItem="sTE-FK-DER" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="l2S-6t-MAm"/>
-                <constraint firstItem="Wq0-if-ML3" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="19" id="lee-Tq-x8G"/>
                 <constraint firstItem="Wq0-if-ML3" firstAttribute="centerY" secondItem="yJI-3R-cgF" secondAttribute="centerY" constant="-15" id="mCv-wr-9eA"/>
                 <constraint firstItem="yJI-3R-cgF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="nYk-cp-imb"/>
                 <constraint firstAttribute="trailing" secondItem="eGV-R3-AZJ" secondAttribute="trailing" id="ncA-3f-713"/>
@@ -150,15 +141,6 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <variation key="default">
                 <mask key="constraints">
-                    <exclude reference="6yD-1j-TOR"/>
-                    <exclude reference="F3K-iz-d6A"/>
-                    <exclude reference="Hdk-pG-8yV"/>
-                    <exclude reference="JcC-vF-rE1"/>
-                    <exclude reference="ZBc-WP-xe5"/>
-                    <exclude reference="cEb-ga-b0O"/>
-                    <exclude reference="fwV-Nl-pza"/>
-                    <exclude reference="jBv-IO-eSU"/>
-                    <exclude reference="lee-Tq-x8G"/>
                     <exclude reference="qna-jm-j6W"/>
                     <exclude reference="vm2-et-pwb"/>
                     <exclude reference="Rfu-aa-sNy"/>

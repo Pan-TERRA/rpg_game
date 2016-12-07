@@ -52,3 +52,5 @@ NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
 NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
 NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
+NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
+NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
