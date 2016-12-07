@@ -10,8 +10,6 @@
   // Controllers
 #import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGSkillsEffectsCollectionViewController.h"
-  // View
-#import "RPGSkillsEffectsCollectionViewCell.h"
   // Entities
 #import "RPGPlayer.h"
   // Constants
