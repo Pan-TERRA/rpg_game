@@ -26,6 +26,8 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
 
 @implementation RPGSkillsEffectsCollectionViewController
 
+#pragma mark - Init
+
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                          skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
                       transformEnabled:(BOOL)aTransformEnabledFlag
