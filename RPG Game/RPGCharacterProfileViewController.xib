@@ -86,6 +86,11 @@
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="40" id="Olp-6S-kgD"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="align">
+                                                            <integer key="value" value="1"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="Olp-6S-kgD"/>

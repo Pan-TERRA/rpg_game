@@ -8,15 +8,30 @@
 
 #import "RPGSkillsEffectsCollectionViewCell.h"
 
+static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMultiplier = 0.5;
+
 @interface RPGSkillsEffectsCollectionViewCell()
 
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *imageView;
+
+@property (nonatomic, assign, readwrite) IBOutlet UIView *durationView;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *durationContainerView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *durationLabel;
 
 @end
 
 @implementation RPGSkillsEffectsCollectionViewCell
+
+- (void)drawRect:(CGRect)rect
+{
+  [super drawRect:rect];
+  
+  [self setCornerRadiusForView:self.backgroundImageView];
+  [self setCornerRadiusForView:self.durationView];
+}
+
+#pragma mark - Accessors
 
 - (void)setImage:(UIImage *)anImage
 {
@@ -26,6 +41,16 @@
 - (UIImage *)image
 {
   return self.imageView.image;
+}
+
+- (void)setBackgroundImage:(UIImage *)anImage
+{
+  self.backgroundImageView.image = anImage;
+}
+
+- (UIImage *)backgroundImage
+{
+  return self.backgroundImageView.image;
 }
 
 - (void)setDuration:(NSInteger)aDuration
@@ -38,14 +63,22 @@
   return [self.durationLabel.text integerValue];
 }
 
-- (void)setTransformEnabled:(BOOL)aTransformEnabled
+- (void)setAlign:(RPGSkillsEffectsCollectionViewAlign)anAlign
 {
-  _transformEnabled = aTransformEnabled;
+  _align = anAlign;
   
-  if (_transformEnabled)
+  if (_align == kRPGSkillsEffectsCollectionViewAlignRight)
   {
     self.transform = CGAffineTransformMakeScale(-1, 1);
   }
+}
+
+#pragma mark - 
+
+- (void)setCornerRadiusForView:(UIView *)aView
+{
+  aView.layer.cornerRadius = aView.frame.size.width * kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMultiplier;
+  aView.layer.masksToBounds = YES;
 }
 
 @end

@@ -200,6 +200,7 @@
 		2817233A1DB5005500F74403 /* RPGQuestProofImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestProofImageViewController.h; sourceTree = "<group>"; };
 		2817233B1DB5005500F74403 /* RPGQuestProofImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestProofImageViewController.m; sourceTree = "<group>"; };
 		2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuestProofImageViewController.xib; sourceTree = "<group>"; };
+		281849EC1DF87675002EF22D /* RPGSkillsEffectsCollectionViewAlign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGSkillsEffectsCollectionViewAlign.h; sourceTree = "<group>"; };
 		28307BD31DD0CD2A002E6233 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		28307BE11DD21CA5002E6233 /* RPGSkillRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillRepresentation.h; sourceTree = "<group>"; };
 		28307BE21DD21CA5002E6233 /* RPGSkillRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillRepresentation.m; sourceTree = "<group>"; };
@@ -1679,6 +1680,7 @@
 			children = (
 				AE5E46A81DF85D4A00546256 /* RPGSkillsEffectsCollectionViewController.h */,
 				AE5E46A91DF85D4A00546256 /* RPGSkillsEffectsCollectionViewController.m */,
+				281849EC1DF87675002EF22D /* RPGSkillsEffectsCollectionViewAlign.h */,
 				AE5E469F1DF6B9E800546256 /* Collection Cell */,
 			);
 			name = "SkillsEffects Collection ViewController";

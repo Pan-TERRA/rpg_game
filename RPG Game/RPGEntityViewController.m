@@ -98,11 +98,11 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
   [self.skillsEffectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
   
-  BOOL transformFlag = (self.entityHPBar.align == kRPGProgressBarLeftAlign);
+  RPGSkillsEffectsCollectionViewAlign align = (self.entityHPBar.align == kRPGProgressBarLeftAlign) ? kRPGSkillsEffectsCollectionViewAlignLeft : kRPGSkillsEffectsCollectionViewAlignRight;
   self.skillsEffectsCollectionViewController = [[[RPGSkillsEffectsCollectionViewController alloc]
                                                  initWithCollectionView:self.skillsEffectsCollectionView
                                                  skillsEffects:self.entity.skillsEffects
-                                                 transformEnabled:transformFlag] autorelease];
+                                                 align:align] autorelease];
 }
 
 - (void)didReceiveMemoryWarning
@@ -125,6 +125,7 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
     self.entityHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)entityHP, (long)entityMaxHP];
     self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
     self.skillsEffectsCollectionViewController.skillsEffects = self.entity.skillsEffects;
+    [self.skillsEffectsCollectionView reloadData];
   }
 }
 

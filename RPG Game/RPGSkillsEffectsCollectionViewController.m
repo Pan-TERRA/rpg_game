@@ -1,10 +1,10 @@
-//
-//  RPGSkillsEffectsCollectionViewController.m
-//  RPG Game
-//
-//  Created by Максим Шульга on 12/7/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGSkillsEffectsCollectionViewController.m
+  //  RPG Game
+  //
+  //  Created by Максим Шульга on 12/7/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGSkillsEffectsCollectionViewController.h"
   // Views
@@ -15,12 +15,12 @@
 #import "RPGNibNames.h"
 
 static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize = 6;
-static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMultiplier = 0.5;
+
 
 @interface RPGSkillsEffectsCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-@property (nonatomic, assign, readwrite, getter=isTransformEnabled) BOOL transformEnabled;
+@property (nonatomic, assign, readwrite) RPGSkillsEffectsCollectionViewAlign align;
 
 @end
 
@@ -30,7 +30,7 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                          skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
-                      transformEnabled:(BOOL)aTransformEnabledFlag
+                                 align:(RPGSkillsEffectsCollectionViewAlign)anAlign
 {
   self = [super init];
   
@@ -38,11 +38,11 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
   {
     _collectionView = aCollectionView;
     _skillsEffects = [aSkillsEffects retain];
-    _transformEnabled = aTransformEnabledFlag;
-    
+    _align = anAlign;
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
-    if (_transformEnabled)
+    
+    if (anAlign == kRPGSkillsEffectsCollectionViewAlignRight)
     {
       _collectionView.transform = CGAffineTransformMakeScale(-1, 1);
     }
@@ -55,23 +55,19 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
 {
   return [self initWithCollectionView:nil
                         skillsEffects:nil
-                     transformEnabled:NO];
+                                align:kRPGSkillsEffectsCollectionViewAlignLeft];
 }
 
-#pragma mark - Custom Setter
+#pragma mark - Dealloc
 
-- (void)setSkillsEffects:(NSArray *)aSkillsEffects
+- (void)dealloc
 {
-  if (_skillsEffects != aSkillsEffects)
-  {
-    [_skillsEffects release];
-    _skillsEffects = [aSkillsEffects retain];
-  }
+  [_skillsEffects release];
   
-  [self.collectionView reloadData];
+  [super dealloc];
 }
 
-#pragma mark - UICollectionView
+#pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
@@ -90,19 +86,18 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
     RPGSkillEffect *skillEffect = skillsEffects[index];
     
     cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
-    cell.backgroundImageView.image = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
+    cell.backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
     
     cell.duration = skillEffect.duration;
-    
-    [self setCornerRadiusForView:cell.backgroundImageView];
-    [self setCornerRadiusForView:cell.durationView];
   }
   
   cell.hidden = !(index < skillsEffects.count);
-  cell.transformEnabled = self.isTransformEnabled;
+  cell.align = self.align;
   
   return cell;
 }
+
+#pragma mark - UICollectionViewDelegate
 
 - (CGSize)collectionView:(UICollectionView *)aCollectionView
                   layout:(UICollectionViewLayout *)aCollectionViewLayout
@@ -112,14 +107,6 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
   CGFloat cellWidth = viewWidth / (CGFloat) kRPGSkillsEffectsCollectionViewControllerCollectionSize;
   
   return CGSizeMake(cellWidth, cellWidth);
-}
-
-#pragma mark - Heplful Method
-
-- (void)setCornerRadiusForView:(UIView *)aView
-{
-  aView.layer.cornerRadius = aView.frame.size.width * kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMultiplier;
-  aView.layer.masksToBounds = YES;
 }
 
 @end

@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+  // Constants
+#import "RPGSkillsEffectsCollectionViewAlign.h"
 
 @interface RPGSkillsEffectsCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign, readwrite) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, assign, readwrite) UIImage *image;
+@property (nonatomic, assign, readwrite) UIImage *backgroundImage;
 @property (nonatomic, assign, readwrite) NSInteger duration;
-@property (nonatomic, assign, readwrite) IBOutlet UIView *durationView;
-@property (nonatomic, assign, readwrite, getter=isTransformEnabled) BOOL transformEnabled;
+
+@property (nonatomic, assign, readwrite) RPGSkillsEffectsCollectionViewAlign align;
 
 @end
