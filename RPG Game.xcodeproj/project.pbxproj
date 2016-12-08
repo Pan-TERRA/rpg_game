@@ -1242,8 +1242,8 @@
 		289C42EB1DE20E2500E35506 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				289C42D51DE20C6700E35506 /* RPGSkillsSelectRequest.m */,
 				289C42C81DE20C4E00E35506 /* RPGSkillsSelectRequest.h */,
+				289C42D51DE20C6700E35506 /* RPGSkillsSelectRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1639,8 +1639,8 @@
 			isa = PBXGroup;
 			children = (
 				28C5769C1DE225AB008DCB88 /* RPGAlertViewController.xib */,
-				28C5769F1DE225B5008DCB88 /* RPGAlertViewController.m */,
 				28C5769B1DE225A2008DCB88 /* RPGAlertViewController.h */,
+				28C5769F1DE225B5008DCB88 /* RPGAlertViewController.m */,
 			);
 			name = "Alert ViewController";
 			sourceTree = "<group>";
