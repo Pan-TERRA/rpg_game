@@ -10,6 +10,7 @@
   // Entities
 #import "RPGAuthorizationLoginRequest.h"
 #import "RPGAuthorizationLoginResponse.h"
+#import "RPGBasicNetworkResponse.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "NSObject+RPGErrorLog.h"
@@ -199,9 +200,19 @@
       return;
     }
     
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
+    // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      aCallback([responseDictionary[kRPGNetworkManagerStatus] integerValue]);
+      if (responseObject == nil)
+      {
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+      }
+      else
+      {
+        aCallback(responseObject.status);
+      }
     });
     
   }];

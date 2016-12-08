@@ -7,7 +7,7 @@
 //
 
 #import "RPGNetworkManager.h"
-
+  // Entities
 @class RPGClassesResponse;
 @class RPGClassInfoResponse;
 

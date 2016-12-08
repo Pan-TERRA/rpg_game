@@ -7,7 +7,7 @@
 //
 
 #import "RPGNetworkManager.h"
-
+  // Entities
 @class RPGSkillsSelectRequest;
 
 @interface RPGNetworkManager (Skills)

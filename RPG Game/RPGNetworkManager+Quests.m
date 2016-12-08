@@ -12,7 +12,7 @@
 #import "RPGQuestRequest.h"
 #import "RPGQuestReviewRequest.h"
 #import "RPGBasicNetworkResponse.h"
-  //Misc
+  // Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
@@ -483,7 +483,7 @@
 }
 
 - (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))callbackBlock
+                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -507,7 +507,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
         return;
       }
@@ -516,7 +516,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
       return;
     }
@@ -527,7 +527,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
       return;
     }
@@ -536,7 +536,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
       return;
     }
@@ -552,7 +552,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
       return;
     }
@@ -564,11 +564,11 @@
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       }
       else
       {
-        callbackBlock(responseObject.status);
+        aCallback(responseObject.status);
       }
     });
     

@@ -7,9 +7,10 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Constants
 #import "RPGQuestListState.h"
 #import "RPGQuestAction.h"
-
+  // Entities
 @class RPGQuestRequest;
 @class RPGQuestReviewRequest;
 @class RPGQuestListResponse;
@@ -32,6 +33,6 @@
                 completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 - (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))callbackBlock;
+                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 @end
