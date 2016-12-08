@@ -13,11 +13,11 @@
 @interface RPGArenaSkillsResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger status;
-@property (nonatomic, retain, readonly) NSArray *skills;
+@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skills;
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                        skills:(NSArray *)aSkills NS_DESIGNATED_INITIALIZER;
+                        skills:(NSArray<NSNumber *> *)aSkills NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithStatus:(NSInteger)aStatus
-                            skills:(NSArray *)aSkills;
+                            skills:(NSArray<NSNumber *> *)aSkills;
 
 @end

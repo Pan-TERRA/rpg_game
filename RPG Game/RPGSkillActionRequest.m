@@ -49,18 +49,17 @@ NSString * const kRPGSkillActionRequestType = @"SKILL_ACTION";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
     // !!!: change to proper constant
     //  dictionaryRepresentation[kRPGSkillID] = @(self.skillID);
   dictionaryRepresentation[@"skill_id"] = @(self.skillID);
   
-  return [dictionaryRepresentation autorelease];
+  return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger skllID = [aDictionary[@"skill_id"] integerValue];
-  return [self initWithSkillID:skllID];
+  return [self initWithSkillID:[aDictionary[@"skill_id"] integerValue]];
 }
 
 @end

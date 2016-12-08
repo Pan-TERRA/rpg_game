@@ -14,7 +14,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
 @interface RPGClassesResponse()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
-@property (nonatomic, retain, readwrite) NSArray *classes;
+@property (nonatomic, retain, readwrite) NSArray<NSDictionary *> *classes;
 
 @end
 
@@ -23,7 +23,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
 #pragma mark - Init
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                       classes:(NSArray *)aClasses
+                       classes:(NSArray<NSDictionary *> *)aClasses
 {
   self = [super init];
   if (self != nil)
@@ -31,7 +31,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
     _status = aStatus;
     if (aClasses != nil)
     {
-    _classes = [aClasses retain];
+      _classes = [aClasses retain];
     }
     else
     {
@@ -49,7 +49,7 @@ static NSString * const kRPGClassesResposeClasses = @"classes";
 }
 
 + (instancetype)responseWithStatus:(NSInteger)aStatus
-                           classes:(NSArray *)aClasses
+                           classes:(NSArray<NSDictionary *> *)aClasses
 {
   return [[[self alloc] initWithStatus:aStatus
                                classes:aClasses] autorelease];

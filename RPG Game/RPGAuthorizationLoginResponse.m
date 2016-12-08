@@ -118,9 +118,18 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
   dictionaryRepresentation[kRPGAuthorizationLoginResponseStatus] = @(self.status);
-  dictionaryRepresentation[kRPGAuthorizationLoginResponseUsername] = self.username;
-  dictionaryRepresentation[kRPGAuthorizationLoginResponseToken] = self.token;
-  dictionaryRepresentation[kRPGAuthorizationLoginResponseCharacter] = self.character;
+  if (self.username != nil)
+  {
+    dictionaryRepresentation[kRPGAuthorizationLoginResponseUsername] = self.username;
+  }
+  if (self.token != nil)
+  {
+    dictionaryRepresentation[kRPGAuthorizationLoginResponseToken] = self.token;
+  }
+  if (self.character != nil)
+  {
+    dictionaryRepresentation[kRPGAuthorizationLoginResponseCharacter] = self.character;
+  }
   
   return dictionaryRepresentation;
 }
@@ -133,6 +142,5 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
                       character:character
                          status:[aDictionary[kRPGAuthorizationLoginResponseStatus] integerValue]];
 }
-
 
 @end
