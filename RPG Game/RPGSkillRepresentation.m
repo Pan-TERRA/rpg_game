@@ -7,6 +7,8 @@
 //
 
 #import "RPGSkillRepresentation.h"
+  // Entities
+#import "RPGSkillEffect.h"
 
 NSString * const kRPGSkillRepresentationName = @"name";
 NSString * const kRPGSkillRepresentationSkillDescription = @"description";
@@ -15,6 +17,7 @@ NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
 NSString * const kRPGSkillRepresentationImageName = @"imageName";
 NSString * const kRPGSkillRepresentationSoundName = @"soundName";
 NSString * const kRPGSkillRepresentationRequiredLevel = @"requiredLevel";
+NSString * const kRPGSkillRepresentationEffects = @"effects";
 
 static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
 
@@ -36,11 +39,19 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
     _name = [skillDictionary[kRPGSkillRepresentationName] copy];
     _skillDescription = [skillDictionary[kRPGSkillRepresentationSkillDescription] copy];
     _multiplier = [skillDictionary[kRPGSkillRepresentationMultiplier] floatValue];
-    _absoluteCooldown = [skillDictionary[kRPGSkillRepresentationAbsoluteCooldown] integerValue];
-    _remainingCooldown = 0;
+    _cooldown = [skillDictionary[kRPGSkillRepresentationAbsoluteCooldown] integerValue];
     _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
     _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
     _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
+    
+    NSMutableArray *effectsObjects = [NSMutableArray array];
+    NSArray *effectsArray = skillDictionary[kRPGSkillRepresentationEffects];
+    for (NSDictionary *effectDictionary in effectsArray)
+    {
+      RPGSkillEffect *effect = [[[RPGSkillEffect alloc] initWithDictionaryRepresentation:effectDictionary] autorelease];
+      [effectsObjects addObject:effect];
+    }
+    _effects = [effectsObjects retain];
   }
   
   return self;
@@ -59,6 +70,7 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
   [_skillDescription release];
   [_imageName release];
   [_soundName release];
+  [_effects release];
   
   [super dealloc];
 }
