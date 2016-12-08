@@ -7,7 +7,6 @@
   //
 
 #import "RPGBattleController.h"
-  // API
   // Entities
 #import "RPGBattle.h"
 #import "RPGRequest.h"
@@ -27,8 +26,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
 
-@property (copy, nonatomic, readwrite) NSString *battleInitWebSocketMessageType;
-@property (copy, nonatomic, readwrite) NSString *battleConditionWebSocketMessageType;
+@property (nonatomic, copy, readwrite) NSString *battleInitWebSocketMessageType;
+@property (nonatomic, copy, readwrite) NSString *battleConditionWebSocketMessageType;
 
 @end
 

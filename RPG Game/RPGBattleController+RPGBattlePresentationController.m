@@ -15,7 +15,7 @@
 
 @implementation RPGBattleController (RPGBattlePresentationController)
 
-#pragma mark  Player
+#pragma mark - Player
 
 - (NSString *)playerNickName
 {
@@ -52,7 +52,7 @@
   return self.battle.player.skills;
 }
 
-#pragma mark  Opponent
+#pragma mark - Opponent
 
 - (NSString *)opponentNickName
 {
@@ -74,7 +74,7 @@
   return self.battle.opponent.level;
 }
 
-#pragma mark  General
+#pragma mark - General
 
 - (NSInteger)rewardGold
 {
@@ -91,7 +91,7 @@
   return self.battle.reward.exp;
 }
 
-- (NSArray *)actions
+- (NSArray<RPGBattleAction *> *)actions
 {
   return self.battle.battleLog.actions;
 }

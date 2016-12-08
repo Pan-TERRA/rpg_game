@@ -26,13 +26,11 @@
   // Constants
 #import "RPGMessageTypes.h"
 
-
-
 static NSString * const kRPGBattleControllerSkills = @"skills";
 
 @interface RPGAdventuresController ()
 
-@property (retain, nonatomic, readwrite) RPGWebsocketManager *webSocketManager;
+@property (nonatomic, retain, readwrite) RPGWebsocketManager *webSocketManager;
 
 @end
 
@@ -85,22 +83,22 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 - (void)processBattleInitResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
-                                                initWithDictionaryRepresentation:aResponse]
-                                               autorelease];
+                                                    initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     
     NSArray<NSNumber *> *skillIDs = [self getPlayerSkillIDs];
-    
     NSMutableArray *skills = [NSMutableArray array];
+    
     for (NSNumber *skillID in skillIDs)
     {
       RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
       [skills addObject:skill];
       [skill release];
     }
+    
     self.battle.player.skills = skills;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
@@ -115,7 +113,7 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 - (void)processBattleConditionResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresConditionResponse *battleConditionResponse = [[[RPGAdventuresConditionResponse alloc]
-                                                          initWithDictionaryRepresentation:aResponse] autorelease];
+                                                              initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
   {
