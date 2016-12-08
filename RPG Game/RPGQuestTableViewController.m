@@ -359,11 +359,11 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
   }
 }
 
-- (void)getRewardForQuestWithID:(NSUInteger)anID
+- (void)getRewardForQuestWithID:(NSUInteger)aQuestID
 {
   __block typeof(self.questListViewController) weakQuestViewController = self.questListViewController;
   RPGQuestListState state = self.questListState;
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:anID];
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
   [[RPGNetworkManager sharedNetworkManager] getQuestRewardWithRequest:request completionHandler:^void(NSInteger statusCode)
    {
      switch (statusCode)

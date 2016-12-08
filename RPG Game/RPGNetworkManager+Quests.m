@@ -557,8 +557,8 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
-                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {

@@ -14,7 +14,6 @@ NSString * const kRPGSkillSelected = @"is_selected";
 @interface RPGCharacterProfileSkill()
 
 @property (nonatomic, assign, readwrite) NSInteger skillID;
-@property (nonatomic, assign, readwrite) BOOL selected;
 
 @end
 

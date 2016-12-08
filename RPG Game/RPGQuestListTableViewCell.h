@@ -14,6 +14,7 @@
 @protocol RPGTableViewCellDelegate <NSObject>
 
 - (void)deleteQuestWithID:(NSUInteger)aQuestID;
+- (void)getRewardForQuestWithID:(NSUInteger)aQuestID;
 
 @end
 

@@ -173,7 +173,7 @@ static CGFloat const kBounceValue = 10.0;
 
 - (IBAction)getRewardButtonOnClick:(UIButton *)aSender
 {
-  [self.tableViewController getRewardForQuestWithID:self.questID];
+  [self.delegate getRewardForQuestWithID:self.questID];
 }
 
 #pragma mark - Cell State
