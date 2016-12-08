@@ -13,11 +13,16 @@
   // View
 #import "RPGAddFriendViewController.h"
 #import "RPGFriendsTableViewController.h"
+  // Network
+#import "RPGNetworkManager+Friends.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGFriendsState.h"
   // Misc
 #import "UIViewController+RPGChildViewController.h"
+#import "RPGAlertController.h"
+
+typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
 
 @interface RPGFriendsViewController () <RPGFriendsTableViewControllerDelegate>
 
@@ -114,6 +119,65 @@
 - (IBAction)showAddFriendView:(UIButton *)sender
 {
   [self addChildViewController:self.addFriendViewController view:self.view];
+}
+
+#pragma mark - Network
+
+- (void)fetchFriends
+{
+  fetchFriendsCompletionHandler handler = ^void(RPGStatusCode statusCode, NSArray *friendsList)
+  {
+    __block typeof(self) weakSelf = self;
+    
+    switch (statusCode)
+    {
+      case kRPGStatusCodeOK:
+      {
+        NSMutableArray<RPGFriend *> *friends = [NSMutableArray array];
+        
+        for (NSDictionary *friendDictionary in friendsList)
+        {
+          RPGFriend *friend = [[RPGFriend alloc] initWithDictionaryRepresentation:friendDictionary];
+          [friends addObject:[friend autorelease]];
+        }
+        
+        [weakSelf.friendsModelController setData:friends];
+        [weakSelf.friendsTableViewController reloadTable];
+        
+        break;
+      }
+        
+      case kRPGStatusCodeWrongToken:
+      {
+        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:^(void)
+         {
+           dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
+         }];
+        
+        break;
+      }
+        
+      default:
+      {
+        NSString *message = @"Can't update quest list.";
+        [RPGAlertController showAlertWithTitle:nil
+                                       message:message
+                                   actionTitle:nil
+                                    completion:nil];
+        break;
+      }
+    }
+  };
+  
+  [[RPGNetworkManager sharedNetworkManager] fetchFriendsWithCompletionHandler:handler];
 }
 
 #pragma mark - Buttons state
