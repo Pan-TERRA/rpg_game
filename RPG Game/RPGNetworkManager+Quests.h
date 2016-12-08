@@ -31,4 +31,7 @@
 - (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
+- (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
+                completionHandler:(void (^)(NSInteger status))callbackBlock;
+
 @end

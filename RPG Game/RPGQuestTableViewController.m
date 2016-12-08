@@ -22,7 +22,7 @@
 #import "RPGStatusCodes.h"
 #import "RPGQuestListState.h"
 
-#import "RPGAlertController.h"
+#import "RPGAlertController+RPGErrorHandling.h"
 
 static CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30.0;
 static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
@@ -357,6 +357,47 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
       break;
     }
   }
+}
+
+- (void)getRewardForQuestWithID:(NSUInteger)anID
+{
+  __block typeof(self.questListViewController) weakQuestViewController = self.questListViewController;
+  RPGQuestListState state = self.questListState;
+  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:anID];
+  [[RPGNetworkManager sharedNetworkManager] getQuestRewardWithRequest:request completionHandler:^void(NSInteger statusCode)
+   {
+     switch (statusCode)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [weakQuestViewController updateViewForState:state shouldReload:YES];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+          {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+              UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController;
+              [viewController dismissViewControllerAnimated:YES completion:nil];
+            });
+          }];
+         break;
+       }
+         
+       default:
+       {
+         NSString *message = @"Can't get reward.";
+         [RPGAlertController showAlertWithTitle:nil
+                                        message:message
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+     }
+   }];
 }
 
 @end

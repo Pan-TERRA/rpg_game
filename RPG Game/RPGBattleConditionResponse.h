@@ -11,11 +11,12 @@
 #import "RPGBattleStatus.h"
 
 @class RPGBattleReward;
+@class RPGPlayerInfo;
 
 @interface RPGBattleConditionResponse : RPGResponse
 
-@property (nonatomic, assign, readonly) NSInteger HP;
-@property (nonatomic, assign, readonly) NSInteger opponentHP;
+@property (nonatomic, retain, readonly) RPGPlayerInfo *playerInfo;
+@property (nonatomic, retain, readonly) RPGPlayerInfo *opponentInfo;
 @property (nonatomic, retain, readonly) NSArray *skillsCondition;
 @property (nonatomic, retain, readonly) NSDictionary *skillsDamage;
 @property (nonatomic, retain, readonly) RPGBattleReward *reward;
@@ -25,22 +26,22 @@
 #pragma mark - Init
 
 - (instancetype)initWithType:(NSString *)aType
-                          HP:(NSInteger)aHP
-                opponentHP:(NSInteger)anOpponentHP
-           skillsCondition:(NSArray *)aSkillsCondition
-              skillsDamage:(NSDictionary *)aSkillsDamage
-              battleStatus:(RPGBattleStatus)aBattleStatus
-                    reward:(RPGBattleReward *)aReward
-                    status:(NSInteger)aStatus
-               currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
+                  playerInfo:(RPGPlayerInfo *)aPlayerInfo
+                opponentInfo:(RPGPlayerInfo *)anOpponentInfo
+             skillsCondition:(NSArray *)aSkillsCondition
+                skillsDamage:(NSDictionary *)aSkillsDamage
+                battleStatus:(RPGBattleStatus)aBattleStatus
+                      reward:(RPGBattleReward *)aReward
+                      status:(NSInteger)aStatus
+                 currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithType:(NSString *)aType
-                                             HP:(NSInteger)aHP
-                                   opponentHP:(NSInteger)anOpponentHP
-                              skillsCondition:(NSArray *)aSkillsCondition
-                                 skillsDamage:(NSDictionary *)aSkillsDamage
-                                 battleStatus:(RPGBattleStatus)aBattleStatus
-                                       reward:(RPGBattleReward *)aReward
-                                       status:(NSInteger)aStatus
-                                  currentTurn:(BOOL)aCurrentTurn;
+                                     playerInfo:(RPGPlayerInfo *)aPlayerInfo
+                                   opponentInfo:(RPGPlayerInfo *)anOpponentInfo
+                                skillsCondition:(NSArray *)aSkillsCondition
+                                   skillsDamage:(NSDictionary *)aSkillsDamage
+                                   battleStatus:(RPGBattleStatus)aBattleStatus
+                                         reward:(RPGBattleReward *)aReward
+                                         status:(NSInteger)aStatus
+                                    currentTurn:(BOOL)aCurrentTurn;
 
 @end

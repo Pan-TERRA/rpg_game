@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="RPGAvatarCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="141" height="122"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="141" height="122"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-pB-Mwf">
+                        <rect key="frame" x="0.0" y="0.0" width="141" height="122"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm_icon_inactive" translatesAutoresizingMaskIntoConstraints="NO" id="256-ia-aoQ">
+                        <rect key="frame" x="101" y="82" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="256-ia-aoQ" secondAttribute="height" multiplier="1:1" id="PNG-bJ-Tdh"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstItem="EgU-pB-Mwf" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="3GV-JH-vv1"/>
+                <constraint firstAttribute="trailing" secondItem="EgU-pB-Mwf" secondAttribute="trailing" id="4CH-bq-5Dl"/>
+                <constraint firstItem="EgU-pB-Mwf" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="5Lv-Qm-qfm"/>
+                <constraint firstAttribute="bottom" secondItem="256-ia-aoQ" secondAttribute="bottom" id="BLL-xd-M7N"/>
+                <constraint firstAttribute="bottom" secondItem="EgU-pB-Mwf" secondAttribute="bottom" id="OX2-76-Sil"/>
+                <constraint firstItem="256-ia-aoQ" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.33" id="PAc-h0-rUc"/>
+                <constraint firstAttribute="trailing" secondItem="256-ia-aoQ" secondAttribute="trailing" id="Z9j-r0-z8g"/>
+            </constraints>
+            <size key="customSize" width="141" height="122"/>
+            <connections>
+                <outlet property="chosenFlagImageView" destination="256-ia-aoQ" id="17T-3x-GaC"/>
+                <outlet property="imageView" destination="EgU-pB-Mwf" id="iYG-NY-st9"/>
+            </connections>
+            <point key="canvasLocation" x="521.5" y="493"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="confirm_icon_inactive" width="40" height="40"/>
+    </resources>
+</document>

@@ -14,6 +14,7 @@ static NSString * const kRPGQuestName = @"name";
 static NSString * const kRPGQuestDescription = @"description";
 static NSString * const kRPGQuestState = @"state";
 static NSString * const kRPGQuestReward = @"reward";
+static NSString * const kRPGQuestGetReward = @"gotReward";
 static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 
 @interface RPGQuest()
@@ -23,6 +24,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
 @property (nonatomic, copy, readwrite) NSString *questDescription;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
 @property (nonatomic, retain, readwrite) RPGQuestReward *reward;
+@property (nonatomic, assign, readwrite, getter=hasGotReward) BOOL getReward;
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
 
 @end
@@ -36,6 +38,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
                description:(NSString *)aQuestDescription
                      state:(NSUInteger)aState
                     reward:(RPGQuestReward *)aReward
+                 getReward:(BOOL)hasGotReward
        proofImageStringURL:(NSString *)aStringURL
 {
   self = [super init];
@@ -54,6 +57,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
       _questDescription = [aQuestDescription copy];
       _state = aState;
       _reward = [aReward retain];
+      _getReward = hasGotReward;
       _proofImageStringURL = [aStringURL copy];
     }
   }
@@ -66,6 +70,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
                 description:(NSString *)aQuestDescription
                       state:(NSUInteger)aState
                      reward:(RPGQuestReward *)aReward
+                  getReward:(BOOL)hasGotReward
         proofImageStringURL:(NSString *)aStringURL
 {
   return [[[self alloc] initWithID:aQuestID
@@ -73,6 +78,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
                        description:aQuestDescription
                              state:aState
                             reward:aReward
+                         getReward:hasGotReward
                proofImageStringURL:aStringURL] autorelease];
 }
 
@@ -83,6 +89,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
               description:nil
                     state:0
                    reward:nil
+                getReward:YES
       proofImageStringURL:nil];
 }
 
@@ -118,6 +125,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
   {
     dictionaryRepresentation[kRPGQuestReward] = [self.reward dictionaryRepresentation];
   }
+  dictionaryRepresentation[kRPGQuestGetReward] = @(self.hasGotReward);
   if (self.proofImageStringURL)
   {
     dictionaryRepresentation[kRPGQuestProofImageStringURL] = self.proofImageStringURL;
@@ -135,6 +143,7 @@ static NSString * const kRPGQuestProofImageStringURL = @"prove_image";
               description:aDictionary[kRPGQuestDescription]
                     state:[aDictionary[kRPGQuestState] integerValue]
                    reward:reward
+                getReward:[aDictionary[kRPGQuestGetReward] boolValue]
       proofImageStringURL:aDictionary[kRPGQuestProofImageStringURL]];
 }
 

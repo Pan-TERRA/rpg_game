@@ -63,6 +63,7 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeInvalidCharacterName = 48,
   kRPGStatusCodeUndefinedSymbolsInUsername = 49,
   kRPGStatusCodeUndefinedSymbolsInCharacterName = 50,
+  
   kRPGStatusCodeDefaultError = 1337,
   
     // RPGNetworkManager Status Codes
