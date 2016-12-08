@@ -14,6 +14,7 @@ static NSString * const kRPGRegistrationRequestPassword = @"password";
 static NSString * const kRPGRegistrationRequestCharacter = @"character";
 static NSString * const kRPGRegistrationRequestCharacterName = @"name";
 static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
+static NSString * const kRPGRegistrationRequestCharacterAvatarID = @"avatar_id";
 
 @interface RPGRegistrationRequest ()
 
@@ -22,6 +23,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
 @property (nonatomic, copy, readwrite) NSString *password;
 @property (nonatomic, copy, readwrite) NSString *characterName;
 @property (nonatomic, assign, readwrite) NSInteger characterType;
+@property (nonatomic, assign, readwrite) NSInteger avatarID;
 
 @end
 
@@ -34,10 +36,12 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
                      username:(NSString *)aUsername
                 characterName:(NSString *)aCharacterName
                 characterType:(NSInteger)aCharacterType
+                     avatarID:(NSInteger)anAvatarID
 {
   self = [super init];
   
   if (aCharacterType < 0 ||
+      anAvatarID < 0 ||
       anEmail == nil ||
       aUsername == nil ||
       aPassword == nil ||
@@ -54,6 +58,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
     _password = [aPassword copy];
     _characterName = [aCharacterName copy];
     _characterType = aCharacterType;
+    _avatarID = anAvatarID;
   }
   
   return self;
@@ -64,12 +69,14 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
                                     username:(NSString *)aUsername
                                characterName:(NSString *)aCharacterName
                                characterType:(NSInteger)aCharacterType
+                                    avatarID:(NSInteger)anAvatarID
 {
   return [[[self alloc] initWithEmail:anEmail
                              password:aPassword
                              username:aUsername
                         characterName:aCharacterName
-                        characterType:aCharacterType] autorelease];
+                        characterType:aCharacterType
+                             avatarID:anAvatarID] autorelease];
 }
 
 - (instancetype)init
@@ -78,7 +85,8 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
                     password:nil
                     username:nil
                characterName:nil
-               characterType:-1];
+               characterType:-1
+                    avatarID:-1];
 }
 
 #pragma mark - Dealloc
@@ -89,6 +97,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
   [_email release];
   [_password release];
   [_characterName release];
+  
   [super dealloc];
 }
 
@@ -102,7 +111,8 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
   dictionaryRepresentation[kRPGRegistrationRequestEmail] = self.email;
   dictionaryRepresentation[kRPGRegistrationRequestPassword] = self.password;
   dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
-                                                                 kRPGRegistrationRequestCharacterType : @(self.characterType)};
+                                                                 kRPGRegistrationRequestCharacterType : @(self.characterType),
+                                                                 kRPGRegistrationRequestCharacterAvatarID : @(self.avatarID)};
   
   return dictionaryRepresentation;
 }
@@ -113,6 +123,7 @@ static NSString * const kRPGRegistrationRequestCharacterType = @"class_id";
                     password:aDictionary[kRPGRegistrationRequestPassword]
                     username:aDictionary[kRPGRegistrationRequestUsername]
                characterName:aDictionary[kRPGRegistrationRequestCharacterName]
-               characterType:[aDictionary[kRPGRegistrationRequestCharacterType] integerValue]];
+               characterType:[aDictionary[kRPGRegistrationRequestCharacterType] integerValue]
+                    avatarID:[aDictionary[kRPGRegistrationRequestCharacterAvatarID] integerValue]];
 }
 @end

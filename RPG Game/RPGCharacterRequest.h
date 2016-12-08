@@ -6,15 +6,14 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGRequest.h"
+#import <Foundation/Foundation.h>
 #import "RPGSerializable.h"
 
-extern NSString * const kRPGCharacterRequestToken;
 extern NSString * const kRPGCharacterRequestCharacterID;
 
 @interface RPGCharacterRequest : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readwrite) NSInteger characterID;
+@property (nonatomic, assign, readonly) NSInteger characterID;
 
 - (instancetype)initWithCharacterID:(NSInteger)aCharacterID NS_DESIGNATED_INITIALIZER;
 + (instancetype)characterRequestWithCharacterID:(NSInteger)aCharacterID;

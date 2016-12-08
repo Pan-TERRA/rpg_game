@@ -12,7 +12,6 @@
 
 @interface RPGSkillDescriptionViewController : UIViewController
 
-- (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation;
-+ (instancetype)viewControllerWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation;
+- (void)setViewContent:(RPGSkillRepresentation *)aSkillRepresentation;
 
 @end

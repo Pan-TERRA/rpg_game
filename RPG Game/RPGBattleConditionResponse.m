@@ -9,9 +9,10 @@
 #import "RPGBattleConditionResponse.h"
 #import "RPGMessageTypes.h"
 #import "RPGBattleReward.h"
+#import "RPGPlayerInfo.h"
 
-NSString * const kRPGBattleConditionResponseHP = @"hp";
-NSString * const kRPGBattleConditionResponseOpponentHP = @"opponent_hp";
+NSString * const kRPGBattleConditionResponsePlayerInfo = @"player_info";
+NSString * const kRPGBattleConditionResponseOpponentInfo = @"opponent_info";
 NSString * const kRPGBattleConditionResponseSkillsCondition = @"skills_condition";
 NSString * const kRPGBattleConditionResponseSkillsDamage = @"skills_damage";
 NSString * const kRPGBattleConditionResponseReward = @"reward";
@@ -21,8 +22,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 @interface RPGBattleConditionResponse ()
 
-@property (nonatomic, assign, readwrite) NSInteger HP;
-@property (nonatomic, assign, readwrite) NSInteger opponentHP;
+@property (nonatomic, retain, readwrite) RPGPlayerInfo *playerInfo;
+@property (nonatomic, retain, readwrite) RPGPlayerInfo *opponentInfo;
 @property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *mutableSkillsDamage;
 @property (nonatomic, assign, readwrite) RPGBattleStatus battleStatus;
@@ -36,31 +37,29 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 #pragma mark - Init
 
 - (instancetype)initWithType:(NSString *)aType
-                          HP:(NSInteger)aHP
-                opponentHP:(NSInteger)anOpponentHP
-           skillsCondition:(NSArray *)aSkillsCondition
-              skillsDamage:(NSDictionary *)aSkillsDamage
-              battleStatus:(RPGBattleStatus)aBattleStatus
-                    reward:(RPGBattleReward *)aReward
-                    status:(NSInteger)aStatus
-               currentTurn:(BOOL)aCurrentTurn
+                  playerInfo:(RPGPlayerInfo *)aPlayerInfo
+                opponentInfo:(RPGPlayerInfo *)anOpponentInfo
+             skillsCondition:(NSArray *)aSkillsCondition
+                skillsDamage:(NSDictionary *)aSkillsDamage
+                battleStatus:(RPGBattleStatus)aBattleStatus
+                      reward:(RPGBattleReward *)aReward
+                      status:(NSInteger)aStatus
+                 currentTurn:(BOOL)aCurrentTurn
 {
   self = [super initWithType:aType
                       status:aStatus];
   
   if (self != nil)
   {
-    if (aHP < 0 ||
-        anOpponentHP < 0 ||
-        aSkillsCondition == nil)
+    if (aSkillsCondition == nil)
     {
       [self release];
       self = nil;
     }
     else
     {
-      _HP = aHP;
-      _opponentHP = anOpponentHP;
+      _playerInfo = [aPlayerInfo retain];
+      _opponentInfo = [anOpponentInfo retain];
       _mutableSkillsCondition = [aSkillsCondition mutableCopy];
       _mutableSkillsDamage = [aSkillsDamage mutableCopy];
       _battleStatus = aBattleStatus;
@@ -76,41 +75,43 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                       status:(NSInteger)aStatus
 {
   return [self initWithType:aType
-                         HP:-1
-               opponentHP:-1
-          skillsCondition:nil
-             skillsDamage:nil
-             battleStatus:kRPGBattleStatusBattleInProgress
-                   reward:nil
-                   status:-1
-              currentTurn:NO];
+                 playerInfo:nil
+               opponentInfo:nil
+            skillsCondition:nil
+               skillsDamage:nil
+               battleStatus:kRPGBattleStatusBattleInProgress
+                     reward:nil
+                     status:-1
+                currentTurn:NO];
 }
 
 + (instancetype)battleConditionResponseWithType:(NSString *)aType
-                                             HP:(NSInteger)aHP
-                                   opponentHP:(NSInteger)anOpponentHP
-                              skillsCondition:(NSArray *)aSkillsCondition
-                                 skillsDamage:(NSDictionary *)aSkillsDamage
-                                 battleStatus:(RPGBattleStatus)aBattleStatus
-                                       reward:(RPGBattleReward *)aReward
-                                       status:(NSInteger)aStatus
-                                  currentTurn:(BOOL)aCurrentTurn
+                                     playerInfo:(RPGPlayerInfo *)aPlayerInfo
+                                   opponentInfo:(RPGPlayerInfo *)anOpponentInfo
+                                skillsCondition:(NSArray *)aSkillsCondition
+                                   skillsDamage:(NSDictionary *)aSkillsDamage
+                                   battleStatus:(RPGBattleStatus)aBattleStatus
+                                         reward:(RPGBattleReward *)aReward
+                                         status:(NSInteger)aStatus
+                                    currentTurn:(BOOL)aCurrentTurn
 {
   return [[[self alloc] initWithType:aType
-                                  HP:aHP
-                        opponentHP:anOpponentHP
-                   skillsCondition:aSkillsCondition
-                      skillsDamage:aSkillsDamage
-                      battleStatus:aBattleStatus
-                            reward:aReward
-                            status:aStatus
-                       currentTurn:aCurrentTurn] autorelease];
+                          playerInfo:aPlayerInfo
+                        opponentInfo:anOpponentInfo
+                     skillsCondition:aSkillsCondition
+                        skillsDamage:aSkillsDamage
+                        battleStatus:aBattleStatus
+                              reward:aReward
+                              status:aStatus
+                         currentTurn:aCurrentTurn] autorelease];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
+  [_playerInfo release];
+  [_opponentInfo release];
   [_mutableSkillsCondition release];
   [_mutableSkillsDamage release];
   [_reward release];
@@ -136,8 +137,8 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 {
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   
-  dictionaryRepresentation[kRPGBattleConditionResponseHP] = @(self.HP);
-  dictionaryRepresentation[kRPGBattleConditionResponseOpponentHP] = @(self.opponentHP);
+  dictionaryRepresentation[kRPGBattleConditionResponsePlayerInfo] = [self.playerInfo dictionaryRepresentation];
+  dictionaryRepresentation[kRPGBattleConditionResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
   dictionaryRepresentation[kRPGBattleConditionResponseSkillsCondition] = self.skillsCondition;
   dictionaryRepresentation[kRPGBattleConditionResponseSkillsDamage] = self.skillsDamage;
   dictionaryRepresentation[kRPGBattleConditionResponseReward] = [self.reward dictionaryRepresentation];
@@ -151,15 +152,18 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   RPGBattleReward *reward = [[[RPGBattleReward alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseReward]] autorelease];
+  RPGPlayerInfo *playerInfo = [[[RPGPlayerInfo alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponsePlayerInfo]] autorelease];
+  RPGPlayerInfo *opponentInfo = [[[RPGPlayerInfo alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleConditionResponseOpponentInfo]] autorelease];
+  
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
-                         HP:[aDictionary[kRPGBattleConditionResponseHP] integerValue]
-               opponentHP:[aDictionary[kRPGBattleConditionResponseOpponentHP] integerValue]
-          skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
-             skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]
-             battleStatus:[aDictionary[kRPGBattleConditionResponseBattleStatus] integerValue]
-                   reward:reward
-                   status:[aDictionary[kRPGBattleConditionResponseStatus] integerValue]
-              currentTurn:[aDictionary[kRPGBattleConditionResponseCurrentTurn] boolValue]];
+                 playerInfo:playerInfo
+               opponentInfo:opponentInfo
+            skillsCondition:aDictionary[kRPGBattleConditionResponseSkillsCondition]
+               skillsDamage:aDictionary[kRPGBattleConditionResponseSkillsDamage]
+               battleStatus:[aDictionary[kRPGBattleConditionResponseBattleStatus] integerValue]
+                     reward:reward
+                     status:[aDictionary[kRPGBattleConditionResponseStatus] integerValue]
+                currentTurn:[aDictionary[kRPGBattleConditionResponseCurrentTurn] boolValue]];
 }
 
 @end

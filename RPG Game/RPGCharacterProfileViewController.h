@@ -17,7 +17,8 @@
 @property (nonatomic, assign, readonly) IBOutlet UICollectionView *bagCollectionView;
 @property (nonatomic, assign, readonly) NSUInteger characterLevel;
 
-- (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID type:(RPGItemType)aType;
-- (void)addItemToBagCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType;
+- (void)handleWrongTokenError;
+- (void)handleDefaultError;
+- (void)updateCharacterAvatar;
 
 @end

@@ -21,5 +21,7 @@
   // TODO: In future add characterIDbyName: or currentCharacterID
 @property (nonatomic, readonly) NSInteger characterID;
 @property (nonatomic, readonly) NSString *characterNickName;
+@property (nonatomic, readonly) NSInteger characterClassID;
+@property (nonatomic, readonly) NSInteger characterAvatarID;
 
 @end

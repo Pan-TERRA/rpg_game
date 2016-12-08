@@ -8,12 +8,9 @@
 
 #import "RPGNetworkManager.h"
 
-@class RPGCharacterRequest;
-@class RPGSkillsResponse;
 @class RPGSkillsSelectRequest;
 
 @interface RPGNetworkManager (Skills)
-
 
 /**
  *  Fetches skill identifiers by specific character ID.
@@ -22,7 +19,8 @@
  *  @param callbackBlock Completion handler.
  */
 - (void)fetchSkillsByCharacterID:(NSInteger)aCharacterID
-               completionHandler:(void (^)(NSInteger status, NSArray *skills))callbackBlock;
+               completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                           NSArray *aSkillsArray))aCallbackBlock;
 
 /**
  *  Fetches skill info such as name, description, multiplier.
@@ -31,9 +29,10 @@
  *  @param callbackBlock Completion handler.
  */
 - (void)getSkillInfoByID:(NSInteger)anID
-       completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))callbackBlock;
+       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                   NSDictionary *aSkillInfoDictionary))aCallbackBlock;
 
 - (void)selectSkillsWithRequest:(RPGSkillsSelectRequest *)aRequest
-              completionHandler:(void (^)(RPGStatusCode, RPGSkillsResponse *))callbackBlock;
+              completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallbackBlock;
 
 @end

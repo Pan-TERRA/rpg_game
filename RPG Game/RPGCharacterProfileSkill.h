@@ -12,7 +12,7 @@
 @interface RPGCharacterProfileSkill : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSUInteger skillID;
-@property (nonatomic, assign, readonly, getter=isSelected) BOOL selected;
+@property (nonatomic, assign, readwrite, getter=isSelected) BOOL selected;
 
 - (instancetype)initWithID:(NSUInteger)aSkillID
                   selected:(BOOL)isSelected NS_DESIGNATED_INITIALIZER;

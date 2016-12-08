@@ -15,6 +15,7 @@ extern NSString * const kRPGEntityHP;
 extern NSString * const kRPGEntityMaxHP;
 extern NSString * const kRPGEntityLevel;
 
+@class RPGSkillEffect;
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
  *  object.
@@ -25,6 +26,7 @@ extern NSString * const kRPGEntityLevel;
 @property (assign, nonatomic, readwrite) NSInteger HP;
 @property (assign, nonatomic, readwrite) NSInteger maxHP;
 @property (assign, nonatomic, readwrite) NSInteger level;
+@property (retain, nonatomic, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
 
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP

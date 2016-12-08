@@ -4,6 +4,21 @@
 <dict>
 	<key>37</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -21,6 +36,21 @@
 	</dict>
 	<key>36</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>9</integer>
 		<key>description</key>
@@ -38,6 +68,21 @@
 	</dict>
 	<key>35</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -55,6 +100,21 @@
 	</dict>
 	<key>34</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -72,6 +132,21 @@
 	</dict>
 	<key>33</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -89,6 +164,21 @@
 	</dict>
 	<key>32</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -106,6 +196,21 @@
 	</dict>
 	<key>31</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>1</integer>
 		<key>description</key>
@@ -123,6 +228,21 @@
 	</dict>
 	<key>30</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -140,6 +260,21 @@
 	</dict>
 	<key>29</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -157,6 +292,21 @@
 	</dict>
 	<key>28</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -174,6 +324,21 @@
 	</dict>
 	<key>27</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -191,6 +356,21 @@
 	</dict>
 	<key>26</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -208,6 +388,21 @@
 	</dict>
 	<key>25</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -225,6 +420,21 @@
 	</dict>
 	<key>24</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -242,6 +452,21 @@
 	</dict>
 	<key>23</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -259,6 +484,21 @@
 	</dict>
 	<key>22</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -276,6 +516,21 @@
 	</dict>
 	<key>21</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -293,6 +548,21 @@
 	</dict>
 	<key>20</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -310,6 +580,21 @@
 	</dict>
 	<key>19</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -327,6 +612,21 @@
 	</dict>
 	<key>18</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -344,6 +644,21 @@
 	</dict>
 	<key>17</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>1</integer>
 		<key>description</key>
@@ -361,6 +676,21 @@
 	</dict>
 	<key>16</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>1</integer>
 		<key>description</key>
@@ -378,6 +708,21 @@
 	</dict>
 	<key>15</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -395,6 +740,21 @@
 	</dict>
 	<key>14</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -412,6 +772,21 @@
 	</dict>
 	<key>13</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -429,6 +804,21 @@
 	</dict>
 	<key>12</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>10</integer>
 		<key>description</key>
@@ -446,6 +836,21 @@
 	</dict>
 	<key>11</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -463,6 +868,21 @@
 	</dict>
 	<key>10</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -480,6 +900,21 @@
 	</dict>
 	<key>9</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>7</integer>
 		<key>description</key>
@@ -497,6 +932,21 @@
 	</dict>
 	<key>8</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -514,6 +964,21 @@
 	</dict>
 	<key>7</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -531,6 +996,21 @@
 	</dict>
 	<key>6</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>5</integer>
 		<key>description</key>
@@ -548,6 +1028,21 @@
 	</dict>
 	<key>5</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -565,6 +1060,21 @@
 	</dict>
 	<key>4</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -582,6 +1092,21 @@
 	</dict>
 	<key>3</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>3</integer>
 		<key>description</key>
@@ -599,6 +1124,21 @@
 	</dict>
 	<key>2</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>1</integer>
 		<key>description</key>
@@ -616,6 +1156,21 @@
 	</dict>
 	<key>1</key>
 	<dict>
+		<key>effects</key>
+		<array>
+			<dict>
+				<key>effect_id</key>
+				<integer>1</integer>
+				<key>duration</key>
+				<integer>2</integer>
+			</dict>
+			<dict>
+				<key>effect_id</key>
+				<integer>2</integer>
+				<key>duration</key>
+				<integer>3</integer>
+			</dict>
+		</array>
 		<key>requiredLevel</key>
 		<integer>1</integer>
 		<key>description</key>

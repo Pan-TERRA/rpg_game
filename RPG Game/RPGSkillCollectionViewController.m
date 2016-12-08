@@ -9,6 +9,8 @@
 #import "RPGSkillCollectionViewController.h"
   // Controllers
 #import "RPGCharacterProfileViewController.h"
+  //Entities
+#import "RPGCharacterProfileSkill.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -26,9 +28,23 @@ NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
   return kRPGSkillCollectionViewControllerMaxSize;
 }
 
-- (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
 {
-  [(RPGCharacterProfileViewController *)self.viewController addItemToBagCollectionWithID:anItemID type:aType];
+  switch (aType)
+  {
+    case kRPGItemTypeSkill:
+    {
+      anItem.selected = !anItem.isSelected;
+      break;
+    }
+      
+    default:
+    {
+      break;
+    }
+  }
+  
+  [self.delegate reloadCollection:nil];
 }
 
 @end

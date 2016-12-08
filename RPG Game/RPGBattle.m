@@ -16,6 +16,7 @@
 #import "RPGSFXEngine.h"
 #import "RPGBattleReward.h"
 #import "RPGBattleLog.h"
+#import "RPGPlayerInfo.h"
 
 const NSInteger kRPGBattleTurnDuration = 30;
 
@@ -60,10 +61,12 @@ const NSInteger kRPGBattleTurnDuration = 30;
 {
   [self.battleLog updateWithBattleConditionResponse:aResponse];
   
-  self.player.HP = aResponse.HP;
-  self.opponent.HP = aResponse.opponentHP;
+  self.player.HP = aResponse.playerInfo.HP;
+  self.opponent.HP = aResponse.opponentInfo.HP;
   self.currentTurn = aResponse.currentTurn;
   self.battleStatus = aResponse.battleStatus;
+  self.player.skillsEffects = aResponse.playerInfo.skillsEffects;
+  self.opponent.skillsEffects = aResponse.opponentInfo.skillsEffects;
   
   RPGBattleReward *reward = aResponse.reward;
   if (reward != nil)

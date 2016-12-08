@@ -13,6 +13,8 @@
 #import "RPGNetworkManager+Classes.h"
   // Controllers
 #import "RPGAlertController+RPGErrorHandling.h"
+#import "RPGCollectionViewController.h"
+#import "RPGAvatarCollectionViewController.h"
   // Views
 #import "RPGLoginViewController.h"
 #import "RPGMainViewController.h"
@@ -23,8 +25,6 @@
   // Constants
 #import "RPGNibNames.h"
 
-
-
 @interface RPGRegistrationViewController () <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *emailTextField;
@@ -34,6 +34,8 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
 @property (nonatomic, retain, readwrite) NSArray *classPickerData;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *avatarCollectionView;
+@property (nonatomic, retain, readwrite) RPGAvatarCollectionViewController *avatarCollectionViewController;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *submitActivityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *submitButton;
@@ -53,7 +55,8 @@
   if (self != nil)
   {
     _classInfo = [[RPGClassInfoRepresentation alloc] init];
-    _classPickerData = [NSArray array];
+    _classPickerData = [[NSArray alloc] init];
+    _avatarCollectionViewController = [[RPGAvatarCollectionViewController alloc] init];
   }
   
   return self;
@@ -64,8 +67,10 @@
 - (void)dealloc
 {
   [_classPickerData release];
+  [_avatarCollectionViewController release];
+  [_classInfo release];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
-  
+
   [super dealloc];
 }
 
@@ -89,6 +94,13 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return self.classPickerData[aRow];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView
+      didSelectRow:(NSInteger)row
+       inComponent:(NSInteger)component
+{
+  [self updateAvatarCollection];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
@@ -96,6 +108,13 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [super viewDidLoad];
   
   self.classPickerData = self.classInfo.classNames;
+  
+  UINib *cellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
+  [self.avatarCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
+                                                                                      parentViewController:self
+                                                                                       selectedAvatarIndex:0] autorelease];
+  [self updateAvatarCollection];
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -103,7 +122,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return UIInterfaceOrientationMaskLandscape;
 }
 
-#pragma mark View State
+#pragma mark - View State
 
 - (void)setViewToWaitingForServerResponseState
 {
@@ -117,7 +136,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   [self.submitActivityIndicator stopAnimating];
 }
 
-#pragma mark IBActions
+#pragma mark - IBActions
 
 - (IBAction)cancelButtonAction:(UIButton *)aSender
 {
@@ -133,6 +152,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSString *characterNameFieldText = self.characterNameTextField.text;
   NSInteger classNameIndex = [self.classPicker selectedRowInComponent:0];
   NSInteger selectedClassID = [self.classInfo classIDByName:self.classPickerData[classNameIndex]];
+  NSInteger selectedAvatarIndex = self.avatarCollectionViewController.selectedAvatarIndex + 1;
   
   if ([self textFieldsNotEmpty])
   {
@@ -144,7 +164,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
                                                                                                 password:passwordFieldText
                                                                                                 username:usernameFieldText
                                                                                            characterName:characterNameFieldText
-                                                                                           characterType:selectedClassID];
+                                                                                           characterType:selectedClassID
+                                                                                                avatarID:selectedAvatarIndex];
       
       [[RPGNetworkManager sharedNetworkManager] registerWithRequest:registrationRequest
                                                   completionHandler:^(NSInteger statusCode)
@@ -236,13 +257,6 @@ numberOfRowsInComponent:(NSInteger)aComponent
   self.characterNameTextField.text.length != 0;
 }
 
-- (NSInteger)getSelectedClassID
-{
-  NSInteger selectedClassIndex = [self.classPicker selectedRowInComponent:0];
-  
-  return [self.classPickerData[selectedClassIndex][@"id"] integerValue];
-}
-
 - (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
 {
   return aStatusCode == kRPGStatusCodeWrongEmail
@@ -259,6 +273,14 @@ numberOfRowsInComponent:(NSInteger)aComponent
   || aStatusCode == kRPGStatusCodeInvalidCharacterName
   || aStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
   || aStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
+}
+
+- (void)updateAvatarCollection
+{
+  NSInteger i = [self.classPicker selectedRowInComponent:0];
+  NSString *characterClassName = self.classPickerData[i];
+  NSInteger characterClassID = [self.classInfo classIDByName:characterClassName];
+  self.avatarCollectionViewController.characterClassID = characterClassID;
 }
 
 @end
