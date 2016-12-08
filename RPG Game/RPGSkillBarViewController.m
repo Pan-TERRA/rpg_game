@@ -78,11 +78,13 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
   {
     NSInteger index = aSender.view.tag - 1;
     RPGSkillRepresentation *skillRepresentation = self.skillRepresentations[index];
-    RPGSkillDescriptionViewController *skillDescriptionCiewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
+    RPGSkillDescriptionViewController *skillDescriptionViewController = [[[RPGSkillDescriptionViewController alloc] init] autorelease];
     
     UIViewController *parentViewController = self.parentViewController;
-    [parentViewController addChildViewController:skillDescriptionCiewController
+    [parentViewController addChildViewController:skillDescriptionViewController
                                            frame:parentViewController.view.frame];
+    
+    [skillDescriptionViewController setViewContent:skillRepresentation];
   }
 }
 

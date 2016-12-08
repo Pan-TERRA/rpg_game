@@ -70,7 +70,7 @@
   CGFloat currentWidth = self.absoluteWidth * _progress;
   CGRect currentProgressBarRect = CGRectZero;
   
-  if (self.align == kRPGProgressBarRightAlign)
+  if (self.align == kRPGProgressBarLeftAlign)
   {
     currentProgressBarRect = CGRectMake(originX,
                                         originY,

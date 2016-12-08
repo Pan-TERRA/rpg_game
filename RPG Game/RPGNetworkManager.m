@@ -39,6 +39,7 @@ NSString * const kRPGNetworkManagerAPIAcceptQuestRoute = @"/accept_quest";
 NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
 NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
+NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute = @"/get_quest_reward";
   // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
@@ -48,6 +49,10 @@ NSString * const kRPGNetworkManagerAPIClassesRoute = @"/classes";
 NSString * const kRPGNetworkManagerAPIClassInfoRoute = @"/class/";
   // Character Profile
 NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute = @"/char_profile";
+NSString * const kRPGNetworkManagerAPICharacterAvatarSelectRoute = @"/change_avatar";
+  // Shop
+NSString * const kRPGNetworkManagerAPIShopUnitsRoute = @"/shop";
+NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute = @"/unit_buy";
   // Arena
 NSString * const kRPGNetworkManagerAPIArenaSkillsRoute = @"/arena_skills";
 NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";

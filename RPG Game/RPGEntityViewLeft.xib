@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGEntityViewController">
@@ -13,12 +14,13 @@
                 <outlet property="entityLevelLabel" destination="iJV-TU-SI5" id="BE2-xc-IzJ"/>
                 <outlet property="entityLevelView" destination="WK1-R2-wr7" id="hAz-Xr-JY3"/>
                 <outlet property="entityNickName" destination="DxF-jt-rCk" id="p8G-XG-c9d"/>
+                <outlet property="skillsEffectsCollectionView" destination="ah1-Bo-ASk" id="uCU-kY-C55"/>
                 <outlet property="view" destination="iN0-l3-epB" id="IgW-Gv-Mx0"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="228" height="92"/>
+            <rect key="frame" x="0.0" y="0.0" width="220" height="123"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DxF-jt-rCk" userLabel="Player Nick Name">
@@ -28,7 +30,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Q8-zM-4oT" userLabel="Player HP bar">
-                    <rect key="frame" x="0.0" y="44" width="220" height="50"/>
+                    <rect key="frame" x="0.0" y="34" width="220" height="50"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_left" translatesAutoresizingMaskIntoConstraints="NO" id="vDT-XG-LRJ">
                             <rect key="frame" x="0.0" y="0.0" width="220" height="50"/>
@@ -41,7 +43,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="number" keyPath="align">
-                                            <integer key="value" value="0"/>
+                                            <integer key="value" value="1"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </view>
@@ -107,19 +109,47 @@
                         <constraint firstItem="vDT-XG-LRJ" firstAttribute="top" secondItem="8Q8-zM-4oT" secondAttribute="top" id="xT4-g3-e5G"/>
                     </constraints>
                 </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ah1-Bo-ASk">
+                    <rect key="frame" x="0.0" y="84" width="176" height="29"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ah1-Bo-ASk" secondAttribute="height" multiplier="6:1" id="2hF-o2-h9V"/>
+                        <constraint firstAttribute="width" secondItem="ah1-Bo-ASk" secondAttribute="height" multiplier="220:37" id="AqB-db-ko4"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="dq1-Ho-vkJ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="2hF-o2-h9V"/>
+                            <exclude reference="AqB-db-ko4"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="Ays-H3-PGL"/>
+                        <outlet property="delegate" destination="-1" id="h17-x9-r2I"/>
+                    </connections>
+                </collectionView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="8Q8-zM-4oT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="6HV-M9-yG0"/>
+                <constraint firstItem="ah1-Bo-ASk" firstAttribute="width" secondItem="8Q8-zM-4oT" secondAttribute="width" multiplier="0.8" id="DrH-7z-b40"/>
+                <constraint firstItem="8Q8-zM-4oT" firstAttribute="leading" secondItem="DxF-jt-rCk" secondAttribute="leading" id="FSo-U6-3cI"/>
+                <constraint firstItem="ah1-Bo-ASk" firstAttribute="top" secondItem="8Q8-zM-4oT" secondAttribute="bottom" id="Ham-pf-wND"/>
                 <constraint firstItem="DxF-jt-rCk" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vo4-uJ-CYN"/>
-                <constraint firstItem="8Q8-zM-4oT" firstAttribute="top" secondItem="DxF-jt-rCk" secondAttribute="bottom" constant="10" id="hGw-oB-cEu"/>
+                <constraint firstItem="8Q8-zM-4oT" firstAttribute="top" secondItem="DxF-jt-rCk" secondAttribute="bottom" id="hGw-oB-cEu"/>
+                <constraint firstItem="ah1-Bo-ASk" firstAttribute="width" secondItem="ah1-Bo-ASk" secondAttribute="height" multiplier="6:1" id="m1n-aQ-jpR"/>
+                <constraint firstItem="ah1-Bo-ASk" firstAttribute="leading" secondItem="DxF-jt-rCk" secondAttribute="leading" id="omN-uN-RQD"/>
                 <constraint firstItem="DxF-jt-rCk" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="xK0-hf-ZMe"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="48" y="130"/>
+            <point key="canvasLocation" x="44" y="169.5"/>
         </view>
     </objects>
     <resources>

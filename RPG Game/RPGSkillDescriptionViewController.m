@@ -7,6 +7,8 @@
 //
 
 #import "RPGSkillDescriptionViewController.h"
+  // Controllers
+#import "RPGSkillsEffectsCollectionViewController.h"
   // Entities
 #import "RPGSkillRepresentation.h"
   // Constants
@@ -18,8 +20,9 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *cooldownLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *multiplierLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *effectsCollectionView;
 
-@property (nonatomic, retain, readwrite) RPGSkillRepresentation* skillRepresentation;
+@property (nonatomic, retain, readwrite) RPGSkillsEffectsCollectionViewController *effectsCollectionViewController;
 
 @end
 
@@ -27,53 +30,28 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
-{
-  self = [self init];
-  
-  if (self != nil)
-  {
-    _skillRepresentation = [aSkillRepresentation retain];
-  }
-  
-  return self;
-}
-
 - (instancetype)init
 {
   return [super initWithNibName:kRPGSkillDescriptionViewControllerNIBName bundle:nil];
-}
-
-+ (instancetype)viewControllerWithSkillRepresentation:(RPGSkillRepresentation *)aSkillRepresentation
-{
-  return [[[self alloc] initWithSkillRepresentation:aSkillRepresentation] autorelease];
 }
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_skillRepresentation release];
+  [_effectsCollectionViewController release];
   
   [super dealloc];
 }
 
 #pragma mark - UIViewController
 
-- (void)viewWillAppear:(BOOL)isAnimated
-{
-  [super viewWillAppear:isAnimated];
-  
-  RPGSkillRepresentation *skill = self.skillRepresentation;
-  self.titleLabel.text = skill.name;
-  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", (long)skill.absoluteCooldown];
-  self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", skill.multiplier];
-  self.descriptionLabel.text = skill.skillDescription;
-}
-
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
+  [self.effectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
 }
 
 - (void)didReceiveMemoryWarning
@@ -81,9 +59,23 @@
   [super didReceiveMemoryWarning];
 }
 
+#pragma mark - 
+
+- (void)setViewContent:(RPGSkillRepresentation *)aSkillRepresentation
+{
+  self.titleLabel.text = aSkillRepresentation.name;
+  self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", (long)aSkillRepresentation.cooldown];
+  self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", aSkillRepresentation.multiplier];
+  self.descriptionLabel.text = aSkillRepresentation.skillDescription;
+  self.effectsCollectionViewController = [[[RPGSkillsEffectsCollectionViewController alloc]
+                                           initWithCollectionView:self.effectsCollectionView
+                                           skillsEffects:aSkillRepresentation.effects
+                                           align:kRPGSkillsEffectsCollectionViewAlignRight] autorelease];
+}
+
 #pragma mark - Actions
 
-- (IBAction)removeViewControllerFromParent:(UITapGestureRecognizer *)recognizer
+- (IBAction)removeViewControllerFromParent:(UITapGestureRecognizer *)aRecognizer
 {
   [self.view removeFromSuperview];
   [self removeFromParentViewController];

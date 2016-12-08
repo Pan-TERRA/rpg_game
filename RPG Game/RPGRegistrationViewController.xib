@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGRegistrationViewController">
             <connections>
+                <outlet property="avatarCollectionView" destination="rwS-bS-9ia" id="WZP-RG-G7E"/>
                 <outlet property="characterNameTextField" destination="klf-Ub-H1u" id="Ye0-Fq-BCU"/>
                 <outlet property="classPicker" destination="kDh-Rc-IQc" id="EEa-px-add"/>
                 <outlet property="confirmPasswordTextField" destination="jg5-Of-sug" id="kIh-x9-MAx"/>
@@ -23,26 +24,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aof-43-j00">
-                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rXL-dV-CSz" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="736" height="615"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="730"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="X8E-Pq-ZSr">
-                                    <rect key="frame" x="0.0" y="0.0" width="736" height="615"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="730"/>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x9m-Pi-Yeg" userLabel="Registration View Title">
-                                    <rect key="frame" x="166" y="5" width="404" height="65"/>
+                                    <rect key="frame" x="230" y="5" width="564" height="65"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_menu_title" translatesAutoresizingMaskIntoConstraints="NO" id="3fc-qO-Sxf">
-                                            <rect key="frame" x="0.0" y="0.0" width="404" height="65"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="564" height="65"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrh-JT-Wrk">
-                                            <rect key="frame" x="131" y="11" width="143" height="33"/>
+                                            <rect key="frame" x="211" y="11" width="143" height="33"/>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="28"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -59,16 +60,16 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jmy-Vo-d5s" userLabel="Registration Form Container">
-                                    <rect key="frame" x="110" y="90" width="516" height="485"/>
+                                    <rect key="frame" x="154" y="90" width="716" height="600"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-Pq-o1Z" userLabel="Email Input Container">
-                                            <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="Zqs-Sq-kdo">
-                                                    <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="hqJ-Of-aAA">
-                                                    <rect key="frame" x="25" y="10" width="476" height="30"/>
+                                                    <rect key="frame" x="25" y="10" width="676" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -98,13 +99,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ron-KR-mFa" userLabel="Username Input Container">
-                                            <rect key="frame" x="0.0" y="70" width="516" height="50"/>
+                                            <rect key="frame" x="0.0" y="70" width="716" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="gvF-Ui-AQJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="DCR-cw-nHU">
-                                                    <rect key="frame" x="25" y="10" width="476" height="30"/>
+                                                    <rect key="frame" x="25" y="10" width="676" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -133,13 +134,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RmL-aP-Ekc" userLabel="Password Input Container">
-                                            <rect key="frame" x="0.0" y="140" width="516" height="50"/>
+                                            <rect key="frame" x="0.0" y="140" width="716" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="QXG-Nr-wh4">
-                                                    <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KPV-m7-euA">
-                                                    <rect key="frame" x="25" y="10" width="476" height="30"/>
+                                                    <rect key="frame" x="25" y="10" width="676" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -168,13 +169,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cbe-kc-obe" userLabel="Confirm Password Input Container">
-                                            <rect key="frame" x="0.0" y="210" width="516" height="50"/>
+                                            <rect key="frame" x="0.0" y="210" width="716" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="og3-Fz-98m">
-                                                    <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm password" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jg5-Of-sug">
-                                                    <rect key="frame" x="25" y="10" width="476" height="30"/>
+                                                    <rect key="frame" x="25" y="10" width="676" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -203,13 +204,13 @@
                                             </constraints>
                                         </view>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7HH-3r-XxZ" userLabel="Character Name Input Container">
-                                            <rect key="frame" x="0.0" y="280" width="516" height="50"/>
+                                            <rect key="frame" x="0.0" y="280" width="716" height="50"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="YGR-c2-bVB">
-                                                    <rect key="frame" x="0.0" y="0.0" width="516" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="716" height="50"/>
                                                 </imageView>
                                                 <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Character name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="klf-Ub-H1u">
-                                                    <rect key="frame" x="25" y="10" width="476" height="30"/>
+                                                    <rect key="frame" x="25" y="10" width="676" height="30"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
@@ -237,13 +238,14 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Class:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="61i-fj-u2I">
-                                            <rect key="frame" x="237" y="340" width="42" height="20"/>
+                                            <rect key="frame" x="337" y="340" width="42" height="20"/>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
-                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kDh-Rc-IQc">
-                                            <rect key="frame" x="0.0" y="370" width="516" height="60"/>
+                                            <rect key="frame" x="0.0" y="370" width="716" height="60"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="60" id="d2e-nF-XVi"/>
                                             </constraints>
@@ -253,7 +255,7 @@
                                             </connections>
                                         </pickerView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCW-E8-h9A">
-                                            <rect key="frame" x="0.0" y="445" width="100" height="40"/>
+                                            <rect key="frame" x="0.0" y="560" width="100" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="Pag-t9-V83"/>
                                                 <constraint firstAttribute="width" constant="100" id="qQV-db-qGz"/>
@@ -264,11 +266,10 @@
                                             </state>
                                             <connections>
                                                 <action selector="cancelButtonAction:" destination="-1" eventType="touchUpInside" id="FCA-xG-1hn"/>
-                                                <action selector="submitButtonAction:" destination="-1" eventType="touchUpInside" id="uxY-12-Z1w"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VR6-e4-NmN">
-                                            <rect key="frame" x="416" y="445" width="100" height="40"/>
+                                            <rect key="frame" x="616" y="560" width="100" height="40"/>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                             <state key="normal" title="Submit" backgroundImage="main_button_inactive">
                                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -278,20 +279,38 @@
                                             </connections>
                                         </button>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="w0c-jW-2P1">
-                                            <rect key="frame" x="381" y="455" width="20" height="20"/>
+                                            <rect key="frame" x="581" y="570" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="BAE-oq-ge0"/>
                                                 <constraint firstAttribute="width" secondItem="w0c-jW-2P1" secondAttribute="height" multiplier="1:1" id="JFd-gq-AlA"/>
                                             </constraints>
                                         </activityIndicatorView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Avatar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvP-Mm-7np">
+                                            <rect key="frame" x="334" y="440" width="48" height="20"/>
+                                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                                            <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="rwS-bS-9ia">
+                                            <rect key="frame" x="0.0" y="470" width="716" height="80"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="IWZ-4C-5e8">
+                                                <size key="itemSize" width="50" height="50"/>
+                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            </collectionViewFlowLayout>
+                                        </collectionView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="VR6-e4-NmN" firstAttribute="centerY" secondItem="MCW-E8-h9A" secondAttribute="centerY" id="08y-ND-E7h"/>
+                                        <constraint firstItem="KvP-Mm-7np" firstAttribute="top" secondItem="kDh-Rc-IQc" secondAttribute="bottom" constant="10" id="0wh-hF-DMs"/>
                                         <constraint firstItem="cbe-kc-obe" firstAttribute="top" secondItem="RmL-aP-Ekc" secondAttribute="bottom" constant="20" id="23e-ur-pbK"/>
                                         <constraint firstItem="7HH-3r-XxZ" firstAttribute="height" secondItem="afZ-Pq-o1Z" secondAttribute="height" id="2bE-UO-6b3"/>
                                         <constraint firstItem="ron-KR-mFa" firstAttribute="leading" secondItem="afZ-Pq-o1Z" secondAttribute="leading" id="3gX-2r-gjC"/>
                                         <constraint firstItem="MCW-E8-h9A" firstAttribute="leading" secondItem="afZ-Pq-o1Z" secondAttribute="leading" id="3tz-qS-JqM"/>
+                                        <constraint firstItem="rwS-bS-9ia" firstAttribute="top" secondItem="KvP-Mm-7np" secondAttribute="bottom" constant="10" id="5FN-k0-OYM"/>
                                         <constraint firstItem="afZ-Pq-o1Z" firstAttribute="leading" secondItem="jmy-Vo-d5s" secondAttribute="leading" id="5LL-Jw-0BK"/>
                                         <constraint firstItem="RmL-aP-Ekc" firstAttribute="height" secondItem="afZ-Pq-o1Z" secondAttribute="height" id="5Y6-PP-E5Q"/>
                                         <constraint firstItem="61i-fj-u2I" firstAttribute="centerX" secondItem="jmy-Vo-d5s" secondAttribute="centerX" id="6TM-gV-B5x"/>
@@ -303,18 +322,24 @@
                                         <constraint firstAttribute="bottom" secondItem="MCW-E8-h9A" secondAttribute="bottom" id="9Rp-id-mXS"/>
                                         <constraint firstItem="61i-fj-u2I" firstAttribute="top" secondItem="7HH-3r-XxZ" secondAttribute="bottom" constant="10" id="BAQ-eG-ogH"/>
                                         <constraint firstItem="kDh-Rc-IQc" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="GJt-id-qRE"/>
+                                        <constraint firstItem="rwS-bS-9ia" firstAttribute="leading" secondItem="afZ-Pq-o1Z" secondAttribute="leading" id="HvG-m2-W9d"/>
                                         <constraint firstItem="RmL-aP-Ekc" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="IQX-Vy-oc0"/>
                                         <constraint firstItem="7HH-3r-XxZ" firstAttribute="leading" secondItem="afZ-Pq-o1Z" secondAttribute="leading" id="OJM-j9-YHA"/>
                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="MCW-E8-h9A" secondAttribute="bottom" id="SdS-Ih-mnw"/>
                                         <constraint firstAttribute="trailing" secondItem="afZ-Pq-o1Z" secondAttribute="trailing" id="Uon-j4-3dB"/>
+                                        <constraint firstItem="KvP-Mm-7np" firstAttribute="top" secondItem="7HH-3r-XxZ" secondAttribute="bottom" constant="10" id="aax-IQ-lFu"/>
                                         <constraint firstItem="VR6-e4-NmN" firstAttribute="width" secondItem="MCW-E8-h9A" secondAttribute="width" id="b4t-Ks-u55"/>
                                         <constraint firstItem="kDh-Rc-IQc" firstAttribute="top" secondItem="61i-fj-u2I" secondAttribute="bottom" constant="10" id="cED-gi-yQ4"/>
+                                        <constraint firstItem="rwS-bS-9ia" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="de9-fA-uWS"/>
                                         <constraint firstItem="cbe-kc-obe" firstAttribute="leading" secondItem="afZ-Pq-o1Z" secondAttribute="leading" id="gKL-Ly-cd9"/>
                                         <constraint firstItem="7HH-3r-XxZ" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="hJV-dw-t7p"/>
+                                        <constraint firstItem="KvP-Mm-7np" firstAttribute="centerX" secondItem="jmy-Vo-d5s" secondAttribute="centerX" id="hxW-bu-wkp"/>
                                         <constraint firstItem="cbe-kc-obe" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="jPB-rQ-Tbl"/>
+                                        <constraint firstItem="MCW-E8-h9A" firstAttribute="top" secondItem="rwS-bS-9ia" secondAttribute="bottom" constant="10" id="jfS-pR-eh7"/>
                                         <constraint firstItem="ron-KR-mFa" firstAttribute="width" secondItem="afZ-Pq-o1Z" secondAttribute="width" id="ksK-q5-eMd"/>
                                         <constraint firstItem="7HH-3r-XxZ" firstAttribute="top" secondItem="cbe-kc-obe" secondAttribute="bottom" constant="20" id="l1d-Gu-RpB"/>
-                                        <constraint firstAttribute="height" constant="485" id="ml7-9Q-vko"/>
+                                        <constraint firstAttribute="height" constant="600" id="ml7-9Q-vko"/>
+                                        <constraint firstItem="61i-fj-u2I" firstAttribute="top" secondItem="7HH-3r-XxZ" secondAttribute="bottom" constant="10" id="nme-OG-k4Y"/>
                                         <constraint firstItem="ron-KR-mFa" firstAttribute="height" secondItem="afZ-Pq-o1Z" secondAttribute="height" id="pdl-pQ-QwE"/>
                                         <constraint firstItem="VR6-e4-NmN" firstAttribute="centerY" secondItem="w0c-jW-2P1" secondAttribute="centerY" id="pol-At-lbp"/>
                                         <constraint firstItem="MCW-E8-h9A" firstAttribute="top" secondItem="kDh-Rc-IQc" secondAttribute="bottom" constant="15" id="q7h-tH-eRs"/>
@@ -325,7 +350,10 @@
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
+                                            <exclude reference="BAQ-eG-ogH"/>
+                                            <exclude reference="aax-IQ-lFu"/>
                                             <exclude reference="SdS-Ih-mnw"/>
+                                            <exclude reference="q7h-tH-eRs"/>
                                         </mask>
                                     </variation>
                                 </view>
@@ -365,17 +393,9 @@
                 <constraint firstItem="jmy-Vo-d5s" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="xOW-UA-uXL"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="RPD-bb-vuJ" appends="YES" id="zRs-53-NjD"/>
-            </connections>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="iPad"/>
             <point key="canvasLocation" x="53" y="30"/>
         </view>
-        <tapGestureRecognizer id="RPD-bb-vuJ">
-            <connections>
-                <action selector="userTappedView:" destination="-1" id="3A4-zo-ZOC"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="Label Item Dark Brown" width="268" height="50"/>

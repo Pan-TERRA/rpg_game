@@ -36,6 +36,7 @@ extern NSString * const kRPGNetworkManagerAPIAcceptQuestRoute;
 extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute;
   // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
@@ -45,9 +46,14 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
   // Character Profile
 extern NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute;
 extern NSString * const kRPGNetworkManagerAPISelectSkillsRoute;
+extern NSString * const kRPGNetworkManagerAPICharacterAvatarSelectRoute;
   // Constants
 extern NSString * const kRPGRequestToken;
 extern NSString * const kRPGNetworkManagerStatus;
+  // Shop
+extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
+extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
+  //Arena
 extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
 extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
