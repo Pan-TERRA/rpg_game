@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
                   actionTitle:(NSString *)anActionTitle
             completionHandler:(void(^ __nullable)(void))aCompletionHandler;
 
-
 @end
 
 NS_ASSUME_NONNULL_END
