@@ -848,7 +848,6 @@
 				28A915241DC76963001E0F51 /* Quests */,
 				28A915251DC76968001E0F51 /* Authorization */,
 				28A915261DC76970001E0F51 /* Registration */,
-				281849FE1DF87EB6002EF22D /* Shop */,
 			);
 			name = "Network Communication";
 			sourceTree = "<group>";
@@ -1392,8 +1391,8 @@
 				28A6F9B31DF02958008519AA /* RPGEntityViewController.h */,
 				28A6F9B41DF02958008519AA /* RPGEntityViewController.m */,
 				28A6F9BB1DF04800008519AA /* RPGEntityViewRight.xib */,
-				281849ED1DF87BCA002EF22D /* SkillEffects CollectionView Controller */,
 				28A6F9B91DF02BE7008519AA /* RPGEntityViewLeft.xib */,
+				281849ED1DF87BCA002EF22D /* SkillEffects CollectionView Controller */,
 			);
 			name = "Entity ViewController";
 			sourceTree = "<group>";
@@ -1562,6 +1561,7 @@
 				28149A111DB1008100C26881 /* Battle */,
 				28E9D90C1DE59C55006C7688 /* Arena */,
 				28149A121DB100B900C26881 /* Settings */,
+				281849FE1DF87EB6002EF22D /* Shop */,
 			);
 			name = View;
 			sourceTree = "<group>";
