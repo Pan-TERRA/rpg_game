@@ -224,10 +224,13 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
       {
         RPGCharacterProfileSkill *skill = array[row];
         RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skill.skillID];
-        RPGSkillDescriptionViewController *skillDescriptionViewController = [RPGSkillDescriptionViewController viewControllerWithSkillRepresentation:skillRepresentation];
+        RPGSkillDescriptionViewController *skillDescriptionViewController = [[[RPGSkillDescriptionViewController alloc] init] autorelease];
         
         UIViewController *parentViewController = (UIViewController *)self.delegate;
-        [parentViewController addChildViewController:skillDescriptionViewController frame:parentViewController.view.frame];
+        [parentViewController addChildViewController:skillDescriptionViewController
+                                               frame:parentViewController.view.frame];
+        
+        [skillDescriptionViewController setViewContent:skillRepresentation];
       }
     }
   }
