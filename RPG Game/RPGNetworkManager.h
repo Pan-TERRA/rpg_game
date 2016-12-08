@@ -45,6 +45,13 @@ extern NSString * const kRPGNetworkManagerAPIClassInfoRoute;
   // Character Profile
 extern NSString * const kRPGNetworkManagerAPICharacterProfileInfoRoute;
 extern NSString * const kRPGNetworkManagerAPISelectSkillsRoute;
+  // Friends
+extern NSString * const kRPGNetworkManagerAPIFriendsRoute;
+extern NSString * const kRPGNetworkManagerAPIAddFriendRoute;
+extern NSString * const kRPGNetworkManagerAPICancelFriendRequestRoute;
+extern NSString * const kRPGNetworkManagerAPIDeleteFriendRoute;
+extern NSString * const kRPGNetworkManagerAPIAcceptFriendRequestRoute;
+extern NSString * const kRPGNetworkManagerAPISkipFriendRequestRoute;
   // Constants
 extern NSString * const kRPGRequestToken;
 extern NSString * const kRPGNetworkManagerStatus;

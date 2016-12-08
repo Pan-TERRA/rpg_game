@@ -13,6 +13,14 @@
 @class RPGFriendRequest;
 @class RPGFriendConfirmRequest;
 
+typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
+{
+  kRPGFriendsNetworkActionCancelFriendRequest,
+  kRPGFriendsNetworkActionDeleteFriendRequest,
+  kRPGFriendsNetworkActionAcceptFriendRequest,
+  kRPGFriendsNetworkActionSkipFriendRequest
+};
+
 @interface RPGNetworkManager (Friends)
 
 - (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode status, NSArray *friends))callbackBlock;
@@ -20,12 +28,14 @@
 - (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
-- (void)confirmFriendWithRequest:(RPGFriendConfirmRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+- (void)doFriendAction:(RPGFriendsNetworkAction)anAction
+           withRequest:(RPGFriendRequest *)aRequest
+     completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
 - (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
          completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
 - (void)confirmQuestChallengeWith:(RPGFriendConfirmRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+
 @end

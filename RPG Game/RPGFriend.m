@@ -9,22 +9,25 @@
 #import "RPGFriend.h"
 
 NSString * const kRPGFriendID = @"friend_id";
-NSString * const kRPGFriendUserName = @"user_name";
-NSString * const kRPGFriendCharacterName = @"character_name";
-NSString * const kRPGFriendAvatar = @"avatar";
-NSString * const kRPGFriendState = @"state";
-NSString * const kRPGFriendLevel = @"level";
-NSString * const kRPGFriendOnline = @"online";
+NSString * const kRPGFriendUserName = @"username";
+NSString * const kRPGFriendState = @"status";
+NSString * const kRPGFriendOnline = @"is_online";
+NSString * const kRPGFriendCharacter = @"character";
+NSString * const kRPGFriendCharacterName = @"name";
+NSString * const kRPGFriendCharacterLevel = @"lvl";
+NSString * const kRPGFriendCharacterClassID = @"class_id";
+NSString * const kRPGFriendCharacterAvatar = @"avatar_id";
 
 @interface RPGFriend ()
 
 @property (nonatomic, assign, readwrite) NSUInteger friendID;
 @property (nonatomic, copy, readwrite) NSString *userName;
 @property (nonatomic, copy, readwrite) NSString *characterName;
-@property (nonatomic, copy, readwrite) NSString *avatar;
+@property (nonatomic, assign, readwrite) NSInteger avatarID;
 @property (nonatomic, assign, readwrite) RPGFriendState state;
 @property (nonatomic, assign, readwrite) NSInteger level;
 @property (nonatomic, assign, readwrite, getter=isOnline) BOOL online;
+@property (nonatomic, assign, readwrite) NSInteger classID;
 
 @end
 
@@ -35,10 +38,11 @@ NSString * const kRPGFriendOnline = @"online";
 - (instancetype)initWithID:(NSUInteger)aFriendID
                   userName:(NSString *)aUserName
              characterName:(NSString *)aCharacterName
-                    avatar:(NSString *)anAvatar
+                  avatarID:(NSInteger)anAvatarID
                      state:(RPGFriendState)aState
                      level:(NSInteger)aLevel
                     online:(BOOL)isOnline
+                   classID:(NSInteger)aClassID
 {
   self = [super init];
   
@@ -47,10 +51,11 @@ NSString * const kRPGFriendOnline = @"online";
     _friendID = aFriendID;
     _userName = [aUserName copy];
     _characterName = [aCharacterName copy];
-    _avatar = [anAvatar copy];
+    _avatarID = anAvatarID;
     _state = aState;
     _level = aLevel;
     _online = isOnline;
+    _classID = aClassID;
   }
   
   return self;
@@ -59,18 +64,20 @@ NSString * const kRPGFriendOnline = @"online";
 + (instancetype)friendWithID:(NSUInteger)aFriendID
                     userName:(NSString *)aUserName
                characterName:(NSString *)aCharacterName
-                      avatar:(NSString *)anAvatar
+                    avatarID:(NSInteger)anAvatarID
                        state:(RPGFriendState)aState
                        level:(NSInteger)aLevel
                       online:(BOOL)isOnline
+                     classID:(NSInteger)aClassID
 {
   return [[[self alloc] initWithID:aFriendID
                           userName:aUserName
                      characterName:aCharacterName
-                            avatar:anAvatar
+                            avatarID:anAvatarID
                              state:aState
                              level:aLevel
-                            online:isOnline] autorelease];
+                            online:isOnline
+                           classID:aClassID] autorelease];
 }
 
 - (instancetype)init
@@ -78,10 +85,11 @@ NSString * const kRPGFriendOnline = @"online";
   return [self initWithID:-1
                  userName:nil
             characterName:nil
-                   avatar:nil
+                   avatarID:-1
                     state:0
                     level:-1
-                   online:NO];
+                   online:NO
+                  classID:-1];
 }
 
 #pragma mark - Dealloc
@@ -90,7 +98,6 @@ NSString * const kRPGFriendOnline = @"online";
 {
   [_userName release];
   [_characterName release];
-  [_avatar release];
   
   [super dealloc];
 }
@@ -102,11 +109,16 @@ NSString * const kRPGFriendOnline = @"online";
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   dictionaryRepresentation[kRPGFriendID] = @(self.friendID);
   dictionaryRepresentation[kRPGFriendUserName] = self.userName;
-  dictionaryRepresentation[kRPGFriendCharacterName] = self.characterName;
-  dictionaryRepresentation[kRPGFriendAvatar] = self.avatar;
   dictionaryRepresentation[kRPGFriendState] = @(self.state);
-  dictionaryRepresentation[kRPGFriendLevel] = @(self.level);
   dictionaryRepresentation[kRPGFriendOnline] = @(self.isOnline);
+  
+  NSMutableDictionary *characterRepresetation = [NSMutableDictionary dictionary];
+  characterRepresetation[kRPGFriendCharacterName] = self.characterName;
+  characterRepresetation[kRPGFriendCharacterLevel] = @(self.level);
+  characterRepresetation[kRPGFriendCharacterClassID] = @(self.classID);
+  characterRepresetation[kRPGFriendCharacterAvatar] = @(self.avatarID);
+  
+  dictionaryRepresentation[kRPGFriendCharacter] = characterRepresetation;
   
   return dictionaryRepresentation;
 }
@@ -114,20 +126,25 @@ NSString * const kRPGFriendOnline = @"online";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   NSUInteger friendID = [aDictionary[kRPGFriendID] integerValue];
-  NSString *userName = aDictionary[kRPGFriendUserName];
-  NSString *characterName = aDictionary[kRPGFriendCharacterName];
-  NSString *avatar = aDictionary[kRPGFriendAvatar];
   NSUInteger state = [aDictionary[kRPGFriendState] integerValue];
-  NSInteger level = [aDictionary[kRPGFriendLevel] integerValue];
+  NSString *userName = aDictionary[kRPGFriendUserName];
   BOOL online = [aDictionary[kRPGFriendOnline] boolValue];
+  
+  NSDictionary *characterRepresentation = aDictionary[kRPGFriendCharacter];
+  
+  NSString *characterName = characterRepresentation[kRPGFriendCharacterName];
+  NSInteger level = [characterRepresentation[kRPGFriendCharacterLevel] integerValue];
+  NSInteger classID = [characterRepresentation[kRPGFriendCharacterClassID] integerValue];
+  NSInteger avatarID = [characterRepresentation[kRPGFriendCharacterAvatar] integerValue];
   
   return [self initWithID:friendID
                  userName:userName
             characterName:characterName
-                   avatar:avatar
+                 avatarID:avatarID
                     state:state
                     level:level
-                   online:online];
+                   online:online
+                  classID:classID];
 }
 
 @end

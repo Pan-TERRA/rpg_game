@@ -21,7 +21,7 @@
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
-                             @"UnknownRoute"];
+                             kRPGNetworkManagerAPIFriendsRoute];
   
   NSURLRequest *request = [self requestWithObject:@{}
                                         URLstring:requestString
@@ -123,9 +123,11 @@
 - (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
+  
+#warning - server conflict
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
-                             @"UnknownRoute"];
+                             kRPGNetworkManagerAPIAddFriendRoute];
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
@@ -220,17 +222,58 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)confirmFriendWithRequest:(RPGFriendConfirmRequest *)aRequest
-               completionHandler:(void (^)(RPGStatusCode status))callbackBlock
+- (void)doFriendAction:(RPGFriendsNetworkAction)anAction
+     withRequest:(RPGFriendRequest *)aRequest
+completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@%@",
-                             kRPGNetworkManagerAPIHost,
-                             @"UnknownRoute"];
+  NSString *requestString = nil;
+  
+  switch (anAction)
+  {
+    case kRPGFriendsNetworkActionCancelFriendRequest:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPICancelFriendRequestRoute];
+      break;
+    }
+      
+    case kRPGFriendsNetworkActionDeleteFriendRequest:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIDeleteFriendRoute];
+      break;
+    }
+      
+    case kRPGFriendsNetworkActionAcceptFriendRequest:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                                 kRPGNetworkManagerAPIHost,
+                                 kRPGNetworkManagerAPIAcceptFriendRequestRoute];
+      break;
+    }
+      
+    case kRPGFriendsNetworkActionSkipFriendRequest:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIAcceptFriendRequestRoute];
+      break;
+    }
+      
+    default:
+    {
+      requestString = [NSString string];
+      
+      break;
+    }
+  }
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
                                            method:@"POST"
-                                      shouldInjectToken:YES];
+                                shouldInjectToken:YES];
   
   NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
   NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
@@ -297,7 +340,7 @@
     }
     
     RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
-                                             initWithDictionaryRepresentation:responseDictionary] autorelease];
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
@@ -314,7 +357,7 @@
        });
     }
   }];
-  
+
   [task resume];
   
   [session finishTasksAndInvalidate];
