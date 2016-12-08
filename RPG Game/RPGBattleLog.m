@@ -53,13 +53,12 @@ NSString * const kRPGBattleLogDamage = @"damage";
   
   if (skillDamage != nil)
   {
-    RPGBattleAction *action = [[RPGBattleAction alloc] initWithMyTurn:!aResponse.currentTurn
+    RPGBattleAction *action = [[[RPGBattleAction alloc] initWithMyTurn:!aResponse.currentTurn
                                                               skillID:[skillDamage[kRPGBattleLogSkillID] integerValue]
-                                                               damage:[skillDamage[kRPGBattleLogDamage] integerValue]];
+                                                               damage:[skillDamage[kRPGBattleLogDamage] integerValue]] autorelease];
     if (action != nil)
     {
       [self addAction:action];
-      [action release];
     }
   }
 }
@@ -83,9 +82,9 @@ NSString * const kRPGBattleLogDamage = @"damage";
   [self.mutableActions addObject:anObject];
 }
 
-- (void)removeObjectFromActionsAtIndex:(NSUInteger)index
+- (void)removeObjectFromActionsAtIndex:(NSUInteger)anIndex
 {
-  [self.mutableActions removeObjectAtIndex:index];
+  [self.mutableActions removeObjectAtIndex:anIndex];
 }
 
 @end

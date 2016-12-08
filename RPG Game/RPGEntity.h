@@ -9,23 +9,24 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Entities
+@class RPGSkillEffect;
 
 extern NSString * const kRPGEntityName;
 extern NSString * const kRPGEntityHP;
 extern NSString * const kRPGEntityMaxHP;
 extern NSString * const kRPGEntityLevel;
 
-@class RPGSkillEffect;
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
  *  object.
  */
 @interface RPGEntity : NSObject <RPGSerializable>
 
-@property (nonatomic, copy, readwrite) NSString *name;
+@property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, assign, readwrite) NSInteger HP;
-@property (nonatomic, assign, readwrite) NSInteger maxHP;
-@property (nonatomic, assign, readwrite) NSInteger level;
+@property (nonatomic, assign, readonly) NSInteger maxHP;
+@property (nonatomic, assign, readonly) NSInteger level;
 @property (nonatomic, retain, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
 
 - (instancetype)initWithName:(NSString *)aName

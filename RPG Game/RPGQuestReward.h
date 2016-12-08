@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import "RPGResources.h"
+  // Misc
 #import "RPGSerializable.h"
 
 @interface RPGQuestReward : RPGResources <RPGSerializable>

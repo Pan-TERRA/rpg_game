@@ -7,8 +7,10 @@
 //
 
 #import "RPGPlayer.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
+  // Entities
 #import "RPGSkill.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 static NSString * const kRPGPlayerSkills = @"skills";
 
@@ -82,14 +84,14 @@ static NSString * const kRPGPlayerSkills = @"skills";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
   if (self.skills)
   {
     dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
   }
   
-  return [dictionaryRepresentation autorelease];
+  return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary

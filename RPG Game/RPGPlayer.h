@@ -7,8 +7,9 @@
 //
 
 #import "RPGEntity.h"
+  // Misc
 #import "RPGSerializable.h"
-
+  // Entities
 @class RPGSkill;
 
 /**

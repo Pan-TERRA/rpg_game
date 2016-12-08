@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+  // Entities
 @class RPGBattleAction;
 @class RPGBattleConditionResponse;
 

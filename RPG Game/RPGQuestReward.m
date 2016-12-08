@@ -24,7 +24,8 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
                     crystals:(NSInteger)aCrystals
                      skillID:(NSInteger)aSkillID
 {
-  self = [super initWithGold:aGold crystals:aCrystals];
+  self = [super initWithGold:aGold
+                    crystals:aCrystals];
   
   if (self != nil)
   {

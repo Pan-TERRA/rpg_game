@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 typedef NS_ENUM(NSUInteger, RPGQuestState)
@@ -19,7 +20,7 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateReviewedFalse,
   kRPGQuestStateForReview = 6 // ???: sho
 };
-
+  // Entities
 @class RPGQuestReward;
 
 @interface RPGQuest : NSObject <RPGSerializable>

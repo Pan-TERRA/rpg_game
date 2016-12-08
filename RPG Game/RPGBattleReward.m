@@ -24,7 +24,8 @@ static NSString * const kRPGBattleRewardExp = @"exp";
                     crystals:(NSInteger)aCrystals
                          exp:(NSInteger)anExp
 {
-  self = [super initWithGold:aGold crystals:aCrystals];
+  self = [super initWithGold:aGold
+                    crystals:aCrystals];
   
   if (self != nil)
   {

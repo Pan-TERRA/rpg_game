@@ -20,4 +20,5 @@
 
 - (instancetype)initWithSkillID:(NSInteger)aSkillID;
 + (instancetype)skillWithSkillID:(NSInteger)aSkillID;
+
 @end
