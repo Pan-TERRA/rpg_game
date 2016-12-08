@@ -6,9 +6,19 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RPGFriendsBasicTableViewCell.h"
 
+@class RPGFriendsTableViewCellIncoming;
+
+@protocol RPGFriendsTableViewCellIncomingDelegate <NSObject>
+
+- (void)acceptFriendRequestButtonDidPressOnCell:(RPGFriendsTableViewCellIncoming *)aCell;
+- (void)skipFriendRequestButtonDidPressOnCell:(RPGFriendsTableViewCellIncoming *)aCell;
+
+@end
+
 @interface RPGFriendsTableViewCellIncoming : RPGFriendsBasicTableViewCell
+
+@property (nonatomic, assign, readwrite) id<RPGFriendsTableViewCellIncomingDelegate> delegate;
 
 @end

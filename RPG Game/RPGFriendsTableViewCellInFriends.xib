@@ -60,6 +60,9 @@
                             <constraint firstAttribute="width" secondItem="TW1-AY-Yu9" secondAttribute="height" multiplier="1:1" id="JVq-bc-eva"/>
                         </constraints>
                         <state key="normal" backgroundImage="quest_icon"/>
+                        <connections>
+                            <action selector="questChallengeButtonAction:" destination="QS8-k2-kHX" eventType="touchUpInside" id="vBB-La-2Wc"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FVn-fK-f3U">
                         <rect key="frame" x="424" y="34" width="46" height="46"/>
@@ -73,6 +76,9 @@
                                 <exclude reference="Xvd-uV-XEI"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="removeFromFriendsButtonAction:" destination="QS8-k2-kHX" eventType="touchUpInside" id="ggu-I0-NlN"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

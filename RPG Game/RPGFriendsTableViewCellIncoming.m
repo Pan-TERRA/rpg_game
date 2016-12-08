@@ -10,15 +10,14 @@
 
 @implementation RPGFriendsTableViewCellIncoming
 
-- (void)awakeFromNib
+- (IBAction)acceptFriendRequestButtonAction:(UIButton *)sender
 {
-  [super awakeFromNib];
-
+  [self.delegate acceptFriendRequestButtonDidPressOnCell:self];
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+- (IBAction)skipFriendRequestButtonAction:(UIButton *)sender
 {
-  [super setSelected:selected animated:animated];
+  [self.delegate skipFriendRequestButtonDidPressOnCell:self];
 }
 
 @end

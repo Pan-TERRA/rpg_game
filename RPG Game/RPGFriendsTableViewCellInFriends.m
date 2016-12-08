@@ -10,9 +10,14 @@
 
 @implementation RPGFriendsTableViewCellInFriends
 
-
-- (void)dealloc
+- (IBAction)questChallengeButtonAction:(UIButton *)sender
 {
-  [super dealloc];
+  [self.delegate questChallengeButtonDidPressOnCell:self];
 }
+
+- (IBAction)removeFromFriendsButtonAction:(UIButton *)sender
+{
+  [self.delegate removeFromFriendsButtonDidPressOnCell:self];
+}
+
 @end

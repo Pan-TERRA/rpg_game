@@ -60,6 +60,9 @@
                             <constraint firstAttribute="width" secondItem="ujF-BU-h3N" secondAttribute="height" multiplier="1:1" id="dyE-4b-SsU"/>
                         </constraints>
                         <state key="normal" backgroundImage="confirm_icon_inactive"/>
+                        <connections>
+                            <action selector="acceptFriendRequestButtonAction:" destination="YRE-Z3-TJe" eventType="touchUpInside" id="gBy-4M-C26"/>
+                        </connections>
                     </button>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWN-zM-2lA">
                         <rect key="frame" x="424" y="34" width="46" height="46"/>
@@ -73,6 +76,9 @@
                                 <exclude reference="E7z-JU-5Bg"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="skipFriendRequestButtonAction:" destination="YRE-Z3-TJe" eventType="touchUpInside" id="8kz-bu-vDI"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>

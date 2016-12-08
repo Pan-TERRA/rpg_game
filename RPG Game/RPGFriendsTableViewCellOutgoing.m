@@ -10,14 +10,9 @@
 
 @implementation RPGFriendsTableViewCellOutgoing
 
-- (void)awakeFromNib
+- (IBAction)cancelFriendRequestButtonAction:(UIButton *)sender
 {
-  [super awakeFromNib];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-  [super setSelected:selected animated:animated];
+  [self.delegate cancelFriendRequestButtonDidPressOnCell:self];
 }
 
 @end

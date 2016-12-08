@@ -66,6 +66,9 @@
                                 <exclude reference="SIg-pL-nnh"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <action selector="cancelFriendRequestButtonAction:" destination="5Mf-ZV-yKS" eventType="touchUpInside" id="ze8-aV-QSo"/>
+                        </connections>
                     </button>
                 </subviews>
                 <constraints>
