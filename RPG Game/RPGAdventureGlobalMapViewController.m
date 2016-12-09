@@ -7,7 +7,7 @@
 //
 
 #import "RPGAdventureGlobalMapViewController.h"
-  // View controllers
+  // Controllers
 #import "RPGLocationMapViewController.h"
   // Misc
 #import "UIView+RPGColorOfPoint.h"
@@ -23,8 +23,6 @@
 
 @interface RPGAdventureGlobalMapViewController ()
 
-#pragma - Outlets
-
   // View outlets
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *maskImageView;
 
@@ -39,7 +37,7 @@
   return [self initWithNibName:kRPGAdventureGlobalMapViewControllerNIBName bundle:nil];
 }
 
-#pragma mark - Actions
+#pragma mark - IBActions
 
 - (IBAction)backAction:(UIButton *)sender
 {
@@ -53,7 +51,8 @@
   CGPoint tapLocation = [gestureRecognizer locationInView:gestureRecognizer.view];
   UIColor *tappedLocationColor = [self.maskImageView colorOfPoint:tapLocation];
   NSInteger tappedLocationID = [self getMapLocationIDWithColor:tappedLocationColor];
-  RPGLocationMapViewController *locationMapViewController = [[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID];
+  
+  RPGLocationMapViewController *locationMapViewController = [[[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID] autorelease];
   
   if (locationMapViewController != nil)
   {
@@ -61,8 +60,6 @@
                        animated:YES
                      completion:nil];
   }
-  
-  [locationMapViewController release];
 
   NSLog(@"%ld", tappedLocationID);
 }
@@ -70,21 +67,38 @@
 - (NSInteger)getMapLocationIDWithColor:(UIColor *)aColor
 {
   NSInteger result = -1;
-  NSArray<UIColor *> *mapLocationColors = @[
-                                 GLOBAL_MAP_LOCATION1_MASK_COLOR,
-                                 GLOBAL_MAP_LOCATION2_MASK_COLOR,
-                                 GLOBAL_MAP_LOCATION3_MASK_COLOR,
-                                 GLOBAL_MAP_LOCATION4_MASK_COLOR
-                                 ];
+  
+  NSArray *mapLocationColors = [RPGAdventureGlobalMapViewController mapLocationColors];
+  
   for (NSInteger i = 0; i < mapLocationColors.count; i++)
   {
     if ([aColor isEqualToColor:mapLocationColors[i]])
     {
       result = i + 1;
+      break;
     }
   }
   
   return result;
+}
+
+#pragma mark - Constants
+
++ (NSArray<UIColor *> *)mapLocationColors
+{
+  static NSArray *mapLocationColors = nil;
+  
+  if (mapLocationColors == nil)
+  {
+    mapLocationColors = [[NSArray alloc] initWithObjects:
+                         GLOBAL_MAP_LOCATION1_MASK_COLOR,
+                         GLOBAL_MAP_LOCATION2_MASK_COLOR,
+                         GLOBAL_MAP_LOCATION3_MASK_COLOR,
+                         GLOBAL_MAP_LOCATION4_MASK_COLOR
+                         , nil];
+  }
+  
+  return mapLocationColors;
 }
 
 @end

@@ -1,10 +1,10 @@
-//
-//  RPGLocationMapViewController.m
-//  RPG Game
-//
-//  Created by Степан Супинский on 12/3/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGLocationMapViewController.m
+  //  RPG Game
+  //
+  //  Created by Степан Супинский on 12/3/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGLocationMapViewController.h"
   // API
@@ -23,7 +23,7 @@
 @property (readwrite, assign, nonatomic) NSInteger chosenBattleplaceID;
 @property (readwrite, retain, nonatomic) NSMutableArray<RPGBattleplaceView *> *battleplaceViews;
 
-#pragma mark Outlets
+  // Outlets
 
 @property (readwrite, assign, nonatomic) IBOutlet UIButton *toBattleButton;
 
@@ -39,11 +39,11 @@
 
 - (instancetype)initWithLocationID:(NSInteger)locationID
 {
-  // Check if location with given ID exists
+    // Check if location with given ID exists
   if (locationID > 0 && locationID <= 1)
   {
     NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, locationID];
-    self = [super initWithNibName:NIBName bundle:nil];
+    self = [self initWithNibName:NIBName bundle:nil];
     
     if (self != nil)
     {
@@ -92,13 +92,14 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   self.battleplaceViews = [NSMutableArray arrayWithObjects:
-                                           self.battleplaceView1,
-                                           self.battleplaceView2,
+                           self.battleplaceView1,
+                           self.battleplaceView2,
                            nil];
 }
 
-#pragma mark Actions
+#pragma mark - IBActions
 
 - (IBAction)backAction:(UIButton *)sender
 {
@@ -107,7 +108,7 @@
 
 - (IBAction)toBattleAction:(UIButton *)sender
 {
-  //TODO: battle init with location id and battleplace id (no API yet)
+    //TODO: battle init with location id and battleplace id (no API yet)
   NSLog(@"Battle!");
   
   RPGBattleControllerGenerator *adventuresControllerGenerator = [[RPGAdventuresControllerGenerator alloc] init];
@@ -123,17 +124,17 @@
 
 - (IBAction)battleplaceClickAction:(UIButton *)sender
 {
-  // Clear selection
+    // Clear selection
   for (RPGBattleplaceView *battleplaceView in self.battleplaceViews)
   {
     battleplaceView.selectedMarkImageView.hidden = YES;
   }
   
-  // Set selection
+    // Set selection
   RPGBattleplaceView *clickedBattleplaceView = (RPGBattleplaceView *)sender.superview;
   clickedBattleplaceView.selectedMarkImageView.hidden = NO;
   
-  // Get battleplace ID and set it to property
+    // Get battleplace ID and set it to property
   NSInteger clickedBattleplaceID = clickedBattleplaceView.tag;
   self.chosenBattleplaceID = clickedBattleplaceID;
   
