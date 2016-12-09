@@ -36,7 +36,8 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGLoginViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGLoginViewControllerNIBName
+                         bundle:nil];
   
   if (self != nil)
   {
@@ -50,7 +51,9 @@
         case kRPGStatusCodeOK:
         {
           RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
-          [weakSelf presentViewController:mainViewController animated:YES completion:nil];
+          [weakSelf presentViewController:mainViewController
+                                 animated:YES
+                               completion:nil];
           [weakSelf.emailInputField setText:@""];
           [weakSelf.passwordInputField setText:@""];
           break;
@@ -58,7 +61,7 @@
           
         default:
         {
-          if ([self canHandleStatusCode:aNetworkStatusCode])
+          if ([self canHandleNetworkStatusCode:aNetworkStatusCode])
           {
             [RPGAlertController showErrorWithStatusCode:aNetworkStatusCode
                                       completionHandler:nil];
@@ -126,18 +129,17 @@
   }
 }
 
-- (IBAction)forgotPasswordAction:(UIButton *)sender
+- (IBAction)forgotPasswordAction:(UIButton *)aSender
 {
   
 }
 
 - (IBAction)signupAction:(UIButton *)aSender
 {
-  RPGRegistrationViewController *registrationViewController = [[RPGRegistrationViewController alloc] init];
+  RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc] init] autorelease];
   [self presentViewController:registrationViewController
                      animated:YES
                    completion:nil];
-  [registrationViewController release];
 }
 
 - (IBAction)loginAction:(UIButton *)aSender
@@ -149,12 +151,8 @@
   {
     [self setViewToWaitingForServerResponseState];
     
-    RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest
-                                             authorizationRequestWithEmail:email
-                                             password:password];
-    
-    [[RPGNetworkManager sharedNetworkManager] loginWithRequest:request
-                                             completionHandler:self.loginCompletionHandler];
+    [self loginActionWithEmail:email
+                      password:password];
   }
 }
 
@@ -173,7 +171,8 @@
 
 #pragma mark - API
 
-- (void)loginActionWithEmail:(NSString *)anEmail password:(NSString *)aPassword
+- (void)loginActionWithEmail:(NSString *)anEmail
+                    password:(NSString *)aPassword
 {
   
   RPGAuthorizationLoginRequest *request = [RPGAuthorizationLoginRequest
@@ -186,11 +185,11 @@
 
 #pragma mark - Helper Methods
 
-- (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
+- (BOOL)canHandleNetworkStatusCode:(RPGStatusCode)aNetworkStatusCode
 {
-  return aStatusCode == kRPGStatusCodeWrongEmail
-  || aStatusCode == kRPGStatusCodeUserDoesNotExist
-  || aStatusCode == kRPGStatusCodeWrongPassword;
+  return aNetworkStatusCode == kRPGStatusCodeWrongEmail
+  || aNetworkStatusCode == kRPGStatusCodeUserDoesNotExist
+  || aNetworkStatusCode == kRPGStatusCodeWrongPassword;
 }
 
 @end

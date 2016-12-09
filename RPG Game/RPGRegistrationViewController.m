@@ -33,7 +33,7 @@
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *confirmPasswordTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UITextField *characterNameTextField;
 @property (nonatomic, assign, readwrite) IBOutlet UIPickerView *classPicker;
-@property (nonatomic, retain, readwrite) NSArray *classPickerData;
+@property (nonatomic, retain, readwrite) NSArray<NSString *> *classPickerData;
 @property (nonatomic, assign, readwrite) IBOutlet UICollectionView *avatarCollectionView;
 @property (nonatomic, retain, readwrite) RPGAvatarCollectionViewController *avatarCollectionViewController;
 
@@ -94,9 +94,9 @@ numberOfRowsInComponent:(NSInteger)aComponent
   return self.classPickerData[aRow];
 }
 
-- (void)pickerView:(UIPickerView *)pickerView
-      didSelectRow:(NSInteger)row
-       inComponent:(NSInteger)component
+- (void)pickerView:(UIPickerView *)aPickerView
+      didSelectRow:(NSInteger)aRow
+       inComponent:(NSInteger)aComponent
 {
   [self updateAvatarCollection];
 }
@@ -109,10 +109,12 @@ numberOfRowsInComponent:(NSInteger)aComponent
   
   self.classPickerData = self.classInfo.classNames;
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
-  [self.avatarCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.avatarCollectionView registerNib:cellNIB
+              forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  
   self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarCollectionView
-                                                                                      parentViewController:self
                                                                                        selectedAvatarIndex:0] autorelease];
   [self updateAvatarCollection];
 }
@@ -176,9 +178,8 @@ numberOfRowsInComponent:(NSInteger)aComponent
          {
            case kRPGStatusCodeOK:
            {
-             RPGAuthorizationLoginRequest *loginRequest = [[RPGAuthorizationLoginRequest alloc] initWithEmail:emailFieldText
-                                                                                                     password:passwordFieldText];
-             [loginRequest autorelease];
+             RPGAuthorizationLoginRequest *loginRequest = [RPGAuthorizationLoginRequest authorizationRequestWithEmail:emailFieldText
+                                                                                                             password:passwordFieldText];
              [[RPGNetworkManager sharedNetworkManager] loginWithRequest:loginRequest
                                                       completionHandler:^(RPGStatusCode aNetworkStatusCode)
               {
@@ -188,7 +189,9 @@ numberOfRowsInComponent:(NSInteger)aComponent
                   {
                     
                     RPGMainViewController *mainViewController = [[[RPGMainViewController alloc] init] autorelease];
-                    [self presentViewController:mainViewController animated:YES completion:nil];
+                    [self presentViewController:mainViewController
+                                       animated:YES
+                                     completion:nil];
                     break;
                   }
                     
@@ -206,7 +209,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
              
            default:
            {
-             if ([self canHandleStatusCode:aNetworkStatusCode])
+             if ([self canHandleNetworkStatusCode:aNetworkStatusCode])
              {
                [RPGAlertController showErrorWithStatusCode:aNetworkStatusCode
                                          completionHandler:nil];
@@ -240,39 +243,39 @@ numberOfRowsInComponent:(NSInteger)aComponent
 
 #pragma mark - Helper Methods
 
-- (void)showErrorWithMessage:(NSString *)message
+- (void)showErrorWithMessage:(NSString *)aMessage
 {
   [RPGAlertController showAlertWithTitle:nil
-                                 message:message
+                                 message:aMessage
                              actionTitle:nil
                               completion:nil];
 }
 
 - (BOOL)textFieldsNotEmpty
 {
-  return self.emailTextField.text.length != 0 &&
-  self.usernameTextField.text.length != 0 &&
-  self.passwordTextField.text.length != 0 &&
-  self.confirmPasswordTextField.text.length != 0 &&
-  self.characterNameTextField.text.length != 0;
+  return self.emailTextField.text.length != 0
+  && self.usernameTextField.text.length != 0
+  && self.passwordTextField.text.length != 0
+  && self.confirmPasswordTextField.text.length != 0
+  && self.characterNameTextField.text.length != 0;
 }
 
-- (BOOL)canHandleStatusCode:(RPGStatusCode)aStatusCode
+- (BOOL)canHandleNetworkStatusCode:(RPGStatusCode)aNetworkStatusCode
 {
-  return aStatusCode == kRPGStatusCodeWrongEmail
-  || aStatusCode == kRPGStatusCodeWrongJSON
-  || aStatusCode == kRPGStatusCodeEmailAlreadyTaken
-  || aStatusCode == kRPGStatusCodeUsernameAlreadyTaken
-  || aStatusCode == kRPGStatusCodeTooShortUsername
-  || aStatusCode == kRPGStatusCodeTooLongUsername
-  || aStatusCode == kRPGStatusCodeTooShortPassword
-  || aStatusCode == kRPGStatusCodeTooLongPassword
-  || aStatusCode == kRPGStatusCodeTooShortCharacterName
-  || aStatusCode == kRPGStatusCodeTooLongCharacterName
-  || aStatusCode == kRPGStatusCodeInvalidUsername
-  || aStatusCode == kRPGStatusCodeInvalidCharacterName
-  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
-  || aStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
+  return aNetworkStatusCode == kRPGStatusCodeWrongEmail
+  || aNetworkStatusCode == kRPGStatusCodeWrongJSON
+  || aNetworkStatusCode == kRPGStatusCodeEmailAlreadyTaken
+  || aNetworkStatusCode == kRPGStatusCodeUsernameAlreadyTaken
+  || aNetworkStatusCode == kRPGStatusCodeTooShortUsername
+  || aNetworkStatusCode == kRPGStatusCodeTooLongUsername
+  || aNetworkStatusCode == kRPGStatusCodeTooShortPassword
+  || aNetworkStatusCode == kRPGStatusCodeTooLongPassword
+  || aNetworkStatusCode == kRPGStatusCodeTooShortCharacterName
+  || aNetworkStatusCode == kRPGStatusCodeTooLongCharacterName
+  || aNetworkStatusCode == kRPGStatusCodeInvalidUsername
+  || aNetworkStatusCode == kRPGStatusCodeInvalidCharacterName
+  || aNetworkStatusCode == kRPGStatusCodeUndefinedSymbolsInUsername
+  || aNetworkStatusCode == kRPGStatusCodeUndefinedSymbolsInCharacterName;
 }
 
 - (void)updateAvatarCollection
@@ -280,6 +283,7 @@ numberOfRowsInComponent:(NSInteger)aComponent
   NSInteger i = [self.classPicker selectedRowInComponent:0];
   NSString *characterClassName = self.classPickerData[i];
   NSInteger characterClassID = [self.classInfo classIDByName:characterClassName];
+  
   self.avatarCollectionViewController.characterClassID = characterClassID;
 }
 
