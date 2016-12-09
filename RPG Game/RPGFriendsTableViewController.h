@@ -11,10 +11,13 @@
 #import "RPGFriendsState.h"
 
 @class RPGFriendsModelController;
+@class RPGFriendsTableViewController;
 
 @protocol RPGFriendsTableViewControllerDelegate <NSObject>
 
 @property (nonatomic, assign, readonly) RPGFriendsListState activeState;
+
+- (void)needUpdateFriendsList:(RPGFriendsTableViewController *)friendsTableViewController;
 
 @end
 
