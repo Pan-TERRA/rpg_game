@@ -92,6 +92,8 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
 {
   [super viewWillAppear:animated];
   [self addChildViewController:self.friendsTableViewController view:self.tableViewContainer];
+  
+  [self fetchFriends];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -152,7 +154,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
         
       case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
+        NSString *message = @"Can't update friends list.\nWrong token error.\nTry to log in again.";
         [RPGAlertController showAlertWithTitle:nil
                                        message:message
                                    actionTitle:nil
@@ -170,7 +172,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
         
       default:
       {
-        NSString *message = @"Can't update quest list.";
+        NSString *message = @"Can't update friends list.";
         [RPGAlertController showAlertWithTitle:nil
                                        message:message
                                    actionTitle:nil
@@ -280,7 +282,6 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
     _activeState = activeState;
     
     [self updateButtonsState];
-    
     [self.friendsTableViewController reloadTable];
   }
 }
