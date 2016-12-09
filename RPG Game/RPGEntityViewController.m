@@ -10,8 +10,13 @@
   // Controllers
 #import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGSkillsEffectsCollectionViewController.h"
+#import "RPGSkillEffectDescriptionViewController.h"
+#import "UIViewController+RPGChildViewController.h"
+  // Views
+#import "RPGSkillsEffectsCollectionViewCell.h"
   // Entities
 #import "RPGPlayer.h"
+#import "RPGSkillEffectRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -127,6 +132,29 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
     self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
     self.skillsEffectsCollectionViewController.skillsEffects = self.entity.skillsEffects;
     [self.skillsEffectsCollectionView reloadData];
+  }
+}
+
+#pragma mark - Actions
+
+- (IBAction)handleTapGesture:(UITapGestureRecognizer *)aRecognizer
+{
+  UICollectionView *collectionView = self.skillsEffectsCollectionView;
+  CGPoint point = [aRecognizer locationInView:collectionView];
+  NSIndexPath *path = [self.skillsEffectsCollectionView indexPathForItemAtPoint:point];
+  RPGSkillsEffectsCollectionViewCell *cell = (RPGSkillsEffectsCollectionViewCell *)[collectionView cellForItemAtIndexPath:path];
+  
+  if (cell != nil)
+  {
+    RPGSkillEffectDescriptionViewController *skillEffectDescriptionViewController = [[[RPGSkillEffectDescriptionViewController alloc] init] autorelease];
+    
+    RPGSkillEffectRepresentation *skillEffectRepresentation = [[[RPGSkillEffectRepresentation alloc] initWithSkillEffectID:cell.skillEffectID] autorelease];
+    
+    UIViewController *parentViewController = self.parentViewController;
+    [parentViewController addChildViewController:skillEffectDescriptionViewController
+                                           frame:parentViewController.view.frame];
+    
+    [skillEffectDescriptionViewController setViewContent:skillEffectRepresentation];
   }
 }
 
