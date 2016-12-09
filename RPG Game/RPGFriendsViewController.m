@@ -22,9 +22,10 @@
 #import "UIViewController+RPGChildViewController.h"
 #import "RPGAlertController.h"
 
-typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
+typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionary *> *);
 
-@interface RPGFriendsViewController () <RPGFriendsTableViewControllerDelegate>
+@interface RPGFriendsViewController () <RPGFriendsTableViewControllerDelegate,
+                                        RPGAddFriendViewControllerDelegate>
 
   // Table View controls
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *allFriendButton;
@@ -54,9 +55,9 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
   if (self != nil)
   {
     _addFriendViewController = [RPGAddFriendViewController new];
+    _addFriendViewController.delegate = self;
     
     _friendsModelController = [RPGFriendsModelController new];
-    [_friendsModelController setData:[self sampleData]];
     
     _friendsTableViewController = [[RPGFriendsTableViewController alloc] initWithFriendsModelController:_friendsModelController];
     _friendsTableViewController.delegate = self;
@@ -244,32 +245,30 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
   }
 }
 
-#pragma mark - Helper Methods
+#pragma mark - View State
 
-- (NSMutableArray<RPGFriend *> *)sampleData
+- (void)setViewToWaitingForServerResponseState
 {
-  NSMutableArray *result = [NSMutableArray array];
-  for (NSInteger i = 0; i < 25; i ++)
-  {
-    NSString *userName = [NSString stringWithFormat:@"UserName - %li", (long)i];
-    NSString *characterName = [NSString stringWithFormat:@"CharacterName - %li", (long)i];
-    NSInteger avatarID = i % 10;
-    RPGFriendState state = i % 3;
-    NSInteger level = (i * 5 + i % 3) % 11;
-    BOOL online = i % 2;
-    NSInteger classID = i % 2 + 1;
-    RPGFriend *friend = [RPGFriend friendWithID:i
-                                       userName:userName
-                                  characterName:characterName
-                                       avatarID:avatarID
-                                          state:state
-                                          level:level
-                                         online:online
-                                        classID:classID];
-    [result addObject:friend];
-  }
-  
-  return result;
+  [self.activityIndicator startAnimating];
+}
+
+- (void)setViewToNormalState
+{
+  [self.activityIndicator stopAnimating];
+}
+
+#pragma mark - RPGAddFriendViewControllerDelegate
+
+- (void)friendDidAdd:(RPGAddFriendViewController *)anAddFriendViewController
+{
+  [self fetchFriends];
+}
+
+#pragma mark - RPGFriendsTableViewControllerDelegate
+
+- (void)needUpdateFriendsList:(RPGFriendsTableViewController *)friendsTableViewController
+{
+  [self fetchFriends];
 }
 
 #pragma mark - Accessors
