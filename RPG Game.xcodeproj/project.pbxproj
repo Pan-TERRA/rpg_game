@@ -140,6 +140,10 @@
 		AE5E468A1DEF438900546256 /* RPGCharacterAvatarSelectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46891DEF438900546256 /* RPGCharacterAvatarSelectRequest.m */; };
 		AE5E468F1DF041AB00546256 /* RPGAvatarSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E468D1DF041AB00546256 /* RPGAvatarSelectViewController.m */; };
 		AE5E46901DF041AB00546256 /* RPGAvatarSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5E468E1DF041AB00546256 /* RPGAvatarSelectViewController.xib */; };
+		AE5E46B01DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46AE1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.m */; };
+		AE5E46B11DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5E46AF1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.xib */; };
+		AE5E46B51DFB181800546256 /* RPGSkillEffectRepresentation.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46B41DFB181800546256 /* RPGSkillEffectRepresentation.m */; };
+		AE5E46B81DFB192600546256 /* RPGSkillsEffectsInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE5E46B71DFB192600546256 /* RPGSkillsEffectsInfo.plist */; };
 		AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68001DBA773100715480 /* RPGQuestRequest.m */; };
 		AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */; };
 		AE8076381DB5360400AF5E5B /* RPGQuestListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */; };
@@ -451,6 +455,12 @@
 		AE5E468C1DF041AB00546256 /* RPGAvatarSelectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAvatarSelectViewController.h; sourceTree = "<group>"; };
 		AE5E468D1DF041AB00546256 /* RPGAvatarSelectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAvatarSelectViewController.m; sourceTree = "<group>"; };
 		AE5E468E1DF041AB00546256 /* RPGAvatarSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGAvatarSelectViewController.xib; sourceTree = "<group>"; };
+		AE5E46AD1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillEffectDescriptionViewController.h; sourceTree = "<group>"; };
+		AE5E46AE1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillEffectDescriptionViewController.m; sourceTree = "<group>"; };
+		AE5E46AF1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillEffectDescriptionViewController.xib; sourceTree = "<group>"; };
+		AE5E46B31DFB181800546256 /* RPGSkillEffectRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillEffectRepresentation.h; sourceTree = "<group>"; };
+		AE5E46B41DFB181800546256 /* RPGSkillEffectRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillEffectRepresentation.m; sourceTree = "<group>"; };
+		AE5E46B71DFB192600546256 /* RPGSkillsEffectsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGSkillsEffectsInfo.plist; sourceTree = "<group>"; };
 		AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestRequest.h; sourceTree = "<group>"; };
 		AE5E68001DBA773100715480 /* RPGQuestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestRequest.m; sourceTree = "<group>"; };
 		AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGQuestListState.h; sourceTree = "<group>"; };
@@ -649,7 +659,9 @@
 				D0819AC21DD6182A00021DB9 /* Skill Bar ViewController */,
 				28A6F9C01DF08A5D008519AA /* Reward ViewController */,
 				28AB94AB1DDEF90D00F1503B /* Settings Modal */,
+				AE5E46AC1DFB026000546256 /* Skill Effect Description ViewController */,
 				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
+				AE5E46B61DFB181C00546256 /* Skill Effect Representation */,
 				283D191A1DD5FEC3008C5396 /* Skill Representation */,
 				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
@@ -1170,6 +1182,7 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
+				AE5E46B71DFB192600546256 /* RPGSkillsEffectsInfo.plist */,
 				2A6F2AC41DDA07B70036CD2D /* RPGLogTemplates.txt */,
 				877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */,
 				28E9D9141DE5D1E8006C7688 /* RPGClassInfo.plist */,
@@ -1887,6 +1900,25 @@
 			name = "Select Avatar";
 			sourceTree = "<group>";
 		};
+		AE5E46AC1DFB026000546256 /* Skill Effect Description ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E46AD1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.h */,
+				AE5E46AE1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.m */,
+				AE5E46AF1DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.xib */,
+			);
+			name = "Skill Effect Description ViewController";
+			sourceTree = "<group>";
+		};
+		AE5E46B61DFB181C00546256 /* Skill Effect Representation */ = {
+			isa = PBXGroup;
+			children = (
+				AE5E46B31DFB181800546256 /* RPGSkillEffectRepresentation.h */,
+				AE5E46B41DFB181800546256 /* RPGSkillEffectRepresentation.m */,
+			);
+			name = "Skill Effect Representation";
+			sourceTree = "<group>";
+		};
 		AE87B59B1DE861830019E416 /* Battle Reward */ = {
 			isa = PBXGroup;
 			children = (
@@ -2177,6 +2209,7 @@
 				AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */,
 				289C42D71DE20C6700E35506 /* RPGCharacterProfileViewController.xib in Resources */,
 				2A6F2AC51DDA07B70036CD2D /* RPGLogTemplates.txt in Resources */,
+				AE5E46B11DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.xib in Resources */,
 				28184A0F1DF87EDE002EF22D /* RPGShopViewController.xib in Resources */,
 				877C86531DC8CF61004B4A00 /* RPGSkillsInfo.plist in Resources */,
 				28149A1D1DB1011300C26881 /* RPGRegistrationViewController.xib in Resources */,
@@ -2185,6 +2218,7 @@
 				28A6F9CB1DF1929D008519AA /* RPGBattleTimerViewController.xib in Resources */,
 				281849F81DF87C93002EF22D /* RPGSkillsEffectsCollectionViewCell.xib in Resources */,
 				AEFC27EA1DDF379900905ADD /* RPGWaitingViewController.xib in Resources */,
+				AE5E46B81DFB192600546256 /* RPGSkillsEffectsInfo.plist in Resources */,
 				28A6F9BA1DF02BE7008519AA /* RPGEntityViewLeft.xib in Resources */,
 				28E9D9151DE5D1E8006C7688 /* RPGClassInfo.plist in Resources */,
 				D0CFEE691DB65B6100C61D0B /* Sounds.bundle in Resources */,
@@ -2374,6 +2408,7 @@
 				28A915611DC7B921001E0F51 /* RPGClassInfoResponse.m in Sources */,
 				28A6F9CA1DF1929D008519AA /* RPGBattleTimerViewController.m in Sources */,
 				28A915531DC7B8F3001E0F51 /* RPGNetworkManager+Classes.m in Sources */,
+				AE5E46B51DFB181800546256 /* RPGSkillEffectRepresentation.m in Sources */,
 				28184A301DFAF32D002EF22D /* RPGBattleplaceView.m in Sources */,
 				2A6F2AE41DE219BD0036CD2D /* RPGNetworkManager+Arena.m in Sources */,
 				28AB94891DD8A8EB00F1503B /* RPGBattleController.m in Sources */,
@@ -2393,6 +2428,7 @@
 				28A5A0DF1DB9186B000EF49F /* RPGQuest.m in Sources */,
 				2817233D1DB5005500F74403 /* RPGQuestProofImageViewController.m in Sources */,
 				28184A121DF87EDE002EF22D /* RPGShopCollectionViewController.m in Sources */,
+				AE5E46B01DFB02AE00546256 /* RPGSkillEffectDescriptionViewController.m in Sources */,
 				28AB949D1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m in Sources */,
 				289C42DE1DE20C6700E35506 /* RPGCollectionViewController.m in Sources */,
 				2A32D32E1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.m in Sources */,
