@@ -58,7 +58,7 @@ NSString * const kRPGNetworkManagerAPIArenaSkillsRoute = @"/arena_skills";
 NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
 // Friends
 NSString * const kRPGNetworkManagerAPIFriendsRoute = @"/friends";
-NSString * const kRPGNetworkManagerAPIAddFriendRoute = @"/friend_send_request";
+NSString * const kRPGNetworkManagerAPIAddFriendRoute = @"/friend_add_request";
 NSString * const kRPGNetworkManagerAPICancelFriendRequestRoute = @"/friend_cancel_request";
 NSString * const kRPGNetworkManagerAPIDeleteFriendRoute = @"/friend_delete";
 NSString * const kRPGNetworkManagerAPIAcceptFriendRequestRoute = @"/friend_accept_request";
