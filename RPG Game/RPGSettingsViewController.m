@@ -43,6 +43,7 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].playing;
   self.musicVolumeSlider.value = [RPGBackgroundMusicController sharedBackgroundMusicController].volume;
   
@@ -64,19 +65,20 @@
 
 - (IBAction)back:(id)aSender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES
+                           completion:nil];
 }
 
 - (IBAction)logOut
 {
-  RPGNetworkManager *networkManager = [RPGNetworkManager sharedNetworkManager];
-  [networkManager logoutWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode)
+  [[RPGNetworkManager sharedNetworkManager] logoutWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode)
    {
      switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                  completionHandler:^
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
@@ -98,7 +100,8 @@
 
        case kRPGStatusCodeWrongJSON:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON completionHandler:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongJSON
+                                   completionHandler:nil];
          break;
        }
          

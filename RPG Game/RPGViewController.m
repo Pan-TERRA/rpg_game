@@ -8,17 +8,17 @@
 
 #import "RPGViewController.h"
 
-static CGFloat kRPGViewControllerContentInsetsGap = 10.0;
-
-@interface RPGViewController ()
-
-@end
+static CGFloat const kRPGViewControllerContentInsetsGap = 10.0;
 
 @implementation RPGViewController
 
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - Init
+
+- (instancetype)initWithNibName:(NSString *)aNibNameOrNil
+                         bundle:(NSBundle *)aNibBundleOrNil
 {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  self = [super initWithNibName:aNibNameOrNil
+                         bundle:aNibBundleOrNil];
   
   if (self != nil)
   {
@@ -36,7 +36,7 @@ static CGFloat kRPGViewControllerContentInsetsGap = 10.0;
   return self;
 }
 
-
+#pragma mark - Dealloc
 
 - (void)dealloc
 {
@@ -45,16 +45,16 @@ static CGFloat kRPGViewControllerContentInsetsGap = 10.0;
   [super dealloc];
 }
 
+#pragma mark - UIViewController
+
 - (void)viewDidLoad
 {
   [super viewDidLoad];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Keyboard Notifications

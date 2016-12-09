@@ -17,31 +17,21 @@
   // Constants
 #import "RPGNibNames.h"
 
-@interface RPGInitialScreenViewController ()
-
-@end
-
 @implementation RPGInitialScreenViewController
 
 #pragma mark - Init
 
 - (instancetype)init
-{
-  self = [super init];
-  
-  if (self != nil)
-  {
-    [self initWithNibName:kRPGInitialScreenViewControllerNIBName bundle:nil];
-  }
-  
-  return self;
+{  
+  return [super initWithNibName:kRPGInitialScreenViewControllerNIBName
+                         bundle:nil];
 }
 
 #pragma mark - UIViewController
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)anAnimated
 {
-  [super viewDidAppear:animated];
+  [super viewDidAppear:anAnimated];
   
   [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL anIsValidFlag)
    {

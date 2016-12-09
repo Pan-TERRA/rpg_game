@@ -15,10 +15,10 @@
 
 @interface RPGQuickSettingsViewController ()
 
-@property (retain, nonatomic) IBOutlet UISlider *musicVolumeSlider;
-@property (retain, nonatomic) IBOutlet UISlider *soundVolumeSlider;
-@property (retain, nonatomic) IBOutlet UISwitch *musicSwitch;
-@property (retain, nonatomic) IBOutlet UISwitch *soundSwitch;
+@property (nonatomic, assign, readwrite) IBOutlet UISlider *musicVolumeSlider;
+@property (nonatomic, assign, readwrite) IBOutlet UISlider *soundVolumeSlider;
+@property (nonatomic, assign, readwrite) IBOutlet UISwitch *musicSwitch;
+@property (nonatomic, assign, readwrite) IBOutlet UISwitch *soundSwitch;
 
 @end
 
@@ -28,7 +28,8 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGQuickSettingsViewControllerNIBName bundle:nil];
+  return [super initWithNibName:kRPGQuickSettingsViewControllerNIBName
+                         bundle:nil];
 }
 
 #pragma mark - Dealloc
@@ -60,15 +61,17 @@
   [RPGSFXEngine sharedSFXEngine].volume = aSender.value;
 }
 
-- (IBAction)back:(UIButton *)sender
+- (IBAction)back:(UIButton *)aSender
 {
   [self.view removeFromSuperview];
 }
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   self.musicSwitch.on = [RPGBackgroundMusicController sharedBackgroundMusicController].playing;
   self.musicVolumeSlider.value = [RPGBackgroundMusicController sharedBackgroundMusicController].volume;
   
@@ -80,6 +83,5 @@
 {
     [super didReceiveMemoryWarning];
 }
-
 
 @end

@@ -17,8 +17,4 @@
 @property (nonatomic, assign, readonly) IBOutlet UICollectionView *bagCollectionView;
 @property (nonatomic, assign, readonly) NSUInteger characterLevel;
 
-- (void)handleWrongTokenError;
-- (void)handleDefaultError;
-- (void)updateCharacterAvatar;
-
 @end

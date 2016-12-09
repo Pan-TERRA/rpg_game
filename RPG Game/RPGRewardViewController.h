@@ -22,7 +22,6 @@
 @property (nonatomic, assign, readwrite) id<RPGRewardModalDelegate> delegate;
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
-
 - (void)updateView;
 
 @end

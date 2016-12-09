@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
   // Constants
 #import "RPGItemTypes.h"
-
+  // Views
 @class RPGCollectionViewController;
+  // Entities
 @class RPGCharacterProfileSkill;
 
 @protocol RPGCollectionViewControllerDelegate <NSObject>
@@ -20,15 +21,13 @@
 
 @end
 
-extern NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius;
-
 @interface RPGCollectionViewController : NSObject
 
 @property (nonatomic, assign, readwrite) id<RPGCollectionViewControllerDelegate> delegate;
 
-@property (nonatomic, assign, readonly) NSArray *skillsIDArray;
-@property (nonatomic, assign, readonly) NSArray *skillsArray;
-@property (nonatomic, assign, readonly) NSArray *validatedSkillsArray;
+@property (nonatomic, assign, readonly) NSArray<NSNumber *> *skillsIDArray;
+@property (nonatomic, assign, readonly) NSArray<RPGCharacterProfileSkill *> *skillsArray;
+@property (nonatomic, assign, readonly) NSArray<RPGCharacterProfileSkill *> *validatedSkillsArray;
 
 @property (nonatomic, assign, readonly) NSUInteger numberOfCellsInRow;
 @property (nonatomic, assign, readonly) NSUInteger collectionSize;
@@ -36,19 +35,20 @@ extern NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray;
+                           skillsArray:(NSMutableArray<RPGCharacterProfileSkill *> *)aSkillsArray;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray
+                           skillsArray:(NSMutableArray<RPGCharacterProfileSkill *> *)aSkillsArray
          shouldUseValidatedSkillsArray:(BOOL)aValidateSkillsArrayFlag NS_DESIGNATED_INITIALIZER;
 
-- (NSArray *)validatedSkillsArray:(BOOL)aFlag;
+- (NSArray<RPGCharacterProfileSkill *> *)validatedSkillsArray:(BOOL)aFlag;
 - (BOOL)canSelectItem:(RPGCharacterProfileSkill *)anItem;
 
 /**
  *  Swaps item to another collection.
  */
-- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType;
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem
+            type:(RPGItemType)aType;
 
 @end
