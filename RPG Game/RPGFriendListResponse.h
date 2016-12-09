@@ -12,11 +12,11 @@ extern NSString * const kRPGFriendsListResponseFriends;
 
 @interface RPGFriendListResponse : RPGBasicNetworkResponse <RPGSerializable>
 
-@property (nonatomic, retain, readonly) NSArray *friends;
+@property (nonatomic, retain, readonly) NSArray<NSDictionary *> *friends;
 
 - (instancetype)initWithStatus:(RPGStatusCode)aStatus
-                        friends:(NSArray *)aFriends NS_DESIGNATED_INITIALIZER;
+                        friends:(NSArray<NSDictionary *> *)aFriends NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithStatus:(RPGStatusCode)aStatus
-                            friends:(NSArray *)aFriends;
+                            friends:(NSArray<NSDictionary *> *)aFriends;
 
 @end

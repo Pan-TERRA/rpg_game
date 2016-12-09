@@ -16,6 +16,6 @@ extern NSString * const kRPGFriendRequestFriendID;
 @property (nonatomic, assign, readonly) NSInteger friendID;
 
 - (instancetype)initWithFriendID:(NSInteger)aFriendID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)addFriendRequestWithFriendID:(NSInteger)aFriendID;
++ (instancetype)friendRequestWithFriendID:(NSInteger)aFriendID;
 
 @end

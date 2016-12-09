@@ -37,7 +37,7 @@ NSString * const kRPGFriendRequestFriendID = @"friend_id";
   return [self initWithFriendID:-1];
 }
 
-+ (instancetype)addFriendRequestWithFriendID:(NSInteger)aFriendID
++ (instancetype)friendRequestWithFriendID:(NSInteger)aFriendID
 {
   return [[[self alloc] initWithFriendID:aFriendID] autorelease];
 }

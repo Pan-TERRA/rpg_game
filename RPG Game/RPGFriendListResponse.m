@@ -14,7 +14,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
 
 @interface RPGFriendListResponse ()
 
-@property (nonatomic, retain, readwrite) NSArray *friends;
+@property (nonatomic, retain, readwrite) NSArray<NSDictionary *> *friends;
 
 @end
 
@@ -23,7 +23,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
 #pragma mark - Init
 
 - (instancetype)initWithStatus:(RPGStatusCode)aStatus
-                        friends:(NSArray *)aFriends
+                        friends:(NSArray<NSDictionary *> *)aFriends
 {
   self = [super initWithStatus:aStatus];
   
@@ -48,7 +48,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
 }
 
 + (instancetype)responseWithStatus:(RPGStatusCode)aStatus
-                            friends:(NSArray *)aFriends
+                            friends:(NSArray<NSDictionary *> *)aFriends
 {
   return [[[self alloc] initWithStatus:aStatus
                                 friends:aFriends] autorelease];
@@ -82,32 +82,16 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
   
   if (self.friends)
   {
-    NSMutableArray *friendsMutableArray = [NSMutableArray array];
-    for (RPGFriend *aFriend in self.friends)
-    {
-      [friendsMutableArray addObject:[aFriend dictionaryRepresentation]];
-    }
-    
-    dictionaryRepresentation[kRPGFriendsListResponseFriends] = friendsMutableArray;
+    dictionaryRepresentation[kRPGFriendsListResponseFriends] = self.friends;
   }
+  
   return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger status = [aDictionary[kRPGBasicNetworkResponseStatus] integerValue];
-  
-  NSArray *friendsDictionaryArray = aDictionary[kRPGFriendsListResponseFriends];
-  
-  NSMutableArray *friends  =[NSMutableArray array];
-  
-  for (NSDictionary *friendDictionary in friendsDictionaryArray)
-  {
-    RPGFriend *aFriend = [[[RPGFriend alloc] initWithDictionaryRepresentation:friendDictionary] autorelease];
-    [friends addObject:aFriend];
-  }
-  
-  return [self initWithStatus:status friends:friends];
+  return [self initWithStatus:[aDictionary[kRPGBasicNetworkResponseStatus] integerValue]
+                      friends:aDictionary[kRPGFriendsListResponseFriends]];
 }
 
 @end
