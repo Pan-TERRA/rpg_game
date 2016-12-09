@@ -246,7 +246,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
 }
 
 - (void)getResourcesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                    RPGResources *aResources))aCallback
+                                                    RPGResourcesResponse *aResponse))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -337,7 +337,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
       }
       else
       {
-        aCallback(responseObject.status, responseObject.resources);
+        aCallback(responseObject.status, responseObject);
       }
     });
   }];

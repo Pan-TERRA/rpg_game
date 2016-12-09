@@ -57,7 +57,8 @@ extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
 extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
 extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
-@class RPGResources;
+  // Entities
+@class RPGResourcesResponse;
 
 #pragma mark -
 
@@ -99,7 +100,7 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
 - (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL anIsValidFlag))aCallback;
 - (void)getResourcesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                    RPGResources *aResources))aCallback;
+                                                    RPGResourcesResponse *aResponse))aCallback;
 - (void)getImageDataFromPath:(NSString *)aPath
            completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
                                        NSData *anImageData))aCallback;
