@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+  // Controllers
 @class RPGBattleControllerGenerator;
 @class RPGBattleController;
 
