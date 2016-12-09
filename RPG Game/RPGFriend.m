@@ -9,8 +9,8 @@
 #import "RPGFriend.h"
 
 NSString * const kRPGFriendID = @"friend_id";
-NSString * const kRPGFriendUserName = @"username";
-NSString * const kRPGFriendState = @"status";
+NSString * const kRPGFriendUserName = @"name";
+NSString * const kRPGFriendState = @"state";
 NSString * const kRPGFriendOnline = @"is_online";
 NSString * const kRPGFriendCharacter = @"character";
 NSString * const kRPGFriendCharacterName = @"name";
@@ -116,7 +116,8 @@ NSString * const kRPGFriendCharacterAvatar = @"avatar_id";
   characterRepresetation[kRPGFriendCharacterName] = self.characterName;
   characterRepresetation[kRPGFriendCharacterLevel] = @(self.level);
   characterRepresetation[kRPGFriendCharacterClassID] = @(self.classID);
-  characterRepresetation[kRPGFriendCharacterAvatar] = @(self.avatarID);
+  // client-server index
+  characterRepresetation[kRPGFriendCharacterAvatar] = @(self.avatarID + 1);
   
   dictionaryRepresentation[kRPGFriendCharacter] = characterRepresetation;
   
@@ -135,7 +136,8 @@ NSString * const kRPGFriendCharacterAvatar = @"avatar_id";
   NSString *characterName = characterRepresentation[kRPGFriendCharacterName];
   NSInteger level = [characterRepresentation[kRPGFriendCharacterLevel] integerValue];
   NSInteger classID = [characterRepresentation[kRPGFriendCharacterClassID] integerValue];
-  NSInteger avatarID = [characterRepresentation[kRPGFriendCharacterAvatar] integerValue];
+  // client-server index
+  NSInteger avatarID = [characterRepresentation[kRPGFriendCharacterAvatar] integerValue] - 1;
   
   return [self initWithID:friendID
                  userName:userName
