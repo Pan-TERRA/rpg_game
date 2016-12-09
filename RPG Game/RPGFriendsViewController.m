@@ -40,6 +40,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
 @property (nonatomic, retain, readwrite) RPGFriendsModelController *friendsModelController;
   // State
 @property (nonatomic, assign, readwrite) RPGFriendsListState activeState;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -125,6 +126,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
 
 - (void)fetchFriends
 {
+  [self setViewToWaitingForServerResponseState];
   fetchFriendsCompletionHandler handler = ^void(RPGStatusCode statusCode, NSArray *friendsList)
   {
     __block typeof(self) weakSelf = self;
@@ -175,6 +177,8 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
         break;
       }
     }
+    
+    [weakSelf setViewToNormalState];
   };
   
   [[RPGNetworkManager sharedNetworkManager] fetchFriendsWithCompletionHandler:handler];
