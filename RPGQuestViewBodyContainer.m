@@ -9,7 +9,7 @@
 #import "RPGQuestViewBodyContainer.h"
   // API
 #import "RPGNetworkManager+Quests.h"
-  // View
+  // Views
 #import "RPGQuestViewController.h"
 #import "RPGQuestProofImageViewController.h"
   // Entitites
@@ -45,6 +45,7 @@
 {
   [_proofLabel release];
   [_proofImageView release];
+  [_indicatorView release];
   [_descriptionBottomConstraint release];
   
   [super dealloc];
@@ -64,19 +65,21 @@
                                                                 multiplier:1.0
                                                                   constant:0] retain];
   }
+  
   return _descriptionBottomConstraint;
 }
 
 #pragma mark - Custom Setter
 
-- (void)setQuestViewController:(RPGQuestViewController *)questViewController
+- (void)setQuestViewController:(RPGQuestViewController *)aQuestViewController
 {
-  _questViewController = questViewController;
+  _questViewController = aQuestViewController;
   if (_questViewController != nil)
   {
-    
-    UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapGesture)] autorelease];
+    UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                  action:@selector(handleTapGesture)] autorelease];
     tapGesture.numberOfTapsRequired = 1;
+    
     [self.proofImageView setUserInteractionEnabled:YES];
     [self.proofImageView addGestureRecognizer:tapGesture];
   }
@@ -199,17 +202,20 @@
 
 - (void)handleTapGesture
 {
-  RPGQuestProofImageViewController *questProofImageViewController = [[RPGQuestProofImageViewController alloc] init];
-  [self.questViewController presentViewController:questProofImageViewController animated:YES completion:nil];
-  [questProofImageViewController setImage:self.proofImageView.image];
-  [questProofImageViewController release];
+  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] init] autorelease];
+  
+  [self.questViewController presentViewController:questProofImageViewController
+                                         animated:YES
+                                       completion:nil];
+  questProofImageViewController.proofImage = self.proofImageView.image;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)aPicker didFinishPickingMediaWithInfo:(NSDictionary *)anInfo
 {
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  [aPicker dismissViewControllerAnimated:YES
+                              completion:NULL];
   self.questViewController.state = kRPGQuestStateDone;
   [self setViewToWaitingState];
   
@@ -233,6 +239,7 @@
          self.proofImageView.image = chosenImage;
          break;
        }
+         
        case kRPGStatusCodeWrongToken:
        {
          [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
@@ -245,6 +252,7 @@
           }];
          break;
        }
+         
        default:
        {
          self.questViewController.state = kRPGQuestStateInProgress;
@@ -261,7 +269,6 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
-  //self.addProofButton.enabled = YES;
   [aPicker dismissViewControllerAnimated:YES completion:NULL];
 }
 

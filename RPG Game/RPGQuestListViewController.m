@@ -22,7 +22,7 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlertController.h"
 
-@interface RPGQuestListViewController ()
+@interface RPGQuestListViewController () <RPGQuestTableViewControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UITableView *tableView;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *takeQuestListButton;
@@ -44,13 +44,15 @@
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGQuestListViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGQuestListViewControllerNIBName
+                         bundle:nil];
   
   if (self != nil)
   {
     _tableViewController = [[RPGQuestTableViewController alloc] init];
     _sendRequest = YES;
   }
+  
   return self;
 }
 
@@ -69,8 +71,8 @@
 {
   [super viewDidLoad];
   
-  self.tableViewController = [[[RPGQuestTableViewController alloc] initWithTableView:self.tableView
-                                                                parentViewController:self] autorelease];
+  self.tableViewController = [[[RPGQuestTableViewController alloc] initWithTableView:self.tableView] autorelease];
+  self.tableViewController.delegate = self;
 }
 
 - (void)viewWillAppear:(BOOL)anAnimated
@@ -99,10 +101,23 @@
   return UIInterfaceOrientationMaskLandscape;
 }
 
+- (UIViewController *)getViewController
+{
+  return self;
+}
+
 #pragma mark - View Update
 
-  //Invokes at viewWillAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
-- (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag
+/**
+ *  Update the quest list table view.
+ *  Invokes at viewWillAppear, scrollViewDidScroll, viewStateButtonControlOnClick.
+ *
+ *  @param aState            A qust list state.
+ *  @param aShouldReloadFlag A flag that indicates whether to perform
+ *         reloadData method on table or not.
+ */
+- (void)updateViewForState:(RPGQuestListState)aState
+              shouldReload:(BOOL)aShouldReloadFlag
 {
   if (self.canSendRequest)
   {
@@ -122,7 +137,8 @@
       {
         case kRPGStatusCodeOK:
         {
-          [weakSelf processQuestsData:aResponse.quests byState:aState];
+          [weakSelf processQuestsData:aResponse.quests
+                              byState:aState];
           
           if (aShouldReloadFlag)
           {
@@ -146,7 +162,8 @@
             dispatch_async(dispatch_get_main_queue(), ^
             {
               UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES completion:nil];
+              [viewController dismissViewControllerAnimated:YES
+                                                 completion:nil];
             });
           }];
           break;
@@ -180,7 +197,7 @@
   [self.activityIndicator stopAnimating];
 }
 
-- (void)setViewForNoQuests:(BOOL)aFlag
+- (void)setViewToNoQuestsState:(BOOL)aFlag
 {
   self.messageLabel.hidden = !aFlag;
 }
@@ -194,23 +211,27 @@
  *  @param aData  An array from RPGQuestListResponse
  *  @param aState A view state
  */
-- (void)processQuestsData:(NSArray *)aData byState:(RPGQuestListState)aState
+- (void)processQuestsData:(NSArray *)aData
+                  byState:(RPGQuestListState)aState
 {
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListTakeQuest];
+      [self.tableViewController setQuests:aData
+                        forQuestListState:kRPGQuestListTakeQuest];
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListInProgressQuest];
+      [self.tableViewController setQuests:aData
+                        forQuestListState:kRPGQuestListInProgressQuest];
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      [self.tableViewController setQuestArray:aData forQuestListState:kRPGQuestListDoneQuest];
+      [self.tableViewController setQuests:aData
+                        forQuestListState:kRPGQuestListDoneQuest];
       break;
     }
     case kRPGQuestListReviewQuest:
@@ -226,6 +247,7 @@
                                        message:message
                                    actionTitle:nil
                                     completion:nil];
+        
         [self setActiveButtonForState:self.tableViewController.questListState];
       }
       break;
@@ -238,7 +260,10 @@
 - (void)showQuestViewWithQuest:(RPGQuest *)aQuest
 {
   RPGQuestViewController *questViewController = [[[RPGQuestViewController alloc] init] autorelease];
-  [self presentViewController:questViewController animated:YES completion:nil];
+  
+  [self presentViewController:questViewController
+                     animated:YES
+                   completion:nil];
   [questViewController setViewContent:aQuest];
 }
 
@@ -252,17 +277,20 @@
   if (state != kRPGQuestListReviewQuest)
   {
     self.tableViewController.questListState = state;
-    [self updateViewForState:self.tableViewController.questListState shouldReload:YES];
+    [self updateViewForState:self.tableViewController.questListState
+                shouldReload:YES];
   }
   else
   {
-    [self updateViewForState:state shouldReload:NO];
+    [self updateViewForState:state
+                shouldReload:NO];
   }
 }
 
 - (IBAction)backButtonOnClicked:(UIButton *)aSender
 {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES
+                           completion:nil];
 }
 
 #pragma mark - Set Button Background
@@ -274,37 +302,46 @@
   UIButton *doneQuestListButton = self.doneQuestListButton;
   UIButton *reviewQuestButton = self.reviewQuestButton;
   
-  [self toggleButtonBackground:takeQuestListButton active:NO];
-  [self toggleButtonBackground:inProgressQuestListButton active:NO];
-  [self toggleButtonBackground:doneQuestListButton active:NO];
-  [self toggleButtonBackground:reviewQuestButton active:NO];
+  [self toggleButtonBackground:takeQuestListButton
+                        active:NO];
+  [self toggleButtonBackground:inProgressQuestListButton
+                        active:NO];
+  [self toggleButtonBackground:doneQuestListButton
+                        active:NO];
+  [self toggleButtonBackground:reviewQuestButton
+                        active:NO];
 
   switch (aState)
   {
     case kRPGQuestListTakeQuest:
     {
-      [self toggleButtonBackground:takeQuestListButton active:YES];
+      [self toggleButtonBackground:takeQuestListButton
+                            active:YES];
       break;
     }
     case kRPGQuestListInProgressQuest:
     {
-      [self toggleButtonBackground:inProgressQuestListButton active:YES];
+      [self toggleButtonBackground:inProgressQuestListButton
+                            active:YES];
       break;
     }
     case kRPGQuestListDoneQuest:
     {
-      [self toggleButtonBackground:doneQuestListButton active:YES];
+      [self toggleButtonBackground:doneQuestListButton
+                            active:YES];
       break;
     }
     case kRPGQuestListReviewQuest:
     {
-      [self toggleButtonBackground:reviewQuestButton active:YES];
+      [self toggleButtonBackground:reviewQuestButton
+                            active:YES];
       break;
     }
   }
 }
 
-- (void)toggleButtonBackground:(UIButton *)aButton active:(BOOL)anActiveFlag
+- (void)toggleButtonBackground:(UIButton *)aButton
+                        active:(BOOL)anActiveFlag
 {
   UIImage *activeButtonImage = [UIImage imageNamed:@"main_button_active"];
   UIImage *inactiveButtonImage = [UIImage imageNamed:@"main_button_inactive"];
