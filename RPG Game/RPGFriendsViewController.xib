@@ -9,6 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGFriendsViewController">
             <connections>
+                <outlet property="activityIndicator" destination="pCu-Z4-41y" id="Szh-rF-Ffa"/>
                 <outlet property="allFriendButton" destination="a38-10-RY4" id="hp1-Xp-ORd"/>
                 <outlet property="incomingRequestsButton" destination="L84-1V-gfN" id="24m-5m-UbG"/>
                 <outlet property="onlineFriendButton" destination="RGX-SC-SGC" id="UUH-XK-ihR"/>
@@ -117,13 +118,21 @@
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="NGf-eq-Nv8"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pCu-Z4-41y">
+                    <rect key="frame" x="282" y="281" width="37" height="37"/>
+                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
             </subviews>
             <constraints>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0l3-hm-9vy"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="5Xu-9k-z6f"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7Tl-59-EKa"/>
                 <constraint firstItem="svW-5R-EA5" firstAttribute="top" secondItem="o08-zB-S8G" secondAttribute="bottom" constant="5" id="7e6-Hf-eTT"/>
                 <constraint firstItem="HUA-nR-0TJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="87d-ay-KmH"/>
                 <constraint firstItem="Vid-o6-Adi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8y9-zJ-W7T"/>
                 <constraint firstItem="Vid-o6-Adi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Atw-0A-BkX"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.07" id="C4L-KB-wj6"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Jdv-aH-4T0"/>
                 <constraint firstAttribute="trailing" secondItem="svW-5R-EA5" secondAttribute="trailing" constant="8" id="To9-rr-axK"/>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="U7R-MY-HM6"/>
                 <constraint firstAttribute="bottom" secondItem="4UH-fg-Yhn" secondAttribute="bottom" constant="8" id="XsE-Mw-PPO"/>
@@ -138,6 +147,13 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="5Xu-9k-z6f"/>
+                    <exclude reference="C4L-KB-wj6"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="429" y="274"/>
         </view>
     </objects>
     <resources>
