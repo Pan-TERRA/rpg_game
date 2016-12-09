@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class RPGAddFriendViewController;
+
+@protocol RPGAddFriendViewControllerDelegate <NSObject>
+
+- (void)friendDidAdd:(RPGAddFriendViewController *)anAddFriendViewController;
+
+@end
+
 @interface RPGAddFriendViewController : UIViewController
+
+@property (nonatomic, assign, readwrite) id<RPGAddFriendViewControllerDelegate> delegate;
 
 @end
