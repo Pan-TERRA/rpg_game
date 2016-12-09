@@ -10,6 +10,8 @@
 
 @implementation RPGFriendsTableViewCellInFriends
 
+@dynamic delegate;
+
 - (IBAction)questChallengeButtonAction:(UIButton *)sender
 {
   [self.delegate questChallengeButtonDidPressOnCell:self];

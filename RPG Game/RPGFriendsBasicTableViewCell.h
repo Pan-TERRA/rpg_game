@@ -19,4 +19,6 @@
 
 @property (nonatomic, retain, readwrite) RPGFriend *currentFriend;
 
+@property (nonatomic, assign, readwrite) id delegate;
+
 @end

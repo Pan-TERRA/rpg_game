@@ -10,6 +10,8 @@
 
 @implementation RPGFriendsTableViewCellOutgoing
 
+@dynamic delegate;
+
 - (IBAction)cancelFriendRequestButtonAction:(UIButton *)sender
 {
   [self.delegate cancelFriendRequestButtonDidPressOnCell:self];

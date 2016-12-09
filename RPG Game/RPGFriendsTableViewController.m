@@ -24,7 +24,9 @@ static NSString * const sOutgoingCellReusableIdentifier = @"outgoingIdentifier";
 
 static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 
-@interface RPGFriendsTableViewController ()
+@interface RPGFriendsTableViewController () <RPGFriendsTableViewCellInFriendsDelegate,
+                                             RPGFriendsTableViewCellIncomingDelegate,
+                                             RPGFriendsTableViewCellOutgoingDelegate>
 
 @end
 
@@ -214,14 +216,42 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
       break;
     }
   }
+  cell.delegate = self;
+  
   return cell;
 }
 
 #pragma mark - API
 
-- (void)setNeedReloadTableView
+- (void)reloadTable
 {
   [self.tableView reloadData];
 }
 
+#pragma mark - Cells Delegate
+
+- (void)questChallengeButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
+{
+  NSLog(@"Quest Challenge");
+}
+
+- (void)removeFromFriendsButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
+{
+  NSLog(@"Remove Friend");
+}
+
+- (void)acceptFriendRequestButtonDidPressOnCell:(RPGFriendsTableViewCellIncoming *)aCell
+{
+  NSLog(@"Accept");
+}
+
+- (void)skipFriendRequestButtonDidPressOnCell:(RPGFriendsTableViewCellIncoming *)aCell
+{
+  NSLog(@"Skip");
+}
+
+- (void)cancelFriendRequestButtonDidPressOnCell:(RPGFriendsTableViewCellOutgoing *)aCell
+{
+  NSLog(@"Cancel");
+}
 @end
