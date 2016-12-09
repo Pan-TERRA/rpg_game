@@ -89,6 +89,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
     cell.backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
     
     cell.duration = skillEffect.duration;
+    cell.skillEffectID = skillEffect.skillEffectID;
   }
   
   cell.hidden = !(index < skillsEffects.count);
