@@ -36,7 +36,7 @@ static NSString * const kRPGCharacterProfileViewControllerWaitingMessageDownload
 static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = @"Storing skills";
 static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
-@interface RPGCharacterProfileViewController () <RPGCollectionViewControllerDelegate>
+@interface RPGCharacterProfileViewController () <RPGCollectionViewControllerDelegate, RPGAvatarSelectViewControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *nickNameLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *levelLabel;
@@ -72,6 +72,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
     _bagCollectionViewController = [[RPGBagCollectionViewController alloc] init];
     _waitingModal = [[RPGWaitingViewController alloc] init];
     _avatarSelectViewController = [[RPGAvatarSelectViewController alloc] init];
+    _avatarSelectViewController.delegate = self;
   }
   
   return self;
@@ -102,9 +103,12 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 {
   [super viewDidLoad];
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
-  [self.skillCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
-  [self.bagCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.skillCollectionView registerNib:cellNIB
+             forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  [self.bagCollectionView registerNib:cellNIB
+           forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
   
   UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self
                                                                                 action:@selector(handleTapGesture)] autorelease];
@@ -121,7 +125,6 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   
   NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
   NSInteger characterID = standardUserDefaults.characterID;
-  
   RPGCharacterRequest *request = [RPGCharacterRequest characterRequestWithCharacterID:characterID];
   
   [[RPGNetworkManager sharedNetworkManager] getCharacterProfileInfoWithRequest:request
@@ -146,25 +149,29 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
          
        case kRPGStatusCodeEmptySkillsToSelect:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmptySkillsToSelect completionHandler:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeEmptySkillsToSelect
+                                   completionHandler:nil];
          break;
        }
          
        case kRPGStatusCodeHasNoSuchSkills:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoSuchSkills completionHandler:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoSuchSkills
+                                   completionHandler:nil];
          break;
        }
          
        case kRPGStatusCodeHasNoAnySkills:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoAnySkills completionHandler:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeHasNoAnySkills
+                                   completionHandler:nil];
          break;
        }
          
        case kRPGStatusCodeExceedActiveSkillsBagSize:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeExceedActiveSkillsBagSize completionHandler:nil];
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeExceedActiveSkillsBagSize
+                                   completionHandler:nil];
          break;
        }
          
@@ -177,6 +184,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
    }];
   
   [self updateCharacterAvatar];
+  
 }
 
 - (void)didReceiveMemoryWarning
@@ -193,30 +201,35 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 - (void)handleTapGesture
 {
-  [self addChildViewController:self.avatarSelectViewController frame:self.view.frame];
+  [self addChildViewController:self.avatarSelectViewController
+                         frame:self.view.frame];
 }
 
 #pragma mark - Error Handling
 
 - (void)handleWrongTokenError
 {
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                            completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
      {
        UIViewController *viewController = self.presentingViewController.presentingViewController;
-       [viewController dismissViewControllerAnimated:YES completion:nil];
+       [viewController dismissViewControllerAnimated:YES
+                                          completion:nil];
      });
    }];
 }
 
 - (void)handleDefaultError
 {
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError
+                            completionHandler:^
    {
      dispatch_async(dispatch_get_main_queue(), ^
      {
-       [self dismissViewControllerAnimated:YES completion:nil];
+       [self dismissViewControllerAnimated:YES
+                                completion:nil];
      });
    }];
 }
@@ -230,7 +243,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   self.expLabel.text = [NSString stringWithFormat:@"%lu/%lu", (unsigned long)aResponse.currentExp, (unsigned long)aResponse.maxExp];
   self.hpLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.HP];
   self.attackLabel.text = [NSString stringWithFormat:@"%lu", (unsigned long)aResponse.attack];
-  self.expProgressBar.progress = (CGFloat)aResponse.currentExp / aResponse.maxExp;
+  self.expProgressBar.progress = (CGFloat) aResponse.currentExp / aResponse.maxExp;
 
   NSMutableArray *skillsArray = [[aResponse.skills mutableCopy] autorelease];
   self.skillCollectionViewController = [[[RPGSkillCollectionViewController alloc] initWithCollectionView:self.skillCollectionView
@@ -249,7 +262,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 - (void)setViewToWaitingStateWithMessage:(NSString *)aMessage
 {
   self.waitingModal.message = aMessage;
-  [self addChildViewController:self.waitingModal frame:self.view.frame];
+  [self addChildViewController:self.waitingModal
+                         frame:self.view.frame];
 }
 
 - (void)setViewToNormalState
@@ -265,15 +279,16 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
 
 #pragma mark - Actions
 
-- (IBAction)back:(UIButton *)sender
+- (IBAction)back:(UIButton *)aSender
 {
   [self setViewToWaitingStateWithMessage:kRPGCharacterProfileViewControllerWaitingMessageStore];
   
   NSUInteger characterID = [NSUserDefaults standardUserDefaults].characterID;
   NSArray *skillsArray = self.skillCollectionViewController.skillsIDArray;
+  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest
+                                     skillSelectRequestWithCharacterID:characterID
+                                     skills:skillsArray];
   
-  
-  RPGSkillsSelectRequest *request = [RPGSkillsSelectRequest skillSelectRequestWithCharacterID:characterID skills:skillsArray];
   [[RPGNetworkManager sharedNetworkManager] selectSkillsWithRequest:request
                                                   completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
@@ -284,7 +299,8 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
        case kRPGStatusCodeOK:
        {
          [self saveSelectedSkills];
-         [self dismissViewControllerAnimated:YES completion:nil];
+         [self dismissViewControllerAnimated:YES
+                                  completion:nil];
          break;
        }
          
@@ -311,6 +327,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSMutableDictionary *character = [[[characters firstObject] mutableCopy] autorelease];
   
   NSArray *skillsIDArray = self.skillCollectionViewController.skillsIDArray;
+  
   if (skillsIDArray != nil)
   {
     character[kRPGCharacterProfileViewControllerSkills] = skillsIDArray;
@@ -328,6 +345,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
   NSInteger characterClassID = standardUserDefaults.characterClassID;
   NSInteger characterAvatarID = standardUserDefaults.characterAvatarID - 1;
   UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"avatar_%ld_%ld", (long)characterClassID, (long)characterAvatarID]];
+  
   if (image != nil)
   {
     self.avatarImageView.image = image;
@@ -351,6 +369,7 @@ static NSString * const kRPGCharacterProfileViewControllerSkills = @"skills";
     [self.skillCollectionView reloadData];
     [self.bagCollectionView reloadData];
   }
+  
   [self setBackButtonState];
 }
 

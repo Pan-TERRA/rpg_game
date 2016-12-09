@@ -10,14 +10,14 @@
   // Entities
 #import "RPGSkillEffect.h"
 
-NSString * const kRPGSkillRepresentationName = @"name";
-NSString * const kRPGSkillRepresentationSkillDescription = @"description";
-NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
-NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
-NSString * const kRPGSkillRepresentationImageName = @"imageName";
-NSString * const kRPGSkillRepresentationSoundName = @"soundName";
-NSString * const kRPGSkillRepresentationRequiredLevel = @"requiredLevel";
-NSString * const kRPGSkillRepresentationEffects = @"effects";
+static NSString * const kRPGSkillRepresentationName = @"name";
+static NSString * const kRPGSkillRepresentationSkillDescription = @"description";
+static NSString * const kRPGSkillRepresentationMultiplier = @"multiplier";
+static NSString * const kRPGSkillRepresentationAbsoluteCooldown = @"cooldown";
+static NSString * const kRPGSkillRepresentationImageName = @"imageName";
+static NSString * const kRPGSkillRepresentationSoundName = @"soundName";
+static NSString * const kRPGSkillRepresentationRequiredLevel = @"requiredLevel";
+static NSString * const kRPGSkillRepresentationEffects = @"effects";
 
 static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
 
@@ -31,30 +31,43 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
   
   if (self != nil)
   {
-    NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillRepresentationResourceName
-                                                     ofType:@"plist"];
-    NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
-    
-    _name = [skillDictionary[kRPGSkillRepresentationName] copy];
-    _skillDescription = [skillDictionary[kRPGSkillRepresentationSkillDescription] copy];
-    _multiplier = [skillDictionary[kRPGSkillRepresentationMultiplier] floatValue];
-    _cooldown = [skillDictionary[kRPGSkillRepresentationAbsoluteCooldown] integerValue];
-    _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
-    _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
-    _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
-    
-    NSMutableArray *effectsObjects = [NSMutableArray array];
-    NSArray *effectsArray = skillDictionary[kRPGSkillRepresentationEffects];
-    for (NSDictionary *effectDictionary in effectsArray)
+    if (aSkillID < 1)
     {
-      RPGSkillEffect *effect = [[[RPGSkillEffect alloc] initWithDictionaryRepresentation:effectDictionary] autorelease];
-      [effectsObjects addObject:effect];
+      [self release];
+      self = nil;
     }
-    _effects = [effectsObjects retain];
+    else
+    {
+      NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillRepresentationResourceName
+                                                       ofType:@"plist"];
+      NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
+      NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
+      
+      _name = [skillDictionary[kRPGSkillRepresentationName] copy];
+      _skillDescription = [skillDictionary[kRPGSkillRepresentationSkillDescription] copy];
+      _multiplier = [skillDictionary[kRPGSkillRepresentationMultiplier] floatValue];
+      _cooldown = [skillDictionary[kRPGSkillRepresentationAbsoluteCooldown] integerValue];
+      _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
+      _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
+      _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
+      
+      NSMutableArray *effectsObjects = [NSMutableArray array];
+      NSArray *effectsArray = skillDictionary[kRPGSkillRepresentationEffects];
+      for (NSDictionary *effectDictionary in effectsArray)
+      {
+        RPGSkillEffect *effect = [[[RPGSkillEffect alloc] initWithDictionaryRepresentation:effectDictionary] autorelease];
+        [effectsObjects addObject:effect];
+      }
+      _effects = [effectsObjects retain];
+    }
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithSkillID:-1];
 }
 
 + (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID

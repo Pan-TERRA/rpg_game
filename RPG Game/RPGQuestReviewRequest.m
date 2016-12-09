@@ -18,7 +18,7 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 
 @implementation RPGQuestReviewRequest
 
-- (instancetype)initWithQuestID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSInteger)aQuestID
                          result:(BOOL)aResult
 {
   self = [super initWithQuestID:aQuestID];
@@ -33,18 +33,21 @@ static NSString * const kRPGQuestReviewRequestResult = @"result";
 
 - (instancetype)init
 {
-  return [self initWithQuestID:0 result:NO];
+  return [self initWithQuestID:-1
+                        result:NO];
 }
 
-- (instancetype)initWithQuestID:(NSUInteger)aQuestID
+- (instancetype)initWithQuestID:(NSInteger)aQuestID
 {
-  return [self initWithQuestID:0 result:NO];
+  return [self initWithQuestID:-1
+                        result:NO];
 }
 
-+ (instancetype)questReviewRequestWithQuestID:(NSUInteger)aQuestID
++ (instancetype)questReviewRequestWithQuestID:(NSInteger)aQuestID
                                        result:(BOOL)aResult
 {
-  return [[[self alloc] initWithQuestID:aQuestID result:aResult] autorelease];
+  return [[[self alloc] initWithQuestID:aQuestID
+                                 result:aResult] autorelease];
 }
 
 #pragma mark - RPGSerializable

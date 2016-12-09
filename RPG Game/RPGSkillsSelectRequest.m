@@ -12,7 +12,7 @@ static NSString * const kRPGSkillsSelectRequestSkillsIDArray = @"skills";
 
 @interface RPGSkillsSelectRequest()
 
-@property (nonatomic, retain, readwrite) NSArray *skillsID;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
 
 @end
 
@@ -21,7 +21,7 @@ static NSString * const kRPGSkillsSelectRequestSkillsIDArray = @"skills";
 #pragma mark - Init
 
 - (instancetype)initWithCharacterID:(NSInteger)characterID
-                             skills:(NSArray *)aSkills
+                             skills:(NSArray<NSNumber *> *)aSkills
 {
   self = [super initWithCharacterID:characterID];
   
@@ -54,7 +54,7 @@ static NSString * const kRPGSkillsSelectRequestSkillsIDArray = @"skills";
 }
 
 + (instancetype)skillSelectRequestWithCharacterID:(NSInteger)aCharacterID
-                                           skills:(NSArray *)aSkills
+                                           skills:(NSArray<NSNumber *> *)aSkills
 {
   return [[[self alloc] initWithCharacterID:aCharacterID
                                      skills:aSkills] autorelease];

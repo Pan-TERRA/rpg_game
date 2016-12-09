@@ -18,7 +18,7 @@ static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:
 
 @interface RPGArenaControllerGenerator ()
 
-@property (retain, nonatomic, readwrite) NSArray *skillsID;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
 
 @end
 
@@ -26,7 +26,7 @@ static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillsID:(NSArray *)aSkillsID
+- (instancetype)initWithSkillsID:(NSArray<NSNumber *> *)aSkillsID
 {
   self = [super init];
   

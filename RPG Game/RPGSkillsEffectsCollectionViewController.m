@@ -16,7 +16,6 @@
 
 static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize = 6;
 
-
 @interface RPGSkillsEffectsCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
@@ -76,8 +75,9 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
-                                                                                        forIndexPath:anIndexPath];
+  RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView
+                                              dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
+                                              forIndexPath:anIndexPath];
   NSInteger index = anIndexPath.row;
   NSArray *skillsEffects = self.skillsEffects;
   

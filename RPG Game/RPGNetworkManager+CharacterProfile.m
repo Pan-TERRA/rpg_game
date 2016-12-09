@@ -20,7 +20,7 @@
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
                          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                     RPGCharacterProfileInfoResponse *aResponse))aCallbackBlock
+                                                     RPGCharacterProfileInfoResponse *aResponse))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -43,7 +43,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          aCallbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
         });
         
         return;
@@ -53,7 +53,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerUnknown, nil);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
       });
       
       return;
@@ -65,7 +65,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerServerError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
       });
       
       return;
@@ -75,7 +75,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
       });
       
       return;
@@ -91,7 +91,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerSerializingError, nil);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
       });
       
       return;
@@ -105,11 +105,11 @@
     {
       if (responseObject == nil)
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
       }
       else
       {
-        aCallbackBlock(responseObject.status, responseObject);
+        aCallback(responseObject.status, responseObject);
       }
     });
     
@@ -121,7 +121,7 @@
 }
 
 - (void)characterAvatarSelectWithRequest:(RPGCharacterAvatarSelectRequest *)aRequest
-                       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallbackBlock
+                       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -144,7 +144,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          aCallbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
         
         return;
@@ -154,7 +154,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
       
       return;
@@ -166,7 +166,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
       
       return;
@@ -176,7 +176,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
       
       return;
@@ -192,25 +192,24 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
       
       return;
     }
     
-    RPGBasicNetworkResponse *responseObject = nil;
-    responseObject = [[[RPGBasicNetworkResponse alloc]
-                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                  initWithDictionaryRepresentation:responseDictionary] autorelease];
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
       if (responseObject == nil)
       {
-        aCallbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       }
       else
       {
-        aCallbackBlock(responseObject.status);
+        aCallback(responseObject.status);
       }
     });
     

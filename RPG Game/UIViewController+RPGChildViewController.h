@@ -10,6 +10,9 @@
 
 @interface UIViewController (RPGChildViewController)
 
-- (void)addChildViewController:(UIViewController *)aChildViewController frame:(CGRect)aFrame;
-- (void)addChildViewController:(UIViewController *)aChildViewController view:(UIView *)aView;
+- (void)addChildViewController:(UIViewController *)aChildViewController
+                         frame:(CGRect)aFrame;
+- (void)addChildViewController:(UIViewController *)aChildViewController
+                          view:(UIView *)aView;
+
 @end

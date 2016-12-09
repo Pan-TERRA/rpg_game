@@ -7,36 +7,28 @@
 //
 
 #import "RPGEntity.h"
+  // Misc
 #import "RPGSerializable.h"
-
+  // Entities
 @class RPGSkill;
-
-extern NSString * const kRPGPlayerSkills;
-
-@protocol RPGClientEntity <NSObject>
-
-@property (retain, nonatomic, readwrite) NSArray<RPGSkill *> *skills;
-
-@end
 
 /**
  *  User battle entity. Used by RPGBattle as player object.
  */
-@interface RPGPlayer : RPGEntity <RPGClientEntity, RPGSerializable>
+@interface RPGPlayer : RPGEntity <RPGSerializable>
+
+@property (nonatomic, retain, readwrite) NSArray<RPGSkill *> *skills;
 
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
                        level:(NSInteger)aLevel
-                      skills:(NSArray<RPGSkill *> *)aSkills;
-
+                      skills:(NSArray<RPGSkill *> *)aSkills NS_DESIGNATED_INITIALIZER;
 + (instancetype)playerWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP
                          level:(NSInteger)aLevel
                         skills:(NSArray<RPGSkill *> *)aSkills;
-//- (instancetype)initWithSkills:(NSArray<RPGSkill *> *)aSkills;
-//+ (instancetype)playerWithSkills:(NSArray<RPGSkill *> *)aSkills;
 
 - (RPGSkill *)skillByID:(NSInteger)anID;
 

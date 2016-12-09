@@ -26,7 +26,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 @interface RPGCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-@property (nonatomic, retain, readwrite) NSMutableArray *skillsMutableArray;
+@property (nonatomic, retain, readwrite) NSMutableArray<RPGCharacterProfileSkill *> *skillsMutableArray;
 @property (nonatomic, assign, readwrite, getter=shouldValidateSkillsArray) BOOL validateSkillsArray;
 
 @end
@@ -37,7 +37,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray
+                           skillsArray:(NSMutableArray<RPGCharacterProfileSkill *> *)aSkillsArray
 {
   return [self initWithCollectionView:aCollectionView
                        collectionSize:aCollectionSize
@@ -47,7 +47,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                         collectionSize:(NSUInteger)aCollectionSize
-                           skillsArray:(NSMutableArray *)aSkillsArray
+                           skillsArray:(NSMutableArray<RPGCharacterProfileSkill *> *)aSkillsArray
          shouldUseValidatedSkillsArray:(BOOL)aValidateSkillsArrayFlag
 {
   self = [super init];
@@ -91,7 +91,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 #pragma mark - Custom Getter
 
-- (NSArray *)skillsIDArray
+- (NSArray<NSNumber *> *)skillsIDArray
 {
   NSMutableArray *skills = [NSMutableArray array];
   for (RPGCharacterProfileSkill *skill in self.validatedSkillsArray)
@@ -101,12 +101,12 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return skills;
 }
 
-- (NSArray *)skillsArray
+- (NSArray<RPGCharacterProfileSkill *> *)skillsArray
 {
   return self.skillsMutableArray;
 }
 
-- (NSArray *)validatedSkillsArray
+- (NSArray<RPGCharacterProfileSkill *> *)validatedSkillsArray
 {
   return [self validatedSkillsArray:self.shouldValidateSkillsArray];
 }
@@ -118,7 +118,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 #pragma mark - Heplful Method
 
-- (NSArray *)validatedSkillsArray:(BOOL)aFlag
+- (NSArray<RPGCharacterProfileSkill *> *)validatedSkillsArray:(BOOL)aFlag
 {
   NSArray *array = self.skillsArray;
   if (aFlag)
@@ -138,7 +138,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return 0;
 }
@@ -197,9 +197,9 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)aCollectionView
+                  layout:(UICollectionViewLayout *)aCollectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   CGFloat viewWidth = self.collectionView.frame.size.width;
   CGFloat cellWidth = viewWidth / (CGFloat) self.numberOfCellsInRow;
@@ -236,7 +236,8 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   }
 }
 
-- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem
+            type:(RPGItemType)aType
 {
   
   [self.collectionView reloadData];
@@ -246,6 +247,7 @@ NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 {
   NSInteger index = anIndexPath.row;
   NSArray *array = self.validatedSkillsArray;
+  
   if (index < array.count)
   {
     RPGCharacterProfileSkill *skill = array[index];

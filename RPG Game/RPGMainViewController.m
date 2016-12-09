@@ -7,13 +7,12 @@
   //
 
 #import "RPGMainViewController.h"
-  // API
-#import "RPGBattleViewController.h"
   // Controllers
 #import "RPGArenaControllerGenerator.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGAdventureGlobalMapViewController.h"
   // Views
+#import "RPGBattleViewController.h"
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
@@ -24,9 +23,11 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
-
+  // API
 #import "RPGNetworkManager.h"
+  // Entities
 #import "RPGResources.h"
+#import "RPGResourcesResponse.h"
 
 @interface RPGMainViewController () <RPGPresentingViewController>
 
@@ -69,13 +70,15 @@
   [super viewWillAppear:anAnimated];
   [self updateResourcesLabels];
   
-  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(NSInteger aStatusCode, RPGResources *aResources)
+  [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode,
+                                                                                RPGResourcesResponse *aResponse)
   {
-    if (aStatusCode == 0)
+    if (aNetworkStatusCode == kRPGStatusCodeOK)
     {
+      RPGResources *resources = aResponse.resources;
       NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
-      standartUserDefaults.sessionGold = aResources.gold;
-      standartUserDefaults.sessionCrystals = aResources.crystals;
+      standartUserDefaults.sessionGold = resources.gold;
+      standartUserDefaults.sessionCrystals = resources.crystals;
       [self updateResourcesLabels];
     }
   }];
@@ -90,9 +93,12 @@
 
 - (void)dismissCurrentAndPresentViewController:(UIViewController *)aViewController
 {
-  [self dismissViewControllerAnimated:NO completion:^
+  [self dismissViewControllerAnimated:NO
+                           completion:^
   {
-    [self presentViewController:aViewController animated:YES completion:nil];
+    [self presentViewController:aViewController
+                       animated:YES
+                     completion:nil];
   }];
 }
 
@@ -102,22 +108,28 @@
 {
   RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] init] autorelease];
   
-  [self presentViewController:questListViewController animated:YES completion:nil];
+  [self presentViewController:questListViewController
+                     animated:YES
+                   completion:nil];
 }
 
 
 - (IBAction)segueToShop
 {
-  RPGShopViewController *shopViewController = [[RPGShopViewController new] autorelease];
+  RPGShopViewController *shopViewController = [[[RPGShopViewController alloc] init] autorelease];
   
-  [self presentViewController:shopViewController animated:YES completion:nil];
+  [self presentViewController:shopViewController
+                     animated:YES
+                   completion:nil];
 }
 
 - (IBAction)segueToChar
 {
   RPGCharacterProfileViewController *characterProfileViewController = [[[RPGCharacterProfileViewController alloc] init] autorelease];
   
-  [self presentViewController:characterProfileViewController animated:YES completion:nil];
+  [self presentViewController:characterProfileViewController
+                     animated:YES
+                   completion:nil];
 }
 
 - (IBAction)segueToPlay
@@ -137,18 +149,25 @@
 {
   RPGArenaSkillDrawViewController *viewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
   viewController.delegate = self;
-  [self presentViewController:viewController animated:YES completion:nil];
+  
+  [self presentViewController:viewController
+                     animated:YES
+                   completion:nil];
 }
 
 - (IBAction)segueToSettings
 {
   RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] init] autorelease];
-  [self presentViewController:settingsViewController animated:YES completion:nil];
+  
+  [self presentViewController:settingsViewController
+                     animated:YES
+                   completion:nil];
 }
 
 - (void)updateResourcesLabels
 {
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
+  
   self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionGold];
   self.crystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionCrystals];
 }

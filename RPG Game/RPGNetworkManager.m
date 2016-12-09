@@ -124,15 +124,15 @@ NSString * const kRPGNetworkManagerStatus = @"status";
                              method:(NSString *)aMethod
 {
   return [self requestWithObject:anObject
-                URLstring:aString
-                   method:aMethod
-              shouldInjectToken:YES];
+                       URLstring:aString
+                          method:aMethod
+               shouldInjectToken:YES];
 }
 
 - (NSURLRequest *)requestWithObject:(nullable id)anObject
                           URLstring:(NSString *)aString
                              method:(NSString *)aMethod
-                        shouldInjectToken:(BOOL)anInjectTokenFlag
+                  shouldInjectToken:(BOOL)anInjectTokenFlag
 {
   NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:aString]];
   request.HTTPMethod = aMethod;
@@ -185,7 +185,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
 
 #pragma mark - General Requests
 
-- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL isValid))callbackBlock
+- (void)requestIfCurrentTokenIsValidWithCompletionHandler:(void (^)(BOOL anIsValidFlag))aCallback
 {
   NSString *token = [NSUserDefaults standardUserDefaults].sessionToken;
   
@@ -230,9 +230,9 @@ NSString * const kRPGNetworkManagerStatus = @"status";
       }
       
       dispatch_async(dispatch_get_main_queue(), ^
-                     {
-                       callbackBlock(result);
-                     });
+      {
+        aCallback(result);
+      });
       
     }];
     
@@ -241,11 +241,12 @@ NSString * const kRPGNetworkManagerStatus = @"status";
   }
   else // if no token
   {
-    callbackBlock(NO);
+    aCallback(NO);
   }
 }
 
-- (void)getResourcesWithCompletionHandler:(void (^)(NSInteger aStatus, RPGResources *aResources))aCallback
+- (void)getResourcesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                    RPGResourcesResponse *aResponse))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -336,7 +337,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
       }
       else
       {
-        aCallback(responseObject.status, responseObject.resources);
+        aCallback(responseObject.status, responseObject);
       }
     });
   }];
@@ -347,7 +348,8 @@ NSString * const kRPGNetworkManagerStatus = @"status";
 }
 
 - (void)getImageDataFromPath:(NSString *)aPath
-           completionHandler:(void (^)(NSInteger aStatusCode, NSData *anImageData))aCallback
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                       NSData *anImageData))aCallback
 {
   NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@",
                                      kRPGNetworkManagerAPIHost,
@@ -397,8 +399,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
       
       return;
     }
-    
-    
+
     dispatch_async(dispatch_get_main_queue(), ^
     {
       if (data == nil)

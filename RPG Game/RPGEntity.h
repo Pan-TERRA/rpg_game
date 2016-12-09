@@ -9,29 +9,30 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Entities
+@class RPGSkillEffect;
 
 extern NSString * const kRPGEntityName;
 extern NSString * const kRPGEntityHP;
 extern NSString * const kRPGEntityMaxHP;
 extern NSString * const kRPGEntityLevel;
 
-@class RPGSkillEffect;
 /**
  *  Basic battle entity. Used by RPGBattle as opponent
  *  object.
  */
 @interface RPGEntity : NSObject <RPGSerializable>
 
-@property (copy, nonatomic, readwrite) NSString *name;
-@property (assign, nonatomic, readwrite) NSInteger HP;
-@property (assign, nonatomic, readwrite) NSInteger maxHP;
-@property (assign, nonatomic, readwrite) NSInteger level;
-@property (retain, nonatomic, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
+@property (nonatomic, copy, readonly) NSString *name;
+@property (nonatomic, assign, readwrite) NSInteger HP;
+@property (nonatomic, assign, readonly) NSInteger maxHP;
+@property (nonatomic, assign, readonly) NSInteger level;
+@property (nonatomic, retain, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
 
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
-                       level:(NSInteger)aLevel;
+                       level:(NSInteger)aLevel NS_DESIGNATED_INITIALIZER;
 + (instancetype)entityWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP

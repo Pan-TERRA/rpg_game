@@ -11,19 +11,42 @@
 static NSString * const kRPGClassInfoResponseStatus = @"status";
 static NSString * const kRPGClassInfoResponseClass = @"class";
 
+@interface RPGClassInfoResponse()
+
+@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, retain, readwrite) NSDictionary *classInfo;
+
+@end
+
 @implementation RPGClassInfoResponse
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus classInfo:(NSDictionary *)aClassInfo
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                     classInfo:(NSDictionary *)aClassInfo
 {
   self = [super init];
+  
   if (self != nil)
   {
     _status = aStatus;
-    _classInfo = [[NSDictionary alloc] initWithDictionary:aClassInfo];
+    _classInfo = [aClassInfo retain];
   }
+  
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithStatus:-1
+                    classInfo:nil];
+}
+
++ (instancetype)responseWithStatus:(NSInteger)aStatus
+                         classInfo:(NSDictionary *)aClassInfo
+{
+  return [[[self alloc] initWithStatus:aStatus
+                             classInfo:aClassInfo] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -31,6 +54,7 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
 - (void)dealloc
 {
   [_classInfo release];
+  
   [super dealloc];
 }
 
@@ -38,10 +62,16 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  return @{
-           kRPGClassInfoResponseStatus: @(self.status),
-           kRPGClassInfoResponseClass: self.classInfo
-           };
+  NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
+  
+  dictionary[kRPGClassInfoResponseStatus] = @(self.status);
+  
+  if (self.classInfo != nil)
+  {
+    dictionary[kRPGClassInfoResponseClass] = self.classInfo;
+  }
+  
+  return dictionary;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary

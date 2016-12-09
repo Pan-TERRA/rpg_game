@@ -95,8 +95,10 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   self.entityLevelView.layer.cornerRadius = self.entityLevelView.frame.size.height * kRPGEntityViewControllerViewCornerRadiusMultiplier;
   self.entityLevelView.layer.masksToBounds = YES;
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
-  [self.skillsEffectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.skillsEffectsCollectionView registerNib:cellNIB
+                     forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
   
   RPGSkillsEffectsCollectionViewAlign align = (self.entityHPBar.align == kRPGProgressBarLeftAlign) ? kRPGSkillsEffectsCollectionViewAlignLeft : kRPGSkillsEffectsCollectionViewAlignRight;
   self.skillsEffectsCollectionViewController = [[[RPGSkillsEffectsCollectionViewController alloc]
@@ -108,7 +110,6 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - View Update

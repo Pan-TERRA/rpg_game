@@ -16,7 +16,7 @@ extern NSString * const kRPGQuestViewControllerWaitingMessageUpload;
 
 @property (nonatomic, copy, readonly) NSString *proofImageStringURL;
 @property (nonatomic, assign, readwrite) RPGQuestState state;
-@property (nonatomic, assign, readonly) NSUInteger questID;
+@property (nonatomic, assign, readonly) NSInteger questID;
 @property (nonatomic, assign, readonly, getter=hasGotReward) BOOL getReward;
 @property (nonatomic, retain, readonly) UIImagePickerController *imagePickerController;
 

@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RPGQuest.h"
-
+  // Views
 @class RPGQuestViewController;
+  // Entites
+#import "RPGQuest.h"
 
 @interface RPGQuestViewButtonContainer : UIView
 

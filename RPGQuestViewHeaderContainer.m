@@ -11,7 +11,7 @@
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
 #import "RPGSkillRepresentation.h"
-  // View
+  // Views
 #import "RPGQuestViewController.h"
 
 @interface RPGQuestViewHeaderContainer()
@@ -98,6 +98,7 @@
   {
     UIImageView *proofTypeImageView = self.proofTypeImageView;
     UIView *superview = proofTypeImageView.superview;
+    
     [self.stateImageView removeFromSuperview];
     [self.stateTitleLabel removeFromSuperview];
     [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview

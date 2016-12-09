@@ -14,10 +14,12 @@
  */
 @interface RPGBattleAction : NSObject
 
-@property (assign, nonatomic, readonly, getter=isMyTurn) BOOL myTurn;
-@property (assign, nonatomic, readonly) NSInteger skillID;
-@property (assign, nonatomic, readonly) NSInteger damage;
+@property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
+@property (nonatomic, assign, readonly) NSInteger skillID;
+@property (nonatomic, assign, readonly) NSInteger damage;
 
-- (instancetype)initWithMyTurn:(BOOL)myTurn skillID:(NSInteger)skillID damage:(NSInteger)damage;
+- (instancetype)initWithMyTurn:(BOOL)myTurn
+                       skillID:(NSInteger)skillID
+                        damage:(NSInteger)damage NS_DESIGNATED_INITIALIZER;
 
 @end

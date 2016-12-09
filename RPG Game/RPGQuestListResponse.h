@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Entities
+@class RPGQuest;
 
 @interface RPGQuestListResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger status;
-@property (nonatomic, retain, readonly) NSArray *quests;
+@property (nonatomic, retain, readonly) NSArray<RPGQuest *> *quests;
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                        quests:(NSArray *)aQuests NS_DESIGNATED_INITIALIZER;
+                        quests:(NSArray<RPGQuest *> *)aQuests NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithStatus:(NSInteger)aStatus
-                        quests:(NSArray *)aQuests;
+                            quests:(NSArray<RPGQuest *> *)aQuests;
 
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 typedef NS_ENUM(NSUInteger, RPGQuestState)
@@ -19,12 +20,12 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
   kRPGQuestStateReviewedFalse,
   kRPGQuestStateForReview = 6 // ???: sho
 };
-
+  // Entities
 @class RPGQuestReward;
 
 @interface RPGQuest : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSUInteger questID;
+@property (nonatomic, assign, readonly) NSInteger questID;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *questDescription;
 @property (nonatomic, assign, readonly) RPGQuestState state;
@@ -32,15 +33,14 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
 @property (nonatomic, assign, readonly, getter=hasGotReward) BOOL getReward;
 @property (nonatomic, copy, readonly) NSString *proofImageStringURL;
 
-- (instancetype)initWithID:(NSUInteger)aQuestID
+- (instancetype)initWithID:(NSInteger)aQuestID
                       name:(NSString *)aName
                description:(NSString *)aQuestDescription
                      state:(NSUInteger)aState
                     reward:(RPGQuestReward *)aReward
                  getReward:(BOOL)hasGotReward
        proofImageStringURL:(NSString *)aStringURL NS_DESIGNATED_INITIALIZER;
-
-+ (instancetype)questWithID:(NSUInteger)aQuestID
++ (instancetype)questWithID:(NSInteger)aQuestID
                        name:(NSString *)aName
                 description:(NSString *)aQuestDescription
                       state:(NSUInteger)aState

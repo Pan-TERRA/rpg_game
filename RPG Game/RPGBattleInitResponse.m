@@ -19,6 +19,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 
 @interface RPGBattleInitResponse ()
 
+@property (nonatomic, retain, readwrite) RPGPlayer *playerInfo;
 @property (nonatomic, retain, readwrite) RPGEntity *opponentInfo;
 @property (nonatomic, assign, readwrite, getter=isCurrentTurn) BOOL currentTurn;
 @property (nonatomic, assign, readwrite) NSInteger time;
@@ -100,6 +101,14 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 {
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
+  if (self.playerInfo != nil)
+  {
+    dictionaryRepresentation[kRPGBattleInitResponsePlayerInfo] = [self.playerInfo dictionaryRepresentation];
+  }
+  if (self.opponentInfo != nil)
+  {
+    dictionaryRepresentation[kRPGBattleInitResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
+  }
   dictionaryRepresentation[kRPGBattleInitResponseCurrentTurn] = [NSNumber numberWithBool:self.isCurrentTurn];
   dictionaryRepresentation[kRPGBattleInitResponseOpponentTime] = @(self.time);
   
@@ -108,18 +117,15 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  RPGEntity *opponentInfo = [[RPGEntity alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponseOpponentInfo]];
-  RPGPlayer *playerInfo = [[RPGPlayer alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponsePlayerInfo]];
-  
-  BOOL currentTurn = [aDictionary[kRPGBattleInitResponseCurrentTurn] boolValue];
-  NSInteger status = [aDictionary[kRPGResponseSerializationStatus] integerValue];
-  NSInteger time = [aDictionary[kRPGBattleInitResponseOpponentTime] integerValue];
+  RPGEntity *opponentInfo = [[[RPGEntity alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponseOpponentInfo]] autorelease];
+  RPGPlayer *playerInfo = [[[RPGPlayer alloc] initWithDictionaryRepresentation:aDictionary[kRPGBattleInitResponsePlayerInfo]] autorelease];
   
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
-               opponentInfo:[opponentInfo autorelease]
-                         playerInfo:[playerInfo autorelease]
-                        currentTurn:currentTurn
-                               time:time status:status];
+               opponentInfo:opponentInfo
+                 playerInfo:playerInfo
+                currentTurn:[aDictionary[kRPGBattleInitResponseCurrentTurn] boolValue]
+                       time:[aDictionary[kRPGBattleInitResponseOpponentTime] integerValue]
+                     status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
 }
 
 

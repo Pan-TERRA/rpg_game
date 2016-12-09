@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RPGAvatarSelectViewControllerDelegate <NSObject>
+
+- (void)handleWrongTokenError;
+- (void)handleDefaultError;
+- (void)updateCharacterAvatar;
+
+@end
+
 @interface RPGAvatarSelectViewController : UIViewController
+
+@property (nonatomic, assign, readwrite) id<RPGAvatarSelectViewControllerDelegate> delegate;
 
 @end

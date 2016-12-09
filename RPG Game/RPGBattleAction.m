@@ -10,9 +10,9 @@
 
 @interface RPGBattleAction ()
 
-@property (assign, nonatomic, readwrite, getter=isMyTurn) BOOL myTurn;
-@property (assign, nonatomic, readwrite) NSInteger skillID;
-@property (assign, nonatomic, readwrite) NSInteger damage;
+@property (nonatomic, assign, readwrite, getter=isMyTurn) BOOL myTurn;
+@property (nonatomic, assign, readwrite) NSInteger skillID;
+@property (nonatomic, assign, readwrite) NSInteger damage;
 
 @end
 
@@ -20,13 +20,15 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithMyTurn:(BOOL)aMyTurn skillID:(NSInteger)aSkillID damage:(NSInteger)aDamage
+- (instancetype)initWithMyTurn:(BOOL)aMyTurn
+                       skillID:(NSInteger)aSkillID
+                        damage:(NSInteger)aDamage
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aSkillID < 0)
+    if (aSkillID < 1)
     {
       [self release];
       self = nil;
@@ -40,6 +42,13 @@
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithMyTurn:NO
+                      skillID:-1
+                       damage:-1];
 }
 
 @end

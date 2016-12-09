@@ -12,10 +12,12 @@
 
 @interface RPGShopUnitsResponse : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readonly) NSInteger status;
-@property (copy, nonatomic, readonly) NSArray *shopUnits;
+@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, copy, readonly) NSArray<NSDictionary *> *shopUnits;
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                     shopUnits:(NSArray *)aShopUnits NS_DESIGNATED_INITIALIZER;
+                     shopUnits:(NSArray<NSDictionary *> *)aShopUnits NS_DESIGNATED_INITIALIZER;
++ (instancetype)shopUnitResponseWithStatus:(NSInteger)aStatus
+                                 shopUnits:(NSArray<NSDictionary *> *)aShopUnits;
 
 @end

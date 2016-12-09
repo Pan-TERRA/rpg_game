@@ -7,6 +7,7 @@
 //
 
 #import "RPGBackgroundMusicController.h"
+  // Misc
 #import "NSUserDefaults+RPGVolumeSettings.h"
 
 static RPGBackgroundMusicController *sharedBackgroundMusicController = nil;
@@ -82,6 +83,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
   [_peacePlayer release];
   [_battlePlayer release];
   [[NSNotificationCenter defaultCenter] removeObserver:self];
+  
   [super dealloc];
 }
 
@@ -145,10 +147,10 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
   return self.peacePlayer.volume;
 }
 
-- (void)setPlaying:(BOOL)playing
+- (void)setPlaying:(BOOL)isPlaying
 {
-  _playing = playing;
-  [NSUserDefaults standardUserDefaults].musicPlaying = playing;
+  _playing = isPlaying;
+  [NSUserDefaults standardUserDefaults].musicPlaying = isPlaying;
   if (_playing)
   {
     [self.currentPlayer play];
@@ -160,6 +162,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
   }
   
 }
+
 #pragma mark - Music Changing
 
 - (void)switchToBattle

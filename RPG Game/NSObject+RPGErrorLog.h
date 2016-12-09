@@ -10,6 +10,7 @@
 
 @interface NSObject (RPGErrorLog)
 
-- (void)logError:(NSError *)anError withTitle:(NSString *)aTitle;
+- (void)logError:(NSError *)anError
+       withTitle:(NSString *)aTitle;
 
 @end

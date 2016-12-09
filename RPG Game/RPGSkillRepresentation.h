@@ -21,7 +21,7 @@
 @property (nonatomic, assign, readonly) NSInteger requiredLevel;
 @property (nonatomic, retain, readonly) NSArray<RPGSkillEffect *> *effects;
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID;
+- (instancetype)initWithSkillID:(NSInteger)aSkillID NS_DESIGNATED_INITIALIZER;
 + (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID;
 
 @end

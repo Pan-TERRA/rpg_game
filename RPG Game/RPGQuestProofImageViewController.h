@@ -10,6 +10,6 @@
 
 @interface RPGQuestProofImageViewController : UIViewController
 
-- (void)setImage:(UIImage *)anImage;
+@property (nonatomic, assign, readwrite) UIImage *proofImage;
 
 @end

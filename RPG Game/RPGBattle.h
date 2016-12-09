@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
   // Constants
 #import "RPGBattleStatus.h"
-
+  // Entities
 @class RPGEntity;
 @class RPGPlayer;
 @class RPGBattleLog;
@@ -26,14 +26,14 @@ extern const NSInteger kRPGBattleTurnDuration;
  */
 @interface RPGBattle : NSObject
 
-@property (retain, nonatomic, readwrite) RPGPlayer *player;
-@property (retain, nonatomic, readonly) RPGEntity *opponent;
-@property (assign, nonatomic, readonly) NSInteger startTime;
-@property (assign, nonatomic, readonly) NSInteger currentTime;
-@property (assign, nonatomic, readonly) RPGBattleStatus battleStatus;
-@property (assign, nonatomic, readonly, getter=isCurrentTurn) BOOL currentTurn;
-@property (retain, nonatomic, readonly) RPGBattleReward *reward;
-@property (retain, nonatomic, readonly) RPGBattleLog *battleLog;
+@property (nonatomic, retain, readwrite) RPGPlayer *player;
+@property (nonatomic, retain, readonly) RPGEntity *opponent;
+@property (nonatomic, assign, readonly) NSInteger startTime;
+@property (nonatomic, assign, readonly) NSInteger currentTime;
+@property (nonatomic, assign, readonly) RPGBattleStatus battleStatus;
+@property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
+@property (nonatomic, retain, readonly) RPGBattleReward *reward;
+@property (nonatomic, retain, readonly) RPGBattleLog *battleLog;
 
 /**
  *  Inits model. Sets startTime, general player info.

@@ -141,7 +141,6 @@
 		AE5E468F1DF041AB00546256 /* RPGAvatarSelectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E468D1DF041AB00546256 /* RPGAvatarSelectViewController.m */; };
 		AE5E46901DF041AB00546256 /* RPGAvatarSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE5E468E1DF041AB00546256 /* RPGAvatarSelectViewController.xib */; };
 		AE5E68011DBA773100715480 /* RPGQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68001DBA773100715480 /* RPGQuestRequest.m */; };
-		AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */; };
 		AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */; };
 		AE8076381DB5360400AF5E5B /* RPGQuestListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE8076371DB5360400AF5E5B /* RPGQuestListResponse.m */; };
 		AE87B59E1DE861AB0019E416 /* RPGBattleReward.m in Sources */ = {isa = PBXBuildFile; fileRef = AE87B59D1DE861AB0019E416 /* RPGBattleReward.m */; };
@@ -454,8 +453,6 @@
 		AE5E468E1DF041AB00546256 /* RPGAvatarSelectViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGAvatarSelectViewController.xib; sourceTree = "<group>"; };
 		AE5E67FF1DBA773100715480 /* RPGQuestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestRequest.h; sourceTree = "<group>"; };
 		AE5E68001DBA773100715480 /* RPGQuestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestRequest.m; sourceTree = "<group>"; };
-		AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestResponse.h; sourceTree = "<group>"; };
-		AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestResponse.m; sourceTree = "<group>"; };
 		AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGQuestListState.h; sourceTree = "<group>"; };
 		AE7B37E31DC0E43B00D105C5 /* RPGQuestReviewRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGQuestReviewRequest.h; sourceTree = "<group>"; };
 		AE7B37E41DC0E43B00D105C5 /* RPGQuestReviewRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGQuestReviewRequest.m; sourceTree = "<group>"; };
@@ -1295,8 +1292,8 @@
 		289C42EB1DE20E2500E35506 /* Request */ = {
 			isa = PBXGroup;
 			children = (
-				289C42D51DE20C6700E35506 /* RPGSkillsSelectRequest.m */,
 				289C42C81DE20C4E00E35506 /* RPGSkillsSelectRequest.h */,
+				289C42D51DE20C6700E35506 /* RPGSkillsSelectRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -1641,7 +1638,6 @@
 			isa = PBXGroup;
 			children = (
 				28AE27171DBD161F00834FBB /* Request */,
-				28AE27181DBD162700834FBB /* Response */,
 			);
 			name = Quest;
 			sourceTree = "<group>";
@@ -1653,15 +1649,6 @@
 				AE5E68001DBA773100715480 /* RPGQuestRequest.m */,
 			);
 			name = Request;
-			sourceTree = "<group>";
-		};
-		28AE27181DBD162700834FBB /* Response */ = {
-			isa = PBXGroup;
-			children = (
-				AE5E68051DBA7EA300715480 /* RPGQuestResponse.h */,
-				AE5E68061DBA7EA300715480 /* RPGQuestResponse.m */,
-			);
-			name = Response;
 			sourceTree = "<group>";
 		};
 		28B4DDB01DCC971200332DCD /* Support */ = {
@@ -1707,8 +1694,8 @@
 			isa = PBXGroup;
 			children = (
 				28C5769C1DE225AB008DCB88 /* RPGAlertViewController.xib */,
-				28C5769F1DE225B5008DCB88 /* RPGAlertViewController.m */,
 				28C5769B1DE225A2008DCB88 /* RPGAlertViewController.h */,
+				28C5769F1DE225B5008DCB88 /* RPGAlertViewController.m */,
 			);
 			name = "Alert ViewController";
 			sourceTree = "<group>";
@@ -2470,7 +2457,6 @@
 				28F102251DB7756C00C969CA /* NSUserDefaults+RPGSessionInfo.m in Sources */,
 				28B4DDB31DCC974B00332DCD /* NSObject+RPGErrorLog.m in Sources */,
 				283FF1D91DE5D3ED00F4535E /* RPGClassInfoRepresentation.m in Sources */,
-				AE5E68071DBA7EA300715480 /* RPGQuestResponse.m in Sources */,
 				28AB94A91DDEF8B100F1503B /* RPGQuickSettingsViewController.m in Sources */,
 				AEFC27B41DD4CB0300905ADD /* RPGQuestViewHeaderContainer.m in Sources */,
 				289C42E21DE20C6700E35506 /* RPGSkillsSelectRequest.m in Sources */,

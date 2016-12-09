@@ -10,9 +10,9 @@
 
 @interface RPGArenaInitRequest : RPGRequest
 
-@property (nonatomic, retain, readonly) NSArray *skillIDs;
+@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skillIDs;
 
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs NS_DESIGNATED_INITIALIZER;
-+ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs;
+- (instancetype)initWithSkillIDs:(NSArray<NSNumber *> *)aSkillIDs NS_DESIGNATED_INITIALIZER;
++ (instancetype)requestWithSkillIDs:(NSArray<NSNumber *> *)aSkillIDs;
 
 @end

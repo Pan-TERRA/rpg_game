@@ -17,26 +17,37 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
 
 - (instancetype)init
 {
-  return [self initWithStatus:-1 shopUnits:nil];
+  return [self initWithStatus:-1
+                    shopUnits:nil];
 }
 
-- (instancetype)initWithStatus:(NSInteger)aStatus shopUnits:(NSArray *)aShopUnits
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                     shopUnits:(NSArray<NSDictionary *> *)aShopUnits
 {
   self = [super init];
+  
   if (self != nil)
   {
     _status = aStatus;
-    if (aShopUnits != nil)
+    if (aShopUnits == nil)
     {
-      _shopUnits = [aShopUnits retain];
+      [self release];
+      self = nil;
     }
     else
     {
-      _shopUnits = [[NSArray alloc] init];
+      _shopUnits = [aShopUnits retain];
     }
   }
   
   return self;
+}
+
++ (instancetype)shopUnitResponseWithStatus:(NSInteger)aStatus
+                                 shopUnits:(NSArray<NSDictionary *> *)aShopUnits
+{
+  return [[[self alloc] initWithStatus:aStatus
+                             shopUnits:aShopUnits] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -44,6 +55,7 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
 - (void)dealloc
 {
   [_shopUnits release];
+  
   [super dealloc];
 }
 
@@ -54,7 +66,10 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   
   dictionary[kRPGShopUnitsResponseStatus] = @(self.status);
-  dictionary[kRPGShopUnitsResponseUnits] = self.shopUnits;
+  if (self.shopUnits != nil)
+  {
+    dictionary[kRPGShopUnitsResponseUnits] = self.shopUnits;
+  }
   
   return dictionary;
 }
@@ -62,8 +77,7 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
   return [self initWithStatus:[aDictionary[kRPGShopUnitsResponseStatus] integerValue]
-                       shopUnits:aDictionary[kRPGShopUnitsResponseUnits]];
+                    shopUnits:aDictionary[kRPGShopUnitsResponseUnits]];
 }
-
 
 @end
