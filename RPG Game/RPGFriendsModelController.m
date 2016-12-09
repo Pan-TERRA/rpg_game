@@ -140,7 +140,7 @@
     {
       NSNumber *first = @(((RPGFriend *)obj1).state);
       NSNumber *second = @(((RPGFriend *)obj2).state);
-      NSComparisonResult result = [first compare:second];
+      NSComparisonResult result = [second compare:first];
       
       //if state is equal - check for online
       if (result == NSOrderedSame)

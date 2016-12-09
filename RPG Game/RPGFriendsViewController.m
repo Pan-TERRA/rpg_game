@@ -249,17 +249,19 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
   {
     NSString *userName = [NSString stringWithFormat:@"UserName - %li", (long)i];
     NSString *characterName = [NSString stringWithFormat:@"CharacterName - %li", (long)i];
-    NSString *avatar = @"forbidden";
+    NSInteger avatarID = i % 10;
     RPGFriendState state = i % 3;
     NSInteger level = (i * 5 + i % 3) % 11;
     BOOL online = i % 2;
+    NSInteger classID = i % 2 + 1;
     RPGFriend *friend = [RPGFriend friendWithID:i
                                        userName:userName
                                   characterName:characterName
-                                         avatar:avatar
+                                       avatarID:avatarID
                                           state:state
                                           level:level
-                                         online:online];
+                                         online:online
+                                        classID:classID];
     [result addObject:friend];
   }
   
@@ -276,7 +278,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray *);
     
     [self updateButtonsState];
     
-    [self.friendsTableViewController setNeedReloadTableView];
+    [self.friendsTableViewController reloadTable];
   }
 }
 

@@ -26,6 +26,6 @@
 
 - (instancetype)initWithFriendsModelController:(RPGFriendsModelController *)aModelController;
 
-- (void)setNeedReloadTableView;
+- (void)reloadTable;
 
 @end
