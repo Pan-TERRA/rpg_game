@@ -12,7 +12,6 @@
   // Constants
 #import "RPGSkillsEffectsCollectionViewAlign.h"
 
-
 @interface RPGSkillsEffectsCollectionViewController : NSObject
 
 @property (nonatomic, retain, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;

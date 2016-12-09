@@ -32,7 +32,8 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGSkillDescriptionViewControllerNIBName bundle:nil];
+  return [super initWithNibName:kRPGSkillDescriptionViewControllerNIBName
+                         bundle:nil];
 }
 
 #pragma mark - Dealloc
@@ -50,8 +51,10 @@
 {
   [super viewDidLoad];
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
-  [self.effectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.effectsCollectionView registerNib:cellNIB
+               forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
 }
 
 - (void)didReceiveMemoryWarning

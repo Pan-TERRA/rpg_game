@@ -7,7 +7,7 @@
   //
 
 #import "RPGSkillBarViewController.h"
-// Frameworks
+  // Frameworks
 #import <QuartzCore/QuartzCore.h>
   // Entities
 #import "RPGBattle.h"
@@ -42,7 +42,7 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
   if (self != nil)
   {
     _battleController = aBattleController;
-    _skillRepresentations = [NSMutableArray new];
+    _skillRepresentations = [[NSMutableArray alloc] init];
   }
   
   return self;
@@ -50,7 +50,8 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGSkillBarViewControllerNIBName bundle:nil];
+  return [super initWithNibName:kRPGSkillBarViewControllerNIBName
+                         bundle:nil];
 }
 
 #pragma mark - Dealloc
@@ -58,6 +59,7 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 - (void)dealloc
 {
   [_skillRepresentations release];
+  
   [super dealloc];
 }
 
