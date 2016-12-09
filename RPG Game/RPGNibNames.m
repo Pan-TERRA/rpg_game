@@ -61,3 +61,8 @@ NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
 NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
 NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
 
+/****************	Adventure Maps ****************/
+
+NSString * const kRPGAdventureGlobalMapViewControllerNIBName = @"RPGAdventureGlobalMapViewController";
+NSString * const kRPGLocationMapSuffixlessNIBName = @"RPGLocationMap-";
+

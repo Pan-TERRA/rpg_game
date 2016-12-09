@@ -61,3 +61,8 @@ extern NSString * const kRPGRewardViewControllerNIBName;
 extern NSString * const kRPGSkillsEffectsViewControllerNIBName;
 extern NSString * const kRPGSkillsEffectsCollectionViewCellNIBName;
 
+/****************	Adventure Maps ****************/
+
+extern NSString * const kRPGAdventureGlobalMapViewControllerNIBName;
+extern NSString * const kRPGLocationMapSuffixlessNIBName;
+
