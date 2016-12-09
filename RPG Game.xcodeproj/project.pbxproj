@@ -147,7 +147,7 @@
 		D0819AC01DD6180100021DB9 /* RPGSkillDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0819AB51DD6180100021DB9 /* RPGSkillDescriptionViewController.xib */; };
 		D08406151DEF375200CBB9EE /* RPGNetworkManager+Friends.m in Sources */ = {isa = PBXBuildFile; fileRef = D08406141DEF375200CBB9EE /* RPGNetworkManager+Friends.m */; };
 		D084061F1DEF474600CBB9EE /* RPGFriendListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = D084061E1DEF474600CBB9EE /* RPGFriendListResponse.m */; };
-		D08406231DEF47BE00CBB9EE /* RPGFriendConfirmRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D08406221DEF47BE00CBB9EE /* RPGFriendConfirmRequest.m */; };
+		D08406231DEF47BE00CBB9EE /* RPGAddFriendRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = D08406221DEF47BE00CBB9EE /* RPGAddFriendRequest.m */; };
 		D084062F1DEF4C0700CBB9EE /* RPGFriend.m in Sources */ = {isa = PBXBuildFile; fileRef = D084062E1DEF4C0700CBB9EE /* RPGFriend.m */; };
 		D08406491DF0566E00CBB9EE /* RPGFriendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08406471DF0566E00CBB9EE /* RPGFriendsViewController.m */; };
 		D084064A1DF0566E00CBB9EE /* RPGFriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D08406481DF0566E00CBB9EE /* RPGFriendsViewController.xib */; };
@@ -474,8 +474,8 @@
 		D08406141DEF375200CBB9EE /* RPGNetworkManager+Friends.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+Friends.m"; sourceTree = "<group>"; };
 		D084061D1DEF474600CBB9EE /* RPGFriendListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGFriendListResponse.h; sourceTree = "<group>"; };
 		D084061E1DEF474600CBB9EE /* RPGFriendListResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGFriendListResponse.m; sourceTree = "<group>"; };
-		D08406211DEF47BE00CBB9EE /* RPGFriendConfirmRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGFriendConfirmRequest.h; sourceTree = "<group>"; };
-		D08406221DEF47BE00CBB9EE /* RPGFriendConfirmRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGFriendConfirmRequest.m; sourceTree = "<group>"; };
+		D08406211DEF47BE00CBB9EE /* RPGAddFriendRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAddFriendRequest.h; sourceTree = "<group>"; };
+		D08406221DEF47BE00CBB9EE /* RPGAddFriendRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAddFriendRequest.m; sourceTree = "<group>"; };
 		D084062D1DEF4C0700CBB9EE /* RPGFriend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGFriend.h; sourceTree = "<group>"; };
 		D084062E1DEF4C0700CBB9EE /* RPGFriend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGFriend.m; sourceTree = "<group>"; };
 		D08406461DF0566E00CBB9EE /* RPGFriendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGFriendsViewController.h; sourceTree = "<group>"; };
@@ -1839,7 +1839,7 @@
 				D08406131DEF375200CBB9EE /* RPGNetworkManager+Friends.h */,
 				D08406141DEF375200CBB9EE /* RPGNetworkManager+Friends.m */,
 				D0B354131DF720D5007AF7F2 /* Request */,
-				D08406201DEF479D00CBB9EE /* Confirm Request */,
+				D08406201DEF479D00CBB9EE /* Add Friend Request */,
 				D084061B1DEF46C600CBB9EE /* Friends List Response */,
 			);
 			name = Friends;
@@ -1854,13 +1854,13 @@
 			name = "Friends List Response";
 			sourceTree = "<group>";
 		};
-		D08406201DEF479D00CBB9EE /* Confirm Request */ = {
+		D08406201DEF479D00CBB9EE /* Add Friend Request */ = {
 			isa = PBXGroup;
 			children = (
-				D08406211DEF47BE00CBB9EE /* RPGFriendConfirmRequest.h */,
-				D08406221DEF47BE00CBB9EE /* RPGFriendConfirmRequest.m */,
+				D08406211DEF47BE00CBB9EE /* RPGAddFriendRequest.h */,
+				D08406221DEF47BE00CBB9EE /* RPGAddFriendRequest.m */,
 			);
-			name = "Confirm Request";
+			name = "Add Friend Request";
 			sourceTree = "<group>";
 		};
 		D084062C1DEF4BF600CBB9EE /* Friend */ = {
@@ -2378,7 +2378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D08406231DEF47BE00CBB9EE /* RPGFriendConfirmRequest.m in Sources */,
+				D08406231DEF47BE00CBB9EE /* RPGAddFriendRequest.m in Sources */,
 				2A32D3361DE3787800F6CA7C /* RPGArenaSkillCollectionViewController.m in Sources */,
 				D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */,
 				D0B3545E1DF9F21D007AF7F2 /* RPGSkillsEffectsCollectionViewController.m in Sources */,
