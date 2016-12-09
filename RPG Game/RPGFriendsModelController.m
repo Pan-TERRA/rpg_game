@@ -71,6 +71,11 @@
 
 - (void)setData:(NSArray<RPGFriend *> *)aFriends
 {
+  [self.allFriendsMutable removeAllObjects];
+  [self.incomingRequestsMutable removeAllObjects];
+  [self.outgoingRequestsMutable removeAllObjects];
+  [self.onlineFriendsMutable removeAllObjects];
+  
   for (RPGFriend *friend in aFriends)
   {
     switch (friend.state)
