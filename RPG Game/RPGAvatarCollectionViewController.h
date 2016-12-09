@@ -14,7 +14,6 @@
 @property (nonatomic, assign, readwrite) NSInteger characterClassID;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                  parentViewController:(UIViewController *)aViewController
                    selectedAvatarIndex:(NSInteger)anIndex;
 
 @end

@@ -7,18 +7,17 @@
 //
 
 #import "RPGAvatarCollectionViewController.h"
-// Views
+  // Views
 #import "RPGAvatarCollectionViewCell.h"
-// Misc
+  // Misc
 #import "UIViewController+RPGChildViewController.h"
-// Constants
+  // Constants
 #import "RPGNibNames.h"
 
-static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
+static NSInteger const kRPGAvatarCollectionViewControllerSize = 10;
 
 @interface RPGAvatarCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic, assign, readwrite) UIViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
 @property (nonatomic, assign, readwrite) NSInteger selectedAvatarIndex;
 
@@ -29,7 +28,6 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                  parentViewController:(UIViewController *)aViewController
                    selectedAvatarIndex:(NSInteger)anIndex
 {
   self = [super init];
@@ -40,7 +38,6 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
-    _viewController = aViewController;
     _selectedAvatarIndex = anIndex;
   }
   
@@ -50,7 +47,6 @@ static NSInteger kRPGAvatarCollectionViewControllerSize = 10;
 - (instancetype)init
 {
   return [self initWithCollectionView:nil
-                 parentViewController:nil
                   selectedAvatarIndex:-1];
 }
 
