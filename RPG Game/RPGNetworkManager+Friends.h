@@ -11,7 +11,7 @@
 #import "RPGStatusCodes.h"
 
 @class RPGFriendRequest;
-@class RPGFriendConfirmRequest;
+@class RPGAddFriendRequest;
 
 typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 {
@@ -23,9 +23,9 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 
 @interface RPGNetworkManager (Friends)
 
-- (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode status, NSArray *friends))callbackBlock;
+- (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode status, NSArray<NSDictionary *> *friends))callbackBlock;
 
-- (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
+- (void)addPlayerToFriendsWithRequest:(RPGAddFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
 - (void)doFriendAction:(RPGFriendsNetworkAction)anAction
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 - (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
          completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
-- (void)confirmQuestChallengeWith:(RPGFriendConfirmRequest *)aRequest
+- (void)confirmQuestChallengeWith:(RPGAddFriendRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
 
 @end

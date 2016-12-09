@@ -11,13 +11,13 @@
 #import "RPGBasicNetworkResponse.h"
 #import "RPGFriendListResponse.h"
 #import "RPGFriendRequest.h"
-#import "RPGFriendConfirmRequest.h"
+#import "RPGAddFriendRequest.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
 
 @implementation RPGNetworkManager (Friends)
 
-- (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode, NSArray *friends))callbackBlock
+- (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode, NSArray<NSDictionary *> *friends))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -120,12 +120,10 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)addPlayerToFriendsWithRequest:(RPGFriendRequest *)aRequest
+- (void)addPlayerToFriendsWithRequest:(RPGAddFriendRequest *)aRequest
                     completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
-  
-#warning - server conflict
-  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+    NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
                              kRPGNetworkManagerAPIAddFriendRoute];
   
@@ -258,7 +256,7 @@ completionHandler:(void (^)(RPGStatusCode status))callbackBlock
     {
       requestString = [NSString stringWithFormat:@"%@%@",
                        kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIAcceptFriendRequestRoute];
+                       kRPGNetworkManagerAPISkipFriendRequestRoute];
       break;
     }
       
@@ -463,7 +461,7 @@ completionHandler:(void (^)(RPGStatusCode status))callbackBlock
   [session finishTasksAndInvalidate];
 }
 
-- (void)confirmQuestChallengeWith:(RPGFriendConfirmRequest *)aRequest
+- (void)confirmQuestChallengeWith:(RPGAddFriendRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode status))callbackBlock
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
