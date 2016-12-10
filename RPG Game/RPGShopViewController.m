@@ -86,6 +86,12 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];
+  
+  NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+  self.goldLabel.text = [@(userDefault.sessionGold) stringValue];
+  self.crystallLabel.text = [@(userDefault.sessionCrystals) stringValue];
+  
+  self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 
   [self updateViewsWithWaitingModal];
 }
@@ -93,12 +99,6 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
 - (void)viewDidAppear:(BOOL)anAnimated
 {
   [super viewDidAppear:anAnimated];
-  
-  NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-  self.goldLabel.text = [@(userDefault.sessionGold) stringValue];
-  self.crystallLabel.text = [@(userDefault.sessionCrystals) stringValue];
-  
-  self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 }
 
 #pragma mark - IBActions
