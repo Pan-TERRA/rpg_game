@@ -8,15 +8,15 @@
 
 #import "RPGMainViewController.h"
   // API
-#import "RPGBattleViewController.h"
+#import "RPGAdventuresFactory.h"
+#import "RPGArenaFactory.h"
+#import "RPGTournamentFactory.h"
   // Controllers
-#import "RPGArenaControllerGenerator.h"
-#import "RPGAdventuresControllerGenerator.h"
 #import "RPGAdventuresController.h"
 #import "RPGArenaController.h"
 #import "RPGTournamentController.h"
-#import "RPGTournamentControllerGenerator.h"
   // Views
+#import "RPGBattleViewController.h"
 #import "RPGSettingsViewController.h"
 #import "RPGQuestListViewController.h"
 #import "RPGCharacterProfileViewController.h"
@@ -29,7 +29,6 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
-
 #import "RPGNetworkManager.h"
 #import "RPGResources.h"
 
@@ -127,9 +126,9 @@
 
 - (IBAction)segueToPlay
 {
-  RPGBattleControllerGenerator *tournamentControllerGenerator = [[[RPGTournamentControllerGenerator alloc] init] autorelease];
+  RPGTournamentFactory *tournamentFactory = [[[RPGTournamentFactory alloc] init] autorelease];
   RPGTournamentViewController *tournamentViewController = [[[RPGTournamentViewController alloc]
-                                                            initWithBattleControllerGenerator:tournamentControllerGenerator]
+                                                            initWithBattleFactory:tournamentFactory]
                                                            autorelease];
   
   [self presentViewController:tournamentViewController animated:YES completion:nil];
@@ -137,8 +136,10 @@
 
 - (IBAction)segueToAdventures
 {
-  RPGBattleControllerGenerator *adventuresControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
-  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:adventuresControllerGenerator] autorelease];
+  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
+  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc]
+                                                    initWithBattleFactory:adventuresFactory]
+                                                   autorelease];
   
   [self presentViewController:battleViewController
                      animated:YES

@@ -8,10 +8,9 @@
 
 #import "RPGArenaSkillDrawViewController.h"
   // API
+#import "RPGArenaFactory.h"
 #import "RPGNetworkManager+Arena.h"
   // Controllers
-#import "RPGArenaControllerGenerator.h"
-//#import "RPGArenaCollectionViewController.h"
 #import "RPGWaitingViewController.h"
 #import "RPGArenaSkillCollectionViewController.h"
 #import "RPGArenaBagCollectionViewController.h"
@@ -236,8 +235,10 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
 {
   [self saveSelectedSkills];
 
-  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] init] autorelease];
-  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:arenaControllerGenerator] autorelease];
+  RPGArenaFactory *arenaFactory = [[[RPGArenaFactory alloc] init] autorelease];
+  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc]
+                                              initWithBattleFactory:arenaFactory]
+                                             autorelease];
   
   [self.delegate dismissCurrentAndPresentViewController:viewController];
 }

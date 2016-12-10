@@ -11,8 +11,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RPGBattleControllerGenerator;
+@class RPGBattleFactory;
 @class RPGBattleController;
+@class RPGRewardViewController;
 
 @interface RPGBattleViewController : UIViewController
 
@@ -21,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
   // Containers
 @property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 
-- (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
+- (instancetype)initWithBattleFactory:(nonnull RPGBattleFactory *)aBattleFactory;
 
 - (void)modelDidChange:(NSNotification *)aNotification NS_REQUIRES_SUPER;
 

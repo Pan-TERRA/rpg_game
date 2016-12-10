@@ -9,7 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
-#import "RPGArenaController.h"
+#import "RPGBattleFactory.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -39,7 +39,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @interface RPGBattleViewController () <RPGRewardModalDelegate>
 
-@property (retain, nonatomic, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
+@property (assign, nonatomic, readwrite) RPGBattleFactory *battleFactory;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
 @property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
@@ -72,14 +72,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleControllerGenerator:(RPGBattleControllerGenerator *)aBattleControllerGenerator
+- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
-    _battleControllerGenerator = [aBattleControllerGenerator retain];
-    _battleController = [[_battleControllerGenerator battleController] retain];
+    _battleController = [aBattleFactory.battleController retain];
     
     _timerViewController = [[RPGBattleTimerViewController alloc] initWithBattleController:_battleController
                                                                              turnDuration:kRPGBattleTurnDuration];
@@ -88,7 +87,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     if (_battleController != nil)
     {
         // internal view controllers
-      _battleRewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+      _battleRewardViewController = [aBattleFactory.rewardViewController retain];
       _battleRewardViewController.delegate = self;
       
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
