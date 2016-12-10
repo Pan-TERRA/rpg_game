@@ -26,7 +26,6 @@
                  currentTurn:aCurrentTurn
                         time:aTime
                       status:aStatus];
-  
 }
 
 - (instancetype)initWithType:(NSString *)aType
@@ -43,11 +42,11 @@
                              status:aStatus];
 }
 
-+ (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                                        playerInfo:(RPGPlayer *)aPlayerInfo
-                                       currentTurn:(BOOL)aCurrentTurn
-                                              time:(NSInteger)aTime
-                                            status:(NSInteger)aStatus
++ (instancetype)responseWithOpponentInfo:(RPGEntity *)anOpponentInfo
+                              playerInfo:(RPGPlayer *)aPlayerInfo
+                             currentTurn:(BOOL)aCurrentTurn
+                                    time:(NSInteger)aTime
+                                  status:(NSInteger)aStatus
 {
   return [[[self alloc] initWithOpponentInfo:anOpponentInfo
                                   playerInfo:aPlayerInfo

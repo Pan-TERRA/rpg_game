@@ -16,10 +16,10 @@
                                 time:(NSInteger)aTime
                               status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 
-+ (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                                        playerInfo:(RPGPlayer *)aPlayerInfo
-                                       currentTurn:(BOOL)aCurrentTurn
-                                              time:(NSInteger)aTime
-                                            status:(NSInteger)aStatus;
++ (instancetype)responseWithOpponentInfo:(RPGEntity *)anOpponentInfo
+                              playerInfo:(RPGPlayer *)aPlayerInfo
+                             currentTurn:(BOOL)aCurrentTurn
+                                    time:(NSInteger)aTime
+                                  status:(NSInteger)aStatus;
 
 @end
