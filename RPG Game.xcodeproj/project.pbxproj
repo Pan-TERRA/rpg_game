@@ -775,13 +775,40 @@
 			name = General;
 			sourceTree = "<group>";
 		};
+		28184A3A1DFC2CBC002EF22D /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				D08406211DEF47BE00CBB9EE /* RPGAddFriendRequest.h */,
+				D08406221DEF47BE00CBB9EE /* RPGAddFriendRequest.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		28184A3B1DFC2CC3002EF22D /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				D084061D1DEF474600CBB9EE /* RPGFriendListResponse.h */,
+				D084061E1DEF474600CBB9EE /* RPGFriendListResponse.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		28184A3C1DFC2D04002EF22D /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				D0B354161DF72488007AF7F2 /* RPGFriendRequest.h */,
+				D0B354171DF72488007AF7F2 /* RPGFriendRequest.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {
 			isa = PBXGroup;
 			children = (
-				D08406121DEF371700CBB9EE /* Friends */,
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				D08406121DEF371700CBB9EE /* Friends */,
 				28E9D9111DE59D0F006C7688 /* Arena */,
 				289C42E91DE20D5900E35506 /* Character Profile */,
 				87C8734C1DDF27DB00903193 /* Response */,
@@ -1838,29 +1865,27 @@
 			children = (
 				D08406131DEF375200CBB9EE /* RPGNetworkManager+Friends.h */,
 				D08406141DEF375200CBB9EE /* RPGNetworkManager+Friends.m */,
-				D0B354131DF720D5007AF7F2 /* Request */,
-				D08406201DEF479D00CBB9EE /* Add Friend Request */,
-				D084061B1DEF46C600CBB9EE /* Friends List Response */,
+				D0B354131DF720D5007AF7F2 /* General */,
+				D08406201DEF479D00CBB9EE /* Add Friend */,
+				D084061B1DEF46C600CBB9EE /* Friends List */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
 		};
-		D084061B1DEF46C600CBB9EE /* Friends List Response */ = {
+		D084061B1DEF46C600CBB9EE /* Friends List */ = {
 			isa = PBXGroup;
 			children = (
-				D084061D1DEF474600CBB9EE /* RPGFriendListResponse.h */,
-				D084061E1DEF474600CBB9EE /* RPGFriendListResponse.m */,
+				28184A3B1DFC2CC3002EF22D /* Response */,
 			);
-			name = "Friends List Response";
+			name = "Friends List";
 			sourceTree = "<group>";
 		};
-		D08406201DEF479D00CBB9EE /* Add Friend Request */ = {
+		D08406201DEF479D00CBB9EE /* Add Friend */ = {
 			isa = PBXGroup;
 			children = (
-				D08406211DEF47BE00CBB9EE /* RPGAddFriendRequest.h */,
-				D08406221DEF47BE00CBB9EE /* RPGAddFriendRequest.m */,
+				28184A3A1DFC2CBC002EF22D /* Request */,
 			);
-			name = "Add Friend Request";
+			name = "Add Friend";
 			sourceTree = "<group>";
 		};
 		D084062C1DEF4BF600CBB9EE /* Friend */ = {
@@ -1936,13 +1961,12 @@
 			name = Outgoing;
 			sourceTree = "<group>";
 		};
-		D0B354131DF720D5007AF7F2 /* Request */ = {
+		D0B354131DF720D5007AF7F2 /* General */ = {
 			isa = PBXGroup;
 			children = (
-				D0B354161DF72488007AF7F2 /* RPGFriendRequest.h */,
-				D0B354171DF72488007AF7F2 /* RPGFriendRequest.m */,
+				28184A3C1DFC2D04002EF22D /* Request */,
 			);
-			name = Request;
+			name = General;
 			sourceTree = "<group>";
 		};
 		D0B354191DF844A5007AF7F2 /* Add Friend View Controller */ = {

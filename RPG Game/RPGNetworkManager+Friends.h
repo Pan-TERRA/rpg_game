@@ -7,11 +7,11 @@
 //
 
 #import "RPGNetworkManager.h"
-
-#import "RPGStatusCodes.h"
-
+  // Entities
 @class RPGFriendRequest;
 @class RPGAddFriendRequest;
+  // Constants
+#import "RPGStatusCodes.h"
 
 typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 {
@@ -26,16 +26,16 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 - (void)fetchFriendsWithCompletionHandler:(void (^)(RPGStatusCode status, NSArray<NSDictionary *> *friends))callbackBlock;
 
 - (void)addPlayerToFriendsWithRequest:(RPGAddFriendRequest *)aRequest
-                    completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+                    completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 
 - (void)doFriendAction:(RPGFriendsNetworkAction)anAction
            withRequest:(RPGFriendRequest *)aRequest
-     completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+     completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 
 - (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
-         completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+         completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 
 - (void)confirmQuestChallengeWith:(RPGAddFriendRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode status))callbackBlock;
+                completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 
 @end
