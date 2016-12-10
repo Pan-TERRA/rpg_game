@@ -9,7 +9,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGRewardViewController">
             <connections>
-                <outlet property="rankContainer" destination="xJX-Ay-3qc" id="SQj-8f-6gM"/>
+                <outlet property="rankContainer" destination="xJX-Ay-3qc" id="sOC-7d-cRn"/>
                 <outlet property="restartButton" destination="ucg-9I-2Is" id="PBD-jE-fpJ"/>
                 <outlet property="rewardCrystalsLabel" destination="fW8-5g-3Nj" id="rNB-1P-kgP"/>
                 <outlet property="rewardExpLabel" destination="xIq-ud-Qyg" id="LFN-Oj-18h"/>
@@ -29,13 +29,13 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="2jD-nF-g30">
                             <rect key="frame" x="0.0" y="0.0" width="300" height="267"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKR-tW-Fcv">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The winner is" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dKR-tW-Fcv">
                             <rect key="frame" x="96" y="20" width="108" height="22"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQS-vT-cbh" userLabel="NickName">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NickName" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQS-vT-cbh" userLabel="NickName">
                             <rect key="frame" x="107" y="52" width="87" height="22"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

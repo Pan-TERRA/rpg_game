@@ -23,6 +23,8 @@
 @property (nonatomic, assign, readwrite) id<RPGRewardModalDelegate> delegate;
 
 @property (nonatomic, assign, readonly) IBOutlet UIButton *restartButton;
+  // Containers
+@property (nonatomic, assign, readonly) IBOutlet UIView *rankContainer;
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 
