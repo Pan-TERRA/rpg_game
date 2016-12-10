@@ -24,13 +24,19 @@ extern NSString * const kRPGQuestListViewControllerNIBName;
 extern NSString * const kRPGQuestViewControllerNIBName;
 extern NSString * const kRPGQuestListTableViewCellNIBName;
 
-/****************	BattleViewController ****************/
+/****************	Battle ****************/
 
 extern NSString * const kRPGBattleViewControllerNIBName;
 extern NSString * const kRPGSkillBarViewControllerNIBName;
 extern NSString * const kRPGSkillDescriptionViewControllerNIBName;
 extern NSString * const kRPGQuickSettingsViewControllerNIBName;
-extern NSString * const kRPGCurrentWinCountBadgeViewControllerNIBName;
+extern NSString * const kRPGRankBadgeViewControllerNIBName;
+extern NSString * const kRPGEntityViewLeftNIBName;
+extern NSString * const kRPGEntityViewRightNIBName;
+extern NSString * const kRPGRewardViewControllerNIBName;
+extern NSString * const kRPGTournamentRewardRankViewControllerNIBName;
+extern NSString * const kRPGSkillsEffectsViewControllerNIBName;
+extern NSString * const kRPGSkillsEffectsCollectionViewCellNIBName;
 
 /****************	Arena ****************/
 
@@ -53,12 +59,3 @@ extern NSString * const kRPGWaitingViewControllerNIBName;
 extern NSString * const kRPGShopViewControllerNIBName;
 extern NSString * const kRPGShopCollectionViewNIBName;
 extern NSString * const kRPGShopCollectionViewCellNIBName;
-
-/****************	Battle ****************/
-
-extern NSString * const kRPGEntityViewLeftNIBName;
-extern NSString * const kRPGEntityViewRightNIBName;
-extern NSString * const kRPGRewardViewControllerNIBName;
-extern NSString * const kRPGSkillsEffectsViewControllerNIBName;
-extern NSString * const kRPGSkillsEffectsCollectionViewCellNIBName;
-

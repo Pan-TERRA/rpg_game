@@ -24,13 +24,19 @@ NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell
 NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
 
-/****************	BattleViewController ****************/
+/****************	Battle ****************/
 
 NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
 NSString * const kRPGSkillBarViewControllerNIBName = @"RPGSkillBarViewController";
 NSString * const kRPGSkillDescriptionViewControllerNIBName = @"RPGSkillDescriptionViewController";
 NSString * const kRPGQuickSettingsViewControllerNIBName = @"RPGQuickSettingsViewController";
-NSString * const kRPGCurrentWinCountBadgeViewControllerNIBName = @"RPGCurrentWinCountBadgeViewController";
+NSString * const kRPGRankBadgeViewControllerNIBName = @"RPGRankBadgeViewController";
+NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
+NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
+NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
+NSString * const kRPGTournamentRewardRankViewControllerNIBName = @"RPGTournamentRewardRankViewController";
+NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
+NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
 
 /****************	Arena ****************/
 
@@ -53,12 +59,3 @@ NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 NSString * const kRPGShopViewControllerNIBName = @"RPGShopViewController";
 NSString * const kRPGShopCollectionViewNIBName = @"RPGShopCollectionView";
 NSString * const kRPGShopCollectionViewCellNIBName = @"RPGShopCollectionViewCell";
-
-/****************	Battle ****************/
-
-NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
-NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
-NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
-NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
-NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
-
