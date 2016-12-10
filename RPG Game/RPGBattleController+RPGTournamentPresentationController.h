@@ -11,6 +11,7 @@
 
 @interface RPGBattleController (RPGTournamentPresentationController)
 
+@property (assign, nonatomic, readonly) NSArray *winsForRanks;
 @property (assign, nonatomic, readonly) NSInteger playerCurrentWinCount;
 @property (assign, nonatomic, readonly) NSInteger currentPlayerRank;
 @property (assign, nonatomic, readonly) NSInteger absoluteWinsForCurrentRank;

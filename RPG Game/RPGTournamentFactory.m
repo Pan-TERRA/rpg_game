@@ -10,7 +10,6 @@
 #import "RPGTournamentController.h"
 #import "RPGTournamentControllerGenerator.h"
 #import "RPGTournamentRewardViewController.h"
-#import "RPGRewardViewController.h"
 #import "RPGBattleFactoryPrivateProperties.h"
 
 @implementation RPGTournamentFactory

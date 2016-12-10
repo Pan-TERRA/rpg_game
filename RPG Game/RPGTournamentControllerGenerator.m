@@ -14,13 +14,13 @@
 // Constants
 #import "RPGMessageTypes.h"
 
-static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:8888/tournament_battle";
+static NSString * const kRPGWebsocketManagerAPITournamentBattle = @"ws://10.55.33.15:8888/tournament_battle";
 
 @implementation RPGTournamentControllerGenerator
 
 - (RPGBattleController *)battleController
 {
-  RPGWebsocketManager *manager = [[RPGWebsocketManager alloc] initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPIArenaBattle]];
+  RPGWebsocketManager *manager = [[RPGWebsocketManager alloc] initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPITournamentBattle]];
   RPGTournamentController *controller = [[[RPGTournamentController alloc] initWithWebSocketManager:manager] autorelease];
   manager.battleController = controller;
   [manager release];
