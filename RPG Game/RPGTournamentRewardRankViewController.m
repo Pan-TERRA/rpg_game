@@ -8,7 +8,7 @@
 
 #import "RPGTournamentRewardRankViewController.h"
   // API
-#import "RPGTournamentController+TournamentPresentationController.h"
+#import "RPGBattleController+RPGTournamentPresentationController.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
@@ -26,13 +26,13 @@
 
 @implementation RPGTournamentRewardRankViewController
 
-- (instancetype)initWithTournamentController:(RPGTournamentController *)aTournamentController
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
 {
-  self = [super initWithNibName:kRPGCurrentWinCountBadgeViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGTournamentRewardRankViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
-    _tournamentController = aTournamentController;
+    _battleController = aBattleController;
   }
   
   return self;
@@ -40,15 +40,15 @@
 
 - (void)updateView
 {
-  RPGTournamentController *tournamentController = self.tournamentController;
-  NSInteger currentWinCount = tournamentController.battle.player.currentWinCount;
-  NSInteger absoluteWinsForCurrentRank = tournamentController.absoluteWinsForCurrentRank;
-  NSInteger absoluteWinsForNextRank = tournamentController.absoluteWinsForNextRank;
+  RPGBattleController *battleController = self.battleController;
+  NSInteger currentWinCount = battleController.battle.player.currentWinCount;
+  NSInteger absoluteWinsForCurrentRank = battleController.absoluteWinsForCurrentRank;
+  NSInteger absoluteWinsForNextRank = battleController.absoluteWinsForNextRank;
   
   NSInteger totalWinsToNextRank = absoluteWinsForNextRank - absoluteWinsForCurrentRank;
   NSInteger currentWinsAtRank = currentWinCount - absoluteWinsForCurrentRank;
   
-  self.rankLabel.text = [@(tournamentController.currentPlayerRank) stringValue];
+  self.rankLabel.text = [@(battleController.currentPlayerRank) stringValue];
   self.winCountLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)currentWinsAtRank, (long)totalWinsToNextRank];
 }
 

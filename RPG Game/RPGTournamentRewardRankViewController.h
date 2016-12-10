@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class RPGBattleController;
+
 @interface RPGTournamentRewardRankViewController : UIViewController
+
+@property (assign, nonatomic, readonly) RPGBattleController *battleController;
+
+- (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
+
+- (void)updateView;
 
 @end
