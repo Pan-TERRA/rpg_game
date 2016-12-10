@@ -59,3 +59,8 @@ NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 NSString * const kRPGShopViewControllerNIBName = @"RPGShopViewController";
 NSString * const kRPGShopCollectionViewNIBName = @"RPGShopCollectionView";
 NSString * const kRPGShopCollectionViewCellNIBName = @"RPGShopCollectionViewCell";
+
+/****************	Adventure Maps ****************/
+
+NSString * const kRPGAdventureGlobalMapViewControllerNIBName = @"RPGAdventureGlobalMapViewController";
+NSString * const kRPGLocationMapSuffixlessNIBName = @"RPGLocationMap-";

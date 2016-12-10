@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)close;
 
 - (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject;
-- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject shouldInjectToken:(BOOL)anInjectTokenFlag;
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject
+                            shouldInjectToken:(BOOL)anInjectTokenFlag;
 
 @end
 

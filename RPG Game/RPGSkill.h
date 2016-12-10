@@ -13,10 +13,12 @@
 @property (nonatomic, assign, readonly) NSInteger skillID;
 @property (nonatomic, assign, readwrite) NSInteger cooldown;
 
+- (instancetype)initWithSkillID:(NSInteger)aSkillID
+                       cooldown:(NSInteger)aCooldown NS_DESIGNATED_INITIALIZER;
++ (instancetype)skillWithSkillID:(NSInteger)aSkillID
+                        cooldown:(NSInteger)aCooldown;
+
 - (instancetype)initWithSkillID:(NSInteger)aSkillID;
 + (instancetype)skillWithSkillID:(NSInteger)aSkillID;
-
-- (instancetype)initWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown;
-+ (instancetype)skillWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown;
 
 @end

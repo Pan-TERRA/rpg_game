@@ -14,11 +14,11 @@
   // Constants
 #import "RPGNibNames.h"
 
-NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
+static NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
 
 @implementation RPGSkillCollectionViewController
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return kRPGSkillCollectionViewControllerMaxSize;
 }
@@ -28,7 +28,8 @@ NSUInteger const kRPGSkillCollectionViewControllerMaxSize = 5;
   return kRPGSkillCollectionViewControllerMaxSize;
 }
 
-- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem
+            type:(RPGItemType)aType
 {
   switch (aType)
   {

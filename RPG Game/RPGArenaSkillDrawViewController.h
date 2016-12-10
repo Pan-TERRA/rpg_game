@@ -13,6 +13,4 @@
 
 @property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
 
-- (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID;
-
 @end

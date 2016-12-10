@@ -9,19 +9,9 @@
 #import <UIKit/UIKit.h>
   // Constants
 #import "RPGQuestListState.h"
-
+  // Entities
 @class RPGQuest;
 
 @interface RPGQuestListViewController : UIViewController
-/**
- *  Update the quest list table view.
- *
- *  @param aState            A qust list state.
- *  @param aShouldReloadFlag A flag that indicates whether to perform 
- *         reloadData method on table or not.
- */
-- (void)updateViewForState:(RPGQuestListState)aState shouldReload:(BOOL)aShouldReloadFlag;
-- (void)showQuestViewWithQuest:(RPGQuest *)aQuest;
-- (void)setViewForNoQuests:(BOOL)aFlag;
 
 @end

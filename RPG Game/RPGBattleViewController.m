@@ -42,19 +42,19 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (assign, nonatomic, readwrite) RPGBattleFactory *battleFactory;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
-@property (assign, nonatomic) IBOutlet UIView *playerViewContainer;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *playerViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *playerViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *currentWinCountBadgeViewContainer;
   // Opponent
-@property (assign, nonatomic) IBOutlet UIView *opponentViewContainer;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *opponentViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *opponentViewController;
   // Battle log
 @property (nonatomic, retain, readwrite) RPGBattleLogViewController *battleLogViewController;
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
-@property (nonatomic, retain, readwrite) RPGBattleTimerViewController *timerViewController;
-@property (assign, nonatomic) IBOutlet UIView *timerContainer;
+@property (nonatomic, assign, readwrite) RPGBattleTimerViewController *timerViewController;
+@property (nonatomic, retain, readwrite) IBOutlet UIView *timerContainer;
   // Reward
 @property (nonatomic, retain, readwrite) RPGRewardViewController *battleRewardViewController;
   // Modals
@@ -94,13 +94,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
         // player view controller
-      _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
+      _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignLeft];
       
         // opponent view controller
-      _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarRightAlign];
+      _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignRight];
       
       
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init" completion:^
+      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"
+                                                                completion:^
       {
         [self.battleController prepareBattleControllerForDismiss];
         [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
@@ -119,7 +120,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
                                                    name:kRPGBattleInitDidEndSetUpNotification
                                                  object:_battleController];
     }
-    
   }
   
   return self;
@@ -132,10 +132,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [[NSNotificationCenter defaultCenter] removeObserver:_skillBar];
   
-  [_battleInitModal release];
-  [_battleLogViewController release];
-  [_battleRewardViewController release];
   [_battleController release];
+  [_playerViewController release];
+  [_opponentViewController release];
+  [_battleLogViewController release];
+  [_timerViewController release];
+  [_battleRewardViewController release];
+  [_battleInitModal release];
   [_skillBarViewController release];
   [_settingsViewController release];
   
@@ -151,35 +154,40 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   self.battleLogViewController.view = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
-  [self addChildViewController:self.timerViewController view:self.timerContainer];
-  [self addChildViewController:self.battleInitModal view:self.view];
-  [self addChildViewController:self.skillBarViewController view:self.skillBar];
-  [self addChildViewController:self.playerViewController view:self.playerViewContainer];
-  [self addChildViewController:self.opponentViewController view:self.opponentViewContainer];
+  [self addChildViewController:self.timerViewController
+                          view:self.timerContainer];
+  [self addChildViewController:self.battleInitModal
+                          view:self.view];
+  [self addChildViewController:self.skillBarViewController
+                          view:self.skillBar];
+  [self addChildViewController:self.playerViewController
+                          view:self.playerViewContainer];
+  [self addChildViewController:self.opponentViewController
+                          view:self.opponentViewContainer];
   
   [self.battleController fireUpBattleController];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)anAnimated
 {
-  [super viewWillAppear:animated];
+  [super viewWillAppear:anAnimated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)anAnimated
 {
-  [super viewDidAppear:animated];
+  [super viewDidAppear:anAnimated];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)anAnimated
 {
-  [super viewWillDisappear:animated];
+  [super viewWillDisappear:anAnimated];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)viewDidDisappear:(BOOL)anAnimated
 {
     // TODO: if we end battle, we may want to invalidate this timer earlier
     //[self.timer invalidate];
-  [super viewDidDisappear:animated];
+  [super viewDidDisappear:anAnimated];
 }
 
 - (void)didReceiveMemoryWarning
@@ -198,14 +206,15 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [self.battleController prepareBattleControllerForDismiss];
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-  [self dismissViewControllerAnimated:YES completion:nil];
+  [self dismissViewControllerAnimated:YES
+                           completion:nil];
 }
 
-- (IBAction)showSettingsModal:(UIButton *)sender
+- (IBAction)showSettingsModal:(UIButton *)aSender
 {
   if (self.settingsViewController == nil)
   {
-    self.settingsViewController = [[RPGQuickSettingsViewController new] autorelease];
+    self.settingsViewController = [[[RPGQuickSettingsViewController alloc] init] autorelease];
   }
   
   self.settingsView = self.settingsViewController.view;

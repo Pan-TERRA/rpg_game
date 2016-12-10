@@ -112,6 +112,7 @@
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="doW-3W-Glt">
                     <rect key="frame" x="44" y="84" width="176" height="29"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="doW-3W-Glt" secondAttribute="height" multiplier="6:1" id="SvS-at-2E6"/>
                     </constraints>
@@ -124,6 +125,7 @@
                     <connections>
                         <outlet property="dataSource" destination="-1" id="fn0-R1-Dfr"/>
                         <outlet property="delegate" destination="-1" id="FZr-Ot-3Y4"/>
+                        <outletCollection property="gestureRecognizers" destination="MXz-Yf-SUL" appends="YES" id="oKT-Jf-Zzd"/>
                     </connections>
                 </collectionView>
             </subviews>
@@ -143,6 +145,11 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="25" y="238.5"/>
         </view>
+        <tapGestureRecognizer id="MXz-Yf-SUL">
+            <connections>
+                <action selector="handleTapGesture:" destination="-1" id="CfP-N9-vLt"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="bar_right" width="519" height="124"/>

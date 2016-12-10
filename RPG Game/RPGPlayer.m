@@ -7,19 +7,15 @@
 //
 
 #import "RPGPlayer.h"
-#import "NSUserDefaults+RPGSessionInfo.h"
+  // Entities
 #import "RPGSkill.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 NSString * const kRPGPlayerSkills = @"skills";
 NSString * const kRPGPlayerCurrentWinCount = @"win_count";
 
-@interface RPGPlayer ()
-
-@end
-
 @implementation RPGPlayer
-
-@synthesize skills = _skills;
 
 #pragma mark - Init
 
@@ -42,6 +38,29 @@ NSString * const kRPGPlayerCurrentWinCount = @"win_count";
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithName:nil
+                         HP:-1
+                      maxHP:-1
+                      level:-1
+                     skills:nil
+            currentWinCount:-1];
+}
+
+- (instancetype)initWithName:(NSString *)aName
+                          HP:(NSInteger)aHP
+                       maxHP:(NSInteger)aMaxHP
+                       level:(NSInteger)aLevel
+{
+  return [self initWithName:aName
+                         HP:aHP
+                      maxHP:aMaxHP
+                      level:aLevel
+                     skills:nil
+            currentWinCount:-1];
 }
 
 + (instancetype)playerWithName:(NSString *)aName
@@ -72,12 +91,18 @@ NSString * const kRPGPlayerCurrentWinCount = @"win_count";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
-  dictionaryRepresentation[kRPGPlayerCurrentWinCount] = @(self.currentWinCount);
+  if (self.skills)
+  {
+    dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
+  }
+  if (self.currentWinCount != -1)
+  {
+    dictionaryRepresentation[kRPGPlayerCurrentWinCount] = @(self.currentWinCount);
+  }
   
-  return [dictionaryRepresentation autorelease];
+  return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
@@ -95,6 +120,8 @@ NSString * const kRPGPlayerCurrentWinCount = @"win_count";
             currentWinCount:currentWinCount];
 }
 
+#pragma mark - Heplful Method
+
 - (RPGSkill *)skillByID:(NSInteger)anID
 {
   RPGSkill *result = nil;
@@ -110,6 +137,5 @@ NSString * const kRPGPlayerCurrentWinCount = @"win_count";
   
   return result;
 }
-
 
 @end

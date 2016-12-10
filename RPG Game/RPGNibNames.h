@@ -59,3 +59,8 @@ extern NSString * const kRPGWaitingViewControllerNIBName;
 extern NSString * const kRPGShopViewControllerNIBName;
 extern NSString * const kRPGShopCollectionViewNIBName;
 extern NSString * const kRPGShopCollectionViewCellNIBName;
+
+/****************	Adventure Maps ****************/
+
+extern NSString * const kRPGAdventureGlobalMapViewControllerNIBName;
+extern NSString * const kRPGLocationMapSuffixlessNIBName;

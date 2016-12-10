@@ -9,7 +9,7 @@
 #import "RPGNetworkManager.h"
   // Constants
 #import "RPGStatusCodes.h"
-
+  // Entities
 @class RPGCharacterRequest;
 @class RPGCharacterProfileInfoResponse;
 @class RPGCharacterAvatarSelectRequest;
@@ -18,8 +18,8 @@
 
 - (void)getCharacterProfileInfoWithRequest:(RPGCharacterRequest *)aRequest
                          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                     RPGCharacterProfileInfoResponse *aResponse))aCallbackBlock;
+                                                     RPGCharacterProfileInfoResponse *aResponse))aCallback;
 - (void)characterAvatarSelectWithRequest:(RPGCharacterAvatarSelectRequest *)aRequest
-                       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallbackBlock;
+                       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 @end

@@ -16,10 +16,10 @@
 
 @property (nonatomic, assign, readwrite) RPGEntity *entity;
 
-- (instancetype)initWithAlign:(RPGProgressBarAlign)anAlignFlag;
+- (instancetype)initWithAlign:(RPGAlign)anAlign;
 
 - (instancetype)initWithEntity:(RPGEntity *)anEntity
-                         align:(RPGProgressBarAlign)anAlignFlag NS_DESIGNATED_INITIALIZER;
+                         align:(RPGAlign)anAlign NS_DESIGNATED_INITIALIZER;
 
 - (void)updateView;
 

@@ -12,7 +12,7 @@ static NSString * const kRPGBattleRewardExp = @"exp";
 
 @interface RPGBattleReward()
 
-@property (nonatomic, assign, readwrite) NSUInteger exp;
+@property (nonatomic, assign, readwrite) NSInteger exp;
 
 @end
 
@@ -22,13 +22,22 @@ static NSString * const kRPGBattleRewardExp = @"exp";
 
 - (instancetype)initWithGold:(NSInteger)aGold
                     crystals:(NSInteger)aCrystals
-                         exp:(NSUInteger)anExp
+                         exp:(NSInteger)anExp
 {
-  self = [super initWithGold:aGold crystals:aCrystals];
+  self = [super initWithGold:aGold
+                    crystals:aCrystals];
   
   if (self != nil)
   {
-    _exp = anExp;
+    if (anExp < 0)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _exp = anExp;
+    }
   }
   
   return self;
@@ -36,26 +45,26 @@ static NSString * const kRPGBattleRewardExp = @"exp";
 
 + (instancetype)battleRewardWithGold:(NSInteger)aGold
                             crystals:(NSInteger)aCrystals
-                                 exp:(NSUInteger)anExp
+                                 exp:(NSInteger)anExp
 {
-  return [[[self alloc] initWithGold:aGold crystals:aCrystals exp:anExp] autorelease];
+  return [[[self alloc] initWithGold:aGold
+                            crystals:aCrystals
+                                 exp:anExp] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithGold:0 crystals:0 exp:0];
+  return [self initWithGold:-1
+                   crystals:-1
+                        exp:-1];
 }
 
-- (instancetype)initWithGold:(NSInteger)aGold crystals:(NSInteger)aCrystals
+- (instancetype)initWithGold:(NSInteger)aGold
+                    crystals:(NSInteger)aCrystals
 {
-  return [self initWithGold:0 crystals:0 exp:0];
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
+  return [self initWithGold:-1
+                   crystals:-1
+                        exp:-1];
 }
 
 #pragma mark - RPGSerializable

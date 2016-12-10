@@ -15,10 +15,10 @@
 #pragma mark - Init
 
 - (instancetype)initWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                  playerInfo:(RPGPlayer *)aPlayerInfo
-                 currentTurn:(BOOL)aCurrentTurn
-                        time:(NSInteger)aTime
-                      status:(NSInteger)aStatus
+                          playerInfo:(RPGPlayer *)aPlayerInfo
+                         currentTurn:(BOOL)aCurrentTurn
+                                time:(NSInteger)aTime
+                              status:(NSInteger)aStatus
 {
   return [super initWithType:kRPGAdventuresInitMessageType
                 opponentInfo:anOpponentInfo
@@ -44,10 +44,10 @@
 }
 
 + (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                                playerInfo:(RPGPlayer *)aPlayerInfo
-                               currentTurn:(BOOL)aCurrentTurn
-                                      time:(NSInteger)aTime
-                                    status:(NSInteger)aStatus
+                                        playerInfo:(RPGPlayer *)aPlayerInfo
+                                       currentTurn:(BOOL)aCurrentTurn
+                                              time:(NSInteger)aTime
+                                            status:(NSInteger)aStatus
 {
   return [[[self alloc] initWithOpponentInfo:anOpponentInfo
                                   playerInfo:aPlayerInfo

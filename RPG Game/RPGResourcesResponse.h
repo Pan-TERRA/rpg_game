@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
-
+  // Entities
 @class RPGResources;
 
 @interface RPGResourcesResponse : NSObject <RPGSerializable>

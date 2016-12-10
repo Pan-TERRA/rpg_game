@@ -9,31 +9,32 @@
 #import "RPGBattleController.h"
   // Constants
 #import "RPGBattleStatus.h"
-
+  // Entities
 @class RPGSkill;
+@class RPGBattleAction;
 
 @interface RPGBattleController (RPGBattlePresentationController)
 
   // Player
-@property (assign, nonatomic, readonly) NSString *playerNickName;
-@property (assign, nonatomic, readonly) NSInteger playerHP;
-@property (assign, nonatomic, readonly) NSInteger playerMaxHP;
-@property (assign, nonatomic, readonly) NSInteger playerLevel;
-@property (assign, nonatomic, readonly) NSArray<RPGSkill *> *skills;
+@property (nonatomic, assign, readonly) NSString *playerNickName;
+@property (nonatomic, assign, readonly) NSInteger playerHP;
+@property (nonatomic, assign, readonly) NSInteger playerMaxHP;
+@property (nonatomic, assign, readonly) NSInteger playerLevel;
+@property (nonatomic, assign, readonly) NSArray<RPGSkill *> *skills;
 @property (nonatomic, assign, readonly) NSUInteger skillsCount;
 @property (nonatomic, assign, readonly, getter=isMyTurn) BOOL myTurn;
   // Opponent
-@property (assign, nonatomic, readonly) NSString *opponentNickName;
-@property (assign, nonatomic, readonly) NSInteger opponentHP;
-@property (assign, nonatomic, readonly) NSInteger opponentMaxHP;
-@property (assign, nonatomic, readonly) NSInteger opponentLevel;
+@property (nonatomic, assign, readonly) NSString *opponentNickName;
+@property (nonatomic, assign, readonly) NSInteger opponentHP;
+@property (nonatomic, assign, readonly) NSInteger opponentMaxHP;
+@property (nonatomic, assign, readonly) NSInteger opponentLevel;
   // General
-@property (assign, nonatomic, readonly) RPGBattleStatus battleStatus;
-@property (assign, nonatomic, readonly) NSString *attackerNickName;
-@property (assign, nonatomic, readonly) NSString *defenderNickName;
-@property (assign, nonatomic, readonly) NSInteger rewardGold;
-@property (assign, nonatomic, readonly) NSInteger rewardCrystals;
-@property (assign, nonatomic, readonly) NSInteger rewardExp;
-@property (assign, nonatomic, readonly) NSArray *actions;
+@property (nonatomic, assign, readonly) RPGBattleStatus battleStatus;
+@property (nonatomic, assign, readonly) NSString *attackerNickName;
+@property (nonatomic, assign, readonly) NSString *defenderNickName;
+@property (nonatomic, assign, readonly) NSInteger rewardGold;
+@property (nonatomic, assign, readonly) NSInteger rewardCrystals;
+@property (nonatomic, assign, readonly) NSInteger rewardExp;
+@property (nonatomic, assign, readonly) NSArray<RPGBattleAction *> *actions;
 
 @end

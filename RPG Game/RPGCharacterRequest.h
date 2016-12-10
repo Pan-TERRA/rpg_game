@@ -1,12 +1,13 @@
 //
-//  RPGSkillsRequest.h
+//  RPGCharacterRequest.h
 //  RPG Game
 //
-//  Created by Степан Супинский on 10/28/16.
+//  Created by Максим Шульга on 11/17/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
 
 extern NSString * const kRPGCharacterRequestCharacterID;

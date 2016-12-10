@@ -10,8 +10,8 @@
   // Entities
 #import "RPGResources.h"
 
-NSString * const kRPGResourcesResponseStatus = @"status";
-NSString * const kRPGResourcesResponseResources = @"resources";
+static NSString * const kRPGResourcesResponseStatus = @"status";
+static NSString * const kRPGResourcesResponseResources = @"resources";
 
 @interface RPGResourcesResponse ()
 
@@ -59,7 +59,7 @@ NSString * const kRPGResourcesResponseResources = @"resources";
 
 - (instancetype)init
 {
-  return [self initWithStatus:0
+  return [self initWithStatus:-1
                     resources:nil];
 }
 
@@ -68,6 +68,7 @@ NSString * const kRPGResourcesResponseResources = @"resources";
 - (void)dealloc
 {
   [_resources release];
+  
   [super dealloc];
 }
 
@@ -75,17 +76,21 @@ NSString * const kRPGResourcesResponseResources = @"resources";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   dictionaryRepresentation[kRPGResourcesResponseStatus] = @(self.status);
-  dictionaryRepresentation[kRPGResourcesResponseResources] = [self.resources dictionaryRepresentation];
+  
+  if (self.resources != nil)
+  {
+    dictionaryRepresentation[kRPGResourcesResponseResources] = [self.resources dictionaryRepresentation];
+  }
+  
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger status = [aDictionary[kRPGResourcesResponseStatus] integerValue];
   RPGResources *resources = [[[RPGResources alloc] initWithDictionaryRepresentation:aDictionary[kRPGResourcesResponseResources]] autorelease];
   
-  return [self initWithStatus:status resources:resources];
+  return [self initWithStatus:[aDictionary[kRPGResourcesResponseStatus] integerValue]
+                    resources:resources];
 }
 
 @end
-

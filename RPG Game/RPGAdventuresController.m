@@ -29,7 +29,7 @@
 
 @interface RPGAdventuresController ()
 
-@property (retain, nonatomic, readwrite) RPGWebsocketManager *webSocketManager;
+@property (nonatomic, retain, readwrite) RPGWebsocketManager *webSocketManager;
 
 @end
 
@@ -82,8 +82,7 @@
 - (void)processBattleInitResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
-                                                initWithDictionaryRepresentation:aResponse]
-                                               autorelease];
+                                                    initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
@@ -93,12 +92,14 @@
     NSArray *skillIDs = standardUserDefaults.sessionCharacters.firstObject[kRPGUserSessionKeyCharacterSkills];
     
     NSMutableArray *skills = [NSMutableArray array];
+    
     for (NSNumber *skillID in skillIDs)
     {
       RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
       [skills addObject:skill];
       [skill release];
     }
+    
     self.battle.player.skills = skills;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
@@ -113,7 +114,7 @@
 - (void)processBattleConditionResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresConditionResponse *battleConditionResponse = [[[RPGAdventuresConditionResponse alloc]
-                                                          initWithDictionaryRepresentation:aResponse] autorelease];
+                                                              initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
   {

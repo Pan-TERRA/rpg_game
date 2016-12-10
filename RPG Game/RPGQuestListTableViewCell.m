@@ -9,11 +9,12 @@
 #import "RPGQuestListTableViewCell.h"
   // Views
 #import "RPGQuestListViewController.h"
+  // Controllers
+#import "RPGQuestTableViewController.h"
   // Entities
 #import "RPGQuestReward.h"
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
-#import "RPGQuestTableViewController.h"
 #import "RPGSkillRepresentation.h"
 
 static CGFloat const kBounceValue = 10.0;
@@ -60,14 +61,17 @@ static CGFloat const kBounceValue = 10.0;
 {
   [super awakeFromNib];
   
-  self.panGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panAction:)] autorelease];
+  self.panGestureRecognizer = [[[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                       action:@selector(panAction:)] autorelease];
   self.panGestureRecognizer.delegate = self;
   [self addGestureRecognizer:self.panGestureRecognizer];
 }
 
-- (void)setSelected:(BOOL)aSelected animated:(BOOL)anAnimated
+- (void)setSelected:(BOOL)aSelected
+           animated:(BOOL)anAnimated
 {
-  [super setSelected:aSelected animated:anAnimated];
+  [super setSelected:aSelected
+            animated:anAnimated];
 }
 
 #pragma mark - Cell Content
@@ -154,26 +158,20 @@ static CGFloat const kBounceValue = 10.0;
     }
   }
   
-  if (state == kRPGQuestStateReviewedTrue && aCellContent.hasGotReward == NO)
-  {
-    self.getRewardButton.hidden = NO;
-  }
-  else
-  {
-    self.getRewardButton.hidden = YES;
-  }
+  BOOL hiddenFlag = (state == kRPGQuestStateReviewedTrue && aCellContent.hasGotReward == NO);
+  self.getRewardButton.hidden = !hiddenFlag;
 }
 
 #pragma mark - Actions
 
 - (IBAction)deleteButtonOnClick:(UIButton *)aSender
 {
-  [self.tableViewController deleteQuestWithID:self.questID];
+  [self.delegate deleteQuestWithID:self.questID];
 }
 
 - (IBAction)getRewardButtonOnClick:(UIButton *)aSender
 {
-  [self.tableViewController getRewardForQuestWithID:self.questID];
+  [self.delegate getRewardForQuestWithID:self.questID];
 }
 
 #pragma mark - Cell State
@@ -270,13 +268,14 @@ static CGFloat const kBounceValue = 10.0;
   return self.deleteButton.frame.size.width + kBounceValue;
 }
 
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)aGestureRecognizer
 {
   BOOL result = NO;
-  if ([gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
+  
+  if ([aGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
   {
 
-    UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer*)gestureRecognizer;
+    UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer*)aGestureRecognizer;
     UIView *cell = [panGestureRecognizer view];
     CGPoint translation = [panGestureRecognizer translationInView:[cell superview]];
     
@@ -285,12 +284,14 @@ static CGFloat const kBounceValue = 10.0;
       result = YES;
     }
   }
+  
   return result;
 }
 
 - (BOOL)canDeleteQuest
 {
   BOOL result = NO;
+  
   RPGQuestState state = self.questState;
   if (state == kRPGQuestStateCanTake ||
       state == kRPGQuestStateInProgress ||
@@ -298,6 +299,7 @@ static CGFloat const kBounceValue = 10.0;
   {
     result = YES;
   }
+  
   return result;
 }
 

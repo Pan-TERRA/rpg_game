@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 + (void)showAlertWithTitle:(NSString * __nullable)aTitle
                    message:(NSString * __nullable)aMessage
                actionTitle:(NSString * __nullable)anActionTitle
-                completion:(void (^ __nullable)())completionHandler;
+                completion:(void (^ __nullable)())aCompletionHandler;
 
 @end
 

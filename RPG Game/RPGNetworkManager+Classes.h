@@ -7,6 +7,9 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Entities
+@class RPGClassesResponse;
+@class RPGClassInfoResponse;
 
 @interface RPGNetworkManager (Classes)
 
@@ -15,7 +18,8 @@
  *
  *  @param aCallback A completion handler
  */
-- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger, NSArray *))aCallback;
+- (void)fetchClassesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                    RPGClassesResponse *aResponse))aCallback;
 
 /**
  *  Fetches class info such as name and description.
@@ -24,6 +28,7 @@
  *  @param aCallback A completion handler.
  */
 - (void)getClassInfoByID:(NSInteger)anID
-       completionHandler:(void (^)(NSInteger, NSDictionary *))aCallback;
+       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                   RPGClassInfoResponse *aResponse))aCallback;
 
 @end

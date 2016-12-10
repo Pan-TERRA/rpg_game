@@ -12,7 +12,7 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 @interface RPGQuestReward()
 
-@property (nonatomic, assign, readwrite) NSUInteger skillID;
+@property (nonatomic, assign, readwrite) NSInteger skillID;
 
 @end
 
@@ -22,13 +22,22 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 - (instancetype)initWithGold:(NSInteger)aGold
                     crystals:(NSInteger)aCrystals
-                     skillID:(NSUInteger)aSkillID
+                     skillID:(NSInteger)aSkillID
 {
-  self = [super initWithGold:aGold crystals:aCrystals];
+  self = [super initWithGold:aGold
+                    crystals:aCrystals];
   
   if (self != nil)
   {
-    _skillID = aSkillID;
+    if (aSkillID < 0)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _skillID = aSkillID;
+    }
   }
   
   return self;
@@ -36,26 +45,26 @@ static NSString * const kRPGQuestRewardSkillId = @"skill_id";
 
 + (instancetype)questRewardWithGold:(NSInteger)aGold
                            crystals:(NSInteger)aCrystals
-                            skillID:(NSUInteger)aSkillID
+                            skillID:(NSInteger)aSkillID
 {
-  return [[[self alloc] initWithGold:aGold crystals:aCrystals skillID:aSkillID] autorelease];
+  return [[[self alloc] initWithGold:aGold
+                            crystals:aCrystals
+                             skillID:aSkillID] autorelease];
 }
 
 - (instancetype)init
 {
-  return [self initWithGold:0 crystals:0 skillID:0];
+  return [self initWithGold:-1
+                   crystals:-1
+                    skillID:-1];
 }
 
-- (instancetype)initWithGold:(NSInteger)aGold crystals:(NSInteger)aCrystals
+- (instancetype)initWithGold:(NSInteger)aGold
+                    crystals:(NSInteger)aCrystals
 {
-  return [self initWithGold:0 crystals:0 skillID:0];
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [super dealloc];
+  return [self initWithGold:-1
+                   crystals:-1
+                    skillID:-1];
 }
 
 #pragma mark - RPGSerializable

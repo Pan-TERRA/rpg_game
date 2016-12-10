@@ -21,10 +21,6 @@
   // Constants
 #import "RPGMessageTypes.h"
 
-@interface RPGArenaController ()
-
-@end
-
 @implementation RPGArenaController
 
 #pragma mark - Creating Request

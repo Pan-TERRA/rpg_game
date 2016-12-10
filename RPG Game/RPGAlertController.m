@@ -21,7 +21,7 @@ static NSString * const kRPGAlertControllerDefaultActionTitle = @"OK";
 + (void)showAlertWithTitle:(NSString * __nullable)aTitle
                    message:(NSString * __nullable)aMessage
                actionTitle:(NSString * __nullable)anActionTitle
-                completion:(void (^ __nullable)())completionHandler
+                completion:(void (^ __nullable)())aCompletionHandler
 {
   if (aTitle == nil)
   {
@@ -39,9 +39,9 @@ static NSString * const kRPGAlertControllerDefaultActionTitle = @"OK";
   }
   
   RPGAlertViewController *alertViewController = [[RPGAlertViewController alloc] initWithTitle:aTitle
-                                                                    description:aMessage
-                                                                    actionTitle:anActionTitle
-                                                              completionHandler:completionHandler];
+                                                                                  description:aMessage
+                                                                                  actionTitle:anActionTitle
+                                                                            completionHandler:aCompletionHandler];
  
   
   UIViewController *currentViewController = [[UIApplication sharedApplication].keyWindow visibleViewController];

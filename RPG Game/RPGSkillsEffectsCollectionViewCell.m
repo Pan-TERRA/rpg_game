@@ -63,11 +63,11 @@ static CGFloat const kRPGSkillsEffectsCollectionViewControllerViewCornerRadiusMu
   return [self.durationLabel.text integerValue];
 }
 
-- (void)setAlign:(RPGSkillsEffectsCollectionViewAlign)anAlign
+- (void)setAlign:(RPGAlign)anAlign
 {
   _align = anAlign;
   
-  if (_align == kRPGSkillsEffectsCollectionViewAlignRight)
+  if (_align == kRPGAlignRight)
   {
     self.transform = CGAffineTransformMakeScale(-1, 1);
   }

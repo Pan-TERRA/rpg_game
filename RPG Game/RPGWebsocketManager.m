@@ -81,10 +81,12 @@
 
 - (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject
 {
-  [self sendWebsocketManagerMessageWithObject:anObject shouldInjectToken:YES];
+  [self sendWebsocketManagerMessageWithObject:anObject
+                            shouldInjectToken:YES];
 }
 
-- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject shouldInjectToken:(BOOL)anInjectTokenFlag
+- (void)sendWebsocketManagerMessageWithObject:(nonnull id<RPGSerializable>)anObject
+                            shouldInjectToken:(BOOL)anInjectTokenFlag
 {
     // logging
   NSLog(@"\r\nRequest:\r\n %@", [anObject dictionaryRepresentation]);
@@ -121,15 +123,15 @@
 
 #pragma mark - SRWebSocketDelegate
 
-- (void)webSocketDidOpen:(SRWebSocket *)webSocket
+- (void)webSocketDidOpen:(SRWebSocket *)aWebSocket
 {
   [self.battleController requestBattleInit];
 }
 
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessage:(id)message
+- (void)webSocket:(SRWebSocket *)aWebSocket didReceiveMessage:(id)aMessage
 {
   NSError *JSONError = nil;
-  NSData *data = [(NSString *)message dataUsingEncoding:NSUTF8StringEncoding];
+  NSData *data = [(NSString *)aMessage dataUsingEncoding:NSUTF8StringEncoding];
   NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                      options:0
                                                                        error:&JSONError];
@@ -147,27 +149,27 @@
 }
 
 
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithString:(NSString *)string
+- (void)webSocket:(SRWebSocket *)aWebSocket didReceiveMessageWithString:(NSString *)aString
 {
   
 }
 
-- (void)webSocket:(SRWebSocket *)webSocket didReceiveMessageWithData:(NSData *)data
+- (void)webSocket:(SRWebSocket *)aWebSocket didReceiveMessageWithData:(NSData *)aData
 {
   
 }
 
-- (void)webSocket:(SRWebSocket *)webSocket didFailWithError:(NSError *)error
+- (void)webSocket:(SRWebSocket *)aWebSocket didFailWithError:(NSError *)anError
 {
-  [self logError:error withTitle:@"Battle manager error"];
+  [self logError:anError withTitle:@"Battle manager error"];
 }
 
-- (void)webSocket:(SRWebSocket *)webSocket
- didCloseWithCode:(NSInteger)code
-           reason:(nullable NSString *)reason
-         wasClean:(BOOL)wasClean
+- (void)webSocket:(SRWebSocket *)aWebSocket
+ didCloseWithCode:(NSInteger)aCode
+           reason:(nullable NSString *)aReason
+         wasClean:(BOOL)aWasCleanFlag
 {
-  NSLog(@"Websocket did close \r\nWith code: %ld\r\nReason: %@", (long)code, reason);
+  NSLog(@"Websocket did close \r\nWith code: %ld\r\nReason: %@", (long)aCode, aReason);
   self.webSocket = nil;
   [self.battleController dismissalDidFinish];
 }

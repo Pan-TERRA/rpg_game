@@ -57,7 +57,10 @@ NSString *const kRPGRequestSerializationType = @"type";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGRequestSerializationType] = self.type;
+  if (self.type != nil)
+  {
+    dictionaryRepresentation[kRPGRequestSerializationType] = self.type;
+  }
   
   return dictionaryRepresentation;
 }

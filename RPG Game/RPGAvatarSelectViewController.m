@@ -37,7 +37,8 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGAvatarSelectViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGAvatarSelectViewControllerNIBName
+                         bundle:nil];
   
   if (self != nil)
   {
@@ -61,13 +62,18 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
   NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
   NSInteger characterAvatarID = standardUserDefaults.characterAvatarID - 1;
-  UINib *avatarCellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName bundle:nil];
-  [self.avatarSelectCollectionView registerNib:avatarCellNIB forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
-  self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc] initWithCollectionView:self.avatarSelectCollectionView
-                                                                                      parentViewController:self
-                                                                                       selectedAvatarIndex:characterAvatarID] autorelease];
+  
+  UINib *avatarCellNIB = [UINib nibWithNibName:kRPGAvatarCollectionViewCellNIBName
+                                        bundle:nil];
+  [self.avatarSelectCollectionView registerNib:avatarCellNIB
+                    forCellWithReuseIdentifier:kRPGAvatarCollectionViewCellNIBName];
+  
+  self.avatarCollectionViewController = [[[RPGAvatarCollectionViewController alloc]
+                                          initWithCollectionView:self.avatarSelectCollectionView
+                                          selectedAvatarIndex:characterAvatarID] autorelease];
   self.avatarCollectionViewController.characterClassID = standardUserDefaults.characterClassID;
 }
 
@@ -88,6 +94,7 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
 {
   NSInteger index = self.avatarCollectionViewController.selectedAvatarIndex + 1;
   RPGCharacterAvatarSelectRequest *request = [RPGCharacterAvatarSelectRequest characterAvatarSelectRequestWithAvatarID:index];
+  
   [[RPGNetworkManager sharedNetworkManager] characterAvatarSelectWithRequest:request
                                                            completionHandler:^(RPGStatusCode aNetworkStatusCode)
    {
@@ -101,15 +108,17 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
          
        case kRPGStatusCodeWrongToken:
        {
-         [(RPGCharacterProfileViewController *)self.parentViewController handleWrongTokenError];
+         [self.delegate handleWrongTokenError];
+         break;
        }
          
        default:
        {
-         [(RPGCharacterProfileViewController *)self.parentViewController handleDefaultError];
+         [self.delegate handleDefaultError];
          break;
        }
      }
+     
      [self.view removeFromSuperview];
      [self removeFromParentViewController];
    }];
@@ -127,7 +136,7 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
   characters[0] = character;
   
   standardUserDefaults.sessionCharacters = characters;
-  [(RPGCharacterProfileViewController *)self.parentViewController updateCharacterAvatar];
+  [self.delegate updateCharacterAvatar];
 }
 
 @end

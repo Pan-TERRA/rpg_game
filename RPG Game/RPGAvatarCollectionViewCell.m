@@ -27,9 +27,9 @@
   return self.imageView.image;
 }
 
-- (void)setChosenFlagImageViewHidden:(BOOL)aFlag
+- (void)setChosenFlagImageViewHidden:(BOOL)aHiddenFlag
 {
-  self.chosenFlagImageView.hidden = aFlag;
+  self.chosenFlagImageView.hidden = aHiddenFlag;
 }
 
 @end

@@ -14,7 +14,7 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
 @interface RPGArenaInitRequest ()
 
-@property (nonatomic, retain, readwrite) NSArray *skillIDs;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillIDs;
 
 @end
 
@@ -22,7 +22,7 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithSkillIDs:(NSArray *)aSkillIDs
+- (instancetype)initWithSkillIDs:(NSArray<NSNumber *> *)aSkillIDs
 {
   self = [super initWithType:kRPGArenaInitMessageType];
   
@@ -34,7 +34,7 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
   return self;
 }
 
-+ (instancetype)requestWithSkillIDs:(NSArray *)aSkillIDs
++ (instancetype)requestWithSkillIDs:(NSArray<NSNumber *> *)aSkillIDs
 {
   return [[[self alloc] initWithSkillIDs:aSkillIDs] autorelease];
 }
@@ -59,15 +59,17 @@ NSString * const kRPGArenaInitRequestSerializationSkills = @"skills";
 {
   NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
   
-  dictionaryRepresentation[kRPGArenaInitRequestSerializationSkills] = self.skillIDs;
+  if (self.skillIDs != nil)
+  {
+    dictionaryRepresentation[kRPGArenaInitRequestSerializationSkills] = self.skillIDs;
+  }
   
   return [dictionaryRepresentation autorelease];
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSArray *skillIDs = aDictionary[kRPGArenaInitRequestSerializationSkills];
-  return [self initWithSkillIDs:skillIDs];
+  return [self initWithSkillIDs:aDictionary[kRPGArenaInitRequestSerializationSkills]];
 }
 
 @end

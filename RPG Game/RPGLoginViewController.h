@@ -6,11 +6,11 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "RPGViewController.h"
 
 @interface RPGLoginViewController : RPGViewController
 
-- (void)loginActionWithEmail:(NSString *)anEmail password:(NSString *)aPassword;
+- (void)loginActionWithEmail:(NSString *)anEmail
+                    password:(NSString *)aPassword;
 
 @end

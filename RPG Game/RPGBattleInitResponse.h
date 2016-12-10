@@ -7,13 +7,13 @@
   //
 
 #import "RPGResponse.h"
-
+  // Entities
 @class RPGEntity;
 @class RPGPlayer;
 
 @interface RPGBattleInitResponse : RPGResponse
 
-@property (nonatomic, assign, readonly) RPGPlayer *playerInfo;
+@property (nonatomic, retain, readonly) RPGPlayer *playerInfo;
 @property (nonatomic, retain, readonly) RPGEntity *opponentInfo;
 @property (nonatomic, assign, readonly, getter=isCurrentTurn) BOOL currentTurn;
 @property (nonatomic, assign, readonly) NSInteger time;

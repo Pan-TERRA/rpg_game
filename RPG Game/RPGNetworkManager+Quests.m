@@ -10,15 +10,17 @@
   // Entities
 #import "RPGQuestListResponse.h"
 #import "RPGQuestRequest.h"
-#import "RPGQuestResponse.h"
 #import "RPGQuestReviewRequest.h"
-  //Misc
+#import "RPGBasicNetworkResponse.h"
+  // Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
 @implementation RPGNetworkManager (Quests)
 
-- (void)fetchQuestsByState:(RPGQuestListState)aState completionHandler:(void (^)(NSInteger status, NSArray *quests))aCallback
+- (void)fetchQuestsByState:(RPGQuestListState)aState
+         completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                     RPGQuestListResponse *aResponse))aCallback
 {
   NSString *requestString = nil;
   
@@ -139,7 +141,7 @@
       }
       else
       {
-        aCallback(responseObject.status, responseObject.quests);
+        aCallback(responseObject.status, responseObject);
       }
     });
   
@@ -152,7 +154,7 @@
 
 - (void)doQuestAction:(RPGQuestAction)anAction
               request:(RPGQuestRequest *)aRequest
-    completionHandler:(void (^)(NSInteger status))aCallback
+    completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = nil;
   
@@ -242,8 +244,8 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
-                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     if (responseObject == nil)
     {
@@ -268,7 +270,7 @@
 
 - (void)addProofWithRequest:(RPGQuestRequest *)aRequest
                   imageData:(NSData *)anImageData
-          completionHandler:(void (^)(NSInteger status))aCallback
+          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -361,8 +363,8 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
-                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {
@@ -384,7 +386,7 @@
 }
 
 - (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))aCallback
+                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -458,8 +460,8 @@
       return;
     }
     
-    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
-                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
       // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {
@@ -481,7 +483,7 @@
 }
 
 - (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
-                completionHandler:(void (^)(NSInteger status))callbackBlock
+                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -505,7 +507,7 @@
       {
         dispatch_async(dispatch_get_main_queue(), ^
         {
-          callbackBlock(kRPGStatusCodeNetworkManagerNoInternetConnection);
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection);
         });
         return;
       }
@@ -514,7 +516,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerUnknown);
+        aCallback(kRPGStatusCodeNetworkManagerUnknown);
       });
       return;
     }
@@ -525,7 +527,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerServerError);
+        aCallback(kRPGStatusCodeNetworkManagerServerError);
       });
       return;
     }
@@ -534,7 +536,7 @@
     {
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerEmptyResponseData);
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData);
       });
       return;
     }
@@ -550,23 +552,23 @@
       
       dispatch_async(dispatch_get_main_queue(), ^
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerSerializingError);
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError);
       });
       return;
     }
     
-    RPGQuestResponse *responseObject = [[[RPGQuestResponse alloc]
-                                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
     // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {
       if (responseObject == nil)
       {
-        callbackBlock(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
       }
       else
       {
-        callbackBlock(responseObject.status);
+        aCallback(responseObject.status);
       }
     });
     

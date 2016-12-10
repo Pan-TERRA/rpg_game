@@ -14,7 +14,8 @@
 
 @interface RPGNetworkManager (Arena)
 
-- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))aCallback;
-- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))aCallback;
+- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                   RPGArenaSkillsResponse *aResponse))aCallback;
+- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 @end

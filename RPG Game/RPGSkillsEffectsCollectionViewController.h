@@ -10,8 +10,7 @@
   // Entities
 @class RPGSkillEffect;
   // Constants
-#import "RPGSkillsEffectsCollectionViewAlign.h"
-
+#import "RPGAlign.h"
 
 @interface RPGSkillsEffectsCollectionViewController : NSObject
 
@@ -19,6 +18,10 @@
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                          skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
-                                 align:(RPGSkillsEffectsCollectionViewAlign)anAlign NS_DESIGNATED_INITIALIZER;
+                                 align:(RPGAlign)anAlign NS_DESIGNATED_INITIALIZER;
+
++ (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
+                                           skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
+                                                   align:(RPGAlign)anAlign;
 
 @end

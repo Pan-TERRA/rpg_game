@@ -180,7 +180,7 @@
                         <outlet property="stateTitleLabel" destination="lDi-1B-8p2" id="2Eq-nf-jko"/>
                     </connections>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuQ-Ba-KJA" userLabel="Body Container" customClass="RPGQuestViewBodyContainer">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuQ-Ba-KJA" userLabel="Body Container" customClass="RPGQuestViewBodyContainer">
                     <rect key="frame" x="55" y="75" width="626" height="265"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpB-1Z-c9g">

@@ -19,11 +19,11 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
 @interface RPGBattleController : NSObject
 
-@property (retain, nonatomic, readwrite) RPGBattle *battle;
+@property (nonatomic, retain, readwrite) RPGBattle *battle;
 
   // supported websocket messages
-@property (copy, nonatomic, readonly) NSString *battleInitWebSocketMessageType;
-@property (copy, nonatomic, readonly) NSString *battleConditionWebSocketMessageType;
+@property (nonatomic, copy, readonly) NSString *battleInitWebSocketMessageType;
+@property (nonatomic, copy, readonly) NSString *battleConditionWebSocketMessageType;
 
 #pragma mark - Creating Request
 

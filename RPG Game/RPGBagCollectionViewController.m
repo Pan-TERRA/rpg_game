@@ -15,11 +15,11 @@
   // Constants
 #import "RPGNibNames.h"
 
-NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
+static NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
 
 @implementation RPGBagCollectionViewController
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return self.collectionSize;
 }
@@ -35,13 +35,15 @@ NSUInteger const kRPGBagCollectionViewControllerCellInRow = 4;
   return (skillRepresentation.requiredLevel <= ((RPGCharacterProfileViewController *)self.delegate).characterLevel);
 }
 
-- (void)moveItem:(RPGCharacterProfileSkill *)anItem type:(RPGItemType)aType
+- (void)moveItem:(RPGCharacterProfileSkill *)anItem
+            type:(RPGItemType)aType
 {
   switch (aType)
   {
     case kRPGItemTypeSkill:
     {
       NSArray *array = [self validatedSkillsArray:YES];
+      
       if (!anItem.isSelected)
       {
         if (![self.delegate canAddToCollectionWithCurrentSize:array.count])

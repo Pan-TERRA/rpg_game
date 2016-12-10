@@ -12,6 +12,6 @@
 
 @property (nonatomic, assign, readwrite) UIImage *image;
 
-- (void)setChosenFlagImageViewHidden:(BOOL)aFlag;
+- (void)setChosenFlagImageViewHidden:(BOOL)aHiddenFlag;
 
 @end

@@ -11,11 +11,19 @@
 static NSString * const kRPGArenaSkillsResponseStatus = @"status";
 static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
+@interface RPGArenaSkillsResponse()
+
+@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skills;
+
+@end
+
 @implementation RPGArenaSkillsResponse
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus skills:(NSArray *)aSkills
+- (instancetype)initWithStatus:(NSInteger)aStatus
+                        skills:(NSArray<NSNumber *> *)aSkills
 {
   self = [super init];
   
@@ -38,9 +46,16 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
 - (instancetype)init
 {
-  return [self initWithStatus:-1 skills:nil];
+  return [self initWithStatus:-1
+                       skills:nil];
 }
 
++ (instancetype)responseWithStatus:(NSInteger)aStatus
+                            skills:(NSArray<NSNumber *> *)aSkills
+{
+  return [[[self alloc] initWithStatus:aStatus
+                               skills:aSkills] autorelease];
+}
 #pragma mark - Dealloc
 
 - (void)dealloc
@@ -57,7 +72,11 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
   NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
   
   dictionary[kRPGArenaSkillsResponseStatus] = @(self.status);
-  dictionary[kRPGArenaSkillsResponseSkills] = self.skills;
+  
+  if (self.skills != nil)
+  {
+    dictionary[kRPGArenaSkillsResponseSkills] = self.skills;
+  }
   
   return dictionary;
 }

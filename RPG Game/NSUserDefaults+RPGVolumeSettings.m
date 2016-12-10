@@ -19,11 +19,13 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 
 - (BOOL)isMusicPlaying
 {
-  BOOL result = TRUE;
+  BOOL result = YES;
+  
   if ([self objectForKey:kRPGUserVolumeSettingsKeyIsMusicPlaying])
   {
     result = [self boolForKey:kRPGUserVolumeSettingsKeyIsMusicPlaying];
   }
+  
   return result;
 }
 
@@ -34,11 +36,13 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 
 - (BOOL)isSoundsPlaying
 {
-  BOOL result = TRUE;
+  BOOL result = YES;
+  
   if ([self objectForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying])
   {
     result = [self boolForKey:kRPGUserVolumeSettingsKeyIsSoundsPlaying];
   }
+  
   return result;
 }
 
@@ -50,10 +54,12 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 - (double)musicVolume
 {
   double result = 1.0;
+  
   if ([self objectForKey:kRPGUserVolumeSettingsKeyMusicVolume])
   {
     result = [self doubleForKey:kRPGUserVolumeSettingsKeyMusicVolume];
   }
+  
   return result;
 }
 
@@ -65,10 +71,12 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 - (double)soundsVolume
 {
   double result = 1.0;
+  
   if ([self objectForKey:kRPGUserVolumeSettingsKeySoundsVolume])
   {
     result = [self doubleForKey:kRPGUserVolumeSettingsKeySoundsVolume];
   }
+  
   return result;
 }
 
@@ -76,4 +84,5 @@ NSString * const kRPGUserVolumeSettingsKeySoundsVolume = @"RPG_SOUNDS_VOLUME";
 {
   [self setDouble:aSoundsVolume forKey:kRPGUserVolumeSettingsKeySoundsVolume];
 }
+
 @end

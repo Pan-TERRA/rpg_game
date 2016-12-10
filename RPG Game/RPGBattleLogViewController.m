@@ -22,8 +22,8 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
 
 @interface RPGBattleLogViewController ()
 
-@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
-@property (retain, nonatomic, readwrite) NSArray<NSString *> *templates;
+@property (nonatomic, retain, readwrite) RPGBattleController *battleController;
+@property (nonatomic, retain, readwrite) NSArray<NSString *> *templates;
 
 @end
 

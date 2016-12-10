@@ -7,7 +7,6 @@
 //
 
 #import "RPGArenaBagCollectionViewController.h"
-#import "RPGArenaSkillDrawViewController.h"
 
 NSUInteger const kRPGArenaBagCollectionViewControllerCellInRow = 3;
 
@@ -25,8 +24,7 @@ NSUInteger const kRPGArenaBagCollectionViewControllerCellInRow = 3;
 
 - (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
 {
-  RPGArenaSkillDrawViewController *parentViewController = (RPGArenaSkillDrawViewController *)self.viewController;
-  [parentViewController addSkillToSkillCollectionWithID:anItemID];
+  [self.delegate addSkillToSkillCollectionWithID:anItemID];
 }
 
 @end

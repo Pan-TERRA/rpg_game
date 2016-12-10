@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+  // Views
 @class RPGQuestViewController;
+  // Entities
 @class RPGQuest;
 
 @interface RPGQuestViewBodyContainer : UIScrollView <UIImagePickerControllerDelegate, UINavigationControllerDelegate>

@@ -12,8 +12,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class RPGBattleFactory;
+  // Controllers
 @class RPGBattleController;
-@class RPGRewardViewController;
 
 @interface RPGBattleViewController : UIViewController
 

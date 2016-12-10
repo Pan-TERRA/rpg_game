@@ -7,6 +7,7 @@
 //
 
 #import "RPGPlayerInfo.h"
+  // Entities
 #import "RPGSkillEffect.h"
 
 static NSString * const kRPGPlayerInfoHP = @"current_hp";
