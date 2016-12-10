@@ -25,7 +25,7 @@
   {
     RPGTournamentControllerGenerator *battleControllerGenerator = [[[RPGTournamentControllerGenerator alloc] init] autorelease];
     self.battleController = [battleControllerGenerator battleController];
-    self.rewardViewController = [[RPGTournamentRewardViewController alloc] initWithBattleController:self.battleController];
+    self.rewardViewController = [[[RPGTournamentRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
   }
   
   return self;
