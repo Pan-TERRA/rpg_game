@@ -84,13 +84,15 @@ NSString * const kRPGPlayerCurrentWinCount = @"win_count";
 {
     // TODO: redo, choose in characters profile
   NSString *charNickName = [NSUserDefaults standardUserDefaults].characterNickName;
+  NSNumber *currentWinCountObject = aDictionary[kRPGPlayerCurrentWinCount];
+  NSInteger currentWinCount = (currentWinCountObject != nil ? [currentWinCountObject integerValue] : -1);
   
   return [self initWithName:charNickName
                          HP:[aDictionary[kRPGEntityHP] integerValue]
                       maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
                       level:[aDictionary[kRPGEntityLevel] integerValue]
                      skills:aDictionary[kRPGPlayerSkills]
-            currentWinCount:[aDictionary[kRPGPlayerCurrentWinCount] integerValue]];
+            currentWinCount:currentWinCount];
 }
 
 - (RPGSkill *)skillByID:(NSInteger)anID
