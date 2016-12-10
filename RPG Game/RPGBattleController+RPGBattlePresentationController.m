@@ -52,11 +52,6 @@
   return self.battle.player.skills;
 }
 
-- (NSInteger)playerCurrentWinCount
-{
-  return self.battle.player.currentWinCount;
-}
-
 #pragma mark  Opponent
 
 - (NSString *)opponentNickName
