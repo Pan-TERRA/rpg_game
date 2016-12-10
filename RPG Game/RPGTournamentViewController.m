@@ -8,16 +8,14 @@
 
 #import "RPGTournamentViewController.h"
   // Controllers
-#import "RPGCurrentWinCountBadgeViewController.h"
-#import "RPGBattleController.h"
-  // Entities
-#import "RPGBattle.h"
+#import "RPGRankBadgeViewController.h"
+#import "RPGBattleFactory.h"
   // Misc
 #import "UIViewController+RPGChildViewController.h"
 
 @interface RPGTournamentViewController ()
 
-@property (nonatomic, retain, readwrite) RPGCurrentWinCountBadgeViewController *badgeViewController;
+@property (nonatomic, retain, readwrite) RPGRankBadgeViewController *badgeViewController;
 
 @end
 
@@ -25,13 +23,13 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleControllerGenerator:(RPGBattleControllerGenerator *)aBattleControllerGenerator
+- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
 {
-  self = [super initWithBattleControllerGenerator:aBattleControllerGenerator];
+  self = [super initWithBattleFactory:aBattleFactory];
   
   if (self != nil)
   {
-    _badgeViewController = [[RPGCurrentWinCountBadgeViewController alloc] initWithBattleController:self.battleController];
+    _badgeViewController = [[RPGRankBadgeViewController alloc] initWithBattleController:self.battleController];
   }
   
   return self;
@@ -41,9 +39,9 @@
 
 - (void)viewDidLoad
 {
-  [self addChildViewController:self.badgeViewController view:self.currentWinCountBadgeViewContainer];
-  
   [super viewDidLoad];
+  
+  [self addChildViewController:self.badgeViewController view:self.currentWinCountBadgeViewContainer];
 }
 
 #pragma mark - RPGBattleViewController
