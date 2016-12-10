@@ -94,10 +94,10 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _skillBarViewController = [[RPGSkillBarViewController alloc] initWithBattleController:_battleController];
       
         // player view controller
-      _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarLeftAlign];
+      _playerViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignLeft];
       
         // opponent view controller
-      _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGProgressBarRightAlign];
+      _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignRight];
       
       
       _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"

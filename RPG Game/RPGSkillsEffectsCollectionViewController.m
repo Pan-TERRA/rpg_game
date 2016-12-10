@@ -19,7 +19,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 @interface RPGSkillsEffectsCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-@property (nonatomic, assign, readwrite) RPGSkillsEffectsCollectionViewAlign align;
+@property (nonatomic, assign, readwrite) RPGAlign align;
 
 @end
 
@@ -29,7 +29,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
                          skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
-                                 align:(RPGSkillsEffectsCollectionViewAlign)anAlign
+                                 align:(RPGAlign)anAlign
 {
   self = [super init];
   
@@ -41,7 +41,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
-    if (anAlign == kRPGSkillsEffectsCollectionViewAlignRight)
+    if (anAlign == kRPGAlignRight)
     {
       _collectionView.transform = CGAffineTransformMakeScale(-1, 1);
     }
@@ -50,11 +50,21 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   return self;
 }
 
+
++ (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
+                                           skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
+                                                   align:(RPGAlign)anAlign
+{
+    return [[[self alloc] initWithCollectionView:aCollectionView
+                                  skillsEffects:aSkillsEffects
+                                           align:anAlign] autorelease];
+}
+
 - (instancetype)init
 {
   return [self initWithCollectionView:nil
                         skillsEffects:nil
-                                align:kRPGSkillsEffectsCollectionViewAlignLeft];
+                                align:kRPGAlignLeft];
 }
 
 #pragma mark - Dealloc
@@ -109,5 +119,6 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   
   return CGSizeMake(cellWidth, cellWidth);
 }
+
 
 @end

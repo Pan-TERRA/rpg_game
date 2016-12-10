@@ -227,7 +227,6 @@
 		2817233C1DB5005500F74403 /* RPGQuestProofImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGQuestProofImageViewController.xib; sourceTree = "<group>"; };
 		281849EE1DF87C93002EF22D /* RPGSkillEffect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillEffect.h; sourceTree = "<group>"; };
 		281849EF1DF87C93002EF22D /* RPGSkillEffect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillEffect.m; sourceTree = "<group>"; };
-		281849F01DF87C93002EF22D /* RPGSkillsEffectsCollectionViewAlign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillsEffectsCollectionViewAlign.h; sourceTree = "<group>"; };
 		281849F11DF87C93002EF22D /* RPGSkillsEffectsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillsEffectsCollectionViewCell.h; sourceTree = "<group>"; };
 		281849F21DF87C93002EF22D /* RPGSkillsEffectsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillsEffectsCollectionViewCell.m; sourceTree = "<group>"; };
 		281849F31DF87C93002EF22D /* RPGSkillsEffectsCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillsEffectsCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -263,6 +262,7 @@
 		28184A2A1DFAF32D002EF22D /* RPGLocationMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGLocationMapViewController.m; sourceTree = "<group>"; };
 		28184A2B1DFAF32D002EF22D /* UIColor+RPGColorEquality.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RPGColorEquality.m"; sourceTree = "<group>"; };
 		28184A2C1DFAF32D002EF22D /* UIView+RPGColorOfPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RPGColorOfPoint.m"; sourceTree = "<group>"; };
+		28184A391DFC204C002EF22D /* RPGAlign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGAlign.h; sourceTree = "<group>"; };
 		28307BD31DD0CD2A002E6233 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		28307BE11DD21CA5002E6233 /* RPGSkillRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillRepresentation.h; sourceTree = "<group>"; };
 		28307BE21DD21CA5002E6233 /* RPGSkillRepresentation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillRepresentation.m; sourceTree = "<group>"; };
@@ -561,18 +561,15 @@
 		280A522E1DB7C5B500FF66B8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				281849F01DF87C93002EF22D /* RPGSkillsEffectsCollectionViewAlign.h */,
+				28184A391DFC204C002EF22D /* RPGAlign.h */,
 				289C42C51DE20C4E00E35506 /* RPGItemTypes.h */,
-				280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */,
-				280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */,
 				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
 				28F102201DB7756500C969CA /* RPGUserSessionKeys.h */,
 				28F102211DB7756500C969CA /* RPGUserSessionKeys.m */,
 				28E9D90B1DE47F54006C7688 /* RPGBattleStatus.h */,
-				28149A0E1DB1007400C26881 /* RPGNibNames.h */,
-				28149A0F1DB1007400C26881 /* RPGNibNames.m */,
-				28A915281DC771C8001E0F51 /* RPGMessageTypes.h */,
-				28A915291DC77299001E0F51 /* RPGMessageTypes.m */,
+				28184A361DFC1FF2002EF22D /* Status Codes */,
+				28184A371DFC1FFA002EF22D /* NIB Names */,
+				28184A381DFC2004002EF22D /* Websocket Message Types */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -889,6 +886,33 @@
 				28184A291DFAF32D002EF22D /* RPGBattleplaceView.m */,
 			);
 			name = "Battle Place";
+			sourceTree = "<group>";
+		};
+		28184A361DFC1FF2002EF22D /* Status Codes */ = {
+			isa = PBXGroup;
+			children = (
+				280A52311DB7C64000FF66B8 /* RPGStatusCodes.h */,
+				280A52321DB7C64000FF66B8 /* RPGStatusCodes.m */,
+			);
+			name = "Status Codes";
+			sourceTree = "<group>";
+		};
+		28184A371DFC1FFA002EF22D /* NIB Names */ = {
+			isa = PBXGroup;
+			children = (
+				28149A0E1DB1007400C26881 /* RPGNibNames.h */,
+				28149A0F1DB1007400C26881 /* RPGNibNames.m */,
+			);
+			name = "NIB Names";
+			sourceTree = "<group>";
+		};
+		28184A381DFC2004002EF22D /* Websocket Message Types */ = {
+			isa = PBXGroup;
+			children = (
+				28A915281DC771C8001E0F51 /* RPGMessageTypes.h */,
+				28A915291DC77299001E0F51 /* RPGMessageTypes.m */,
+			);
+			name = "Websocket Message Types";
 			sourceTree = "<group>";
 		};
 		283ADCF41DAD3C5000BDC706 /* Network Communication */ = {

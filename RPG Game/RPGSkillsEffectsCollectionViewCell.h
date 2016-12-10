@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
   // Constants
-#import "RPGSkillsEffectsCollectionViewAlign.h"
+#import "RPGAlign.h"
 
 @interface RPGSkillsEffectsCollectionViewCell : UICollectionViewCell
 
@@ -17,6 +17,6 @@
 @property (nonatomic, assign, readwrite) NSInteger duration;
 @property (nonatomic, assign, readwrite) NSInteger skillEffectID;
 
-@property (nonatomic, assign, readwrite) RPGSkillsEffectsCollectionViewAlign align;
+@property (nonatomic, assign, readwrite) RPGAlign align;
 
 @end

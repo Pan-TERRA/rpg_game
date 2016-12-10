@@ -27,7 +27,7 @@
   {
     _absoluteWidth = aFrame.size.width;
     _progress = 1.0;
-    _align = kRPGProgressBarRightAlign;
+    _align = kRPGAlignRight;
   }
   
   return self;
@@ -40,7 +40,7 @@
   if (self != nil)
   {
     _progress = 1.0;
-    _align = kRPGProgressBarRightAlign;
+    _align = kRPGAlignRight;
   }
   return self;
 }
@@ -70,7 +70,7 @@
   CGFloat currentWidth = self.absoluteWidth * _progress;
   CGRect currentProgressBarRect = CGRectZero;
   
-  if (self.align == kRPGProgressBarLeftAlign)
+  if (self.align == kRPGAlignLeft)
   {
     currentProgressBarRect = CGRectMake(originX,
                                         originY,
@@ -108,7 +108,7 @@
   CGFloat currentWidth = self.frame.size.width * _progress;
   CGRect currentProgressBarRect = CGRectZero;
   
-  if (self.align == kRPGProgressBarRightAlign)
+  if (self.align == kRPGAlignLeft)
   {
     currentProgressBarRect = CGRectMake(0,
                                         0,

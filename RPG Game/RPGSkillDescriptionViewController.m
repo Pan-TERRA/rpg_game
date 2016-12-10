@@ -17,6 +17,7 @@
 #import "RPGSkillEffectRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGAlign.h"
 
 @interface RPGSkillDescriptionViewController ()
 
@@ -74,10 +75,10 @@
   self.cooldownLabel.text = [NSString stringWithFormat:@"%lu", (long)aSkillRepresentation.cooldown];
   self.multiplierLabel.text = [NSString stringWithFormat:@"%2.2f", aSkillRepresentation.multiplier];
   self.descriptionLabel.text = aSkillRepresentation.skillDescription;
-  self.effectsCollectionViewController = [[[RPGSkillsEffectsCollectionViewController alloc]
-                                           initWithCollectionView:self.effectsCollectionView
+  self.effectsCollectionViewController = [RPGSkillsEffectsCollectionViewController
+                                           skillEffectsControllerWithCollectionView:self.effectsCollectionView
                                            skillsEffects:aSkillRepresentation.effects
-                                           align:kRPGSkillsEffectsCollectionViewAlignRight] autorelease];
+                                           align:kRPGAlignRight];
 }
 
 #pragma mark - Actions

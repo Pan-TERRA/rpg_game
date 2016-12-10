@@ -7,17 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-
-typedef NS_ENUM(int, RPGProgressBarAlign)
-{
-    kRPGProgressBarRightAlign,
-    kRPGProgressBarLeftAlign
-};
+  // Constants
+#import "RPGAlign.h"
 
 IB_DESIGNABLE
 @interface RPGProgressBarView : UIView
 
-@property (nonatomic, assign, readwrite) IBInspectable int align;
+@property (nonatomic, assign, readwrite) IBInspectable int align; // int - IBInspectable support
 @property (nonatomic, assign, readwrite) IBInspectable CGFloat progress;
 
 @end
