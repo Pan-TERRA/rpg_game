@@ -1,5 +1,5 @@
 //
-//  RPGTournamentController+TournamentPresentationController.h
+//  RPGBattleController+RPGTournamentPresentationController.h
 //  RPG Game
 //
 //  Created by Костянтин Паляничко on 12/6/16.
@@ -9,8 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "RPGTournamentController.h"
 
-@interface RPGTournamentController (TournamentPresentationController)
+@interface RPGBattleController (RPGTournamentPresentationController)
 
+@property (assign, nonatomic, readonly) NSInteger playerCurrentWinCount;
 @property (assign, nonatomic, readonly) NSInteger currentPlayerRank;
 @property (assign, nonatomic, readonly) NSInteger absoluteWinsForCurrentRank;
 @property (assign, nonatomic, readonly) NSInteger absoluteWinsForNextRank;
