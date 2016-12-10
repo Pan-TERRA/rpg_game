@@ -1,5 +1,5 @@
 //
-//  RPGCurrentWinCountBadgeViewController.h
+//  RPGRankBadgeViewController.h
 //  RPG Game
 //
 //  Created by Костянтин Паляничко on 12/5/16.
@@ -10,7 +10,7 @@
 
 @class RPGBattleController;
 
-@interface RPGCurrentWinCountBadgeViewController : UIViewController
+@interface RPGRankBadgeViewController : UIViewController
 
 @property (assign, nonatomic, readonly) RPGBattleController *battleController;
 
