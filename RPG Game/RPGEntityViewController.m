@@ -136,7 +136,7 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   }
 }
 
-#pragma mark - Actions
+#pragma mark - IBActions
 
 - (IBAction)handleTapGesture:(UITapGestureRecognizer *)aRecognizer
 {
@@ -149,7 +149,7 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   {
     RPGSkillEffectDescriptionViewController *skillEffectDescriptionViewController = [[[RPGSkillEffectDescriptionViewController alloc] init] autorelease];
     
-    RPGSkillEffectRepresentation *skillEffectRepresentation = [[[RPGSkillEffectRepresentation alloc] initWithSkillEffectID:cell.skillEffectID] autorelease];
+    RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:cell.skillEffectID];
     
     UIViewController *parentViewController = self.parentViewController;
     [parentViewController addChildViewController:skillEffectDescriptionViewController
