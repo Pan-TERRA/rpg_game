@@ -17,9 +17,6 @@
             <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="M92-u3-eeQ" userLabel="Background image">
-                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
-                </imageView>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHe-40-tg5" userLabel="Map Scroll View">
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                     <subviews>
@@ -87,23 +84,14 @@
             <gestureRecognizers/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="lHe-40-tg5" secondAttribute="bottom" id="1Za-Tn-1iD"/>
-                <constraint firstAttribute="bottom" secondItem="M92-u3-eeQ" secondAttribute="bottom" id="4Cc-gj-7hu"/>
                 <constraint firstItem="lHe-40-tg5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TMk-pj-zwZ"/>
                 <constraint firstItem="BHx-Xg-I18" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="VYK-WH-r3c"/>
                 <constraint firstAttribute="trailing" secondItem="lHe-40-tg5" secondAttribute="trailing" id="aC5-7q-buI"/>
-                <constraint firstItem="M92-u3-eeQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bq9-DC-ICJ"/>
                 <constraint firstItem="BHx-Xg-I18" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="dQx-gj-AB6"/>
-                <constraint firstAttribute="trailing" secondItem="M92-u3-eeQ" secondAttribute="trailing" id="eZ7-Gz-9PQ"/>
                 <constraint firstItem="lHe-40-tg5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iDY-fd-bKd"/>
-                <constraint firstItem="M92-u3-eeQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lud-Dg-afo"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="M92-u3-eeQ"/>
-                </mask>
-            </variation>
         </view>
         <tapGestureRecognizer id="PDg-sv-KPS">
             <connections>
@@ -112,7 +100,6 @@
         </tapGestureRecognizer>
     </objects>
     <resources>
-        <image name="Menu Background" width="501" height="310"/>
         <image name="back_icon_inactive" width="40" height="40"/>
         <image name="map_foreground" width="1600" height="900"/>
         <image name="map_mask" width="1280" height="720"/>
