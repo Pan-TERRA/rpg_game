@@ -17,6 +17,13 @@
   // Constants
 #import "RPGNibNames.h"
 
+  //
+BOOL locationExists(NSInteger locationID)
+{
+  return locationID > 0 && locationID <= 1;
+}
+
+
 @interface RPGLocationMapViewController ()
 
 @property (readonly, assign, nonatomic) NSInteger locationID;
@@ -30,6 +37,7 @@
   // Battleplace views
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView1;
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView2;
+@property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView3;
 
 @end
 
@@ -39,8 +47,7 @@
 
 - (instancetype)initWithLocationID:(NSInteger)locationID
 {
-    // Check if location with given ID exists
-  if (locationID > 0 && locationID <= 1)
+  if (locationExists(locationID))
   {
     NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, locationID];
     self = [self initWithNibName:NIBName bundle:nil];
@@ -96,6 +103,7 @@
   self.battleplaceViews = [NSMutableArray arrayWithObjects:
                            self.battleplaceView1,
                            self.battleplaceView2,
+                           self.battleplaceView3,
                            nil];
 }
 
@@ -109,10 +117,9 @@
 - (IBAction)toBattleAction:(UIButton *)sender
 {
     //TODO: battle init with location id and battleplace id (no API yet)
-  NSLog(@"Battle!");
   
-  RPGAdventuresFactory *adventuresFacory = [[[RPGAdventuresFactory alloc] init] autorelease];
-  RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFacory];
+  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
+  RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFactory];
   
   [self presentViewController:[battleViewController autorelease]
                      animated:YES
