@@ -123,7 +123,7 @@ static NSString * const kRPGRegistrationRequestCharacterAvatarID = @"avatar_id";
   {
     dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
                                                                    kRPGRegistrationRequestCharacterType : @(self.characterType),
-                                                                   kRPGRegistrationRequestCharacterAvatarID : self.avatarID};
+                                                                   kRPGRegistrationRequestCharacterAvatarID : @(self.avatarID)};
   }
   
   return dictionaryRepresentation;
