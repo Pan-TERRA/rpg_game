@@ -14,6 +14,7 @@
 #import "RPGTournamentFactory.h"
   // Controllers
 #import "RPGAdventuresController.h"
+#import "RPGAdventureGlobalMapViewController.h"
 #import "RPGArenaController.h"
 #import "RPGTournamentController.h"
   // Views
@@ -149,12 +150,7 @@
 
 - (IBAction)segueToAdventures
 {
-  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
-  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc]
-                                                    initWithBattleFactory:adventuresFactory]
-                                                   autorelease];
-  
-  [self presentViewController:battleViewController
+  [self presentViewController:[[[RPGAdventureGlobalMapViewController alloc] init] autorelease]
                      animated:YES
                    completion:nil];
 }
