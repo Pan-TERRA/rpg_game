@@ -58,6 +58,7 @@ NSString * const kRPGNetworkManagerAPIArenaSkillsRoute = @"/arena_skills";
 NSString * const kRPGNetworkManagerAPIArenaPayRoute = @"/arena_pay";
   // Adventures
 NSString * const kRPGNetworkManagerAPIAdventuresLocationsRoute = @"/locations";
+NSString * const kRPGNetworkManagerAPIAdventuresLocationInfoRoute = @"/location_info";
 
   // Constants
 NSString * const kRPGRequestToken = @"token";

@@ -7,12 +7,17 @@
 //
 
 #import "RPGNetworkManager.h"
+  // Entities
 @class RPGAvailableLocationsResponse;
+@class RPGLocationInfoResponse;
 
 
 @interface RPGNetworkManager (RPGAdventures)
 
 - (void)fetchAvailableLocationsWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
                                                                RPGAvailableLocationsResponse *aResponse))aCallback;
+- (void)getLocationInfoWithLocationID:(NSInteger)aLocationID
+                    completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                RPGLocationInfoResponse *aResponse))aCallback;
 
 @end

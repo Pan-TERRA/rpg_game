@@ -151,6 +151,7 @@
 		580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */; };
 		87432AED1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m in Sources */ = {isa = PBXBuildFile; fileRef = 87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */; };
 		87432AF11DFEDF2000764552 /* RPGAvailableLocationsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */; };
+		87432AF61DFEEC7E00764552 /* RPGLocationInfoResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87432AF51DFEEC7E00764552 /* RPGLocationInfoResponse.m */; };
 		877C86531DC8CF61004B4A00 /* RPGSkillsInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */; };
 		877C86581DC8F132004B4A00 /* RPGInitialScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */; };
 		877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877C86571DC8F132004B4A00 /* RPGInitialScreenViewController.xib */; };
@@ -495,6 +496,8 @@
 		87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+RPGAdventures.m"; sourceTree = "<group>"; };
 		87432AEF1DFEDF2000764552 /* RPGAvailableLocationsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAvailableLocationsResponse.h; sourceTree = "<group>"; };
 		87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAvailableLocationsResponse.m; sourceTree = "<group>"; };
+		87432AF41DFEEC7E00764552 /* RPGLocationInfoResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGLocationInfoResponse.h; sourceTree = "<group>"; };
+		87432AF51DFEEC7E00764552 /* RPGLocationInfoResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGLocationInfoResponse.m; sourceTree = "<group>"; };
 		877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGSkillsInfo.plist; sourceTree = "<group>"; };
 		877C86551DC8F132004B4A00 /* RPGInitialScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGInitialScreenViewController.h; sourceTree = "<group>"; };
 		877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGInitialScreenViewController.m; sourceTree = "<group>"; };
@@ -2089,6 +2092,7 @@
 				87432AEB1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.h */,
 				87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */,
 				87432AF21DFEDF2600764552 /* Available Locations */,
+				87432AF71DFEEC8800764552 /* Location Info */,
 			);
 			name = Adventures;
 			sourceTree = "<group>";
@@ -2108,6 +2112,15 @@
 				87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */,
 			);
 			name = Response;
+			sourceTree = "<group>";
+		};
+		87432AF71DFEEC8800764552 /* Location Info */ = {
+			isa = PBXGroup;
+			children = (
+				87432AF41DFEEC7E00764552 /* RPGLocationInfoResponse.h */,
+				87432AF51DFEEC7E00764552 /* RPGLocationInfoResponse.m */,
+			);
+			name = "Location Info";
 			sourceTree = "<group>";
 		};
 		877C86541DC8F102004B4A00 /* Initial Screen */ = {
@@ -2741,6 +2754,7 @@
 				AE5E468A1DEF438900546256 /* RPGCharacterAvatarSelectRequest.m in Sources */,
 				D0CFEE791DB65C0100C61D0B /* RPGBackgroundMusicController.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
+				87432AF61DFEEC7E00764552 /* RPGLocationInfoResponse.m in Sources */,
 				280A52331DB7C64000FF66B8 /* RPGStatusCodes.m in Sources */,
 				284DFDB61DE9C26900EE759F /* RPGBattleControllerGenerator.m in Sources */,
 				28184A151DF87EDE002EF22D /* RPGShopUnitsResponse.m in Sources */,
