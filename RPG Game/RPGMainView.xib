@@ -142,43 +142,15 @@
                                 <action selector="segueToArena" destination="-1" eventType="touchUpInside" id="whO-fa-UVd"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7xm-bD-rMZ">
-                            <rect key="frame" x="146" y="200" width="175" height="50"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="175" id="EnT-Ul-je9"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="175" id="VFQ-Fv-cNJ"/>
-                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="ffv-DX-opl"/>
-                                <constraint firstAttribute="height" constant="50" id="kdN-JW-QR4"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="25"/>
-                            <size key="titleShadowOffset" width="2.2250738585072014e-308" height="0.0"/>
-                            <state key="normal" title="Battle Animation" backgroundImage="main_button_inactive">
-                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <state key="selected" backgroundImage="main_button_active"/>
-                            <state key="highlighted" backgroundImage="main_button_active"/>
-                            <state key="focused" backgroundImage="main_button_active"/>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="VFQ-Fv-cNJ"/>
-                                    <exclude reference="ffv-DX-opl"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <action selector="segueToBattleAnimation:" destination="-1" eventType="touchUpInside" id="mfO-0u-vf4"/>
-                            </connections>
-                        </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="7xm-bD-rMZ" firstAttribute="top" secondItem="MG5-h5-sYd" secondAttribute="bottom" constant="20" id="1pW-3e-Ikd"/>
                         <constraint firstAttribute="height" constant="250" id="48h-WD-ybn"/>
                         <constraint firstItem="x9p-30-W3O" firstAttribute="centerX" secondItem="7SE-re-Hvu" secondAttribute="centerX" id="4JJ-DT-vGi"/>
                         <constraint firstItem="tE4-UI-GVk" firstAttribute="top" secondItem="7SE-re-Hvu" secondAttribute="top" id="7oP-aZ-SJ5"/>
                         <constraint firstItem="MG5-h5-sYd" firstAttribute="centerX" secondItem="7SE-re-Hvu" secondAttribute="centerX" id="BFR-2K-hUc"/>
                         <constraint firstItem="MG5-h5-sYd" firstAttribute="top" secondItem="7SE-re-Hvu" secondAttribute="top" constant="15" id="JPt-0F-0bb"/>
                         <constraint firstItem="x9p-30-W3O" firstAttribute="top" secondItem="7SE-re-Hvu" secondAttribute="top" constant="15" id="XPi-v9-itU"/>
-                        <constraint firstItem="7xm-bD-rMZ" firstAttribute="centerX" secondItem="7SE-re-Hvu" secondAttribute="centerX" id="c2Q-Yz-li8"/>
                         <constraint firstItem="tE4-UI-GVk" firstAttribute="centerX" secondItem="7SE-re-Hvu" secondAttribute="centerX" id="kqK-hI-OTS"/>
                         <constraint firstItem="x9p-30-W3O" firstAttribute="top" secondItem="tE4-UI-GVk" secondAttribute="bottom" constant="15" id="uSN-by-pEy"/>
                         <constraint firstItem="MG5-h5-sYd" firstAttribute="top" secondItem="x9p-30-W3O" secondAttribute="bottom" constant="15" id="ykV-Cp-XKy"/>
