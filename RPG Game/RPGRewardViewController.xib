@@ -154,7 +154,7 @@
                                 <constraint firstAttribute="height" constant="35" id="eI0-Fc-lVP"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                            <state key="normal" title="Exit" backgroundImage="main_button_inactive">
+                            <state key="normal" title="OK" backgroundImage="main_button_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
