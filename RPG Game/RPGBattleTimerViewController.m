@@ -65,7 +65,7 @@ static int sRPGBattleTimerViewControllerBattleControllerBattleCurrentTurnContext
     
     [_battleController addObserver:self
                         forKeyPath:self.timerObservationKeyPath
-                           options:(NSKeyValueObservingOptionNew & NSKeyValueObservingOptionOld)
+                           options:(NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld)
                            context:&sRPGBattleTimerViewControllerBattleControllerBattleCurrentTurnContext];
   }
 }

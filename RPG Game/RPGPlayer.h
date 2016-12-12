@@ -19,16 +19,21 @@
 
 @property (nonatomic, retain, readwrite) NSArray<RPGSkill *> *skills;
 
+@property (assign, nonatomic, readwrite) NSInteger currentWinCount;
+
 - (instancetype)initWithName:(NSString *)aName
                           HP:(NSInteger)aHP
                        maxHP:(NSInteger)aMaxHP
                        level:(NSInteger)aLevel
-                      skills:(NSArray<RPGSkill *> *)aSkills NS_DESIGNATED_INITIALIZER;
+                      skills:(NSArray<RPGSkill *> *)aSkills
+             currentWinCount:(NSInteger)aCurrentWinCount NS_DESIGNATED_INITIALIZER;
+
 + (instancetype)playerWithName:(NSString *)aName
                             HP:(NSInteger)aHP
                          maxHP:(NSInteger)aMaxHP
                          level:(NSInteger)aLevel
-                        skills:(NSArray<RPGSkill *> *)aSkills;
+                        skills:(NSArray<RPGSkill *> *)aSkills
+               currentWinCount:(NSInteger)aCurrentWinCount;
 
 - (RPGSkill *)skillByID:(NSInteger)anID;
 

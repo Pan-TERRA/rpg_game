@@ -8,9 +8,9 @@
 
 #import "RPGArenaSkillDrawViewController.h"
   // API
+#import "RPGArenaFactory.h"
 #import "RPGNetworkManager+Arena.h"
   // Controllers
-#import "RPGArenaControllerGenerator.h"
 #import "RPGWaitingViewController.h"
 #import "RPGArenaSkillCollectionViewController.h"
 #import "RPGArenaBagCollectionViewController.h"
@@ -209,14 +209,6 @@ static NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching =
   [self.waitingModal removeFromParentViewController];
 }
 
-#pragma mark - Actions
-
-- (IBAction)back:(UIButton *)aSender
-{
-  [self dismissViewControllerAnimated:YES
-                           completion:nil];
-}
-
 #pragma mark - Add To Collection
 
 - (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID;
@@ -249,15 +241,29 @@ static NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching =
   self.startBattleButton.enabled = YES;
 }
 
-#pragma mark - IBActions
+#pragma mark - Actions
 
 - (IBAction)handleStartBattleButton
 {
-  NSArray *skillsID = self.skillsCollectionViewController.skillsIDArray;
-  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] initWithSkillsID:skillsID] autorelease];
-  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:arenaControllerGenerator] autorelease];
+  [self saveSelectedSkills];
+
+  RPGArenaFactory *arenaFactory = [[[RPGArenaFactory alloc] init] autorelease];
+  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc]
+                                              initWithBattleFactory:arenaFactory]
+                                             autorelease];
   
   [self.delegate dismissCurrentAndPresentViewController:viewController];
+}
+
+- (IBAction)back:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveSelectedSkills
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  standardUserDefaults.selectedArenaSkills = self.skillsCollectionViewController.skillsIDArray;
 }
 
 @end

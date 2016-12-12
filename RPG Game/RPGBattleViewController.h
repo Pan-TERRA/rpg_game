@@ -7,18 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+  // Misc
+#import "RPGPresentingViewControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class RPGBattleFactory;
   // Controllers
-@class RPGBattleControllerGenerator;
 @class RPGBattleController;
 
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
+@property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
+  // Containers
+@property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 
-- (instancetype)initWithBattleControllerGenerator:(nonnull RPGBattleControllerGenerator *)aBattleControllerGenerator;
+- (instancetype)initWithBattleFactory:(nonnull RPGBattleFactory *)aBattleFactory;
+
+- (void)modelDidChange:(NSNotification *)aNotification NS_REQUIRES_SUPER;
 
 @end
 

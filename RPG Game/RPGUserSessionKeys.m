@@ -14,3 +14,5 @@ NSString * const kRPGUserSessionKeyGold = @"RPG_GOLD";
 NSString * const kRPGUserSessionKeyAvatar = @"RPG_AVATAR";
 NSString * const kRPGUserSessionKeyCrystals = @"RPG_CRYSTALS";
 NSString * const kRPGUserSessionKeyCharacters = @"RPG_CHARACTERS";
+NSString * const kRPGUserSessionKeySelectedArenaSkills = @"RPG_SELECTED_ARENA_SKILLS";
+NSString * const kRPGUserSessionKeyCharacterSkills = @"skills";

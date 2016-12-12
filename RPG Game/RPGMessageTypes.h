@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+  // Tournament
+extern NSString * const kRPGTournamentInitMessageType;
+extern NSString * const kRPGTournamentConditionMessageType;
   // Arena
 extern NSString * const kRPGArenaInitMessageType;
 extern NSString * const kRPGArenaConditionMessageType;

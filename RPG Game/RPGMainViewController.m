@@ -7,10 +7,15 @@
   //
 
 #import "RPGMainViewController.h"
+  // API
+#import "RPGNetworkManager.h"
+#import "RPGAdventuresFactory.h"
+#import "RPGArenaFactory.h"
+#import "RPGTournamentFactory.h"
   // Controllers
-#import "RPGArenaControllerGenerator.h"
-#import "RPGAdventuresControllerGenerator.h"
-#import "RPGAdventureGlobalMapViewController.h"
+#import "RPGAdventuresController.h"
+#import "RPGArenaController.h"
+#import "RPGTournamentController.h"
   // Views
 #import "RPGBattleViewController.h"
 #import "RPGSettingsViewController.h"
@@ -18,13 +23,13 @@
 #import "RPGCharacterProfileViewController.h"
 #import "RPGShopViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
+#import "RPGPresentingViewControllerProtocol.h"
+#import "RPGTournamentViewController.h"
   // Misc
 #import "RPGSFXEngine.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGNibNames.h"
-  // API
-#import "RPGNetworkManager.h"
   // Entities
 #import "RPGResources.h"
 #import "RPGResourcesResponse.h"
@@ -134,13 +139,22 @@
 
 - (IBAction)segueToPlay
 {
+  RPGTournamentFactory *tournamentFactory = [[[RPGTournamentFactory alloc] init] autorelease];
+  RPGTournamentViewController *tournamentViewController = [[[RPGTournamentViewController alloc]
+                                                            initWithBattleFactory:tournamentFactory]
+                                                           autorelease];
   
+  [self presentViewController:tournamentViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToAdventures
 {
-  RPGAdventureGlobalMapViewController *adventureGlobalMapViewController = [[RPGAdventureGlobalMapViewController alloc] init];
-  [self presentViewController:[adventureGlobalMapViewController autorelease]
+  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
+  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc]
+                                                    initWithBattleFactory:adventuresFactory]
+                                                   autorelease];
+  
+  [self presentViewController:battleViewController
                      animated:YES
                    completion:nil];
 }

@@ -7,16 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
-/**
- *  Typically, the view controller, which has presented this view controller, should conform to such
- *  protocol for implementing complicated transitions
- */
-@protocol RPGPresentingViewController <NSObject>
-
-- (void)dismissCurrentAndPresentViewController:(UIViewController *)aViewController;
-
-@end
+  // Misc
+#import "RPGPresentingViewControllerProtocol.h"
 
 @interface RPGArenaSkillDrawViewController : UIViewController
 
