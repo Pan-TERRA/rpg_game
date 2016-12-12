@@ -25,10 +25,10 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B97-Vw-McU" userLabel="Main Menu Title Container">
-                    <rect key="frame" x="183" y="5" width="301" height="65"/>
+                    <rect key="frame" x="133" y="5" width="401" height="65"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="main_menu_title" translatesAutoresizingMaskIntoConstraints="NO" id="7bi-4c-sOb" userLabel="Main Menu Title Background">
-                            <rect key="frame" x="0.0" y="0.0" width="301" height="65"/>
+                            <rect key="frame" x="0.0" y="0.0" width="401" height="65"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="375" id="AXr-WZ-OAc"/>
                                 <constraint firstAttribute="height" constant="80" id="ShC-jq-bED"/>
@@ -41,7 +41,7 @@
                             </variation>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main Menu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9W-eq-hDY">
-                            <rect key="frame" x="86" y="13" width="129" height="30"/>
+                            <rect key="frame" x="136" y="13" width="129" height="30"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="26"/>
                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -277,7 +277,7 @@
                 <constraint firstItem="1v0-HJ-qWd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="Zey-xv-0Ey"/>
                 <constraint firstAttribute="trailing" secondItem="3Lg-wm-Sff" secondAttribute="trailing" constant="25" id="byC-DE-cEs"/>
                 <constraint firstItem="Yg0-ml-fbo" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="eDe-GV-z95"/>
-                <constraint firstItem="B97-Vw-McU" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.45" id="gEe-yL-J0f"/>
+                <constraint firstItem="B97-Vw-McU" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.6" id="gEe-yL-J0f"/>
                 <constraint firstItem="Yg0-ml-fbo" firstAttribute="top" secondItem="7vk-qz-MTP" secondAttribute="bottom" constant="8" id="j28-0A-mWx"/>
                 <constraint firstItem="ooY-Ta-rVd" firstAttribute="height" secondItem="c5z-DO-r0T" secondAttribute="height" id="kX5-PG-UEa"/>
                 <constraint firstItem="7SE-re-Hvu" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="kei-0q-ABT">
