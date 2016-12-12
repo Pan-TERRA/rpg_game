@@ -4,6 +4,8 @@
 <dict>
 	<key>8</key>
 	<dict>
+		<key>duration</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Removes all negative effects from personage</string>
 		<key>name</key>
@@ -13,6 +15,8 @@
 	</dict>
 	<key>7</key>
 	<dict>
+		<key>duration</key>
+		<integer>1</integer>
 		<key>description</key>
 		<string>Prevent enemy from moving</string>
 		<key>name</key>
@@ -22,6 +26,8 @@
 	</dict>
 	<key>6</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Heals personage over time</string>
 		<key>name</key>
@@ -31,6 +37,8 @@
 	</dict>
 	<key>5</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Deals damage over time</string>
 		<key>name</key>
@@ -40,6 +48,8 @@
 	</dict>
 	<key>4</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Decreases defence of the enemy</string>
 		<key>name</key>
@@ -49,6 +59,8 @@
 	</dict>
 	<key>3</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Decreases attack power of the enemy</string>
 		<key>name</key>
@@ -58,6 +70,8 @@
 	</dict>
 	<key>2</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Increases defence of the personage</string>
 		<key>name</key>
@@ -67,6 +81,8 @@
 	</dict>
 	<key>1</key>
 	<dict>
+		<key>duration</key>
+		<integer>2</integer>
 		<key>description</key>
 		<string>Increases attack power of the personage</string>
 		<key>name</key>

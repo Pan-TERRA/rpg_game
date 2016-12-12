@@ -16,6 +16,7 @@
   // Entities
 #import "RPGPlayer.h"
 #import "RPGSkillEffectRepresentation.h"
+#import "RPGSkillEffect.h"
   // Misc
 #import "UIViewController+RPGChildViewController.h"
   // Constants
@@ -107,10 +108,17 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   [self.skillsEffectsCollectionView registerNib:cellNIB
                      forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
   
+  NSMutableArray *skillsEffectsID = [NSMutableArray array];
+  for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
+  {
+    [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
+  }
+  
   RPGAlign align = self.entityHPBar.align;
-  self.skillsEffectsCollectionViewController = [RPGSkillsEffectsCollectionViewController skillEffectsControllerWithCollectionView:self.skillsEffectsCollectionView
-                                                                                                                    skillsEffects:self.entity.skillsEffects
-                                                                                                                            align:align];
+  self.skillsEffectsCollectionViewController = [RPGSkillsEffectsCollectionViewController
+                                                skillEffectsControllerWithCollectionView:self.skillsEffectsCollectionView
+                                                skillsEffects:skillsEffectsID
+                                                align:align];
 }
 
 - (void)didReceiveMemoryWarning
@@ -131,7 +139,15 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
     self.entityHPBar.progress = ((float)entityHP / entityMaxHP);
     self.entityHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)entityHP, (long)entityMaxHP];
     self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
-    self.skillsEffectsCollectionViewController.skillsEffects = self.entity.skillsEffects;
+    
+    NSMutableArray *skillsEffectsID = [NSMutableArray array];
+    for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
+    {
+      [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
+    }
+    
+    self.skillsEffectsCollectionViewController.skillsEffects = skillsEffectsID;
+    
     [self.skillsEffectsCollectionView reloadData];
   }
 }
