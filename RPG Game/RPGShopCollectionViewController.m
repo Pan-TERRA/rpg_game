@@ -11,7 +11,7 @@
 #import "RPGShopViewController.h"
 #import "RPGShopCollectionViewCell.h"
   //Entity
-#import "RPGShopUnit.h"
+#import "RPGShopUnitRepresetation.h"
   //Constants
 #import "RPGNibNames.h"
 
@@ -114,7 +114,7 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 - (void)buyButtonDidPressOnCell:(RPGShopCollectionViewCell *)aCell
 {
   NSIndexPath *indexPath = [self.collectionView indexPathForCell:aCell];
-  NSInteger shopUnitID = self.shopUnits[indexPath.item].unitID;
+  NSInteger shopUnitID = self.shopUnits[indexPath.item].shopUnitID;
   
   RPGShopViewController *shopViewController = (RPGShopViewController *)self.parentViewController;
   [shopViewController buyShopUnitWithID:shopUnitID];

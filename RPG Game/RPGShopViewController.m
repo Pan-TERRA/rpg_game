@@ -15,11 +15,12 @@
   // API
 #import "RPGNetworkManager+Shop.h"
 #import "RPGShopUnitsResponse.h"
+#import "RPGShopUnitRequest.h"
   // Entity
 #import "RPGShopUnit.h"
+#import "RPGShopUnitRepresetation.h"
 #import "RPGResources.h"
 #import "RPGResourcesResponse.h"
-#import "RPGShopUnitRequest.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -27,7 +28,7 @@
 #import "RPGAlertController.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
-typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode aNetworkStatusCode, RPGShopUnitsResponse *aResponse);
+typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode aNetworkStatusCode, NSArray<NSDictionary *> *aShopUnits);
 typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode aNetworkStatusCode);
 
 static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
@@ -130,21 +131,22 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
   __block typeof(self) weakSelf = self;
   
   fetchShopUnitsCompletionHandler handler= ^void(RPGStatusCode aNetworkStatusCode,
-                                                 RPGShopUnitsResponse *aResponse)
+                                                 NSArray<NSDictionary *> *aShopUnits)
   {
     
     switch (aNetworkStatusCode)
     {
       case kRPGStatusCodeOK:
       {
-        NSMutableArray *shopUnits = [NSMutableArray array];
+        NSMutableArray<RPGShopUnitRepresetation *> *shopUnitRepresentations = [NSMutableArray array];
         
-        for (NSDictionary *shopUnitDictionary in aResponse.shopUnits)
+        for (NSDictionary *shopUnitDictionary in aShopUnits)
         {
           RPGShopUnit *shopUnit = [[[RPGShopUnit alloc] initWithDictionaryRepresentation:shopUnitDictionary] autorelease];
-          [shopUnits addObject:shopUnit];
+          RPGShopUnitRepresetation *representation = [RPGShopUnitRepresetation shopUnitRepresetationWithShopUnit:shopUnit];
+          [shopUnitRepresentations addObject:representation];
         }
-        self.collectionViewController.shopUnits = shopUnits;
+        self.collectionViewController.shopUnits = shopUnitRepresentations;
         break;
       }
         case kRPGStatusCodeWrongToken:
