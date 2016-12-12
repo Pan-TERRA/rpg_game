@@ -137,7 +137,7 @@
                    completion:nil];
 }
 
-- (IBAction)segueToPlay
+- (IBAction)segueToTournament
 {
   RPGTournamentFactory *tournamentFactory = [[[RPGTournamentFactory alloc] init] autorelease];
   RPGTournamentViewController *tournamentViewController = [[[RPGTournamentViewController alloc]
@@ -150,21 +150,21 @@
 - (IBAction)segueToAdventures
 {
   RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
-  RPGBattleViewController *battleViewController = [[[RPGBattleViewController alloc]
+  RPGBattleViewController *adventuresViewController = [[[RPGBattleViewController alloc]
                                                     initWithBattleFactory:adventuresFactory]
                                                    autorelease];
   
-  [self presentViewController:battleViewController
+  [self presentViewController:adventuresViewController
                      animated:YES
                    completion:nil];
 }
 
 - (IBAction)segueToArena
 {
-  RPGArenaSkillDrawViewController *viewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
-  viewController.delegate = self;
+  RPGArenaSkillDrawViewController *arenaViewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
+  arenaViewController.delegate = self;
   
-  [self presentViewController:viewController
+  [self presentViewController:arenaViewController
                      animated:YES
                    completion:nil];
 }
