@@ -10,6 +10,7 @@
   // Views
 #import "RPGShopCollectionViewController.h"
 #import "RPGWaitingViewController.h"
+#import "RPGConfirmViewController.h"
   // Support
 #import "UIViewController+RPGChildViewController.h"
   // API
@@ -32,8 +33,9 @@ typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode aNetworkStatusCode
 typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode aNetworkStatusCode);
 
 static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
+static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure you want to buy this unit?";
 
-@interface RPGShopViewController ()
+@interface RPGShopViewController () <RPGShopCollectionViewControllerDelegate>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystallLabel;
@@ -42,6 +44,7 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
 @property (nonatomic, retain, readwrite) RPGShopCollectionViewController *collectionViewController;
   // Modals
 @property (nonatomic, retain, readwrite) RPGWaitingViewController *shopInitModal;
+@property (nonatomic, retain, readwrite) RPGConfirmViewController *shopConfirmModal;
 
 @end
 
@@ -57,8 +60,10 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
   if (self != nil)
   {
     _collectionViewController = [[RPGShopCollectionViewController alloc] init];
+    _collectionViewController.delegate = self;
     _shopInitModal = [[RPGWaitingViewController alloc] initWithMessage:sRPGShopViewControllerLoadingMessage
                                                             completion:nil];
+    _shopConfirmModal = [RPGConfirmViewController new];
   }
   
   return self;
@@ -70,6 +75,7 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
 {
   [_collectionViewController release];
   [_shopInitModal release];
+  [_shopConfirmModal release];
   
   [super dealloc];
 }
@@ -284,6 +290,26 @@ static NSString * const sRPGShopViewControllerLoadingMessage = @"Loading...";
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
   self.goldLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionGold];
   self.crystallLabel.text = [NSString stringWithFormat:@"%ld", (long)standartUserDefaults.sessionCrystals];
+}
+
+#pragma mark - RPGShopCollectionViewControllerDelegate
+
+- (void)buyButtonDidPress:(RPGShopCollectionViewController *)aCollectionViewController
+           withShopUnitID:(NSInteger)aShopUnitID
+{
+  self.shopConfirmModal.question = sRPGShopViewControllerConfirmQuestion;
+  
+  __block typeof(self) weakSelf = self;
+  
+  self.shopConfirmModal.completionHandler = ^void(void)
+  {
+    [weakSelf addChildViewController:weakSelf.shopInitModal
+                               frame:weakSelf.view.frame];
+    
+    [weakSelf buyShopUnitWithID:aShopUnitID];
+  };
+
+  [self addChildViewController:self.shopConfirmModal view:self.view];
 }
 
 @end

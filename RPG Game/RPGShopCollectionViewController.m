@@ -111,15 +111,15 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   return cellSize;
 }
 
+#pragma mark - RPGShopCollectionViewCellDelegate
+
 - (void)buyButtonDidPressOnCell:(RPGShopCollectionViewCell *)aCell
 {
   NSIndexPath *indexPath = [self.collectionView indexPathForCell:aCell];
   NSInteger shopUnitID = self.shopUnits[indexPath.item].shopUnitID;
   
-  RPGShopViewController *shopViewController = (RPGShopViewController *)self.parentViewController;
-  [shopViewController buyShopUnitWithID:shopUnitID];
+  
+  [self.delegate buyButtonDidPress:self withShopUnitID:shopUnitID];
 }
-
-
 
 @end

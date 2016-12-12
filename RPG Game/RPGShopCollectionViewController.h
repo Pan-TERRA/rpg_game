@@ -13,7 +13,8 @@
 
 @protocol RPGShopCollectionViewControllerDelegate <NSObject>
 
-- (void)buyButtonDidPress:(RPGShopCollectionViewController *)aCollectionViewController;
+- (void)buyButtonDidPress:(RPGShopCollectionViewController *)aCollectionViewController
+           withShopUnitID:(NSInteger)aShopUnitID;
 
 @end
 
@@ -23,7 +24,5 @@
 @property (nonatomic, retain, readwrite) NSArray<RPGShopUnitRepresetation *> *shopUnits;
 
 @property (nonatomic, assign, readwrite) id<RPGShopCollectionViewControllerDelegate> delegate;
-
-
 
 @end

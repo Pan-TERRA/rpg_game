@@ -10,6 +10,4 @@
 
 @interface RPGShopViewController : UIViewController
 
-- (void)buyShopUnitWithID:(NSInteger)anUnitID;
-
 @end
