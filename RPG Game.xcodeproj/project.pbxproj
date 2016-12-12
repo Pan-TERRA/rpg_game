@@ -135,7 +135,6 @@
 		2ACD023A1DFC88EB00068AAE /* RPGAdventuresFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD021C1DFC88EA00068AAE /* RPGAdventuresFactory.m */; };
 		2ACD023B1DFC88EB00068AAE /* RPGArenaFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD021E1DFC88EA00068AAE /* RPGArenaFactory.m */; };
 		2ACD023C1DFC88EB00068AAE /* RPGBattleController+RPGTournamentPresentationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD02201DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.m */; };
-		2ACD023D1DFC88EB00068AAE /* RPGBattleFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */; };
 		2ACD023E1DFC88EB00068AAE /* RPGRankBadgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD02261DFC88EA00068AAE /* RPGRankBadgeViewController.m */; };
 		2ACD023F1DFC88EB00068AAE /* RPGRankBadgeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2ACD02271DFC88EA00068AAE /* RPGRankBadgeViewController.xib */; };
 		2ACD02401DFC88EB00068AAE /* RPGRanks.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2ACD02281DFC88EA00068AAE /* RPGRanks.plist */; };
@@ -456,15 +455,13 @@
 		2A8D9B9E1DB14B5A0026A5AB /* RPGTimeResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGTimeResponse.m; sourceTree = "<group>"; };
 		2A8D9BA41DB164520026A5AB /* RPGRegistrationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRegistrationRequest.h; sourceTree = "<group>"; };
 		2A8D9BA51DB164520026A5AB /* RPGRegistrationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRegistrationRequest.m; sourceTree = "<group>"; };
+		2AA40AA51DFF014D00286DBE /* RPGBattleFactoryProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RPGBattleFactoryProtocol.h; sourceTree = "<group>"; };
 		2ACD021B1DFC88EA00068AAE /* RPGAdventuresFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAdventuresFactory.h; sourceTree = "<group>"; };
 		2ACD021C1DFC88EA00068AAE /* RPGAdventuresFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAdventuresFactory.m; sourceTree = "<group>"; };
 		2ACD021D1DFC88EA00068AAE /* RPGArenaFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGArenaFactory.h; sourceTree = "<group>"; };
 		2ACD021E1DFC88EA00068AAE /* RPGArenaFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGArenaFactory.m; sourceTree = "<group>"; };
 		2ACD021F1DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGBattleController+RPGTournamentPresentationController.h"; sourceTree = "<group>"; };
 		2ACD02201DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGBattleController+RPGTournamentPresentationController.m"; sourceTree = "<group>"; };
-		2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleFactory.h; sourceTree = "<group>"; };
-		2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleFactory.m; sourceTree = "<group>"; };
-		2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleFactoryPrivateProperties.h; sourceTree = "<group>"; };
 		2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGPresentingViewControllerProtocol.h; sourceTree = "<group>"; };
 		2ACD02251DFC88EA00068AAE /* RPGRankBadgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRankBadgeViewController.h; sourceTree = "<group>"; };
 		2ACD02261DFC88EA00068AAE /* RPGRankBadgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRankBadgeViewController.m; sourceTree = "<group>"; };
@@ -1730,9 +1727,7 @@
 		28AD19EA1DFEAA7900E6D97F /* Battle Factories */ = {
 			isa = PBXGroup;
 			children = (
-				2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */,
-				2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */,
-				2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */,
+				2AA40AA51DFF014D00286DBE /* RPGBattleFactoryProtocol.h */,
 				28AD19EE1DFEAD0300E6D97F /* Adventures Factory */,
 				28AD19EF1DFEAD0A00E6D97F /* Arena Factory */,
 				28AD19F01DFEAD1000E6D97F /* Tournament Factory */,
@@ -2736,7 +2731,6 @@
 				2ACD023C1DFC88EB00068AAE /* RPGBattleController+RPGTournamentPresentationController.m in Sources */,
 				28184A161DF87EDE002EF22D /* RPGShopViewController.m in Sources */,
 				2A6F2AE31DE219BD0036CD2D /* RPGArenaSkillsResponse.m in Sources */,
-				2ACD023D1DFC88EB00068AAE /* RPGBattleFactory.m in Sources */,
 				AEFC27E91DDF379900905ADD /* RPGWaitingViewController.m in Sources */,
 				281849FC1DF87CB9002EF22D /* RPGPlayerInfo.m in Sources */,
 				289C42DB1DE20C6700E35506 /* RPGCharacterProfileSkill.m in Sources */,
