@@ -20,7 +20,7 @@
   //
 BOOL locationExists(NSInteger locationID)
 {
-  return locationID > 0 && locationID <= 1;
+  return locationID >= 1 && locationID <= 1;
 }
 
 
