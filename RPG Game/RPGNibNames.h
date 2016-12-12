@@ -42,10 +42,11 @@ extern NSString * const kRPGCharacterBagCollectionViewCellNIBName;
 extern NSString * const kRPGAvatarCollectionViewCellNIBName;
 extern NSString * const kRPGAvatarSelectViewControllerNIBName;
 
-/****************	Character Profile ****************/
+/****************	Misc ****************/
 
 extern NSString * const kRPGAlertViewControllerNIBName;
 extern NSString * const kRPGWaitingViewControllerNIBName;
+extern NSString * const kRPGConfirmViewControllerNIBName;
 
 /********************* Shop ***********************/
 

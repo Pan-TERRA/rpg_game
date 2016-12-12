@@ -46,6 +46,7 @@ NSString * const kRPGAvatarSelectViewControllerNIBName = @"RPGAvatarSelectViewCo
 
 NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
 NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
+NSString * const kRPGConfirmViewControllerNIBName = @"RPGConfirmViewController";
 
 /********************* Shop ***********************/
 
