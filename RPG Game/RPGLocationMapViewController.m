@@ -118,7 +118,7 @@ BOOL locationExists(NSInteger locationID)
 {
     //TODO: battle init with location id and battleplace id (no API yet)
   
-  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] init] autorelease];
+  RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] initWithBattleplaceID:self.chosenBattleplaceID] autorelease];
   RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFactory];
   
   [self presentViewController:[battleViewController autorelease]

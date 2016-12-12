@@ -20,6 +20,7 @@
 #import "RPGSkillActionRequest.h"
 #import "RPGAdventuresInitResponse.h"
 #import "RPGAdventuresConditionResponse.h"
+#import "RPGAdventuresInitRequest.h"
   // Misc
 #import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -44,6 +45,7 @@
   if (self != nil)
   {
     _webSocketManager = [aManager retain];
+    _stageID = -1;
   }
   
   return self;
@@ -67,7 +69,7 @@
 
 - (RPGRequest *)createBattleInitRequest
 {
-  return [RPGRequest requestWithType:kRPGAdventuresInitMessageType];
+  return [RPGAdventuresInitRequest requestWithType:kRPGAdventuresInitMessageType stageID:self.stageID];
 }
 
 #pragma mark - Process Manager Response

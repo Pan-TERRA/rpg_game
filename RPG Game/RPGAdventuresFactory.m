@@ -17,18 +17,34 @@
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithBattleplaceID:(NSInteger)aBattleplaceID
 {
   self = [super init];
   
   if (self != nil)
   {
-    RPGAdventuresControllerGenerator *battleControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
-    self.battleController = [battleControllerGenerator battleController];
-    self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    if (aBattleplaceID >= 0)
+    {
+      RPGAdventuresControllerGenerator *battleControllerGenerator = [[RPGAdventuresControllerGenerator alloc] initWithStageID:aBattleplaceID];
+      self.battleController = [battleControllerGenerator battleController];
+      
+      [battleControllerGenerator release];
+      
+      self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    }
+    else
+    {
+      [self release];
+      self = nil;
+    }
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithBattleplaceID:-1];
 }
 
 @end
