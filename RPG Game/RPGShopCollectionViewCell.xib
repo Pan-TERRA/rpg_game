@@ -32,7 +32,9 @@
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="M6z-i8-NbT">
                         <rect key="frame" x="15" y="206" width="120" height="38"/>
                         <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
-                        <state key="normal" image="Ruby" backgroundImage="Label Item Dark Brown"/>
+                        <state key="normal" image="Ruby" backgroundImage="main_button_inactive">
+                            <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
                         <connections>
                             <action selector="buyAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="eIs-PB-Ddy"/>
                         </connections>
@@ -72,9 +74,9 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Label Item Dark Brown" width="268" height="50"/>
         <image name="Label Item Light Brown" width="151" height="50"/>
         <image name="Ruby" width="20" height="20"/>
         <image name="confirm_icon_empty" width="40" height="40"/>
+        <image name="main_button_inactive" width="275" height="137"/>
     </resources>
 </document>
