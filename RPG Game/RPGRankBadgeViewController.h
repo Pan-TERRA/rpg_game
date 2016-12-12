@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+  // Controller
 @class RPGBattleController;
 
 @interface RPGRankBadgeViewController : UIViewController

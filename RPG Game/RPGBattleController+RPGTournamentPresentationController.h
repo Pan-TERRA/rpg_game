@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Controller
 #import "RPGTournamentController.h"
 
 @interface RPGBattleController (RPGTournamentPresentationController)

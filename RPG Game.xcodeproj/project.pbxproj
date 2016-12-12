@@ -608,6 +608,7 @@
 		280A522E1DB7C5B500FF66B8 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
+				28AD19F61DFEAE4600E6D97F /* Resource Names */,
 				28184A391DFC204C002EF22D /* RPGAlign.h */,
 				289C42C51DE20C4E00E35506 /* RPGItemTypes.h */,
 				AE6D32DF1DB7B19F00F58878 /* RPGQuestListState.h */,
@@ -652,6 +653,7 @@
 		281499EC1DAFC95F00C26881 /* Battle */ = {
 			isa = PBXGroup;
 			children = (
+				28AD19EA1DFEAA7900E6D97F /* Battle Factories */,
 				284DFDBA1DE9C3A900EE759F /* Controller Generator */,
 				284DFDC61DE9CCC300EE759F /* Controllers */,
 				285231611DC0F107002F702B /* Entities */,
@@ -667,6 +669,7 @@
 				2A8D9B9C1DB14ACB0026A5AB /* Time */,
 				284DFDCA1DEAFA2700EE759F /* Battle Init */,
 				284DFDCB1DEAFA2F00EE759F /* Battle Condition */,
+				28AD19F41DFEADB100E6D97F /* Tournament Init */,
 				284DFDC71DEAF9A200EE759F /* Arena Init */,
 				284DFDC81DEAF9F200EE759F /* Arena Condition */,
 				283ADD001DAD3F9100BDC706 /* Adventures Init */,
@@ -1032,6 +1035,7 @@
 			children = (
 				284DFDB41DE9C26900EE759F /* RPGBattleControllerGenerator.h */,
 				284DFDB51DE9C26900EE759F /* RPGBattleControllerGenerator.m */,
+				28AD19EC1DFEAC5A00E6D97F /* Tournament Controller Generator */,
 				284DFDC31DE9C98A00EE759F /* Adventures Controller Generator */,
 				284DFDC41DE9C99A00EE759F /* Arena Controller Generator */,
 			);
@@ -1081,6 +1085,8 @@
 				28AB94881DD8A8EB00F1503B /* RPGBattleController.m */,
 				28AB949B1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.h */,
 				28AB949C1DDDB93200F1503B /* RPGBattleController+RPGBattlePresentationController.m */,
+				2ACD021F1DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.h */,
+				2ACD02201DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.m */,
 			);
 			name = "Battle Controller";
 			sourceTree = "<group>";
@@ -1089,6 +1095,7 @@
 			isa = PBXGroup;
 			children = (
 				284DFDC51DE9CCB900EE759F /* Battle Controller */,
+				28AD19EB1DFEAC2B00E6D97F /* Tournament Controller */,
 				284DFDBB1DE9C3B200EE759F /* Adventures Controller */,
 				284DFDBC1DE9C3BF00EE759F /* Arena Controller */,
 			);
@@ -1242,37 +1249,6 @@
 			isa = PBXGroup;
 			children = (
 				288E85D01DABDA8A00321F4D /* RPGAppDelegate.h */,
-				2ACD021B1DFC88EA00068AAE /* RPGAdventuresFactory.h */,
-				2ACD021C1DFC88EA00068AAE /* RPGAdventuresFactory.m */,
-				2ACD021D1DFC88EA00068AAE /* RPGArenaFactory.h */,
-				2ACD021E1DFC88EA00068AAE /* RPGArenaFactory.m */,
-				2ACD021F1DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.h */,
-				2ACD02201DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.m */,
-				2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */,
-				2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */,
-				2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */,
-				2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */,
-				2ACD02251DFC88EA00068AAE /* RPGRankBadgeViewController.h */,
-				2ACD02261DFC88EA00068AAE /* RPGRankBadgeViewController.m */,
-				2ACD02271DFC88EA00068AAE /* RPGRankBadgeViewController.xib */,
-				2ACD02281DFC88EA00068AAE /* RPGRanks.plist */,
-				2ACD02291DFC88EB00068AAE /* RPGResourceNames.h */,
-				2ACD022A1DFC88EB00068AAE /* RPGResourceNames.m */,
-				2ACD022B1DFC88EB00068AAE /* RPGTournamentController.h */,
-				2ACD022C1DFC88EB00068AAE /* RPGTournamentController.m */,
-				2ACD022D1DFC88EB00068AAE /* RPGTournamentControllerGenerator.h */,
-				2ACD022E1DFC88EB00068AAE /* RPGTournamentControllerGenerator.m */,
-				2ACD022F1DFC88EB00068AAE /* RPGTournamentFactory.h */,
-				2ACD02301DFC88EB00068AAE /* RPGTournamentFactory.m */,
-				2ACD02311DFC88EB00068AAE /* RPGTournamentInitResponse.h */,
-				2ACD02321DFC88EB00068AAE /* RPGTournamentInitResponse.m */,
-				2ACD02331DFC88EB00068AAE /* RPGTournamentRewardRankViewController.h */,
-				2ACD02341DFC88EB00068AAE /* RPGTournamentRewardRankViewController.m */,
-				2ACD02351DFC88EB00068AAE /* RPGTournamentRewardRankViewController.xib */,
-				2ACD02361DFC88EB00068AAE /* RPGTournamentRewardViewController.h */,
-				2ACD02371DFC88EB00068AAE /* RPGTournamentRewardViewController.m */,
-				2ACD02381DFC88EB00068AAE /* RPGTournamentViewController.h */,
-				2ACD02391DFC88EB00068AAE /* RPGTournamentViewController.m */,
 				288E85D11DABDA8A00321F4D /* RPGAppDelegate.m */,
 				28AB94A11DDDDFD800F1503B /* View */,
 				28AB94A21DDDDFE000F1503B /* Model */,
@@ -1284,6 +1260,7 @@
 				288E85D91DABDA8A00321F4D /* Assets.xcassets */,
 				288E85DB1DABDA8A00321F4D /* LaunchScreen.storyboard */,
 				288E85DE1DABDA8A00321F4D /* Info.plist */,
+				2ACD02281DFC88EA00068AAE /* RPGRanks.plist */,
 				AE5E46B71DFB192600546256 /* RPGSkillsEffectsInfo.plist */,
 				2A6F2AC41DDA07B70036CD2D /* RPGLogTemplates.txt */,
 				877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */,
@@ -1720,6 +1697,7 @@
 				28149A131DB100FB00C26881 /* Main Menu */,
 				AED6F57A1DACD89F007ED1B8 /* Quests */,
 				289C42E61DE20CC800E35506 /* Character Profile */,
+				28AD19ED1DFEACE600E6D97F /* Tournament */,
 				28149A111DB1008100C26881 /* Battle */,
 				28E9D90C1DE59C55006C7688 /* Arena */,
 				28149A121DB100B900C26881 /* Settings */,
@@ -1749,6 +1727,149 @@
 			name = "Settings Modal";
 			sourceTree = "<group>";
 		};
+		28AD19EA1DFEAA7900E6D97F /* Battle Factories */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */,
+				2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */,
+				2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */,
+				28AD19EE1DFEAD0300E6D97F /* Adventures Factory */,
+				28AD19EF1DFEAD0A00E6D97F /* Arena Factory */,
+				28AD19F01DFEAD1000E6D97F /* Tournament Factory */,
+			);
+			name = "Battle Factories";
+			sourceTree = "<group>";
+		};
+		28AD19EB1DFEAC2B00E6D97F /* Tournament Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD022B1DFC88EB00068AAE /* RPGTournamentController.h */,
+				2ACD022C1DFC88EB00068AAE /* RPGTournamentController.m */,
+			);
+			name = "Tournament Controller";
+			sourceTree = "<group>";
+		};
+		28AD19EC1DFEAC5A00E6D97F /* Tournament Controller Generator */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD022D1DFC88EB00068AAE /* RPGTournamentControllerGenerator.h */,
+				2ACD022E1DFC88EB00068AAE /* RPGTournamentControllerGenerator.m */,
+			);
+			name = "Tournament Controller Generator";
+			sourceTree = "<group>";
+		};
+		28AD19ED1DFEACE600E6D97F /* Tournament */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02381DFC88EB00068AAE /* RPGTournamentViewController.h */,
+				2ACD02391DFC88EB00068AAE /* RPGTournamentViewController.m */,
+				28AD19F31DFEAD8A00E6D97F /* Tournament Reward ViewController */,
+				28AD19F21DFEAD6D00E6D97F /* Tournament Reward Rank ViewController */,
+				28AD19F11DFEAD5700E6D97F /* Badge ViewController */,
+			);
+			name = Tournament;
+			sourceTree = "<group>";
+		};
+		28AD19EE1DFEAD0300E6D97F /* Adventures Factory */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD021B1DFC88EA00068AAE /* RPGAdventuresFactory.h */,
+				2ACD021C1DFC88EA00068AAE /* RPGAdventuresFactory.m */,
+			);
+			name = "Adventures Factory";
+			sourceTree = "<group>";
+		};
+		28AD19EF1DFEAD0A00E6D97F /* Arena Factory */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD021D1DFC88EA00068AAE /* RPGArenaFactory.h */,
+				2ACD021E1DFC88EA00068AAE /* RPGArenaFactory.m */,
+			);
+			name = "Arena Factory";
+			sourceTree = "<group>";
+		};
+		28AD19F01DFEAD1000E6D97F /* Tournament Factory */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD022F1DFC88EB00068AAE /* RPGTournamentFactory.h */,
+				2ACD02301DFC88EB00068AAE /* RPGTournamentFactory.m */,
+			);
+			name = "Tournament Factory";
+			sourceTree = "<group>";
+		};
+		28AD19F11DFEAD5700E6D97F /* Badge ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02251DFC88EA00068AAE /* RPGRankBadgeViewController.h */,
+				2ACD02261DFC88EA00068AAE /* RPGRankBadgeViewController.m */,
+				2ACD02271DFC88EA00068AAE /* RPGRankBadgeViewController.xib */,
+			);
+			name = "Badge ViewController";
+			sourceTree = "<group>";
+		};
+		28AD19F21DFEAD6D00E6D97F /* Tournament Reward Rank ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02331DFC88EB00068AAE /* RPGTournamentRewardRankViewController.h */,
+				2ACD02341DFC88EB00068AAE /* RPGTournamentRewardRankViewController.m */,
+				2ACD02351DFC88EB00068AAE /* RPGTournamentRewardRankViewController.xib */,
+			);
+			name = "Tournament Reward Rank ViewController";
+			sourceTree = "<group>";
+		};
+		28AD19F31DFEAD8A00E6D97F /* Tournament Reward ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02361DFC88EB00068AAE /* RPGTournamentRewardViewController.h */,
+				2ACD02371DFC88EB00068AAE /* RPGTournamentRewardViewController.m */,
+			);
+			name = "Tournament Reward ViewController";
+			sourceTree = "<group>";
+		};
+		28AD19F41DFEADB100E6D97F /* Tournament Init */ = {
+			isa = PBXGroup;
+			children = (
+				28AD19F51DFEADC700E6D97F /* Response */,
+			);
+			name = "Tournament Init";
+			sourceTree = "<group>";
+		};
+		28AD19F51DFEADC700E6D97F /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02311DFC88EB00068AAE /* RPGTournamentInitResponse.h */,
+				2ACD02321DFC88EB00068AAE /* RPGTournamentInitResponse.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		28AD19F61DFEAE4600E6D97F /* Resource Names */ = {
+			isa = PBXGroup;
+			children = (
+				2ACD02291DFC88EB00068AAE /* RPGResourceNames.h */,
+				2ACD022A1DFC88EB00068AAE /* RPGResourceNames.m */,
+			);
+			name = "Resource Names";
+			sourceTree = "<group>";
+		};
+		28AD19F71DFEAE8200E6D97F /* Color Equality */ = {
+			isa = PBXGroup;
+			children = (
+				28184A241DFAF32D002EF22D /* UIColor+RPGColorEquality.h */,
+				28184A2B1DFAF32D002EF22D /* UIColor+RPGColorEquality.m */,
+			);
+			name = "Color Equality";
+			sourceTree = "<group>";
+		};
+		28AD19F81DFEAE9100E6D97F /* Color At Point */ = {
+			isa = PBXGroup;
+			children = (
+				28184A251DFAF32D002EF22D /* UIView+RPGColorOfPoint.h */,
+				28184A2C1DFAF32D002EF22D /* UIView+RPGColorOfPoint.m */,
+			);
+			name = "Color At Point";
+			sourceTree = "<group>";
+		};
 		28AE27161DBD161300834FBB /* Quest */ = {
 			isa = PBXGroup;
 			children = (
@@ -1769,12 +1890,11 @@
 		28B4DDB01DCC971200332DCD /* Support */ = {
 			isa = PBXGroup;
 			children = (
-				28184A241DFAF32D002EF22D /* UIColor+RPGColorEquality.h */,
-				28184A2B1DFAF32D002EF22D /* UIColor+RPGColorEquality.m */,
-				28184A251DFAF32D002EF22D /* UIView+RPGColorOfPoint.h */,
-				28184A2C1DFAF32D002EF22D /* UIView+RPGColorOfPoint.m */,
+				2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */,
 				283FF1D71DE5D3ED00F4535E /* RPGClassInfoRepresentation.h */,
 				283FF1D81DE5D3ED00F4535E /* RPGClassInfoRepresentation.m */,
+				28AD19F71DFEAE8200E6D97F /* Color Equality */,
+				28AD19F81DFEAE9100E6D97F /* Color At Point */,
 				28C576A21DE225B7008DCB88 /* Alert Controller */,
 				28C576A31DE225CF008DCB88 /* Alert ViewController */,
 				28C576A71DE312CD008DCB88 /* Error Log */,
@@ -2258,7 +2378,7 @@
 				TargetAttributes = {
 					288E85C91DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = QMKFWDG6C6;
+						DevelopmentTeam = S62KPRX8XQ;
 					};
 					288E85E21DABDA8A00321F4D = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -2769,7 +2889,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.app4.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -2786,7 +2906,7 @@
 				INFOPLIST_FILE = "RPG Game/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.app4.zeo.RPG-team.RPG-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.app.zeo.RPG-team.RPG-Game";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

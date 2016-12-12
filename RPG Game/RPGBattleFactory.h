@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@class RPGBattleController;
+  // Controlelers
 @class RPGRewardViewController;
+@class RPGBattleController;
 
 @interface RPGBattleFactory : NSObject
 

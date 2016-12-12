@@ -7,8 +7,10 @@
 //
 
 #import "RPGAdventuresFactory.h"
+  // Controllers
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGRewardViewController.h"
+  // Misc
 #import "RPGBattleFactoryPrivateProperties.h"
 
 @implementation RPGAdventuresFactory

@@ -7,11 +7,11 @@
 //
 
 #import "RPGTournamentControllerGenerator.h"
-// API
+  // API
 #import "RPGWebsocketManager.h"
-// Controllers
+  // Controllers
 #import "RPGTournamentController.h"
-// Constants
+  // Constants
 #import "RPGMessageTypes.h"
 
 static NSString * const kRPGWebsocketManagerAPITournamentBattle = @"ws://10.55.33.15:8888/tournament_battle";
