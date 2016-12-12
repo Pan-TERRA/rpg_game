@@ -16,10 +16,10 @@
 #import "RPGNibNames.h"
 
   // Global map location mask colors
-#define GLOBAL_MAP_LOCATION1_MASK_COLOR [UIColor colorWithRed:0.32549 green:0.219608 blue:0.113725 alpha:1.0]
-#define GLOBAL_MAP_LOCATION2_MASK_COLOR [UIColor colorWithRed:0.647059 green:0.411765 blue:0.411765 alpha:1.0]
-#define GLOBAL_MAP_LOCATION3_MASK_COLOR [UIColor colorWithRed:0.266667 green:0.945098 blue:0.00392157 alpha:1.0]
-#define GLOBAL_MAP_LOCATION4_MASK_COLOR [UIColor colorWithRed:0.27451 green:0.235294 blue:0.752941 alpha:1.0]
+#define GLOBAL_MAP_LOCATION1_MASK_COLOR [UIColor colorWithRed:0.776471 green:0.12549 blue:0.12549 alpha:1.0]
+#define GLOBAL_MAP_LOCATION2_MASK_COLOR [UIColor colorWithRed:0.580392 green:0.105882 blue:0.984314 alpha:1.0]
+#define GLOBAL_MAP_LOCATION3_MASK_COLOR [UIColor colorWithRed:0.976471 green:0.984314 blue:0.105882 alpha:1.0]
+#define GLOBAL_MAP_LOCATION4_MASK_COLOR [UIColor colorWithRed:0.458824 green:0.717647 blue:0.184314 alpha:1.0]
 
 @interface RPGAdventureGlobalMapViewController ()
 
@@ -94,8 +94,8 @@
                          GLOBAL_MAP_LOCATION1_MASK_COLOR,
                          GLOBAL_MAP_LOCATION2_MASK_COLOR,
                          GLOBAL_MAP_LOCATION3_MASK_COLOR,
-                         GLOBAL_MAP_LOCATION4_MASK_COLOR
-                         , nil];
+                         GLOBAL_MAP_LOCATION4_MASK_COLOR,
+                         nil];
   }
   
   return mapLocationColors;
