@@ -8,6 +8,9 @@
 
 #import "RPGBattleViewController.h"
 
+/**
+ *  This class is responsible for creating and adding subviews, specific for tournament battle
+ */
 @interface RPGTournamentViewController : RPGBattleViewController
 
 @end

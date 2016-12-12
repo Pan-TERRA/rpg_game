@@ -10,6 +10,9 @@
 
 @class RPGBattleController;
 
+/**
+ *  Created and used by RPGTournamentRewardViewController
+ */
 @interface RPGTournamentRewardRankViewController : UIViewController
 
 @property (assign, nonatomic, readonly) RPGBattleController *battleController;

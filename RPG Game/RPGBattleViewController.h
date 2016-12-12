@@ -16,6 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
   // Controllers
 @class RPGBattleController;
 
+/**
+ *  General battle view.
+ *  Represents a battle between player and other entity (either player or bot).
+ *  May be subclassed to add specific battle's behaviour (different kinds of battle may need
+ *  different representations, e.g. adding some subviews).
+ */
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;

@@ -8,6 +8,9 @@
 
 #import "RPGRewardViewController.h"
 
+/**
+ *  This class is responsible for creating and adding subviews, specific for tournament reward window
+ */
 @interface RPGTournamentRewardViewController : RPGRewardViewController
 
 @end
