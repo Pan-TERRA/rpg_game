@@ -35,6 +35,15 @@
   return self;
 }
 
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_badgeViewController release];
+  
+  [super dealloc];
+}
+
 #pragma mark - UIViewController
 
 - (void)viewDidLoad
