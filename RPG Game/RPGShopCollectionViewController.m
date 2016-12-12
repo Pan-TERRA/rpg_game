@@ -94,14 +94,14 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 
 #pragma mark - UICollectionViewDelegateFlowLayout
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
   CGSize collectionViewSize = self.collectionView.frame.size;
   CGSize cellSize = CGSizeZero;
   
   if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
   {
-    cellSize = CGSizeMake(collectionViewSize.width / 5.25, collectionViewSize.height / 2.35);
+    cellSize = CGSizeMake(collectionViewSize.width / 5.25, collectionViewSize.height / 2.25);
   }
   else
   {
@@ -117,7 +117,6 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
 {
   NSIndexPath *indexPath = [self.collectionView indexPathForCell:aCell];
   NSInteger shopUnitID = self.shopUnits[indexPath.item].shopUnitID;
-  
   
   [self.delegate buyButtonDidPress:self withShopUnitID:shopUnitID];
 }
