@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+  // API
+#import "RPGBattleFactoryProtocol.h"
   // Misc
 #import "RPGPresentingViewControllerProtocol.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RPGBattleFactory;
+@class RPGBattleFactoryProtocol;
   // Controllers
 @class RPGBattleController;
 
@@ -23,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
   // Containers
 @property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 
-- (instancetype)initWithBattleFactory:(nonnull RPGBattleFactory *)aBattleFactory;
+- (instancetype)initWithBattleFactory:(nonnull id<RPGBattleFactoryProtocol>)aBattleFactory;
 
 - (void)modelDidChange:(NSNotification *)aNotification NS_REQUIRES_SUPER;
 

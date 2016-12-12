@@ -8,10 +8,16 @@
 
 #import "RPGAdventuresFactory.h"
   // Controllers
+#import "RPGBattleController.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGRewardViewController.h"
-  // Misc
-#import "RPGBattleFactoryPrivateProperties.h"
+
+@interface RPGAdventuresFactory ()
+
+@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
+@property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+
+@end
 
 @implementation RPGAdventuresFactory
 
@@ -24,11 +30,21 @@
   if (self != nil)
   {
     RPGAdventuresControllerGenerator *battleControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
-    self.battleController = [battleControllerGenerator battleController];
-    self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    _battleController = [[battleControllerGenerator battleController] retain];
+    _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
   }
   
   return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_battleController release];
+  [_rewardViewController release];
+  
+  [super dealloc];
 }
 
 @end

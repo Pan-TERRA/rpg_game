@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGBattleFactory.h"
+#import "RPGBattleFactoryProtocol.h"
 
-@interface RPGAdventuresFactory : RPGBattleFactory
+@interface RPGAdventuresFactory : NSObject <RPGBattleFactoryProtocol>
 
 @end

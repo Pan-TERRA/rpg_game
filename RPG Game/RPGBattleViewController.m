@@ -9,7 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
-#import "RPGBattleFactory.h"
+#import "RPGBattleFactoryProtocol.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -39,7 +39,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @interface RPGBattleViewController () <RPGRewardModalDelegate>
 
-@property (assign, nonatomic, readwrite) RPGBattleFactory *battleFactory;
+@property (nonatomic, assign, readwrite) id<RPGBattleFactoryProtocol> battleFactory;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
 @property (nonatomic, assign, readwrite) IBOutlet UIView *playerViewContainer;
@@ -72,7 +72,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
+- (instancetype)initWithBattleFactory:(id<RPGBattleFactoryProtocol>)aBattleFactory
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
