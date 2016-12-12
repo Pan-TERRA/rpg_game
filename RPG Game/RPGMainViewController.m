@@ -11,6 +11,7 @@
 #import "RPGArenaControllerGenerator.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGAdventureGlobalMapViewController.h"
+#import "RPGBattleAnimationViewController.h"
   // Views
 #import "RPGBattleViewController.h"
 #import "RPGSettingsViewController.h"
@@ -160,6 +161,15 @@
   RPGSettingsViewController *settingsViewController = [[[RPGSettingsViewController alloc] init] autorelease];
   
   [self presentViewController:settingsViewController
+                     animated:YES
+                   completion:nil];
+}
+
+- (IBAction)segueToBattleAnimation:(UIButton *)sender
+{
+  RPGBattleAnimationViewController *battleAnimationViewController = [[[RPGBattleAnimationViewController alloc] init] autorelease];
+  
+  [self presentViewController:battleAnimationViewController
                      animated:YES
                    completion:nil];
 }
