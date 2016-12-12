@@ -55,23 +55,23 @@
                     <rect key="frame" x="100" y="63" width="467" height="250"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tE4-UI-GVk">
-                            <rect key="frame" x="159" y="0.0" width="150" height="50"/>
+                            <rect key="frame" x="146" y="0.0" width="175" height="50"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="tE4-UI-GVk" secondAttribute="height" multiplier="3:1" id="C7b-F2-WI7"/>
+                                <constraint firstAttribute="width" secondItem="tE4-UI-GVk" secondAttribute="height" multiplier="7:2" id="C7b-F2-WI7"/>
                                 <constraint firstAttribute="height" constant="50" id="TUC-kJ-vjV">
                                     <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                 </constraint>
                             </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="25"/>
                             <inset key="contentEdgeInsets" minX="20" minY="10" maxX="20" maxY="10"/>
-                            <state key="normal" title="Play" backgroundImage="main_button_inactive">
+                            <state key="normal" title="Tournament" backgroundImage="main_button_inactive">
                                 <color key="titleColor" red="0.40797278025211436" green="0.21198610692630462" blue="0.20364340794048336" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <variation key="heightClass=regular-widthClass=regular">
                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="28"/>
                             </variation>
                             <connections>
-                                <action selector="segueToPlay" destination="-1" eventType="touchUpInside" id="4yS-8L-Yqm"/>
+                                <action selector="segueToTournament" destination="-1" eventType="touchUpInside" id="ZUd-LS-V0l"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x9p-30-W3O">

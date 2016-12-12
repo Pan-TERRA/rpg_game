@@ -18,7 +18,7 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EgU-pB-Mwf">
                         <rect key="frame" x="0.0" y="0.0" width="141" height="122"/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="confirm_icon_inactive" translatesAutoresizingMaskIntoConstraints="NO" id="256-ia-aoQ">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mark_selected" translatesAutoresizingMaskIntoConstraints="NO" id="256-ia-aoQ">
                         <rect key="frame" x="101" y="82" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="256-ia-aoQ" secondAttribute="height" multiplier="1:1" id="PNG-bJ-Tdh"/>
@@ -45,6 +45,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="confirm_icon_inactive" width="40" height="40"/>
+        <image name="mark_selected" width="400" height="400"/>
     </resources>
 </document>

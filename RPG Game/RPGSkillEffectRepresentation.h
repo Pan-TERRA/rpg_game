@@ -10,6 +10,7 @@
 
 @interface RPGSkillEffectRepresentation : NSObject
 
+@property (nonatomic, assign, readonly) NSInteger duration;
 @property (nonatomic, copy, readonly) NSString *name;
 @property (nonatomic, copy, readonly) NSString *skillEffectDescription;
 @property (nonatomic, copy, readonly) NSString *imageName;
