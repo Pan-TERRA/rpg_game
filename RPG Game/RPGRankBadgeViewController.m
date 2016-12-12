@@ -22,6 +22,8 @@
 
 @implementation RPGRankBadgeViewController
 
+#pragma mark - Init
+
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
 {
   self = [super initWithNibName:kRPGRankBadgeViewControllerNIBName bundle:nil];
@@ -33,6 +35,8 @@
   
   return self;
 }
+
+#pragma mark - Actions
 
 - (void)updateView
 {

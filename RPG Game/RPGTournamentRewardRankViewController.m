@@ -26,6 +26,8 @@
 
 @implementation RPGTournamentRewardRankViewController
 
+#pragma mark - Init
+
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
 {
   self = [super initWithNibName:kRPGTournamentRewardRankViewControllerNIBName bundle:nil];
@@ -37,6 +39,8 @@
   
   return self;
 }
+
+#pragma mark - Actions
 
 - (void)updateView
 {
