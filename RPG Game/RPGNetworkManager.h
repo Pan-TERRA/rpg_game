@@ -53,9 +53,11 @@ extern NSString * const kRPGNetworkManagerStatus;
   // Shop
 extern NSString * const kRPGNetworkManagerAPIShopUnitsRoute;
 extern NSString * const kRPGNetworkManagerAPIShopBuyUnitRoute;
-  //Arena
+  // Arena
 extern NSString * const kRPGNetworkManagerAPIArenaSkillsRoute;
 extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
+  // Adventures
+extern NSString * const kRPGNetworkManagerAPIAdventuresLocationsRoute;
 
   // Entities
 @class RPGResourcesResponse;

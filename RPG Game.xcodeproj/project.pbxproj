@@ -149,6 +149,8 @@
 		2ACD02481DFC88EB00068AAE /* RPGTournamentRewardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD02371DFC88EB00068AAE /* RPGTournamentRewardViewController.m */; };
 		2ACD02491DFC88EB00068AAE /* RPGTournamentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2ACD02391DFC88EB00068AAE /* RPGTournamentViewController.m */; };
 		580969FEA8C97C8111441230 /* libPods-RPG Game.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E84F6E8CA62397A8A89BD4E /* libPods-RPG Game.a */; };
+		87432AED1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m in Sources */ = {isa = PBXBuildFile; fileRef = 87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */; };
+		87432AF11DFEDF2000764552 /* RPGAvailableLocationsResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */; };
 		877C86531DC8CF61004B4A00 /* RPGSkillsInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */; };
 		877C86581DC8F132004B4A00 /* RPGInitialScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */; };
 		877C86591DC8F132004B4A00 /* RPGInitialScreenViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877C86571DC8F132004B4A00 /* RPGInitialScreenViewController.xib */; };
@@ -489,6 +491,10 @@
 		2ACD02391DFC88EB00068AAE /* RPGTournamentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGTournamentViewController.m; sourceTree = "<group>"; };
 		48EE8E79906C3CFA1B806543 /* libPods-RPG GameUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RPG GameUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		810370191D8BD309214BF556 /* Pods-RPG GameUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RPG GameUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RPG GameUITests/Pods-RPG GameUITests.release.xcconfig"; sourceTree = "<group>"; };
+		87432AEB1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGNetworkManager+RPGAdventures.h"; sourceTree = "<group>"; };
+		87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGNetworkManager+RPGAdventures.m"; sourceTree = "<group>"; };
+		87432AEF1DFEDF2000764552 /* RPGAvailableLocationsResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGAvailableLocationsResponse.h; sourceTree = "<group>"; };
+		87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGAvailableLocationsResponse.m; sourceTree = "<group>"; };
 		877C86521DC8CF61004B4A00 /* RPGSkillsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGSkillsInfo.plist; sourceTree = "<group>"; };
 		877C86551DC8F132004B4A00 /* RPGInitialScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGInitialScreenViewController.h; sourceTree = "<group>"; };
 		877C86561DC8F132004B4A00 /* RPGInitialScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGInitialScreenViewController.m; sourceTree = "<group>"; };
@@ -971,6 +977,7 @@
 				283ADCFC1DAD3D1C00BDC706 /* RPGNetworkManager.h */,
 				283ADCFD1DAD3D1C00BDC706 /* RPGNetworkManager.m */,
 				2852313E1DC0CBC5002F702B /* RPGSerializable.h */,
+				87432AEE1DFEDDF500764552 /* Adventures */,
 				28184A1B1DF87F5C002EF22D /* Shop */,
 				28E9D9111DE59D0F006C7688 /* Arena */,
 				289C42E91DE20D5900E35506 /* Character Profile */,
@@ -2076,6 +2083,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		87432AEE1DFEDDF500764552 /* Adventures */ = {
+			isa = PBXGroup;
+			children = (
+				87432AEB1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.h */,
+				87432AEC1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m */,
+				87432AF21DFEDF2600764552 /* Available Locations */,
+			);
+			name = Adventures;
+			sourceTree = "<group>";
+		};
+		87432AF21DFEDF2600764552 /* Available Locations */ = {
+			isa = PBXGroup;
+			children = (
+				87432AF31DFEDF3A00764552 /* Response */,
+			);
+			name = "Available Locations";
+			sourceTree = "<group>";
+		};
+		87432AF31DFEDF3A00764552 /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				87432AEF1DFEDF2000764552 /* RPGAvailableLocationsResponse.h */,
+				87432AF01DFEDF2000764552 /* RPGAvailableLocationsResponse.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
 		877C86541DC8F102004B4A00 /* Initial Screen */ = {
 			isa = PBXGroup;
 			children = (
@@ -2677,6 +2711,7 @@
 				AE7B37E51DC0E43B00D105C5 /* RPGQuestReviewRequest.m in Sources */,
 				28C576A61DE30143008DCB88 /* RPGAlertController+RPGErrorHandling.m in Sources */,
 				87C8734B1DDF27D300903193 /* RPGBasicNetworkResponse.m in Sources */,
+				87432AF11DFEDF2000764552 /* RPGAvailableLocationsResponse.m in Sources */,
 				2ACD02411DFC88EB00068AAE /* RPGResourceNames.m in Sources */,
 				283ADCFB1DAD3CBA00BDC706 /* RPGResponse.m in Sources */,
 				28A915541DC7B8F3001E0F51 /* RPGNetworkManager+Skills.m in Sources */,
@@ -2702,6 +2737,7 @@
 				284DFDC21DE9C92000EE759F /* RPGArenaControllerGenerator.m in Sources */,
 				AE8076381DB5360400AF5E5B /* RPGQuestListResponse.m in Sources */,
 				28AB94A01DDDC1DC00F1503B /* RPGViewController.m in Sources */,
+				87432AED1DFEDDED00764552 /* RPGNetworkManager+RPGAdventures.m in Sources */,
 				AE5E468A1DEF438900546256 /* RPGCharacterAvatarSelectRequest.m in Sources */,
 				D0CFEE791DB65C0100C61D0B /* RPGBackgroundMusicController.m in Sources */,
 				AED6F58B1DACECBD007ED1B8 /* RPGQuestViewController.m in Sources */,
