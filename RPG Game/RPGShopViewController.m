@@ -97,10 +97,15 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
   NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
   self.goldLabel.text = [@(userDefault.sessionGold) stringValue];
   self.crystallLabel.text = [@(userDefault.sessionCrystals) stringValue];
-  
-  self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 
   [self updateViewsWithWaitingModal];
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [super viewDidLayoutSubviews];
+
+  self.collectionViewController.view.frame = self.collectionViewContainer.frame;
 }
 
 - (void)viewDidAppear:(BOOL)anAnimated
