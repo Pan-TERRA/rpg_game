@@ -16,6 +16,8 @@
   // Notifications
 extern NSString * const kRPGModelDidChangeNotification;
 extern NSString * const kRPGBattleInitDidEndSetUpNotification;
+  // User info keys
+extern NSString * const kRPGBattleControllerUserInfoErrorCodeKey;
 
 @interface RPGBattleController : NSObject
 

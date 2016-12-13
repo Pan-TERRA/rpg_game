@@ -109,6 +109,14 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
                                                         object:self];
   }
+  else if (battleInitResponse.status != 0)
+  {
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
+                                                        object:self
+                                                      userInfo:@{
+                                                                 kRPGBattleControllerUserInfoErrorCodeKey: @(battleInitResponse.status)
+                                                                 }];
+  }
 }
 
 #pragma mark - Battle Condition Response

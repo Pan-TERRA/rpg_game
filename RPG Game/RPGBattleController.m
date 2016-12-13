@@ -18,8 +18,11 @@
   // Constants
 #import "RPGMessageTypes.h"
 
+  // Notifications
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
+  // User info keys
+NSString * const kRPGBattleControllerUserInfoErrorCodeKey = @"errorCode";
 
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
