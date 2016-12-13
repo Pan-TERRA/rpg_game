@@ -116,8 +116,6 @@ BOOL locationExists(NSInteger locationID)
 
 - (IBAction)toBattleAction:(UIButton *)sender
 {
-    //TODO: battle init with location id and battleplace id (no API yet)
-  
   RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] initWithBattleplaceID:self.chosenBattleplaceID] autorelease];
   RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFactory];
   
@@ -140,7 +138,7 @@ BOOL locationExists(NSInteger locationID)
   RPGBattleplaceView *clickedBattleplaceView = (RPGBattleplaceView *)sender.superview;
   clickedBattleplaceView.selectedMarkImageView.hidden = NO;
   
-    // Get battleplace ID and set it to property
+    // Get battleplace ID and set it to a property
   NSInteger clickedBattleplaceID = clickedBattleplaceView.tag;
   self.chosenBattleplaceID = clickedBattleplaceID;
   
