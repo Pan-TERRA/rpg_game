@@ -8,6 +8,9 @@
 
 #import "RPGMessageTypes.h"
 
+  // Tournament
+NSString * const kRPGTournamentInitMessageType = @"TOURNAMENT_BATTLE_INIT";
+NSString * const kRPGTournamentConditionMessageType = @"PVP_BATTLE_CONDITION";
   // Arena
 NSString * const kRPGArenaInitMessageType = @"ARENA_BATTLE_INIT";
 NSString * const kRPGArenaConditionMessageType = @"PVP_BATTLE_CONDITION";

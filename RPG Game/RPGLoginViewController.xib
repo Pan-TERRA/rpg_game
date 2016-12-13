@@ -4,6 +4,7 @@
         <deployment identifier="iOS"/>
         <development version="7000" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -131,34 +132,38 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i7l-7H-KAr">
                                             <rect key="frame" x="0.0" y="135" width="100" height="40"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="Hed-1x-SiT"/>
-                                                <constraint firstAttribute="height" constant="40" id="Woy-P1-ZTN"/>
+                                                <constraint firstAttribute="width" secondItem="i7l-7H-KAr" secondAttribute="height" multiplier="5:2" id="AX6-fE-RUk"/>
+                                                <constraint firstAttribute="height" constant="40" id="Woy-P1-ZTN">
+                                                    <variation key="heightClass=regular" constant="60"/>
+                                                </constraint>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                             <state key="normal" title="Sign up" backgroundImage="main_button_inactive">
                                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                            </variation>
                                             <connections>
                                                 <action selector="signupAction:" destination="-1" eventType="touchUpInside" id="LFZ-76-s7K"/>
                                             </connections>
                                         </button>
                                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3i9-nt-l1p">
-                                            <rect key="frame" x="342" y="145" width="20" height="20"/>
+                                            <rect key="frame" x="332" y="145" width="20" height="20"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="20" id="gNW-J2-72x"/>
                                                 <constraint firstAttribute="height" constant="20" id="w2w-y3-YJW"/>
                                             </constraints>
                                         </activityIndicatorView>
                                         <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ICW-A7-Q3E">
-                                            <rect key="frame" x="377" y="135" width="90" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="90" id="HiO-ai-K7i"/>
-                                                <constraint firstAttribute="height" constant="40" id="vpd-EO-Evh"/>
-                                            </constraints>
+                                            <rect key="frame" x="367" y="135" width="100" height="40"/>
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                                             <state key="normal" title="Log in" backgroundImage="main_button_inactive">
                                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                            </variation>
                                             <connections>
                                                 <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="vhi-91-fjM"/>
                                             </connections>
@@ -180,43 +185,45 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstItem="ICW-A7-Q3E" firstAttribute="top" secondItem="JLe-Us-ytB" secondAttribute="bottom" constant="15" id="0yy-HT-wP9"/>
-                                        <constraint firstItem="i7l-7H-KAr" firstAttribute="top" secondItem="JLe-Us-ytB" secondAttribute="bottom" constant="15" id="2n5-rv-kAn"/>
+                                        <constraint firstItem="i7l-7H-KAr" firstAttribute="top" secondItem="JLe-Us-ytB" secondAttribute="bottom" constant="15" id="2n5-rv-kAn">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="25"/>
+                                        </constraint>
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="width" secondItem="YiU-3l-e5x" secondAttribute="width" id="3vS-Eh-2EV"/>
                                         <constraint firstItem="ICW-A7-Q3E" firstAttribute="leading" secondItem="3i9-nt-l1p" secondAttribute="trailing" constant="15" id="4TC-OD-XEv"/>
                                         <constraint firstAttribute="height" constant="245" id="7uF-7y-4eU"/>
+                                        <constraint firstItem="ICW-A7-Q3E" firstAttribute="height" secondItem="i7l-7H-KAr" secondAttribute="height" id="D1X-rh-O3N"/>
                                         <constraint firstAttribute="trailing" secondItem="JLe-Us-ytB" secondAttribute="trailing" id="EaF-ai-lw2"/>
-                                        <constraint firstItem="YdM-GY-RsC" firstAttribute="centerY" secondItem="ICW-A7-Q3E" secondAttribute="centerY" id="FWp-2J-Ugs"/>
-                                        <constraint firstItem="YdM-GY-RsC" firstAttribute="centerX" secondItem="NxC-0c-a7a" secondAttribute="centerX" id="Gr9-z8-OqJ"/>
                                         <constraint firstItem="YiU-3l-e5x" firstAttribute="top" secondItem="NxC-0c-a7a" secondAttribute="top" id="HNF-HX-t4r"/>
-                                        <constraint firstItem="YdM-GY-RsC" firstAttribute="centerX" secondItem="NxC-0c-a7a" secondAttribute="centerX" id="Ji4-PG-Kgu"/>
                                         <constraint firstItem="YdM-GY-RsC" firstAttribute="trailing" secondItem="ICW-A7-Q3E" secondAttribute="trailing" id="PoU-Hv-PVf"/>
                                         <constraint firstItem="ICW-A7-Q3E" firstAttribute="trailing" secondItem="JLe-Us-ytB" secondAttribute="trailing" id="TRN-NJ-GKW"/>
                                         <constraint firstItem="3i9-nt-l1p" firstAttribute="centerY" secondItem="ICW-A7-Q3E" secondAttribute="centerY" id="ZYQ-cb-Hu4"/>
                                         <constraint firstItem="YiU-3l-e5x" firstAttribute="leading" secondItem="NxC-0c-a7a" secondAttribute="leading" id="a4h-t2-rlK"/>
+                                        <constraint firstItem="ICW-A7-Q3E" firstAttribute="width" secondItem="i7l-7H-KAr" secondAttribute="width" id="c7X-yc-b4i"/>
                                         <constraint firstAttribute="trailing" secondItem="YiU-3l-e5x" secondAttribute="trailing" id="dhF-if-xVw"/>
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="height" secondItem="YiU-3l-e5x" secondAttribute="height" id="esj-98-NbH"/>
+                                        <constraint firstItem="ICW-A7-Q3E" firstAttribute="top" secondItem="i7l-7H-KAr" secondAttribute="top" id="h71-8g-2DP"/>
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="leading" secondItem="NxC-0c-a7a" secondAttribute="leading" id="hAP-Bk-JQb"/>
                                         <constraint firstItem="i7l-7H-KAr" firstAttribute="leading" secondItem="JLe-Us-ytB" secondAttribute="leading" id="okl-PE-lpe"/>
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="top" secondItem="YiU-3l-e5x" secondAttribute="bottom" constant="20" id="pKR-lN-vag"/>
                                         <constraint firstItem="YdM-GY-RsC" firstAttribute="top" secondItem="ICW-A7-Q3E" secondAttribute="bottom" constant="15" id="z9N-qR-u2c">
                                             <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
                                         </constraint>
+                                        <constraint firstItem="ICW-A7-Q3E" firstAttribute="top" secondItem="i7l-7H-KAr" secondAttribute="top" id="zyR-hk-Yd6"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
-                                            <exclude reference="FWp-2J-Ugs"/>
-                                            <exclude reference="Gr9-z8-OqJ"/>
-                                            <exclude reference="Ji4-PG-Kgu"/>
+                                            <exclude reference="h71-8g-2DP"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=compact-widthClass=compact">
                                         <mask key="constraints">
-                                            <include reference="FWp-2J-Ugs"/>
-                                            <exclude reference="Gr9-z8-OqJ"/>
-                                            <include reference="Ji4-PG-Kgu"/>
                                             <exclude reference="PoU-Hv-PVf"/>
                                             <exclude reference="z9N-qR-u2c"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="h71-8g-2DP"/>
                                         </mask>
                                     </variation>
                                 </view>

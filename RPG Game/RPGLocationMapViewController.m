@@ -8,9 +8,9 @@
 
 #import "RPGLocationMapViewController.h"
   // API
+#import "RPGAdventuresFactory.h"
 #import "RPGBattleViewController.h"
   // Controllers
-#import "RPGAdventuresControllerGenerator.h"
 #import "RPGAdventureGlobalMapViewController.h"
   // Views
 #import "RPGBattleplaceView.h"
@@ -111,9 +111,8 @@
     //TODO: battle init with location id and battleplace id (no API yet)
   NSLog(@"Battle!");
   
-  RPGBattleControllerGenerator *adventuresControllerGenerator = [[RPGAdventuresControllerGenerator alloc] init];
-  [adventuresControllerGenerator autorelease];
-  RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleControllerGenerator:adventuresControllerGenerator];
+  RPGAdventuresFactory *adventuresFacory = [[[RPGAdventuresFactory alloc] init] autorelease];
+  RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFacory];
   
   [self presentViewController:[battleViewController autorelease]
                      animated:YES

@@ -11,6 +11,7 @@
 #import "RPGSkillsEffectsCollectionViewCell.h"
   // Entites
 #import "RPGSkillEffect.h"
+#import "RPGSkillEffectRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -28,7 +29,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                         skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
+                         skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
                                  align:(RPGAlign)anAlign
 {
   self = [super init];
@@ -52,11 +53,11 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 
 
 + (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
-                                           skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
+                                           skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
                                                    align:(RPGAlign)anAlign
 {
     return [[[self alloc] initWithCollectionView:aCollectionView
-                                  skillsEffects:aSkillsEffects
+                                   skillsEffects:aSkillsEffects
                                            align:anAlign] autorelease];
 }
 
@@ -93,13 +94,14 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   
   if (index < skillsEffects.count)
   {
-    RPGSkillEffect *skillEffect = skillsEffects[index];
+    NSInteger skillEffectID = [skillsEffects[index] integerValue];
+    RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:skillEffectID];
     
     cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
-    cell.backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
+    cell.backgroundImage = [UIImage imageNamed:skillEffectRepresentation.imageName];
     
-    cell.duration = skillEffect.duration;
-    cell.skillEffectID = skillEffect.skillEffectID;
+    cell.duration = skillEffectRepresentation.duration;
+    cell.skillEffectID = skillEffectID;
   }
   
   cell.hidden = !(index < skillsEffects.count);

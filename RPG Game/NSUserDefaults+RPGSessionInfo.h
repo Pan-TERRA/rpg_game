@@ -24,4 +24,6 @@
 @property (nonatomic, readonly) NSInteger characterClassID;
 @property (nonatomic, readonly) NSInteger characterAvatarID;
 
+@property (nonatomic) NSArray *selectedArenaSkills;
+
 @end

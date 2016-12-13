@@ -122,7 +122,8 @@ static NSString * const kRPGRegistrationRequestCharacterAvatarID = @"avatar_id";
   if (self.characterName != nil)
   {
     dictionaryRepresentation[kRPGRegistrationRequestCharacter] = @{kRPGRegistrationRequestCharacterName : self.characterName,
-                                                                   kRPGRegistrationRequestCharacterType : @(self.characterType)};
+                                                                   kRPGRegistrationRequestCharacterType : @(self.characterType),
+                                                                   kRPGRegistrationRequestCharacterAvatarID : @(self.avatarID)};
   }
   
   return dictionaryRepresentation;

@@ -63,6 +63,12 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeInvalidCharacterName = 48,
   kRPGStatusCodeUndefinedSymbolsInUsername = 49,
   kRPGStatusCodeUndefinedSymbolsInCharacterName = 50,
+  kRPGStatusCodeUserIDCannotBeEqualToFriend = 57,
+  kRPGStatusCodeFriendRequestIsAlreadySended = 58,
+  kRPGStatusCodeFriendRequestNotFound = 59,
+  kRPGStatusCodeFriendNotFound = 60,
+  kRPGStatusCodeAreAlreadyFriends = 61,
+  kRPGStatusCodeUserNotFound = 62,
   
   kRPGStatusCodeDefaultError = 1337,
   

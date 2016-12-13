@@ -42,7 +42,6 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
   if (self != nil)
   {
     _battleController = aBattleController;
-    _skillRepresentations = [[NSMutableArray alloc] init];
   }
   
   return self;
@@ -128,6 +127,8 @@ static NSInteger kRPGSkillBarViewControllerSkillButtonCornerRadius = 15;
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
+  self.skillRepresentations = [NSMutableArray array];
+  
     //load skillRepresentations
   for (RPGSkill *skill in self.battleController.skills)
   {

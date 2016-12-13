@@ -10,6 +10,4 @@
 
 @interface RPGArenaControllerGenerator : RPGBattleControllerGenerator
 
-- (instancetype)initWithSkillsID:(NSArray<NSNumber *> *)aSkillsID;
-
 @end

@@ -10,6 +10,8 @@
 #import "CMOpenALSoundManager.h"
   // Misc
 #import "NSUserDefaults+RPGVolumeSettings.h"
+  // Constants
+#import "RPGResourceNames.h"
 
 static RPGSFXEngine *sharedSFXEngine = nil;
 
@@ -130,8 +132,7 @@ NSString * const kRPGSoundName = @"soundName";
 
 - (void)playSFXWithSkillID:(NSUInteger)aSkillID
 {
-    //TODO: remove hardcode
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
+  NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillsInfoPlistName ofType:@"plist"];
   NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
   NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
   

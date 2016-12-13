@@ -15,9 +15,10 @@
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGSFXEngine.h"
+  // Constants
+#import "RPGResourceNames.h"
 
 static int sRPGBattleLogViewControllerBattleBattleLogAction;
-static NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 
 @interface RPGBattleLogViewController ()
 
@@ -36,8 +37,8 @@ static NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
   
   if (self != nil)
   {
-    NSString *logTemplatesFile = [[NSBundle mainBundle] pathForResource:kRPGLogTemplatesFile
-                                                                 ofType:nil];
+    NSString *logTemplatesFile = [[NSBundle mainBundle] pathForResource:kRPGLogTemplatesFileName
+                                                                 ofType:@"txt"];
     NSString *templatesString = [NSString stringWithContentsOfFile:logTemplatesFile
                                                           encoding:NSUTF8StringEncoding
                                                              error:nil];
@@ -74,13 +75,31 @@ static NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 {
   if (aContext == &sRPGBattleLogViewControllerBattleBattleLogAction)
   {
-    if ([aChange[NSKeyValueChangeKindKey] unsignedIntegerValue] == NSKeyValueChangeInsertion)
+    NSUInteger kindOfChange = [aChange[NSKeyValueChangeKindKey] unsignedIntegerValue];
+    
+    switch (kindOfChange)
     {
-      NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
-      RPGBattleAction *battleAction = self.battleController.actions[newObjectIndices.firstIndex];
-      [self addMessageWithAction:battleAction];
-      [self playSkillSFXWithAction:battleAction];
-      [self scrollViewToBottom];
+      case NSKeyValueChangeInsertion:
+      {
+        NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
+        RPGBattleAction *battleAction = self.battleController.actions[newObjectIndices.firstIndex];
+        [self addMessageWithAction:battleAction];
+        [self playSkillSFXWithAction:battleAction];
+        [self scrollViewToBottom];
+        break;
+      }
+        
+      case NSKeyValueChangeSetting:
+      {
+        [self recreateBattleLog];
+        [self scrollViewToBottom];
+        break;
+      }
+        
+      default:
+      {
+        break;
+      }
     }
   }
   else
@@ -93,6 +112,17 @@ static NSString * const kRPGLogTemplatesFile = @"RPGLogTemplates.txt";
 }
 
 #pragma mark - Actions
+
+- (void)recreateBattleLog
+{
+  UITextView *textView = (UITextView *)self.view;
+  textView.text = @"";
+  
+  for (RPGBattleAction *action in self.battleController.actions)
+  {
+    [self addMessageWithAction:action];
+  }
+}
 
 /**
  *  Builds battle log message.

@@ -34,6 +34,9 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                             <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -42,10 +45,12 @@
                         <constraint firstAttribute="bottom" secondItem="umO-N2-JSz" secondAttribute="bottom" id="A2S-tu-liw"/>
                         <constraint firstItem="BW3-it-MJN" firstAttribute="centerY" secondItem="KPs-FG-eeV" secondAttribute="centerY" id="Ee8-3h-bDK"/>
                         <constraint firstItem="umO-N2-JSz" firstAttribute="leading" secondItem="KPs-FG-eeV" secondAttribute="leading" id="P3e-D1-XfB"/>
-                        <constraint firstAttribute="width" constant="200" id="QF7-Hf-5A1"/>
-                        <constraint firstAttribute="height" constant="30" id="YRQ-tU-h3z"/>
+                        <constraint firstAttribute="height" constant="30" id="YRQ-tU-h3z">
+                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                        </constraint>
                         <constraint firstItem="umO-N2-JSz" firstAttribute="top" secondItem="KPs-FG-eeV" secondAttribute="top" id="dME-yH-B6f"/>
                         <constraint firstItem="BW3-it-MJN" firstAttribute="centerX" secondItem="KPs-FG-eeV" secondAttribute="centerX" id="kTZ-Kv-KhC"/>
+                        <constraint firstAttribute="width" secondItem="KPs-FG-eeV" secondAttribute="height" multiplier="20:3" id="r3p-LJ-e2T"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="bvK-Eq-x3o" userLabel="Skill Collection View">
@@ -77,22 +82,26 @@
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FOO-UF-nOk">
                     <rect key="frame" x="318" y="342" width="100" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="NBg-Qz-jfa"/>
-                        <constraint firstAttribute="height" constant="40" id="uoi-dT-mCj"/>
+                        <constraint firstAttribute="width" secondItem="FOO-UF-nOk" secondAttribute="height" multiplier="5:2" id="QpV-Vo-3CA"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                     <state key="normal" title="Fight!" backgroundImage="main_button_inactive">
                         <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                    </variation>
                     <connections>
                         <action selector="handleStartBattleButton" destination="-1" eventType="touchUpInside" id="trh-uR-yw0"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ara-3E-6bE">
-                    <rect key="frame" x="666" y="344" width="40" height="40"/>
+                    <rect key="frame" x="642" y="342" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="BNH-Su-F1e"/>
-                        <constraint firstAttribute="width" constant="40" id="oB7-WX-0dc"/>
+                        <constraint firstAttribute="height" constant="40" id="BNH-Su-F1e">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
+                        <constraint firstAttribute="width" secondItem="ara-3E-6bE" secondAttribute="height" multiplier="1:1" id="Rdv-oc-jMy"/>
                     </constraints>
                     <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
@@ -102,12 +111,13 @@
             </subviews>
             <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="ara-3E-6bE" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" multiplier="9:5" id="4g0-Ug-uTr"/>
                 <constraint firstAttribute="bottom" secondItem="YEC-nP-tOC" secondAttribute="bottom" id="9KU-VW-i1o"/>
                 <constraint firstItem="wJ4-UY-XQ1" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="3:4" id="AMY-Kg-DIo"/>
-                <constraint firstAttribute="trailing" secondItem="ara-3E-6bE" secondAttribute="trailing" constant="30" id="AQq-Po-HmP"/>
-                <constraint firstAttribute="bottom" secondItem="ara-3E-6bE" secondAttribute="bottom" constant="30" id="CaR-A4-Rsz"/>
+                <constraint firstItem="ara-3E-6bE" firstAttribute="bottom" secondItem="FOO-UF-nOk" secondAttribute="bottom" id="Dl7-2p-Xfc"/>
                 <constraint firstItem="wJ4-UY-XQ1" firstAttribute="width" secondItem="YEC-nP-tOC" secondAttribute="width" multiplier="0.3" id="ILI-dS-Qme"/>
                 <constraint firstItem="bvK-Eq-x3o" firstAttribute="width" secondItem="YEC-nP-tOC" secondAttribute="width" multiplier="0.45" id="LwW-cq-cTu"/>
+                <constraint firstItem="ara-3E-6bE" firstAttribute="height" secondItem="FOO-UF-nOk" secondAttribute="height" id="PYG-1t-wRS"/>
                 <constraint firstItem="YEC-nP-tOC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="R2n-sd-cr3"/>
                 <constraint firstItem="bvK-Eq-x3o" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="5:4" id="cK0-OT-1dA"/>
                 <constraint firstItem="bvK-Eq-x3o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="jcC-d9-rXC"/>

@@ -24,14 +24,21 @@ NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell
 NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
 
-/****************	BattleViewController ****************/
+/****************	Battle ****************/
 
 NSString * const kRPGBattleViewControllerNIBName = @"RPGBattleViewController";
 NSString * const kRPGSkillBarViewControllerNIBName = @"RPGSkillBarViewController";
 NSString * const kRPGSkillDescriptionViewControllerNIBName = @"RPGSkillDescriptionViewController";
 NSString * const kRPGQuickSettingsViewControllerNIBName = @"RPGQuickSettingsViewController";
+NSString * const kRPGRankBadgeViewControllerNIBName = @"RPGRankBadgeViewController";
+NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
+NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
+NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
+NSString * const kRPGTournamentRewardRankViewControllerNIBName = @"RPGTournamentRewardRankViewController";
+NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
+NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
 
-/****************	ArenaViewController ****************/
+/****************	Arena ****************/
 
 NSString * const kRPGArenaSkillDrawViewControllerNIBName = @"RPGArenaSkillDrawViewController";
 
@@ -48,22 +55,21 @@ NSString * const kRPGWaitingViewControllerNIBName = @"RPGWaitingViewController";
 NSString * const kRPGAlertViewControllerNIBName = @"RPGAlertViewController";
 NSString * const kRPGConfirmViewControllerNIBName = @"RPGConfirmViewController";
 
+/****************	Friends ****************/
+
+NSString * const kRPGFriendsViewControllerNIBName = @"RPGFriendsViewController";
+NSString * const kRPGFriendsTableViewCellInFriendsNIBName = @"RPGFriendsTableViewCellInFriends";
+NSString * const kRPGFriendsTableViewCellIncomingNIBName = @"RPGFriendsTableViewCellIncoming";
+NSString * const kRPGFriendsTableViewCellOutgoingNIBName = @"RPGFriendsTableViewCellOutgoing";
+NSString * const kRPGAddFriendViewControllerNIBName = @"RPGAddFriendViewController";
+
 /********************* Shop ***********************/
 
 NSString * const kRPGShopViewControllerNIBName = @"RPGShopViewController";
 NSString * const kRPGShopCollectionViewNIBName = @"RPGShopCollectionView";
 NSString * const kRPGShopCollectionViewCellNIBName = @"RPGShopCollectionViewCell";
 
-/****************	Battle ****************/
-
-NSString * const kRPGEntityViewLeftNIBName = @"RPGEntityViewLeft";
-NSString * const kRPGEntityViewRightNIBName = @"RPGEntityViewRight";
-NSString * const kRPGRewardViewControllerNIBName = @"RPGRewardViewController";
-NSString * const kRPGSkillsEffectsViewControllerNIBName = @"RPGSkillsEffectsViewController";
-NSString * const kRPGSkillsEffectsCollectionViewCellNIBName = @"RPGSkillsEffectsCollectionViewCell";
-
 /****************	Adventure Maps ****************/
 
 NSString * const kRPGAdventureGlobalMapViewControllerNIBName = @"RPGAdventureGlobalMapViewController";
 NSString * const kRPGLocationMapSuffixlessNIBName = @"RPGLocationMap-";
-

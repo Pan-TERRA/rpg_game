@@ -9,7 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
-#import "RPGArenaController.h"
+#import "RPGBattleFactory.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -39,11 +39,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @interface RPGBattleViewController () <RPGRewardModalDelegate>
 
-@property (nonatomic, retain, readwrite) RPGBattleControllerGenerator *battleControllerGenerator;
+@property (assign, nonatomic, readwrite) RPGBattleFactory *battleFactory;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
 @property (nonatomic, assign, readwrite) IBOutlet UIView *playerViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *playerViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *currentWinCountBadgeViewContainer;
   // Opponent
 @property (nonatomic, assign, readwrite) IBOutlet UIView *opponentViewContainer;
 @property (nonatomic, retain, readwrite) RPGEntityViewController *opponentViewController;
@@ -52,7 +53,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 @property (nonatomic, assign, readwrite) IBOutlet UITextView *battleTextView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *turnLabel;
   // Timer
-@property (nonatomic, retain, readwrite) RPGBattleTimerViewController *timerViewController;
+@property (nonatomic, assign, readwrite) RPGBattleTimerViewController *timerViewController;
 @property (nonatomic, retain, readwrite) IBOutlet UIView *timerContainer;
   // Reward
 @property (nonatomic, retain, readwrite) RPGRewardViewController *battleRewardViewController;
@@ -71,23 +72,22 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleControllerGenerator:(RPGBattleControllerGenerator *)aBattleControllerGenerator
+- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
-    _battleControllerGenerator = [aBattleControllerGenerator retain];
-    _battleController = [[_battleControllerGenerator battleController] retain];
+    _battleController = [aBattleFactory.battleController retain];
     
     _timerViewController = [[RPGBattleTimerViewController alloc] initWithBattleController:_battleController
                                                                              turnDuration:kRPGBattleTurnDuration];
-    [_timerViewController registerTimerObservationKeyPath:@"battle.currentTime"];
+    [_timerViewController registerTimerObservationKeyPath:@"battle.currentTurn"];
     
     if (_battleController != nil)
     {
         // internal view controllers
-      _battleRewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+      _battleRewardViewController = [aBattleFactory.rewardViewController retain];
       _battleRewardViewController.delegate = self;
       
       _battleLogViewController = [[RPGBattleLogViewController alloc] initWithBattleController:_battleController];
@@ -132,13 +132,11 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [[NSNotificationCenter defaultCenter] removeObserver:self];
   [[NSNotificationCenter defaultCenter] removeObserver:_skillBar];
   
-  [_battleControllerGenerator release];
   [_battleController release];
   [_playerViewController release];
   [_opponentViewController release];
   [_battleLogViewController release];
   [_timerViewController release];
-  [_timerContainer release];
   [_battleRewardViewController release];
   [_battleInitModal release];
   [_skillBarViewController release];
@@ -167,7 +165,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self addChildViewController:self.opponentViewController
                           view:self.opponentViewContainer];
   
-  [self.battleController openBattleControllerWebSocket];
+  [self.battleController fireUpBattleController];
 }
 
 - (void)viewWillAppear:(BOOL)anAnimated
@@ -202,7 +200,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   return UIInterfaceOrientationMaskLandscape;
 }
 
-#pragma mark - IBAction
+#pragma mark - Action
 
 - (IBAction)back:(id)aSender
 {
@@ -224,13 +222,32 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self.view addSubview:self.settingsView];
 }
 
+  // TODO: move this to appropriate category over UIViewController
+- (void)rpg_removeChildViewController:(UIViewController *)aChildViewController
+{
+  [aChildViewController.view removeFromSuperview];
+  [aChildViewController removeFromParentViewController];
+}
+
+- (void)removeBattleInitModal
+{
+  [self.timerViewController restartTimer];
+  [self.battleInitModal.view removeFromSuperview];
+  [self.battleInitModal removeFromParentViewController];
+}
+
+- (void)setUpEntityViewControllers
+{
+  self.playerViewController.entity = self.battleController.battle.player;
+  self.opponentViewController.entity = self.battleController.battle.opponent;
+}
+
 #pragma mark - Notifications
 
 - (void)modelDidChange:(NSNotification *)aNotification
 {
   RPGBattleController *battleController = self.battleController;
   
-  [self.timerViewController restartTimer];
   [self.playerViewController updateView];
   [self.opponentViewController updateView];
   
@@ -250,7 +267,13 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     [self.battleRewardViewController updateView];
     
     [self.timerViewController invalidateTimer];
-    [self.battleController prepareBattleControllerForDismiss];
+    [self.battleController prepareBattleControllerForDismissWithCompletionHandler:^
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        self.battleRewardViewController.restartButton.enabled = YES;
+      });
+    }];
   }
   
     // skillbar
@@ -266,19 +289,6 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self setUpEntityViewControllers];
 }
 
-- (void)removeBattleInitModal
-{
-  [self.timerViewController restartTimer];
-  [self.battleInitModal.view removeFromSuperview];
-  [self.battleInitModal removeFromParentViewController];
-}
-
-- (void)setUpEntityViewControllers
-{
-  self.playerViewController.entity = self.battleController.battle.player;
-  self.opponentViewController.entity = self.battleController.battle.opponent;
-}
-
 #pragma mark - RPGRewardModalDelegate
 
 - (void)dismissRewardModal:(RPGRewardViewController *)aRewardModal
@@ -287,6 +297,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   
   [aRewardModal.view removeFromSuperview];
   [aRewardModal removeFromParentViewController];
+}
+
+- (void)restartBattle:(RPGRewardViewController *)aRewardModal
+{
+  [self rpg_removeChildViewController:aRewardModal];
+  [self addChildViewController:self.battleInitModal view:self.view];
+  
+  [self.battleController fireUpBattleController];
 }
 
 @end

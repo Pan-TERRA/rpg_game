@@ -16,36 +16,7 @@
 
 static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:8888/arena_battle";
 
-@interface RPGArenaControllerGenerator ()
-
-@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsID;
-
-@end
-
 @implementation RPGArenaControllerGenerator
-
-#pragma mark - Init
-
-- (instancetype)initWithSkillsID:(NSArray<NSNumber *> *)aSkillsID
-{
-  self = [super init];
-  
-  if (self != nil)
-  {
-    _skillsID = [aSkillsID retain];
-  }
-  
-  return self;
-}
-
-#pragma mark - Dealloc
-
-- (void)dealloc
-{
-  [_skillsID release];
-  
-  [super dealloc];
-}
 
 - (RPGBattleController *)battleController
 {
@@ -56,7 +27,6 @@ static NSString * const kRPGWebsocketManagerAPIArenaBattle = @"ws://10.55.33.15:
   
   [controller registerWebSocketMessageTypeForBattleInitResponse:kRPGArenaInitMessageType];
   [controller registerWebSocketMessageTypeForBattleConditionResponse:kRPGArenaConditionMessageType];
-  controller.skillsID = self.skillsID;
   
   return controller;
 }

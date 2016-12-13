@@ -50,15 +50,7 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
       _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
       _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
       _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
-      
-      NSMutableArray *effectsObjects = [NSMutableArray array];
-      NSArray *effectsArray = skillDictionary[kRPGSkillRepresentationEffects];
-      for (NSDictionary *effectDictionary in effectsArray)
-      {
-        RPGSkillEffect *effect = [[[RPGSkillEffect alloc] initWithDictionaryRepresentation:effectDictionary] autorelease];
-        [effectsObjects addObject:effect];
-      }
-      _effects = [effectsObjects retain];
+      _effects = [skillDictionary[kRPGSkillRepresentationEffects] retain];
     }
   }
   

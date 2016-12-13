@@ -14,3 +14,5 @@ extern NSString * const kRPGUserSessionKeyGold;
 extern NSString * const kRPGUserSessionKeyAvatar;
 extern NSString * const kRPGUserSessionKeyCrystals;
 extern NSString * const kRPGUserSessionKeyCharacters;
+extern NSString * const kRPGUserSessionKeyCharacterSkills;
+extern NSString * const kRPGUserSessionKeySelectedArenaSkills;

@@ -12,7 +12,8 @@
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 
-static NSString * const kRPGPlayerSkills = @"skills";
+NSString * const kRPGPlayerSkills = @"skills";
+NSString * const kRPGPlayerCurrentWinCount = @"win_count";
 
 @implementation RPGPlayer
 
@@ -23,6 +24,7 @@ static NSString * const kRPGPlayerSkills = @"skills";
                        maxHP:(NSInteger)aMaxHP
                        level:(NSInteger)aLevel
                       skills:(NSArray<RPGSkill *> *)aSkills
+             currentWinCount:(NSInteger)aCurrentWinCount;
 {
   self = [super initWithName:aName
                           HP:aHP
@@ -32,6 +34,7 @@ static NSString * const kRPGPlayerSkills = @"skills";
   if (self != nil)
   {
     _skills = [aSkills retain];
+    _currentWinCount = aCurrentWinCount;
   }
   
   return self;
@@ -43,7 +46,8 @@ static NSString * const kRPGPlayerSkills = @"skills";
                          HP:-1
                       maxHP:-1
                       level:-1
-                     skills:nil];
+                     skills:nil
+            currentWinCount:-1];
 }
 
 - (instancetype)initWithName:(NSString *)aName
@@ -55,7 +59,8 @@ static NSString * const kRPGPlayerSkills = @"skills";
                          HP:aHP
                       maxHP:aMaxHP
                       level:aLevel
-                     skills:nil];
+                     skills:nil
+            currentWinCount:-1];
 }
 
 + (instancetype)playerWithName:(NSString *)aName
@@ -63,12 +68,14 @@ static NSString * const kRPGPlayerSkills = @"skills";
                          maxHP:(NSInteger)aMaxHP
                          level:(NSInteger)aLevel
                         skills:(NSArray<RPGSkill *> *)aSkills
+               currentWinCount:(NSInteger)aCurrentWinCount;
 {
   return [[[self alloc] initWithName:aName
                                   HP:aHP
                                maxHP:aMaxHP
                                level:aLevel
-                              skills:aSkills] autorelease];
+                              skills:aSkills
+                     currentWinCount:aCurrentWinCount] autorelease];
 }
 
 #pragma mark - Dealloc
@@ -90,6 +97,10 @@ static NSString * const kRPGPlayerSkills = @"skills";
   {
     dictionaryRepresentation[kRPGPlayerSkills] = self.skills;
   }
+  if (self.currentWinCount != -1)
+  {
+    dictionaryRepresentation[kRPGPlayerCurrentWinCount] = @(self.currentWinCount);
+  }
   
   return dictionaryRepresentation;
 }
@@ -98,12 +109,15 @@ static NSString * const kRPGPlayerSkills = @"skills";
 {
     // TODO: redo, choose in characters profile
   NSString *charNickName = [NSUserDefaults standardUserDefaults].characterNickName;
+  NSNumber *currentWinCountObject = aDictionary[kRPGPlayerCurrentWinCount];
+  NSInteger currentWinCount = (currentWinCountObject != nil ? [currentWinCountObject integerValue] : -1);
   
   return [self initWithName:charNickName
                          HP:[aDictionary[kRPGEntityHP] integerValue]
                       maxHP:[aDictionary[kRPGEntityMaxHP] integerValue]
                       level:[aDictionary[kRPGEntityLevel] integerValue]
-                     skills:aDictionary[kRPGPlayerSkills]];
+                     skills:aDictionary[kRPGPlayerSkills]
+            currentWinCount:currentWinCount];
 }
 
 #pragma mark - Heplful Method
