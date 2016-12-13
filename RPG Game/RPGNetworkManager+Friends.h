@@ -18,7 +18,8 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
   kRPGFriendsNetworkActionCancelFriendRequest,
   kRPGFriendsNetworkActionDeleteFriendRequest,
   kRPGFriendsNetworkActionAcceptFriendRequest,
-  kRPGFriendsNetworkActionSkipFriendRequest
+  kRPGFriendsNetworkActionSkipFriendRequest,
+  kRPGFriendsNetworkActionSendChallengeRequest
 };
 
 @interface RPGNetworkManager (Friends)
@@ -34,8 +35,4 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
 
 - (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
          completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
-
-- (void)confirmQuestChallengeWith:(RPGAddFriendRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
-
 @end
