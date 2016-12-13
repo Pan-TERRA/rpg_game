@@ -25,6 +25,19 @@
 
   // View outlets
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *maskImageView;
+    // Lock outlets
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock1;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock2;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock3;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock4;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock5;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock6;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock7;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock8;
+@property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock9;
+
+// Propeties
+@property (readwrite, retain, nonatomic) NSMutableArray<UIImageView *> *lockViews;
 
 @end
 
@@ -35,6 +48,31 @@
 - (instancetype)init
 {
   return [self initWithNibName:kRPGAdventureGlobalMapViewControllerNIBName bundle:nil];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_lockViews release];
+  [super dealloc];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+  self.lockViews = [NSMutableArray arrayWithObjects:self.lock1, self.lock2,
+                    self.lock3, self.lock4, self.lock4, self.lock5, self.lock6,
+                    self.lock7, self.lock8, self.lock9, nil];
+  
+  for (UIImageView *lockImageView in self.lockViews)
+  {
+    if (lockImageView.tag == 1) //TODO: use API to find out what locations are enabled for current user
+    {
+      lockImageView.hidden = YES;
+    }
+  }
 }
 
 #pragma mark - IBActions

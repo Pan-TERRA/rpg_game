@@ -7,6 +7,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGAdventureGlobalMapViewController">
             <connections>
+                <outlet property="lock1" destination="SKt-1Z-EGA" id="Eha-Kd-2KY"/>
+                <outlet property="lock2" destination="TWz-DA-2VM" id="tfY-H3-UPE"/>
+                <outlet property="lock3" destination="Dhs-Y7-Uri" id="Tb8-eJ-ZLZ"/>
+                <outlet property="lock4" destination="aqV-sq-zlR" id="zn0-G0-NoS"/>
+                <outlet property="lock5" destination="sUD-Nt-Qop" id="mEt-rn-WVA"/>
+                <outlet property="lock6" destination="AcG-Nt-gFe" id="iJm-lw-iqh"/>
+                <outlet property="lock7" destination="biY-1E-3by" id="C76-KP-LeS"/>
+                <outlet property="lock8" destination="yCc-3o-gCm" id="NTw-DT-eLm"/>
+                <outlet property="lock9" destination="idM-k0-x3j" id="eKx-8l-SlY"/>
                 <outlet property="maskImageView" destination="jJ6-5l-uqK" id="ARw-s5-XJQ"/>
                 <outlet property="scrollView" destination="lHe-40-tg5" id="Ny4-lW-g90"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -14,11 +23,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <rect key="frame" x="0.0" y="0.0" width="1092" height="827"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHe-40-tg5" userLabel="Map Scroll View">
-                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                    <rect key="frame" x="0.0" y="0.0" width="1092" height="827"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vvf-MO-rdu" userLabel="Map Content view">
                             <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
@@ -41,6 +50,33 @@
                                 </imageView>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_foreground" translatesAutoresizingMaskIntoConstraints="NO" id="pML-8O-zgt" userLabel="Display image view">
                                     <rect key="frame" x="0.0" y="0.0" width="1280" height="720"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="SKt-1Z-EGA" userLabel="lock1">
+                                    <rect key="frame" x="343" y="145" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="Dhs-Y7-Uri" userLabel="lock3">
+                                    <rect key="frame" x="457" y="264" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="4" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="aqV-sq-zlR" userLabel="lock4">
+                                    <rect key="frame" x="611" y="343" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="sUD-Nt-Qop" userLabel="lock5">
+                                    <rect key="frame" x="527" y="509" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="6" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="AcG-Nt-gFe" userLabel="lock6">
+                                    <rect key="frame" x="651" y="509" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="7" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="biY-1E-3by" userLabel="lock7">
+                                    <rect key="frame" x="921" y="352" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="8" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="yCc-3o-gCm" userLabel="lock8">
+                                    <rect key="frame" x="882" y="502" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="9" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="idM-k0-x3j" userLabel="lock9">
+                                    <rect key="frame" x="304" y="558" width="40" height="52"/>
+                                </imageView>
+                                <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock" translatesAutoresizingMaskIntoConstraints="NO" id="TWz-DA-2VM" userLabel="lock2">
+                                    <rect key="frame" x="611" y="154" width="40" height="52"/>
                                 </imageView>
                             </subviews>
                             <constraints>
@@ -91,7 +127,8 @@
                 <constraint firstItem="lHe-40-tg5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="iDY-fd-bKd"/>
             </constraints>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="318" y="360.5"/>
         </view>
         <tapGestureRecognizer id="PDg-sv-KPS">
             <connections>
@@ -101,6 +138,7 @@
     </objects>
     <resources>
         <image name="back_icon_inactive" width="40" height="40"/>
+        <image name="lock" width="456" height="594"/>
         <image name="map_foreground" width="1600" height="900"/>
         <image name="map_mask" width="1280" height="720"/>
     </resources>
