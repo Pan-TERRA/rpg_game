@@ -45,7 +45,16 @@
     [self.buyButton setTitle:[@(aShopUnit.priceCount) stringValue] forState:UIControlStateNormal];
     [self.buyButton setImage:priceTypeImage forState:UIControlStateNormal];
   
-    self.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld)", aShopUnit.shopUnitName, (long)aShopUnit.unitCount];
+    NSString *newTitle = nil;
+    if (aShopUnit.unitType == kRPGShopUnitTypeGold)
+    {
+      newTitle = [NSString stringWithFormat:@"%@ (%ld)", aShopUnit.shopUnitName, (long)aShopUnit.unitCount];
+    }
+    else
+    {
+      newTitle = aShopUnit.shopUnitName;
+    }
+    self.titleLabel.text = newTitle;
   }
 }
 

@@ -15,6 +15,11 @@
   //Constants
 #import "RPGNibNames.h"
 
+static CGFloat const sRPGShopCollectionViewControllerCellAspectRatio = 0.73;
+static CGFloat const sRPGShopCollectionViewControllerHeightMultiplierIPad = 2.05;
+static CGFloat const sRPGShopCollectionViewControllerHeightMultiplierIPhone = 1.05;
+
+
 @interface RPGShopCollectionViewController () <UICollectionViewDelegateFlowLayout, RPGShopCollectionViewCellDelegate>
 
 @end
@@ -101,11 +106,13 @@ static NSString * const reuseIdentifier = @"shopCollectionViewCell";
   
   if([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad)
   {
-    cellSize = CGSizeMake(collectionViewSize.width / 5.25, collectionViewSize.height / 2.25);
+    cellSize = CGSizeMake(collectionViewSize.height / sRPGShopCollectionViewControllerHeightMultiplierIPad * sRPGShopCollectionViewControllerCellAspectRatio,
+                          collectionViewSize.height / sRPGShopCollectionViewControllerHeightMultiplierIPad);
   }
   else
   {
-    cellSize = CGSizeMake(collectionViewSize.width / 3.25, collectionViewSize.height / 1.05);
+    cellSize = CGSizeMake(collectionViewSize.height / sRPGShopCollectionViewControllerHeightMultiplierIPhone * sRPGShopCollectionViewControllerCellAspectRatio,
+                          collectionViewSize.height / sRPGShopCollectionViewControllerHeightMultiplierIPhone);
   }
   
   return cellSize;
