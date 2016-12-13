@@ -62,6 +62,8 @@
 
 - (void)viewDidLoad
 {
+  [super viewDidLoad];
+  
   self.lockViews = [NSMutableArray arrayWithObjects:self.lock1, self.lock2,
                     self.lock3, self.lock4, self.lock4, self.lock5, self.lock6,
                     self.lock7, self.lock8, self.lock9, nil];
