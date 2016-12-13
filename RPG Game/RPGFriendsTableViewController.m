@@ -240,7 +240,49 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 
 - (void)questChallengeButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
 {
+  NSInteger friendID = aCell.currentFriend.friendID;
+  RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
   
+  __block typeof(self) weakSelf = self;
+  
+  [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionDeleteFriendRequest
+                                               withRequest:request
+                                         completionHandler:^(RPGStatusCode status)
+   {
+     switch (status)
+     {
+       case kRPGStatusCodeOK:
+       {
+         [RPGAlertController showAlertWithTitle:@"Success"
+                                        message:@"You remove this user from friends"
+                                    actionTitle:nil
+                                     completion:nil];
+         break;
+       }
+         
+       case kRPGStatusCodeWrongToken:
+       {
+         [weakSelf handleWrongToken];
+         
+         break;
+       }
+         
+       case kRPGStatusCodeFriendNotFound:
+       {
+         [weakSelf handleFriendNotFound];
+         
+         break;
+       }
+         // TODO: Handle other errors
+       default:
+       {
+         [weakSelf handleDefaultError];
+         
+         break;
+       }
+     }
+     [weakSelf.delegate needUpdateFriendsList:self];
+   }];
 }
 
 - (void)removeFromFriendsButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
