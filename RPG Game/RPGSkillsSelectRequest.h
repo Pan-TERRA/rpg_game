@@ -10,11 +10,11 @@
 
 @interface RPGSkillsSelectRequest : RPGCharacterRequest
 
-@property (nonatomic, retain, readonly) NSArray *skillsID;
+@property (nonatomic, retain, readonly) NSArray<NSNumber *> *skillsID;
 
 - (instancetype)initWithCharacterID:(NSInteger)aCharacterID
-                             skills:(NSArray *)aSkills NS_DESIGNATED_INITIALIZER;
+                             skills:(NSArray<NSNumber *> *)aSkills NS_DESIGNATED_INITIALIZER;
 + (instancetype)skillSelectRequestWithCharacterID:(NSInteger)aCharacterID
-                                           skills:(NSArray *)aSkills;
+                                           skills:(NSArray<NSNumber *> *)aSkills;
 
 @end

@@ -16,16 +16,16 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
 
 @interface RPGAlertViewController ()
 
-@property (assign, nonatomic) IBOutlet UILabel *alertTitleLabel;
-@property (copy, nonatomic)  NSString *alertTitleLabelText;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *alertTitleLabel;
+@property (nonatomic, copy, readwrite)  NSString *alertTitleLabelText;
 
-@property (assign, nonatomic) IBOutlet UILabel *alertDescriptionLabel;
-@property (copy, nonatomic)  NSString *alertDescriptionLabelText;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *alertDescriptionLabel;
+@property (nonatomic, copy, readwrite)  NSString *alertDescriptionLabelText;
 
-@property (assign, nonatomic) IBOutlet UIButton *alertActionButton;
-@property (copy, nonatomic)  NSString *alertActionButtonText;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *alertActionButton;
+@property (nonatomic, copy, readwrite)  NSString *alertActionButtonText;
 
-@property (nonatomic, copy, nullable) void (^completionHandler)(void);
+@property (nonatomic, copy, readwrite, nullable) void (^completionHandler)(void);
 
 @end
 
@@ -76,6 +76,7 @@ static NSString * const kRPGAlertViewControllerDefaultActionTitle = @"Alert Acti
   [_alertTitleLabelText release];
   [_alertDescriptionLabelText release];
   [_alertActionButtonText release];
+  
   [super dealloc];
 }
 

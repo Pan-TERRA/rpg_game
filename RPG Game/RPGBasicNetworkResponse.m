@@ -17,6 +17,7 @@ NSString * const kRPGBasicNetworkResponseStatus = @"status";
 - (instancetype)initWithStatus:(RPGStatusCode)aStatus
 {
   self = [super init];
+  
   if (self != nil)
   {
     _status = aStatus;

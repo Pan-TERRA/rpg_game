@@ -65,16 +65,19 @@
         }
         break;
       }
+        
       case kRPGFriendStateIncoming:
       {
         onlineStatus = [UIImage imageNamed:@"incoming"];
         break;
       }
+        
       case kRPGFriendStateOutgoing:
       {
         onlineStatus = [UIImage imageNamed:@"outgoing"];
         break;
       }
+        
       default:
       {
         break;

@@ -13,46 +13,57 @@
 #pragma mark - Init
 
 - (instancetype)initWithSkillID:(NSInteger)aSkillID
+                       cooldown:(NSInteger)aCooldown
 {
   self = [super init];
+  
   if (self != nil)
   {
-    _skillID = aSkillID;
-    _cooldown = 0;
+    if (aSkillID < 1)
+    {
+      [self release];
+      self = nil;
+    }
+    else
+    {
+      _skillID = aSkillID;
+      _cooldown = 0;
+    }
   }
+  
   return self;
 }
 
 + (instancetype)skillWithSkillID:(NSInteger)aSkillID
+                        cooldown:(NSInteger)aCooldown;
 {
-  return [[[RPGSkill alloc] initWithSkillID:aSkillID] autorelease];
+  return [[[RPGSkill alloc] initWithSkillID:aSkillID
+                                   cooldown:aCooldown] autorelease];
 }
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown
+- (instancetype)initWithSkillID:(NSInteger)aSkillID
 {
-  self = [self initWithSkillID:aSkillID];
-  if (self != nil)
-  {
-    _cooldown = aCooldown;
-  }
-  return self;
+  return [self initWithSkillID:aSkillID
+                      cooldown:0];
 }
 
-+ (instancetype)skillWithSkillID:(NSInteger)aSkillID cooldown:(NSInteger)aCooldown;
++ (instancetype)skillWithSkillID:(NSInteger)aSkillID
 {
-  return [[[RPGSkill alloc] initWithSkillID:aSkillID cooldown:aCooldown] autorelease];
+  return [[[RPGSkill alloc] initWithSkillID:aSkillID
+                                   cooldown:0] autorelease];
 }
 
-#pragma mark - Dealloc
-
-- (void)dealloc
+- (instancetype)init
 {
-  [super dealloc];
+  return [self initWithSkillID:-1
+                      cooldown:-1];
 }
+
+#pragma mark - Description
 
 - (NSString *)description
 {
-  return [NSString stringWithFormat:@"%@ r\n %ld \r\n %ld", [super description], self.skillID, self.cooldown];
+  return [NSString stringWithFormat:@"%@ r\n %ld \r\n %ld", [super description], (long)self.skillID, (long)self.cooldown];
 }
 
 @end

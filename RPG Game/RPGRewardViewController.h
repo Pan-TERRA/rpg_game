@@ -14,6 +14,7 @@
 @protocol RPGRewardModalDelegate <NSObject>
 
 - (void)dismissRewardModal:(RPGRewardViewController *)aRewardModal;
+- (void)restartBattle:(RPGRewardViewController *)aRewardModal;
 
 @end
 
@@ -21,8 +22,12 @@
 
 @property (nonatomic, assign, readwrite) id<RPGRewardModalDelegate> delegate;
 
+@property (nonatomic, assign, readonly) IBOutlet UIButton *restartButton;
+  // Containers
+@property (nonatomic, assign, readonly) IBOutlet UIView *rankContainer;
+
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;
 
-- (void)updateView;
+- (void)updateView NS_REQUIRES_SUPER;
 
 @end

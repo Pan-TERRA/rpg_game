@@ -59,11 +59,19 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
                                        status:aStatus] autorelease];
 }
 
+- (instancetype)initWithType:(NSString *)aType
+                      status:(NSInteger)aStatus
+{
+  return [self initWithTimestamp:nil
+                          status:aStatus];
+}
+
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
   [_timestamp release];
+  
   [super dealloc];
 }
 
@@ -73,7 +81,10 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 {
   NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGTimeResponseSerializationTimestamp] = @([self.timestamp timeIntervalSince1970]);
+  if (self.timestamp != nil)
+  {
+    dictionaryRepresentation[kRPGTimeResponseSerializationTimestamp] = @([self.timestamp timeIntervalSince1970]);
+  }
   
   return dictionaryRepresentation;
 }
@@ -83,6 +94,5 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
   return [self initWithUnixTimestamp:[aDictionary[kRPGTimeResponseSerializationTimestamp] intValue]
                               status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
 }
-
 
 @end

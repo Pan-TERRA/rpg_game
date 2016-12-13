@@ -35,15 +35,23 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="MNi-r6-cdm">
                                     <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="192" height="43"/>
+                                    </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldN-tR-wmG">
                                     <rect key="frame" x="10" y="5" width="44" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="44" id="yNf-pj-bqY"/>
+                                        <constraint firstAttribute="width" constant="44" id="yNf-pj-bqY">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                                        </constraint>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_icon" translatesAutoresizingMaskIntoConstraints="NO" id="mp1-xk-DZr">
                                     <rect key="frame" x="64" y="5" width="20" height="20"/>
@@ -51,12 +59,19 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="mp1-xk-DZr" secondAttribute="height" multiplier="1:1" id="ZCy-Dr-UdY"/>
                                     </constraints>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="64" y="7" width="28" height="29"/>
+                                    </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDi-1B-8p2">
                                     <rect key="frame" x="94" y="5" width="41" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                        <rect key="frame" x="102" y="7" width="41" height="29"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="char_icon" translatesAutoresizingMaskIntoConstraints="NO" id="3xF-bb-6BF">
                                     <rect key="frame" x="145" y="5" width="20" height="20"/>
@@ -64,6 +79,9 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="3xF-bb-6BF" secondAttribute="height" multiplier="1:1" id="Uk2-3W-qQH"/>
                                     </constraints>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="153" y="7" width="29" height="29"/>
+                                    </variation>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -85,20 +103,29 @@
                                 <constraint firstItem="lDi-1B-8p2" firstAttribute="height" secondItem="ldN-tR-wmG" secondAttribute="height" id="mn2-aE-VJ1"/>
                                 <constraint firstItem="3xF-bb-6BF" firstAttribute="height" secondItem="ldN-tR-wmG" secondAttribute="height" id="mvk-kE-MaL"/>
                                 <constraint firstItem="ldN-tR-wmG" firstAttribute="height" secondItem="k3z-O9-ZbC" secondAttribute="height" multiplier="0.66" id="uJV-qU-n4l"/>
-                                <constraint firstAttribute="height" constant="30" id="yuy-rO-Ujo"/>
                             </constraints>
+                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <rect key="frame" x="0.0" y="0.0" width="192" height="43"/>
+                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kfo-5d-K00" userLabel="Quest Item Reward Container">
                             <rect key="frame" x="401" y="0.0" width="225" height="30"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="EDq-Qr-YkL">
                                     <rect key="frame" x="0.0" y="0.0" width="225" height="30"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="0.0" y="0.0" width="250" height="43"/>
+                                    </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reward:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5yi-KJ-XqJ">
                                     <rect key="frame" x="10" y="5" width="61" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                        <rect key="frame" x="10" y="7" width="61" height="29"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Ruby" translatesAutoresizingMaskIntoConstraints="NO" id="Igj-7q-TiL">
                                     <rect key="frame" x="81" y="5" width="20" height="20"/>
@@ -106,12 +133,19 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="Igj-7q-TiL" secondAttribute="height" multiplier="1:1" id="0va-fP-JQd"/>
                                     </constraints>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="81" y="7" width="28" height="29"/>
+                                    </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RdB-xu-vX3">
                                     <rect key="frame" x="111" y="5" width="17" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                        <rect key="frame" x="119" y="7" width="17" height="29"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Gold" translatesAutoresizingMaskIntoConstraints="NO" id="yuc-nd-BS9">
                                     <rect key="frame" x="138" y="5" width="20" height="20"/>
@@ -119,12 +153,19 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="yuc-nd-BS9" secondAttribute="height" multiplier="1:1" id="3sR-Tl-HIe"/>
                                     </constraints>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="146" y="7" width="29" height="29"/>
+                                    </variation>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zqR-hX-tt4">
                                     <rect key="frame" x="168" y="5" width="17" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                        <rect key="frame" x="185" y="7" width="17" height="29"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="char_icon" translatesAutoresizingMaskIntoConstraints="NO" id="uHv-Tx-BHb">
                                     <rect key="frame" x="195" y="5" width="20" height="20"/>
@@ -132,6 +173,9 @@
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="uHv-Tx-BHb" secondAttribute="height" multiplier="1:1" id="Laz-4j-DHv"/>
                                     </constraints>
+                                    <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                        <rect key="frame" x="212" y="7" width="28" height="29"/>
+                                    </variation>
                                 </imageView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -156,19 +200,25 @@
                                 <constraint firstItem="zqR-hX-tt4" firstAttribute="leading" secondItem="yuc-nd-BS9" secondAttribute="trailing" constant="10" id="fPr-AP-cgQ"/>
                                 <constraint firstItem="zqR-hX-tt4" firstAttribute="centerY" secondItem="5yi-KJ-XqJ" secondAttribute="centerY" id="hzL-5g-lZI"/>
                                 <constraint firstItem="5yi-KJ-XqJ" firstAttribute="height" secondItem="kfo-5d-K00" secondAttribute="height" multiplier="0.66" id="kEx-rP-XNJ"/>
-                                <constraint firstAttribute="height" constant="30" id="qio-0Q-Xo7"/>
                                 <constraint firstItem="zqR-hX-tt4" firstAttribute="height" secondItem="5yi-KJ-XqJ" secondAttribute="height" id="sdF-ue-qeR"/>
                                 <constraint firstItem="EDq-Qr-YkL" firstAttribute="leading" secondItem="kfo-5d-K00" secondAttribute="leading" id="tDT-Sk-RMI"/>
                                 <constraint firstItem="uHv-Tx-BHb" firstAttribute="leading" secondItem="zqR-hX-tt4" secondAttribute="trailing" constant="10" id="x2w-by-Wr0"/>
                             </constraints>
+                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                <rect key="frame" x="376" y="0.0" width="250" height="43"/>
+                            </variation>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="CSf-e2-LYH"/>
+                        <constraint firstItem="kfo-5d-K00" firstAttribute="height" secondItem="WWs-qF-gcS" secondAttribute="height" multiplier="0.85" id="1vy-dA-AM1"/>
+                        <constraint firstAttribute="height" constant="35" id="CSf-e2-LYH">
+                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                        </constraint>
                         <constraint firstItem="k3z-O9-ZbC" firstAttribute="top" secondItem="WWs-qF-gcS" secondAttribute="top" id="cOl-6R-xDD"/>
                         <constraint firstAttribute="trailing" secondItem="kfo-5d-K00" secondAttribute="trailing" id="kPv-LO-yk0"/>
                         <constraint firstItem="k3z-O9-ZbC" firstAttribute="leading" secondItem="WWs-qF-gcS" secondAttribute="leading" id="nB9-uF-6eY"/>
+                        <constraint firstItem="k3z-O9-ZbC" firstAttribute="height" secondItem="WWs-qF-gcS" secondAttribute="height" multiplier="0.85" id="o6T-dc-ZEB"/>
                         <constraint firstItem="kfo-5d-K00" firstAttribute="top" secondItem="WWs-qF-gcS" secondAttribute="top" id="wh9-Hv-IA8"/>
                     </constraints>
                     <connections>
@@ -180,7 +230,7 @@
                         <outlet property="stateTitleLabel" destination="lDi-1B-8p2" id="2Eq-nf-jko"/>
                     </connections>
                 </view>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuQ-Ba-KJA" userLabel="Body Container" customClass="RPGQuestViewBodyContainer">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" alwaysBounceHorizontal="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuQ-Ba-KJA" userLabel="Body Container" customClass="RPGQuestViewBodyContainer">
                     <rect key="frame" x="55" y="75" width="626" height="265"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpB-1Z-c9g">
@@ -189,11 +239,16 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Yi-cw-St8">
                                     <rect key="frame" x="0.0" y="0.0" width="38" height="20"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="20" id="owl-na-nYa"/>
+                                        <constraint firstAttribute="height" constant="20" id="owl-na-nYa">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="25"/>
+                                        </constraint>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
                                     <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="24"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myW-ff-wcL">
                                     <rect key="frame" x="0.0" y="25" width="626" height="117"/>
@@ -201,12 +256,18 @@
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1w-X6-j7o">
                                     <rect key="frame" x="0.0" y="152" width="47" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
                                     <color key="textColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="24"/>
+                                    </variation>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lai-1W-qG8">
                                     <rect key="frame" x="0.0" y="177" width="250" height="250"/>
@@ -257,11 +318,26 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Cf-4K-WWr">
                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="height" multiplier="1:1" id="bSY-tc-3IJ"/>
+                            </constraints>
                             <state key="normal" backgroundImage="confirm_icon_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
                             <connections>
                                 <action selector="acceptButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="WZf-8d-Ync"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="height" multiplier="1:1" id="J9A-ww-Eqp"/>
+                            </constraints>
+                            <state key="normal" backgroundImage="photo-camera">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="addProofButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="Vna-fC-13M"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bpj-c4-GjR">
@@ -285,19 +361,6 @@
                                 <action selector="backButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="vIS-5v-9P4"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lld-Ax-hOC">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="cDX-sa-6Jp"/>
-                                <constraint firstAttribute="width" constant="40" id="ncw-BG-sXB"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="photo-camera">
-                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="addProofButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="Vna-fC-13M"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcu-b6-fYI">
                             <rect key="frame" x="0.0" y="0.0" width="100" height="40"/>
                             <constraints>
@@ -313,6 +376,9 @@
                                     <exclude reference="Pj3-J5-4Iz"/>
                                 </mask>
                             </variation>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                            </variation>
                             <connections>
                                 <action selector="getRewardButtonOnClick:" destination="VrL-iM-XQj" eventType="touchUpInside" id="P5T-DL-dgB"/>
                             </connections>
@@ -320,32 +386,25 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Lld-Ax-hOC" secondAttribute="width" id="0Jl-Zt-CFX"/>
-                        <constraint firstItem="gcu-b6-fYI" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="3GV-GW-GlF"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="Bpj-c4-GjR" secondAttribute="height" id="7aP-Zd-064"/>
                         <constraint firstItem="0Cf-4K-WWr" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="EbL-WY-Cdc"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="Bpj-c4-GjR" secondAttribute="width" id="Efk-ub-uCG"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="leading" secondItem="VrL-iM-XQj" secondAttribute="leading" id="FsD-VS-Wat"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="KS0-g5-6Yc"/>
+                        <constraint firstItem="gcu-b6-fYI" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="LSq-c8-G4U"/>
+                        <constraint firstItem="Lld-Ax-hOC" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="Pox-VV-Jjl"/>
                         <constraint firstItem="Bpj-c4-GjR" firstAttribute="leading" secondItem="Lld-Ax-hOC" secondAttribute="trailing" constant="10" id="Q5E-bv-8ez"/>
                         <constraint firstAttribute="bottom" secondItem="grH-jv-bBd" secondAttribute="bottom" id="TbX-r4-aB7"/>
                         <constraint firstItem="Lld-Ax-hOC" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="V6G-04-uwO"/>
                         <constraint firstItem="gcu-b6-fYI" firstAttribute="leading" secondItem="0Cf-4K-WWr" secondAttribute="leading" id="aw6-Fg-tFn"/>
                         <constraint firstAttribute="trailing" secondItem="grH-jv-bBd" secondAttribute="trailing" id="crh-77-Ky7"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="cvq-3B-AcD"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="width" secondItem="0Cf-4K-WWr" secondAttribute="width" id="hpR-9t-oJE"/>
+                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="dWd-Pj-5cw"/>
                         <constraint firstItem="gcu-b6-fYI" firstAttribute="centerY" secondItem="0Cf-4K-WWr" secondAttribute="centerY" id="inY-UB-K5T"/>
                         <constraint firstItem="grH-jv-bBd" firstAttribute="top" secondItem="VrL-iM-XQj" secondAttribute="top" id="k4f-tF-XIy"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="gcu-b6-fYI" secondAttribute="height" id="r4x-fj-NdR"/>
-                        <constraint firstItem="grH-jv-bBd" firstAttribute="height" secondItem="Lld-Ax-hOC" secondAttribute="height" id="sAZ-Ec-NWl"/>
+                        <constraint firstItem="Bpj-c4-GjR" firstAttribute="height" secondItem="0Cf-4K-WWr" secondAttribute="height" id="qkR-8G-8aN"/>
                         <constraint firstItem="0Cf-4K-WWr" firstAttribute="centerY" secondItem="Bpj-c4-GjR" secondAttribute="centerY" id="wmm-AH-krN"/>
-                        <constraint firstAttribute="height" constant="40" id="z4v-wW-Z3Z"/>
+                        <constraint firstAttribute="height" constant="40" id="z4v-wW-Z3Z">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="3GV-GW-GlF"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <outlet property="acceptButton" destination="0Cf-4K-WWr" id="Nr6-ua-eO7"/>
                         <outlet property="addProofButton" destination="Lld-Ax-hOC" id="kKp-rt-q0Q"/>

@@ -10,7 +10,6 @@
 #import "RPGCharacterProfileSkill.h"
 
 NSString * const kRPGCharacterProfileInfoResponseStatus = @"status";
-NSString * const kRPGCharacterProfileInfoResponseAvatar = @"avatar";
 NSString * const kRPGCharacterProfileInfoResponseCurrentLevel = @"current_level";
 NSString * const kRPGCharacterProfileInfoResponseMaxExp = @"max_exp";
 NSString * const kRPGCharacterProfileInfoResponseCurrentExp = @"current_exp";
@@ -23,7 +22,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 @interface RPGCharacterProfileInfoResponse()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
-@property (nonatomic, copy, readwrite) NSString *avatar;
 @property (nonatomic, assign, readwrite) NSUInteger currentLevel;
 @property (nonatomic, assign, readwrite) NSUInteger maxExp;
 @property (nonatomic, assign, readwrite) NSUInteger currentExp;
@@ -40,7 +38,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 #pragma mark - Init
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                        avatar:(NSString *)anAvatar
                   currentLevel:(NSUInteger)aCurrentLevel
                         maxExp:(NSUInteger)aMaxExp
                     currentExp:(NSUInteger)aCurrentExp
@@ -55,7 +52,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   if (self != nil)
   {
     _status = aStatus;
-    _avatar = [anAvatar copy];
     _currentLevel = aCurrentLevel;
     _maxExp = aMaxExp;
     _currentExp = aCurrentExp;
@@ -70,7 +66,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 }
 
 + (instancetype)characterProfileInfoResponseWithStatus:(NSInteger)aStatus
-                                                avatar:(NSString *)anAvatar
                                           currentLevel:(NSUInteger)aCurrentLevel
                                                 maxExp:(NSUInteger)aMaxExp
                                             currentExp:(NSUInteger)aCurrentExp
@@ -81,7 +76,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
                                                 skills:(NSArray *)aSkills
 {
   return [[[self alloc] initWithStatus:aStatus
-                                avatar:anAvatar
                           currentLevel:aCurrentLevel
                                 maxExp:aMaxExp
                             currentExp:aCurrentExp
@@ -95,7 +89,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 - (instancetype)init
 {
   return [self initWithStatus:0
-                       avatar:nil
                  currentLevel:0
                        maxExp:0
                    currentExp:0
@@ -110,7 +103,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 
 - (void)dealloc
 {
-  [_avatar release];
   [_skills release];
   
   [super dealloc];
@@ -122,7 +114,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseStatus] = @(self.status);
-  dictionaryRepresentation[kRPGCharacterProfileInfoResponseAvatar] = self.avatar;
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseCurrentLevel] = @(self.currentLevel);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseMaxExp] = @(self.maxExp);
   dictionaryRepresentation[kRPGCharacterProfileInfoResponseCurrentExp] = @(self.currentExp);
@@ -139,6 +130,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
     }
     dictionaryRepresentation[kRPGCharacterProfileInfoResponseSkills] = skillsMutableArray;
   }
+  
   return dictionaryRepresentation;
 }
 
@@ -154,7 +146,6 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   }
   
   return [self initWithStatus:[aDictionary[kRPGCharacterProfileInfoResponseStatus] integerValue]
-                       avatar:aDictionary[kRPGCharacterProfileInfoResponseAvatar]
                  currentLevel:[aDictionary[kRPGCharacterProfileInfoResponseCurrentLevel] integerValue]
                        maxExp:[aDictionary[kRPGCharacterProfileInfoResponseMaxExp] integerValue]
                    currentExp:[aDictionary[kRPGCharacterProfileInfoResponseCurrentExp] integerValue]

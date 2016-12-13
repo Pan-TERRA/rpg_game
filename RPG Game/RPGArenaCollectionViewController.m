@@ -38,7 +38,6 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 @interface RPGArenaCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate>
 
-@property (nonatomic, assign, readwrite) UIViewController *viewController;
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
 @property (nonatomic, retain, readwrite) NSMutableArray *skillsIDMutableArray;
 
@@ -49,7 +48,6 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                  parentViewController:(UIViewController *)aViewController
                         collectionSize:(NSUInteger)aCollectionSize
                            skillsArray:(NSArray *)aSkillsArray
 {
@@ -67,7 +65,6 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
-    _viewController = aViewController;
     _collectionSize = aCollectionSize;
     _skillsIDMutableArray = [aSkillsArray mutableCopy];
   }
@@ -77,7 +74,9 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 - (instancetype)init
 {
-  return [self initWithCollectionView:nil parentViewController:nil collectionSize:0 skillsArray:nil];
+  return [self initWithCollectionView:nil
+                       collectionSize:0
+                          skillsArray:nil];
 }
 
 #pragma mark - Dealloc
@@ -98,15 +97,16 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
 
 #pragma mark - UICollectionViewDataSource
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)aCollectionView numberOfItemsInSection:(NSInteger)aSection
 {
   return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGCharacterBagCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName
-                                                                                       forIndexPath:anIndexPath];
+  RPGCharacterBagCollectionViewCell *cell = [aCollectionView
+                                             dequeueReusableCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName
+                                             forIndexPath:anIndexPath];
   
   NSInteger index = anIndexPath.row;
   if (index < self.collectionSize)
@@ -147,9 +147,9 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)aCollectionView
+                  layout:(UICollectionViewLayout *)aCollectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
   CGFloat viewWidth = self.collectionView.frame.size.width;
   CGFloat cellWidth = viewWidth / (CGFloat) self.numberOfCellsInRow;
@@ -175,7 +175,7 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
         RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:skillID];
         RPGSkillDescriptionViewController *skillDescriptionViewController = [[[RPGSkillDescriptionViewController alloc] init] autorelease];
         
-        UIViewController *parentViewController = self.viewController;
+        UIViewController *parentViewController = [self.delegate getViewController];
         [parentViewController addChildViewController:skillDescriptionViewController
                                                frame:parentViewController.view.frame];
         
@@ -185,7 +185,8 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   }
 }
 
-- (void)addItem:(NSUInteger)anItemID type:(RPGItemType)aType
+- (void)addItem:(NSUInteger)anItemID
+           type:(RPGItemType)aType
 {
   switch (aType)
   {
@@ -209,9 +210,11 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   [self.collectionView reloadData];
 }
 
-- (void)moveItem:(NSUInteger)anItemID type:(RPGItemType)aType
+- (void)moveItem:(NSUInteger)anItemID
+            type:(RPGItemType)aType
 {
-  [self addItemToOtherCollectionWithID:anItemID type:aType];
+  [self addItemToOtherCollectionWithID:anItemID
+                                  type:aType];
 }
 
 - (void)collectionView:(UICollectionView *)aCollectionView didSelectItemAtIndexPath:(NSIndexPath *)anIndexPath
@@ -225,7 +228,8 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
   }
 }
 
-- (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID type:(RPGItemType)aType
+- (void)addItemToOtherCollectionWithID:(NSUInteger)anItemID
+                                  type:(RPGItemType)aType
 {
   // Define move logic there
 }

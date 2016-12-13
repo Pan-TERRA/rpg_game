@@ -11,9 +11,16 @@
 @class RPGQuest;
 @class RPGQuestTableViewController;
 
+@protocol RPGTableViewCellDelegate <NSObject>
+
+- (void)deleteQuestWithID:(NSInteger)aQuestID;
+- (void)getRewardForQuestWithID:(NSInteger)aQuestID;
+
+@end
+
 @interface RPGQuestListTableViewCell : UITableViewCell
 
-@property (nonatomic, assign, readwrite) RPGQuestTableViewController *tableViewController;
+@property (nonatomic, assign, readwrite) id<RPGTableViewCellDelegate> delegate;
 
 - (void)setCellContent:(RPGQuest *)aCellContent;
 

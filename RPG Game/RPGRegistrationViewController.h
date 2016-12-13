@@ -6,8 +6,6 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-  // Controllers
 #import "RPGViewController.h"
 
 @interface RPGRegistrationViewController : RPGViewController

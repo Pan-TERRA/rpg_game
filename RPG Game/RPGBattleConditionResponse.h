@@ -9,7 +9,7 @@
 #import "RPGResponse.h"
   // Constants
 #import "RPGBattleStatus.h"
-
+  // Entities
 @class RPGBattleReward;
 @class RPGPlayerInfo;
 
@@ -17,7 +17,7 @@
 
 @property (nonatomic, retain, readonly) RPGPlayerInfo *playerInfo;
 @property (nonatomic, retain, readonly) RPGPlayerInfo *opponentInfo;
-@property (nonatomic, retain, readonly) NSArray *skillsCondition;
+@property (nonatomic, retain, readonly) NSArray<NSDictionary *> *skillsCondition;
 @property (nonatomic, retain, readonly) NSDictionary *skillsDamage;
 @property (nonatomic, retain, readonly) RPGBattleReward *reward;
 @property (nonatomic, assign, readonly) RPGBattleStatus battleStatus;
@@ -28,7 +28,7 @@
 - (instancetype)initWithType:(NSString *)aType
                   playerInfo:(RPGPlayerInfo *)aPlayerInfo
                 opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-             skillsCondition:(NSArray *)aSkillsCondition
+             skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                 skillsDamage:(NSDictionary *)aSkillsDamage
                 battleStatus:(RPGBattleStatus)aBattleStatus
                       reward:(RPGBattleReward *)aReward
@@ -37,7 +37,7 @@
 + (instancetype)battleConditionResponseWithType:(NSString *)aType
                                      playerInfo:(RPGPlayerInfo *)aPlayerInfo
                                    opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-                                skillsCondition:(NSArray *)aSkillsCondition
+                                skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                                    skillsDamage:(NSDictionary *)aSkillsDamage
                                    battleStatus:(RPGBattleStatus)aBattleStatus
                                          reward:(RPGBattleReward *)aReward

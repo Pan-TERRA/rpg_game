@@ -46,7 +46,8 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 
 - (instancetype)init
 {
-  return [self initWithType:nil status:-1];
+  return [self initWithType:nil
+                     status:-1];
 }
 
 + (instancetype)responseWithType:(NSString *)aType
@@ -61,6 +62,7 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 - (void)dealloc
 {
   [_type release];
+  
   [super dealloc];
 }
 
@@ -70,7 +72,10 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGResponseSerializationType] = self.type;
+  if (self.type != nil)
+  {
+    dictionaryRepresentation[kRPGResponseSerializationType] = self.type;
+  }
   dictionaryRepresentation[kRPGResponseSerializationStatus] = @(self.status);
   
   return dictionaryRepresentation;
@@ -81,6 +86,5 @@ NSString * const kRPGResponseSerializationStatus = @"status";
   return [self initWithType:aDictionary[kRPGResponseSerializationType]
                      status:[aDictionary[kRPGResponseSerializationStatus] integerValue]];
 }
-
 
 @end

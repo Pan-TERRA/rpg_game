@@ -77,19 +77,14 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VtP-Za-rzk">
-                    <rect key="frame" x="544" y="544" width="48" height="48"/>
+                    <rect key="frame" x="530" y="530" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="40" id="KoF-a1-Vv1"/>
-                        <constraint firstAttribute="height" constant="40" id="XJc-hL-u4k"/>
                         <constraint firstAttribute="width" secondItem="VtP-Za-rzk" secondAttribute="height" multiplier="1:1" id="XKA-6z-rjn"/>
+                        <constraint firstAttribute="height" constant="40" id="hu8-mn-0qe">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
                     </constraints>
                     <state key="normal" backgroundImage="back_icon_inactive"/>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="KoF-a1-Vv1"/>
-                            <exclude reference="XJc-hL-u4k"/>
-                        </mask>
-                    </variation>
                     <connections>
                         <action selector="back:" destination="-1" eventType="touchUpInside" id="Cpd-73-qJ9"/>
                     </connections>
@@ -99,21 +94,19 @@
             <constraints>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="centerY" secondItem="2eb-2T-iTd" secondAttribute="centerY" id="KeY-nf-psV"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="MOw-qS-YZs"/>
-                <constraint firstAttribute="trailing" secondItem="VtP-Za-rzk" secondAttribute="trailing" constant="8" id="Mmk-dV-HQA"/>
+                <constraint firstAttribute="trailing" secondItem="VtP-Za-rzk" secondAttribute="trailing" constant="30" id="Mmk-dV-HQA"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="width" secondItem="2eb-2T-iTd" secondAttribute="width" id="O8b-P8-cDJ"/>
                 <constraint firstItem="rVz-hJ-VS6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="OHe-x4-TV3"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.8" id="RaY-JC-sbz"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="trailing" secondItem="kky-Fg-Lkw" secondAttribute="trailing" id="SbU-dS-kMC"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Spv-8g-AYm"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="leading" secondItem="kky-Fg-Lkw" secondAttribute="leading" id="Vbp-7h-47N"/>
-                <constraint firstAttribute="bottom" secondItem="VtP-Za-rzk" secondAttribute="bottom" constant="8" id="Xl1-Qd-ExS"/>
-                <constraint firstItem="VtP-Za-rzk" firstAttribute="width" secondItem="rVz-hJ-VS6" secondAttribute="width" multiplier="0.08" id="ZSf-Vd-7Ox"/>
+                <constraint firstAttribute="bottom" secondItem="VtP-Za-rzk" secondAttribute="bottom" constant="30" id="Xl1-Qd-ExS"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="width" secondItem="rVz-hJ-VS6" secondAttribute="width" multiplier="0.35" id="d6S-HG-cNe"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" multiplier="0.1" id="gFm-WO-dhm"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="gJ1-Lr-YYv"/>
                 <constraint firstItem="2eb-2T-iTd" firstAttribute="height" secondItem="rVz-hJ-VS6" secondAttribute="height" multiplier="0.07" id="idU-Ks-YLv"/>
                 <constraint firstAttribute="trailing" secondItem="rVz-hJ-VS6" secondAttribute="trailing" id="nv8-xB-Qw8"/>
-                <constraint firstItem="VtP-Za-rzk" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="pUp-5v-jOe"/>
                 <constraint firstItem="kky-Fg-Lkw" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="qNR-mx-A1g"/>
                 <constraint firstItem="1Z1-pF-ATk" firstAttribute="height" secondItem="2eb-2T-iTd" secondAttribute="height" id="sc7-ss-AQl"/>
                 <constraint firstAttribute="bottom" secondItem="rVz-hJ-VS6" secondAttribute="bottom" id="xhY-I9-WBv"/>
@@ -121,11 +114,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="pUp-5v-jOe"/>
-                </mask>
-            </variation>
         </view>
     </objects>
     <resources>

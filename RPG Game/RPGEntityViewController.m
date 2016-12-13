@@ -10,8 +10,15 @@
   // Controllers
 #import "RPGBattleController+RPGBattlePresentationController.h"
 #import "RPGSkillsEffectsCollectionViewController.h"
+#import "RPGSkillEffectDescriptionViewController.h"
+  // Views
+#import "RPGSkillsEffectsCollectionViewCell.h"
   // Entities
 #import "RPGPlayer.h"
+#import "RPGSkillEffectRepresentation.h"
+#import "RPGSkillEffect.h"
+  // Misc
+#import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -24,8 +31,9 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *entityHPLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIView *entityLevelView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *entityLevelLabel;
-@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillsEffectsCollectionView;
+
 @property (nonatomic, retain, readwrite) RPGSkillsEffectsCollectionViewController *skillsEffectsCollectionViewController;
+@property (nonatomic, assign, readwrite) IBOutlet UICollectionView *skillsEffectsCollectionView;
 
 @end
 
@@ -34,11 +42,11 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
 #pragma mark - Init
 
 - (instancetype)initWithEntity:(RPGEntity *)anEntity
-                         align:(RPGProgressBarAlign)anAlignFlag
+                         align:(RPGAlign)anAlign
 {
   NSString *NIBName = nil;
   
-  if (anAlignFlag == kRPGProgressBarLeftAlign)
+  if (anAlign == kRPGAlignLeft)
   {
     NIBName = kRPGEntityViewLeftNIBName;
   }
@@ -58,23 +66,23 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   return self;
 }
 
-- (instancetype)initWithAlign:(RPGProgressBarAlign)anAlignFlag
+- (instancetype)initWithAlign:(RPGAlign)anAlign
 {
   return [self initWithEntity:nil
-                        align:anAlignFlag];
+                        align:anAlign];
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil
                          bundle:(NSBundle *)nibBundleOrNil
 {
   return [self initWithEntity:nil
-                        align:kRPGProgressBarLeftAlign];
+                        align:kRPGAlignLeft];
 }
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
   return [self initWithEntity:nil
-                        align:kRPGProgressBarLeftAlign];
+                        align:kRPGAlignLeft];
 }
 
 #pragma marl - Dealloc
@@ -95,20 +103,27 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
   self.entityLevelView.layer.cornerRadius = self.entityLevelView.frame.size.height * kRPGEntityViewControllerViewCornerRadiusMultiplier;
   self.entityLevelView.layer.masksToBounds = YES;
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName bundle:nil];
-  [self.skillsEffectsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGSkillsEffectsCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.skillsEffectsCollectionView registerNib:cellNIB
+                     forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
   
-  RPGSkillsEffectsCollectionViewAlign align = (self.entityHPBar.align == kRPGProgressBarLeftAlign) ? kRPGSkillsEffectsCollectionViewAlignLeft : kRPGSkillsEffectsCollectionViewAlignRight;
-  self.skillsEffectsCollectionViewController = [[[RPGSkillsEffectsCollectionViewController alloc]
-                                                 initWithCollectionView:self.skillsEffectsCollectionView
-                                                 skillsEffects:self.entity.skillsEffects
-                                                 align:align] autorelease];
+  NSMutableArray *skillsEffectsID = [NSMutableArray array];
+  for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
+  {
+    [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
+  }
+  
+  RPGAlign align = self.entityHPBar.align;
+  self.skillsEffectsCollectionViewController = [RPGSkillsEffectsCollectionViewController
+                                                skillEffectsControllerWithCollectionView:self.skillsEffectsCollectionView
+                                                skillsEffects:skillsEffectsID
+                                                align:align];
 }
 
 - (void)didReceiveMemoryWarning
 {
   [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - View Update
@@ -124,8 +139,39 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
     self.entityHPBar.progress = ((float)entityHP / entityMaxHP);
     self.entityHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)entityHP, (long)entityMaxHP];
     self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
-    self.skillsEffectsCollectionViewController.skillsEffects = self.entity.skillsEffects;
+    
+    NSMutableArray *skillsEffectsID = [NSMutableArray array];
+    for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
+    {
+      [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
+    }
+    
+    self.skillsEffectsCollectionViewController.skillsEffects = skillsEffectsID;
+    
     [self.skillsEffectsCollectionView reloadData];
+  }
+}
+
+#pragma mark - IBActions
+
+- (IBAction)handleTapGesture:(UITapGestureRecognizer *)aRecognizer
+{
+  UICollectionView *collectionView = self.skillsEffectsCollectionView;
+  CGPoint point = [aRecognizer locationInView:collectionView];
+  NSIndexPath *path = [self.skillsEffectsCollectionView indexPathForItemAtPoint:point];
+  RPGSkillsEffectsCollectionViewCell *cell = (RPGSkillsEffectsCollectionViewCell *)[collectionView cellForItemAtIndexPath:path];
+  
+  if (cell != nil)
+  {
+    RPGSkillEffectDescriptionViewController *skillEffectDescriptionViewController = [[[RPGSkillEffectDescriptionViewController alloc] init] autorelease];
+    
+    RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:cell.skillEffectID];
+    
+    UIViewController *parentViewController = self.parentViewController;
+    [parentViewController addChildViewController:skillEffectDescriptionViewController
+                                           frame:parentViewController.view.frame];
+    
+    [skillEffectDescriptionViewController setViewContent:skillEffectRepresentation];
   }
 }
 

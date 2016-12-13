@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-// Misc
+  // Misc
 #import "RPGSerializable.h"
-
+  // Entities
 @class RPGSkillEffect;
 
 @interface RPGPlayerInfo : NSObject <RPGSerializable>

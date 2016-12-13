@@ -7,7 +7,7 @@
 //
 
 #import "RPGAddFriendViewController.h"
-  // Network
+  // API
 #import "RPGNetworkManager+Friends.h"
   // Entity
 #import "RPGAddFriendRequest.h"

@@ -21,25 +21,20 @@
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardCrystalsLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *rewardExpLabel;
 
+@property (nonatomic, assign, readwrite) IBOutlet UIView *rankContainer;
+
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *restartButton;
+
 @end
 
 @implementation RPGRewardViewController
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark - Init
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController
-{  
-  self = [super initWithNibName:kRPGRewardViewControllerNIBName bundle:nil];
+{
+  self = [self initWithNibName:kRPGRewardViewControllerNIBName
+                        bundle:nil];
   
   if (self != nil)
   {
@@ -47,6 +42,24 @@
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [super initWithNibName:kRPGRewardViewControllerNIBName
+                         bundle:nil];
+}
+
+#pragma mark - UIViewController
+
+- (void)viewDidLoad
+{
+  [super viewDidLoad];
+}
+
+- (void)didReceiveMemoryWarning
+{
+  [super didReceiveMemoryWarning];
 }
 
 - (void)updateView
@@ -62,9 +75,14 @@
   self.rewardExpLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardExp];
 }
 
-- (IBAction)buttonOKAction:(UIButton *)sender
+- (IBAction)buttonOKAction:(UIButton *)aSender
 {
   [self.delegate dismissRewardModal:self];
+}
+
+- (IBAction)restartButtonAction:(UIButton *)sender
+{
+  [self.delegate restartBattle:self];
 }
 
 @end

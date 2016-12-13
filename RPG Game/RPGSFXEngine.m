@@ -8,7 +8,10 @@
 
 #import "RPGsfxEngine.h"
 #import "CMOpenALSoundManager.h"
+  // Misc
 #import "NSUserDefaults+RPGVolumeSettings.h"
+  // Constants
+#import "RPGResourceNames.h"
 
 static RPGSFXEngine *sharedSFXEngine = nil;
 
@@ -16,7 +19,7 @@ NSString * const kRPGSoundName = @"soundName";
 
 @interface RPGSFXEngine ()
 
-@property (nonatomic, retain) CMOpenALSoundManager *soundManager;
+@property (nonatomic, retain, readwrite) CMOpenALSoundManager *soundManager;
 
 @end
 
@@ -27,11 +30,13 @@ NSString * const kRPGSoundName = @"soundName";
 - (instancetype)init
 {
   self = [super init];
+  
   if (self)
   {
       _soundManager = [CMOpenALSoundManager new];
       _playing = [NSUserDefaults standardUserDefaults].soundsPlaying;
   }
+  
   return self;
 }
 
@@ -40,6 +45,7 @@ NSString * const kRPGSoundName = @"soundName";
 - (void)dealloc
 {
   [_soundManager release];
+  
   [super dealloc];
 }
 
@@ -94,10 +100,10 @@ NSString * const kRPGSoundName = @"soundName";
 
 #pragma mark - Accessors
 
-- (void)setVolume:(double)volume
+- (void)setVolume:(double)aVolume
 {
-  self.soundManager.soundEffectsVolume = volume;
-  [NSUserDefaults standardUserDefaults].soundsVolume = volume;
+  self.soundManager.soundEffectsVolume = aVolume;
+  [NSUserDefaults standardUserDefaults].soundsVolume = aVolume;
 }
 
 - (double)volume
@@ -105,20 +111,20 @@ NSString * const kRPGSoundName = @"soundName";
   return self.soundManager.soundEffectsVolume;
 }
 
-- (void)setPlaying:(BOOL)playing
+- (void)setPlaying:(BOOL)isPlaying
 {
-  _playing = playing;
-  [NSUserDefaults standardUserDefaults].soundsPlaying = playing;
+  _playing = isPlaying;
+  [NSUserDefaults standardUserDefaults].soundsPlaying = isPlaying;
 }
 
 #pragma mark - Actions
 
-- (void)playSFXNamed:(NSString *)name
+- (void)playSFXNamed:(NSString *)aName
 {
-  if (self.playing)
+  if (self.isPlaying)
   {
       //TODO: remove hardcode
-    NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", name];
+    NSString *pathToSound = [NSString stringWithFormat:@"Sounds.bundle/SFX/%@.wav", aName];
     self.soundManager.soundFileNames = [NSArray arrayWithObject:pathToSound];
     [self.soundManager playSoundWithID:0];
   }
@@ -126,8 +132,7 @@ NSString * const kRPGSoundName = @"soundName";
 
 - (void)playSFXWithSkillID:(NSUInteger)aSkillID
 {
-    //TODO: remove hardcode
-  NSString *path = [[NSBundle mainBundle] pathForResource:@"RPGSkillsInfo" ofType:@"plist"];
+  NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillsInfoPlistName ofType:@"plist"];
   NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
   NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillID) stringValue]];
   
@@ -135,6 +140,5 @@ NSString * const kRPGSoundName = @"soundName";
 
   [self playSFXNamed:soundName];
 }
-
 
 @end

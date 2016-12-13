@@ -24,7 +24,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 @property (nonatomic, retain, readwrite) RPGPlayerInfo *playerInfo;
 @property (nonatomic, retain, readwrite) RPGPlayerInfo *opponentInfo;
-@property (nonatomic, retain, readwrite) NSMutableArray *mutableSkillsCondition;
+@property (nonatomic, retain, readwrite) NSMutableArray<NSDictionary *> *mutableSkillsCondition;
 @property (nonatomic, retain, readwrite) NSMutableDictionary *mutableSkillsDamage;
 @property (nonatomic, assign, readwrite) RPGBattleStatus battleStatus;
 @property (nonatomic, retain, readwrite) RPGBattleReward *reward;
@@ -39,7 +39,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 - (instancetype)initWithType:(NSString *)aType
                   playerInfo:(RPGPlayerInfo *)aPlayerInfo
                 opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-             skillsCondition:(NSArray *)aSkillsCondition
+             skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                 skillsDamage:(NSDictionary *)aSkillsDamage
                 battleStatus:(RPGBattleStatus)aBattleStatus
                       reward:(RPGBattleReward *)aReward
@@ -88,7 +88,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 + (instancetype)battleConditionResponseWithType:(NSString *)aType
                                      playerInfo:(RPGPlayerInfo *)aPlayerInfo
                                    opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-                                skillsCondition:(NSArray *)aSkillsCondition
+                                skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                                    skillsDamage:(NSDictionary *)aSkillsDamage
                                    battleStatus:(RPGBattleStatus)aBattleStatus
                                          reward:(RPGBattleReward *)aReward
@@ -121,7 +121,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 #pragma mark - Accessors
 
-- (NSArray *)skillsCondition
+- (NSArray<NSDictionary *> *)skillsCondition
 {
   return self.mutableSkillsCondition;
 }
@@ -135,18 +135,33 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 
 - (NSDictionary *)dictionaryRepresentation
 {
-  NSMutableDictionary *dictionaryRepresentation = [[super dictionaryRepresentation] mutableCopy];
+  NSMutableDictionary *dictionaryRepresentation = [[[super dictionaryRepresentation] mutableCopy] autorelease];
   
-  dictionaryRepresentation[kRPGBattleConditionResponsePlayerInfo] = [self.playerInfo dictionaryRepresentation];
-  dictionaryRepresentation[kRPGBattleConditionResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
-  dictionaryRepresentation[kRPGBattleConditionResponseSkillsCondition] = self.skillsCondition;
-  dictionaryRepresentation[kRPGBattleConditionResponseSkillsDamage] = self.skillsDamage;
-  dictionaryRepresentation[kRPGBattleConditionResponseReward] = [self.reward dictionaryRepresentation];
+  if (self.playerInfo != nil)
+  {
+    dictionaryRepresentation[kRPGBattleConditionResponsePlayerInfo] = [self.playerInfo dictionaryRepresentation];
+  }
+  if (self.opponentInfo != nil)
+  {
+    dictionaryRepresentation[kRPGBattleConditionResponseOpponentInfo] = [self.opponentInfo dictionaryRepresentation];
+  }
+  if (self.skillsCondition != nil)
+  {
+    dictionaryRepresentation[kRPGBattleConditionResponseSkillsCondition] = self.skillsCondition;
+  }
+  if (self.skillsDamage != nil)
+  {
+    dictionaryRepresentation[kRPGBattleConditionResponseSkillsDamage] = self.skillsDamage;
+  }
+  if (self.reward != nil)
+  {
+    dictionaryRepresentation[kRPGBattleConditionResponseReward] = [self.reward dictionaryRepresentation];
+  }
   dictionaryRepresentation[kRPGBattleConditionResponseStatus] = @(self.status);
   dictionaryRepresentation[kRPGBattleConditionResponseCurrentTurn] = @(self.currentTurn);
   dictionaryRepresentation[kRPGBattleConditionResponseBattleStatus] = @(self.battleStatus);
   
-  return [dictionaryRepresentation autorelease];
+  return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary

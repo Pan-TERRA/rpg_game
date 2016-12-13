@@ -146,7 +146,6 @@
                         <constraint firstItem="23v-Wy-8qM" firstAttribute="height" secondItem="Ec4-An-Tey" secondAttribute="height" multiplier="0.07" id="j7S-sn-FFY"/>
                         <constraint firstItem="3dk-dY-hdr" firstAttribute="centerX" secondItem="Ec4-An-Tey" secondAttribute="centerX" id="o07-v6-Ipm"/>
                         <constraint firstAttribute="bottom" secondItem="nsp-kx-WVY" secondAttribute="bottom" id="qJu-PK-eC8"/>
-                        <constraint firstItem="dKV-8M-zUW" firstAttribute="top" secondItem="Kn2-tM-O48" secondAttribute="bottom" constant="10" id="s1w-yp-Muv"/>
                         <constraint firstItem="XtB-wT-ISK" firstAttribute="width" secondItem="Kn2-tM-O48" secondAttribute="width" id="saL-Te-oBK"/>
                         <constraint firstItem="3dk-dY-hdr" firstAttribute="centerX" secondItem="XtB-wT-ISK" secondAttribute="centerX" id="tgY-yF-br3"/>
                         <constraint firstAttribute="bottom" secondItem="2kY-PF-cNP" secondAttribute="bottom" id="wMk-rn-2ha"/>
@@ -154,11 +153,6 @@
                         <constraint firstItem="dKV-8M-zUW" firstAttribute="top" secondItem="XtB-wT-ISK" secondAttribute="bottom" constant="5" id="yob-Sk-izn"/>
                         <constraint firstItem="Kn2-tM-O48" firstAttribute="width" secondItem="Ec4-An-Tey" secondAttribute="width" multiplier="0.82" id="yur-TF-jIN"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="s1w-yp-Muv"/>
-                        </mask>
-                    </variation>
                 </view>
             </subviews>
             <gestureRecognizers/>
@@ -181,7 +175,7 @@
         </view>
         <tapGestureRecognizer id="1fC-C1-v8E">
             <connections>
-                <action selector="removeViewControllerFromParent:" destination="-1" id="mLV-4r-yv4"/>
+                <action selector="handleTapGesture:" destination="-1" id="86C-7M-bxQ"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

@@ -6,7 +6,6 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-
 #import "RPGQuestViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
@@ -35,7 +34,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 
 @interface RPGQuestViewController () 
 
-@property (nonatomic, assign, readwrite) NSUInteger questID;
+@property (nonatomic, assign, readwrite) NSInteger questID;
 @property (nonatomic, assign, readwrite, getter=hasGotReward) BOOL getReward;
 
 @property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
@@ -78,9 +77,9 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
   self.bodyContainer.questViewController = self;
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)anAnimated
 {
-  [super viewWillAppear:animated];
+  [super viewWillAppear:anAnimated];
   
   if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
   {
@@ -126,6 +125,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imagePickerController = [picker retain];
   }
+  
   return _imagePickerController;
 }
 

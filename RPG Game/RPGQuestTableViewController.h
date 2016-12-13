@@ -9,18 +9,26 @@
 #import <UIKit/UIKit.h>
   // Constants
 #import "RPGQuestListState.h"
+  // Entities
+@class RPGQuest;
 
-@class RPGQuestListViewController;
+@protocol RPGQuestTableViewControllerDelegate <NSObject>
+
+- (void)updateViewForState:(RPGQuestListState)aState
+              shouldReload:(BOOL)aShouldReloadFlag;
+- (void)setViewToNoQuestsState:(BOOL)aFlag;
+- (void)showQuestViewWithQuest:(RPGQuest *)aQuest;
+- (UIViewController *)getViewController;
+
+@end
 
 @interface RPGQuestTableViewController : NSObject
 
+@property (nonatomic, assign, readwrite) id<RPGQuestTableViewControllerDelegate> delegate;
 @property (nonatomic, assign, readwrite) RPGQuestListState questListState;
 
-- (instancetype)initWithTableView:(UITableView *)aTableView
-             parentViewController:(RPGQuestListViewController *)aViewController;
-- (void)deleteQuestWithID:(NSUInteger)anID;
-- (void)setQuestArray:(NSArray *)aQuestArray
-    forQuestListState:(RPGQuestListState)aState;
-- (void)getRewardForQuestWithID:(NSUInteger)anID;
+- (instancetype)initWithTableView:(UITableView *)aTableView;
+- (void)setQuests:(NSArray<RPGQuest *> *)aQuests
+forQuestListState:(RPGQuestListState)aState;
 
 @end

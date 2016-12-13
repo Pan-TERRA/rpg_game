@@ -19,15 +19,15 @@
 
 #pragma mark - Init
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)aFrame
 {
-  self = [super initWithFrame:frame];
+  self = [super initWithFrame:aFrame];
   
   if (self != nil)
   {
-    _absoluteWidth = frame.size.width;
+    _absoluteWidth = aFrame.size.width;
     _progress = 1.0;
-    _align = kRPGProgressBarRightAlign;
+    _align = kRPGAlignRight;
   }
   
   return self;
@@ -40,7 +40,7 @@
   if (self != nil)
   {
     _progress = 1.0;
-    _align = kRPGProgressBarRightAlign;
+    _align = kRPGAlignRight;
   }
   return self;
 }
@@ -70,7 +70,7 @@
   CGFloat currentWidth = self.absoluteWidth * _progress;
   CGRect currentProgressBarRect = CGRectZero;
   
-  if (self.align == kRPGProgressBarLeftAlign)
+  if (self.align == kRPGAlignLeft)
   {
     currentProgressBarRect = CGRectMake(originX,
                                         originY,
@@ -94,14 +94,13 @@
   self.frame = currentProgressBarRect;
   
   [UIView commitAnimations];
-  
 }
 
 #pragma mark - Draw Rect
 
-- (void)drawRect:(CGRect)rect
+- (void)drawRect:(CGRect)aRect
 {
-  [super drawRect:rect];
+  [super drawRect:aRect];
   
   CGFloat width = self.frame.size.width;
   self.absoluteWidth = width;
@@ -109,7 +108,7 @@
   CGFloat currentWidth = self.frame.size.width * _progress;
   CGRect currentProgressBarRect = CGRectZero;
   
-  if (self.align == kRPGProgressBarRightAlign)
+  if (self.align == kRPGAlignLeft)
   {
     currentProgressBarRect = CGRectMake(0,
                                         0,
@@ -123,7 +122,6 @@
                                         currentWidth,
                                         height);
   }
-  
   
     // Invokes once
   UIImage *progressBarImage = [UIImage imageNamed:@"pink_bar"];

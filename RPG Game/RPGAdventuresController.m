@@ -25,14 +25,11 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
-
-
-
-static NSString * const kRPGBattleControllerSkills = @"skills";
+#import "RPGUserSessionKeys.h"
 
 @interface RPGAdventuresController ()
 
-@property (retain, nonatomic, readwrite) RPGWebsocketManager *webSocketManager;
+@property (nonatomic, retain, readwrite) RPGWebsocketManager *webSocketManager;
 
 @end
 
@@ -85,22 +82,24 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 - (void)processBattleInitResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
-                                                initWithDictionaryRepresentation:aResponse]
-                                               autorelease];
+                                                    initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleInitResponse != nil && battleInitResponse.status == 0)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     
-    NSArray<NSNumber *> *skillIDs = [self getPlayerSkillIDs];
+    NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+    NSArray *skillIDs = standardUserDefaults.sessionCharacters.firstObject[kRPGUserSessionKeyCharacterSkills];
     
     NSMutableArray *skills = [NSMutableArray array];
+    
     for (NSNumber *skillID in skillIDs)
     {
       RPGSkill *skill = [[RPGSkill alloc] initWithSkillID:[skillID integerValue]];
       [skills addObject:skill];
       [skill release];
     }
+    
     self.battle.player.skills = skills;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGBattleInitDidEndSetUpNotification
@@ -115,7 +114,7 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
 - (void)processBattleConditionResponse:(NSDictionary *)aResponse
 {
   RPGAdventuresConditionResponse *battleConditionResponse = [[[RPGAdventuresConditionResponse alloc]
-                                                          initWithDictionaryRepresentation:aResponse] autorelease];
+                                                              initWithDictionaryRepresentation:aResponse] autorelease];
   
   if (battleConditionResponse != nil && battleConditionResponse.status == 0)
   {
@@ -141,7 +140,19 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
   }
 }
 
-- (void)sendBattleInitRequest
+#pragma mark - Misc
+
+- (void)prepareBattleControllerForDismiss
+{
+  [self.webSocketManager close];
+}
+
+- (void)fireUpBattleController
+{
+  [self.webSocketManager open];
+}
+
+- (void)requestBattleInit
 {
   id request = [self createBattleInitRequest];
   
@@ -153,32 +164,6 @@ static NSString * const kRPGBattleControllerSkills = @"skills";
   {
     NSLog(@"Request is nil");
   }
-}
-
-#pragma mark - Misc
-
-- (void)prepareBattleControllerForDismiss
-{
-  [self.webSocketManager close];
-}
-
-- (void)openBattleControllerWebSocket
-{
-  [self.webSocketManager open];
-}
-
-- (void)requestBattleInit
-{
-  [self sendBattleInitRequest];
-}
-
-#pragma mark - Helper Methods
-
-- (NSArray<NSNumber *> *)getPlayerSkillIDs
-{
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-  return skillIDs;
 }
 
 @end

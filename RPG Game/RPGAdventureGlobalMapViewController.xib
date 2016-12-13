@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGAdventureGlobalMapViewController">
+            <connections>
+                <outlet property="maskImageView" destination="jJ6-5l-uqK" id="ARw-s5-XJQ"/>
+                <outlet property="scrollView" destination="lHe-40-tg5" id="Ny4-lW-g90"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="M92-u3-eeQ" userLabel="Background image">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                </imageView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lHe-40-tg5" userLabel="Map Scroll View">
+                    <rect key="frame" x="0.0" y="50" width="736" height="314"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vvf-MO-rdu" userLabel="Map Content view">
+                            <rect key="frame" x="0.0" y="0.0" width="735" height="735"/>
+                            <subviews>
+                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map_mask" translatesAutoresizingMaskIntoConstraints="NO" id="jJ6-5l-uqK" userLabel="Mask image view">
+                                    <rect key="frame" x="0.0" y="0.0" width="735" height="735"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="735" id="45o-kj-Zdr"/>
+                                        <constraint firstAttribute="width" constant="735" id="6sj-Zz-Qsq"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="45o-kj-Zdr"/>
+                                            <exclude reference="6sj-Zz-Qsq"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="PDg-sv-KPS" appends="YES" id="o7T-Fb-u0O"/>
+                                    </connections>
+                                </imageView>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pML-8O-zgt" userLabel="Display image view">
+                                    <rect key="frame" x="0.0" y="0.0" width="735" height="735"/>
+                                </imageView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="pML-8O-zgt" firstAttribute="height" secondItem="jJ6-5l-uqK" secondAttribute="height" id="5fO-9o-Exc"/>
+                                <constraint firstItem="pML-8O-zgt" firstAttribute="top" secondItem="jJ6-5l-uqK" secondAttribute="top" id="9j2-hN-mT6"/>
+                                <constraint firstItem="jJ6-5l-uqK" firstAttribute="top" secondItem="Vvf-MO-rdu" secondAttribute="top" id="MI6-4V-ruD"/>
+                                <constraint firstAttribute="trailing" secondItem="jJ6-5l-uqK" secondAttribute="trailing" id="Qby-yj-CS7"/>
+                                <constraint firstAttribute="height" constant="735" id="Uc8-IP-gHy"/>
+                                <constraint firstAttribute="bottom" secondItem="jJ6-5l-uqK" secondAttribute="bottom" id="XBe-f4-MX9"/>
+                                <constraint firstItem="jJ6-5l-uqK" firstAttribute="leading" secondItem="Vvf-MO-rdu" secondAttribute="leading" id="aNa-EM-Hpb"/>
+                                <constraint firstAttribute="width" constant="735" id="hVZ-r7-1dE"/>
+                                <constraint firstItem="pML-8O-zgt" firstAttribute="leading" secondItem="jJ6-5l-uqK" secondAttribute="leading" id="nfg-nI-QY4"/>
+                                <constraint firstItem="pML-8O-zgt" firstAttribute="width" secondItem="jJ6-5l-uqK" secondAttribute="width" id="rYF-M5-xwy"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="Vvf-MO-rdu" secondAttribute="trailing" id="Gp7-lO-c6Z"/>
+                        <constraint firstItem="Vvf-MO-rdu" firstAttribute="top" secondItem="lHe-40-tg5" secondAttribute="top" id="IsL-v7-9dy"/>
+                        <constraint firstItem="Vvf-MO-rdu" firstAttribute="leading" secondItem="lHe-40-tg5" secondAttribute="leading" id="T5y-6f-Qvd"/>
+                        <constraint firstAttribute="bottom" secondItem="Vvf-MO-rdu" secondAttribute="bottom" id="qTq-tP-Sf8"/>
+                    </constraints>
+                </scrollView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BHx-Xg-I18" userLabel="Back button">
+                    <rect key="frame" x="30" y="8" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="epU-T7-nd5"/>
+                        <constraint firstAttribute="height" constant="40" id="pwK-7x-Hub"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
+                    <connections>
+                        <action selector="backAction:" destination="-1" eventType="touchUpInside" id="7kF-GM-dLH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="lHe-40-tg5" secondAttribute="bottom" constant="50" id="1Za-Tn-1iD"/>
+                <constraint firstAttribute="bottom" secondItem="M92-u3-eeQ" secondAttribute="bottom" id="4Cc-gj-7hu"/>
+                <constraint firstItem="lHe-40-tg5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TMk-pj-zwZ"/>
+                <constraint firstItem="BHx-Xg-I18" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="VYK-WH-r3c"/>
+                <constraint firstAttribute="trailing" secondItem="lHe-40-tg5" secondAttribute="trailing" id="aC5-7q-buI"/>
+                <constraint firstItem="M92-u3-eeQ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="bq9-DC-ICJ"/>
+                <constraint firstItem="BHx-Xg-I18" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="dQx-gj-AB6"/>
+                <constraint firstAttribute="trailing" secondItem="M92-u3-eeQ" secondAttribute="trailing" id="eZ7-Gz-9PQ"/>
+                <constraint firstItem="lHe-40-tg5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="50" id="iDY-fd-bKd"/>
+                <constraint firstItem="M92-u3-eeQ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="lud-Dg-afo"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+        </view>
+        <tapGestureRecognizer id="PDg-sv-KPS">
+            <connections>
+                <action selector="mapTappedAction:" destination="-1" id="Wsz-Cf-3IV"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
+        <image name="map_mask" width="2205" height="2205"/>
+    </resources>
+</document>

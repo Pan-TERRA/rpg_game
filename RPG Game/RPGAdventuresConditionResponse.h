@@ -14,7 +14,7 @@
 
 - (instancetype)initWithPlayerInfo:(RPGPlayerInfo *)aPlayerInfo
                       opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-                   skillsCondition:(NSArray *)aSkillsCondition
+                   skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                       skillsDamage:(NSDictionary *)aSkillsDamage
                       battleStatus:(RPGBattleStatus)aBattleStatus
                             reward:(RPGBattleReward *)aReward
@@ -23,7 +23,7 @@
 
 + (instancetype)battleConditionResponseWithPlayerInfo:(RPGPlayerInfo *)aPlayerInfo
                                          opponentInfo:(RPGPlayerInfo *)anOpponentInfo
-                                      skillsCondition:(NSArray *)aSkillsCondition
+                                      skillsCondition:(NSArray<NSDictionary *> *)aSkillsCondition
                                          skillsDamage:(NSDictionary *)aSkillsDamage
                                          battleStatus:(RPGBattleStatus)aBattleStatus
                                                reward:(RPGBattleReward *)aReward

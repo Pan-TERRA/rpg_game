@@ -16,7 +16,8 @@
 
 @implementation RPGNetworkManager (Arena)
 
-- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode, RPGArenaSkillsResponse *))aCallback
+- (void)fetchSkillsWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                   RPGArenaSkillsResponse *aResponse))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -119,7 +120,7 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode))aCallback
+- (void)arenaPayWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -198,12 +199,12 @@
       return;
     }
     
-    RPGBasicNetworkResponse *responseEntity = [[[RPGBasicNetworkResponse alloc]
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
                                                 initWithDictionaryRepresentation:responseDictionary]
                                                autorelease];
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      aCallback(responseEntity.status);
+      aCallback(responseObject.status);
     });
     
   }];

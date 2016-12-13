@@ -19,4 +19,5 @@
 - (void)invalidateTimer;
 - (void)updateTimerLabel:(NSTimer *)aTimer;
 - (void)restartTimer;
+
 @end

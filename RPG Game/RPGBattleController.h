@@ -19,11 +19,11 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
 @interface RPGBattleController : NSObject
 
-@property (retain, nonatomic, readwrite) RPGBattle *battle;
+@property (nonatomic, retain, readwrite) RPGBattle *battle;
 
   // supported websocket messages
-@property (copy, nonatomic, readonly) NSString *battleInitWebSocketMessageType;
-@property (copy, nonatomic, readonly) NSString *battleConditionWebSocketMessageType;
+@property (nonatomic, copy, readonly) NSString *battleInitWebSocketMessageType;
+@property (nonatomic, copy, readonly) NSString *battleConditionWebSocketMessageType;
 
 #pragma mark - Creating Request
 
@@ -40,7 +40,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
  *
  *  @param aResponse A websocket message represented as dictionar
  */
-- (void)processManagerResponse:(NSDictionary *)aResponse;
+- (void)processManagerResponse:(NSDictionary *)aResponse __attribute__((objc_requires_super));
 
 #pragma mark Battle Init Response
 
@@ -49,7 +49,7 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
   // template method
 - (void)processBattleInitResponse:(NSDictionary *)aResponse;
 
-#pragma mark Battle Condtion Response
+#pragma mark Battle Condition Response
 
 - (void)registerWebSocketMessageTypeForBattleConditionResponse:(NSString *)aMessageType;
 
@@ -68,15 +68,15 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 - (void)requestBattleInit;
 
   //  invoke it when showing view controller
-- (void)openBattleControllerWebSocket;
+- (void)fireUpBattleController;
 
   //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismiss;
 
-/**
- *  May be overriden to get player skills from other source.
- *  These skills will be used in battle.
- */
-- (NSArray<NSNumber *> *)getPlayerSkillIDs;
+  //  invoke it when dismissing view controller
+- (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock;
+
+  //  invoked by WebSocketManager delegate
+- (void)dismissalDidFinish;
 
 @end

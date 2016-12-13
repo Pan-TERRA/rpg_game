@@ -15,7 +15,8 @@
 
 @implementation RPGNetworkManager (Classes)
 
-- (void)fetchClassesWithCompletionHandler:(void (^)(NSInteger status, NSArray *classes))aCallback;
+- (void)fetchClassesWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                    RPGClassesResponse *aResponse))aCallback;
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -106,7 +107,7 @@
       }
       else
       {
-        aCallback(responseObject.status, responseObject.classes);
+        aCallback(responseObject.status, responseObject);
       }
     });
     
@@ -117,7 +118,9 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)getClassInfoByID:(NSInteger)anID completionHandler:(void (^)(NSInteger status, NSDictionary *skillInfo))aCallback
+- (void)getClassInfoByID:(NSInteger)anID
+       completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                   RPGClassInfoResponse *aResponse))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@%ld",
                              kRPGNetworkManagerAPIHost,
@@ -209,7 +212,7 @@
       }
       else
       {
-        aCallback(responseObject.status, responseObject.classInfo);
+        aCallback(responseObject.status, responseObject);
       }
     });
     

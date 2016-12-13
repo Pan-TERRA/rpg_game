@@ -16,7 +16,7 @@
 @implementation RPGNetworkManager (Registration)
 
 - (void)registerWithRequest:(RPGRegistrationRequest *)aRequest
-          completionHandler:(void (^)(NSInteger))aCallback
+          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -78,11 +78,9 @@
     NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
                                                                        options:0
                                                                          error:&JSONParsingError];
-    RPGBasicNetworkResponse *responseEntity = [[RPGBasicNetworkResponse alloc] initWithDictionaryRepresentation:responseDictionary];
-    [responseEntity autorelease];
     
       // parse error
-    if (responseEntity == nil)
+    if (responseDictionary == nil)
     {
       [self logError:JSONParsingError withTitle:@"JSON error"];
       
@@ -93,9 +91,19 @@
       return;
     }
     
+    RPGBasicNetworkResponse *responseObject = [[[RPGBasicNetworkResponse alloc]
+                                                initWithDictionaryRepresentation:responseDictionary] autorelease];
+    // validation error
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      aCallback(responseEntity.status);
+      if (responseObject == nil)
+      {
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail);
+      }
+      else
+      {
+        aCallback(responseObject.status);
+      }
     });
   }];
   

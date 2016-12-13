@@ -13,7 +13,7 @@
   // View
 #import "RPGAddFriendViewController.h"
 #import "RPGFriendsTableViewController.h"
-  // Network
+  // API
 #import "RPGNetworkManager+Friends.h"
   // Constants
 #import "RPGNibNames.h"
@@ -94,16 +94,6 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
   [self addChildViewController:self.friendsTableViewController view:self.tableViewContainer];
   
   [self fetchFriends];
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-  [super viewDidAppear:animated];
-}
-
-- (void)didReceiveMemoryWarning
-{
-  [super didReceiveMemoryWarning];
 }
 
 #pragma mark - IBActions

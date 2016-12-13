@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-  // Entities
-@class RPGSkillEffect;
 
 @interface RPGSkillRepresentation : NSObject
 
@@ -19,9 +17,9 @@
 @property (nonatomic, copy, readonly) NSString *imageName;
 @property (nonatomic, copy, readonly) NSString *soundName;
 @property (nonatomic, assign, readonly) NSInteger requiredLevel;
-@property (nonatomic, retain, readonly) NSArray<RPGSkillEffect *> *effects;
+@property (nonatomic, retain, readonly) NSArray<NSNumber *> *effects;
 
-- (instancetype)initWithSkillID:(NSInteger)aSkillID;
+- (instancetype)initWithSkillID:(NSInteger)aSkillID NS_DESIGNATED_INITIALIZER;
 + (instancetype)skillrepresentationWithSkillID:(NSInteger)aSkillID;
 
 @end

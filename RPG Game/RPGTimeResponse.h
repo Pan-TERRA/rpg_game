@@ -17,7 +17,7 @@ extern NSString * const kRPGTimeResponseType;
 #pragma mark - Init
 
 - (instancetype)initWithTimestamp:(NSDate *)aTimestamp
-                           status:(NSInteger)aStatus;
+                           status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithUnixTimestamp:(int)aTimestamp
                                status:(NSInteger)aStatus;
 + (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp

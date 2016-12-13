@@ -8,10 +8,9 @@
 
 #import "RPGArenaSkillDrawViewController.h"
   // API
+#import "RPGArenaFactory.h"
 #import "RPGNetworkManager+Arena.h"
   // Controllers
-#import "RPGArenaControllerGenerator.h"
-//#import "RPGArenaCollectionViewController.h"
 #import "RPGWaitingViewController.h"
 #import "RPGArenaSkillCollectionViewController.h"
 #import "RPGArenaBagCollectionViewController.h"
@@ -30,9 +29,9 @@
 #import "RPGNibNames.h"
 #import "RPGItemTypes.h"
 
-NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetching skills";
+static NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetching skills";
 
-@interface RPGArenaSkillDrawViewController ()
+@interface RPGArenaSkillDrawViewController () <RPGArenaCollectionViewControllerDelegate>
 
 @property (nonatomic, retain, readwrite) RPGArenaBagCollectionViewController *bagSetCollectionViewController;
 @property (nonatomic, retain, readwrite) RPGArenaSkillCollectionViewController *skillsCollectionViewController;
@@ -55,13 +54,15 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
 
 - (instancetype)init
 {
-  self = [super initWithNibName:kRPGArenaSkillDrawViewControllerNIBName bundle:nil];
+  self = [super initWithNibName:kRPGArenaSkillDrawViewControllerNIBName
+                         bundle:nil];
   
   if (self != nil)
   {
     _bagSetCollectionViewController = [[RPGArenaBagCollectionViewController alloc] init];
     _skillsCollectionViewController = [[RPGArenaSkillCollectionViewController alloc] init];
-    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Fetching skills" completion:nil];
+    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Fetching skills"
+                                                           completion:nil];
   }
   
   return self;
@@ -86,9 +87,12 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
 {
   [super viewDidLoad];
   
-  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName bundle:nil];
-  [self.skillsCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
-  [self.bagSetCollectionView registerNib:cellNIB forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  UINib *cellNIB = [UINib nibWithNibName:kRPGCharacterBagCollectionViewCellNIBName
+                                  bundle:nil];
+  [self.skillsCollectionView registerNib:cellNIB
+              forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
+  [self.bagSetCollectionView registerNib:cellNIB
+              forCellWithReuseIdentifier:kRPGCharacterBagCollectionViewCellNIBName];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -96,18 +100,17 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   [super viewWillAppear:animated];
   
   [self setViewToWaitingStateWithMessage:kRPGArenaSkillDrawViewControllerWaitingMessageFetching];
-
-  RPGNetworkManager *sharedNetworkManager = [RPGNetworkManager sharedNetworkManager];
-  [sharedNetworkManager fetchSkillsWithCompletionHandler:^(RPGStatusCode networkStatusCode,
-                                                           RPGArenaSkillsResponse *response)
+  
+  [[RPGNetworkManager sharedNetworkManager] fetchSkillsWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode,
+                                                                               RPGArenaSkillsResponse *aResponse)
   {
     [self setViewToNormalState];
     
-    switch (response.status)
+    switch (aNetworkStatusCode)
     {
       case kRPGStatusCodeOK:
       {
-        [self updateViewWithResponse:response];
+        [self updateViewWithResponse:aResponse];
         break;
       }
       
@@ -124,7 +127,6 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
       }
     }
   }];
-  
 }
 
 - (void)didReceiveMemoryWarning
@@ -137,6 +139,11 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   return UIInterfaceOrientationMaskLandscape;
 }
 
+- (UIViewController *)getViewController
+{
+  return self;
+}
+
 #pragma mark - Update View
 
 - (void)updateViewWithResponse:(RPGArenaSkillsResponse *)aResponse
@@ -146,10 +153,10 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   
   self.skillsCollectionViewController = [[[RPGArenaSkillCollectionViewController alloc]
                                           initWithCollectionView:self.skillsCollectionView
-                                          parentViewController:self
                                           collectionSize:skillCollectionSize
                                           skillsArray:[NSArray array]] autorelease];
-
+  self.skillsCollectionViewController.delegate = self;
+  
   self.bag = [[[RPGArenaBag alloc] initWithArray:skillIDs] autorelease];
   
   [self reloadBagSetCollection];
@@ -159,7 +166,8 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
 
 - (void)handleWrongTokenError
 {
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                            completionHandler:^
   {
     dispatch_async(dispatch_get_main_queue(), ^
     {
@@ -168,18 +176,21 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
       // but in the method below we call -dismiss... on self.
       // figure this out
       UIViewController *viewController = self.presentingViewController.presentingViewController;
-      [viewController dismissViewControllerAnimated:YES completion:nil];
+      [viewController dismissViewControllerAnimated:YES
+                                         completion:nil];
     });
   }];
 }
 
 - (void)handleDefaultError
 {
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:^
+  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeDefaultError
+                            completionHandler:^
   {
     dispatch_async(dispatch_get_main_queue(), ^
     {
-      [self dismissViewControllerAnimated:YES completion:nil];
+      [self dismissViewControllerAnimated:YES
+                               completion:nil];
     });
   }];
 }
@@ -198,18 +209,12 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   [self.waitingModal removeFromParentViewController];
 }
 
-#pragma mark - Actions
-
-- (IBAction)back:(UIButton *)sender
-{
-  [self dismissViewControllerAnimated:YES completion:nil];
-}
-
 #pragma mark - Add To Collection
 
 - (void)addSkillToSkillCollectionWithID:(NSUInteger)aSkillID;
 {
-  [self.skillsCollectionViewController addItem:aSkillID type:kRPGItemTypeSkill];
+  [self.skillsCollectionViewController addItem:aSkillID
+                                          type:kRPGItemTypeSkill];
   [self reloadBagSetCollection];
 }
 
@@ -220,10 +225,9 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   {
     self.bagSetCollectionViewController = [[[RPGArenaBagCollectionViewController alloc]
                                             initWithCollectionView:self.bagSetCollectionView
-                                            parentViewController:self
                                             collectionSize:kRPGArenaBagSetSize
-                                            skillsArray:nextItems]
-                                           autorelease];
+                                            skillsArray:nextItems] autorelease];
+    self.bagSetCollectionViewController.delegate = self;
   }
   else
   {
@@ -237,15 +241,29 @@ NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching = @"Fetc
   self.startBattleButton.enabled = YES;
 }
 
-#pragma mark - IBActions
+#pragma mark - Actions
 
 - (IBAction)handleStartBattleButton
 {
-  NSArray *skillsID = self.skillsCollectionViewController.skillsIDArray;
-  RPGArenaControllerGenerator *arenaControllerGenerator = [[[RPGArenaControllerGenerator alloc] initWithSkillsID:skillsID] autorelease];
-  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc] initWithBattleControllerGenerator:arenaControllerGenerator] autorelease];
+  [self saveSelectedSkills];
+
+  RPGArenaFactory *arenaFactory = [[[RPGArenaFactory alloc] init] autorelease];
+  RPGBattleViewController *viewController = [[[RPGBattleViewController alloc]
+                                              initWithBattleFactory:arenaFactory]
+                                             autorelease];
   
   [self.delegate dismissCurrentAndPresentViewController:viewController];
+}
+
+- (IBAction)back:(UIButton *)aSender
+{
+  [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)saveSelectedSkills
+{
+  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
+  standardUserDefaults.selectedArenaSkills = self.skillsCollectionViewController.skillsIDArray;
 }
 
 @end

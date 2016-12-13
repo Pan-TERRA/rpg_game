@@ -7,7 +7,6 @@
   //
 
 #import "RPGBattleController.h"
-  // API
   // Entities
 #import "RPGBattle.h"
 #import "RPGRequest.h"
@@ -22,13 +21,14 @@
 NSString * const kRPGModelDidChangeNotification = @"modelDidChangeNotification";
 NSString * const kRPGBattleInitDidEndSetUpNotification =  @"battleInitDidEndNotification";
 
-static NSString * const kRPGBattleControllerSkills = @"skills";
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
 
-@property (copy, nonatomic, readwrite) NSString *battleInitWebSocketMessageType;
-@property (copy, nonatomic, readwrite) NSString *battleConditionWebSocketMessageType;
+@property (nonatomic, copy, readwrite) NSString *battleInitWebSocketMessageType;
+@property (nonatomic, copy, readwrite) NSString *battleConditionWebSocketMessageType;
+
+@property (copy, nonatomic, readwrite) void (^onBattleDismissCompletionHandler)(void);
 
 @end
 
@@ -128,12 +128,18 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 #pragma mark - Misc
 
+- (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock
+{
+  [self prepareBattleControllerForDismiss];
+  self.onBattleDismissCompletionHandler = callbackBlock;
+}
+
 - (void)prepareBattleControllerForDismiss
 {
 
 }
 
-- (void)openBattleControllerWebSocket
+- (void)fireUpBattleController
 {
 
 }
@@ -143,11 +149,15 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   
 }
 
-- (NSArray<NSNumber *> *)getPlayerSkillIDs
+- (void)dismissalDidFinish
 {
-  NSUserDefaults *standardUserDefaults = [NSUserDefaults standardUserDefaults];
-  NSArray *skillIDs = [[standardUserDefaults.sessionCharacters firstObject] objectForKey:kRPGBattleControllerSkills];
-  return skillIDs;
+  if (_onBattleDismissCompletionHandler != nil)
+  {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+    {
+      _onBattleDismissCompletionHandler();
+    });
+  }
 }
 
 @end

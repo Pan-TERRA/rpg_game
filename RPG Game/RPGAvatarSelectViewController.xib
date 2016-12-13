@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
@@ -25,7 +26,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="480" height="250"/>
                         </imageView>
                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="M6y-zc-QYG">
-                            <rect key="frame" x="36" y="62" width="408" height="108"/>
+                            <rect key="frame" x="36" y="62" width="408" height="103"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="Arr-7R-MSQ"/>
@@ -43,15 +44,20 @@
                             </variation>
                         </collectionView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5zp-si-uFn">
-                            <rect key="frame" x="200" y="190" width="80" height="35"/>
+                            <rect key="frame" x="200" y="185" width="80" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="80" id="709-ok-qvT"/>
-                                <constraint firstAttribute="height" constant="35" id="BVZ-9L-V15"/>
+                                <constraint firstAttribute="height" constant="40" id="BVZ-9L-V15">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                </constraint>
+                                <constraint firstAttribute="width" secondItem="5zp-si-uFn" secondAttribute="height" multiplier="2:1" id="olN-Nq-BpQ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <state key="normal" title="Select" backgroundImage="main_button_inactive">
                                 <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             </state>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                            </variation>
                             <connections>
                                 <action selector="selectAvatarButtonOnClick:" destination="-1" eventType="touchUpInside" id="w4U-Rr-GcA"/>
                             </connections>
@@ -61,6 +67,9 @@
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="24"/>
+                            </variation>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -69,11 +78,15 @@
                         <constraint firstItem="M6y-zc-QYG" firstAttribute="centerX" secondItem="UB0-rt-jwS" secondAttribute="centerX" id="1Eb-al-DeF"/>
                         <constraint firstItem="auj-Ne-Gaw" firstAttribute="centerX" secondItem="UB0-rt-jwS" secondAttribute="centerX" id="5id-33-cRy"/>
                         <constraint firstItem="auj-Ne-Gaw" firstAttribute="top" secondItem="UB0-rt-jwS" secondAttribute="top" constant="20" id="7R4-Hd-djQ"/>
-                        <constraint firstAttribute="width" constant="480" id="ATK-zy-MHC"/>
+                        <constraint firstAttribute="width" constant="480" id="ATK-zy-MHC">
+                            <variation key="heightClass=regular-widthClass=regular" constant="520"/>
+                        </constraint>
                         <constraint firstItem="5zp-si-uFn" firstAttribute="centerX" secondItem="UB0-rt-jwS" secondAttribute="centerX" id="Hsj-VX-HVa"/>
                         <constraint firstItem="M6y-zc-QYG" firstAttribute="width" secondItem="UB0-rt-jwS" secondAttribute="width" multiplier="0.85" id="Wyn-tc-VdH"/>
                         <constraint firstAttribute="bottom" secondItem="5zp-si-uFn" secondAttribute="bottom" constant="25" id="iXD-cD-QeL"/>
-                        <constraint firstAttribute="height" constant="250" id="kvb-u6-Ldq"/>
+                        <constraint firstAttribute="height" constant="250" id="kvb-u6-Ldq">
+                            <variation key="heightClass=regular-widthClass=regular" constant="300"/>
+                        </constraint>
                         <constraint firstAttribute="bottom" secondItem="m39-Ij-ECx" secondAttribute="bottom" id="mZm-PG-Xo2"/>
                         <constraint firstItem="m39-Ij-ECx" firstAttribute="top" secondItem="UB0-rt-jwS" secondAttribute="top" id="r3u-fq-9ok"/>
                         <constraint firstItem="5zp-si-uFn" firstAttribute="top" secondItem="M6y-zc-QYG" secondAttribute="bottom" constant="20" id="rJb-nF-s6d"/>

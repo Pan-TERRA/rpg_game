@@ -10,13 +10,13 @@
   // Entities
 #import "RPGQuest.h"
 
-NSString * const kRPGQuestListResponseStatus = @"status";
-NSString * const kRPGQuestListResponseQuests = @"quests";
+static NSString * const kRPGQuestListResponseStatus = @"status";
+static NSString * const kRPGQuestListResponseQuests = @"quests";
 
 @interface RPGQuestListResponse ()
 
 @property (nonatomic, assign, readwrite) NSInteger status;
-@property (nonatomic, retain, readwrite) NSArray *quests;
+@property (nonatomic, retain, readwrite) NSArray<RPGQuest *> *quests;
 
 @end
 
@@ -25,7 +25,7 @@ NSString * const kRPGQuestListResponseQuests = @"quests";
 #pragma mark - Init
 
 - (instancetype)initWithStatus:(NSInteger)aStatus
-                        quests:(NSArray *)aQuests
+                        quests:(NSArray<RPGQuest *> *)aQuests
 {
   self = [super init];
   
@@ -51,7 +51,7 @@ NSString * const kRPGQuestListResponseQuests = @"quests";
 }
 
 + (instancetype)responseWithStatus:(NSInteger)aStatus
-                            quests:(NSArray *)aQuests
+                            quests:(NSArray<RPGQuest *> *)aQuests
 {
   return [[[self alloc] initWithStatus:aStatus
                                 quests:aQuests] autorelease];
@@ -68,6 +68,7 @@ NSString * const kRPGQuestListResponseQuests = @"quests";
 - (void)dealloc
 {
   [_quests release];
+  
   [super dealloc];
 }
 
@@ -77,21 +78,24 @@ NSString * const kRPGQuestListResponseQuests = @"quests";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   dictionaryRepresentation[kRPGQuestListResponseStatus] = @(self.status);
+  
   if (self.quests)
   {
     NSMutableArray *questsMutableArray = [NSMutableArray array];
+    
     for (RPGQuest *quest in self.quests)
     {
       [questsMutableArray addObject:[quest dictionaryRepresentation]];
     }
+    
     dictionaryRepresentation[kRPGQuestListResponseQuests] = questsMutableArray;
   }
+  
   return dictionaryRepresentation;
 }
 
 - (instancetype)initWithDictionaryRepresentation:(NSDictionary *)aDictionary
 {
-  NSInteger status = [aDictionary[kRPGQuestListResponseStatus] integerValue];
   NSArray *questsDictionaryArray = aDictionary[kRPGQuestListResponseQuests];
   NSMutableArray *quests  =[NSMutableArray array];
   
@@ -100,8 +104,9 @@ NSString * const kRPGQuestListResponseQuests = @"quests";
     RPGQuest *quest = [[[RPGQuest alloc] initWithDictionaryRepresentation:questDictionary] autorelease];
     [quests addObject:quest];
   }
-  return [self initWithStatus:status quests:quests];
+  
+  return [self initWithStatus:[aDictionary[kRPGQuestListResponseStatus] integerValue]
+                       quests:quests];
 }
-
 
 @end

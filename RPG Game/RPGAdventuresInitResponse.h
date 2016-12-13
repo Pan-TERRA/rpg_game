@@ -11,15 +11,15 @@
 @interface RPGAdventuresInitResponse : RPGBattleInitResponse
 
 - (instancetype)initWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                  playerInfo:(RPGPlayer *)aPlayerInfo
-                 currentTurn:(BOOL)aCurrentTurn
-                        time:(NSInteger)aTime
-                      status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                          playerInfo:(RPGPlayer *)aPlayerInfo
+                         currentTurn:(BOOL)aCurrentTurn
+                                time:(NSInteger)aTime
+                              status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)battleInitResponseWithOpponentInfo:(RPGEntity *)anOpponentInfo
-                                playerInfo:(RPGPlayer *)aPlayerInfo
-                               currentTurn:(BOOL)aCurrentTurn
-                                      time:(NSInteger)aTime
-                                    status:(NSInteger)aStatus;
+                                        playerInfo:(RPGPlayer *)aPlayerInfo
+                                       currentTurn:(BOOL)aCurrentTurn
+                                              time:(NSInteger)aTime
+                                            status:(NSInteger)aStatus;
 
 @end

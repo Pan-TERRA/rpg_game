@@ -10,7 +10,8 @@
 
 @implementation NSObject (RPGErrorLog)
 
-- (void)logError:(NSError *)anError withTitle:(NSString *)aTitle
+- (void)logError:(NSError *)anError
+       withTitle:(NSString *)aTitle
 {
   NSLog(@"%@", aTitle);
   NSLog(@"Domain: %@", anError.domain);

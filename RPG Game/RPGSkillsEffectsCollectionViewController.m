@@ -11,16 +11,16 @@
 #import "RPGSkillsEffectsCollectionViewCell.h"
   // Entites
 #import "RPGSkillEffect.h"
+#import "RPGSkillEffectRepresentation.h"
   // Constants
 #import "RPGNibNames.h"
 
 static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize = 6;
 
-
 @interface RPGSkillsEffectsCollectionViewController() <UICollectionViewDelegate, UICollectionViewDataSource>
 
 @property (nonatomic, assign, readwrite) UICollectionView *collectionView;
-@property (nonatomic, assign, readwrite) RPGSkillsEffectsCollectionViewAlign align;
+@property (nonatomic, assign, readwrite) RPGAlign align;
 
 @end
 
@@ -29,8 +29,8 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                         skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
-                                 align:(RPGSkillsEffectsCollectionViewAlign)anAlign
+                         skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                                 align:(RPGAlign)anAlign
 {
   self = [super init];
   
@@ -42,7 +42,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     
-    if (anAlign == kRPGSkillsEffectsCollectionViewAlignRight)
+    if (anAlign == kRPGAlignRight)
     {
       _collectionView.transform = CGAffineTransformMakeScale(-1, 1);
     }
@@ -51,11 +51,21 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   return self;
 }
 
+
++ (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
+                                           skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                                                   align:(RPGAlign)anAlign
+{
+    return [[[self alloc] initWithCollectionView:aCollectionView
+                                   skillsEffects:aSkillsEffects
+                                           align:anAlign] autorelease];
+}
+
 - (instancetype)init
 {
   return [self initWithCollectionView:nil
                         skillsEffects:nil
-                                align:kRPGSkillsEffectsCollectionViewAlignLeft];
+                                align:kRPGAlignLeft];
 }
 
 #pragma mark - Dealloc
@@ -76,19 +86,22 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)aCollectionView cellForItemAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
-                                                                                        forIndexPath:anIndexPath];
+  RPGSkillsEffectsCollectionViewCell *cell = [aCollectionView
+                                              dequeueReusableCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName
+                                              forIndexPath:anIndexPath];
   NSInteger index = anIndexPath.row;
   NSArray *skillsEffects = self.skillsEffects;
   
   if (index < skillsEffects.count)
   {
-    RPGSkillEffect *skillEffect = skillsEffects[index];
+    NSInteger skillEffectID = [skillsEffects[index] integerValue];
+    RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:skillEffectID];
     
     cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
-    cell.backgroundImage = [UIImage imageNamed:[NSString stringWithFormat:@"skill_effect_%ld", (long)skillEffect.skillEffectID]];
+    cell.backgroundImage = [UIImage imageNamed:skillEffectRepresentation.imageName];
     
-    cell.duration = skillEffect.duration;
+    cell.duration = skillEffectRepresentation.duration;
+    cell.skillEffectID = skillEffectID;
   }
   
   cell.hidden = !(index < skillsEffects.count);
@@ -108,5 +121,6 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   
   return CGSizeMake(cellWidth, cellWidth);
 }
+
 
 @end

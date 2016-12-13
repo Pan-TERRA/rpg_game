@@ -10,7 +10,8 @@
 
 @implementation UIViewController (RPGChildViewController)
 
-- (void)addChildViewController:(UIViewController *)aChildViewController frame:(CGRect)aFrame
+- (void)addChildViewController:(UIViewController *)aChildViewController
+                         frame:(CGRect)aFrame
 {
   [self addChildViewController:aChildViewController];
   aChildViewController.view.frame = aFrame;
@@ -18,7 +19,8 @@
   [aChildViewController didMoveToParentViewController:self];
 }
 
-- (void)addChildViewController:(UIViewController *)aChildViewController view:(UIView *)aView
+- (void)addChildViewController:(UIViewController *)aChildViewController
+                          view:(UIView *)aView
 {
   [self addChildViewController:aChildViewController];
   aChildViewController.view.frame = CGRectMake(0, 0, aView.frame.size.width, aView.frame.size.height);

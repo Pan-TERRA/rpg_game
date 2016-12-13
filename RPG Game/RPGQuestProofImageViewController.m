@@ -51,9 +51,9 @@
 
 #pragma mark - Set View Content
 
-- (void)setImage:(UIImage *)anImage
+- (void)setProofImage:(UIImage *)aProofImage
 {
-  CGSize imageSize = anImage.size;
+  CGSize imageSize = aProofImage.size;
   CGSize viewSize = self.view.frame.size;
   NSUInteger topBottomConst = 0;
   NSUInteger leftRightConst = 0;
@@ -74,7 +74,12 @@
   self.leadingImageViewConstraint.constant = leftRightConst;
   self.trailingImageViewConstraint.constant = leftRightConst;
   
-  self.proofImageView.image = anImage;
+  self.proofImageView.image = aProofImage;
+}
+
+- (UIImage *)proofImage
+{
+  return self.proofImageView.image;
 }
 
 @end

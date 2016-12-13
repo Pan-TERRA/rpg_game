@@ -63,6 +63,7 @@ static NSString * const kRPGAuthorizationLoginRequestPassword = @"password";
 {
   [_email release];
   [_password release];
+  
   [super dealloc];
 }
 
@@ -72,8 +73,14 @@ static NSString * const kRPGAuthorizationLoginRequestPassword = @"password";
 {
   NSMutableDictionary *dictionaryRepresentation = [NSMutableDictionary dictionary];
   
-  dictionaryRepresentation[kRPGAuthorizationLoginRequestEmail] = self.email;
-  dictionaryRepresentation[kRPGAuthorizationLoginRequestPassword] = self.password;
+  if (self.email != nil)
+  {
+    dictionaryRepresentation[kRPGAuthorizationLoginRequestEmail] = self.email;
+  }
+  if (self.password != nil)
+  {
+    dictionaryRepresentation[kRPGAuthorizationLoginRequestPassword] = self.password;
+  }
   
   return dictionaryRepresentation;
 }

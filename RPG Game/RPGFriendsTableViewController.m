@@ -15,7 +15,7 @@
 #import "RPGFriendsTableViewCellInFriends.h"
 #import "RPGFriendsTableViewCellIncoming.h"
 #import "RPGFriendsTableViewCellOutgoing.h"
-  // Network
+  // API
 #import "RPGNetworkManager+Friends.h"
   // Network Entity
 #import "RPGFriendRequest.h"
@@ -109,6 +109,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
       
       break;
     }
+      
     default:
     {
       break;
@@ -116,7 +117,6 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
   }
   return numberOfRow;
 }
-
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -240,7 +240,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 
 - (void)questChallengeButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
 {
-  NSLog(@"Quest Challenge");
+  
 }
 
 - (void)removeFromFriendsButtonDidPressOnCell:(RPGFriendsTableViewCellInFriends *)aCell
@@ -268,18 +268,21 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
        case kRPGStatusCodeWrongToken:
        {
          [weakSelf handleWrongToken];
+         
          break;
        }
          
        case kRPGStatusCodeFriendNotFound:
        {
          [weakSelf handleFriendNotFound];
+         
          break;
        }
          
        default:
        {
          [weakSelf handleDefaultError];
+         
          break;
        }
      }
@@ -312,24 +315,28 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
        case kRPGStatusCodeWrongToken:
        {
          [weakSelf handleWrongToken];
+         
          break;
        }
          
        case kRPGStatusCodeAreAlreadyFriends:
        {
          [weakSelf handleAreAlreadyFriends];
+         
          break;
        }
          
        case kRPGStatusCodeFriendRequestNotFound:
        {
          [weakSelf handleFriendRequestNotFound];
+         
          break;
        }
          
        default:
        {
          [weakSelf handleDefaultError];
+         
          break;
        }
      }
@@ -362,18 +369,21 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
        case kRPGStatusCodeWrongToken:
        {
          [weakSelf handleWrongToken];
+         
          break;
        }
          
        case kRPGStatusCodeFriendRequestNotFound:
        {
          [weakSelf handleFriendRequestNotFound];
+         
          break;
        }
          
        default:
        {
          [weakSelf handleDefaultError];
+         
          break;
        }
      }
@@ -406,18 +416,21 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
       case kRPGStatusCodeWrongToken:
       {
         [weakSelf handleWrongToken];
+        
         break;
       }
         
       case kRPGStatusCodeFriendRequestNotFound:
       {
         [weakSelf handleFriendRequestNotFound];
+        
         break;
       }
         
       default:
       {
         [weakSelf handleDefaultError];
+        
         break;
       }
     }

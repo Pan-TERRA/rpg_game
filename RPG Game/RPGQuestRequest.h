@@ -14,9 +14,9 @@ extern NSString * const kRPGQuestRequestQuestID;
 
 @interface RPGQuestRequest : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSUInteger questID;
+@property (nonatomic, assign, readonly) NSInteger questID;
 
-- (instancetype)initWithQuestID:(NSUInteger)aQuestID NS_DESIGNATED_INITIALIZER;
-+ (instancetype)questRequestWithQuestID:(NSUInteger)aQuestID;
+- (instancetype)initWithQuestID:(NSInteger)aQuestID NS_DESIGNATED_INITIALIZER;
++ (instancetype)questRequestWithQuestID:(NSInteger)aQuestID;
 
 @end

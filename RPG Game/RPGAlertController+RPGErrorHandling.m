@@ -12,22 +12,21 @@
 
 #pragma mark - Helper Method
 
-+ (void)showErrorWithStatusCode:(RPGStatusCode)aStatusCode completionHandler:(void (^ _Nullable)())completionHandler
++ (void)showErrorWithStatusCode:(RPGStatusCode)aStatusCode
+              completionHandler:(void (^ _Nullable)())aCompletionHandler
 {
-	 [RPGAlertController showAlertWithTitle:RPGStatusCodeTitle[aStatusCode]
-                                  message:RPGStatusCodeDescription[aStatusCode]
-                              actionTitle:RPGStatusCodeActionTitle[aStatusCode]
-                               completion:completionHandler];
+  [RPGAlertController showAlertWithTitle:RPGStatusCodeTitle[aStatusCode]
+                                 message:RPGStatusCodeDescription[aStatusCode]
+                             actionTitle:RPGStatusCodeActionTitle[aStatusCode]
+                              completion:aCompletionHandler];
 }
 
 #pragma mark - Default
 
 + (void)handleDefaultError
 {
-  [self showErrorWithStatusCode:kRPGStatusCodeDefaultError completionHandler:nil];
+  [self showErrorWithStatusCode:kRPGStatusCodeDefaultError
+              completionHandler:nil];
 }
-
-
-
 
 @end
