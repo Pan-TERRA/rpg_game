@@ -8,36 +8,58 @@
 
 #import "RPGLocationMapViewController.h"
   // API
-#import "RPGAdventuresFactory.h"
-#import "RPGBattleViewController.h"
+#import "RPGNetworkManager+RPGAdventures.h"
   // Controllers
 #import "RPGAdventureGlobalMapViewController.h"
+#import "RPGWaitingViewController.h"
+#import "RPGBattleViewController.h"
+  // Entities
+#import "RPGLocationInfoResponse.h"
   // Views
 #import "RPGBattleplaceView.h"
+  // Misc
+#import "UIViewController+RPGChildViewController.h"
+#import "RPGAdventuresFactory.h"
   // Constants
 #import "RPGNibNames.h"
 
-  //
+static NSString * const kRPGLocationMapViewControllerLocationInfoBattlePlaceIDKey = @"battle_place_id";
+static NSString * const kRPGLocationMapViewControllerLocationInfoStateKey = @"state";
+
+typedef NS_ENUM(NSInteger, RPGLocationInfoState)
+{
+  kRPGLocationInfoIsClearedState,
+  kRPGLocationInfoIsAvailableState,
+  kRPGLocationInfoIsNotAvailableState
+};
+
+  // Helper functions
 BOOL locationExists(NSInteger locationID)
 {
   return locationID >= 1 && locationID <= 1;
 }
 
+#pragma mark
 
 @interface RPGLocationMapViewController () <RPGBattleViewControllerDelegate>
 
 @property (readonly, assign, nonatomic) NSInteger locationID;
 @property (readwrite, assign, nonatomic) NSInteger chosenBattleplaceID;
 @property (readwrite, retain, nonatomic) NSMutableArray<RPGBattleplaceView *> *battleplaceViews;
+@property (readwrite, retain, nonatomic) RPGWaitingViewController *waitingViewController;
+@property (readwrite, retain, nonatomic) NSArray<NSDictionary *> *locationInfo;
 
-  // Outlets
+#pragma mark Outlets
 
 @property (readwrite, assign, nonatomic) IBOutlet UIButton *toBattleButton;
 
-  // Battleplace views
+#pragma mark Battleplace views
+
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView1;
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView2;
 @property (readwrite, assign, nonatomic) IBOutlet RPGBattleplaceView *battleplaceView3;
+
+#pragma mark
 
 @end
 
@@ -91,7 +113,22 @@ BOOL locationExists(NSInteger locationID)
 - (void)dealloc
 {
   [_battleplaceViews release];
+  [_waitingViewController release];
+  [_locationInfo release];
   [super dealloc];
+}
+
+#pragma mark - Getters/Setters
+
+- (void)setLocationInfo:(NSArray<NSDictionary *> *)locationInfo
+{
+  if (_locationInfo != locationInfo)
+  {
+    [_locationInfo release];
+    _locationInfo = [locationInfo retain];
+    
+    [self updateBattleplaces];
+  }
 }
 
 #pragma mark - UIViewController
@@ -99,6 +136,8 @@ BOOL locationExists(NSInteger locationID)
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  [self update];
   
   self.battleplaceViews = [NSMutableArray arrayWithObjects:
                            self.battleplaceView1,
@@ -150,8 +189,51 @@ BOOL locationExists(NSInteger locationID)
 
 - (void)battleViewControllerDidEndBattle
 {
-  NSLog(@"Needs update");
+  [self update];
 }
 
+#pragma mark - Helper methods
+
+- (void)update
+{
+  RPGWaitingViewController *waitingViewController = [[RPGWaitingViewController alloc] initWithMessage:@"Please wait"
+                                                                                           completion:nil];
+  [self showWaitingModal:[waitingViewController autorelease]];
+  
+  [[RPGNetworkManager sharedNetworkManager] getLocationInfoWithLocationID:self.locationID
+                                                        completionHandler:^(RPGStatusCode aNetworkStatusCode, RPGLocationInfoResponse *aResponse)
+  {
+    if (aNetworkStatusCode == kRPGStatusCodeOK
+        && aResponse.status == kRPGStatusCodeOK)
+    {
+      self.locationInfo = aResponse.locationInfo;
+      [self removeWaitingModal];
+    }
+  }];
+}
+
+- (void)updateBattleplaces
+{
+  for (NSDictionary *battlePlaceInfo in self.locationInfo)
+  {
+    NSLog(@"%ld", [battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoBattlePlaceIDKey] integerValue]);
+    NSLog(@"%ld", [battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoStateKey] integerValue]);
+  }
+}
+
+#pragma mark Waiting modal
+
+- (void)showWaitingModal:(RPGWaitingViewController *)waitingViewController
+{
+  self.waitingViewController = waitingViewController;
+  [self addChildViewController:waitingViewController
+                          view:self.view];
+}
+
+- (void)removeWaitingModal
+{
+  [self.waitingViewController.view removeFromSuperview];
+  [self.waitingViewController removeFromParentViewController];
+}
 
 @end

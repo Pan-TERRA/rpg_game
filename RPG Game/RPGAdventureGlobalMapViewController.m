@@ -169,8 +169,12 @@
   
   [[RPGNetworkManager sharedNetworkManager] fetchAvailableLocationsWithCompletionHandler:^(RPGStatusCode networkStatusCode, RPGAvailableLocationsResponse *aResponse)
    {
-     self.availableLocationsIDs = aResponse.locationsIDs;
-     [self removeWaitingModal];
+     if (networkStatusCode == kRPGStatusCodeOK
+         && aResponse.status == kRPGStatusCodeOK)
+     {
+       self.availableLocationsIDs = aResponse.locationsIDs;
+       [self removeWaitingModal];
+     }
    }];
 }
 
