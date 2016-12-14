@@ -100,12 +100,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignRight];
       
       
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"
-                                                                completion:^
+      _battleInitModal = [aBattleFactory.battleInitViewController retain];
+      _battleInitModal.completionHandler = ^
       {
         [self.battleController prepareBattleControllerForDismiss];
         [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-      }];
+      };
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
