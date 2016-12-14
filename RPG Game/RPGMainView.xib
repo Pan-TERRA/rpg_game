@@ -292,10 +292,14 @@
                 <constraint firstItem="B97-Vw-McU" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nAv-ue-O5V"/>
                 <constraint firstItem="Yg0-ml-fbo" firstAttribute="height" secondItem="7vk-qz-MTP" secondAttribute="height" id="ncb-Uc-X2N"/>
                 <constraint firstItem="Yg0-ml-fbo" firstAttribute="width" secondItem="7vk-qz-MTP" secondAttribute="width" id="ngA-EL-H54"/>
-                <constraint firstItem="5hT-at-rRQ" firstAttribute="top" secondItem="Zn9-qw-X8d" secondAttribute="bottom" constant="10" id="nv6-En-Cxp"/>
+                <constraint firstItem="5hT-at-rRQ" firstAttribute="top" secondItem="Zn9-qw-X8d" secondAttribute="bottom" constant="10" id="nv6-En-Cxp">
+                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                </constraint>
                 <constraint firstItem="7SE-re-Hvu" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.7" id="rMP-0U-q9Z"/>
                 <constraint firstItem="3Lg-wm-Sff" firstAttribute="bottom" secondItem="Yg0-ml-fbo" secondAttribute="bottom" id="sbb-Xq-UzZ"/>
-                <constraint firstItem="7vk-qz-MTP" firstAttribute="top" secondItem="Uhm-W6-9gC" secondAttribute="bottom" constant="10" id="srp-AW-B1x"/>
+                <constraint firstItem="7vk-qz-MTP" firstAttribute="top" secondItem="Uhm-W6-9gC" secondAttribute="bottom" constant="10" id="srp-AW-B1x">
+                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                </constraint>
                 <constraint firstItem="7vk-qz-MTP" firstAttribute="top" secondItem="Zn9-qw-X8d" secondAttribute="bottom" constant="10" id="t2n-bp-7L6"/>
                 <constraint firstItem="So4-wR-Ia7" firstAttribute="height" secondItem="c5z-DO-r0T" secondAttribute="height" id="ukJ-ZG-yG0"/>
                 <constraint firstItem="Zn9-qw-X8d" firstAttribute="height" secondItem="7vk-qz-MTP" secondAttribute="height" id="vOS-dH-VD1"/>
