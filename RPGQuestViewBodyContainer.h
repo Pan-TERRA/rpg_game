@@ -15,9 +15,12 @@
 @interface RPGQuestViewBodyContainer : UIScrollView <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
+@property (nonatomic, retain, readonly) UIImageView *proofImageView1;
+@property (nonatomic, assign, readonly) UIImageView *proofImageView2;
 
 - (void)setViewContent:(RPGQuest *)aQuest;
 - (void)updateView;
-- (void)downloadImage;
+- (void)downloadImage:(NSString *)aStringURL
+            imageView:(UIImageView *)anImageView;
 
 @end

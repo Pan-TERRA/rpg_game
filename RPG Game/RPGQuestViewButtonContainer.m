@@ -20,11 +20,13 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGStatusCodes.h"
+#import "RPGQuestEnum.h"
 #import <AVFoundation/AVFoundation.h>
 
 @interface RPGQuestViewButtonContainer()
 
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton1;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton2;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *getRewardButton;
@@ -85,22 +87,26 @@
 
 - (void)setStateTakeOrInProgressQuest:(BOOL)aFlag
 {
-  self.acceptButton.hidden = !aFlag;
+  self.acceptButton1.hidden = !aFlag;
+  self.acceptButton2.hidden = !aFlag;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = aFlag;
 }
 
 - (void)setStateReviewedQuest:(BOOL)aFlag
 {
-  self.acceptButton.hidden = YES;
+  self.acceptButton1.hidden = YES;
+  self.acceptButton2.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = aFlag;
 }
 
 - (void)setStateForReviewQuest
 {
-  self.acceptButton.hidden = NO;
-  self.denyButton.hidden = NO;
+  BOOL aFlag = (self.questViewController.questType == kRPGQuestTypeDuel);
+  self.acceptButton1.hidden = NO;
+  self.acceptButton2.hidden = aFlag;
+  self.denyButton.hidden = !aFlag;
   self.addProofButton.hidden = YES;
 }
 
@@ -115,7 +121,15 @@
   }
   else if (state == kRPGQuestStateForReview)
   {
-    [self sendQuestProofWithResult:YES];
+    BOOL result = YES;
+    
+    if (self.questViewController.questType == kRPGQuestTypeDuel
+        && aSender == self.acceptButton1)
+    {
+      result = NO;
+    }
+    
+    [self sendQuestProofWithResult:result];
   }
 }
 
@@ -154,7 +168,8 @@
          
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                   completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
@@ -187,6 +202,7 @@
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   
   [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest
+                                                   byType:kRPGQuestTypeSingle
                                                   request:request
                                         completionHandler:^void(RPGStatusCode aNetworkStatusCode)
   {
@@ -201,7 +217,8 @@
          
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                   completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
