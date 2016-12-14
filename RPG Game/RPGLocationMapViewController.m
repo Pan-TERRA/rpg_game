@@ -214,10 +214,34 @@ BOOL locationExists(NSInteger locationID)
 
 - (void)updateBattleplaces
 {
-  for (NSDictionary *battlePlaceInfo in self.locationInfo)
+  for (RPGBattleplaceView *battleplaceView in self.battleplaceViews)
   {
-    NSLog(@"%ld", [battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoBattlePlaceIDKey] integerValue]);
-    NSLog(@"%ld", [battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoStateKey] integerValue]);
+    for (NSDictionary *battlePlaceInfo in self.locationInfo)
+    {
+      if ([battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoBattlePlaceIDKey] integerValue] == battleplaceView.tag)
+      {
+        RPGLocationInfoState state = [battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoStateKey] integerValue];
+        [self setBattlePlaceView:battleplaceView toState:state];
+      }
+    }
+  }
+}
+
+- (void)setBattlePlaceView:(RPGBattleplaceView *)aBattleplaceView toState:(RPGLocationInfoState)aState
+{
+  switch (aState)
+  {
+    case kRPGLocationInfoIsAvailableState:
+    {
+      aBattleplaceView.hidden = NO;
+      break;
+    }
+      
+    default:
+    {
+      aBattleplaceView.hidden = YES;
+      break;
+    }
   }
 }
 
