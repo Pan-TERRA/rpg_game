@@ -245,7 +245,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
   
   __block typeof(self) weakSelf = self;
   
-  [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionDeleteFriendRequest
+  [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionSendChallengeRequest
                                                withRequest:request
                                          completionHandler:^(RPGStatusCode status)
    {
@@ -254,7 +254,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
        case kRPGStatusCodeOK:
        {
          [RPGAlertController showAlertWithTitle:@"Success"
-                                        message:@"You remove this user from friends"
+                                        message:@"The request was submitted successfully"
                                     actionTitle:nil
                                      completion:nil];
          break;
@@ -273,7 +273,13 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
          break;
        }
-         // TODO: Handle other errors
+         
+        case kRPGStatusCodeQuestDuelCannotBeSent:
+       {
+         [self handleQuestDuelCannotBeSent];
+         break;
+       }
+
        default:
        {
          [weakSelf handleDefaultError];
@@ -527,6 +533,14 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 {
   [RPGAlertController showAlertWithTitle:nil
                                  message:@"Friend not found"
+                             actionTitle:nil
+                              completion:nil];
+}
+
+- (void)handleQuestDuelCannotBeSent
+{
+  [RPGAlertController showAlertWithTitle:nil
+                                 message:@"Request cannot be sended"
                              actionTitle:nil
                               completion:nil];
 }

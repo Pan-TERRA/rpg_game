@@ -41,7 +41,7 @@ NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result"
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute = @"/get_quest_reward";
   // Quest Challenge
-NSString * const kRPGNetworkManagerAPISendQuestChallengeRoute = @"/send_duel_request";
+NSString * const kRPGNetworkManagerAPISendQuestChallengeRoute = @"/duel_send_request";
   // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";

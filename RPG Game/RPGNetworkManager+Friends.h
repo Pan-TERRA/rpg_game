@@ -33,6 +33,4 @@ typedef NS_ENUM(NSUInteger, RPGFriendsNetworkAction)
            withRequest:(RPGFriendRequest *)aRequest
      completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 
-- (void)postQuestChallengeWith:(RPGFriendRequest *)aRequest
-         completionHandler:(void (^)(RPGStatusCode aStatus))aCallback;
 @end
