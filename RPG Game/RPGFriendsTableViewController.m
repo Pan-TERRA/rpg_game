@@ -243,8 +243,6 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
   NSInteger friendID = aCell.currentFriend.friendID;
   RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
   
-  __block typeof(self) weakSelf = self;
-  
   [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionSendChallengeRequest
                                                withRequest:request
                                          completionHandler:^(RPGStatusCode status)
@@ -262,14 +260,14 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [weakSelf handleWrongToken];
+         [self handleWrongToken];
          
          break;
        }
          
        case kRPGStatusCodeFriendNotFound:
        {
-         [weakSelf handleFriendNotFound];
+         [self handleFriendNotFound];
          
          break;
        }
@@ -282,12 +280,12 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 
        default:
        {
-         [weakSelf handleDefaultError];
+         [self handleDefaultError];
          
          break;
        }
      }
-     [weakSelf.delegate needUpdateFriendsList:self];
+     [self.delegate needUpdateFriendsList:self];
    }];
 }
 
@@ -295,8 +293,6 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 {
   NSInteger friendID = aCell.currentFriend.friendID;
   RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
-  
-  __block typeof(self) weakSelf = self;
   
   [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionDeleteFriendRequest
                                                withRequest:request
@@ -315,26 +311,26 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [weakSelf handleWrongToken];
+         [self handleWrongToken];
          
          break;
        }
          
        case kRPGStatusCodeFriendNotFound:
        {
-         [weakSelf handleFriendNotFound];
+         [self handleFriendNotFound];
          
          break;
        }
          
        default:
        {
-         [weakSelf handleDefaultError];
+         [self handleDefaultError];
          
          break;
        }
      }
-     [weakSelf.delegate needUpdateFriendsList:self];
+     [self.delegate needUpdateFriendsList:self];
    }];
 }
 
@@ -342,9 +338,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 {
   NSInteger friendID = aCell.currentFriend.friendID;
   RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
-  
-  __block typeof(self) weakSelf = self;
-  
+
   [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionAcceptFriendRequest
                                                withRequest:request
                                          completionHandler:^(RPGStatusCode status)
@@ -362,33 +356,33 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [weakSelf handleWrongToken];
+         [self handleWrongToken];
          
          break;
        }
          
        case kRPGStatusCodeAreAlreadyFriends:
        {
-         [weakSelf handleAreAlreadyFriends];
+         [self handleAreAlreadyFriends];
          
          break;
        }
          
        case kRPGStatusCodeFriendRequestNotFound:
        {
-         [weakSelf handleFriendRequestNotFound];
+         [self handleFriendRequestNotFound];
          
          break;
        }
          
        default:
        {
-         [weakSelf handleDefaultError];
+         [self handleDefaultError];
          
          break;
        }
      }
-     [weakSelf.delegate needUpdateFriendsList:self];
+     [self.delegate needUpdateFriendsList:self];
    }];
 }
 
@@ -396,9 +390,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 {
   NSInteger friendID = aCell.currentFriend.friendID;
   RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
-  
-  __block typeof(self) weakSelf = self;
-  
+
   [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionSkipFriendRequest
                                                withRequest:request
                                          completionHandler:^(RPGStatusCode status)
@@ -416,26 +408,26 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [weakSelf handleWrongToken];
+         [self handleWrongToken];
          
          break;
        }
          
        case kRPGStatusCodeFriendRequestNotFound:
        {
-         [weakSelf handleFriendRequestNotFound];
+         [self handleFriendRequestNotFound];
          
          break;
        }
          
        default:
        {
-         [weakSelf handleDefaultError];
+         [self handleDefaultError];
          
          break;
        }
      }
-     [weakSelf.delegate needUpdateFriendsList:self];
+     [self.delegate needUpdateFriendsList:self];
    }];
 }
 
@@ -443,9 +435,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 {
   NSInteger friendID = aCell.currentFriend.friendID;
   RPGFriendRequest *request = [RPGFriendRequest friendRequestWithFriendID:friendID];
-  
-  __block typeof(self) weakSelf = self;
-  
+
   [[RPGNetworkManager sharedNetworkManager] doFriendAction:kRPGFriendsNetworkActionCancelFriendRequest
                                                withRequest:request
                                          completionHandler:^(RPGStatusCode status)
@@ -463,26 +453,26 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
         
       case kRPGStatusCodeWrongToken:
       {
-        [weakSelf handleWrongToken];
+        [self handleWrongToken];
         
         break;
       }
         
       case kRPGStatusCodeFriendRequestNotFound:
       {
-        [weakSelf handleFriendRequestNotFound];
+        [self handleFriendRequestNotFound];
         
         break;
       }
         
       default:
       {
-        [weakSelf handleDefaultError];
+        [self handleDefaultError];
         
         break;
       }
     }
-    [weakSelf.delegate needUpdateFriendsList:self];
+    [self.delegate needUpdateFriendsList:self];
   }];
 }
 

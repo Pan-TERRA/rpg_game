@@ -122,8 +122,6 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
   [self setViewToWaitingForServerResponseState];
   fetchFriendsCompletionHandler handler = ^void(RPGStatusCode statusCode, NSArray *friendsList)
   {
-    __block typeof(self) weakSelf = self;
-    
     switch (statusCode)
     {
       case kRPGStatusCodeOK:
@@ -136,8 +134,8 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
           [friends addObject:[friend autorelease]];
         }
         
-        [weakSelf.friendsModelController setData:friends];
-        [weakSelf.friendsTableViewController reloadTable];
+        [self.friendsModelController setData:friends];
+        [self.friendsTableViewController reloadTable];
         
         break;
       }
@@ -152,7 +150,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
          {
            dispatch_async(dispatch_get_main_queue(), ^
             {
-              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              UIViewController *viewController = self.presentingViewController.presentingViewController;
               [viewController dismissViewControllerAnimated:YES completion:nil];
             });
          }];
@@ -171,7 +169,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
       }
     }
     
-    [weakSelf setViewToNormalState];
+    [self setViewToNormalState];
   };
   
   [[RPGNetworkManager sharedNetworkManager] fetchFriendsWithCompletionHandler:handler];

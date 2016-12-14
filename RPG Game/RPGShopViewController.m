@@ -139,8 +139,6 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
 
 - (void)fetchShopUnits
 {
-  __block typeof(self) weakSelf = self;
-  
   fetchShopUnitsCompletionHandler handler= ^void(RPGStatusCode aNetworkStatusCode,
                                                  NSArray<NSDictionary *> *aShopUnits)
   {
@@ -170,7 +168,7 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
          {
            dispatch_async(dispatch_get_main_queue(), ^
             {
-              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              UIViewController *viewController = self.presentingViewController.presentingViewController;
               [viewController dismissViewControllerAnimated:YES
                                                  completion:nil];
             });
@@ -188,9 +186,9 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
         break;
       }
     }
-    [weakSelf.collectionViewController.collectionView reloadData];
+    [self.collectionViewController.collectionView reloadData];
     
-    [weakSelf removeShopInitModal];
+    [self removeShopInitModal];
   };
   
   [[RPGNetworkManager sharedNetworkManager] fetchShopUnitsWithCompletionHandler:handler];
@@ -198,8 +196,6 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
 
 - (void)buyShopUnitWithID:(NSInteger)anUnitID
 {
-  __block typeof(self) weakSelf = self;
-  
   buyShopUnitCompletionHandler handler= ^void(RPGStatusCode aNetworkStatusCode)
   {
     
@@ -227,7 +223,7 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
          {
            dispatch_async(dispatch_get_main_queue(), ^
             {
-              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              UIViewController *viewController = self.presentingViewController.presentingViewController;
               [viewController dismissViewControllerAnimated:YES
                                                  completion:nil];
             });
@@ -280,7 +276,7 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
        }
      }];
     
-    [weakSelf removeShopInitModal];
+    [self removeShopInitModal];
   };
   
   RPGShopUnitRequest *request = [RPGShopUnitRequest shopUnitRequestWithShopUnitID:anUnitID];
@@ -304,14 +300,12 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
 {
   self.shopConfirmModal.question = sRPGShopViewControllerConfirmQuestion;
   
-  __block typeof(self) weakSelf = self;
-  
   self.shopConfirmModal.completionHandler = ^void(void)
   {
-    [weakSelf addChildViewController:weakSelf.shopInitModal
-                               frame:weakSelf.view.frame];
+    [self addChildViewController:self.shopInitModal
+                               frame:self.view.frame];
     
-    [weakSelf buyShopUnitWithID:aShopUnitID];
+    [self buyShopUnitWithID:aShopUnitID];
   };
 
   [self addChildViewController:self.shopConfirmModal view:self.view];
