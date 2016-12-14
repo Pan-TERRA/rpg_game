@@ -9,9 +9,22 @@
 #import <UIKit/UIKit.h>
   // Constants
 #import "RPGQuestListState.h"
-  // Entities
-@class RPGQuest;
+#import "RPGQuestEnum.h"
+  // Controllers
+@class RPGQuestTableViewController;
 
 @interface RPGQuestListViewController : UIViewController
+
+@property (nonatomic, assign, readonly) IBOutlet UITableView *tableView;
+@property (nonatomic, retain, readonly) RPGQuestTableViewController *tableViewController;
+
+
+@property (nonatomic, assign, readwrite, getter=canSendRequest) BOOL sendRequest;
+
+- (instancetype)initWithType:(RPGQuestType)aType;
+- (void)setViewToWaitingForServerResponseState;
+- (void)setViewToNormalState;
+- (void)processQuestsData:(NSArray *)aData
+                  byState:(RPGQuestListState)aState;
 
 @end
