@@ -23,6 +23,7 @@
 #import "RPGCharacterProfileViewController.h"
 #import "RPGShopViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
+#import "RPGFriendsViewController.h"
 #import "RPGPresentingViewControllerProtocol.h"
 #import "RPGTournamentViewController.h"
   // Misc
@@ -145,6 +146,13 @@
                                                            autorelease];
   
   [self presentViewController:tournamentViewController animated:YES completion:nil];
+}
+
+- (IBAction)segueToFriends
+{
+  RPGFriendsViewController *friendsViewController = [[RPGFriendsViewController new] autorelease];
+  
+  [self presentViewController:friendsViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToAdventures

@@ -8,7 +8,7 @@
 
 #import "RPGShopCollectionViewCell.h"
   // Entities
-#import "RPGShopUnit.h"
+#import "RPGShopUnitRepresetation.h"
 #import "RPGSkillRepresentation.h"
 
 @interface RPGShopCollectionViewCell ()
@@ -23,57 +23,13 @@
 
 #pragma mark - Accessors
 
-- (void)setShopUnit:(RPGShopUnit *)aShopUnit
+- (void)setShopUnit:(RPGShopUnitRepresetation *)aShopUnit
 {
   if (_shopUnit != aShopUnit)
   {
     _shopUnit = aShopUnit;
     
-    //TODO: create plist for Shop Units
-    UIImage *unitImage = nil;
-    switch (aShopUnit.unitType)
-    {
-      case kRPGShopUnitTypeGold:
-      {
-        unitImage = [UIImage imageNamed:@"Gold"];
-        
-        break;
-      }
-        
-      case kRPGShopUnitTypeSkill:
-      {
-        RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:aShopUnit.skillID];
-        unitImage = [UIImage imageNamed:skillRepresentation.imageName];
-        
-        if (unitImage == nil)
-        {
-          unitImage = [UIImage imageNamed:@"confirm_icon_inactive"];
-        }
-        
-        break;
-      }
-        
-      case kRPGShopUnitTypeBagSlot:
-      {
-        unitImage = [UIImage imageNamed:@"shop_icon"];
-        
-        break;
-      }
-        
-      case kRPGShopUnitTypeActiveSlot:
-      {
-        unitImage = [UIImage imageNamed:@"hp_icon"];
-        
-        break;
-      }
-        
-      default:
-      {
-        unitImage = [UIImage imageNamed:@"_967740272"];
-        
-        break;
-      }
-    }
+    self.unitImageView.image = [UIImage imageNamed:aShopUnit.imageName];
     
     UIImage *priceTypeImage = nil;
     
@@ -86,12 +42,19 @@
       priceTypeImage = [UIImage imageNamed:@"Gold"];
     }
     
-    self.unitImageView.image = unitImage;
-    
     [self.buyButton setTitle:[@(aShopUnit.priceCount) stringValue] forState:UIControlStateNormal];
     [self.buyButton setImage:priceTypeImage forState:UIControlStateNormal];
   
-    self.titleLabel.text = [NSString stringWithFormat:@"%@ (%ld)", aShopUnit.unitName, (long)aShopUnit.unitCount];
+    NSString *newTitle = nil;
+    if (aShopUnit.unitType == kRPGShopUnitTypeGold)
+    {
+      newTitle = [NSString stringWithFormat:@"%@ (%ld)", aShopUnit.shopUnitName, (long)aShopUnit.unitCount];
+    }
+    else
+    {
+      newTitle = aShopUnit.shopUnitName;
+    }
+    self.titleLabel.text = newTitle;
   }
 }
 

@@ -17,7 +17,7 @@
 @implementation RPGNetworkManager (Shop)
 
 - (void)fetchShopUnitsWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                      RPGShopUnitsResponse *aShopUnitResponse))aCallback
+                                                      NSArray<NSDictionary *> *aShopUnit))aCallback
 {
   NSString *requestString = [NSString stringWithFormat:@"%@%@",
                              kRPGNetworkManagerAPIHost,
@@ -110,7 +110,7 @@
        }
        else
        {
-         aCallback(responseObject.status, responseObject);
+         aCallback(responseObject.status, responseObject.shopUnits);
        }
      });
   }];

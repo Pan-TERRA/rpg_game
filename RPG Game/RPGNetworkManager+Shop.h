@@ -16,7 +16,7 @@
 @interface RPGNetworkManager (Shop)
 
 - (void)fetchShopUnitsWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                                      RPGShopUnitsResponse *aShopUnitResponse))aCallback;
+                                                      NSArray<NSDictionary *> *aShopUnit))aCallback;
 
 - (void)buyShopUnitWithRequest:(RPGShopUnitRequest *)aRequest
             completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
