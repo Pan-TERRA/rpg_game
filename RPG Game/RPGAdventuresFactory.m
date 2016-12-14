@@ -11,11 +11,15 @@
 #import "RPGBattleController.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGRewardViewController.h"
+#import "RPGWaitingViewController.h"
+
+NSString * const kRPGAdventuresFactoryBattleInitMessage = @"Battle init";
 
 @interface RPGAdventuresFactory ()
 
 @property (retain, nonatomic, readwrite) RPGBattleController *battleController;
 @property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readwrite) RPGWaitingViewController *battleInitViewController;
 
 @end
 
@@ -32,6 +36,7 @@
     RPGAdventuresControllerGenerator *battleControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
     _battleController = [[battleControllerGenerator battleController] retain];
     _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+    _battleInitViewController = [[RPGWaitingViewController alloc] initWithMessage:kRPGAdventuresFactoryBattleInitMessage];
   }
   
   return self;
@@ -43,6 +48,7 @@
 {
   [_battleController release];
   [_rewardViewController release];
+  [_battleInitViewController release];
   
   [super dealloc];
 }

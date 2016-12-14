@@ -10,6 +10,7 @@
 
 @class RPGBattleController;
 @class RPGRewardViewController;
+@class RPGWaitingViewController;
 
 /**
  *  Abstract factory. Used by battleViewController and its subclasses
@@ -18,5 +19,6 @@
 
 @property (retain, nonatomic, readonly) RPGBattleController *battleController;
 @property (retain, nonatomic, readonly) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readonly) RPGWaitingViewController *battleInitViewController;
 
 @end

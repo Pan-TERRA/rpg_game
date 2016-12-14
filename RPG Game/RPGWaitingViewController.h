@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RPGWaitingViewController : UIViewController
 
 @property (nonatomic, copy, readwrite) NSString *message;
+@property (nonatomic, copy, readwrite) void (^completionHandler)(void);
 
 /**
  *  Init modal window. 
@@ -24,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return An instanse
  */
 - (instancetype)initWithMessage:(NSString *)aMessage completion:(void (^ __nullable)())completionHandler;
+
+- (instancetype)initWithMessage:(NSString *)aMessage;
 
 @end
 
