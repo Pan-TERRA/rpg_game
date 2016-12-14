@@ -151,7 +151,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [super viewDidLoad];
   
-  self.battleLogViewController.view = self.battleTextView;
+  self.battleLogViewController.textView = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
   [self addChildViewController:self.timerViewController

@@ -94,8 +94,8 @@
                          GLOBAL_MAP_LOCATION1_MASK_COLOR,
                          GLOBAL_MAP_LOCATION2_MASK_COLOR,
                          GLOBAL_MAP_LOCATION3_MASK_COLOR,
-                         GLOBAL_MAP_LOCATION4_MASK_COLOR
-                         , nil];
+                         GLOBAL_MAP_LOCATION4_MASK_COLOR,
+                         nil];
   }
   
   return mapLocationColors;

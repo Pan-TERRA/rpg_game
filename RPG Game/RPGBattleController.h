@@ -72,8 +72,6 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
   //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismiss;
-
-  //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock;
 
   //  invoked by WebSocketManager delegate

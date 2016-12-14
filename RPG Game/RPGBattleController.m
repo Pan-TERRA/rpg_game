@@ -28,7 +28,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 @property (nonatomic, copy, readwrite) NSString *battleInitWebSocketMessageType;
 @property (nonatomic, copy, readwrite) NSString *battleConditionWebSocketMessageType;
 
-@property (copy, nonatomic, readwrite) void (^onBattleDismissCompletionHandler)(void);
+@property (nonatomic, copy, readwrite) void (^onBattleDismissCompletionHandler)(void);
 
 @end
 
@@ -151,7 +151,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)dismissalDidFinish
 {
-  if (_onBattleDismissCompletionHandler != nil)
+  if (self.onBattleDismissCompletionHandler != nil)
   {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
     {

@@ -7,11 +7,11 @@
 //
 
 #import "RPGInitialScreenViewController.h"
+  // API
+#import "RPGNetworkManager.h"
   // Views
 #import "RPGMainViewController.h"
 #import "RPGLoginViewController.h"
-  // API
-#import "RPGNetworkManager.h"
   //Misc
 #import "RPGBackgroundMusicController.h"
   // Constants
@@ -34,22 +34,22 @@
   [super viewDidAppear:anAnimated];
   
   [[RPGNetworkManager sharedNetworkManager] requestIfCurrentTokenIsValidWithCompletionHandler:^(BOOL anIsValidFlag)
-   {
-     UIViewController *viewControllerToBePresented = nil;
+  {
+    UIViewController *viewControllerToBePresented = nil;
      
-     if (anIsValidFlag)
-     {
-       viewControllerToBePresented = [[RPGMainViewController alloc] init];
-     }
-     else
-     {
-       viewControllerToBePresented = [[RPGLoginViewController alloc] init];
-     }
+    if (anIsValidFlag)
+    {
+      viewControllerToBePresented = [[RPGMainViewController alloc] init];
+    }
+    else
+    {
+      viewControllerToBePresented = [[RPGLoginViewController alloc] init];
+    }
     
-     [self presentViewController:[viewControllerToBePresented autorelease]
-                        animated:YES
-                      completion:nil];
-   }];
+    [self presentViewController:[viewControllerToBePresented autorelease]
+                       animated:YES
+                     completion:nil];
+  }];
 }
 
 - (void)viewDidLoad
