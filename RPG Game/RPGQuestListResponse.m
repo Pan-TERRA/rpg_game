@@ -9,9 +9,10 @@
 #import "RPGQuestListResponse.h"
   // Entities
 #import "RPGQuest.h"
+#import "RPGDuelQuest.h"
 
-static NSString * const kRPGQuestListResponseStatus = @"status";
-static NSString * const kRPGQuestListResponseQuests = @"quests";
+NSString * const kRPGQuestListResponseStatus = @"status";
+NSString * const kRPGQuestListResponseQuests = @"quests";
 
 @interface RPGQuestListResponse ()
 
@@ -31,12 +32,12 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
   
   if (self != nil)
   {
-    if (aStatus == 0 && aQuests == nil)
+    if (aStatus != 0 && aQuests == nil)
     {
       [self release];
       self = nil;
     }
-    else if (aStatus != 0 && aQuests == nil)
+    else if (aStatus == 0 && aQuests == nil)
     {
       _quests = nil;
     }
@@ -59,7 +60,7 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
 
 - (instancetype)init
 {
-  return [self initWithStatus:0
+  return [self initWithStatus:-1
                        quests:nil];
 }
 
@@ -101,8 +102,26 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
   
   for (NSDictionary *questDictionary in questsDictionaryArray)
   {
-    RPGQuest *quest = [[[RPGQuest alloc] initWithDictionaryRepresentation:questDictionary] autorelease];
-    [quests addObject:quest];
+    RPGQuest *quest = nil;
+    
+    switch ([questDictionary[kRPGQuestType] integerValue])
+    {
+      case kRPGQuestTypeSingle:
+      {
+        quest = [[RPGQuest alloc] initWithDictionaryRepresentation:questDictionary];
+        break;
+      }
+        
+      case kRPGQuestTypeDuel:
+      {
+        quest = [[RPGDuelQuest alloc] initWithDictionaryRepresentation:questDictionary];
+        break;
+      }
+    }
+    if (quest != nil)
+    {
+      [quests addObject:[quest autorelease]];
+    }
   }
   
   return [self initWithStatus:[aDictionary[kRPGQuestListResponseStatus] integerValue]
