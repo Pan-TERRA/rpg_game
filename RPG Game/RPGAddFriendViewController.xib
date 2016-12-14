@@ -19,31 +19,31 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HJr-PD-q3t" userLabel="Content View">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJr-PD-q3t" userLabel="Content View">
                     <rect key="frame" x="63" y="82" width="474" height="136"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="jG4-mk-eIv" userLabel="Background Image">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="jG4-mk-eIv" userLabel="Background Image">
                             <rect key="frame" x="0.0" y="0.0" width="474" height="136"/>
                         </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Enter user's name or character's name:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pte-KL-KDa">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter user's name or character's name:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pte-KL-KDa">
                             <rect key="frame" x="47" y="16" width="380" height="20"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="ajJ-Wh-vlp" userLabel="Text Field background">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="ajJ-Wh-vlp" userLabel="Text Field background">
                             <rect key="frame" x="35" y="46" width="308" height="50"/>
                         </imageView>
-                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LUx-wJ-MQ9">
+                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="LUx-wJ-MQ9">
                             <rect key="frame" x="60" y="56" width="268" height="30"/>
                             <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="14"/>
-                            <textInputTraits key="textInputTraits"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="alphabet"/>
                             <connections>
                                 <action selector="editingDidChange:" destination="-1" eventType="editingChanged" id="hv8-xq-Fyw"/>
                             </connections>
                         </textField>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zb6-2J-lia" userLabel="Confirm addFriend Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zb6-2J-lia" userLabel="Confirm addFriend Button">
                             <rect key="frame" x="356" y="51" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="Zb6-2J-lia" secondAttribute="height" multiplier="1:1" id="Zch-Wv-1kv"/>
@@ -53,7 +53,7 @@
                                 <action selector="confirmAddFriend:" destination="-1" eventType="touchUpInside" id="bL0-4D-kh7"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q4-ik-sSw" userLabel="Close addFriend Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6q4-ik-sSw" userLabel="Close addFriend Button">
                             <rect key="frame" x="409" y="51" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="6q4-ik-sSw" secondAttribute="height" multiplier="51:52" id="asj-Jh-EOV"/>

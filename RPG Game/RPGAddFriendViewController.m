@@ -45,16 +45,17 @@
 
 #pragma mark - UIViewController
 
-- (void)viewDidLoad
-{
-  [super viewDidLoad];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
   [super viewWillAppear:animated];
   
   [self.friendNickNameTextField becomeFirstResponder];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+  self.friendNickNameTextField.text = @"";
+  [super viewWillDisappear:animated];
 }
 
 #pragma mark - IBActions
