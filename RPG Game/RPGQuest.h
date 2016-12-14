@@ -9,21 +9,23 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
-
-typedef NS_ENUM(NSUInteger, RPGQuestState)
-{
-  kRPGQuestStateCanTake,
-  kRPGQuestStateInProgress,
-  // TODO: rename
-  kRPGQuestStateDone,
-  kRPGQuestStateReviewedTrue,
-  kRPGQuestStateReviewedFalse,
-  kRPGQuestStateForReview = 6 // ???: sho
-};
   // Entities
 @class RPGQuestReward;
+  // Constants
+#import "RPGQuestEnum.h"
+
+extern NSString * const kRPGQuestType;
+extern NSString * const kRPGQuestID;
+extern NSString * const kRPGQuestName;
+extern NSString * const kRPGQuestDescription;
+extern NSString * const kRPGQuestState;
+extern NSString * const kRPGQuestReward;
+extern NSString * const kRPGQuestGetReward;
+extern NSString * const kRPGQuestProofImageStringURL1;
 
 @interface RPGQuest : NSObject <RPGSerializable>
+
+@property (nonatomic, assign, readonly) RPGQuestType questType;
 
 @property (nonatomic, assign, readonly) NSInteger questID;
 @property (nonatomic, copy, readonly) NSString *name;
@@ -31,21 +33,25 @@ typedef NS_ENUM(NSUInteger, RPGQuestState)
 @property (nonatomic, assign, readonly) RPGQuestState state;
 @property (nonatomic, retain, readonly) RPGQuestReward *reward;
 @property (nonatomic, assign, readonly, getter=hasGotReward) BOOL getReward;
-@property (nonatomic, copy, readonly) NSString *proofImageStringURL;
+@property (nonatomic, copy, readonly) NSString *proofImageStringURL1;
 
-- (instancetype)initWithID:(NSInteger)aQuestID
-                      name:(NSString *)aName
-               description:(NSString *)aQuestDescription
-                     state:(NSUInteger)aState
-                    reward:(RPGQuestReward *)aReward
-                 getReward:(BOOL)hasGotReward
-       proofImageStringURL:(NSString *)aStringURL NS_DESIGNATED_INITIALIZER;
-+ (instancetype)questWithID:(NSInteger)aQuestID
-                       name:(NSString *)aName
-                description:(NSString *)aQuestDescription
-                      state:(NSUInteger)aState
-                     reward:(RPGQuestReward *)aReward
-                  getReward:(BOOL)hasGotReward
-        proofImageStringURL:(NSString *)aStringURL;
+
+
+- (instancetype)initWithType:(RPGQuestType)aType
+                     questID:(NSInteger)aQuestID
+                        name:(NSString *)aName
+                 description:(NSString *)aQuestDescription
+                       state:(RPGQuestState)aState
+                      reward:(RPGQuestReward *)aReward
+                   getReward:(BOOL)hasGotReward
+        proofImageStringURL1:(NSString *)aStringURL1 NS_DESIGNATED_INITIALIZER;
++ (instancetype)questWithType:(RPGQuestType)aType
+                      questID:(NSInteger)aQuestID
+                         name:(NSString *)aName
+                  description:(NSString *)aQuestDescription
+                        state:(RPGQuestState)aState
+                       reward:(RPGQuestReward *)aReward
+                    getReward:(BOOL)hasGotReward
+         proofImageStringURL1:(NSString *)aStringURL1;
 
 @end
