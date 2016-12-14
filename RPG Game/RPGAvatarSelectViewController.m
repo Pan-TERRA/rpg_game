@@ -18,6 +18,7 @@
 #import "RPGCharacterAvatarSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
   // Constants
 #import "RPGNibNames.h"
 
@@ -108,7 +109,7 @@ static NSString * const kRPGAvatarSelectViewControllerAvatarID = @"avatar_id";
          
        case kRPGStatusCodeWrongToken:
        {
-         [self.delegate handleWrongTokenError];
+         [self handleWrongTokenError];
          break;
        }
          

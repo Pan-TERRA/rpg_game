@@ -212,6 +212,7 @@
 		D0B354B41E001C1E007AF7F2 /* RPGConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0B354AF1E001C1E007AF7F2 /* RPGConfirmViewController.xib */; };
 		D0B354B51E001C1E007AF7F2 /* RPGShopUnitRepresetation.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B354B11E001C1E007AF7F2 /* RPGShopUnitRepresetation.m */; };
 		D0B354B61E001C1E007AF7F2 /* RPGShopUnitsInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B354B21E001C1E007AF7F2 /* RPGShopUnitsInfo.plist */; };
+		D0B354BD1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = D0B354BC1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.m */; };
 		D0CFEE681DB65B6100C61D0B /* RPGSFXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */; };
 		D0CFEE691DB65B6100C61D0B /* Sounds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0CFEE671DB65B6100C61D0B /* Sounds.bundle */; };
 		D0CFEE761DB65C0100C61D0B /* AppleOpenALSupport.c in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE6E1DB65C0100C61D0B /* AppleOpenALSupport.c */; };
@@ -616,6 +617,8 @@
 		D0B354B01E001C1E007AF7F2 /* RPGShopUnitRepresetation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGShopUnitRepresetation.h; sourceTree = "<group>"; };
 		D0B354B11E001C1E007AF7F2 /* RPGShopUnitRepresetation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGShopUnitRepresetation.m; sourceTree = "<group>"; };
 		D0B354B21E001C1E007AF7F2 /* RPGShopUnitsInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = RPGShopUnitsInfo.plist; sourceTree = "<group>"; };
+		D0B354BB1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RPGWrongTokenHandling.h"; sourceTree = "<group>"; };
+		D0B354BC1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RPGWrongTokenHandling.m"; sourceTree = "<group>"; };
 		D0CFEE651DB65B6100C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
 		D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
 		D0CFEE671DB65B6100C61D0B /* Sounds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sounds.bundle; sourceTree = "<group>"; };
@@ -1949,6 +1952,7 @@
 		28B4DDB01DCC971200332DCD /* Support */ = {
 			isa = PBXGroup;
 			children = (
+				D0B354BA1E01AF27007AF7F2 /* Wrong Token Handling */,
 				2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */,
 				283FF1D71DE5D3ED00F4535E /* RPGClassInfoRepresentation.h */,
 				283FF1D81DE5D3ED00F4535E /* RPGClassInfoRepresentation.m */,
@@ -2483,6 +2487,15 @@
 			name = Representations;
 			sourceTree = "<group>";
 		};
+		D0B354BA1E01AF27007AF7F2 /* Wrong Token Handling */ = {
+			isa = PBXGroup;
+			children = (
+				D0B354BB1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.h */,
+				D0B354BC1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.m */,
+			);
+			name = "Wrong Token Handling";
+			sourceTree = "<group>";
+		};
 		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
 			isa = PBXGroup;
 			children = (
@@ -2882,6 +2895,7 @@
 				28A9155F1DC7B921001E0F51 /* RPGClassesResponse.m in Sources */,
 				AEFC27AB1DD389C100905ADD /* RPGResources.m in Sources */,
 				2A6F2AC21DDA04E80036CD2D /* RPGBattleLog.m in Sources */,
+				D0B354BD1E01AFC9007AF7F2 /* UIViewController+RPGWrongTokenHandling.m in Sources */,
 				AE5E468F1DF041AB00546256 /* RPGAvatarSelectViewController.m in Sources */,
 				284DFDD51DEAFDEA00EE759F /* RPGArenaConditionResponse.m in Sources */,
 				28C576AC1DE3130A008DCB88 /* UIViewController+RPGChildViewController.m in Sources */,

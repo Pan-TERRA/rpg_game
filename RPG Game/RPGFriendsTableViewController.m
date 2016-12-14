@@ -23,6 +23,7 @@
 #import "RPGNibNames.h"
   // Misc
 #import "RPGAlertController.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
 
 static NSString * const sInFriendsCellReusableIdentifier = @"inFriendsIdentifier";
 static NSString * const sIncomingCellReusableIdentifier = @"incomingIdentifier";
@@ -260,7 +261,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [self handleWrongToken];
+         [self handleWrongTokenError];
          
          break;
        }
@@ -311,7 +312,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [self handleWrongToken];
+         [self handleWrongTokenError];
          
          break;
        }
@@ -356,7 +357,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [self handleWrongToken];
+         [self handleWrongTokenError];
          
          break;
        }
@@ -408,7 +409,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
          
        case kRPGStatusCodeWrongToken:
        {
-         [self handleWrongToken];
+         [self handleWrongTokenError];
          
          break;
        }
@@ -453,7 +454,7 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
         
       case kRPGStatusCodeWrongToken:
       {
-        [self handleWrongToken];
+        [self handleWrongTokenError];
         
         break;
       }
@@ -477,22 +478,6 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
 }
 
 #pragma mark - Error Handling
-
-- (void)handleWrongToken
-{
-  NSString *message = @"Can't update friends list.\nWrong token error.\nTry to log in again.";
-  [RPGAlertController showAlertWithTitle:nil
-                                 message:message
-                             actionTitle:nil
-                              completion:^(void)
-   {
-     dispatch_async(dispatch_get_main_queue(), ^
-      {
-        UIViewController *viewController = self.presentingViewController.presentingViewController;
-        [viewController dismissViewControllerAnimated:YES completion:nil];
-      });
-   }];
-}
 
 - (void)handleFriendRequestNotFound
 {

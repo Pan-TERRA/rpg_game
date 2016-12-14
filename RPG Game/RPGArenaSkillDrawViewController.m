@@ -25,6 +25,7 @@
 #import "RPGArenaBag.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGItemTypes.h"
@@ -163,24 +164,6 @@ static NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching =
 }
 
 #pragma mark - Error Handling
-
-- (void)handleWrongTokenError
-{
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
-                            completionHandler:^
-  {
-    dispatch_async(dispatch_get_main_queue(), ^
-    {
-      // TODO: here and in RPGChracterProfileViewController:
-      // in this method we call -dismiss... on self.presentingVC.presentingVC,
-      // but in the method below we call -dismiss... on self.
-      // figure this out
-      UIViewController *viewController = self.presentingViewController.presentingViewController;
-      [viewController dismissViewControllerAnimated:YES
-                                         completion:nil];
-    });
-  }];
-}
 
 - (void)handleDefaultError
 {

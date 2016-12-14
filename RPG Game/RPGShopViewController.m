@@ -28,6 +28,7 @@
   // Misc
 #import "RPGAlertController.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
 
 typedef void (^fetchShopUnitsCompletionHandler)(RPGStatusCode aNetworkStatusCode, NSArray<NSDictionary *> *aShopUnits);
 typedef void (^buyShopUnitCompletionHandler)(RPGStatusCode aNetworkStatusCode);
@@ -160,19 +161,8 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
       }
         case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't update shop.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:^(void)
-         {
-           dispatch_async(dispatch_get_main_queue(), ^
-            {
-              UIViewController *viewController = self.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES
-                                                 completion:nil];
-            });
-         }];
+        [self handleWrongTokenError];
+        
         break;
       }
         
@@ -215,19 +205,8 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
         
       case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't update shop.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:^(void)
-         {
-           dispatch_async(dispatch_get_main_queue(), ^
-            {
-              UIViewController *viewController = self.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES
-                                                 completion:nil];
-            });
-         }];
+        [self handleWrongTokenError];
+        
         break;
       }
         

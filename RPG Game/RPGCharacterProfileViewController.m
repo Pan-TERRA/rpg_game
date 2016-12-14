@@ -29,6 +29,7 @@
 #import "RPGSkillsSelectRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGUserSessionKeys.h"
@@ -206,20 +207,6 @@ static NSString * const kRPGCharacterProfileViewControllerWaitingMessageStore = 
 }
 
 #pragma mark - Error Handling
-
-- (void)handleWrongTokenError
-{
-  [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
-                            completionHandler:^
-   {
-     dispatch_async(dispatch_get_main_queue(), ^
-     {
-       UIViewController *viewController = self.presentingViewController.presentingViewController;
-       [viewController dismissViewControllerAnimated:YES
-                                          completion:nil];
-     });
-   }];
-}
 
 - (void)handleDefaultError
 {

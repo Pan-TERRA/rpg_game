@@ -15,6 +15,7 @@
 #import "RPGBackgroundMusicController.h"
 #import "RPGSFXEngine.h"
 #import "RPGAlertController.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
   // Constants
 #import "RPGNibNames.h"
 #import "RPGStatusCodes.h"
@@ -77,16 +78,8 @@
      {
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
-                                  completionHandler:^
-          {
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-              UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-              [rootViewController dismissViewControllerAnimated:YES
-                                                     completion:nil];
-            });
-          }];
+         [self handleWrongTokenError];
+         
          break;
        }
          

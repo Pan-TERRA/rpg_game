@@ -20,6 +20,7 @@
 #import "RPGStatusCodes.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
 #import "RPGAlertController.h"
 
 @interface RPGQuestListViewController () <RPGQuestTableViewControllerDelegate>
@@ -153,19 +154,8 @@
           
         case kRPGStatusCodeWrongToken:
         {
-          NSString *message = @"Can't update quest list.\nWrong token error.\nTry to log in again.";
-          [RPGAlertController showAlertWithTitle:nil
-                                         message:message
-                                     actionTitle:nil
-                                      completion:^(void)
-          {
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES
-                                                 completion:nil];
-            });
-          }];
+          [self handleWrongTokenError];
+          
           break;
         }
           

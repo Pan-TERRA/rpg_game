@@ -20,6 +20,7 @@
 #import "RPGFriendsState.h"
   // Misc
 #import "UIViewController+RPGChildViewController.h"
+#import "UIViewController+RPGWrongTokenHandling.h"
 #import "RPGAlertController.h"
 
 typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionary *> *);
@@ -142,18 +143,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
         
       case kRPGStatusCodeWrongToken:
       {
-        NSString *message = @"Can't update friends list.\nWrong token error.\nTry to log in again.";
-        [RPGAlertController showAlertWithTitle:nil
-                                       message:message
-                                   actionTitle:nil
-                                    completion:^(void)
-         {
-           dispatch_async(dispatch_get_main_queue(), ^
-            {
-              UIViewController *viewController = self.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES completion:nil];
-            });
-         }];
+        [self handleWrongTokenError];
         
         break;
       }
