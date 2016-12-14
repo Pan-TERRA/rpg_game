@@ -119,6 +119,14 @@
                    completion:nil];
 }
 
+- (IBAction)segueToDuelQuests
+{
+  RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] initWithType:kRPGQuestTypeDuel] autorelease];
+  
+  [self presentViewController:questListViewController
+                     animated:YES
+                   completion:nil];
+}
 
 - (IBAction)segueToShop
 {
