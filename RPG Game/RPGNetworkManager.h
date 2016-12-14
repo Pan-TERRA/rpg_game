@@ -37,6 +37,14 @@ extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute;
+  // Quests Duel
+extern NSString * const kRPGNetworkManagerAPIDuelIncomingQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelQuestsInProgressRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelConfirmedQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelReviewQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIAcceptDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPISkipDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIProofDuelQuestRoute;
   // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;

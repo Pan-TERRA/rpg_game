@@ -40,6 +40,14 @@ NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
 NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute = @"/get_quest_reward";
+  // Quests Duel
+NSString * const kRPGNetworkManagerAPIDuelIncomingQuestsRoute = @"/duel_incoming_requests";
+NSString * const kRPGNetworkManagerAPIDuelQuestsInProgressRoute = @"/duel_in_progress";
+NSString * const kRPGNetworkManagerAPIDuelConfirmedQuestsRoute = @"/duel_confirmed";
+NSString * const kRPGNetworkManagerAPIDuelReviewQuestsRoute = @"/review_duel_quests";
+NSString * const kRPGNetworkManagerAPIAcceptDuelQuestRoute = @"/duel_accept_request";
+NSString * const kRPGNetworkManagerAPISkipDuelQuestRoute = @"/duel_skip_request";
+NSString * const kRPGNetworkManagerAPIProofDuelQuestRoute = @"/prove_duel";
   // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
