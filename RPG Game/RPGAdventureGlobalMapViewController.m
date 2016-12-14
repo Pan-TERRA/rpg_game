@@ -7,13 +7,20 @@
 //
 
 #import "RPGAdventureGlobalMapViewController.h"
+  // API
+#import "RPGNetworkManager+RPGAdventures.h"
   // Controllers
 #import "RPGLocationMapViewController.h"
+#import "RPGWaitingViewController.h"
+  // Entities
+#import "RPGAvailableLocationsResponse.h"
   // Misc
 #import "UIView+RPGColorOfPoint.h"
 #import "UIColor+RPGColorEquality.h"
+#import "UIViewController+RPGChildViewController.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
   // Global map location mask colors
 #define GLOBAL_MAP_LOCATION1_MASK_COLOR [UIColor colorWithRed:0.776471 green:0.12549 blue:0.12549 alpha:1.0]
@@ -38,6 +45,8 @@
 
 // Propeties
 @property (readwrite, retain, nonatomic) NSMutableArray<UIImageView *> *lockViews;
+@property (readwrite, retain, nonatomic) RPGWaitingViewController *waitingViewController;
+@property (readwrite, retain, nonatomic) NSArray<NSNumber *> *availableLocationsIDs;
 
 @end
 
@@ -55,7 +64,22 @@
 - (void)dealloc
 {
   [_lockViews release];
+  [_waitingViewController release];
+  [_availableLocationsIDs release];
   [super dealloc];
+}
+
+#pragma mark - Getters/Setters
+
+- (void)setAvailableLocationsIDs:(NSArray<NSNumber *> *)availableLocationsIDs
+{
+  if (_availableLocationsIDs != availableLocationsIDs)
+  {
+    [_availableLocationsIDs release];
+    _availableLocationsIDs = [availableLocationsIDs retain];
+    
+    [self updateAvailableLocations];
+  }
 }
 
 #pragma mark - UIViewController
@@ -68,13 +92,7 @@
                     self.lock3, self.lock4, self.lock4, self.lock5, self.lock6,
                     self.lock7, self.lock8, self.lock9, nil];
   
-  for (UIImageView *lockImageView in self.lockViews)
-  {
-    if (lockImageView.tag == 1) //TODO: use API to find out what locations are enabled for current user
-    {
-      lockImageView.hidden = YES;
-    }
-  }
+  [self update];
 }
 
 #pragma mark - IBActions
@@ -139,6 +157,54 @@
   }
   
   return mapLocationColors;
+}
+
+#pragma mark - Helper methods
+
+- (void)update
+{
+  RPGWaitingViewController *waitingViewController = [[RPGWaitingViewController alloc] initWithMessage:@"Please wait"
+                                                                                           completion:nil];
+  [self showWaitingModal:[waitingViewController autorelease]];
+  
+  [[RPGNetworkManager sharedNetworkManager] fetchAvailableLocationsWithCompletionHandler:^(RPGStatusCode networkStatusCode, RPGAvailableLocationsResponse *aResponse)
+   {
+     self.availableLocationsIDs = aResponse.locationsIDs;
+     [self removeWaitingModal];
+   }];
+}
+
+#pragma mark Locks
+
+- (void)updateAvailableLocations
+{
+  for (UIImageView *lockView in [self lockViews])
+  {
+    lockView.hidden = NO;
+    
+    for (NSNumber *locationIDNumber in self.availableLocationsIDs)
+    {
+      if ([locationIDNumber integerValue] == lockView.tag)
+      {
+        lockView.hidden = YES;
+      }
+    }
+  }
+}
+
+#pragma mark Waiting modal
+
+- (void)showWaitingModal:(RPGWaitingViewController *)waitingViewController
+{
+  self.waitingViewController = waitingViewController;
+  [self addChildViewController:waitingViewController
+                          view:self.view];
+}
+
+- (void)removeWaitingModal
+{
+  [self.waitingViewController.view removeFromSuperview];
+  [self.waitingViewController removeFromParentViewController];
 }
 
 @end
