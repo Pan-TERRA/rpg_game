@@ -70,6 +70,13 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeAreAlreadyFriends = 61,
   kRPGStatusCodeUserNotFound = 62,
   
+  kRPGStatusCodeQuestDuelRequestNotFound = 65,
+  kRPGStatusCodeQuestDuelIsAlreadyInProgress = 66,
+  kRPGStatusCodeQuestDuelCanNotBeSkipped = 67,
+  kRPGStatusCodeQuestDuelIsAlreadySended = 68,
+  kRPGStatusCodeQuestDuelIsNotAccepted = 69,
+  kRPGStatusCodeQuestDuelCannotBeSent = 70,
+  
   kRPGStatusCodeDefaultError = 1337,
   
     // RPGNetworkManager Status Codes
