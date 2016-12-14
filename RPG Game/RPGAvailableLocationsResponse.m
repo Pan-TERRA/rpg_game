@@ -24,7 +24,7 @@ static NSString * const kRPGAvailableLocationsResponseLocationsIDs = @"locations
     if (aStatus >= 0 && aLocationsIDs != nil)
     {
       _status = aStatus;
-      _locationsIDs = aLocationsIDs;
+      _locationsIDs = [aLocationsIDs retain];
     }
     else
     {

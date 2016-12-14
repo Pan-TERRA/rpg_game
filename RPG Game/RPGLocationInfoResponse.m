@@ -24,7 +24,7 @@ static NSString * const kRPGLocationInfoResponseLocationInfo = @"location_info";
     if (aStatus >= 0 && aLocationInfo != nil)
     {
       _status = aStatus;
-      _locationInfo = aLocationInfo;
+      _locationInfo = [aLocationInfo retain];
     }
     else
     {
