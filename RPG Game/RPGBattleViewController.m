@@ -208,6 +208,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [self.battleController prepareBattleControllerForDismiss];
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+  
+  [self.battleViewControllerDelegate battleViewControllerDidEndBattle];
+  
   [self dismissViewControllerAnimated:YES
                            completion:nil];
 }

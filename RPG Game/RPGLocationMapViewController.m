@@ -24,7 +24,7 @@ BOOL locationExists(NSInteger locationID)
 }
 
 
-@interface RPGLocationMapViewController ()
+@interface RPGLocationMapViewController () <RPGBattleViewControllerDelegate>
 
 @property (readonly, assign, nonatomic) NSInteger locationID;
 @property (readwrite, assign, nonatomic) NSInteger chosenBattleplaceID;
@@ -118,6 +118,7 @@ BOOL locationExists(NSInteger locationID)
 {
   RPGAdventuresFactory *adventuresFactory = [[[RPGAdventuresFactory alloc] initWithBattleplaceID:self.chosenBattleplaceID] autorelease];
   RPGBattleViewController *battleViewController = [[RPGBattleViewController alloc] initWithBattleFactory:adventuresFactory];
+  battleViewController.battleViewControllerDelegate = self;
   
   [self presentViewController:[battleViewController autorelease]
                      animated:YES
@@ -143,6 +144,13 @@ BOOL locationExists(NSInteger locationID)
   self.chosenBattleplaceID = clickedBattleplaceID;
   
   self.toBattleButton.enabled = YES;
+}
+
+#pragma mark - RPGBattleViewControllerDelegate
+
+- (void)battleViewControllerDidEndBattle
+{
+  NSLog(@"Needs update");
 }
 
 

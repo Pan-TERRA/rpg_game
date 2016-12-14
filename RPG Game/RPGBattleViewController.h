@@ -16,10 +16,17 @@ NS_ASSUME_NONNULL_BEGIN
   // Controllers
 @class RPGBattleController;
 
+@protocol RPGBattleViewControllerDelegate <NSObject>
+
+- (void)battleViewControllerDidEndBattle;
+
+@end
+
 @interface RPGBattleViewController : UIViewController
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 @property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
+@property (nonatomic, assign, readwrite) id<RPGBattleViewControllerDelegate> battleViewControllerDelegate;
   // Containers
 @property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 
