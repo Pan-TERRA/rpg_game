@@ -50,6 +50,7 @@
   [super viewWillAppear:animated];
   
   [self.friendNickNameTextField becomeFirstResponder];
+  self.confirmAddFriendButton.enabled = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -92,8 +93,6 @@
 {
   
   RPGAddFriendRequest *request = [RPGAddFriendRequest addFriendRequestWithUserName:anUserName];
-  
-  __block typeof(self) weakSelf = self;
   
   [[RPGNetworkManager sharedNetworkManager] addPlayerToFriendsWithRequest:request
                                                         completionHandler:^(RPGStatusCode status)
@@ -155,7 +154,7 @@
          {
            dispatch_async(dispatch_get_main_queue(), ^
             {
-              UIViewController *viewController = weakSelf.presentingViewController.presentingViewController;
+              UIViewController *viewController = self.presentingViewController.presentingViewController;
               [viewController dismissViewControllerAnimated:YES completion:nil];
             });
          }];
@@ -171,10 +170,10 @@
         break;
       }
     }
-    [weakSelf.delegate friendDidAdd:self];
+    [self.delegate friendDidAdd:self];
     
-    [weakSelf.view removeFromSuperview];
-    [weakSelf removeFromParentViewController];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
   }];
 }
 
