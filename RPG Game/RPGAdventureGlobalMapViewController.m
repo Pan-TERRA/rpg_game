@@ -229,7 +229,8 @@
 
 - (CGPoint)advanceScrollOffsetForCurrentLocation
 {
-  return CGPointMake(220, 55);
+//  return CGPointMake(220, 55);
+  return CGPointZero;
 }
 
 @end
