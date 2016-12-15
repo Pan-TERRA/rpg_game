@@ -9,6 +9,7 @@
 #import "RPGSkillRepresentation.h"
   // Entities
 #import "RPGSkillEffect.h"
+#import "RPGSkillEffectRepresentation.h"
 
 static NSString * const kRPGSkillRepresentationName = @"name";
 static NSString * const kRPGSkillRepresentationSkillDescription = @"description";
@@ -50,7 +51,20 @@ static NSString * const kRPGSkillRepresentationResourceName = @"RPGSkillsInfo";
       _imageName = [skillDictionary[kRPGSkillRepresentationImageName] copy];
       _soundName = [skillDictionary[kRPGSkillRepresentationSoundName] copy];
       _requiredLevel = [skillDictionary[kRPGSkillRepresentationRequiredLevel] integerValue];
-      _effects = [skillDictionary[kRPGSkillRepresentationEffects] retain];
+      
+      NSArray *skillEffectsID = skillDictionary[kRPGSkillRepresentationEffects];
+      NSMutableArray *skillEffects = [NSMutableArray array];
+      
+      for (NSNumber *skillEffectIDNumber in skillEffectsID)
+      {
+        NSInteger skillEffectID = [skillEffectIDNumber integerValue];
+        RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:skillEffectID];
+        RPGSkillEffect *skillEffect = [RPGSkillEffect skillEffectWithSkillEffectID:skillEffectID
+                                                                          duration:skillEffectRepresentation.duration];
+        [skillEffects addObject:skillEffect];
+      }
+      
+      _effects = [skillEffects retain];
     }
   }
   

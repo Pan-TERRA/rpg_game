@@ -29,7 +29,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 #pragma mark - Init
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                         skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                         skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
                                  align:(RPGAlign)anAlign
 {
   self = [super init];
@@ -53,7 +53,7 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
 
 
 + (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
-                                           skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                                           skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
                                                    align:(RPGAlign)anAlign
 {
     return [[[self alloc] initWithCollectionView:aCollectionView
@@ -94,13 +94,14 @@ static NSUInteger const kRPGSkillsEffectsCollectionViewControllerCollectionSize 
   
   if (index < skillsEffects.count)
   {
-    NSInteger skillEffectID = [skillsEffects[index] integerValue];
+    RPGSkillEffect *skillEffect = skillsEffects[index];
+    NSInteger skillEffectID = skillEffect.skillEffectID;
     RPGSkillEffectRepresentation *skillEffectRepresentation = [RPGSkillEffectRepresentation skillEffectRepresentationWithSkillEffectID:skillEffectID];
     
     cell.image = [UIImage imageNamed:@"battle_empty_icon_inactive"];
     cell.backgroundImage = [UIImage imageNamed:skillEffectRepresentation.imageName];
     
-    cell.duration = skillEffectRepresentation.duration;
+    cell.duration = skillEffect.duration;
     cell.skillEffectID = skillEffectID;
   }
   

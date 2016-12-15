@@ -107,17 +107,11 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
                                   bundle:nil];
   [self.skillsEffectsCollectionView registerNib:cellNIB
                      forCellWithReuseIdentifier:kRPGSkillsEffectsCollectionViewCellNIBName];
-  
-  NSMutableArray *skillsEffectsID = [NSMutableArray array];
-  for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
-  {
-    [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
-  }
-  
+
   RPGAlign align = self.entityHPBar.align;
   self.skillsEffectsCollectionViewController = [RPGSkillsEffectsCollectionViewController
                                                 skillEffectsControllerWithCollectionView:self.skillsEffectsCollectionView
-                                                skillsEffects:skillsEffectsID
+                                                skillsEffects:self.entity.skillsEffects
                                                 align:align];
 }
 
@@ -130,23 +124,18 @@ static CGFloat const kRPGEntityViewControllerViewCornerRadiusMultiplier = 0.5;
 
 - (void)updateView
 {
-  if (self.entity != nil)
+  RPGEntity *entity = self.entity;
+  
+  if (entity != nil)
   {
-    NSInteger entityHP = self.entity.HP;
-    NSInteger entityMaxHP = self.entity.maxHP;
+    NSInteger entityHP = entity.HP;
+    NSInteger entityMaxHP = entity.maxHP;
     entityHP = (entityHP <= entityMaxHP) ? entityHP : entityMaxHP;
-    self.entityNickName.text = self.entity.name;
+    self.entityNickName.text = entity.name;
     self.entityHPBar.progress = ((float)entityHP / entityMaxHP);
     self.entityHPLabel.text = [NSString stringWithFormat:@"%ld/%ld", (long)entityHP, (long)entityMaxHP];
-    self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)self.entity.level];
-    
-    NSMutableArray *skillsEffectsID = [NSMutableArray array];
-    for (RPGSkillEffect *skillEffect in self.entity.skillsEffects)
-    {
-      [skillsEffectsID addObject:@(skillEffect.skillEffectID)];
-    }
-    
-    self.skillsEffectsCollectionViewController.skillsEffects = skillsEffectsID;
+    self.entityLevelLabel.text = [NSString stringWithFormat:@"%ld", (long)entity.level];
+    self.skillsEffectsCollectionViewController.skillsEffects = entity.skillsEffects;
     
     [self.skillsEffectsCollectionView reloadData];
   }

@@ -14,14 +14,14 @@
 
 @interface RPGSkillsEffectsCollectionViewController : NSObject
 
-@property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skillsEffects;
+@property (nonatomic, retain, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
 
 - (instancetype)initWithCollectionView:(UICollectionView *)aCollectionView
-                         skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                         skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
                                  align:(RPGAlign)anAlign NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)skillEffectsControllerWithCollectionView:(UICollectionView *)aCollectionView
-                                           skillsEffects:(NSArray<NSNumber *> *)aSkillsEffects
+                                           skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
                                                    align:(RPGAlign)anAlign;
 
 @end
