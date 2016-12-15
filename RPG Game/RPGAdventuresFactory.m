@@ -36,11 +36,12 @@ NSString * const kRPGAdventuresFactoryBattleInitMessage = @"Battle init";
     if (aBattleplaceID >= 0)
     {
       RPGAdventuresControllerGenerator *battleControllerGenerator = [[RPGAdventuresControllerGenerator alloc] initWithStageID:aBattleplaceID];
-      self.battleController = [battleControllerGenerator battleController];
+      _battleController = [[battleControllerGenerator battleController] retain];
       
       [battleControllerGenerator release];
       
-      self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+      _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:self.battleController];
+      _battleInitViewController = [[RPGWaitingViewController alloc] initWithMessage:kRPGAdventuresFactoryBattleInitMessage];
     }
     else
     {
