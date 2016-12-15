@@ -123,13 +123,16 @@
   UIColor *tappedLocationColor = [self.maskImageView colorOfPoint:tapLocation];
   NSInteger tappedLocationID = [self getMapLocationIDWithColor:tappedLocationColor];
   
-  RPGLocationMapViewController *locationMapViewController = [[[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID] autorelease];
-  
-  if (locationMapViewController != nil)
+  if ([self.availableLocationsIDs containsObject:@(tappedLocationID)])
   {
-    [self presentViewController:locationMapViewController
-                       animated:YES
-                     completion:nil];
+    RPGLocationMapViewController *locationMapViewController = [[[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID] autorelease];
+    
+    if (locationMapViewController != nil)
+    {
+      [self presentViewController:locationMapViewController
+                         animated:YES
+                       completion:nil];
+    }
   }
 }
 
