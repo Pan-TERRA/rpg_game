@@ -24,6 +24,7 @@
 #import "RPGCharacterProfileViewController.h"
 #import "RPGShopViewController.h"
 #import "RPGArenaSkillDrawViewController.h"
+#import "RPGFriendsViewController.h"
 #import "RPGPresentingViewControllerProtocol.h"
 #import "RPGTournamentViewController.h"
   // Misc
@@ -138,7 +139,7 @@
                    completion:nil];
 }
 
-- (IBAction)segueToPlay
+- (IBAction)segueToTournament
 {
   RPGTournamentFactory *tournamentFactory = [[[RPGTournamentFactory alloc] init] autorelease];
   RPGTournamentViewController *tournamentViewController = [[[RPGTournamentViewController alloc]
@@ -146,6 +147,13 @@
                                                            autorelease];
   
   [self presentViewController:tournamentViewController animated:YES completion:nil];
+}
+
+- (IBAction)segueToFriends
+{
+  RPGFriendsViewController *friendsViewController = [[RPGFriendsViewController new] autorelease];
+  
+  [self presentViewController:friendsViewController animated:YES completion:nil];
 }
 
 - (IBAction)segueToAdventures
@@ -157,10 +165,10 @@
 
 - (IBAction)segueToArena
 {
-  RPGArenaSkillDrawViewController *viewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
-  viewController.delegate = self;
+  RPGArenaSkillDrawViewController *arenaViewController = [[[RPGArenaSkillDrawViewController alloc] init] autorelease];
+  arenaViewController.delegate = self;
   
-  [self presentViewController:viewController
+  [self presentViewController:arenaViewController
                      animated:YES
                    completion:nil];
 }

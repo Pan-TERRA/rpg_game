@@ -8,11 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class RPGMainViewController;
-
 @interface RPGAppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (retain, nonatomic) UIWindow *window;
-
+@property (nonatomic, retain, readwrite) UIWindow *window;
 
 @end

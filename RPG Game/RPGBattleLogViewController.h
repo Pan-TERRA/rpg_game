@@ -12,6 +12,8 @@
 
 @interface RPGBattleLogViewController : UIViewController
 
+@property (nonatomic, assign, readwrite) UITextView *textView;
+
 @property (retain, nonatomic, readonly) RPGBattleController *battleController;
 
 - (instancetype)initWithBattleController:(RPGBattleController *)aBattleController;

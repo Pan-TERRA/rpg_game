@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGFriendsViewController">
+            <connections>
+                <outlet property="activityIndicator" destination="pCu-Z4-41y" id="Szh-rF-Ffa"/>
+                <outlet property="allFriendButton" destination="a38-10-RY4" id="hp1-Xp-ORd"/>
+                <outlet property="incomingRequestsButton" destination="L84-1V-gfN" id="24m-5m-UbG"/>
+                <outlet property="onlineFriendButton" destination="RGX-SC-SGC" id="UUH-XK-ihR"/>
+                <outlet property="outgoingRequestsButton" destination="NGL-dg-Gm8" id="IoS-Qf-JFv"/>
+                <outlet property="tableViewContainer" destination="o08-zB-S8G" id="1K2-XO-tfO"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="Vid-o6-Adi">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUA-nR-0TJ" userLabel="Table Control Container">
+                    <rect key="frame" x="60" y="10" width="480" height="62"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="a38-10-RY4">
+                            <rect key="frame" x="-8" y="0.0" width="113" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="All Friends">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeViewStateOnButtonClick:" destination="-1" eventType="touchUpInside" id="pj4-9H-zjE"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="NGL-dg-Gm8">
+                            <rect key="frame" x="376" y="0.0" width="113" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Outgoing Requests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeViewStateOnButtonClick:" destination="-1" eventType="touchUpInside" id="4ON-Oc-CAe"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L84-1V-gfN">
+                            <rect key="frame" x="250" y="0.0" width="113" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Incoming Requests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeViewStateOnButtonClick:" destination="-1" eventType="touchUpInside" id="IRK-w9-Q5G"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="RGX-SC-SGC">
+                            <rect key="frame" x="118" y="0.0" width="113" height="62"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Online Friends">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="changeViewStateOnButtonClick:" destination="-1" eventType="touchUpInside" id="Cu3-DK-sRL"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="NGL-dg-Gm8" firstAttribute="width" secondItem="L84-1V-gfN" secondAttribute="width" id="7Ik-cC-hYI"/>
+                        <constraint firstItem="L84-1V-gfN" firstAttribute="centerY" secondItem="HUA-nR-0TJ" secondAttribute="centerY" id="9tG-QV-M0J"/>
+                        <constraint firstItem="L84-1V-gfN" firstAttribute="centerX" secondItem="HUA-nR-0TJ" secondAttribute="centerX" multiplier="5.1:4" id="Onl-gs-qym"/>
+                        <constraint firstItem="L84-1V-gfN" firstAttribute="width" secondItem="RGX-SC-SGC" secondAttribute="width" id="QfC-ag-IG9"/>
+                        <constraint firstItem="RGX-SC-SGC" firstAttribute="height" secondItem="a38-10-RY4" secondAttribute="height" id="XLn-gO-9gX"/>
+                        <constraint firstItem="a38-10-RY4" firstAttribute="centerX" secondItem="HUA-nR-0TJ" secondAttribute="centerX" multiplier="0.8:4" id="XNj-P0-hyb"/>
+                        <constraint firstItem="RGX-SC-SGC" firstAttribute="centerX" secondItem="HUA-nR-0TJ" secondAttribute="centerX" multiplier="2.9:4" id="bj0-cF-Lnc"/>
+                        <constraint firstItem="NGL-dg-Gm8" firstAttribute="centerY" secondItem="HUA-nR-0TJ" secondAttribute="centerY" id="cEw-Gi-FrP"/>
+                        <constraint firstItem="L84-1V-gfN" firstAttribute="height" secondItem="RGX-SC-SGC" secondAttribute="height" id="kDv-Ak-jqF"/>
+                        <constraint firstAttribute="height" constant="62" id="kan-4f-1Ph"/>
+                        <constraint firstItem="RGX-SC-SGC" firstAttribute="width" secondItem="a38-10-RY4" secondAttribute="width" id="lpH-bs-35U"/>
+                        <constraint firstItem="NGL-dg-Gm8" firstAttribute="centerX" secondItem="HUA-nR-0TJ" secondAttribute="centerX" multiplier="7.2:4" id="lwG-wm-irh"/>
+                        <constraint firstItem="a38-10-RY4" firstAttribute="centerY" secondItem="HUA-nR-0TJ" secondAttribute="centerY" id="nFf-p5-BKo"/>
+                        <constraint firstItem="a38-10-RY4" firstAttribute="height" secondItem="HUA-nR-0TJ" secondAttribute="height" id="nNN-AZ-8IQ"/>
+                        <constraint firstItem="NGL-dg-Gm8" firstAttribute="height" secondItem="L84-1V-gfN" secondAttribute="height" id="qZ0-Gw-8CY"/>
+                        <constraint firstItem="a38-10-RY4" firstAttribute="width" secondItem="HUA-nR-0TJ" secondAttribute="width" multiplier="0.235" id="u9X-bz-wAl"/>
+                        <constraint firstItem="RGX-SC-SGC" firstAttribute="centerY" secondItem="HUA-nR-0TJ" secondAttribute="centerY" id="v0w-3u-VbV"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-fg-Yhn" userLabel="Add Friend Button">
+                    <rect key="frame" x="8" y="552" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="4UH-fg-Yhn" secondAttribute="height" multiplier="1:1" id="Ij4-C1-OED"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="plus_icon_inactive"/>
+                    <connections>
+                        <action selector="showAddFriendView:" destination="-1" eventType="touchUpInside" id="tCw-x9-fiX"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o08-zB-S8G" userLabel="TableView Container">
+                    <rect key="frame" x="45" y="82" width="510" height="465"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svW-5R-EA5" userLabel="Back Button">
+                    <rect key="frame" x="552" y="552" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="svW-5R-EA5" secondAttribute="height" multiplier="1:1" id="sui-tf-lRH"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
+                    <connections>
+                        <action selector="back:" destination="-1" eventType="touchUpInside" id="NGf-eq-Nv8"/>
+                    </connections>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pCu-Z4-41y">
+                    <rect key="frame" x="282" y="281" width="37" height="37"/>
+                    <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="o08-zB-S8G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0l3-hm-9vy"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="5Xu-9k-z6f"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7Tl-59-EKa"/>
+                <constraint firstItem="svW-5R-EA5" firstAttribute="top" secondItem="o08-zB-S8G" secondAttribute="bottom" constant="5" id="7e6-Hf-eTT"/>
+                <constraint firstItem="HUA-nR-0TJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="87d-ay-KmH"/>
+                <constraint firstItem="Vid-o6-Adi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8y9-zJ-W7T"/>
+                <constraint firstItem="Vid-o6-Adi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Atw-0A-BkX"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.07" id="C4L-KB-wj6"/>
+                <constraint firstItem="pCu-Z4-41y" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Jdv-aH-4T0"/>
+                <constraint firstAttribute="trailing" secondItem="svW-5R-EA5" secondAttribute="trailing" constant="8" id="To9-rr-axK"/>
+                <constraint firstItem="o08-zB-S8G" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="U7R-MY-HM6"/>
+                <constraint firstAttribute="bottom" secondItem="4UH-fg-Yhn" secondAttribute="bottom" constant="8" id="XsE-Mw-PPO"/>
+                <constraint firstItem="4UH-fg-Yhn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zww-Hz-NMy"/>
+                <constraint firstItem="HUA-nR-0TJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="bLs-Q5-K1a"/>
+                <constraint firstAttribute="bottom" secondItem="svW-5R-EA5" secondAttribute="bottom" constant="8" id="cUy-bk-OlI"/>
+                <constraint firstAttribute="trailing" secondItem="Vid-o6-Adi" secondAttribute="trailing" id="eM4-8J-VLn"/>
+                <constraint firstItem="HUA-nR-0TJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hax-DI-fLZ"/>
+                <constraint firstItem="o08-zB-S8G" firstAttribute="top" secondItem="HUA-nR-0TJ" secondAttribute="bottom" constant="10" id="ugS-4i-5TN"/>
+                <constraint firstAttribute="bottom" secondItem="Vid-o6-Adi" secondAttribute="bottom" id="zJ1-ml-VJ4"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="5Xu-9k-z6f"/>
+                    <exclude reference="C4L-KB-wj6"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="429" y="274"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
+        <image name="plus_icon_inactive" width="40" height="40"/>
+    </resources>
+</document>

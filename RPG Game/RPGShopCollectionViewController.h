@@ -7,11 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
+  // Entity
+@class RPGShopUnitRepresetation;
+@class RPGShopCollectionViewController;
 
-@class RPGShopUnit;
+@protocol RPGShopCollectionViewControllerDelegate <NSObject>
+
+- (void)buyButtonDidPress:(RPGShopCollectionViewController *)aCollectionViewController
+           withShopUnitID:(NSInteger)aShopUnitID;
+
+@end
+
 
 @interface RPGShopCollectionViewController : UICollectionViewController
 
-@property (nonatomic, retain, readwrite) NSArray<RPGShopUnit *> *shopUnits;
+@property (nonatomic, retain, readwrite) NSArray<RPGShopUnitRepresetation *> *shopUnits;
+
+@property (nonatomic, assign, readwrite) id<RPGShopCollectionViewControllerDelegate> delegate;
 
 @end

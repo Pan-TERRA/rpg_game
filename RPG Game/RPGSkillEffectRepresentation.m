@@ -8,6 +8,7 @@
 
 #import "RPGSkillEffectRepresentation.h"
 
+static NSString * const kRPGSkillEffectRepresentationDuration = @"duration";
 static NSString * const kRPGSkillEffectRepresentationName = @"name";
 static NSString * const kRPGSkillEffectRepresentationSkillDescription = @"description";
 static NSString * const kRPGSkillEffectRepresentationImageName = @"imageName";
@@ -34,11 +35,12 @@ static NSString * const kRPGSkillEffectRepresentationResourceName = @"RPGSkillsE
       NSString *path = [[NSBundle mainBundle] pathForResource:kRPGSkillEffectRepresentationResourceName
                                                        ofType:@"plist"];
       NSDictionary *plistDictionary = [NSDictionary dictionaryWithContentsOfFile:path];
-      NSDictionary *skillDictionary = [plistDictionary valueForKey:[@(aSkillEffectID) stringValue]];
+      NSDictionary *skillEffectDictionary = [plistDictionary valueForKey:[@(aSkillEffectID) stringValue]];
       
-      _name = [skillDictionary[kRPGSkillEffectRepresentationName] copy];
-      _skillEffectDescription = [skillDictionary[kRPGSkillEffectRepresentationSkillDescription] copy];
-      _imageName = [skillDictionary[kRPGSkillEffectRepresentationImageName] copy];
+      _duration = [skillEffectDictionary[kRPGSkillEffectRepresentationDuration] integerValue];
+      _name = [skillEffectDictionary[kRPGSkillEffectRepresentationName] copy];
+      _skillEffectDescription = [skillEffectDictionary[kRPGSkillEffectRepresentationSkillDescription] copy];
+      _imageName = [skillEffectDictionary[kRPGSkillEffectRepresentationImageName] copy];
     }
   }
   

@@ -7,9 +7,10 @@
 //
 
 #import "RPGTournamentViewController.h"
+  // API
+#import "RPGBattleFactoryProtocol.h"
   // Controllers
 #import "RPGRankBadgeViewController.h"
-#import "RPGBattleFactory.h"
   // Misc
 #import "UIViewController+RPGChildViewController.h"
 
@@ -23,16 +24,25 @@
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
+- (instancetype)initWithBattleFactory:(id<RPGBattleFactoryProtocol>)aBattleFactory
 {
   self = [super initWithBattleFactory:aBattleFactory];
   
   if (self != nil)
   {
-    _badgeViewController = [[RPGRankBadgeViewController alloc] initWithBattleController:self.battleController];
+    _badgeViewController = [[RPGRankBadgeViewController alloc] initWithBattleController:aBattleFactory.battleController];
   }
   
   return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_badgeViewController release];
+  
+  [super dealloc];
 }
 
 #pragma mark - UIViewController

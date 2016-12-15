@@ -8,13 +8,13 @@
 
 #import "RPGBasicNetworkResponse.h"
 
-static NSString * const kRPGBasicNetworkResponseStatus = @"status";
+NSString * const kRPGBasicNetworkResponseStatus = @"status";
 
 @implementation RPGBasicNetworkResponse
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
 {
   self = [super init];
   
@@ -28,10 +28,10 @@ static NSString * const kRPGBasicNetworkResponseStatus = @"status";
 
 - (instancetype)init
 {
-  return [self initWithStatus:-1];
+  return [self initWithStatus:kRPGStatusCodeDefaultError];
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithStatus:aStatus] autorelease];
 }

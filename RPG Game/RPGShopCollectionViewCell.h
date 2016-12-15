@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
   // Entities
-@class RPGShopUnit;
+@class RPGShopUnitRepresetation;
   // Views
 @class RPGShopCollectionViewCell;
 
@@ -23,6 +23,6 @@
 
 @property (nonatomic, assign, readwrite) id<RPGShopCollectionViewCellDelegate> delegate;
 
-@property (nonatomic, assign, readwrite) RPGShopUnit *shopUnit;
+@property (nonatomic, assign, readwrite) RPGShopUnitRepresetation *shopUnit;
 
 @end

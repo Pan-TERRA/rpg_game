@@ -47,6 +47,9 @@
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                             <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -56,7 +59,9 @@
                                         <constraint firstAttribute="bottom" secondItem="uZo-a6-xNj" secondAttribute="bottom" id="Gqy-oc-pKt"/>
                                         <constraint firstItem="DuB-rB-F4n" firstAttribute="centerX" secondItem="aUC-4w-lxW" secondAttribute="centerX" id="SiC-UC-URG"/>
                                         <constraint firstItem="DuB-rB-F4n" firstAttribute="centerY" secondItem="aUC-4w-lxW" secondAttribute="centerY" id="gZY-Ah-Sbg"/>
-                                        <constraint firstAttribute="height" constant="30" id="mft-Qw-BHU"/>
+                                        <constraint firstAttribute="height" constant="30" id="mft-Qw-BHU">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                                        </constraint>
                                         <constraint firstItem="uZo-a6-xNj" firstAttribute="leading" secondItem="aUC-4w-lxW" secondAttribute="leading" id="uyR-cf-AqQ"/>
                                         <constraint firstItem="DuB-rB-F4n" firstAttribute="height" secondItem="aUC-4w-lxW" secondAttribute="height" multiplier="0.66" id="yIJ-mL-QHr"/>
                                     </constraints>
@@ -111,12 +116,18 @@
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bcg-NX-OBs">
-                                            <rect key="frame" x="18" y="12" width="9" height="20"/>
-                                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                                            <rect key="frame" x="18" y="13" width="8" height="19"/>
+                                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="16"/>
                                             <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="20"/>
+                                            </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1y3-H6-20T">
                                             <rect key="frame" x="176" y="0.0" width="15" height="43"/>
@@ -185,6 +196,9 @@
                                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                             <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular">
+                                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                            </variation>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -192,7 +206,6 @@
                                         <constraint firstAttribute="trailing" secondItem="urU-9n-gP0" secondAttribute="trailing" id="DpZ-1B-K6u"/>
                                         <constraint firstItem="9l2-pW-avk" firstAttribute="centerX" secondItem="5pd-sG-Hyu" secondAttribute="centerX" id="GDQ-1g-cST"/>
                                         <constraint firstItem="9l2-pW-avk" firstAttribute="centerY" secondItem="5pd-sG-Hyu" secondAttribute="centerY" id="Rxr-iz-Epj"/>
-                                        <constraint firstAttribute="height" constant="30" id="Svc-iQ-AHB"/>
                                         <constraint firstItem="9l2-pW-avk" firstAttribute="height" secondItem="5pd-sG-Hyu" secondAttribute="height" multiplier="0.66" id="dWo-5M-qZh"/>
                                         <constraint firstItem="urU-9n-gP0" firstAttribute="leading" secondItem="5pd-sG-Hyu" secondAttribute="leading" id="h3r-ls-Use"/>
                                         <constraint firstAttribute="bottom" secondItem="urU-9n-gP0" secondAttribute="bottom" id="kHK-GP-tCG"/>
@@ -204,7 +217,9 @@
                             <constraints>
                                 <constraint firstItem="5pd-sG-Hyu" firstAttribute="top" secondItem="LyC-SA-bD4" secondAttribute="top" id="9J5-fY-Von"/>
                                 <constraint firstAttribute="bottom" secondItem="5pd-sG-Hyu" secondAttribute="bottom" id="doa-hE-Kxa"/>
-                                <constraint firstAttribute="height" constant="30" id="fWV-sg-oGf"/>
+                                <constraint firstAttribute="height" constant="30" id="fWV-sg-oGf">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                                </constraint>
                                 <constraint firstItem="5pd-sG-Hyu" firstAttribute="centerX" secondItem="LyC-SA-bD4" secondAttribute="centerX" id="n4D-eZ-7wR"/>
                             </constraints>
                         </view>
@@ -219,31 +234,45 @@
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="itB-oS-rok">
                                     <rect key="frame" x="45" y="5" width="26" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Attack:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n0O-Xj-63l">
                                     <rect key="frame" x="86" y="5" width="52" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GM3-XB-K5w">
                                     <rect key="frame" x="143" y="5" width="26" height="20"/>
                                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                     <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="22"/>
+                                    </variation>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="grY-SZ-Vk4" secondAttribute="bottom" id="2hr-sr-oYW"/>
                                 <constraint firstItem="n0O-Xj-63l" firstAttribute="centerY" secondItem="SLX-F2-vTD" secondAttribute="centerY" id="6k3-gU-Ld9"/>
-                                <constraint firstAttribute="height" constant="30" id="AzB-wp-wb6"/>
+                                <constraint firstAttribute="height" constant="30" id="AzB-wp-wb6">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                                </constraint>
                                 <constraint firstAttribute="trailing" secondItem="GM3-XB-K5w" secondAttribute="trailing" constant="10" id="Rwp-NT-u22"/>
                                 <constraint firstItem="itB-oS-rok" firstAttribute="centerY" secondItem="SLX-F2-vTD" secondAttribute="centerY" id="Wtb-iU-SSf"/>
                                 <constraint firstItem="GM3-XB-K5w" firstAttribute="leading" secondItem="n0O-Xj-63l" secondAttribute="trailing" constant="5" id="XXe-UA-Mj4"/>
@@ -267,7 +296,9 @@
                             <rect key="frame" x="596" y="324" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="5S1-dU-ULd" secondAttribute="height" multiplier="1:1" id="YT4-3g-GC5"/>
-                                <constraint firstAttribute="height" constant="40" id="bYw-nX-7Yz"/>
+                                <constraint firstAttribute="height" constant="40" id="bYw-nX-7Yz">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                </constraint>
                             </constraints>
                             <state key="normal" backgroundImage="back_icon_inactive"/>
                             <connections>

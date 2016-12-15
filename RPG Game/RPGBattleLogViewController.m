@@ -79,6 +79,7 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
     
     switch (kindOfChange)
     {
+        // new actions were added to array
       case NSKeyValueChangeInsertion:
       {
         NSIndexSet *newObjectIndices = aChange[NSKeyValueChangeIndexesKey];
@@ -89,6 +90,7 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
         break;
       }
         
+        // array of actions was reset
       case NSKeyValueChangeSetting:
       {
         [self recreateBattleLog];
@@ -115,8 +117,7 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
 
 - (void)recreateBattleLog
 {
-  UITextView *textView = (UITextView *)self.view;
-  textView.text = @"";
+  self.textView.text = @"";
   
   for (RPGBattleAction *action in self.battleController.actions)
   {
@@ -142,7 +143,6 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
                        skillName,
                        (long)anAction.damage];
   
-  UITextView *textView = (UITextView *)self.view;
   UIFont *textFont = [UIFont fontWithName:@"Cochin" size:19.0];
   UIColor *textColor = [UIColor colorWithRed:104.0/255.0 green:54.0/255.0 blue:52.0/255.0 alpha:1.0];
   NSMutableAttributedString *string = [[[NSMutableAttributedString alloc] initWithString:message
@@ -150,7 +150,7 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
                                                                                            NSFontAttributeName:textFont,
                                                                                            NSForegroundColorAttributeName:textColor
                                                                                            }] autorelease];
-  [textView.textStorage appendAttributedString:string];
+  [self.textView.textStorage appendAttributedString:string];
 }
 
 - (void)playSkillSFXWithAction:(RPGBattleAction *)anAction
@@ -163,7 +163,7 @@ static int sRPGBattleLogViewControllerBattleBattleLogAction;
 
 - (void)scrollViewToBottom
 {
-  UITextView *textView = (UITextView *)self.view;
+  UITextView *textView = self.textView;
   if (textView.text.length > 0)
   {
     NSRange bottom = NSMakeRange(textView.text.length - 1, 1);

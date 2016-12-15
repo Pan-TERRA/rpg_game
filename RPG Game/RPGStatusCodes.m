@@ -142,7 +142,7 @@ NSString * const RPGStatusCodeTitle[] =
 NSString * const RPGStatusCodeActionTitle[] =
 {
     // Server Status Codes
-  [kRPGStatusCodeWrongJSON] = @"Go to login screen",
+  [kRPGStatusCodeWrongJSON] = RPGSTATUSCODES_OK_WORD_TOKEN,
   [kRPGStatusCodeUserDoesNotExist] = RPGSTATUSCODES_OK_WORD_TOKEN,
   [kRPGStatusCodeWrongEmail] = RPGSTATUSCODES_OK_WORD_TOKEN,
   [kRPGStatusCodeWrongPassword] = RPGSTATUSCODES_OK_WORD_TOKEN,

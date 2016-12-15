@@ -9,12 +9,16 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
+
+extern NSString * const kRPGBasicNetworkResponseStatus;
 
 @interface RPGBasicNetworkResponse : NSObject <RPGSerializable>
 
-@property (assign, nonatomic, readonly) NSInteger status;
+@property (assign, nonatomic, readonly) RPGStatusCode status;
 
-- (instancetype)initWithStatus:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
-+ (instancetype)responseWithStatus:(NSInteger)aStatus;
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus;
 
 @end

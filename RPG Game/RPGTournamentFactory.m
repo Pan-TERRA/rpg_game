@@ -7,10 +7,21 @@
 //
 
 #import "RPGTournamentFactory.h"
-#import "RPGTournamentController.h"
+  // Controllers
+#import "RPGBattleController.h"
 #import "RPGTournamentControllerGenerator.h"
 #import "RPGTournamentRewardViewController.h"
-#import "RPGBattleFactoryPrivateProperties.h"
+#import "RPGWaitingViewController.h"
+
+NSString * const kRPGTournamentFactoryBattleInitMessage = @"Wait for opponent...";
+
+@interface RPGTournamentFactory ()
+
+@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
+@property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readwrite) RPGWaitingViewController *battleInitViewController;
+
+@end
 
 @implementation RPGTournamentFactory
 
@@ -23,11 +34,23 @@
   if (self != nil)
   {
     RPGTournamentControllerGenerator *battleControllerGenerator = [[[RPGTournamentControllerGenerator alloc] init] autorelease];
-    self.battleController = [battleControllerGenerator battleController];
-    self.rewardViewController = [[[RPGTournamentRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    _battleController = [[battleControllerGenerator battleController] retain];
+    _rewardViewController = [[RPGTournamentRewardViewController alloc] initWithBattleController:_battleController];
+    _battleInitViewController = [[RPGWaitingViewController alloc] initWithMessage:kRPGTournamentFactoryBattleInitMessage];
   }
   
   return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_battleController release];
+  [_rewardViewController release];
+  [_battleInitViewController release];
+  
+  [super dealloc];
 }
 
 @end

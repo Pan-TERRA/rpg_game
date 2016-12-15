@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>1</key>
+	<dict>
+		<key>description</key>
+		<string>Heap of gold</string>
+		<key>imageName</key>
+		<string>shop-unit-1</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>description</key>
+		<string>Bag of gold</string>
+		<key>imageName</key>
+		<string>shop-unit-2</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>description</key>
+		<string>Bunch of gold</string>
+		<key>imageName</key>
+		<string>shop-unit-3</string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>description</key>
+		<string>Increase your skill&apos;s bag by 4</string>
+		<key>imageName</key>
+		<string>shop_icon</string>
+	</dict>
+	<key>5</key>
+	<dict>
+		<key>description</key>
+		<string>Increase your skill&apos;s bag by 4</string>
+		<key>imageName</key>
+		<string>shop_icon</string>
+	</dict>
+	<key>6</key>
+	<dict>
+		<key>description</key>
+		<string>One extra active slot for skill</string>
+		<key>imageName</key>
+		<string>hp_icon</string>
+	</dict>
+	<key>7</key>
+	<dict>
+		<key>description</key>
+		<string>Make a series of punches</string>
+		<key>imageName</key>
+		<string>fireball-eerie-3</string>
+	</dict>
+	<key>8</key>
+	<dict>
+		<key>description</key>
+		<string>Make a series of jab strikes</string>
+		<key>imageName</key>
+		<string>heal-sky-3</string>
+	</dict>
+	<key>9</key>
+	<dict>
+		<key>description</key>
+		<string>Call to a great power and make a super punch!</string>
+		<key>imageName</key>
+		<string>protect-eerie-3</string>
+	</dict>
+	<key>10</key>
+	<dict>
+		<key>description</key>
+		<string>Have a rest and heal yourself</string>
+		<key>imageName</key>
+		<string>rest</string>
+	</dict>
+	<key>11</key>
+	<dict>
+		<key>description</key>
+		<string>Slap that bag guy in the face</string>
+		<key>imageName</key>
+		<string>protect-eerie-1</string>
+	</dict>
+	<key>12</key>
+	<dict>
+		<key>description</key>
+		<string>Throw your opponent to friend zone</string>
+		<key>imageName</key>
+		<string>enchant-red-1</string>
+	</dict>
+	<key>13</key>
+	<dict>
+		<key>description</key>
+		<string>Break out the sky with your tears</string>
+		<key>imageName</key>
+		<string>enchant-royal-1</string>
+	</dict>
+	<key>14</key>
+	<dict>
+		<key>description</key>
+		<string>Increase your health and beauty</string>
+		<key>imageName</key>
+		<string>diet</string>
+	</dict>
+</dict>
+</plist>

@@ -9,7 +9,7 @@
 #import "RPGBattleViewController.h"
   // API
 #import "RPGBattleController+RPGBattlePresentationController.h"
-#import "RPGBattleFactory.h"
+#import "RPGBattleFactoryProtocol.h"
 #import "SRWebSocket.h"
   // Controllers
 #import "RPGSkillBarViewController.h"
@@ -41,7 +41,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 @interface RPGBattleViewController () <RPGRewardModalDelegate>
 
-@property (assign, nonatomic, readwrite) RPGBattleFactory *battleFactory;
+@property (nonatomic, assign, readwrite) id<RPGBattleFactoryProtocol> battleFactory;
 @property (nonatomic, retain, readwrite) RPGBattleController *battleController;
   // Player
 @property (nonatomic, assign, readwrite) IBOutlet UIView *playerViewContainer;
@@ -74,7 +74,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 #pragma mark - Init
 
-- (instancetype)initWithBattleFactory:(RPGBattleFactory *)aBattleFactory
+- (instancetype)initWithBattleFactory:(id<RPGBattleFactoryProtocol>)aBattleFactory
 {
   self = [super initWithNibName:kRPGBattleViewControllerNIBName bundle:nil];
   
@@ -102,12 +102,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignRight];
       
       
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"
-                                                                completion:^
+      _battleInitModal = [aBattleFactory.battleInitViewController retain];
+      _battleInitModal.completionHandler = ^
       {
         [self.battleController prepareBattleControllerForDismiss];
         [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-      }];
+      };
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -153,7 +153,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [super viewDidLoad];
   
-  self.battleLogViewController.view = self.battleTextView;
+  self.battleLogViewController.textView = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
   [self addChildViewController:self.timerViewController

@@ -8,10 +8,20 @@
 
 #import "RPGArenaFactory.h"
   // Controllers
+#import "RPGBattleController.h"
 #import "RPGArenaControllerGenerator.h"
 #import "RPGRewardViewController.h"
-  // Misc
-#import "RPGBattleFactoryPrivateProperties.h"
+#import "RPGWaitingViewController.h"
+
+NSString * const kRPGArenaFactoryBattleInitMessage = @"Wait for opponent...";
+
+@interface RPGArenaFactory ()
+
+@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
+@property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readwrite) RPGWaitingViewController *battleInitViewController;
+
+@end
 
 @implementation RPGArenaFactory
 
@@ -24,11 +34,23 @@
   if (self != nil)
   {
     RPGArenaControllerGenerator *battleControllerGenerator = [[[RPGArenaControllerGenerator alloc] init] autorelease];
-    self.battleController = [battleControllerGenerator battleController];
-    self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    _battleController = [[battleControllerGenerator battleController] retain];
+    _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+    _battleInitViewController = [[RPGWaitingViewController alloc] initWithMessage:kRPGArenaFactoryBattleInitMessage];
   }
   
   return self;
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_battleController release];
+  [_rewardViewController release];
+  [_battleInitViewController release];
+  
+  [super dealloc];
 }
 
 @end

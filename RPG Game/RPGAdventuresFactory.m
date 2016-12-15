@@ -8,10 +8,20 @@
 
 #import "RPGAdventuresFactory.h"
   // Controllers
+#import "RPGBattleController.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGRewardViewController.h"
-  // Misc
-#import "RPGBattleFactoryPrivateProperties.h"
+#import "RPGWaitingViewController.h"
+
+NSString * const kRPGAdventuresFactoryBattleInitMessage = @"Battle init";
+
+@interface RPGAdventuresFactory ()
+
+@property (retain, nonatomic, readwrite) RPGBattleController *battleController;
+@property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readwrite) RPGWaitingViewController *battleInitViewController;
+
+@end
 
 @implementation RPGAdventuresFactory
 
@@ -45,6 +55,17 @@
 - (instancetype)init
 {
   return [self initWithBattleplaceID:-1];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_battleController release];
+  [_rewardViewController release];
+  [_battleInitViewController release];
+  
+  [super dealloc];
 }
 
 @end
