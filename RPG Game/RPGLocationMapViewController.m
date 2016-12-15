@@ -28,8 +28,8 @@ static NSString * const kRPGLocationMapViewControllerLocationInfoStateKey = @"st
 
 typedef NS_ENUM(NSInteger, RPGLocationInfoState)
 {
-  kRPGLocationInfoIsClearedState,
   kRPGLocationInfoIsAvailableState,
+  kRPGLocationInfoIsClearedState,
   kRPGLocationInfoIsNotAvailableState
 };
 
@@ -144,7 +144,7 @@ BOOL locationExists(NSInteger locationID)
                            self.battleplaceView3,
                            nil];
   
-  [self update];
+  [self updateView];
 }
 
 - (void)viewDidLayoutSubviews
@@ -196,12 +196,12 @@ BOOL locationExists(NSInteger locationID)
 
 - (void)battleViewControllerDidEndBattle
 {
-  [self update];
+  [self updateView];
 }
 
 #pragma mark - Helper methods
 
-- (void)update
+- (void)updateView
 {
   RPGWaitingViewController *waitingViewController = [[RPGWaitingViewController alloc] initWithMessage:@"Please wait"
                                                                                            completion:nil];
@@ -240,6 +240,7 @@ BOOL locationExists(NSInteger locationID)
 {
   switch (aState)
   {
+    case kRPGLocationInfoIsClearedState:
     case kRPGLocationInfoIsAvailableState:
     {
       aBattleplaceView.hidden = NO;
