@@ -20,9 +20,14 @@ NSString * const kRPGInitialScreenViewControllerNIBName = @"RPGInitialScreenView
 /****************	Quests ****************/
 
 NSString * const kRPGQuestListViewControllerNIBName = @"RPGQuestListViewController";
-NSString * const kRPGQuestListTableViewCellNIBName = @"RPGQuestListTableViewCell";
+NSString * const kRPGQuestTableViewCellNIBName = @"RPGQuestTableViewCell";
 NSString * const kRPGQuestViewControllerNIBName = @"RPGQuestViewController";
 NSString * const kRPGQuestProofImageViewControllerNIBName = @"RPGQuestProofImageViewController";
+NSString * const kRPGIncomingQuestTableViewCellNIBName = @"RPGIncomingQuestTableViewCell";
+
+NSString * const kRPGHeaderQuestViewControllerNIBName = @"RPGHeaderQuestViewController";
+NSString * const kRPGBodyQuestViewControllerNIBName = @"RPGBodyQuestViewController";
+NSString * const kRPGButtonQuestViewControllerNIBName = @"RPGButtonQuestViewController";
 
 /****************	Battle ****************/
 

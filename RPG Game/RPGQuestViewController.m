@@ -12,13 +12,15 @@
   // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestProofImageViewController.h"
-#import "RPGQuestViewHeaderContainer.h"
-#import "RPGQuestViewBodyContainer.h"
-#import "RPGQuestViewButtonContainer.h"
 #import "RPGWaitingViewController.h"
 #import "UIViewController+RPGChildViewController.h"
+  // Controllers
+#import "RPGHeaderQuestViewController.h"
+#import "RPGBodyQuestViewController.h"
+#import "RPGButtonQuestViewController.h"
   // Entities
 #import "RPGQuest.h"
+#import "RPGDuelQuest.h"
 #import "RPGQuestReward.h"
 #import "RPGQuestRequest.h"
 #import "RPGQuestReviewRequest.h"
@@ -31,18 +33,27 @@
 
 NSString * const kRPGQuestViewControllerWaitingMessageDownload = @"Downloading image";
 NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image";
+static NSString * const kRPGQuestViewControllerEmptyString = @"";
 
 @interface RPGQuestViewController () 
 
+@property (nonatomic, assign, readwrite) RPGQuestType questType;
 @property (nonatomic, assign, readwrite) NSInteger questID;
+@property (nonatomic, assign, readwrite) NSInteger duelQuestFriendID;
 @property (nonatomic, assign, readwrite, getter=hasGotReward) BOOL getReward;
 
-@property (nonatomic, copy, readwrite) NSString *proofImageStringURL;
+@property (nonatomic, copy, readwrite) NSString *proofImageStringURL1;
+@property (nonatomic, copy, readwrite) NSString *proofImageStringURL2;
 @property (nonatomic, retain, readwrite) UIImagePickerController *imagePickerController;
 
-@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewHeaderContainer *headerContainer;
-@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewBodyContainer *bodyContainer;
-@property (nonatomic, assign, readwrite) IBOutlet RPGQuestViewButtonContainer *buttonContainer;
+@property (nonatomic, assign, readwrite) RPGHeaderQuestViewController *headerContainerController;
+@property (nonatomic, retain, readwrite) IBOutlet UIView *headerContainer;
+
+@property (nonatomic, assign, readwrite) RPGBodyQuestViewController *bodyContainerController;
+@property (nonatomic, retain, readwrite) IBOutlet UIView *bodyContainer;
+
+@property (nonatomic, assign, readwrite) RPGButtonQuestViewController *buttonContainerController;
+@property (nonatomic, retain, readwrite) IBOutlet UIView *buttonContainer;
 
 @end
 
@@ -52,8 +63,20 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGQuestViewControllerNIBName
+  self = [super initWithNibName:kRPGQuestViewControllerNIBName
                          bundle:nil];
+  
+  if (self != nil)
+  {
+    _proofImageStringURL1 = kRPGQuestViewControllerEmptyString;
+    _proofImageStringURL2 = kRPGQuestViewControllerEmptyString;
+    
+    _headerContainerController = [[RPGHeaderQuestViewController alloc] initWithQuestViewController:self];
+    _bodyContainerController = [[RPGBodyQuestViewController alloc] initWithQuestViewController:self];
+    _buttonContainerController = [[RPGButtonQuestViewController alloc] initWithQuestViewController:self];
+  }
+  
+  return self;
 }
 
 #pragma mark - Dealloc
@@ -61,7 +84,8 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 - (void)dealloc
 {
   [_imagePickerController release];
-  [_proofImageStringURL release];
+  [_proofImageStringURL1 release];
+  [_proofImageStringURL2 release];
 
   [super dealloc];
 }
@@ -72,18 +96,31 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 {
   [super viewDidLoad];
   
-  self.buttonContainer.questViewController = self;
-  self.headerContainer.questViewController = self;
-  self.bodyContainer.questViewController = self;
+  [self addChildViewController:self.headerContainerController
+                          view:self.headerContainer];
+  [self addChildViewController:self.bodyContainerController
+                          view:self.bodyContainer];
+  [self addChildViewController:self.buttonContainerController
+                          view:self.buttonContainer];
 }
 
 - (void)viewWillAppear:(BOOL)anAnimated
 {
   [super viewWillAppear:anAnimated];
   
-  if (![self.proofImageStringURL isKindOfClass:[NSNull class]] && self.proofImageStringURL != nil)
+  NSString *proofImageStringURL1 = self.proofImageStringURL1;
+  NSString *proofImageStringURL2 = self.proofImageStringURL2;
+  RPGBodyQuestViewController *bodyContainerController = self.bodyContainerController;
+  
+  if (![proofImageStringURL1 isEqualToString:kRPGQuestViewControllerEmptyString])
   {
-    [self.bodyContainer downloadImage];
+    [self.bodyContainerController downloadImage:proofImageStringURL1
+                                      imageView:bodyContainerController.proofImageView1];
+  }
+  if (![proofImageStringURL2 isEqualToString:kRPGQuestViewControllerEmptyString])
+  {
+    [self.bodyContainerController downloadImage:proofImageStringURL2
+                                      imageView:bodyContainerController.proofImageView2];
   }
 }
 
@@ -103,13 +140,25 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 {
   if (aQuest != nil)
   {
+    self.questType = aQuest.questType;
     self.questID = aQuest.questID;
     self.getReward = aQuest.hasGotReward;
-    self.proofImageStringURL = aQuest.proofImageStringURL;
+    self.proofImageStringURL1 = aQuest.proofImageStringURL1;
+    if (![self.proofImageStringURL1 isEqualToString:kRPGQuestViewControllerEmptyString])
+    {
+      self.makeProof = YES;
+    }
     self.state = aQuest.state;
     
-    [self.headerContainer setViewContent:aQuest.reward];
-    [self.bodyContainer setViewContent:aQuest];
+    [self.headerContainerController setViewContent:aQuest.reward];
+    [self.bodyContainerController setViewContent:aQuest];
+    
+    if (self.questType == kRPGQuestTypeDuel)
+    {
+      RPGDuelQuest *duelQuest = (RPGDuelQuest *)aQuest;
+      self.duelQuestFriendID = duelQuest.friendID;
+      self.proofImageStringURL2 = duelQuest.proofImageStringURL2;
+    }
   }
 }
 
@@ -121,7 +170,7 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
   if (_imagePickerController == nil)
   {
     UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-    picker.delegate = self.bodyContainer;
+    picker.delegate = self.bodyContainerController;
     picker.sourceType = UIImagePickerControllerSourceTypeCamera;
     _imagePickerController = [picker retain];
   }
@@ -135,9 +184,39 @@ NSString * const kRPGQuestViewControllerWaitingMessageUpload = @"Uploading image
 {
   _state = aState;
   
-  [self.headerContainer updateView];
-  [self.bodyContainer updateView];
-  [self.buttonContainer updateView];
+  [self.headerContainerController updateView];
+  [self.bodyContainerController updateView];
+  [self.buttonContainerController updateView];
+}
+- (IBAction)handleTapGesture:(UITapGestureRecognizer *)aSender
+{
+  RPGBodyQuestViewController *bodyContainerController = self.bodyContainerController;
+  CGPoint point = [aSender locationInView:self.bodyContainer];
+  UIImageView *proofImageView1 = bodyContainerController.proofImageView1;
+  UIImageView *proofImageView2 = bodyContainerController.proofImageView2;
+  UIImageView *imageView = nil;
+  
+  if (proofImageView1.hidden == NO
+      && CGRectContainsPoint(proofImageView1.frame, point))
+  {
+    imageView = proofImageView1;
+  }
+  else if (proofImageView2.hidden == NO
+           && CGRectContainsPoint(proofImageView2.frame, point))
+  {
+    imageView = proofImageView2;
+  }
+  
+  if (imageView != nil)
+  {
+    RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] init] autorelease];
+    
+    [self presentViewController:questProofImageViewController
+                       animated:YES
+                     completion:nil];
+    
+    questProofImageViewController.proofImage = imageView.image;
+  }
 }
 
 @end

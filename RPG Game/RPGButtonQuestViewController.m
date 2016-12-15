@@ -1,12 +1,12 @@
-  //
-  //  RPGQuestViewButtonContainerController.m
-  //  RPG Game
-  //
-  //  Created by Максим Шульга on 11/10/16.
-  //  Copyright © 2016 RPG-team. All rights reserved.
-  //
+//
+//  RPGButtonQuestViewController.m
+//  RPG Game
+//
+//  Created by Максим Шульга on 12/15/16.
+//  Copyright © 2016 RPG-team. All rights reserved.
+//
 
-#import "RPGQuestViewButtonContainer.h"
+#import "RPGButtonQuestViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
   // Controllers
@@ -18,19 +18,38 @@
 #import "RPGQuestReviewRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
+#import <AVFoundation/AVFoundation.h>
   // Constants
 #import "RPGStatusCodes.h"
-#import <AVFoundation/AVFoundation.h>
+#import "RPGQuestEnum.h"
+#import "RPGNibNames.h"
 
-@interface RPGQuestViewButtonContainer()
+@interface RPGButtonQuestViewController ()
 
-@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton;
+@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
+
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton1;
+@property (nonatomic, assign, readwrite) IBOutlet UIButton *acceptButton2;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *denyButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *addProofButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *getRewardButton;
+
 @end
 
-@implementation RPGQuestViewButtonContainer
+@implementation RPGButtonQuestViewController
+
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController
+{
+  self = [super initWithNibName:kRPGButtonQuestViewControllerNIBName
+                         bundle:nil];
+  
+  if (self != nil)
+  {
+    _questViewController = aViewController;
+  }
+  
+  return self;
+}
 
 #pragma mark - View Update
 
@@ -77,7 +96,8 @@
     }
   }
   
-  BOOL hiddenFlag = (state == kRPGQuestStateReviewedTrue && self.questViewController.hasGotReward == NO);
+  BOOL hiddenFlag = (state == kRPGQuestStateReviewedTrue
+                     && self.questViewController.hasGotReward == NO);
   self.getRewardButton.hidden = !hiddenFlag;
 }
 
@@ -85,22 +105,26 @@
 
 - (void)setStateTakeOrInProgressQuest:(BOOL)aFlag
 {
-  self.acceptButton.hidden = !aFlag;
+  self.acceptButton1.hidden = !aFlag;
+  self.acceptButton2.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = aFlag;
 }
 
 - (void)setStateReviewedQuest:(BOOL)aFlag
 {
-  self.acceptButton.hidden = YES;
+  self.acceptButton1.hidden = YES;
+  self.acceptButton2.hidden = YES;
   self.denyButton.hidden = YES;
   self.addProofButton.hidden = aFlag;
 }
 
 - (void)setStateForReviewQuest
 {
-  self.acceptButton.hidden = NO;
-  self.denyButton.hidden = NO;
+  BOOL aFlag = (self.questViewController.questType == kRPGQuestTypeSingle);
+  self.acceptButton1.hidden = NO;
+  self.acceptButton2.hidden = aFlag;
+  self.denyButton.hidden = !aFlag;
   self.addProofButton.hidden = YES;
 }
 
@@ -109,13 +133,22 @@
 - (IBAction)acceptButtonOnClick:(UIButton *)aSender
 {
   RPGQuestState state = self.questViewController.state;
+  
   if (state == kRPGQuestStateCanTake)
   {
     [self takeQuest];
   }
   else if (state == kRPGQuestStateForReview)
   {
-    [self sendQuestProofWithResult:YES];
+    BOOL result = YES;
+    
+    if (self.questViewController.questType == kRPGQuestTypeDuel
+        && aSender == self.acceptButton1)
+    {
+      result = NO;
+    }
+    
+    [self sendQuestProofWithResult:result];
   }
 }
 
@@ -154,7 +187,8 @@
          
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                   completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
@@ -163,7 +197,7 @@
                                                  completion:nil];
             });
           }];
-         break;
+          break;
        }
          
        default:
@@ -187,9 +221,10 @@
   RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
   
   [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionTakeQuest
+                                                   byType:kRPGQuestTypeSingle
                                                   request:request
                                         completionHandler:^void(RPGStatusCode aNetworkStatusCode)
-  {
+   {
      switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeOK:
@@ -201,7 +236,8 @@
          
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                   completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
@@ -235,9 +271,9 @@
     __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
     
     [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo
-                             completionHandler:^(BOOL granted)
+                             completionHandler:^(BOOL isGranted)
      {
-       if (granted)
+       if (isGranted)
        {
          if (weakQuestViewController.imagePickerController)
          {
@@ -269,8 +305,9 @@
   RPGQuestReviewRequest *request = [RPGQuestReviewRequest questReviewRequestWithQuestID:self.questViewController.questID
                                                                                  result:aResult];
   
-  [[RPGNetworkManager sharedNetworkManager] postQuestProofWithRequest:request
-                                                    completionHandler:^void(RPGStatusCode aNetworkStatusCode)
+  [[RPGNetworkManager sharedNetworkManager] postQuestProofByType:self.questViewController.questType
+                                                         request:request
+                                               completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
      switch (aNetworkStatusCode)
      {

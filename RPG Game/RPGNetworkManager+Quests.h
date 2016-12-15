@@ -10,27 +10,34 @@
   // Constants
 #import "RPGQuestListState.h"
 #import "RPGQuestAction.h"
+#import "RPGQuestEnum.h"
   // Entities
 @class RPGQuestRequest;
+@class RPGDuelQuestRequest;
 @class RPGQuestReviewRequest;
 @class RPGQuestListResponse;
+@class RPGIncomingDuelQuestListResponse;
 
 @interface RPGNetworkManager (Quests)
 
-- (void)fetchQuestsByState:(RPGQuestListState)aState
-         completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                     RPGQuestListResponse *aResponse))aCallback;
+- (void)fetchQuestsByType:(RPGQuestType)aType
+                    state:(RPGQuestListState)aState
+        completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                    RPGQuestListResponse *aResponse))aCallback;
 
 - (void)doQuestAction:(RPGQuestAction)anAction
+               byType:(RPGQuestType)aType
               request:(RPGQuestRequest *)aRequest
     completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
-- (void)addProofWithRequest:(RPGQuestRequest *)aRequest
-                  imageData:(NSData *)anImageData
-          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
+- (void)addProofByType:(RPGQuestType)aType
+               request:(RPGQuestRequest *)aRequest
+             imageData:(NSData *)anImageData
+     completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
-- (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
+- (void)postQuestProofByType:(RPGQuestType)aType
+                     request:(RPGQuestReviewRequest *)aRequest
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 - (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;

@@ -1,12 +1,12 @@
 //
-//  RPGQuestViewBodyContainer.m
+//  RPGBodyQuestViewController.m
 //  RPG Game
 //
-//  Created by Максим Шульга on 11/10/16.
+//  Created by Максим Шульга on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGQuestViewBodyContainer.h"
+#import "RPGBodyQuestViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
   // Views
@@ -14,40 +14,63 @@
 #import "RPGQuestProofImageViewController.h"
   // Entitites
 #import "RPGQuest.h"
+#import "RPGDuelQuest.h"
 #import "RPGQuestRequest.h"
+#import "RPGDuelQuestRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGAlertController+RPGErrorHandling.h"
   // Constants
 #import "RPGStatusCodes.h"
+#import "RPGNibNames.h"
 
-@interface RPGQuestViewBodyContainer()
+@interface RPGBodyQuestViewController ()
+
+@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 
-@property (nonatomic, retain, readwrite) IBOutlet UILabel *proofLabel;
-@property (nonatomic, retain, readwrite) IBOutlet UIImageView *proofImageView;
+@property (nonatomic, retain, readwrite) IBOutlet UILabel *proofLabel1;
+@property (nonatomic, retain, readwrite) IBOutlet UIImageView *proofImageView1;
+@property (nonatomic, retain, readwrite) IBOutlet UIActivityIndicatorView *proofIndicatorView1;
 
-@property (nonatomic, retain, readwrite) IBOutlet UIActivityIndicatorView *indicatorView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *proofLabel2;
+@property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView2;
+@property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *proofIndicatorView2;
 
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *daysLeftLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *countDaysLeftLabel;
 @property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
 
 @property (nonatomic, assign, readwrite, getter=shouldDownloadImageProof) BOOL downloadImageProof;
 
 @end
 
-@implementation RPGQuestViewBodyContainer
+@implementation RPGBodyQuestViewController
+
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController
+{
+  self = [super initWithNibName:kRPGBodyQuestViewControllerNIBName
+                         bundle:nil];
+  
+  if (self != nil)
+  {
+    _questViewController = aViewController;
+  }
+  
+  return self;
+}
 
 #pragma mark - Dealloc
 
 - (void)dealloc
 {
-  [_proofLabel release];
-  [_proofImageView release];
-  [_indicatorView release];
+  [_proofLabel1 release];
+  [_proofImageView1 release];
+  [_proofIndicatorView1 release];
   [_descriptionBottomConstraint release];
-  
+
   [super dealloc];
 }
 
@@ -69,29 +92,42 @@
   return _descriptionBottomConstraint;
 }
 
-#pragma mark - Custom Setter
-
-- (void)setQuestViewController:(RPGQuestViewController *)aQuestViewController
-{
-  _questViewController = aQuestViewController;
-  if (_questViewController != nil)
-  {
-    UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(handleTapGesture)] autorelease];
-    tapGesture.numberOfTapsRequired = 1;
-    
-    [self.proofImageView setUserInteractionEnabled:YES];
-    [self.proofImageView addGestureRecognizer:tapGesture];
-  }
-}
-
 #pragma mark - View Content
 
 - (void)setViewContent:(RPGQuest *)aQuest
 {
-  self.titleLabel.text = aQuest.name;
+  NSString *questTitle = aQuest.name;
+  RPGQuestState state = aQuest.state;
+  RPGQuestType type = aQuest.questType;
+  RPGDuelQuest *duelQuest = ((RPGDuelQuest *)aQuest);
+  
   self.descriptionLabel.text = aQuest.questDescription;
   self.downloadImageProof = YES;
+  
+  if (type == kRPGQuestTypeDuel
+     && state != kRPGQuestStateForReview)
+  {
+    questTitle = [NSString stringWithFormat:@"%@ with %@", questTitle, duelQuest.friendUsername];
+    
+    if (state == kRPGQuestStateReviewedTrue)
+    {
+      NSString *winner = duelQuest.isWinner ? [NSUserDefaults standardUserDefaults].characterNickName : duelQuest.friendUsername;
+      questTitle = [NSString stringWithFormat:@"%@. Winner is %@", questTitle, winner];
+    }
+  }
+  
+  self.titleLabel.text = questTitle;
+  
+  if (type == kRPGQuestTypeDuel
+      && state == kRPGQuestStateInProgress)
+  {
+    self.countDaysLeftLabel.text = [NSString stringWithFormat:@"%ld", duelQuest.daysLeft];
+  }
+  else
+  {
+    [self.daysLeftLabel removeFromSuperview];
+    [self.countDaysLeftLabel removeFromSuperview];
+  }
 }
 
 #pragma mark - View State
@@ -121,76 +157,87 @@
 
 - (void)setProofItemsHidden:(BOOL)aFlag
 {
-  UILabel *proofLabel = self.proofLabel;
-  UIImageView *proofImageView = self.proofImageView;
+  UILabel *proofLabel1 = self.proofLabel1;
+  UIImageView *proofImageView1 = self.proofImageView1;
+  UIActivityIndicatorView *proofIndicatorView1 = self.proofIndicatorView1;
   UILabel *descriptionLabel = self.descriptionLabel;
-  UIActivityIndicatorView *indicatorView = self.indicatorView;
   UIView *superview = descriptionLabel.superview;
   
   if (aFlag)
   {
-    [proofImageView removeFromSuperview];
-    [proofLabel removeFromSuperview];
-    [indicatorView removeFromSuperview];
-    [superview addConstraint:self.descriptionBottomConstraint];
+    if (!self.questViewController.didMadeProof)
+    {
+      [proofImageView1 removeFromSuperview];
+      [proofLabel1 removeFromSuperview];
+      [proofIndicatorView1 removeFromSuperview];
+      [superview addConstraint:self.descriptionBottomConstraint];
+    }
+    [self setHiddenSecondProofViews];
   }
   else
   {
+    if (self.questViewController.questType == kRPGQuestTypeSingle)
+    {
+      [self setHiddenSecondProofViews];
+    }
+    
     NSArray *subviews = superview.subviews;
-    if (![subviews containsObject:proofImageView] && ![subviews containsObject:proofLabel])
+    if (![subviews containsObject:proofImageView1]
+        && ![subviews containsObject:proofLabel1]
+        && ![subviews containsObject:proofIndicatorView1])
     {
       [superview removeConstraint:self.descriptionBottomConstraint];
       
-      [superview addSubview:proofLabel];
-      [superview addSubview:proofImageView];
-      [superview addSubview:indicatorView];
+      [superview addSubview:proofLabel1];
+      [superview addSubview:proofImageView1];
+      [superview addSubview:proofIndicatorView1];
       
       [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
                                                             attribute:NSLayoutAttributeBottom
                                                             relatedBy:NSLayoutRelationEqual
-                                                               toItem:proofImageView
+                                                               toItem:proofImageView1
                                                             attribute:NSLayoutAttributeBottom
                                                            multiplier:1.0
                                                              constant:0]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView1
                                                             attribute:NSLayoutAttributeTop
                                                             relatedBy:NSLayoutRelationEqual
-                                                               toItem:proofLabel
+                                                               toItem:proofLabel1
                                                             attribute:NSLayoutAttributeBottom
                                                            multiplier:1.0
                                                              constant:5]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel1
                                                             attribute:NSLayoutAttributeTop
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:descriptionLabel
                                                             attribute:NSLayoutAttributeBottom
                                                            multiplier:1.0
                                                              constant:10]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofLabel1
                                                             attribute:NSLayoutAttributeLeading
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:descriptionLabel
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:0]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofImageView1
                                                             attribute:NSLayoutAttributeLeading
                                                             relatedBy:NSLayoutRelationEqual
                                                                toItem:descriptionLabel
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:0]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofIndicatorView1
                                                             attribute:NSLayoutAttributeLeading
                                                             relatedBy:NSLayoutRelationEqual
-                                                               toItem:proofImageView
+                                                               toItem:proofImageView1
                                                             attribute:NSLayoutAttributeLeading
                                                            multiplier:1.0
                                                              constant:0]];
-      [superview addConstraint:[NSLayoutConstraint constraintWithItem:indicatorView
+      [superview addConstraint:[NSLayoutConstraint constraintWithItem:proofIndicatorView1
                                                             attribute:NSLayoutAttributeTop
                                                             relatedBy:NSLayoutRelationEqual
-                                                               toItem:proofImageView
+                                                               toItem:proofImageView1
                                                             attribute:NSLayoutAttributeTop
                                                            multiplier:1.0
                                                              constant:0]];
@@ -198,16 +245,11 @@
   }
 }
 
-#pragma mark - Open QuestProofImageView
-
-- (void)handleTapGesture
+- (void)setHiddenSecondProofViews
 {
-  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] init] autorelease];
-  
-  [self.questViewController presentViewController:questProofImageViewController
-                                         animated:YES
-                                       completion:nil];
-  questProofImageViewController.proofImage = self.proofImageView.image;
+  self.proofLabel2.hidden = YES;
+  self.proofImageView2.hidden = YES;
+  self.proofIndicatorView2.hidden = YES;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -216,38 +258,61 @@
 {
   [aPicker dismissViewControllerAnimated:YES
                               completion:NULL];
+  
   self.questViewController.state = kRPGQuestStateDone;
-  [self setViewToWaitingState];
+  [self setIndicatorViewToWaitingState:self.proofIndicatorView1];
   
   UIImage *chosenImage = anInfo[UIImagePickerControllerOriginalImage];
   // !!!: leak
   __block typeof(self.questViewController) weakQuestViewController = self.questViewController;
   
   NSData *data = UIImageJPEGRepresentation(chosenImage, 0.7);
+  RPGQuestRequest *request = nil;
+  RPGQuestViewController *questViewController = self.questViewController;
+  RPGQuestType questType = questViewController.questType;
   
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:self.questViewController.questID];
-  [[RPGNetworkManager sharedNetworkManager] addProofWithRequest:request
-                                                      imageData:data
-                                              completionHandler:^void(RPGStatusCode aNetworkStatusCode)
+  switch (questType)
+  {
+    case kRPGQuestTypeSingle:
+    {
+      request = [RPGQuestRequest questRequestWithQuestID:questViewController.questID];
+      break;
+    }
+      
+    case kRPGQuestTypeDuel:
+    {
+      request = [RPGDuelQuestRequest duelQuestRequestWithQuestID:questViewController.questID
+                                                        friendID:questViewController.duelQuestFriendID];
+      break;
+    }
+  }
+  
+  [[RPGNetworkManager sharedNetworkManager] addProofByType:questType
+                                                   request:request
+                                                 imageData:data
+                                         completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
-     [self setViewToNormalState];
+     [self setIndicatorViewToNormalState:self.proofIndicatorView1];
      
      switch (aNetworkStatusCode)
      {
        case kRPGStatusCodeOK:
        {
-         self.proofImageView.image = chosenImage;
+         self.proofImageView1.image = chosenImage;
+         self.questViewController.makeProof = YES;
          break;
        }
          
        case kRPGStatusCodeWrongToken:
        {
-         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken completionHandler:^(void)
+         [RPGAlertController showErrorWithStatusCode:kRPGStatusCodeWrongToken
+                                   completionHandler:^(void)
           {
             dispatch_async(dispatch_get_main_queue(), ^
             {
               UIViewController *viewController = weakQuestViewController.presentingViewController.presentingViewController.presentingViewController;
-              [viewController dismissViewControllerAnimated:YES completion:nil];
+              [viewController dismissViewControllerAnimated:YES
+                                                 completion:nil];
             });
           }];
          break;
@@ -256,6 +321,7 @@
        default:
        {
          self.questViewController.state = kRPGQuestStateInProgress;
+         
          NSString *message = @"Can't upload proof image.";
          [RPGAlertController showAlertWithTitle:nil
                                         message:message
@@ -269,29 +335,42 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  [aPicker dismissViewControllerAnimated:YES
+                              completion:NULL];
 }
 
 #pragma mark - Upload Image
 
-- (void)downloadImage
+- (void)downloadImage:(NSString *)aStringURL
+            imageView:(UIImageView *)anImageView
 {
   if (self.shouldDownloadImageProof)
   {
-    [self setViewToWaitingState];
+    UIActivityIndicatorView *indicatorView = nil;
+    
+    if (anImageView == self.proofImageView1)
+    {
+      indicatorView = self.proofIndicatorView1;
+    }
+    else if (anImageView == self.proofImageView2)
+    {
+      indicatorView = self.proofIndicatorView2;
+    }
+    
+    [self setIndicatorViewToWaitingState:indicatorView];
     // !!!: SELF not WEAKSELF
     
-    [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:self.questViewController.proofImageStringURL
+    [[RPGNetworkManager sharedNetworkManager] getImageDataFromPath:aStringURL
                                                  completionHandler:^void(RPGStatusCode aNetworkStatusCode,
                                                                          NSData *anImageData)
      {
-       [self setViewToNormalState];
+       [self setIndicatorViewToNormalState:indicatorView];
        
        switch (aNetworkStatusCode)
        {
          case kRPGStatusCodeOK:
          {
-           self.proofImageView.image = [UIImage imageWithData:anImageData];
+           anImageView.image = [UIImage imageWithData:anImageData];
            self.downloadImageProof = NO;
            break;
          }
@@ -310,16 +389,18 @@
   }
 }
 
-- (void)setViewToWaitingState
+#pragma mark - UIActivityIndicatorView State
+
+- (void)setIndicatorViewToWaitingState:(UIActivityIndicatorView *)anIndicatorView
 {
-  self.indicatorView.hidden = NO;
-  [self.indicatorView startAnimating];
+  anIndicatorView.hidden = NO;
+  [anIndicatorView startAnimating];
 }
 
-- (void)setViewToNormalState
+- (void)setIndicatorViewToNormalState:(UIActivityIndicatorView *)anIndicatorView
 {
-  self.indicatorView.hidden = YES;
-  [self.indicatorView stopAnimating];
+  anIndicatorView.hidden = YES;
+  [anIndicatorView stopAnimating];
 }
 
 @end

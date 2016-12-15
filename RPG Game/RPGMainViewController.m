@@ -35,11 +35,16 @@
   // Entities
 #import "RPGResources.h"
 #import "RPGResourcesResponse.h"
+#import "RPGDuelCountResponse.h"
+
+static CGFloat const kRPGMainViewControllerViewCornerRadiusMultiplier = 0.5;
 
 @interface RPGMainViewController () <RPGPresentingViewController>
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *goldLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *crystalsLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UIView *duelQuestsCountView;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *duelQuestsCountLabel;
 
 @end
 
@@ -65,6 +70,9 @@
 - (void)viewDidLoad
 {
   [super viewDidLoad];
+  
+  self.duelQuestsCountView.layer.cornerRadius = self.duelQuestsCountView.frame.size.height * kRPGMainViewControllerViewCornerRadiusMultiplier;
+  self.duelQuestsCountView.layer.masksToBounds = YES;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations
@@ -87,6 +95,15 @@
       standartUserDefaults.sessionGold = resources.gold;
       standartUserDefaults.sessionCrystals = resources.crystals;
       [self updateResourcesLabels];
+    }
+  }];
+  
+  [[RPGNetworkManager sharedNetworkManager] getDuelQuestsCountWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode, RPGDuelCountResponse * aResponse)
+  {
+    if (aNetworkStatusCode == kRPGStatusCodeOK)
+    {
+      NSInteger count = aResponse.duelQuestsCount;
+      self.duelQuestsCountLabel.text = [NSString stringWithFormat:@"%ld", (long)count];
     }
   }];
 }
@@ -120,6 +137,14 @@
                    completion:nil];
 }
 
+- (IBAction)segueToDuelQuests
+{
+  RPGQuestListViewController *questListViewController = [[[RPGQuestListViewController alloc] initWithType:kRPGQuestTypeDuel] autorelease];
+  
+  [self presentViewController:questListViewController
+                     animated:YES
+                   completion:nil];
+}
 
 - (IBAction)segueToShop
 {

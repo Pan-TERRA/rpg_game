@@ -11,6 +11,7 @@
 #import "RPGQuestViewController.h"
 #import "RPGLoginViewController.h"
 #import "RPGQuestTableViewController.h"
+#import "RPGQuestTableViewCell.h"
   // API
 #import "RPGNetworkManager+Quests.h"
   // Entities
@@ -33,9 +34,9 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
 
-@property (nonatomic, assign, readwrite, getter=canSendRequest) BOOL sendRequest;
-
 @property (nonatomic, retain, readwrite) RPGQuestTableViewController *tableViewController;
+
+@property (nonatomic, assign, readwrite) RPGQuestType questType;
 
 @end
 
@@ -52,6 +53,19 @@
   {
     _tableViewController = [[RPGQuestTableViewController alloc] init];
     _sendRequest = YES;
+    _questType = kRPGQuestTypeSingle;
+  }
+  
+  return self;
+}
+
+- (instancetype)initWithType:(RPGQuestType)aType
+{
+  self = [self init];
+  
+  if (self != nil)
+  {
+    _questType = aType;
   }
   
   return self;
@@ -74,6 +88,8 @@
   
   self.tableViewController = [[[RPGQuestTableViewController alloc] initWithTableView:self.tableView] autorelease];
   self.tableViewController.delegate = self;
+  self.tableViewController.questListState = kRPGQuestListTakeQuest;
+  self.tableViewController.questType = self.questType;
 }
 
 - (void)viewWillAppear:(BOOL)anAnimated
@@ -127,9 +143,10 @@
     
     __block typeof(self) weakSelf = self;
     
-    [[RPGNetworkManager sharedNetworkManager] fetchQuestsByState:aState
-                                               completionHandler:^void(RPGStatusCode aNetworkStatusCode,
-                                                                       RPGQuestListResponse *aResponse)
+    [[RPGNetworkManager sharedNetworkManager] fetchQuestsByType:self.questType
+                                                          state:aState
+                                              completionHandler:^void(RPGStatusCode aNetworkStatusCode,
+                                                                      RPGQuestListResponse *aResponse)
     {
       self.sendRequest = YES;
       [weakSelf setViewToNormalState];

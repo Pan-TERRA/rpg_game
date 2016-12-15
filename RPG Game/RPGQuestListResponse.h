@@ -12,6 +12,9 @@
   // Entities
 @class RPGQuest;
 
+extern NSString * const kRPGQuestListResponseStatus;
+extern NSString * const kRPGQuestListResponseQuests;
+
 @interface RPGQuestListResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger status;

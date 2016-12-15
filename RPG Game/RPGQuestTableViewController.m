@@ -12,9 +12,12 @@
   // Views
 #import "RPGQuestListViewController.h"
 #import "RPGQuestListTableViewCell.h"
+#import "RPGQuestTableViewCell.h"
+#import "RPGIncomingQuestTableViewCell.h"
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestRequest.h"
+#import "RPGDuelQuestRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
@@ -25,9 +28,10 @@
 #import "RPGAlertController+RPGErrorHandling.h"
 
 static CGFloat const kRPGQuestListViewControllerRefreshIndicatorOffset = -30.0;
-static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
+static NSUInteger const kRPGQuestTableViewControllerQuestCellHeight = 200;
+static NSUInteger const kRPGQuestTableViewControllerIncomingQuestCellHeight = 100;
 
-@interface RPGQuestTableViewController () <UITableViewDelegate, UITableViewDataSource, RPGTableViewCellDelegate>
+@interface RPGQuestTableViewController () <UITableViewDelegate, UITableViewDataSource, RPGQuestTableViewCellDelegate>
 
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGQuest *> *takeQuestsMutableArray;
 @property (nonatomic, retain, readwrite) NSMutableArray<RPGQuest *> *inProgressQuestsMutableArray;
@@ -154,22 +158,42 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
 
 - (UITableViewCell *)tableView:(UITableView *)aTableView cellForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGQuestListTableViewCell *cell = (RPGQuestListTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGQuestListTableViewCellNIBName];
+  RPGQuestListTableViewCell *cell = nil;
+  
+  if (self.questListState == kRPGQuestListTakeQuest && self.questType == kRPGQuestTypeDuel)
+  {
+    cell = (RPGIncomingQuestTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGIncomingQuestTableViewCellNIBName];
+  }
+  else
+  {
+    cell = (RPGQuestTableViewCell *)[aTableView dequeueReusableCellWithIdentifier:kRPGQuestTableViewCellNIBName];
+  }
   
   if (cell == nil)
   {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestListTableViewCellNIBName
-                                                 owner:self
-                                               options:nil];
-    cell = nib.firstObject;
+    
+    if (self.questListState == kRPGQuestListTakeQuest && self.questType == kRPGQuestTypeDuel)
+    {
+      NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGIncomingQuestTableViewCellNIBName
+                                                   owner:self
+                                                 options:nil];
+      cell = nib.firstObject;
+    }
+    else
+    {
+      NSArray *nib = [[NSBundle mainBundle] loadNibNamed:kRPGQuestTableViewCellNIBName
+                                                   owner:self
+                                                 options:nil];
+      cell = nib.firstObject;
+    }
   }
   
   cell.backgroundColor = [UIColor clearColor];
   cell.backgroundView = [[UIView new] autorelease];
   cell.selectedBackgroundView = [[UIView new] autorelease];
-  cell.delegate = self;
   
-  RPGQuest *cellContent = nil;
+  
+  id cellContent = nil;
   NSInteger index = anIndexPath.row;
   
   switch (self.questListState)
@@ -201,6 +225,7 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
   if (cellContent != nil)
   {
     [cell setCellContent:cellContent];
+    cell.delegate = self;
   }
   
   return cell;
@@ -210,7 +235,14 @@ static NSUInteger const kRPGQuestListViewControllerTableViewCellHeight = 200;
 
 - (CGFloat)tableView:(UITableView *)aTableView heightForRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  return kRPGQuestListViewControllerTableViewCellHeight;
+  NSInteger result = kRPGQuestTableViewControllerQuestCellHeight;
+  
+  if (self.questListState == kRPGQuestListTakeQuest && self.questType == kRPGQuestTypeDuel)
+  {
+    result = kRPGQuestTableViewControllerIncomingQuestCellHeight;
+  }
+  
+  return result;
 }
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath
@@ -333,12 +365,26 @@ forQuestListState:(RPGQuestListState)aState
 
 #pragma mark - RPGTableViewCellDelegate
 
-- (void)deleteQuestWithID:(NSInteger)aQuestID
+- (void)doQuestAction:(RPGQuestAction)anAction
+               byType:(RPGQuestType)aType
+              questID:(NSInteger)aQuestID
+             friendID:(NSInteger)aFriendID
 {
   RPGQuestListState state = self.questListState;
   
-  RPGQuestRequest *request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
-  [[RPGNetworkManager sharedNetworkManager] doQuestAction:kRPGQuestActionDeleteQuest
+  RPGQuestRequest *request = nil;
+  if (aType == kRPGQuestTypeSingle)
+  {
+    request = [RPGQuestRequest questRequestWithQuestID:aQuestID];
+  }
+  else if (aType == kRPGQuestTypeDuel)
+  {
+    request = [RPGDuelQuestRequest duelQuestRequestWithQuestID:aQuestID
+                                                      friendID:aFriendID];
+  }
+
+  [[RPGNetworkManager sharedNetworkManager] doQuestAction:anAction
+                                                   byType:aType
                                                   request:request
                                         completionHandler:^void(RPGStatusCode aNetworkStatusCode)
    {
@@ -351,8 +397,22 @@ forQuestListState:(RPGQuestListState)aState
      }
      else
      {
-       [RPGAlertController showAlertWithTitle:@"Delete quest"
-                                      message:@"Can't delete quest."
+       NSString *messageTitle = nil;
+       NSString *message = nil;
+       
+       if (anAction == kRPGQuestActionTakeQuest)
+       {
+         messageTitle = @"Accept quest";
+         message = @"Can't accept quest.";
+       }
+       else if (anAction == kRPGQuestActionDeleteQuest)
+       {
+         messageTitle = @"Skip quest";
+         message = @"Can't skip quest.";
+       }
+       
+       [RPGAlertController showAlertWithTitle:messageTitle
+                                      message:message
                                   actionTitle:nil
                                    completion:nil];
      }

@@ -1,20 +1,24 @@
 //
-//  RPGQuestViewHeaderContainer.m
+//  RPGHeaderQuestViewController.m
 //  RPG Game
 //
-//  Created by Максим Шульга on 11/10/16.
+//  Created by Максим Шульга on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGQuestViewHeaderContainer.h"
+#import "RPGHeaderQuestViewController.h"
   // Entities
 #import "RPGQuest.h"
 #import "RPGQuestReward.h"
 #import "RPGSkillRepresentation.h"
   // Views
 #import "RPGQuestViewController.h"
+  // Constants
+#import "RPGNibNames.h"
 
-@interface RPGQuestViewHeaderContainer()
+@interface RPGHeaderQuestViewController ()
+
+@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
 
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofTypeImageView;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *stateTitleLabel;
@@ -26,7 +30,20 @@
 
 @end
 
-@implementation RPGQuestViewHeaderContainer
+@implementation RPGHeaderQuestViewController
+
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController
+{
+  self = [super initWithNibName:kRPGHeaderQuestViewControllerNIBName
+                         bundle:nil];
+  
+  if (self != nil)
+  {
+    _questViewController = aViewController;
+  }
+  
+  return self;
+}
 
 #pragma mark - View Content
 

@@ -12,46 +12,95 @@
 #import "RPGQuestRequest.h"
 #import "RPGQuestReviewRequest.h"
 #import "RPGBasicNetworkResponse.h"
+#import "RPGIncomingDuelQuestListResponse.h"
   // Misc
 #import "NSObject+RPGErrorLog.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
 
 @implementation RPGNetworkManager (Quests)
 
-- (void)fetchQuestsByState:(RPGQuestListState)aState
-         completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
-                                     RPGQuestListResponse *aResponse))aCallback
+- (void)fetchQuestsByType:(RPGQuestType)aType
+                    state:(RPGQuestListState)aState
+        completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                    RPGQuestListResponse *aResponse))aCallback
 {
   NSString *requestString = nil;
   
-  switch (aState)
-  {
-    case kRPGQuestListTakeQuest:
+  switch (aType) {
+    case kRPGQuestTypeSingle:
     {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIQuestsRoute];
+      switch (aState)
+      {
+        case kRPGQuestListTakeQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIQuestsRoute];
+          break;
+        }
+          
+        case kRPGQuestListInProgressQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIQuestsInProgressRoute];
+          break;
+        }
+          
+        case kRPGQuestListDoneQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIConfirmedQuestsRoute];
+          break;
+        }
+          
+        case kRPGQuestListReviewQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIReviewQuestsRoute];
+          break;
+        }
+      }
       break;
     }
-    case kRPGQuestListInProgressQuest:
+    case kRPGQuestTypeDuel:
     {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIQuestsInProgressRoute];
-      break;
-    }
-    case kRPGQuestListDoneQuest:
-    {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIConfirmedQuestsRoute];
-      break;
-    }
-    case kRPGQuestListReviewQuest:
-    {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIReviewQuestsRoute];
+      switch (aState)
+      {
+        case kRPGQuestListTakeQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIDuelIncomingQuestsRoute];
+          break;
+        }
+          
+        case kRPGQuestListInProgressQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIDuelQuestsInProgressRoute];
+          break;
+        }
+          
+        case kRPGQuestListDoneQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIDuelConfirmedQuestsRoute];
+          break;
+        }
+          
+        case kRPGQuestListReviewQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIDuelReviewQuestsRoute];
+          break;
+        }
+      }
       break;
     }
   }
@@ -130,8 +179,16 @@
     }
     
     RPGQuestListResponse *responseObject = nil;
-    responseObject = [[[RPGQuestListResponse alloc]
-                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    if (aState == kRPGQuestListTakeQuest && aType == kRPGQuestTypeDuel)
+    {
+      responseObject = [[[RPGIncomingDuelQuestListResponse alloc]
+                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    }
+    else
+    {
+      responseObject = [[[RPGQuestListResponse alloc]
+                         initWithDictionaryRepresentation:responseDictionary] autorelease];
+    }
     
     dispatch_async(dispatch_get_main_queue(), ^
     {
@@ -153,25 +210,56 @@
 }
 
 - (void)doQuestAction:(RPGQuestAction)anAction
+               byType:(RPGQuestType)aType
               request:(RPGQuestRequest *)aRequest
     completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
   NSString *requestString = nil;
   
-  switch (anAction)
-  {
-    case kRPGQuestActionTakeQuest:
+  switch (aType) {
+    case kRPGQuestTypeSingle:
     {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPIAcceptQuestRoute];
+      switch (anAction)
+      {
+        case kRPGQuestActionTakeQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIAcceptQuestRoute];
+          break;
+        }
+          
+        case kRPGQuestActionDeleteQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPISkipQuestRoute];
+          break;
+        }
+      }
       break;
     }
-    case kRPGQuestActionDeleteQuest:
+      
+    case kRPGQuestTypeDuel:
     {
-      requestString = [NSString stringWithFormat:@"%@%@",
-                       kRPGNetworkManagerAPIHost,
-                       kRPGNetworkManagerAPISkipQuestRoute];
+      switch (anAction)
+      {
+        case kRPGQuestActionTakeQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPIAcceptDuelQuestRoute];
+          break;
+        }
+          
+        case kRPGQuestActionDeleteQuest:
+        {
+          requestString = [NSString stringWithFormat:@"%@%@",
+                           kRPGNetworkManagerAPIHost,
+                           kRPGNetworkManagerAPISkipDuelQuestRoute];
+          break;
+        }
+      }
       break;
     }
   }
@@ -268,13 +356,30 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)addProofWithRequest:(RPGQuestRequest *)aRequest
-                  imageData:(NSData *)anImageData
-          completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
+- (void)addProofByType:(RPGQuestType)aType
+               request:(RPGQuestRequest *)aRequest
+             imageData:(NSData *)anImageData
+     completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@%@",
-                             kRPGNetworkManagerAPIHost,
-                             kRPGNetworkManagerAPIProofQuestRoute];
+  NSString *requestString = nil;
+  
+  switch (aType) {
+    case kRPGQuestTypeSingle:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIProofQuestRoute];
+      break;
+    }
+      
+    case kRPGQuestTypeDuel:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIProofDuelQuestRoute];
+      break;
+    }
+  }
 
   NSMutableURLRequest *request = [[[self requestWithObject:aRequest
                                                  URLstring:requestString
@@ -291,7 +396,7 @@
   [body appendData:[@"Content-Disposition: form-data; name=\"json\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:request.HTTPBody];
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-  [body appendData:[@"Content-Disposition: form-data; name=\"prove_image\"; filename=\"file.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+  [body appendData:[@"Content-Disposition: form-data; name=\"prove_image_1\"; filename=\"file.jpg\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:anImageData];
   [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
@@ -385,12 +490,30 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
+- (void)postQuestProofByType:(RPGQuestType)aType
+                     request:(RPGQuestReviewRequest *)aRequest
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@%@",
-                             kRPGNetworkManagerAPIHost,
-                             kRPGNetworkManagerAPIReviewResultQuestRoute];
+  NSString *requestString = nil;
+  
+  switch (aType)
+  {
+    case kRPGQuestTypeSingle:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIReviewResultQuestRoute];
+      break;
+    }
+      
+    case kRPGQuestTypeDuel:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIReviewResultDuelQuestRoute];
+      break;
+    }
+  }
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString

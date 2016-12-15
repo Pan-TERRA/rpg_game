@@ -37,8 +37,17 @@ extern NSString * const kRPGNetworkManagerAPISkipQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute;
-  // Quest Challenge
+  // Quests Duel
 extern NSString * const kRPGNetworkManagerAPISendQuestChallengeRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelIncomingQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelQuestsInProgressRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelConfirmedQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelReviewQuestsRoute;
+extern NSString * const kRPGNetworkManagerAPIAcceptDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPISkipDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIProofDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIReviewResultDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelCountRoute;
   // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
@@ -71,6 +80,7 @@ extern NSString * const kRPGNetworkManagerAPIAdventuresLocationInfoRoute;
 
   // Entities
 @class RPGResourcesResponse;
+@class RPGDuelCountResponse;
 
 #pragma mark -
 
@@ -116,6 +126,9 @@ extern NSString * const kRPGNetworkManagerAPIAdventuresLocationInfoRoute;
 - (void)getImageDataFromPath:(NSString *)aPath
            completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
                                        NSData *anImageData))aCallback;
+
+- (void)getDuelQuestsCountWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                          RPGDuelCountResponse *aResponse))aCallback;
 
 @end
 

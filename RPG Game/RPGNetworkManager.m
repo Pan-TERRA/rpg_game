@@ -13,6 +13,7 @@
 #import "NSObject+RPGErrorLog.h"
   // Entities
 #import "RPGResourcesResponse.h"
+#import "RPGDuelCountResponse.h"
   // Constants
 #import "RPGStatusCodes.h"
 
@@ -40,8 +41,17 @@ NSString * const kRPGNetworkManagerAPISkipQuestRoute = @"/skip_quest";
 NSString * const kRPGNetworkManagerAPIReviewResultQuestRoute = @"/review_result";
 NSString * const kRPGNetworkManagerAPIProofQuestRoute = @"/prove_quest";
 NSString * const kRPGNetworkManagerAPIGetQuestRewardRoute = @"/get_quest_reward";
-  // Quest Challenge
+  // Quest Duel
 NSString * const kRPGNetworkManagerAPISendQuestChallengeRoute = @"/duel_send_request";
+NSString * const kRPGNetworkManagerAPIDuelIncomingQuestsRoute = @"/duel_incoming_requests";
+NSString * const kRPGNetworkManagerAPIDuelQuestsInProgressRoute = @"/duel_in_progress";
+NSString * const kRPGNetworkManagerAPIDuelConfirmedQuestsRoute = @"/duel_confirmed";
+NSString * const kRPGNetworkManagerAPIDuelReviewQuestsRoute = @"/review_duel_quests";
+NSString * const kRPGNetworkManagerAPIAcceptDuelQuestRoute = @"/duel_accept_request";
+NSString * const kRPGNetworkManagerAPISkipDuelQuestRoute = @"/duel_skip_request";
+NSString * const kRPGNetworkManagerAPIProofDuelQuestRoute = @"/prove_duel";
+NSString * const kRPGNetworkManagerAPIReviewResultDuelQuestRoute = @"/review_duel_result";
+NSString * const kRPGNetworkManagerAPIDuelCountRoute = @"/active_duels";
   // Skills
 NSString * const kRPGNetworkManagerAPISkillsRoute = @"/skills";
 NSString * const kRPGNetworkManagerAPISkillInfoRoute = @"/skill/";
@@ -423,6 +433,108 @@ NSString * const kRPGNetworkManagerStatus = @"status";
       }
     });
     
+  }];
+  
+  [task resume];
+  
+  [session finishTasksAndInvalidate];
+}
+
+- (void)getDuelQuestsCountWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                          RPGDuelCountResponse *aResponse))aCallback
+{
+  NSString *requestString = [NSString stringWithFormat:@"%@%@",
+                             kRPGNetworkManagerAPIHost,
+                             kRPGNetworkManagerAPIDuelCountRoute];
+  
+  NSURLRequest *request = [self requestWithObject:@{}
+                                        URLstring:requestString
+                                           method:@"POST"];
+  
+  NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+  NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+  NSURLSessionDataTask *task = [session dataTaskWithRequest:request
+                                          completionHandler:^(NSData * _Nullable data,
+                                                              NSURLResponse * _Nullable response,
+                                                              NSError * _Nullable error)
+  {
+    // something went wrong
+    if (error != nil)
+    {
+      // no internet connection
+      if ([self isNoInternerConnection:error])
+      {
+        dispatch_async(dispatch_get_main_queue(), ^
+        {
+          aCallback(kRPGStatusCodeNetworkManagerNoInternetConnection, nil);
+        });
+        
+        return;
+      }
+      
+      [self logError:error withTitle:@"Network error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        aCallback(kRPGStatusCodeNetworkManagerUnknown, nil);
+      });
+      
+      return;
+    }
+    
+    if ([self isResponseCodeNot200:response])
+    {
+      NSLog(@"Network error. HTTP status code: %ld", (long)[(NSHTTPURLResponse *)response statusCode]);
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        aCallback(kRPGStatusCodeNetworkManagerServerError, nil);
+      });
+      
+      return;
+    }
+    
+    if (data == nil)
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        aCallback(kRPGStatusCodeNetworkManagerEmptyResponseData, nil);
+      });
+      
+      return;
+    }
+    
+    NSError *JSONParsingError = nil;
+    NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                                       options:0
+                                                                         error:&JSONParsingError];
+    if (responseDictionary == nil)
+    {
+      [self logError:JSONParsingError withTitle:@"JSON error"];
+      
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        aCallback(kRPGStatusCodeNetworkManagerSerializingError, nil);
+      });
+      
+      return;
+    }
+    
+    RPGDuelCountResponse *responseObject = nil;
+    responseObject = [[[RPGDuelCountResponse alloc]
+                       initWithDictionaryRepresentation:responseDictionary] autorelease];
+    // validation error
+    dispatch_async(dispatch_get_main_queue(), ^
+    {
+      if (responseObject == nil)
+      {
+        aCallback(kRPGStatusCodeNetworkManagerResponseObjectValidationFail, nil);
+      }
+      else
+      {
+        aCallback(responseObject.status, responseObject);
+      }
+    });
   }];
   
   [task resume];
