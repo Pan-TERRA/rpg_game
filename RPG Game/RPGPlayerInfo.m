@@ -16,11 +16,13 @@ static NSString * const kRPGPlayerInfoEffects = @"effects";
 @interface RPGPlayerInfo ()
 
 @property (nonatomic, assign, readwrite) NSInteger HP;
-@property (nonatomic, assign, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
+@property (nonatomic, copy, readwrite) NSArray<RPGSkillEffect *> *skillsEffects;
 
 @end
 
 @implementation RPGPlayerInfo
+
+#pragma mark - Init
 
 - (instancetype)initWithHP:(NSInteger)aHP
              skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects
@@ -55,6 +57,15 @@ static NSString * const kRPGPlayerInfoEffects = @"effects";
 {
   return [[[self alloc] initWithHP:aHP
                      skillsEffects:aSkillsEffects] autorelease];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc
+{
+  [_skillsEffects release];
+  
+  [super dealloc];
 }
 
 #pragma mark - RPGSerializable

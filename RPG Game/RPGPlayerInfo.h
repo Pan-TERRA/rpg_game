@@ -15,7 +15,7 @@
 @interface RPGPlayerInfo : NSObject <RPGSerializable>
 
 @property (nonatomic, assign, readonly) NSInteger HP;
-@property (nonatomic, assign, readonly) NSArray<RPGSkillEffect *> *skillsEffects;
+@property (nonatomic, copy, readonly) NSArray<RPGSkillEffect *> *skillsEffects;
 
 - (instancetype)initWithHP:(NSInteger)aHP
              skillsEffects:(NSArray<RPGSkillEffect *> *)aSkillsEffects NS_DESIGNATED_INITIALIZER;
