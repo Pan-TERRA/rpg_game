@@ -118,32 +118,22 @@ static CGFloat const kBounceValue = 10.0;
   if (aCellContent.reward.skillID != 0)
   {
     RPGSkillRepresentation *skillRepresentation = [RPGSkillRepresentation skillrepresentationWithSkillID:aCellContent.reward.skillID];
+    
     self.skillRewardImageView.image = [UIImage imageNamed:skillRepresentation.imageName];
   }
   else
   {
-    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.skillRewardImageView.superview
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
-    [self.skillRewardImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.skillRewardImageView
-                                                                             attribute:NSLayoutAttributeLeading
-                                                                             relatedBy:NSLayoutRelationEqual
-                                                                                toItem:self.goldRewardLabel
-                                                                             attribute:NSLayoutAttributeTrailing
-                                                                            multiplier:1.0
-                                                                              constant:10]];
+    UILabel *goldRewardLabel = self.goldRewardLabel;
+    UIView *superview = goldRewardLabel.superview;
+    
     [self.skillRewardImageView removeFromSuperview];
-    [self.goldRewardLabel.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.goldRewardLabel.superview
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                               relatedBy:NSLayoutRelationEqual
-                                                                                  toItem:self.goldRewardLabel
-                                                                               attribute:NSLayoutAttributeTrailing
-                                                                              multiplier:1.0
-                                                                                constant:10]];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:goldRewardLabel
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:10]];
   }
 
   switch (state)
@@ -212,37 +202,18 @@ static CGFloat const kBounceValue = 10.0;
 {
   if (aFlag)
   {
-    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
-                                                                       attribute:NSLayoutAttributeTrailing
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.stateImageView.superview
-                                                                       attribute:NSLayoutAttributeTrailing
-                                                                      multiplier:1.0
-                                                                        constant:10]];
-    [self.stateImageView removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateImageView
-                                                                       attribute:NSLayoutAttributeLeading
-                                                                       relatedBy:NSLayoutRelationEqual
-                                                                          toItem:self.stateTitleLabel
-                                                                       attribute:NSLayoutAttributeTrailing
-                                                                      multiplier:1.0
-                                                                        constant:10]];
-    [self.stateImageView removeFromSuperview];
-    [self.stateTitleLabel removeConstraint:[NSLayoutConstraint constraintWithItem:self.stateTitleLabel
-                                                                        attribute:NSLayoutAttributeLeading
-                                                                        relatedBy:NSLayoutRelationEqual
-                                                                           toItem:self.proofTypeImageView
-                                                                        attribute:NSLayoutAttributeTrailing
-                                                                       multiplier:1.0
-                                                                         constant:10]];
+    UIImageView *proofTypeImageView = self.proofTypeImageView;
+    UIView *superview = proofTypeImageView.superview;
     
+    [self.stateImageView removeFromSuperview];
     [self.stateTitleLabel removeFromSuperview];
-    [self.proofTypeImageView.superview addConstraint:[NSLayoutConstraint constraintWithItem:self.proofTypeImageView.superview
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                  relatedBy:NSLayoutRelationEqual
-                                                                                     toItem:self.proofTypeImageView
-                                                                                  attribute:NSLayoutAttributeTrailing
-                                                                                 multiplier:1.0
-                                                                                   constant:10]];
+    [superview addConstraint:[NSLayoutConstraint constraintWithItem:superview
+                                                          attribute:NSLayoutAttributeTrailing
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:proofTypeImageView
+                                                          attribute:NSLayoutAttributeTrailing
+                                                         multiplier:1.0
+                                                           constant:10]];
   }
 }
 
@@ -306,7 +277,6 @@ static CGFloat const kBounceValue = 10.0;
   
   if ([aGestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]])
   {
-
     UIPanGestureRecognizer *panGestureRecognizer = (UIPanGestureRecognizer*)aGestureRecognizer;
     UIView *cell = [panGestureRecognizer view];
     CGPoint translation = [panGestureRecognizer translationInView:[cell superview]];
