@@ -28,7 +28,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
-                    <rect key="frame" x="666" y="344" width="40" height="40"/>
+                    <rect key="frame" x="681" y="359" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="5tF-mW-v2f" secondAttribute="height" multiplier="1:1" id="cRp-9B-Nlh"/>
                         <constraint firstAttribute="height" constant="40" id="vW7-CZ-8P1">
@@ -117,7 +117,7 @@
                     </constraints>
                 </activityIndicatorView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
-                    <rect key="frame" x="55" y="85" width="626" height="254"/>
+                    <rect key="frame" x="55" y="85" width="626" height="269"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -138,7 +138,9 @@
             <constraints>
                 <constraint firstItem="k3T-zf-arz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Bi-oE-ZxA"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="74q-CS-hmo"/>
-                <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="30" id="9PY-fB-QAB"/>
+                <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="15" id="9PY-fB-QAB">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="7xu-Ph-Wpt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9sD-de-yoT"/>
                 <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CjS-j8-Vbk"/>
                 <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E8X-U2-51Y"/>
@@ -147,7 +149,9 @@
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
                 <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Ypa-xb-unG"/>
                 <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="7xu-Ph-Wpt" secondAttribute="bottom" constant="10" id="k2c-eA-8bl"/>
-                <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="30" id="pP6-qO-mer"/>
+                <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="15" id="pP6-qO-mer">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstAttribute="bottom" secondItem="k3T-zf-arz" secondAttribute="bottom" id="r4E-ve-Skk"/>
                 <constraint firstItem="haj-qR-g3v" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="swj-mT-RbD"/>
                 <constraint firstItem="7xu-Ph-Wpt" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="ugz-09-8i4"/>

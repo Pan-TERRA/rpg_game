@@ -91,7 +91,6 @@
                         <constraint firstItem="P1B-Zw-wVW" firstAttribute="trailing" secondItem="lbO-xL-M1M" secondAttribute="trailing" id="cm5-O9-eGI"/>
                         <constraint firstAttribute="bottom" secondItem="UxP-3D-1gF" secondAttribute="bottom" constant="20" id="eCB-LS-4r4"/>
                         <constraint firstItem="P1B-Zw-wVW" firstAttribute="leading" secondItem="pc7-Un-zRO" secondAttribute="trailing" constant="8" id="lUO-5N-Lcf"/>
-                        <constraint firstItem="P1B-Zw-wVW" firstAttribute="height" secondItem="lbO-xL-M1M" secondAttribute="height" id="nuT-Nd-6R1"/>
                         <constraint firstItem="UxP-3D-1gF" firstAttribute="width" secondItem="zzj-YK-0Oa" secondAttribute="width" id="pmm-zo-EvN"/>
                         <constraint firstAttribute="height" secondItem="pc7-Un-zRO" secondAttribute="height" multiplier="2.3" id="rIC-jP-6Gy"/>
                         <constraint firstItem="pc7-Un-zRO" firstAttribute="leading" secondItem="UxP-3D-1gF" secondAttribute="trailing" constant="30" id="sLl-Zf-q2M"/>
@@ -102,14 +101,9 @@
                             <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                         </constraint>
                     </constraints>
-                    <variation key="default">
-                        <mask key="constraints">
-                            <exclude reference="nuT-Nd-6R1"/>
-                        </mask>
-                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CE3-67-Zgh">
-                    <rect key="frame" x="30" y="344" width="40" height="40"/>
+                    <rect key="frame" x="15" y="359" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="Hty-Jh-yTf">
                             <variation key="heightClass=regular-widthClass=regular" constant="60"/>
@@ -123,7 +117,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WnW-i4-ViL">
-                    <rect key="frame" x="666" y="344" width="40" height="40"/>
+                    <rect key="frame" x="681" y="359" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="WnW-i4-ViL" secondAttribute="height" multiplier="1:1" id="NbU-AB-MFe"/>
                     </constraints>
@@ -137,18 +131,24 @@
             <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="e4K-3r-8hz" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" priority="751" id="24v-yv-lXR"/>
-                <constraint firstAttribute="trailing" secondItem="WnW-i4-ViL" secondAttribute="trailing" constant="30" id="2L0-hj-Nfg"/>
+                <constraint firstAttribute="trailing" secondItem="WnW-i4-ViL" secondAttribute="trailing" constant="15" id="2L0-hj-Nfg">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="WnW-i4-ViL" firstAttribute="bottom" secondItem="CE3-67-Zgh" secondAttribute="bottom" id="LzY-D1-jPb"/>
                 <constraint firstItem="e4K-3r-8hz" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="M6M-cg-ILp"/>
                 <constraint firstAttribute="bottom" secondItem="3c2-9O-cTS" secondAttribute="bottom" id="PAL-Nu-kee"/>
                 <constraint firstItem="3c2-9O-cTS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bnz-7p-aeQ"/>
                 <constraint firstItem="WnW-i4-ViL" firstAttribute="width" secondItem="CE3-67-Zgh" secondAttribute="width" id="c5r-26-pgc"/>
-                <constraint firstAttribute="bottom" secondItem="CE3-67-Zgh" secondAttribute="bottom" constant="30" id="fSC-Z0-P3I"/>
+                <constraint firstAttribute="bottom" secondItem="CE3-67-Zgh" secondAttribute="bottom" constant="15" id="fSC-Z0-P3I">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="3c2-9O-cTS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gWk-R4-SNY"/>
                 <constraint firstItem="WnW-i4-ViL" firstAttribute="height" secondItem="CE3-67-Zgh" secondAttribute="height" id="gu0-mX-msO"/>
                 <constraint firstItem="e4K-3r-8hz" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kdx-dH-BYB"/>
                 <constraint firstAttribute="trailing" secondItem="3c2-9O-cTS" secondAttribute="trailing" id="kxE-fN-YTb"/>
-                <constraint firstItem="CE3-67-Zgh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="pw4-Xd-UGw"/>
+                <constraint firstItem="CE3-67-Zgh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="pw4-Xd-UGw">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>

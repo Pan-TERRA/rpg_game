@@ -97,7 +97,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4UH-fg-Yhn" userLabel="Add Friend Button">
-                    <rect key="frame" x="8" y="552" width="40" height="40"/>
+                    <rect key="frame" x="15" y="545" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="4UH-fg-Yhn" secondAttribute="height" multiplier="1:1" id="Ij4-C1-OED"/>
                     </constraints>
@@ -107,11 +107,14 @@
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o08-zB-S8G" userLabel="TableView Container">
-                    <rect key="frame" x="45" y="82" width="510" height="465"/>
+                    <rect key="frame" x="45" y="82" width="510" height="458"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="svW-5R-EA5" userLabel="Back Button">
-                    <rect key="frame" x="552" y="552" width="40" height="40"/>
+                    <rect key="frame" x="545" y="545" width="40" height="40"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="40" id="XJn-eV-YeM">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
                         <constraint firstAttribute="width" secondItem="svW-5R-EA5" secondAttribute="height" multiplier="1:1" id="sui-tf-lRH"/>
                     </constraints>
                     <state key="normal" backgroundImage="back_icon_inactive"/>
@@ -133,24 +136,32 @@
                     </variation>
                 </label>
             </subviews>
+            <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0l3-hm-9vy"/>
-                <constraint firstItem="pCu-Z4-41y" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="5Xu-9k-z6f"/>
                 <constraint firstItem="pCu-Z4-41y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="7Tl-59-EKa"/>
                 <constraint firstItem="svW-5R-EA5" firstAttribute="top" secondItem="o08-zB-S8G" secondAttribute="bottom" constant="5" id="7e6-Hf-eTT"/>
                 <constraint firstItem="HUA-nR-0TJ" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.8" id="87d-ay-KmH"/>
                 <constraint firstItem="Vid-o6-Adi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8y9-zJ-W7T"/>
                 <constraint firstItem="Vid-o6-Adi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Atw-0A-BkX"/>
-                <constraint firstItem="pCu-Z4-41y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.07" id="C4L-KB-wj6"/>
+                <constraint firstItem="svW-5R-EA5" firstAttribute="height" secondItem="4UH-fg-Yhn" secondAttribute="height" id="HIh-De-I3r"/>
                 <constraint firstItem="pCu-Z4-41y" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Jdv-aH-4T0"/>
-                <constraint firstAttribute="trailing" secondItem="svW-5R-EA5" secondAttribute="trailing" constant="8" id="To9-rr-axK"/>
+                <constraint firstAttribute="trailing" secondItem="svW-5R-EA5" secondAttribute="trailing" constant="15" id="To9-rr-axK">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="U7R-MY-HM6"/>
                 <constraint firstItem="ktS-Uc-wzL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="W4r-NR-gVA"/>
-                <constraint firstAttribute="bottom" secondItem="4UH-fg-Yhn" secondAttribute="bottom" constant="8" id="XsE-Mw-PPO"/>
+                <constraint firstAttribute="bottom" secondItem="4UH-fg-Yhn" secondAttribute="bottom" constant="15" id="XsE-Mw-PPO">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="ktS-Uc-wzL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yb6-7r-gbf"/>
-                <constraint firstItem="4UH-fg-Yhn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zww-Hz-NMy"/>
+                <constraint firstItem="4UH-fg-Yhn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="Zww-Hz-NMy">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstItem="HUA-nR-0TJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="bLs-Q5-K1a"/>
-                <constraint firstAttribute="bottom" secondItem="svW-5R-EA5" secondAttribute="bottom" constant="8" id="cUy-bk-OlI"/>
+                <constraint firstAttribute="bottom" secondItem="svW-5R-EA5" secondAttribute="bottom" constant="15" id="cUy-bk-OlI">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
                 <constraint firstAttribute="trailing" secondItem="Vid-o6-Adi" secondAttribute="trailing" id="eM4-8J-VLn"/>
                 <constraint firstItem="HUA-nR-0TJ" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hax-DI-fLZ"/>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="top" secondItem="HUA-nR-0TJ" secondAttribute="bottom" constant="10" id="ugS-4i-5TN"/>
@@ -159,12 +170,6 @@
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="5Xu-9k-z6f"/>
-                    <exclude reference="C4L-KB-wj6"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="429" y="274"/>
         </view>
     </objects>
