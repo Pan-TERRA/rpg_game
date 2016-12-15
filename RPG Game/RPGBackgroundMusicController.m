@@ -67,10 +67,7 @@ static NSString * const sRPGBattleMusicName = @"BattleMusic.wav";
     self.playing = [[NSUserDefaults standardUserDefaults] isMusicPlaying];
 	[[AVAudioSession sharedInstance] setActive:YES error:nil];
     
-    if (self.playing)
-    {
-      [_peacePlayer play];
-    }
+    [self switchToPeace];
   }
   
   return self;
