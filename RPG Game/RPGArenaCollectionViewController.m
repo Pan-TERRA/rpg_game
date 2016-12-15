@@ -59,7 +59,7 @@ static NSInteger kRPGCollectionViewControllerSkillButtonCornerRadius = 25;
     UILongPressGestureRecognizer *gestureRecognizer = [[[UILongPressGestureRecognizer alloc] initWithTarget:self
                                                                                                      action:@selector(handleLongPress:)] autorelease];
     gestureRecognizer.delegate = self;
-    gestureRecognizer.minimumPressDuration = 1;
+    gestureRecognizer.minimumPressDuration = 0.5;
     
     [_collectionView addGestureRecognizer:gestureRecognizer];
     _collectionView.delegate = self;
