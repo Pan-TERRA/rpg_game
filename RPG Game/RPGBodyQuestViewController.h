@@ -1,23 +1,23 @@
 //
-//  RPGQuestViewBodyContainer.h
+//  RPGBodyQuestViewController.h
 //  RPG Game
 //
-//  Created by Максим Шульга on 11/10/16.
+//  Created by Максим Шульга on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-  // Views
+// Views
 @class RPGQuestViewController;
-  // Entities
+// Entities
 @class RPGQuest;
 
-@interface RPGQuestViewBodyContainer : UIScrollView <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface RPGBodyQuestViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
-@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
 @property (nonatomic, retain, readonly) UIImageView *proofImageView1;
 @property (nonatomic, assign, readonly) UIImageView *proofImageView2;
 
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController;
 - (void)setViewContent:(RPGQuest *)aQuest;
 - (void)updateView;
 - (void)downloadImage:(NSString *)aStringURL

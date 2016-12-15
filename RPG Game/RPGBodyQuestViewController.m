@@ -1,12 +1,12 @@
 //
-//  RPGQuestViewBodyContainer.m
+//  RPGBodyQuestViewController.m
 //  RPG Game
 //
-//  Created by Максим Шульга on 11/10/16.
+//  Created by Максим Шульга on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGQuestViewBodyContainer.h"
+#import "RPGBodyQuestViewController.h"
   // API
 #import "RPGNetworkManager+Quests.h"
   // Views
@@ -22,8 +22,11 @@
 #import "RPGAlertController+RPGErrorHandling.h"
   // Constants
 #import "RPGStatusCodes.h"
+#import "RPGNibNames.h"
 
-@interface RPGQuestViewBodyContainer()
+@interface RPGBodyQuestViewController ()
+
+@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *titleLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
@@ -36,13 +39,28 @@
 @property (nonatomic, assign, readwrite) IBOutlet UIImageView *proofImageView2;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *proofIndicatorView2;
 
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *daysLeftLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *countDaysLeftLabel;
 @property (nonatomic, retain, readwrite) NSLayoutConstraint *descriptionBottomConstraint;
 
 @property (nonatomic, assign, readwrite, getter=shouldDownloadImageProof) BOOL downloadImageProof;
 
 @end
 
-@implementation RPGQuestViewBodyContainer
+@implementation RPGBodyQuestViewController
+
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController
+{
+  self = [super initWithNibName:kRPGBodyQuestViewControllerNIBName
+                         bundle:nil];
+  
+  if (self != nil)
+  {
+    _questViewController = aViewController;
+  }
+  
+  return self;
+}
 
 #pragma mark - Dealloc
 
@@ -52,7 +70,7 @@
   [_proofImageView1 release];
   [_proofIndicatorView1 release];
   [_descriptionBottomConstraint release];
-  
+
   [super dealloc];
 }
 
@@ -74,43 +92,21 @@
   return _descriptionBottomConstraint;
 }
 
-#pragma mark - Custom Setter
-
-- (void)setQuestViewController:(RPGQuestViewController *)aQuestViewController
-{
-  _questViewController = aQuestViewController;
-  if (_questViewController != nil)
-  {
-    UITapGestureRecognizer *tapGesture = [[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                  action:@selector(handleTapGesture:)] autorelease];
-    tapGesture.numberOfTapsRequired = 1;
-    
-    [self.proofImageView1 setUserInteractionEnabled:YES];
-    [self.proofImageView1 addGestureRecognizer:tapGesture];
-    
-    UITapGestureRecognizer *tapGesture2 = [[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                   action:@selector(handleTapGesture:)] autorelease];
-    tapGesture2.numberOfTapsRequired = 1;
-    
-    [self.proofImageView2 setUserInteractionEnabled:YES];
-    [self.proofImageView2 addGestureRecognizer:tapGesture2];
-  }
-}
-
 #pragma mark - View Content
 
 - (void)setViewContent:(RPGQuest *)aQuest
 {
   NSString *questTitle = aQuest.name;
   RPGQuestState state = aQuest.state;
+  RPGQuestType type = aQuest.questType;
+  RPGDuelQuest *duelQuest = ((RPGDuelQuest *)aQuest);
   
   self.descriptionLabel.text = aQuest.questDescription;
   self.downloadImageProof = YES;
   
-  if(aQuest.questType == kRPGQuestTypeDuel
+  if (type == kRPGQuestTypeDuel
      && state != kRPGQuestStateForReview)
   {
-    RPGDuelQuest *duelQuest = ((RPGDuelQuest *)aQuest);
     questTitle = [NSString stringWithFormat:@"%@ with %@", questTitle, duelQuest.friendUsername];
     
     if (state == kRPGQuestStateReviewedTrue)
@@ -119,7 +115,19 @@
       questTitle = [NSString stringWithFormat:@"%@. Winner is %@", questTitle, winner];
     }
   }
+  
   self.titleLabel.text = questTitle;
+  
+  if (type == kRPGQuestTypeDuel
+      && state == kRPGQuestStateInProgress)
+  {
+    self.countDaysLeftLabel.text = [NSString stringWithFormat:@"%ld", duelQuest.daysLeft];
+  }
+  else
+  {
+    [self.daysLeftLabel removeFromSuperview];
+    [self.countDaysLeftLabel removeFromSuperview];
+  }
 }
 
 #pragma mark - View State
@@ -151,8 +159,8 @@
 {
   UILabel *proofLabel1 = self.proofLabel1;
   UIImageView *proofImageView1 = self.proofImageView1;
-  UILabel *descriptionLabel = self.descriptionLabel;
   UIActivityIndicatorView *proofIndicatorView1 = self.proofIndicatorView1;
+  UILabel *descriptionLabel = self.descriptionLabel;
   UIView *superview = descriptionLabel.superview;
   
   if (aFlag)
@@ -164,11 +172,19 @@
       [proofIndicatorView1 removeFromSuperview];
       [superview addConstraint:self.descriptionBottomConstraint];
     }
+    [self setHiddenSecondProofViews];
   }
   else
   {
+    if (self.questViewController.questType == kRPGQuestTypeSingle)
+    {
+      [self setHiddenSecondProofViews];
+    }
+    
     NSArray *subviews = superview.subviews;
-    if (![subviews containsObject:proofImageView1] && ![subviews containsObject:proofLabel1])
+    if (![subviews containsObject:proofImageView1]
+        && ![subviews containsObject:proofLabel1]
+        && ![subviews containsObject:proofIndicatorView1])
     {
       [superview removeConstraint:self.descriptionBottomConstraint];
       
@@ -229,31 +245,11 @@
   }
 }
 
-#pragma mark - Open QuestProofImageView
-
-- (void)handleTapGesture:(UIGestureRecognizer *)aSender
+- (void)setHiddenSecondProofViews
 {
-  RPGQuestProofImageViewController *questProofImageViewController = [[[RPGQuestProofImageViewController alloc] init] autorelease];
-  
-  [self.questViewController presentViewController:questProofImageViewController
-                                         animated:YES
-                                       completion:nil];
-  
-  UIImage *image = nil;
-  UIView *tappedView = aSender.view;
-  UIImageView *proofImageView1 = self.proofImageView1;
-  UIImageView *proofImageView2 = self.proofImageView2;
-  
-  if (tappedView == proofImageView1)
-  {
-    image = proofImageView1.image;
-  }
-  else if (tappedView == proofImageView2)
-  {
-    image = proofImageView2.image;
-  }
-  
-  questProofImageViewController.proofImage = image;
+  self.proofLabel2.hidden = YES;
+  self.proofImageView2.hidden = YES;
+  self.proofIndicatorView2.hidden = YES;
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -262,6 +258,7 @@
 {
   [aPicker dismissViewControllerAnimated:YES
                               completion:NULL];
+  
   self.questViewController.state = kRPGQuestStateDone;
   [self setIndicatorViewToWaitingState:self.proofIndicatorView1];
   
@@ -338,7 +335,8 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)aPicker
 {
-  [aPicker dismissViewControllerAnimated:YES completion:NULL];
+  [aPicker dismissViewControllerAnimated:YES
+                              completion:NULL];
 }
 
 #pragma mark - Upload Image
@@ -390,6 +388,8 @@
      }];
   }
 }
+
+#pragma mark - UIActivityIndicatorView State
 
 - (void)setIndicatorViewToWaitingState:(UIActivityIndicatorView *)anIndicatorView
 {
