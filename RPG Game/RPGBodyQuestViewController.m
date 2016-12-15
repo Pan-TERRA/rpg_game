@@ -119,7 +119,7 @@
   if (type == kRPGQuestTypeDuel
       && state == kRPGQuestStateInProgress)
   {
-    self.countDaysLeftLabel.text = [NSString stringWithFormat:@"%ld", duelQuest.daysLeft];
+    self.countDaysLeftLabel.text = [NSString stringWithFormat:@"%ld", (long)duelQuest.daysLeft];
   }
   else
   {

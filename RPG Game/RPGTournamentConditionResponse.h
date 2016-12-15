@@ -1,8 +1,8 @@
 //
-//  RPGAdventuresConditionResponse.h
+//  RPGTournamentConditionResponse.h
 //  RPG Game
 //
-//  Created by Иван Дзюбенко on 11/27/16.
+//  Created by Костянтин Паляничко on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
@@ -14,7 +14,7 @@
 @class RPGPlayerInfo;
 @class RPGBattleReward;
 
-@interface RPGAdventuresConditionResponse : RPGBattleConditionResponse
+@interface RPGTournamentConditionResponse : RPGBattleConditionResponse
 
 - (instancetype)initWithPlayerInfo:(RPGPlayerInfo *)aPlayerInfo
                       opponentInfo:(RPGPlayerInfo *)anOpponentInfo

@@ -6,8 +6,8 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGAdventuresController.h"
+#import "RPGBattleController.h"
 
-@interface RPGTournamentController : RPGAdventuresController
+@interface RPGTournamentController : RPGBattleController
 
 @end

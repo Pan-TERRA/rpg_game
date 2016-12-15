@@ -141,6 +141,8 @@
 		2A32D32E1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A32D32D1DE34DD300F6CA7C /* RPGArenaBagCollectionViewController.m */; };
 		2A32D3341DE35E5700F6CA7C /* RPGArenaCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A32D3331DE35E5700F6CA7C /* RPGArenaCollectionViewController.m */; };
 		2A32D3361DE3787800F6CA7C /* RPGArenaSkillCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A32D3301DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.m */; };
+		2A32FD1C1E031C20002C1ABD /* RPGArenaInitResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A32FD1B1E031C20002C1ABD /* RPGArenaInitResponse.m */; };
+		2A32FD211E031F1D002C1ABD /* RPGTournamentConditionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A32FD201E031F1D002C1ABD /* RPGTournamentConditionResponse.m */; };
 		2A6F2AC11DDA04E80036CD2D /* RPGBattleAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F2ABC1DDA04E80036CD2D /* RPGBattleAction.m */; };
 		2A6F2AC21DDA04E80036CD2D /* RPGBattleLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F2ABE1DDA04E80036CD2D /* RPGBattleLog.m */; };
 		2A6F2AC31DDA04E80036CD2D /* RPGBattleLogViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A6F2AC01DDA04E80036CD2D /* RPGBattleLogViewController.m */; };
@@ -508,6 +510,10 @@
 		2A32D3301DE34DF300F6CA7C /* RPGArenaSkillCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGArenaSkillCollectionViewController.m; sourceTree = "<group>"; };
 		2A32D3321DE35E5700F6CA7C /* RPGArenaCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGArenaCollectionViewController.h; sourceTree = "<group>"; };
 		2A32D3331DE35E5700F6CA7C /* RPGArenaCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGArenaCollectionViewController.m; sourceTree = "<group>"; };
+		2A32FD1A1E031C20002C1ABD /* RPGArenaInitResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGArenaInitResponse.h; sourceTree = "<group>"; };
+		2A32FD1B1E031C20002C1ABD /* RPGArenaInitResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGArenaInitResponse.m; sourceTree = "<group>"; };
+		2A32FD1F1E031F1D002C1ABD /* RPGTournamentConditionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGTournamentConditionResponse.h; sourceTree = "<group>"; };
+		2A32FD201E031F1D002C1ABD /* RPGTournamentConditionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGTournamentConditionResponse.m; sourceTree = "<group>"; };
 		2A6F2ABB1DDA04E80036CD2D /* RPGBattleAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleAction.h; sourceTree = "<group>"; };
 		2A6F2ABC1DDA04E80036CD2D /* RPGBattleAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleAction.m; sourceTree = "<group>"; };
 		2A6F2ABD1DDA04E80036CD2D /* RPGBattleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleLog.h; sourceTree = "<group>"; };
@@ -773,6 +779,7 @@
 				284DFDCA1DEAFA2700EE759F /* Battle Init */,
 				284DFDCB1DEAFA2F00EE759F /* Battle Condition */,
 				28AD19F41DFEADB100E6D97F /* Tournament Init */,
+				2A32FD1D1E031E92002C1ABD /* Tournament Condition */,
 				284DFDC71DEAF9A200EE759F /* Arena Init */,
 				284DFDC81DEAF9F200EE759F /* Arena Condition */,
 				283ADD001DAD3F9100BDC706 /* Adventures Init */,
@@ -1189,8 +1196,8 @@
 			isa = PBXGroup;
 			children = (
 				284DFDC51DE9CCB900EE759F /* Battle Controller */,
-				28AD19EB1DFEAC2B00E6D97F /* Tournament Controller */,
 				284DFDBB1DE9C3B200EE759F /* Adventures Controller */,
+				28AD19EB1DFEAC2B00E6D97F /* Tournament Controller */,
 				284DFDBC1DE9C3BF00EE759F /* Arena Controller */,
 			);
 			name = Controllers;
@@ -1200,6 +1207,7 @@
 			isa = PBXGroup;
 			children = (
 				284DFDC91DEAF9FE00EE759F /* Request */,
+				2A32FD191E031C03002C1ABD /* Response */,
 			);
 			name = "Arena Init";
 			sourceTree = "<group>";
@@ -2172,6 +2180,24 @@
 			name = Response;
 			sourceTree = "<group>";
 		};
+		2A32FD191E031C03002C1ABD /* Response */ = {
+			isa = PBXGroup;
+			children = (
+				2A32FD1A1E031C20002C1ABD /* RPGArenaInitResponse.h */,
+				2A32FD1B1E031C20002C1ABD /* RPGArenaInitResponse.m */,
+			);
+			name = Response;
+			sourceTree = "<group>";
+		};
+		2A32FD1D1E031E92002C1ABD /* Tournament Condition */ = {
+			isa = PBXGroup;
+			children = (
+				2A32FD1F1E031F1D002C1ABD /* RPGTournamentConditionResponse.h */,
+				2A32FD201E031F1D002C1ABD /* RPGTournamentConditionResponse.m */,
+			);
+			name = "Tournament Condition";
+			sourceTree = "<group>";
+		};
 		2A8D9B9C1DB14ACB0026A5AB /* Time */ = {
 			isa = PBXGroup;
 			children = (
@@ -3009,6 +3035,7 @@
 				AE9082531E030F410082FCFA /* RPGDuelQuest.m in Sources */,
 				AE9082521E030F350082FCFA /* RPGQuestListTableViewCell.m in Sources */,
 				AE9082511E030CA70082FCFA /* RPGIncomingQuestTableViewCell.m in Sources */,
+				2A32FD1C1E031C20002C1ABD /* RPGArenaInitResponse.m in Sources */,
 				2A32D3361DE3787800F6CA7C /* RPGArenaSkillCollectionViewController.m in Sources */,
 				D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */,
 				D0CFEE761DB65C0100C61D0B /* AppleOpenALSupport.c in Sources */,
@@ -3142,6 +3169,7 @@
 				28184A131DF87EDE002EF22D /* RPGShopUnit.m in Sources */,
 				289C42DC1DE20C6700E35506 /* RPGCharacterProfileViewController.m in Sources */,
 				D0EA315F1DDF5CE70062AB28 /* RPGSkill.m in Sources */,
+				2A32FD211E031F1D002C1ABD /* RPGTournamentConditionResponse.m in Sources */,
 				285231561DC0F089002F702B /* RPGEntity.m in Sources */,
 				28A6F9C41DF08AB2008519AA /* RPGRewardViewController.m in Sources */,
 				283ADD0F1DAD502200BDC706 /* RPGBattleConditionResponse.m in Sources */,

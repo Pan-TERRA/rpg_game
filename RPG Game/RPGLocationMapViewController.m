@@ -72,7 +72,7 @@ BOOL locationExists(NSInteger locationID)
 {
   if (locationExists(locationID))
   {
-    NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, locationID];
+    NSString *NIBName = [NSString stringWithFormat:@"%@%ld", kRPGLocationMapSuffixlessNIBName, (long)locationID];
     self = [self initWithNibName:NIBName bundle:nil];
     
     if (self != nil)

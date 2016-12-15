@@ -40,7 +40,7 @@ NSString * const kRPGAdventuresFactoryBattleInitMessage = @"Battle init";
       
       [battleControllerGenerator release];
       
-      _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:self.battleController];
+      _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
       _battleInitViewController = [[RPGWaitingViewController alloc] initWithMessage:kRPGAdventuresFactoryBattleInitMessage];
     }
     else
