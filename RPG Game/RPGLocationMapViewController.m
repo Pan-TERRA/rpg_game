@@ -279,7 +279,7 @@ BOOL locationExists(NSInteger locationID)
   {
     case 1:
     {
-      result = CGPointMake(20, 300);
+//      result = CGPointMake(20, 300);
       break;
     }
       
