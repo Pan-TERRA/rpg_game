@@ -52,6 +52,7 @@ BOOL locationExists(NSInteger locationID)
 #pragma mark Outlets
 
 @property (readwrite, assign, nonatomic) IBOutlet UIButton *toBattleButton;
+@property (readwrite, assign, nonatomic) IBOutlet UIScrollView *mapScrollView;
 
 #pragma mark Battleplace views
 
@@ -137,13 +138,19 @@ BOOL locationExists(NSInteger locationID)
 {
   [super viewDidLoad];
   
-  [self update];
-  
   self.battleplaceViews = [NSMutableArray arrayWithObjects:
                            self.battleplaceView1,
                            self.battleplaceView2,
                            self.battleplaceView3,
                            nil];
+  
+  [self update];
+}
+
+- (void)viewDidLayoutSubviews
+{
+  [self.mapScrollView setContentOffset:[self advanceScrollOffsetForCurrentLocation]
+                              animated:NO];
 }
 
 #pragma mark - IBActions
@@ -216,6 +223,8 @@ BOOL locationExists(NSInteger locationID)
 {
   for (RPGBattleplaceView *battleplaceView in self.battleplaceViews)
   {
+    battleplaceView.hidden = YES;
+    
     for (NSDictionary *battlePlaceInfo in self.locationInfo)
     {
       if ([battlePlaceInfo[kRPGLocationMapViewControllerLocationInfoBattlePlaceIDKey] integerValue] == battleplaceView.tag)
@@ -258,6 +267,29 @@ BOOL locationExists(NSInteger locationID)
 {
   [self.waitingViewController.view removeFromSuperview];
   [self.waitingViewController removeFromParentViewController];
+}
+
+#pragma mark Scroll View
+
+- (CGPoint)advanceScrollOffsetForCurrentLocation
+{
+  CGPoint result = CGPointZero;
+  
+  switch (self.locationID)
+  {
+    case 1:
+    {
+      result = CGPointMake(20, 300);
+      break;
+    }
+      
+    default:
+    {
+      break;
+    }
+  }
+  
+  return result;
 }
 
 @end

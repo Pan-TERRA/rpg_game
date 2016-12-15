@@ -30,9 +30,21 @@
 
 @interface RPGAdventureGlobalMapViewController ()
 
-  // View outlets
+#pragma mark - Propeties
+
+@property (readwrite, retain, nonatomic) NSMutableArray<UIImageView *> *lockViews;
+@property (readwrite, retain, nonatomic) RPGWaitingViewController *waitingViewController;
+@property (readwrite, retain, nonatomic) NSArray<NSNumber *> *availableLocationsIDs;
+
+#pragma mark Outlets
+
+#pragma mark View outlets
+
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *maskImageView;
-    // Lock outlets
+@property (readwrite, assign, nonatomic) IBOutlet UIScrollView *mapScrollView;
+
+#pragma mark Lock outlets
+
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock1;
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock2;
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock3;
@@ -42,11 +54,6 @@
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock7;
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock8;
 @property (readwrite, assign, nonatomic) IBOutlet UIImageView *lock9;
-
-// Propeties
-@property (readwrite, retain, nonatomic) NSMutableArray<UIImageView *> *lockViews;
-@property (readwrite, retain, nonatomic) RPGWaitingViewController *waitingViewController;
-@property (readwrite, retain, nonatomic) NSArray<NSNumber *> *availableLocationsIDs;
 
 @end
 
@@ -95,6 +102,12 @@
   [self update];
 }
 
+- (void)viewDidLayoutSubviews
+{
+  [self.mapScrollView setContentOffset:[self advanceScrollOffsetForCurrentLocation]
+                              animated:NO];
+}
+
 #pragma mark - IBActions
 
 - (IBAction)backAction:(UIButton *)sender
@@ -110,16 +123,17 @@
   UIColor *tappedLocationColor = [self.maskImageView colorOfPoint:tapLocation];
   NSInteger tappedLocationID = [self getMapLocationIDWithColor:tappedLocationColor];
   
-  RPGLocationMapViewController *locationMapViewController = [[[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID] autorelease];
-  
-  if (locationMapViewController != nil)
+  if ([self.availableLocationsIDs containsObject:@(tappedLocationID)])
   {
-    [self presentViewController:locationMapViewController
-                       animated:YES
-                     completion:nil];
+    RPGLocationMapViewController *locationMapViewController = [[[RPGLocationMapViewController alloc] initWithLocationID:tappedLocationID] autorelease];
+    
+    if (locationMapViewController != nil)
+    {
+      [self presentViewController:locationMapViewController
+                         animated:YES
+                       completion:nil];
+    }
   }
-
-  NSLog(@"%ld", tappedLocationID);
 }
 
 - (NSInteger)getMapLocationIDWithColor:(UIColor *)aColor
@@ -209,6 +223,13 @@
 {
   [self.waitingViewController.view removeFromSuperview];
   [self.waitingViewController removeFromParentViewController];
+}
+
+#pragma mark Scroll View
+
+- (CGPoint)advanceScrollOffsetForCurrentLocation
+{
+  return CGPointMake(220, 55);
 }
 
 @end
