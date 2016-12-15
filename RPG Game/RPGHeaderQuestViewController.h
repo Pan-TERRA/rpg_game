@@ -1,8 +1,8 @@
 //
-//  RPGQuestViewHeaderContainer.h
+//  RPGHeaderQuestViewController.h
 //  RPG Game
 //
-//  Created by Максим Шульга on 11/10/16.
+//  Created by Максим Шульга on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
@@ -12,10 +12,9 @@
   // Entities
 @class RPGQuestReward;
 
-@interface RPGQuestViewHeaderContainer : UIView
+@interface RPGHeaderQuestViewController : UIViewController
 
-@property (nonatomic, assign, readwrite) RPGQuestViewController *questViewController;
-
+- (instancetype)initWithQuestViewController:(RPGQuestViewController *)aViewController;
 - (void)setViewContent:(RPGQuestReward *)aQuestReward;
 - (void)updateView;
 
