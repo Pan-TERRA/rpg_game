@@ -10,13 +10,11 @@
   // API
 #import "RPGNetworkManager+Quests.h"
   // Views
-#import "RPGQuestListViewController.h"
-#import "RPGQuestListTableViewCell.h"
 #import "RPGQuestTableViewCell.h"
 #import "RPGIncomingQuestTableViewCell.h"
+#import "RPGQuestListViewController.h"
   // Entities
 #import "RPGQuest.h"
-#import "RPGQuestRequest.h"
 #import "RPGDuelQuestRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"

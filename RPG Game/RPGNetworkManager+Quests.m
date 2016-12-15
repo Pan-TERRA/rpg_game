@@ -8,8 +8,6 @@
 
 #import "RPGNetworkManager+Quests.h"
   // Entities
-#import "RPGQuestListResponse.h"
-#import "RPGQuestRequest.h"
 #import "RPGQuestReviewRequest.h"
 #import "RPGBasicNetworkResponse.h"
 #import "RPGIncomingDuelQuestListResponse.h"

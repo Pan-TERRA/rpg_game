@@ -197,6 +197,11 @@
 		AE9082451E02A4A90082FCFA /* RPGBodyQuestViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9082431E02A4A90082FCFA /* RPGBodyQuestViewController.xib */; };
 		AE90824D1E030BB30082FCFA /* RPGDuelCountResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90824A1E030BB30082FCFA /* RPGDuelCountResponse.m */; };
 		AE90824E1E030BB30082FCFA /* RPGIncomingDuelQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90824C1E030BB30082FCFA /* RPGIncomingDuelQuest.m */; };
+		AE9082511E030CA70082FCFA /* RPGIncomingQuestTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9082271E0062ED0082FCFA /* RPGIncomingQuestTableViewCell.m */; };
+		AE9082521E030F350082FCFA /* RPGQuestListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AE90822C1E0156550082FCFA /* RPGQuestListTableViewCell.m */; };
+		AE9082531E030F410082FCFA /* RPGDuelQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9082351E017DBA0082FCFA /* RPGDuelQuest.m */; };
+		AE9082541E030F4B0082FCFA /* RPGDuelQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9082201E004A240082FCFA /* RPGDuelQuestRequest.m */; };
+		AE9082551E030F530082FCFA /* RPGIncomingDuelQuestListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46BA1E00427800546256 /* RPGIncomingDuelQuestListResponse.m */; };
 		AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */; };
 		AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */; };
 		AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5711DACD641007ED1B8 /* RPGMainView.xib */; };
@@ -2997,6 +3002,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE9082551E030F530082FCFA /* RPGIncomingDuelQuestListResponse.m in Sources */,
+				AE9082541E030F4B0082FCFA /* RPGDuelQuestRequest.m in Sources */,
+				AE9082531E030F410082FCFA /* RPGDuelQuest.m in Sources */,
+				AE9082521E030F350082FCFA /* RPGQuestListTableViewCell.m in Sources */,
+				AE9082511E030CA70082FCFA /* RPGIncomingQuestTableViewCell.m in Sources */,
 				2A32D3361DE3787800F6CA7C /* RPGArenaSkillCollectionViewController.m in Sources */,
 				D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */,
 				D0CFEE761DB65C0100C61D0B /* AppleOpenALSupport.c in Sources */,

@@ -13,9 +13,7 @@
 #import "RPGQuestViewController.h"
 #import "RPGQuestProofImageViewController.h"
   // Entitites
-#import "RPGQuest.h"
 #import "RPGDuelQuest.h"
-#import "RPGQuestRequest.h"
 #import "RPGDuelQuestRequest.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
