@@ -62,6 +62,8 @@ NSString * const RPGStatusCodeDescription[] =
   [kRPGStatusCodeInvalidCharacterName] = @"Invalid character name",
   [kRPGStatusCodeUndefinedSymbolsInUsername] = @"Undefined symbols in username",
   [kRPGStatusCodeUndefinedSymbolsInCharacterName] = @"Undefined symbols in character name",
+  [kRPGStatusCodeWrongStageError] = @"Wrong stage",
+  [kRPGStatusCodeStageIsNotEnabled] = @"Stage is not enabled for you",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Unknown network error",
@@ -123,6 +125,8 @@ NSString * const RPGStatusCodeTitle[] =
   [kRPGStatusCodeInvalidCharacterName] = @"Registration error",
   [kRPGStatusCodeUndefinedSymbolsInUsername] = @"Registration error",
   [kRPGStatusCodeUndefinedSymbolsInCharacterName] = @"Registration error",
+  [kRPGStatusCodeWrongStageError] = @"Battle error",
+  [kRPGStatusCodeStageIsNotEnabled] = @"Battle error",
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = @"Network error",
@@ -187,6 +191,8 @@ NSString * const RPGStatusCodeActionTitle[] =
   [kRPGStatusCodeInvalidCharacterName] = RPGSTATUSCODES_OK_WORD_TOKEN,
   [kRPGStatusCodeUndefinedSymbolsInUsername] = RPGSTATUSCODES_OK_WORD_TOKEN,
   [kRPGStatusCodeUndefinedSymbolsInCharacterName] = RPGSTATUSCODES_OK_WORD_TOKEN,
+  [kRPGStatusCodeWrongStageError] = RPGSTATUSCODES_OK_WORD_TOKEN,
+  [kRPGStatusCodeStageIsNotEnabled] = RPGSTATUSCODES_OK_WORD_TOKEN,
   
     // RPGNetworkManager Status Codes
   [kRPGStatusCodeNetworkManagerUnknown] = RPGSTATUSCODES_OK_WORD_TOKEN,

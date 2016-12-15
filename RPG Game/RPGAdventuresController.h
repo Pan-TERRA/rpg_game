@@ -15,6 +15,7 @@
 @interface RPGAdventuresController : RPGBattleController
 
 @property (retain, nonatomic, readonly) RPGWebsocketManager *webSocketManager;
+@property (readwrite, assign, nonatomic) NSInteger stageID;
 
 - (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager;
 

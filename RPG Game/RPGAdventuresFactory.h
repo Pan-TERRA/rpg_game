@@ -10,4 +10,6 @@
 
 @interface RPGAdventuresFactory : NSObject <RPGBattleFactoryProtocol>
 
+- (instancetype)initWithBattleplaceID:(NSInteger)aBattleplaceID NS_DESIGNATED_INITIALIZER;
+
 @end

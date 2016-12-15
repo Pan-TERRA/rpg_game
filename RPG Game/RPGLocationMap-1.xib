@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,17 +9,18 @@
             <connections>
                 <outlet property="battleplaceView1" destination="jZo-dE-3fK" id="2o0-Nz-oLX"/>
                 <outlet property="battleplaceView2" destination="wAV-zM-05A" id="bHM-aH-gNm"/>
+                <outlet property="battleplaceView3" destination="sJh-Kn-97E" id="ixr-on-yWf"/>
                 <outlet property="toBattleButton" destination="gZQ-vn-Eyb" id="rdh-rL-qdV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="271-ST-VZK"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="982" height="787"/>
+            <rect key="frame" x="0.0" y="0.0" width="982" height="887"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" canCancelContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JtV-u2-yeJ">
-                    <rect key="frame" x="0.0" y="0.0" width="982" height="787"/>
+                    <rect key="frame" x="0.0" y="0.0" width="982" height="887"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1T-9N-S1b" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -37,7 +38,7 @@
                                         </mask>
                                     </variation>
                                 </imageView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZo-dE-3fK" userLabel="Battleplace view1" customClass="RPGBattleplaceView">
+                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZo-dE-3fK" userLabel="Battleplace view1" customClass="RPGBattleplaceView">
                                     <rect key="frame" x="250" y="491" width="200" height="250"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="381-Tn-zPw" userLabel="Battleplace background">
@@ -74,7 +75,7 @@
                                         <outlet property="selectedMarkImageView" destination="j5L-Is-SsT" id="wfk-C7-Vjk"/>
                                     </connections>
                                 </view>
-                                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-zM-05A" userLabel="Battleplace view2" customClass="RPGBattleplaceView">
+                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-zM-05A" userLabel="Battleplace view2" customClass="RPGBattleplaceView">
                                     <rect key="frame" x="500" y="500" width="200" height="250"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="JTV-D4-aon" userLabel="Battleplace background">
@@ -111,12 +112,50 @@
                                         <outlet property="selectedMarkImageView" destination="xzX-Ar-t1q" id="Xr7-Kn-lUv"/>
                                     </connections>
                                 </view>
+                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJh-Kn-97E" userLabel="Battleplace view3" customClass="RPGBattleplaceView">
+                                    <rect key="frame" x="400" y="300" width="200" height="250"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-Uh-ctV" userLabel="Battleplace background">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2x-LH-kRj" userLabel="Battleplace button">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                            <connections>
+                                                <action selector="battleplaceClickAction:" destination="-1" eventType="touchUpInside" id="imr-pt-L1F"/>
+                                            </connections>
+                                        </button>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_circle" translatesAutoresizingMaskIntoConstraints="NO" id="b43-3D-n6J" userLabel="Selected mark image view">
+                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="b43-3D-n6J" secondAttribute="trailing" id="1c7-bh-eUN"/>
+                                        <constraint firstAttribute="trailing" secondItem="LLH-Uh-ctV" secondAttribute="trailing" id="2IJ-af-6Ka"/>
+                                        <constraint firstItem="b43-3D-n6J" firstAttribute="leading" secondItem="sJh-Kn-97E" secondAttribute="leading" id="8b8-oP-ZqP"/>
+                                        <constraint firstAttribute="trailing" secondItem="o2x-LH-kRj" secondAttribute="trailing" id="FVT-qg-sii"/>
+                                        <constraint firstAttribute="width" constant="200" id="JnB-zz-Ww1"/>
+                                        <constraint firstAttribute="bottom" secondItem="b43-3D-n6J" secondAttribute="bottom" id="LH3-MV-YeT"/>
+                                        <constraint firstItem="o2x-LH-kRj" firstAttribute="leading" secondItem="sJh-Kn-97E" secondAttribute="leading" id="SOU-h7-V2B"/>
+                                        <constraint firstItem="b43-3D-n6J" firstAttribute="top" secondItem="sJh-Kn-97E" secondAttribute="top" id="Thr-K1-jIl"/>
+                                        <constraint firstAttribute="height" constant="250" id="Wht-tv-rN2"/>
+                                        <constraint firstItem="o2x-LH-kRj" firstAttribute="top" secondItem="sJh-Kn-97E" secondAttribute="top" id="a9e-P4-xoc"/>
+                                        <constraint firstAttribute="bottom" secondItem="o2x-LH-kRj" secondAttribute="bottom" id="dLH-Xc-xhp"/>
+                                        <constraint firstAttribute="bottom" secondItem="LLH-Uh-ctV" secondAttribute="bottom" id="may-xt-syo"/>
+                                        <constraint firstItem="LLH-Uh-ctV" firstAttribute="top" secondItem="sJh-Kn-97E" secondAttribute="top" id="tFy-Iy-mzl"/>
+                                        <constraint firstItem="LLH-Uh-ctV" firstAttribute="leading" secondItem="sJh-Kn-97E" secondAttribute="leading" id="uhF-vJ-jCV"/>
+                                    </constraints>
+                                    <connections>
+                                        <outlet property="selectedMarkImageView" destination="b43-3D-n6J" id="2Gt-im-hAh"/>
+                                    </connections>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1000" id="5gd-4b-Okr"/>
                                 <constraint firstAttribute="bottom" secondItem="bse-qr-thi" secondAttribute="bottom" id="9hY-c3-EpP"/>
                                 <constraint firstItem="bse-qr-thi" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" id="CaB-gu-tbg"/>
+                                <constraint firstItem="sJh-Kn-97E" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="400" id="FgG-JZ-W8n"/>
                                 <constraint firstItem="jZo-dE-3fK" firstAttribute="top" secondItem="bse-qr-thi" secondAttribute="bottom" constant="-509" id="Qyy-wr-wUb"/>
                                 <constraint firstItem="wAV-zM-05A" firstAttribute="leading" secondItem="bse-qr-thi" secondAttribute="leading" constant="500" id="Y75-B7-OFe"/>
                                 <constraint firstItem="381-Tn-zPw" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="513" id="eJE-6D-e2e"/>
@@ -124,6 +163,7 @@
                                 <constraint firstItem="bse-qr-thi" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" id="gY1-ld-VVk"/>
                                 <constraint firstItem="jZo-dE-3fK" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="250" id="p6t-Gb-Ygs"/>
                                 <constraint firstAttribute="width" constant="1000" id="tbd-jk-vWR"/>
+                                <constraint firstItem="sJh-Kn-97E" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="300" id="u8G-bh-dYP"/>
                                 <constraint firstAttribute="trailing" secondItem="bse-qr-thi" secondAttribute="trailing" id="zBg-Ag-lF6"/>
                             </constraints>
                             <variation key="default">
@@ -143,8 +183,12 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-xJ-hhb" userLabel="Back button">
                     <rect key="frame" x="20" y="20" width="40" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Kbr-AD-vbH"/>
-                        <constraint firstAttribute="width" constant="40" id="NY7-p9-bZS"/>
+                        <constraint firstAttribute="height" constant="40" id="Kbr-AD-vbH">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
+                        <constraint firstAttribute="width" constant="40" id="NY7-p9-bZS">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
                     </constraints>
                     <state key="normal" backgroundImage="back_icon_inactive"/>
                     <connections>
@@ -154,8 +198,12 @@
                 <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gZQ-vn-Eyb">
                     <rect key="frame" x="441" y="20" width="100" height="40"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="100" id="0eT-1X-bXn"/>
-                        <constraint firstAttribute="height" constant="40" id="FZn-S2-xDK"/>
+                        <constraint firstAttribute="width" constant="100" id="0eT-1X-bXn">
+                            <variation key="heightClass=regular-widthClass=regular" constant="150"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="40" id="FZn-S2-xDK">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
                     </constraints>
                     <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
                     <state key="normal" title="Battle!" backgroundImage="main_button_inactive">
@@ -178,7 +226,7 @@
                 <constraint firstAttribute="bottom" secondItem="JtV-u2-yeJ" secondAttribute="bottom" id="zpl-PC-jOe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="331" y="247.5"/>
+            <point key="canvasLocation" x="331" y="297.5"/>
         </view>
     </objects>
     <resources>

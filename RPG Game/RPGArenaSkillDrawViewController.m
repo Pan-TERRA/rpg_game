@@ -62,7 +62,7 @@ static NSString * const kRPGArenaSkillDrawViewControllerWaitingMessageFetching =
   {
     _bagSetCollectionViewController = [[RPGArenaBagCollectionViewController alloc] init];
     _skillsCollectionViewController = [[RPGArenaSkillCollectionViewController alloc] init];
-    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:@"Fetching skills"
+    _waitingModal = [[RPGWaitingViewController alloc] initWithMessage:kRPGArenaSkillDrawViewControllerWaitingMessageFetching
                                                            completion:nil];
   }
   

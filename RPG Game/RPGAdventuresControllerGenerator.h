@@ -10,4 +10,8 @@
 
 @interface RPGAdventuresControllerGenerator : RPGBattleControllerGenerator
 
+- (instancetype)initWithStageID:(NSInteger)aStageID NS_DESIGNATED_INITIALIZER;
+
+@property (readwrite, assign, nonatomic) NSInteger stageID;
+
 @end

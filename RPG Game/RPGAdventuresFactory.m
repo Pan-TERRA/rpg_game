@@ -11,11 +11,15 @@
 #import "RPGBattleController.h"
 #import "RPGAdventuresControllerGenerator.h"
 #import "RPGRewardViewController.h"
+#import "RPGWaitingViewController.h"
+
+NSString * const kRPGAdventuresFactoryBattleInitMessage = @"Battle init";
 
 @interface RPGAdventuresFactory ()
 
 @property (retain, nonatomic, readwrite) RPGBattleController *battleController;
 @property (retain, nonatomic, readwrite) RPGRewardViewController *rewardViewController;
+@property (retain, nonatomic, readwrite) RPGWaitingViewController *battleInitViewController;
 
 @end
 
@@ -23,18 +27,34 @@
 
 #pragma mark - Init
 
-- (instancetype)init
+- (instancetype)initWithBattleplaceID:(NSInteger)aBattleplaceID
 {
   self = [super init];
   
   if (self != nil)
   {
-    RPGAdventuresControllerGenerator *battleControllerGenerator = [[[RPGAdventuresControllerGenerator alloc] init] autorelease];
-    _battleController = [[battleControllerGenerator battleController] retain];
-    _rewardViewController = [[RPGRewardViewController alloc] initWithBattleController:_battleController];
+    if (aBattleplaceID >= 0)
+    {
+      RPGAdventuresControllerGenerator *battleControllerGenerator = [[RPGAdventuresControllerGenerator alloc] initWithStageID:aBattleplaceID];
+      self.battleController = [battleControllerGenerator battleController];
+      
+      [battleControllerGenerator release];
+      
+      self.rewardViewController = [[[RPGRewardViewController alloc] initWithBattleController:self.battleController] autorelease];
+    }
+    else
+    {
+      [self release];
+      self = nil;
+    }
   }
   
   return self;
+}
+
+- (instancetype)init
+{
+  return [self initWithBattleplaceID:-1];
 }
 
 #pragma mark - Dealloc
@@ -43,6 +63,7 @@
 {
   [_battleController release];
   [_rewardViewController release];
+  [_battleInitViewController release];
   
   [super dealloc];
 }

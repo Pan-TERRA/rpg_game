@@ -11,12 +11,18 @@
 #import "RPGBattleFactoryProtocol.h"
   // Misc
 #import "RPGPresentingViewControllerProtocol.h"
+@class RPGBattleFactoryProtocol;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class RPGBattleFactoryProtocol;
   // Controllers
 @class RPGBattleController;
+
+@protocol RPGBattleViewControllerDelegate <NSObject>
+
+- (void)battleViewControllerDidEndBattle;
+
+@end
 
 /**
  *  General battle view.
@@ -28,6 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, retain, readonly) RPGBattleController *battleController;
 @property (nonatomic, assign, readwrite) id<RPGPresentingViewController> delegate;
+@property (nonatomic, assign, readwrite) id<RPGBattleViewControllerDelegate> battleViewControllerDelegate;
   // Containers
 @property (nonatomic, assign, readonly) IBOutlet UIView *currentWinCountBadgeViewContainer;
 

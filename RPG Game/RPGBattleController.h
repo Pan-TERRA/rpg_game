@@ -16,6 +16,8 @@
   // Notifications
 extern NSString * const kRPGModelDidChangeNotification;
 extern NSString * const kRPGBattleInitDidEndSetUpNotification;
+  // User info keys
+extern NSString * const kRPGBattleControllerUserInfoErrorCodeKey;
 
 @interface RPGBattleController : NSObject
 
@@ -72,8 +74,6 @@ extern NSString * const kRPGBattleInitDidEndSetUpNotification;
 
   //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismiss;
-
-  //  invoke it when dismissing view controller
 - (void)prepareBattleControllerForDismissWithCompletionHandler:(void (^)(void))callbackBlock;
 
   //  invoked by WebSocketManager delegate

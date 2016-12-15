@@ -31,8 +31,10 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
 #import "RPGBackgroundMusicController.h"
 #import "UIViewController+RPGChildViewController.h"
+#import "RPGAlertController+RPGErrorHandling.h"
   // Constants
 #import "RPGNibNames.h"
+#import "RPGStatusCodes.h"
 
 static NSString * const kRPGBattleViewControllerMyTurn = @"My turn";
 static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
@@ -100,12 +102,12 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
       _opponentViewController = [[RPGEntityViewController alloc] initWithAlign:kRPGAlignRight];
       
       
-      _battleInitModal = [[RPGWaitingViewController alloc] initWithMessage:@"Battle init"
-                                                                completion:^
+      _battleInitModal = [aBattleFactory.battleInitViewController retain];
+      _battleInitModal.completionHandler = ^
       {
         [self.battleController prepareBattleControllerForDismiss];
         [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
-      }];
+      };
       
       [[NSNotificationCenter defaultCenter] addObserver:self
                                                selector:@selector(modelDidChange:)
@@ -151,7 +153,7 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [super viewDidLoad];
   
-  self.battleLogViewController.view = self.battleTextView;
+  self.battleLogViewController.textView = self.battleTextView;
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToBattle];
   
   [self addChildViewController:self.timerViewController
@@ -206,6 +208,9 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 {
   [self.battleController prepareBattleControllerForDismiss];
   [[RPGBackgroundMusicController sharedBackgroundMusicController] switchToPeace];
+  
+  [self.battleViewControllerDelegate battleViewControllerDidEndBattle];
+  
   [self dismissViewControllerAnimated:YES
                            completion:nil];
 }
@@ -285,8 +290,32 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
 
 - (void)battleInitDidEndSetUp:(NSNotification *)aNotification
 {
-  [self removeBattleInitModal];
-  [self setUpEntityViewControllers];
+  NSNumber *errorCodeObject = aNotification.userInfo[kRPGBattleControllerUserInfoErrorCodeKey];
+  
+  if (errorCodeObject == nil)
+  {
+    [self removeBattleInitModal];
+    [self setUpEntityViewControllers];
+  }
+  else
+  {
+    RPGStatusCode errorCode = [errorCodeObject integerValue];
+    
+    if (![self canHandleErrorWithCode:errorCode])
+    {
+      errorCode = kRPGStatusCodeDefaultError;
+    }
+    
+    [RPGAlertController showErrorWithStatusCode:errorCode
+                              completionHandler:^
+    {
+      dispatch_async(dispatch_get_main_queue(), ^
+      {
+        [self removeBattleInitModal];
+        [self back:nil];
+      });
+    }];
+  }
 }
 
 #pragma mark - RPGRewardModalDelegate
@@ -305,6 +334,21 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
   [self addChildViewController:self.battleInitModal view:self.view];
   
   [self.battleController fireUpBattleController];
+}
+
+#pragma mark - Misc
+
+- (BOOL)canHandleErrorWithCode:(RPGStatusCode)aCode
+{
+  BOOL result = NO;
+  
+  if (aCode == kRPGStatusCodeWrongStageError
+      || aCode == kRPGStatusCodeStageIsNotEnabled)
+  {
+    result = YES;
+  }
+  
+  return result;
 }
 
 @end

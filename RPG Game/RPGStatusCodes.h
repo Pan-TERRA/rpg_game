@@ -69,7 +69,8 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeFriendNotFound = 60,
   kRPGStatusCodeAreAlreadyFriends = 61,
   kRPGStatusCodeUserNotFound = 62,
-  
+  kRPGStatusCodeWrongStageError = 63,
+  kRPGStatusCodeStageIsNotEnabled = 64,
   kRPGStatusCodeQuestDuelRequestNotFound = 65,
   kRPGStatusCodeQuestDuelIsAlreadyInProgress = 66,
   kRPGStatusCodeQuestDuelCanNotBeSkipped = 67,

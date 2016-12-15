@@ -13,7 +13,6 @@
 @interface RPGWaitingViewController ()
 
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *messageLabel;
-@property (nonatomic, copy, nullable) void (^completionHandler)(void);
 
 @end
 
@@ -23,15 +22,21 @@
 
 - (instancetype)init
 {
-  return [super initWithNibName:kRPGWaitingViewControllerNIBName bundle:nil];
+  return [self initWithMessage:@""];
+}
+
+- (instancetype)initWithMessage:(NSString *)aMessage
+{
+  return [self initWithMessage:aMessage completion:nil];
 }
 
 - (instancetype)initWithMessage:(NSString *)aMessage completion:(void (^ _Nullable)())completionHandler
 {
-  self = [self init];
+  self = [super initWithNibName:kRPGWaitingViewControllerNIBName bundle:nil];
   
   if (self != nil)
   {
+    _message = [aMessage copy];
     if (completionHandler != nil)
     {
       _completionHandler = [completionHandler copy];
@@ -40,7 +45,6 @@
     {
       _completionHandler = [^void(void){} retain];
     }
-    _message = [aMessage copy];
   }
   
   return self;
