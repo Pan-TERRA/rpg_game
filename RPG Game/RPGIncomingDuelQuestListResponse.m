@@ -24,7 +24,7 @@
                 incomingQuests:(NSArray<RPGIncomingDuelQuest *> *)anIncomingQuests
 {
   self = [super initWithStatus:aStatus
-                        quests:nil];
+                        quests:[NSArray array]];
   
   if (self != nil)
   {

@@ -229,21 +229,11 @@
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Zn9-qw-X8d" secondAttribute="height" multiplier="1:1" id="oDT-Sh-h2L"/>
                     </constraints>
-                    <state key="normal" backgroundImage="settings_cog_icon">
+                    <state key="normal" backgroundImage="friends_button_inactive">
                         <attributedString key="attributedTitle"/>
                     </state>
                     <connections>
                         <action selector="segueToFriends" destination="-1" eventType="touchUpInside" id="zsx-Py-fV6"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhm-W6-9gC">
-                    <rect key="frame" x="30" y="205" width="40" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="width" secondItem="Uhm-W6-9gC" secondAttribute="height" multiplier="1:1" id="Shh-Av-tjA"/>
-                    </constraints>
-                    <state key="normal" backgroundImage="quest_icon"/>
-                    <connections>
-                        <action selector="segueToDuelQuests" destination="-1" eventType="touchUpInside" id="BxU-0I-wFm"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KYX-QW-ezp" userLabel="Level View">
@@ -265,6 +255,16 @@
                         <constraint firstAttribute="height" constant="18" id="pia-SW-stx"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uhm-W6-9gC">
+                    <rect key="frame" x="30" y="205" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Uhm-W6-9gC" secondAttribute="height" multiplier="1:1" id="Shh-Av-tjA"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="questduel_button_inactive"/>
+                    <connections>
+                        <action selector="segueToDuelQuests" destination="-1" eventType="touchUpInside" id="BxU-0I-wFm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.35763221153846148" green="0.32512930419873004" blue="0.26062445878041385" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -337,10 +337,12 @@
         <image name="Menu Background" width="501" height="310"/>
         <image name="Ruby" width="20" height="20"/>
         <image name="char_icon" width="40" height="41"/>
+        <image name="friends_button_inactive" width="40" height="40"/>
         <image name="main_button_active" width="275" height="136"/>
         <image name="main_button_inactive" width="275" height="137"/>
         <image name="main_menu_title" width="686" height="140"/>
         <image name="quest_icon" width="40" height="40"/>
+        <image name="questduel_button_inactive" width="40" height="40"/>
         <image name="settings_cog_icon" width="40" height="41"/>
         <image name="shop_icon" width="40" height="41"/>
     </resources>
