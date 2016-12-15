@@ -35,8 +35,9 @@
              imageData:(NSData *)anImageData
      completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
-- (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
+- (void)postQuestProofByType:(RPGQuestType)aType
+                     request:(RPGQuestReviewRequest *)aRequest
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;
 
 - (void)getQuestRewardWithRequest:(RPGQuestRequest *)aRequest
                 completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback;

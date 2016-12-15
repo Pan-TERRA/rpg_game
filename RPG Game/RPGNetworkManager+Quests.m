@@ -490,12 +490,30 @@
   [session finishTasksAndInvalidate];
 }
 
-- (void)postQuestProofWithRequest:(RPGQuestReviewRequest *)aRequest
-                completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
+- (void)postQuestProofByType:(RPGQuestType)aType
+                     request:(RPGQuestReviewRequest *)aRequest
+           completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode))aCallback
 {
-  NSString *requestString = [NSString stringWithFormat:@"%@%@",
-                             kRPGNetworkManagerAPIHost,
-                             kRPGNetworkManagerAPIReviewResultQuestRoute];
+  NSString *requestString = nil;
+  
+  switch (aType)
+  {
+    case kRPGQuestTypeSingle:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIReviewResultQuestRoute];
+      break;
+    }
+      
+    case kRPGQuestTypeDuel:
+    {
+      requestString = [NSString stringWithFormat:@"%@%@",
+                       kRPGNetworkManagerAPIHost,
+                       kRPGNetworkManagerAPIReviewResultDuelQuestRoute];
+      break;
+    }
+  }
   
   NSURLRequest *request = [self requestWithObject:aRequest
                                         URLstring:requestString
