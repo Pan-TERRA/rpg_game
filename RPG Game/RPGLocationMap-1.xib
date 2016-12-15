@@ -10,6 +10,7 @@
                 <outlet property="battleplaceView1" destination="jZo-dE-3fK" id="2o0-Nz-oLX"/>
                 <outlet property="battleplaceView2" destination="wAV-zM-05A" id="bHM-aH-gNm"/>
                 <outlet property="battleplaceView3" destination="sJh-Kn-97E" id="ixr-on-yWf"/>
+                <outlet property="mapScrollView" destination="JtV-u2-yeJ" id="UXy-bV-PiS"/>
                 <outlet property="toBattleButton" destination="gZQ-vn-Eyb" id="rdh-rL-qdV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="271-ST-VZK"/>
             </connections>
@@ -23,10 +24,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="982" height="887"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S1T-9N-S1b" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                            <rect key="frame" x="0.0" y="0.0" width="1024" height="728"/>
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="location_background_1" translatesAutoresizingMaskIntoConstraints="NO" id="bse-qr-thi" userLabel="Background image">
-                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="728"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1000" id="QSr-lo-Jfa"/>
                                         <constraint firstAttribute="width" constant="1000" id="WLz-lz-EQ8"/>
@@ -39,28 +40,30 @@
                                     </variation>
                                 </imageView>
                                 <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jZo-dE-3fK" userLabel="Battleplace view1" customClass="RPGBattleplaceView">
-                                    <rect key="frame" x="250" y="491" width="200" height="250"/>
+                                    <rect key="frame" x="164" y="573" width="59" height="75"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="381-Tn-zPw" userLabel="Battleplace background">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon" translatesAutoresizingMaskIntoConstraints="NO" id="381-Tn-zPw" userLabel="Battleplace background">
+                                            <rect key="frame" x="0.0" y="0.0" width="59" height="75"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kk1-25-jip" userLabel="Battleplace button">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="59" height="75"/>
                                             <connections>
                                                 <action selector="battleplaceClickAction:" destination="-1" eventType="touchUpInside" id="1eT-IV-6ZZ"/>
                                             </connections>
                                         </button>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_circle" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-Is-SsT" userLabel="Selected mark image view">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon_active" translatesAutoresizingMaskIntoConstraints="NO" id="j5L-Is-SsT" userLabel="Selected mark image view">
+                                            <rect key="frame" x="0.0" y="0.0" width="59" height="75"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="j5L-Is-SsT" secondAttribute="bottom" id="C5j-UJ-CFg"/>
+                                        <constraint firstAttribute="height" constant="75" id="GuT-LF-Bqg"/>
                                         <constraint firstItem="kk1-25-jip" firstAttribute="leading" secondItem="jZo-dE-3fK" secondAttribute="leading" id="MZt-dp-R8e"/>
                                         <constraint firstItem="j5L-Is-SsT" firstAttribute="top" secondItem="jZo-dE-3fK" secondAttribute="top" id="Po7-li-Fop"/>
                                         <constraint firstAttribute="width" constant="200" id="acd-4a-e9x"/>
                                         <constraint firstAttribute="height" constant="250" id="c2i-if-sMo"/>
+                                        <constraint firstAttribute="width" constant="59" id="dvP-oQ-rWZ"/>
                                         <constraint firstItem="j5L-Is-SsT" firstAttribute="leading" secondItem="jZo-dE-3fK" secondAttribute="leading" id="jNY-XC-zXe"/>
                                         <constraint firstAttribute="trailing" secondItem="kk1-25-jip" secondAttribute="trailing" id="mEC-sv-uJ0"/>
                                         <constraint firstItem="kk1-25-jip" firstAttribute="top" secondItem="jZo-dE-3fK" secondAttribute="top" id="o34-s2-i8R"/>
@@ -71,61 +74,30 @@
                                         <constraint firstAttribute="bottom" secondItem="381-Tn-zPw" secondAttribute="bottom" id="vfD-xL-f9f"/>
                                         <constraint firstItem="381-Tn-zPw" firstAttribute="leading" secondItem="jZo-dE-3fK" secondAttribute="leading" id="yNF-Hc-Oyw"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="acd-4a-e9x"/>
+                                            <exclude reference="c2i-if-sMo"/>
+                                        </mask>
+                                    </variation>
                                     <connections>
                                         <outlet property="selectedMarkImageView" destination="j5L-Is-SsT" id="wfk-C7-Vjk"/>
                                     </connections>
                                 </view>
-                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-zM-05A" userLabel="Battleplace view2" customClass="RPGBattleplaceView">
-                                    <rect key="frame" x="500" y="500" width="200" height="250"/>
-                                    <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="JTV-D4-aon" userLabel="Battleplace background">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
-                                        </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbS-Pw-afz" userLabel="Battleplace button">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
-                                            <connections>
-                                                <action selector="battleplaceClickAction:" destination="-1" eventType="touchUpInside" id="tgN-z6-x9U"/>
-                                            </connections>
-                                        </button>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_circle" translatesAutoresizingMaskIntoConstraints="NO" id="xzX-Ar-t1q" userLabel="Selected mark image view">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
-                                        </imageView>
-                                    </subviews>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstItem="rbS-Pw-afz" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="0X6-yr-kl1"/>
-                                        <constraint firstAttribute="bottom" secondItem="JTV-D4-aon" secondAttribute="bottom" id="4mZ-RZ-ro9"/>
-                                        <constraint firstAttribute="height" constant="250" id="HsL-De-zjq"/>
-                                        <constraint firstAttribute="width" constant="200" id="KCa-Xq-D2Z"/>
-                                        <constraint firstItem="xzX-Ar-t1q" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="Pd5-5d-nTh"/>
-                                        <constraint firstItem="xzX-Ar-t1q" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="QwF-V6-xp7"/>
-                                        <constraint firstAttribute="trailing" secondItem="rbS-Pw-afz" secondAttribute="trailing" id="RHv-8i-GXn"/>
-                                        <constraint firstItem="rbS-Pw-afz" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="RoE-df-Umc"/>
-                                        <constraint firstAttribute="trailing" secondItem="xzX-Ar-t1q" secondAttribute="trailing" id="VKr-yI-cCM"/>
-                                        <constraint firstAttribute="bottom" secondItem="rbS-Pw-afz" secondAttribute="bottom" id="fRv-9R-XZT"/>
-                                        <constraint firstAttribute="bottom" secondItem="xzX-Ar-t1q" secondAttribute="bottom" id="fY3-jO-FYA"/>
-                                        <constraint firstItem="JTV-D4-aon" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="i47-3Z-lGI"/>
-                                        <constraint firstAttribute="trailing" secondItem="JTV-D4-aon" secondAttribute="trailing" id="tpw-87-Jsp"/>
-                                        <constraint firstItem="JTV-D4-aon" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="uzM-Fp-Gc8"/>
-                                    </constraints>
-                                    <connections>
-                                        <outlet property="selectedMarkImageView" destination="xzX-Ar-t1q" id="Xr7-Kn-lUv"/>
-                                    </connections>
-                                </view>
                                 <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sJh-Kn-97E" userLabel="Battleplace view3" customClass="RPGBattleplaceView">
-                                    <rect key="frame" x="400" y="300" width="200" height="250"/>
+                                    <rect key="frame" x="514" y="114" width="56" height="71"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="windmill" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-Uh-ctV" userLabel="Battleplace background">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon" translatesAutoresizingMaskIntoConstraints="NO" id="LLH-Uh-ctV" userLabel="Battleplace background">
+                                            <rect key="frame" x="0.0" y="0.0" width="56" height="71"/>
                                         </imageView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2x-LH-kRj" userLabel="Battleplace button">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="56" height="71"/>
                                             <connections>
                                                 <action selector="battleplaceClickAction:" destination="-1" eventType="touchUpInside" id="imr-pt-L1F"/>
                                             </connections>
                                         </button>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="red_circle" translatesAutoresizingMaskIntoConstraints="NO" id="b43-3D-n6J" userLabel="Selected mark image view">
-                                            <rect key="frame" x="0.0" y="0.0" width="200" height="250"/>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon_active" translatesAutoresizingMaskIntoConstraints="NO" id="b43-3D-n6J" userLabel="Selected mark image view">
+                                            <rect key="frame" x="0.0" y="0.0" width="56" height="71"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -142,35 +114,82 @@
                                         <constraint firstItem="o2x-LH-kRj" firstAttribute="top" secondItem="sJh-Kn-97E" secondAttribute="top" id="a9e-P4-xoc"/>
                                         <constraint firstAttribute="bottom" secondItem="o2x-LH-kRj" secondAttribute="bottom" id="dLH-Xc-xhp"/>
                                         <constraint firstAttribute="bottom" secondItem="LLH-Uh-ctV" secondAttribute="bottom" id="may-xt-syo"/>
+                                        <constraint firstAttribute="height" constant="71" id="suV-1g-mhC"/>
                                         <constraint firstItem="LLH-Uh-ctV" firstAttribute="top" secondItem="sJh-Kn-97E" secondAttribute="top" id="tFy-Iy-mzl"/>
                                         <constraint firstItem="LLH-Uh-ctV" firstAttribute="leading" secondItem="sJh-Kn-97E" secondAttribute="leading" id="uhF-vJ-jCV"/>
+                                        <constraint firstAttribute="width" constant="56" id="yde-4h-AQS"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="JnB-zz-Ww1"/>
+                                            <exclude reference="Wht-tv-rN2"/>
+                                        </mask>
+                                    </variation>
                                     <connections>
                                         <outlet property="selectedMarkImageView" destination="b43-3D-n6J" id="2Gt-im-hAh"/>
+                                    </connections>
+                                </view>
+                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wAV-zM-05A" userLabel="Battleplace view2" customClass="RPGBattleplaceView">
+                                    <rect key="frame" x="230" y="350" width="43" height="54"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon" translatesAutoresizingMaskIntoConstraints="NO" id="JTV-D4-aon" userLabel="Battleplace background">
+                                            <rect key="frame" x="0.0" y="0.0" width="43" height="54"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rbS-Pw-afz" userLabel="Battleplace button">
+                                            <rect key="frame" x="0.0" y="0.0" width="43" height="54"/>
+                                            <connections>
+                                                <action selector="battleplaceClickAction:" destination="-1" eventType="touchUpInside" id="tgN-z6-x9U"/>
+                                            </connections>
+                                        </button>
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="battleplace_icon_active" translatesAutoresizingMaskIntoConstraints="NO" id="xzX-Ar-t1q" userLabel="Selected mark image view">
+                                            <rect key="frame" x="0.0" y="0.0" width="43" height="54"/>
+                                        </imageView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstItem="rbS-Pw-afz" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="0X6-yr-kl1"/>
+                                        <constraint firstAttribute="bottom" secondItem="JTV-D4-aon" secondAttribute="bottom" id="4mZ-RZ-ro9"/>
+                                        <constraint firstAttribute="height" constant="250" id="HsL-De-zjq"/>
+                                        <constraint firstAttribute="width" constant="200" id="KCa-Xq-D2Z"/>
+                                        <constraint firstItem="xzX-Ar-t1q" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="Pd5-5d-nTh"/>
+                                        <constraint firstAttribute="width" constant="43" id="Qqx-pR-7Uv"/>
+                                        <constraint firstItem="xzX-Ar-t1q" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="QwF-V6-xp7"/>
+                                        <constraint firstAttribute="trailing" secondItem="rbS-Pw-afz" secondAttribute="trailing" id="RHv-8i-GXn"/>
+                                        <constraint firstItem="rbS-Pw-afz" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="RoE-df-Umc"/>
+                                        <constraint firstAttribute="trailing" secondItem="xzX-Ar-t1q" secondAttribute="trailing" id="VKr-yI-cCM"/>
+                                        <constraint firstAttribute="bottom" secondItem="rbS-Pw-afz" secondAttribute="bottom" id="fRv-9R-XZT"/>
+                                        <constraint firstAttribute="bottom" secondItem="xzX-Ar-t1q" secondAttribute="bottom" id="fY3-jO-FYA"/>
+                                        <constraint firstItem="JTV-D4-aon" firstAttribute="leading" secondItem="wAV-zM-05A" secondAttribute="leading" id="i47-3Z-lGI"/>
+                                        <constraint firstAttribute="trailing" secondItem="JTV-D4-aon" secondAttribute="trailing" id="tpw-87-Jsp"/>
+                                        <constraint firstAttribute="height" constant="54" id="un4-8l-pEB"/>
+                                        <constraint firstItem="JTV-D4-aon" firstAttribute="top" secondItem="wAV-zM-05A" secondAttribute="top" id="uzM-Fp-Gc8"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="HsL-De-zjq"/>
+                                            <exclude reference="KCa-Xq-D2Z"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <outlet property="selectedMarkImageView" destination="xzX-Ar-t1q" id="Xr7-Kn-lUv"/>
                                     </connections>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="1000" id="5gd-4b-Okr"/>
+                                <constraint firstAttribute="height" constant="728" id="5gd-4b-Okr"/>
                                 <constraint firstAttribute="bottom" secondItem="bse-qr-thi" secondAttribute="bottom" id="9hY-c3-EpP"/>
                                 <constraint firstItem="bse-qr-thi" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" id="CaB-gu-tbg"/>
-                                <constraint firstItem="sJh-Kn-97E" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="400" id="FgG-JZ-W8n"/>
-                                <constraint firstItem="jZo-dE-3fK" firstAttribute="top" secondItem="bse-qr-thi" secondAttribute="bottom" constant="-509" id="Qyy-wr-wUb"/>
-                                <constraint firstItem="wAV-zM-05A" firstAttribute="leading" secondItem="bse-qr-thi" secondAttribute="leading" constant="500" id="Y75-B7-OFe"/>
-                                <constraint firstItem="381-Tn-zPw" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="513" id="eJE-6D-e2e"/>
-                                <constraint firstItem="wAV-zM-05A" firstAttribute="top" secondItem="bse-qr-thi" secondAttribute="top" constant="500" id="eQM-wI-wp8"/>
+                                <constraint firstItem="sJh-Kn-97E" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="114" id="HPe-Sv-9BU"/>
+                                <constraint firstItem="jZo-dE-3fK" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="164" id="HfV-gX-CvH"/>
+                                <constraint firstItem="sJh-Kn-97E" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="514" id="Nbc-89-p62"/>
+                                <constraint firstItem="wAV-zM-05A" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="230" id="P4x-jt-bLT"/>
+                                <constraint firstItem="wAV-zM-05A" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="350" id="bLe-0V-ojL"/>
                                 <constraint firstItem="bse-qr-thi" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" id="gY1-ld-VVk"/>
-                                <constraint firstItem="jZo-dE-3fK" firstAttribute="leading" secondItem="S1T-9N-S1b" secondAttribute="leading" constant="250" id="p6t-Gb-Ygs"/>
-                                <constraint firstAttribute="width" constant="1000" id="tbd-jk-vWR"/>
-                                <constraint firstItem="sJh-Kn-97E" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="300" id="u8G-bh-dYP"/>
+                                <constraint firstItem="jZo-dE-3fK" firstAttribute="top" secondItem="S1T-9N-S1b" secondAttribute="top" constant="573" id="lXn-Jz-7bU"/>
+                                <constraint firstAttribute="width" constant="1024" id="tbd-jk-vWR"/>
                                 <constraint firstAttribute="trailing" secondItem="bse-qr-thi" secondAttribute="trailing" id="zBg-Ag-lF6"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="eJE-6D-e2e"/>
-                                </mask>
-                            </variation>
                         </view>
                     </subviews>
                     <constraints>
@@ -231,9 +250,9 @@
     </objects>
     <resources>
         <image name="back_icon_inactive" width="40" height="40"/>
-        <image name="location_background_1" width="443" height="312"/>
+        <image name="battleplace_icon" width="512" height="512"/>
+        <image name="battleplace_icon_active" width="512" height="512"/>
+        <image name="location_background_1" width="1024" height="728"/>
         <image name="main_button_inactive" width="275" height="137"/>
-        <image name="red_circle" width="200" height="200"/>
-        <image name="windmill" width="217" height="239"/>
     </resources>
 </document>

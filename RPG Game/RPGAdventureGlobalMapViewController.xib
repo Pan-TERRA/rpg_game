@@ -16,6 +16,7 @@
                 <outlet property="lock7" destination="biY-1E-3by" id="C76-KP-LeS"/>
                 <outlet property="lock8" destination="yCc-3o-gCm" id="NTw-DT-eLm"/>
                 <outlet property="lock9" destination="idM-k0-x3j" id="eKx-8l-SlY"/>
+                <outlet property="mapScrollView" destination="lHe-40-tg5" id="XZc-Yk-r3F"/>
                 <outlet property="maskImageView" destination="jJ6-5l-uqK" id="ARw-s5-XJQ"/>
                 <outlet property="scrollView" destination="lHe-40-tg5" id="Ny4-lW-g90"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
