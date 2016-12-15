@@ -55,10 +55,10 @@
                                 <rect key="frame" x="46" y="25" width="517" height="35"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Up2-uG-O5F" userLabel="Quest Item Proof  Type Container">
-                                        <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="30"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Light Brown" translatesAutoresizingMaskIntoConstraints="NO" id="QF6-j2-5f6">
-                                                <rect key="frame" x="0.0" y="0.0" width="160" height="30"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="165" height="30"/>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Proof:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mHY-ie-G9Z">
                                                 <rect key="frame" x="10" y="5" width="44" height="20"/>
@@ -77,13 +77,13 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="State:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U96-7T-hV6">
-                                                <rect key="frame" x="84" y="5" width="41" height="20"/>
+                                                <rect key="frame" x="89" y="5" width="41" height="20"/>
                                                 <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
                                                 <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="char_icon" translatesAutoresizingMaskIntoConstraints="NO" id="aFD-yl-CBP">
-                                                <rect key="frame" x="130" y="5" width="20" height="20"/>
+                                                <rect key="frame" x="135" y="5" width="20" height="20"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="aFD-yl-CBP" secondAttribute="height" multiplier="1:1" id="yZi-N4-6yu"/>
@@ -107,7 +107,7 @@
                                             <constraint firstItem="QF6-j2-5f6" firstAttribute="top" secondItem="Up2-uG-O5F" secondAttribute="top" id="hvQ-0C-Jcv"/>
                                             <constraint firstAttribute="bottom" secondItem="QF6-j2-5f6" secondAttribute="bottom" id="jwe-zs-ygu"/>
                                             <constraint firstItem="mHY-ie-G9Z" firstAttribute="leading" secondItem="Up2-uG-O5F" secondAttribute="leading" constant="10" id="mLY-He-NVy"/>
-                                            <constraint firstItem="U96-7T-hV6" firstAttribute="leading" secondItem="LsY-Pd-cWq" secondAttribute="trailing" constant="5" id="mQR-26-31p"/>
+                                            <constraint firstItem="U96-7T-hV6" firstAttribute="leading" secondItem="LsY-Pd-cWq" secondAttribute="trailing" constant="10" id="mQR-26-31p"/>
                                             <constraint firstAttribute="height" constant="30" id="s6H-6L-yXf"/>
                                             <constraint firstItem="LsY-Pd-cWq" firstAttribute="leading" secondItem="mHY-ie-G9Z" secondAttribute="trailing" constant="5" id="ujw-OT-Fyu"/>
                                         </constraints>

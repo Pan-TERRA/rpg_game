@@ -202,6 +202,7 @@
 		AE9082531E030F410082FCFA /* RPGDuelQuest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9082351E017DBA0082FCFA /* RPGDuelQuest.m */; };
 		AE9082541E030F4B0082FCFA /* RPGDuelQuestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AE9082201E004A240082FCFA /* RPGDuelQuestRequest.m */; };
 		AE9082551E030F530082FCFA /* RPGIncomingDuelQuestListResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = AE5E46BA1E00427800546256 /* RPGIncomingDuelQuestListResponse.m */; };
+		AE9082561E03194E0082FCFA /* RPGIncomingQuestTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AE9082301E01583D0082FCFA /* RPGIncomingQuestTableViewCell.xib */; };
 		AED6F5751DACD641007ED1B8 /* RPGBattleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AED6F56F1DACD641007ED1B8 /* RPGBattleViewController.m */; };
 		AED6F5761DACD641007ED1B8 /* RPGBattleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5701DACD641007ED1B8 /* RPGBattleViewController.xib */; };
 		AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AED6F5711DACD641007ED1B8 /* RPGMainView.xib */; };
@@ -2806,6 +2807,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2ACD02471DFC88EB00068AAE /* RPGTournamentRewardRankViewController.xib in Resources */,
+				AE9082561E03194E0082FCFA /* RPGIncomingQuestTableViewCell.xib in Resources */,
 				AED6F5771DACD641007ED1B8 /* RPGMainView.xib in Resources */,
 				28AD1A271E029F0200E6D97F /* RPGFriendsTableViewCellInFriends.xib in Resources */,
 				28A6F9C51DF08AB2008519AA /* RPGRewardViewController.xib in Resources */,
