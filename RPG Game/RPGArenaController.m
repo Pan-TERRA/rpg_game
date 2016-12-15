@@ -7,16 +7,14 @@
 //
 
 #import "RPGArenaController.h"
-  // API
-#import "RPGWebsocketManager.h"
   // Entities
 #import "RPGArenaInitRequest.h"
-#import "RPGSkill.h"
+#import "RPGArenaInitResponse.h"
+#import "RPGArenaConditionResponse.h"
 #import "RPGBattle.h"
 #import "RPGPlayer.h"
-#import "RPGAdventuresInitResponse.h"
+#import "RPGSkill.h"
   // Misc
-#import "RPGSerializable.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
@@ -34,15 +32,13 @@
   return [RPGArenaInitRequest requestWithSkillIDs:skillIDs];
 }
 
-#pragma mark Process Manager Response
-
 #pragma mark - Battle Init Response
 
 - (void)processBattleInitResponse:(NSDictionary *)aResponse
 {
-  RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
-                                                    initWithDictionaryRepresentation:aResponse]
-                                                   autorelease];
+  RPGArenaInitResponse *battleInitResponse = [[[RPGArenaInitResponse alloc]
+                                               initWithDictionaryRepresentation:aResponse]
+                                              autorelease];
   
   if (battleInitResponse != nil && battleInitResponse.status == kRPGStatusCodeOK)
   {
@@ -67,8 +63,18 @@
   }
 }
 
-#pragma mark Battle Condition Response
+#pragma mark - Battle Condition Response
 
-#pragma mark - Actions
+- (void)processBattleConditionResponse:(NSDictionary *)aResponse
+{
+  RPGArenaConditionResponse *battleConditionResponse = [[[RPGArenaConditionResponse alloc]
+                                                         initWithDictionaryRepresentation:aResponse] autorelease];
+  
+  if (battleConditionResponse != nil && battleConditionResponse.status == kRPGStatusCodeOK)
+  {
+    [self.battle updateWithBattleConditionResponse:battleConditionResponse];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
+  }
+}
 
 @end

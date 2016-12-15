@@ -7,9 +7,7 @@
 //
 
 #import "RPGBattleController.h"
-  // Controllers
-#import "RPGAdventuresController.h"
 
-@interface RPGArenaController : RPGAdventuresController
+@interface RPGArenaController : RPGBattleController
 
 @end

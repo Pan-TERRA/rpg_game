@@ -1,18 +1,18 @@
 //
-//  RPGArenaConditionResponse.m
+//  RPGTournamentConditionResponse.m
 //  RPG Game
 //
-//  Created by Иван Дзюбенко on 11/27/16.
+//  Created by Костянтин Паляничко on 12/15/16.
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import "RPGArenaConditionResponse.h"
+#import "RPGTournamentConditionResponse.h"
   // Entity
 #import "RPGPlayerInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
 
-@implementation RPGArenaConditionResponse
+@implementation RPGTournamentConditionResponse
 
 - (instancetype)initWithPlayerInfo:(RPGPlayerInfo *)aPlayerInfo
                       opponentInfo:(RPGPlayerInfo *)anOpponentInfo
@@ -23,7 +23,7 @@
                             status:(RPGStatusCode)aStatus
                        currentTurn:(BOOL)aCurrentTurn
 {
-  return [super initWithType:kRPGArenaConditionMessageType
+  return [super initWithType:kRPGTournamentConditionMessageType
                   playerInfo:aPlayerInfo
                 opponentInfo:anOpponentInfo
              skillsCondition:aSkillsCondition

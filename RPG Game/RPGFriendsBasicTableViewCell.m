@@ -47,7 +47,7 @@
     [_currentFriend release];
     _currentFriend = [aFriend retain];
     
-    NSString *imageName = [NSString stringWithFormat:@"avatar_%ld_%ld", aFriend.classID, aFriend.avatarID];
+    NSString *imageName = [NSString stringWithFormat:@"avatar_%ld_%ld", (long)aFriend.classID, (long)aFriend.avatarID];
     self.avatar.image = [UIImage imageNamed:imageName];
     
     UIImage *onlineStatus = nil;

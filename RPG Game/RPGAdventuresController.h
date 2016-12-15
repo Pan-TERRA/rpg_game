@@ -6,7 +6,6 @@
 //  Copyright © 2016 RPG-team. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
   // API
 @class RPGWebsocketManager;
   // Controllers
@@ -14,9 +13,8 @@
 
 @interface RPGAdventuresController : RPGBattleController
 
-@property (retain, nonatomic, readonly) RPGWebsocketManager *webSocketManager;
-@property (readwrite, assign, nonatomic) NSInteger stageID;
+@property (nonatomic, assign, readwrite) NSInteger stageID;
 
-- (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager;
+- (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager stageID:(NSInteger)aStageID;
 
 @end

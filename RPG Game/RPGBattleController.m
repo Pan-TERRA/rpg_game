@@ -7,14 +7,14 @@
   //
 
 #import "RPGBattleController.h"
+  // API
+#import "RPGWebsocketManager.h"
   // Entities
 #import "RPGBattle.h"
 #import "RPGRequest.h"
 #import "RPGSkillActionRequest.h"
 #import "RPGBattleInitResponse.h"
 #import "RPGBattleConditionResponse.h"
-  // Misc
-#import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
 
@@ -27,6 +27,8 @@ NSString * const kRPGBattleControllerUserInfoErrorCodeKey = @"errorCode";
 static NSString * const kRPGBattleControllerResponseType = @"type";
 
 @interface RPGBattleController ()
+
+@property (nonatomic, retain, readwrite) RPGWebsocketManager *webSocketManager;
 
 @property (nonatomic, copy, readwrite) NSString *battleInitWebSocketMessageType;
 @property (nonatomic, copy, readwrite) NSString *battleConditionWebSocketMessageType;
@@ -41,6 +43,11 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (instancetype)init
 {
+  return [self initWithWebSocketManager:[[[RPGWebsocketManager alloc] init] autorelease]];
+}
+
+- (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager
+{
   self = [super init];
   
   if (self != nil)
@@ -48,6 +55,7 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
     _battle = [[RPGBattle alloc] init];
     _battleInitWebSocketMessageType = nil;
     _battleConditionWebSocketMessageType = nil;
+    _webSocketManager = [aManager retain];
   }
   
   return self;
@@ -60,6 +68,8 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
   [_battle release];
   [_battleConditionWebSocketMessageType release];
   [_battleInitWebSocketMessageType release];
+  [_webSocketManager release];
+  [_onBattleDismissCompletionHandler release];
   
   [super dealloc];
 }
@@ -126,7 +136,16 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)sendSkillActionRequestWithSkillID:(NSInteger)aSkillID
 {
+  RPGSkillActionRequest *request = [RPGSkillActionRequest requestWithSkillID:aSkillID];
   
+  if (request != nil)
+  {
+    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
 }
 
 #pragma mark - Misc
@@ -139,17 +158,26 @@ static NSString * const kRPGBattleControllerResponseType = @"type";
 
 - (void)prepareBattleControllerForDismiss
 {
-
+  [self.webSocketManager close];
 }
 
 - (void)fireUpBattleController
 {
-
+  [self.webSocketManager open];
 }
 
 - (void)requestBattleInit
 {
+  id request = [self createBattleInitRequest];
   
+  if (request != nil)
+  {
+    [self.webSocketManager sendWebsocketManagerMessageWithObject:request];
+  }
+  else
+  {
+    NSLog(@"Request is nil");
+  }
 }
 
 - (void)dismissalDidFinish

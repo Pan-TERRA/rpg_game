@@ -50,8 +50,8 @@ static NSString * const kRPGWebsocketManagerAPIMonsterBattle = @"ws://10.55.33.1
 - (RPGBattleController *)battleController
 {
   RPGWebsocketManager *manager = [[RPGWebsocketManager alloc] initWithURL:[NSURL URLWithString:kRPGWebsocketManagerAPIMonsterBattle]];
-  RPGAdventuresController *controller = [[[RPGAdventuresController alloc] initWithWebSocketManager:manager] autorelease];
-  controller.stageID = self.stageID;
+  RPGAdventuresController *controller = [[[RPGAdventuresController alloc] initWithWebSocketManager:manager
+                                                                                           stageID:self.stageID] autorelease];
   manager.battleController = controller;
   [manager release];
   

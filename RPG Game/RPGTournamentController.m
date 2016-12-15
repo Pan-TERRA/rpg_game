@@ -10,9 +10,10 @@
   // Entities
 #import "RPGRequest.h"
 #import "RPGTournamentInitResponse.h"
+#import "RPGTournamentConditionResponse.h"
 #import "RPGBattle.h"
-#import "RPGSkill.h"
 #import "RPGPlayer.h"
+#import "RPGSkill.h"
   // Misc
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
@@ -57,6 +58,20 @@
                                                         object:self];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification
                                                         object:self];
+  }
+}
+
+#pragma mark - Battle Condition Response
+
+- (void)processBattleConditionResponse:(NSDictionary *)aResponse
+{
+  RPGTournamentConditionResponse *battleConditionResponse = [[[RPGTournamentConditionResponse alloc]
+                                                              initWithDictionaryRepresentation:aResponse] autorelease];
+  
+  if (battleConditionResponse != nil && battleConditionResponse.status == kRPGStatusCodeOK)
+  {
+    [self.battle updateWithBattleConditionResponse:battleConditionResponse];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
   }
 }
 

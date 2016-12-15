@@ -22,10 +22,13 @@ extern NSString * const kRPGBattleControllerUserInfoErrorCodeKey;
 @interface RPGBattleController : NSObject
 
 @property (nonatomic, retain, readwrite) RPGBattle *battle;
+@property (nonatomic, retain, readonly) RPGWebsocketManager *webSocketManager;
 
   // supported websocket messages
 @property (nonatomic, copy, readonly) NSString *battleInitWebSocketMessageType;
 @property (nonatomic, copy, readonly) NSString *battleConditionWebSocketMessageType;
+
+- (instancetype)initWithWebSocketManager:(RPGWebsocketManager *)aManager;
 
 #pragma mark - Creating Request
 
@@ -42,7 +45,7 @@ extern NSString * const kRPGBattleControllerUserInfoErrorCodeKey;
  *
  *  @param aResponse A websocket message represented as dictionar
  */
-- (void)processManagerResponse:(NSDictionary *)aResponse __attribute__((objc_requires_super));
+- (void)processManagerResponse:(NSDictionary *)aResponse NS_REQUIRES_SUPER;
 
 #pragma mark Battle Init Response
 
