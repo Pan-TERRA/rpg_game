@@ -54,7 +54,7 @@
                incomingQuests:nil];
 }
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                         quests:(NSArray<RPGQuest *> *)aQuests
 {
   return [self initWithStatus:-1
