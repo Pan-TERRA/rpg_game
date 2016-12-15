@@ -24,6 +24,9 @@ extern NSString * const kRPGQuestListViewControllerNIBName;
 extern NSString * const kRPGQuestViewControllerNIBName;
 extern NSString * const kRPGQuestTableViewCellNIBName;
 extern NSString * const kRPGIncomingQuestTableViewCellNIBName;
+extern NSString * const kRPGHeaderQuestViewControllerNIBName;
+extern NSString * const kRPGBodyQuestViewControllerNIBName;
+extern NSString * const kRPGButtonQuestViewControllerNIBName;
 
 /****************	Battle ****************/
 
