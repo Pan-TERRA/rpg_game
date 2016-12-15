@@ -244,7 +244,7 @@ static NSString * const sRPGShopViewControllerConfirmQuestion = @"Are you sure y
     [[RPGNetworkManager sharedNetworkManager] getResourcesWithCompletionHandler:^(RPGStatusCode aNetworkStatusCode,
                                                                                   RPGResourcesResponse *aResponse)
      {
-       if (aNetworkStatusCode == 0)
+       if (aNetworkStatusCode == kRPGStatusCodeOK)
        {
          RPGResources *resources = aResponse.resources;
          NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];

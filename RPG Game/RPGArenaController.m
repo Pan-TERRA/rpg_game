@@ -20,6 +20,7 @@
 #import "NSUserDefaults+RPGSessionInfo.h"
   // Constants
 #import "RPGMessageTypes.h"
+#import "RPGStatusCodes.h"
 
 @implementation RPGArenaController
 
@@ -43,7 +44,7 @@
                                                     initWithDictionaryRepresentation:aResponse]
                                                    autorelease];
   
-  if (battleInitResponse != nil && battleInitResponse.status == 0)
+  if (battleInitResponse != nil && battleInitResponse.status == kRPGStatusCodeOK)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     

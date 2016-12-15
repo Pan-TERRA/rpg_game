@@ -69,7 +69,7 @@
   NSString *playerNickName = battleController.playerNickName;
   NSString *opponentNickName = battleController.opponentNickName;
   
-  self.winnerNickNameLabel.text = battleController.battleStatus == 0 ? opponentNickName : playerNickName;
+  self.winnerNickNameLabel.text = battleController.battleStatus == kRPGBattleStatusLose ? opponentNickName : playerNickName;
   self.rewardGoldLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardGold];
   self.rewardCrystalsLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardCrystals];
   self.rewardExpLabel.text = [NSString stringWithFormat:@"%ld", (long)battleController.rewardExp];

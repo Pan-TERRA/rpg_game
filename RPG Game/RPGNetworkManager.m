@@ -230,7 +230,7 @@ NSString * const kRPGNetworkManagerStatus = @"status";
         {
           [self logError:JSONError withTitle:@"JSON parsing error"];
         }
-        else if ([responseDictionary[@"status"] integerValue] == 0)
+        else if ([responseDictionary[@"status"] integerValue] == kRPGStatusCodeOK)
         {
           result = YES;
         }

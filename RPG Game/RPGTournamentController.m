@@ -18,6 +18,7 @@
   // Constants
 #import "RPGMessageTypes.h"
 #import "RPGUserSessionKeys.h"
+#import "RPGStatusCodes.h"
 
 @implementation RPGTournamentController
 
@@ -36,7 +37,7 @@
                                                    initWithDictionaryRepresentation:aResponse]
                                                   autorelease];
   
-  if (battleInitResponse != nil && battleInitResponse.status == 0)
+  if (battleInitResponse != nil && battleInitResponse.status == kRPGStatusCodeOK)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     

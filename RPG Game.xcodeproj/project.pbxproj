@@ -527,9 +527,6 @@
 		2ACD021E1DFC88EA00068AAE /* RPGArenaFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGArenaFactory.m; sourceTree = "<group>"; };
 		2ACD021F1DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "RPGBattleController+RPGTournamentPresentationController.h"; sourceTree = "<group>"; };
 		2ACD02201DFC88EA00068AAE /* RPGBattleController+RPGTournamentPresentationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "RPGBattleController+RPGTournamentPresentationController.m"; sourceTree = "<group>"; };
-		2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleFactory.h; sourceTree = "<group>"; };
-		2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGBattleFactory.m; sourceTree = "<group>"; };
-		2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGBattleFactoryPrivateProperties.h; sourceTree = "<group>"; };
 		2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGPresentingViewControllerProtocol.h; sourceTree = "<group>"; };
 		2ACD02251DFC88EA00068AAE /* RPGRankBadgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGRankBadgeViewController.h; sourceTree = "<group>"; };
 		2ACD02261DFC88EA00068AAE /* RPGRankBadgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGRankBadgeViewController.m; sourceTree = "<group>"; };
@@ -785,7 +782,6 @@
 				D0819AC31DD6183500021DB9 /* Skill Description ViewController */,
 				AE5E46B61DFB181C00546256 /* Skill Effect Representation */,
 				283D191A1DD5FEC3008C5396 /* Skill Representation */,
-				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
 			);
 			name = Battle;
 			sourceTree = "<group>";
@@ -1803,9 +1799,6 @@
 		28AD19EA1DFEAA7900E6D97F /* Battle Factories */ = {
 			isa = PBXGroup;
 			children = (
-				2ACD02211DFC88EA00068AAE /* RPGBattleFactory.h */,
-				2ACD02221DFC88EA00068AAE /* RPGBattleFactory.m */,
-				2ACD02231DFC88EA00068AAE /* RPGBattleFactoryPrivateProperties.h */,
 				28AD19EE1DFEAD0300E6D97F /* Adventures Factory */,
 				28AD19EF1DFEAD0A00E6D97F /* Arena Factory */,
 				28AD19F01DFEAD1000E6D97F /* Tournament Factory */,
@@ -1964,8 +1957,8 @@
 			isa = PBXGroup;
 			children = (
 				2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */,
-				283FF1D71DE5D3ED00F4535E /* RPGClassInfoRepresentation.h */,
-				283FF1D81DE5D3ED00F4535E /* RPGClassInfoRepresentation.m */,
+				28A56B4B1DCA48E7005846B6 /* Progress Bar View */,
+				28D59A851E02F8C400469A9C /* Class Info Representation */,
 				D0A34D9A1E02DB620064E581 /* Wrong Token Handling */,
 				28AD19F71DFEAE8200E6D97F /* Color Equality */,
 				28AD19F81DFEAE9100E6D97F /* Color At Point */,
@@ -2034,6 +2027,15 @@
 				28C576AB1DE3130A008DCB88 /* UIViewController+RPGChildViewController.m */,
 			);
 			name = "Add Child ViewController";
+			sourceTree = "<group>";
+		};
+		28D59A851E02F8C400469A9C /* Class Info Representation */ = {
+			isa = PBXGroup;
+			children = (
+				283FF1D71DE5D3ED00F4535E /* RPGClassInfoRepresentation.h */,
+				283FF1D81DE5D3ED00F4535E /* RPGClassInfoRepresentation.m */,
+			);
+			name = "Class Info Representation";
 			sourceTree = "<group>";
 		};
 		28E9D90C1DE59C55006C7688 /* Arena */ = {

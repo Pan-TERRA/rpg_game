@@ -86,7 +86,7 @@
   RPGAdventuresInitResponse *battleInitResponse = [[[RPGAdventuresInitResponse alloc]
                                                     initWithDictionaryRepresentation:aResponse] autorelease];
   
-  if (battleInitResponse != nil && battleInitResponse.status == 0)
+  if (battleInitResponse != nil && battleInitResponse.status == kRPGStatusCodeOK)
   {
     self.battle = [RPGBattle battleWithBattleInitResponse:battleInitResponse];
     
@@ -126,7 +126,7 @@
   RPGAdventuresConditionResponse *battleConditionResponse = [[[RPGAdventuresConditionResponse alloc]
                                                               initWithDictionaryRepresentation:aResponse] autorelease];
   
-  if (battleConditionResponse != nil && battleConditionResponse.status == 0)
+  if (battleConditionResponse != nil && battleConditionResponse.status == kRPGStatusCodeOK)
   {
     [self.battle updateWithBattleConditionResponse:battleConditionResponse];
     [[NSNotificationCenter defaultCenter] postNotificationName:kRPGModelDidChangeNotification object:self];
