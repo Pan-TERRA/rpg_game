@@ -19,6 +19,8 @@
 #import "RPGSkillRepresentation.h"
   // Constants
 #import "RPGQuestAction.h"
+  // Misc
+#import "NSUserDefaults+RPGSessionInfo.h"
 
 static CGFloat const kBounceValue = 10.0;
 
@@ -36,6 +38,9 @@ static CGFloat const kBounceValue = 10.0;
 @property (nonatomic, assign, readwrite) IBOutlet UILabel *descriptionLabel;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *deleteButton;
 @property (nonatomic, assign, readwrite) IBOutlet UIButton *getRewardButton;
+
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *daysLeftLabel;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *countDaysLeftLabel;
 
 @property (nonatomic, retain, readwrite) UIPanGestureRecognizer *panGestureRecognizer;
 @property (nonatomic, assign, readwrite) IBOutlet NSLayoutConstraint *contentViewRightConstraint;
@@ -75,6 +80,8 @@ static CGFloat const kBounceValue = 10.0;
 - (void)setCellContent:(RPGQuest *)aCellContent
 {
   RPGQuestState state = aCellContent.state;
+  RPGQuestType type = aCellContent.questType;
+  RPGDuelQuest *duelQuest = ((RPGDuelQuest *)aCellContent);
   NSString *questTitle = aCellContent.name;
   
   self.descriptionLabel.text = aCellContent.questDescription;
@@ -83,12 +90,30 @@ static CGFloat const kBounceValue = 10.0;
   self.questState = state;
   self.questID = aCellContent.questID;
   
-  if(aCellContent.questType == kRPGQuestTypeDuel)
+  if (type == kRPGQuestTypeDuel
+      && state != kRPGQuestStateForReview)
   {
-    questTitle = [NSString stringWithFormat:@"%@ with %@", questTitle, ((RPGDuelQuest *)aCellContent).friendUsername];
+    questTitle = [NSString stringWithFormat:@"%@ with %@", questTitle, duelQuest.friendUsername];
+    
+    if (state == kRPGQuestStateReviewedTrue)
+    {
+      NSString *winner = duelQuest.isWinner ? [NSUserDefaults standardUserDefaults].characterNickName : duelQuest.friendUsername;
+      questTitle = [NSString stringWithFormat:@"%@. Winner is %@", questTitle, winner];
+    }
   }
   
   self.titleLabel.text = questTitle;
+  
+  if (type == kRPGQuestTypeDuel
+      && state == kRPGQuestStateInProgress)
+  {
+    self.countDaysLeftLabel.text = [NSString stringWithFormat:@"%ld", duelQuest.daysLeft];
+  }
+  else
+  {
+    [self.daysLeftLabel removeFromSuperview];
+    [self.countDaysLeftLabel removeFromSuperview];
+  }
   
   if (aCellContent.reward.skillID != 0)
   {
