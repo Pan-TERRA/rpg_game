@@ -25,7 +25,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e4K-3r-8hz" userLabel="Sound Sliders Container">
-                    <rect key="frame" x="110" y="151" width="516" height="112"/>
+                    <rect key="frame" x="110" y="146" width="516" height="122"/>
                     <subviews>
                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" verticalCompressionResistancePriority="751" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" onImage="sound_icon_active" offImage="sound_icon_disabled" translatesAutoresizingMaskIntoConstraints="NO" id="zzj-YK-0Oa">
                             <rect key="frame" x="20" y="20" width="51" height="31"/>
@@ -35,6 +35,9 @@
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Music:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3F-jD-dhS">
                             <rect key="frame" x="99" y="11" width="120" height="49"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="49" id="Pvk-NN-k8m"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="42"/>
                             <color key="textColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -42,6 +45,9 @@
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbO-xL-M1M">
                             <rect key="frame" x="257" y="21" width="241" height="31"/>
                             <color key="tintColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="SWh-Ky-big"/>
+                            </constraints>
                             <connections>
                                 <action selector="musicVolumeChange:" destination="-1" eventType="valueChanged" id="cOd-TQ-wBZ"/>
                             </connections>
@@ -53,8 +59,9 @@
                             </connections>
                         </switch>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="Sounds:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pc7-Un-zRO">
-                            <rect key="frame" x="99" y="62" width="152" height="49"/>
+                            <rect key="frame" x="99" y="60" width="152" height="53"/>
                             <constraints>
+                                <constraint firstAttribute="height" constant="53" id="iXr-S3-Ot7"/>
                                 <constraint firstAttribute="width" constant="152" id="mOO-T1-fuA"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="42"/>
@@ -64,6 +71,9 @@
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" continuous="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P1B-Zw-wVW">
                             <rect key="frame" x="257" y="72" width="241" height="31"/>
                             <color key="tintColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="30" id="LxP-HM-wKf"/>
+                            </constraints>
                             <connections>
                                 <action selector="soundVolumeChange:" destination="-1" eventType="valueChanged" id="yQ7-ly-ye6"/>
                             </connections>
@@ -79,7 +89,9 @@
                         <constraint firstAttribute="trailing" secondItem="lbO-xL-M1M" secondAttribute="trailing" constant="20" id="bzS-se-B51"/>
                         <constraint firstItem="lbO-xL-M1M" firstAttribute="centerY" secondItem="zzj-YK-0Oa" secondAttribute="centerY" id="cTI-AI-sf6"/>
                         <constraint firstItem="P1B-Zw-wVW" firstAttribute="trailing" secondItem="lbO-xL-M1M" secondAttribute="trailing" id="cm5-O9-eGI"/>
+                        <constraint firstAttribute="bottom" secondItem="UxP-3D-1gF" secondAttribute="bottom" constant="20" id="eCB-LS-4r4"/>
                         <constraint firstItem="P1B-Zw-wVW" firstAttribute="leading" secondItem="pc7-Un-zRO" secondAttribute="trailing" constant="8" id="lUO-5N-Lcf"/>
+                        <constraint firstItem="P1B-Zw-wVW" firstAttribute="height" secondItem="lbO-xL-M1M" secondAttribute="height" id="nuT-Nd-6R1"/>
                         <constraint firstItem="UxP-3D-1gF" firstAttribute="width" secondItem="zzj-YK-0Oa" secondAttribute="width" id="pmm-zo-EvN"/>
                         <constraint firstAttribute="height" secondItem="pc7-Un-zRO" secondAttribute="height" multiplier="2.3" id="rIC-jP-6Gy"/>
                         <constraint firstItem="pc7-Un-zRO" firstAttribute="leading" secondItem="UxP-3D-1gF" secondAttribute="trailing" constant="30" id="sLl-Zf-q2M"/>
@@ -90,6 +102,11 @@
                             <variation key="heightClass=regular-widthClass=regular" constant="60"/>
                         </constraint>
                     </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="nuT-Nd-6R1"/>
+                        </mask>
+                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CE3-67-Zgh">
                     <rect key="frame" x="30" y="344" width="40" height="40"/>
