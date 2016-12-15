@@ -45,6 +45,8 @@ extern NSString * const kRPGNetworkManagerAPIDuelReviewQuestsRoute;
 extern NSString * const kRPGNetworkManagerAPIAcceptDuelQuestRoute;
 extern NSString * const kRPGNetworkManagerAPISkipDuelQuestRoute;
 extern NSString * const kRPGNetworkManagerAPIProofDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIReviewResultDuelQuestRoute;
+extern NSString * const kRPGNetworkManagerAPIDuelCountRoute;
   // Skills
 extern NSString * const kRPGNetworkManagerAPISkillsRoute;
 extern NSString * const kRPGNetworkManagerAPISkillInfoRoute;
@@ -74,6 +76,7 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 
   // Entities
 @class RPGResourcesResponse;
+@class RPGDuelCountResponse;
 
 #pragma mark -
 
@@ -119,6 +122,9 @@ extern NSString * const kRPGNetworkManagerAPIArenaPayRoute;
 - (void)getImageDataFromPath:(NSString *)aPath
            completionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
                                        NSData *anImageData))aCallback;
+
+- (void)getDuelQuestsCountWithCompletionHandler:(void (^)(RPGStatusCode aNetworkStatusCode,
+                                                          RPGDuelCountResponse *aResponse))aCallback;
 
 @end
 
