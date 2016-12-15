@@ -103,7 +103,7 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gDP-hF-sVd" userLabel="Player WinCount Container">
-                    <rect key="frame" x="42" y="142" width="60" height="29"/>
+                    <rect key="frame" x="35" y="142" width="60" height="29"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="29" id="bS4-mH-Krr">
@@ -118,7 +118,7 @@
             <color key="backgroundColor" red="0.94268612490000003" green="1" blue="0.32916141329999998" alpha="0.21303879310000001" colorSpace="calibratedRGB"/>
             <gestureRecognizers/>
             <constraints>
-                <constraint firstItem="gDP-hF-sVd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="42" id="19M-X0-5AW">
+                <constraint firstItem="gDP-hF-sVd" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="35" id="19M-X0-5AW">
                     <variation key="heightClass=regular-widthClass=regular" constant="71"/>
                 </constraint>
                 <constraint firstItem="TmA-7m-uPF" firstAttribute="top" secondItem="2cd-xD-wsS" secondAttribute="bottom" constant="10" id="1Fj-Xs-56R"/>
