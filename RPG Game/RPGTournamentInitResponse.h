@@ -7,6 +7,8 @@
 //
 
 #import "RPGBattleInitResponse.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGTournamentInitResponse : RPGBattleInitResponse
 
@@ -14,12 +16,12 @@
                           playerInfo:(RPGPlayer *)aPlayerInfo
                          currentTurn:(BOOL)aCurrentTurn
                                 time:(NSInteger)aTime
-                              status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                              status:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)responseWithOpponentInfo:(RPGEntity *)anOpponentInfo
                               playerInfo:(RPGPlayer *)aPlayerInfo
                              currentTurn:(BOOL)aCurrentTurn
                                     time:(NSInteger)aTime
-                                  status:(NSInteger)aStatus;
+                                  status:(RPGStatusCode)aStatus;
 
 @end

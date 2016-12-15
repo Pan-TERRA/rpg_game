@@ -34,7 +34,7 @@ NSString * const kRPGFriendsListResponseFriends = @"friends";
       [self release];
       self = nil;
     }
-    else if (aStatus != kRPGStatusCodeOK && aFriends == nil)
+    else if (aFriends == nil)
     {
       _friends = nil;
     }

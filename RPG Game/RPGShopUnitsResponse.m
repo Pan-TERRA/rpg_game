@@ -21,7 +21,7 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
                     shopUnits:nil];
 }
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                      shopUnits:(NSArray<NSDictionary *> *)aShopUnits
 {
   self = [super init];
@@ -43,7 +43,7 @@ static NSString * const kRPGShopUnitsResponseUnits = @"shop_units";
   return self;
 }
 
-+ (instancetype)shopUnitResponseWithStatus:(NSInteger)aStatus
++ (instancetype)shopUnitResponseWithStatus:(RPGStatusCode)aStatus
                                  shopUnits:(NSArray<NSDictionary *> *)aShopUnits
 {
   return [[[self alloc] initWithStatus:aStatus

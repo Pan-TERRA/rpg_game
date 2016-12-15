@@ -13,7 +13,7 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
 
 @interface RPGClassInfoResponse()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, retain, readwrite) NSDictionary *classInfo;
 
 @end
@@ -22,7 +22,7 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                      classInfo:(NSDictionary *)aClassInfo
 {
   self = [super init];
@@ -42,7 +42,7 @@ static NSString * const kRPGClassInfoResponseClass = @"class";
                     classInfo:nil];
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
                          classInfo:(NSDictionary *)aClassInfo
 {
   return [[[self alloc] initWithStatus:aStatus

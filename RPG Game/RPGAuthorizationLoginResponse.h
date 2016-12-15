@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGAuthorizationLoginResponse : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, assign, readonly) RPGStatusCode status;
 @property (nonatomic, copy, readonly) NSString *username;
 @property (nonatomic, copy, readonly) NSString *token;
 @property (nonatomic, retain, readonly) NSDictionary *character;
@@ -22,12 +24,12 @@
 - (instancetype)initWithUsername:(NSString *)aUsername
                            token:(NSString *)aToken
                        character:(NSDictionary *)aCharacter
-                          status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                          status:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)responseWithUsername:(NSString *)aUsername
                                token:(NSString *)aToken
                            character:(NSDictionary *)aCharacter
-                              status:(NSInteger)aStatus;
+                              status:(RPGStatusCode)aStatus;
 
 #pragma mark - Actions
 

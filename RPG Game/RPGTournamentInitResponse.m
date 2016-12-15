@@ -18,7 +18,7 @@
                           playerInfo:(RPGPlayer *)aPlayerInfo
                          currentTurn:(BOOL)aCurrentTurn
                                 time:(NSInteger)aTime
-                              status:(NSInteger)aStatus
+                              status:(RPGStatusCode)aStatus
 {
   return [super initWithType:kRPGTournamentInitMessageType
                 opponentInfo:anOpponentInfo
@@ -33,7 +33,7 @@
                   playerInfo:(RPGPlayer *)aPlayerInfo
                  currentTurn:(BOOL)aCurrentTurn
                         time:(NSInteger)aTime
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   return [self initWithOpponentInfo:anOpponentInfo
                          playerInfo:aPlayerInfo
@@ -46,7 +46,7 @@
                               playerInfo:(RPGPlayer *)aPlayerInfo
                              currentTurn:(BOOL)aCurrentTurn
                                     time:(NSInteger)aTime
-                                  status:(NSInteger)aStatus
+                                  status:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithOpponentInfo:anOpponentInfo
                                   playerInfo:aPlayerInfo

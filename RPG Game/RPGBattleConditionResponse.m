@@ -43,7 +43,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                 skillsDamage:(NSDictionary *)aSkillsDamage
                 battleStatus:(RPGBattleStatus)aBattleStatus
                       reward:(RPGBattleReward *)aReward
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
                  currentTurn:(BOOL)aCurrentTurn
 {
   self = [super initWithType:aType
@@ -72,7 +72,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
 }
 
 - (instancetype)initWithType:(NSString *)aType
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   return [self initWithType:aType
                  playerInfo:nil
@@ -92,7 +92,7 @@ NSString * const kRPGBattleConditionResponseCurrentTurn = @"is_current_turn";
                                    skillsDamage:(NSDictionary *)aSkillsDamage
                                    battleStatus:(RPGBattleStatus)aBattleStatus
                                          reward:(RPGBattleReward *)aReward
-                                         status:(NSInteger)aStatus
+                                         status:(RPGStatusCode)aStatus
                                     currentTurn:(BOOL)aCurrentTurn
 {
   return [[[self alloc] initWithType:aType

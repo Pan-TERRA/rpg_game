@@ -12,6 +12,8 @@
   // Entities
 @class RPGBattleReward;
 @class RPGPlayerInfo;
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGBattleConditionResponse : RPGResponse
 
@@ -32,7 +34,7 @@
                 skillsDamage:(NSDictionary *)aSkillsDamage
                 battleStatus:(RPGBattleStatus)aBattleStatus
                       reward:(RPGBattleReward *)aReward
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
                  currentTurn:(BOOL)aCurrentTurn NS_DESIGNATED_INITIALIZER;
 + (instancetype)battleConditionResponseWithType:(NSString *)aType
                                      playerInfo:(RPGPlayerInfo *)aPlayerInfo
@@ -41,7 +43,7 @@
                                    skillsDamage:(NSDictionary *)aSkillsDamage
                                    battleStatus:(RPGBattleStatus)aBattleStatus
                                          reward:(RPGBattleReward *)aReward
-                                         status:(NSInteger)aStatus
+                                         status:(RPGStatusCode)aStatus
                                     currentTurn:(BOOL)aCurrentTurn;
 
 @end

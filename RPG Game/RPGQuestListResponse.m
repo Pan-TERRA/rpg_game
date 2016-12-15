@@ -15,7 +15,7 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
 
 @interface RPGQuestListResponse ()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, retain, readwrite) NSArray<RPGQuest *> *quests;
 
 @end
@@ -24,14 +24,14 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                         quests:(NSArray<RPGQuest *> *)aQuests
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aStatus == 0 && aQuests == nil)
+    if (aStatus == kRPGStatusCodeOK && aQuests == nil)
     {
       [self release];
       self = nil;
@@ -50,7 +50,7 @@ static NSString * const kRPGQuestListResponseQuests = @"quests";
   return self;
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
                             quests:(NSArray<RPGQuest *> *)aQuests
 {
   return [[[self alloc] initWithStatus:aStatus

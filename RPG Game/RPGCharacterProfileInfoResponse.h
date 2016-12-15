@@ -11,10 +11,12 @@
 #import "RPGSerializable.h"
   // Entities
 @class RPGCharacterProfileSkill;
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGCharacterProfileInfoResponse : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, assign, readonly) RPGStatusCode status;
 @property (nonatomic, assign, readonly) NSUInteger currentLevel;
 @property (nonatomic, assign, readonly) NSUInteger maxExp;
 @property (nonatomic, assign, readonly) NSUInteger currentExp;
@@ -24,7 +26,7 @@
 @property (nonatomic, assign, readonly) NSUInteger activeSkillsBagSize;
 @property (nonatomic, retain, readonly) NSArray<RPGCharacterProfileSkill *> *skills;
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                   currentLevel:(NSUInteger)aCurrentLevel
                         maxExp:(NSUInteger)aMaxExp
                     currentExp:(NSUInteger)aCurrentExp
@@ -33,7 +35,8 @@
                        bagSize:(NSUInteger)aBagSize
            activeSkillsBagSize:(NSUInteger)anActiveSkillsBagSize
                         skills:(NSArray<RPGCharacterProfileSkill *> *)aSkills NS_DESIGNATED_INITIALIZER;
-+ (instancetype)characterProfileInfoResponseWithStatus:(NSInteger)aStatus
+
++ (instancetype)characterProfileInfoResponseWithStatus:(RPGStatusCode)aStatus
                                           currentLevel:(NSUInteger)aCurrentLevel
                                                 maxExp:(NSUInteger)aMaxExp
                                             currentExp:(NSUInteger)aCurrentExp

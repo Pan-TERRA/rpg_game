@@ -15,7 +15,7 @@ static NSString * const kRPGResourcesResponseResources = @"resources";
 
 @interface RPGResourcesResponse ()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, retain, readwrite) RPGResources *resources;
 
 @end
@@ -24,14 +24,14 @@ static NSString * const kRPGResourcesResponseResources = @"resources";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                      resources:(RPGResources *)aResources
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aStatus == 0 && aResources == nil)
+    if (aStatus == kRPGStatusCodeOK && aResources == nil)
     {
       [self release];
       self = nil;
@@ -50,7 +50,7 @@ static NSString * const kRPGResourcesResponseResources = @"resources";
   return self;
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
                          resources:(RPGResources *)aResources
 {
   return [[[self alloc] initWithStatus:aStatus

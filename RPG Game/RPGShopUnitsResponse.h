@@ -9,15 +9,17 @@
 #import <Foundation/Foundation.h>
   // Misc
 #import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGShopUnitsResponse : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, assign, readonly) RPGStatusCode status;
 @property (nonatomic, copy, readonly) NSArray<NSDictionary *> *shopUnits;
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                      shopUnits:(NSArray<NSDictionary *> *)aShopUnits NS_DESIGNATED_INITIALIZER;
-+ (instancetype)shopUnitResponseWithStatus:(NSInteger)aStatus
++ (instancetype)shopUnitResponseWithStatus:(RPGStatusCode)aStatus
                                  shopUnits:(NSArray<NSDictionary *> *)aShopUnits;
 
 @end

@@ -13,7 +13,7 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
 @interface RPGArenaSkillsResponse()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, retain, readwrite) NSArray<NSNumber *> *skills;
 
 @end
@@ -22,14 +22,14 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                         skills:(NSArray<NSNumber *> *)aSkills
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (aStatus != -1 && aSkills != nil)
+    if (aSkills != nil)
     {
       _status = aStatus;
       _skills = [aSkills retain];
@@ -50,7 +50,7 @@ static NSString * const kRPGArenaSkillsResponseSkills = @"skills";
                        skills:nil];
 }
 
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
                             skills:(NSArray<NSNumber *> *)aSkills
 {
   return [[[self alloc] initWithStatus:aStatus

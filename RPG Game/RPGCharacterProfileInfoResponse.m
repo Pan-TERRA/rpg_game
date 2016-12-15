@@ -7,6 +7,7 @@
 //
 
 #import "RPGCharacterProfileInfoResponse.h"
+  // Entities
 #import "RPGCharacterProfileSkill.h"
 
 NSString * const kRPGCharacterProfileInfoResponseStatus = @"status";
@@ -21,7 +22,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 
 @interface RPGCharacterProfileInfoResponse()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, assign, readwrite) NSUInteger currentLevel;
 @property (nonatomic, assign, readwrite) NSUInteger maxExp;
 @property (nonatomic, assign, readwrite) NSUInteger currentExp;
@@ -37,7 +38,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                   currentLevel:(NSUInteger)aCurrentLevel
                         maxExp:(NSUInteger)aMaxExp
                     currentExp:(NSUInteger)aCurrentExp
@@ -65,7 +66,7 @@ NSString * const kRPGCharacterProfileInfoResponseSkills = @"skills";
   return self;
 }
 
-+ (instancetype)characterProfileInfoResponseWithStatus:(NSInteger)aStatus
++ (instancetype)characterProfileInfoResponseWithStatus:(RPGStatusCode)aStatus
                                           currentLevel:(NSUInteger)aCurrentLevel
                                                 maxExp:(NSUInteger)aMaxExp
                                             currentExp:(NSUInteger)aCurrentExp

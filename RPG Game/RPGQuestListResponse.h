@@ -11,15 +11,17 @@
 #import "RPGSerializable.h"
   // Entities
 @class RPGQuest;
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGQuestListResponse : NSObject <RPGSerializable>
 
-@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, assign, readonly) RPGStatusCode status;
 @property (nonatomic, retain, readonly) NSArray<RPGQuest *> *quests;
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                         quests:(NSArray<RPGQuest *> *)aQuests NS_DESIGNATED_INITIALIZER;
-+ (instancetype)responseWithStatus:(NSInteger)aStatus
++ (instancetype)responseWithStatus:(RPGStatusCode)aStatus
                             quests:(NSArray<RPGQuest *> *)aQuests;
 
 @end

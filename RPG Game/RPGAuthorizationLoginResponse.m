@@ -1,10 +1,10 @@
-//
-//  RPGAuthorizationLoginResponse.m
-//  RPG Game
-//
-//  Created by Иван Дзюбенко on 10/13/16.
-//  Copyright © 2016 RPG-team. All rights reserved.
-//
+  //
+  //  RPGAuthorizationLoginResponse.m
+  //  RPG Game
+  //
+  //  Created by Иван Дзюбенко on 10/13/16.
+  //  Copyright © 2016 RPG-team. All rights reserved.
+  //
 
 #import "RPGAuthorizationLoginResponse.h"
 #import "NSUserDefaults+RPGSessionInfo.h"
@@ -16,7 +16,7 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 @interface RPGAuthorizationLoginResponse ()
 
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 @property (nonatomic, copy, readwrite) NSString *username;
 @property (nonatomic, copy, readwrite) NSString *token;
 @property (nonatomic, retain, readwrite) NSDictionary *character;
@@ -29,34 +29,29 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 - (instancetype)initWithUsername:(NSString *)aUsername
                            token:(NSString *)aToken
-                      character:(NSDictionary *)aCharacter
-                          status:(NSInteger)aStatus
+                       character:(NSDictionary *)aCharacter
+                          status:(RPGStatusCode)aStatus
 {
   self = [super init];
   
   if (self != nil)
   {
-    if (
-        aStatus == 0 &&
-        (aUsername == nil ||
+    if (aUsername == nil ||
         aToken == nil ||
-        aCharacter == nil))
+        aCharacter == nil)
     {
       [self release];
       self = nil;
     }
-    //?
-    else if (aStatus != 0 &&
-             (aUsername == nil ||
-              aToken == nil ||
-              aCharacter == nil))
+    else if (aUsername == nil
+             || aToken == nil
+             || aCharacter == nil)
     {
       _status = aStatus;
       _username = nil;
       _token = nil;
-   
-      _character = nil;
       
+      _character = nil;
     }
     else
     {
@@ -72,12 +67,12 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
 
 + (instancetype)responseWithUsername:(NSString *)aUsername
                                token:(NSString *)aToken
-                          character:(NSDictionary *)aCharacter
-                              status:(NSInteger)aStatus
+                           character:(NSDictionary *)aCharacter
+                              status:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithUsername:aUsername
                                    token:aToken
-                              character:aCharacter
+                               character:aCharacter
                                   status:aStatus] autorelease];
 }
 
@@ -107,11 +102,11 @@ static NSString * const kRPGAuthorizationLoginResponseCharacter = @"characters";
   NSUserDefaults *standartUserDefaults = [NSUserDefaults standardUserDefaults];
   standartUserDefaults.sessionToken = self.token;
   standartUserDefaults.sessionUsername = self.username;
-  // TODO: characters array instead of one character
+    // TODO: characters array instead of one character
   standartUserDefaults.sessionCharacters = [NSArray arrayWithObject:self.character];
 }
 
-#pragma mark - RPGSerialization 
+#pragma mark - RPGSerialization
 
 - (NSDictionary *)dictionaryRepresentation
 {

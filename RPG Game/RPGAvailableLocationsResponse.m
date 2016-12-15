@@ -15,13 +15,13 @@ static NSString * const kRPGAvailableLocationsResponseLocationsIDs = @"locations
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                   locationsIDs:(NSArray<NSNumber *> *)aLocationsIDs
 {
   self = [super init];
   if (self != nil)
   {
-    if (aStatus >= 0 && aLocationsIDs != nil)
+    if (aLocationsIDs != nil)
     {
       _status = aStatus;
       _locationsIDs = [aLocationsIDs retain];

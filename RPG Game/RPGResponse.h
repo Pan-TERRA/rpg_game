@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 extern NSString * const kRPGResponseSerializationType;
 extern NSString * const kRPGResponseSerializationStatus;
@@ -18,13 +21,13 @@ extern NSString * const kRPGResponseSerializationStatus;
 @interface RPGResponse : NSObject <RPGSerializable>
 
 @property (nonatomic, copy, readonly) NSString *type;
-@property (nonatomic, assign, readonly) NSInteger status;
+@property (nonatomic, assign, readonly) RPGStatusCode status;
 
 #pragma mark - Init
 
 - (instancetype)initWithType:(NSString *)aType
-                      status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                      status:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
 + (instancetype)responseWithType:(NSString *)aType
-                          status:(NSInteger)aStatus;
+                          status:(RPGStatusCode)aStatus;
 
 @end

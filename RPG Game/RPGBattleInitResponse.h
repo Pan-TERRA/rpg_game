@@ -26,13 +26,13 @@
                   playerInfo:(RPGPlayer *)aPlayerInfo
                  currentTurn:(BOOL)aCurrentTurn
                         time:(NSInteger)aTime
-                      status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                      status:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
 
 + (instancetype)battleInitResponseWithType:(NSString *)aType
                               opponentInfo:(RPGEntity *)anOpponentInfo
                                 playerInfo:(RPGPlayer *)aPlayerInfo
                                currentTurn:(BOOL)aCurrentTurn
                                       time:(NSInteger)aTime
-                                    status:(NSInteger)aStatus;
+                                    status:(RPGStatusCode)aStatus;
 
 @end
