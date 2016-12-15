@@ -15,13 +15,13 @@ static NSString * const kRPGLocationInfoResponseLocationInfo = @"location_info";
 
 #pragma mark - Init
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                   locationInfo:(NSArray<NSDictionary *> *)aLocationInfo
 {
   self = [super init];
   if (self != nil)
   {
-    if (aStatus >= 0 && aLocationInfo != nil)
+    if (aLocationInfo != nil)
     {
       _status = aStatus;
       _locationInfo = [aLocationInfo retain];
@@ -45,6 +45,7 @@ static NSString * const kRPGLocationInfoResponseLocationInfo = @"location_info";
 - (void)dealloc
 {
   [_locationInfo release];
+  
   [super dealloc];
 }
 

@@ -7,6 +7,8 @@
 //
 
 #import "RPGResponse.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 extern NSString * const kRPGTimeResponseType;
 
@@ -17,12 +19,12 @@ extern NSString * const kRPGTimeResponseType;
 #pragma mark - Init
 
 - (instancetype)initWithTimestamp:(NSDate *)aTimestamp
-                           status:(NSInteger)aStatus NS_DESIGNATED_INITIALIZER;
+                           status:(RPGStatusCode)aStatus NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithUnixTimestamp:(int)aTimestamp
-                               status:(NSInteger)aStatus;
+                               status:(RPGStatusCode)aStatus;
 + (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp
-                                   status:(NSInteger)aStatus;
+                                   status:(RPGStatusCode)aStatus;
 + (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp
-                                       status:(NSInteger)aStatus;
+                                       status:(RPGStatusCode)aStatus;
 
 @end

@@ -20,7 +20,7 @@
                       skillsDamage:(NSDictionary *)aSkillsDamage
                       battleStatus:(RPGBattleStatus)aBattleStatus
                             reward:(RPGBattleReward *)aReward
-                            status:(NSInteger)aStatus
+                            status:(RPGStatusCode)aStatus
                        currentTurn:(BOOL)aCurrentTurn
 {
   return [super initWithType:kRPGAdventuresConditionMessageType
@@ -40,7 +40,7 @@
                                          skillsDamage:(NSDictionary *)aSkillsDamage
                                          battleStatus:(RPGBattleStatus)aBattleStatus
                                                reward:(RPGBattleReward *)aReward
-                                               status:(NSInteger)aStatus
+                                               status:(RPGStatusCode)aStatus
                                           currentTurn:(BOOL)aCurrentTurn
 {
   return [[[self alloc] initWithPlayerInfo:(RPGPlayerInfo *)aPlayerInfo
@@ -60,7 +60,7 @@
                 skillsDamage:(NSDictionary *)aSkillsDamage
                 battleStatus:(RPGBattleStatus)aBattleStatus
                       reward:(RPGBattleReward *)aReward
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
                  currentTurn:(BOOL)aCurrentTurn
 {
   return [self initWithPlayerInfo:aPlayerInfo

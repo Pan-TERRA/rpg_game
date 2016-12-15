@@ -7,14 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+  // Misc
 #import "RPGSerializable.h"
+  // Constants
+#import "RPGStatusCodes.h"
 
 @interface RPGLocationInfoResponse : NSObject <RPGSerializable>
 
-- (instancetype)initWithStatus:(NSInteger)aStatus
+@property (readwrite, assign, nonatomic) RPGStatusCode status;
+@property (readwrite, retain, nonatomic) NSArray<NSDictionary *> *locationInfo;
+
+- (instancetype)initWithStatus:(RPGStatusCode)aStatus
                   locationInfo:(NSArray<NSDictionary *> *)aLocationInfo NS_DESIGNATED_INITIALIZER;
 
-@property (readwrite, assign, nonatomic) NSInteger status;
-@property (readwrite, retain, nonatomic) NSArray<NSDictionary *> *locationInfo;
 
 @end

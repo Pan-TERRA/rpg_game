@@ -35,7 +35,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
                   playerInfo:(RPGPlayer *)aPlayerInfo
                  currentTurn:(BOOL)aCurrentTurn
                         time:(NSInteger)aTime
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   self = [super initWithType:aType
                       status:aStatus];
@@ -64,7 +64,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
                                 playerInfo:(RPGPlayer *)aPlayerInfo
                                currentTurn:(BOOL)aCurrentTurn
                                       time:(NSInteger)aTime
-                                    status:(NSInteger)aStatus
+                                    status:(RPGStatusCode)aStatus
 {
   return [[[RPGBattleInitResponse alloc] initWithType:aType
                                          opponentInfo:anOpponentInfo
@@ -75,7 +75,7 @@ static NSString * const kRPGBattleInitResponseCurrentTurn = @"is_current_turn";
 }
 
 - (instancetype)initWithType:(NSString *)aType
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   return [self initWithType:nil
                opponentInfo:nil

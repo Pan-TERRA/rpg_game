@@ -22,7 +22,7 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 #pragma mark - Init
 
 - (instancetype)initWithTimestamp:(NSDate *)aTimestamp
-                           status:(NSInteger)aStatus
+                           status:(RPGStatusCode)aStatus
 {
   self = [super initWithType:kRPGTimeResponseType
                       status:aStatus];
@@ -36,7 +36,7 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 }
 
 - (instancetype)initWithUnixTimestamp:(int)aUnixTimestamp
-                               status:(NSInteger)aStatus
+                               status:(RPGStatusCode)aStatus
 {
   //NSTimeInteval is typedef double
   NSDate *timestamp = [NSDate dateWithTimeIntervalSince1970:(NSTimeInterval)aUnixTimestamp];
@@ -46,21 +46,21 @@ NSString * const kRPGTimeResponseSerializationTimestamp = @"time";
 }
 
 + (instancetype)timeResponseWithTimestamp:(NSDate *)aTimestamp
-                                   status:(NSInteger)aStatus
+                                   status:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithTimestamp:aTimestamp
                                    status:aStatus] autorelease];
 }
 
 + (instancetype)timeResponseWithUnixTimestamp:(int)aTimestamp
-                                       status:(NSInteger)aStatus
+                                       status:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithUnixTimestamp:aTimestamp
                                        status:aStatus] autorelease];
 }
 
 - (instancetype)initWithType:(NSString *)aType
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   return [self initWithTimestamp:nil
                           status:aStatus];

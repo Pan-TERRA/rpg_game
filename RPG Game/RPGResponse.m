@@ -14,7 +14,7 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 @interface RPGResponse ()
 
 @property (nonatomic, copy, readwrite) NSString *type;
-@property (nonatomic, assign, readwrite) NSInteger status;
+@property (nonatomic, assign, readwrite) RPGStatusCode status;
 
 @end
 
@@ -23,7 +23,7 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 #pragma mark - Init
 
 - (instancetype)initWithType:(NSString *)aType
-                      status:(NSInteger)aStatus
+                      status:(RPGStatusCode)aStatus
 {
   self = [super init];
   
@@ -51,7 +51,7 @@ NSString * const kRPGResponseSerializationStatus = @"status";
 }
 
 + (instancetype)responseWithType:(NSString *)aType
-                          status:(NSInteger)aStatus
+                          status:(RPGStatusCode)aStatus
 {
   return [[[self alloc] initWithType:aType
                               status:aStatus] autorelease];

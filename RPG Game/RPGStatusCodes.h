@@ -78,7 +78,9 @@ typedef NS_ENUM(NSInteger, RPGStatusCode)
   kRPGStatusCodeQuestDuelIsNotAccepted = 69,
   kRPGStatusCodeQuestDuelCannotBeSent = 70,
   
+    // Specific client codes
   kRPGStatusCodeDefaultError = 1337,
+  kRPGStatusCodeDefaultInit = -1,
   
     // RPGNetworkManager Status Codes
   kRPGStatusCodeNetworkManagerUnknown = 1700,

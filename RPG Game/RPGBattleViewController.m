@@ -281,10 +281,14 @@ static NSString * const kRPGBattleViewControllerNotMyTurn = @"Opponent turn";
     }];
   }
   
-    // skillbar
+    //
   if (battleController.isMyTurn)
   {
     [self.skillBarViewController updateButtonsState];
+  }
+  else
+  {
+    [self.skillBarViewController lockSkillBar];
   }
 }
 
