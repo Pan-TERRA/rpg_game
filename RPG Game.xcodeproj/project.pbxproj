@@ -215,6 +215,7 @@
 		D0819ABE1DD6180100021DB9 /* RPGSkillBarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0819AB21DD6180100021DB9 /* RPGSkillBarViewController.xib */; };
 		D0819ABF1DD6180100021DB9 /* RPGSkillDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0819AB41DD6180100021DB9 /* RPGSkillDescriptionViewController.m */; };
 		D0819AC01DD6180100021DB9 /* RPGSkillDescriptionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D0819AB51DD6180100021DB9 /* RPGSkillDescriptionViewController.xib */; };
+		D0A34D991E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A34D981E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.m */; };
 		D0B229131B6ECC8305E5F55A /* libPods-RPG GameTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 03EC8B93B483A485443989F7 /* libPods-RPG GameTests.a */; };
 		D0CFEE681DB65B6100C61D0B /* RPGSFXEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */; };
 		D0CFEE691DB65B6100C61D0B /* Sounds.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D0CFEE671DB65B6100C61D0B /* Sounds.bundle */; };
@@ -631,6 +632,8 @@
 		D0819AB31DD6180100021DB9 /* RPGSkillDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSkillDescriptionViewController.h; sourceTree = "<group>"; };
 		D0819AB41DD6180100021DB9 /* RPGSkillDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSkillDescriptionViewController.m; sourceTree = "<group>"; };
 		D0819AB51DD6180100021DB9 /* RPGSkillDescriptionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RPGSkillDescriptionViewController.xib; sourceTree = "<group>"; };
+		D0A34D971E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RPGWrongTokenHandling.h"; sourceTree = "<group>"; };
+		D0A34D981E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RPGWrongTokenHandling.m"; sourceTree = "<group>"; };
 		D0CFEE651DB65B6100C61D0B /* RPGSFXEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RPGSFXEngine.h; sourceTree = "<group>"; };
 		D0CFEE661DB65B6100C61D0B /* RPGSFXEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RPGSFXEngine.m; sourceTree = "<group>"; };
 		D0CFEE671DB65B6100C61D0B /* Sounds.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Sounds.bundle; sourceTree = "<group>"; };
@@ -1963,6 +1966,7 @@
 				2ACD02241DFC88EA00068AAE /* RPGPresentingViewControllerProtocol.h */,
 				283FF1D71DE5D3ED00F4535E /* RPGClassInfoRepresentation.h */,
 				283FF1D81DE5D3ED00F4535E /* RPGClassInfoRepresentation.m */,
+				D0A34D9A1E02DB620064E581 /* Wrong Token Handling */,
 				28AD19F71DFEAE8200E6D97F /* Color Equality */,
 				28AD19F81DFEAE9100E6D97F /* Color At Point */,
 				28C576A21DE225B7008DCB88 /* Alert Controller */,
@@ -2549,6 +2553,15 @@
 			name = Shop;
 			sourceTree = "<group>";
 		};
+		D0A34D9A1E02DB620064E581 /* Wrong Token Handling */ = {
+			isa = PBXGroup;
+			children = (
+				D0A34D971E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.h */,
+				D0A34D981E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.m */,
+			);
+			name = "Wrong Token Handling";
+			sourceTree = "<group>";
+		};
 		D0CFEE6A1DB65B8F00C61D0B /* Sound Engine */ = {
 			isa = PBXGroup;
 			children = (
@@ -3066,6 +3079,7 @@
 				289C42E21DE20C6700E35506 /* RPGSkillsSelectRequest.m in Sources */,
 				AE87B59E1DE861AB0019E416 /* RPGBattleReward.m in Sources */,
 				AED6F5861DACDCAD007ED1B8 /* RPGQuestListTableViewCell.m in Sources */,
+				D0A34D991E02DB560064E581 /* UIViewController+RPGWrongTokenHandling.m in Sources */,
 				D0819ABD1DD6180100021DB9 /* RPGSkillBarViewController.m in Sources */,
 				2ACD023C1DFC88EB00068AAE /* RPGBattleController+RPGTournamentPresentationController.m in Sources */,
 				28184A161DF87EDE002EF22D /* RPGShopViewController.m in Sources */,
