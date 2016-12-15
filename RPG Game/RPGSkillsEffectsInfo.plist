@@ -49,7 +49,7 @@
 	<key>4</key>
 	<dict>
 		<key>duration</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Decreases defence of the enemy</string>
 		<key>name</key>
@@ -60,7 +60,7 @@
 	<key>3</key>
 	<dict>
 		<key>duration</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Decreases attack power of the enemy</string>
 		<key>name</key>
@@ -71,7 +71,7 @@
 	<key>2</key>
 	<dict>
 		<key>duration</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Increases defence of the personage</string>
 		<key>name</key>
@@ -82,7 +82,7 @@
 	<key>1</key>
 	<dict>
 		<key>duration</key>
-		<integer>2</integer>
+		<integer>3</integer>
 		<key>description</key>
 		<string>Increases attack power of the personage</string>
 		<key>name</key>
