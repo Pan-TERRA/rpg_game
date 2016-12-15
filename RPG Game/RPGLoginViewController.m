@@ -129,11 +129,6 @@
   }
 }
 
-- (IBAction)forgotPasswordAction:(UIButton *)aSender
-{
-  
-}
-
 - (IBAction)signupAction:(UIButton *)aSender
 {
   RPGRegistrationViewController *registrationViewController = [[[RPGRegistrationViewController alloc] init] autorelease];

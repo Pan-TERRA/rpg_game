@@ -168,20 +168,6 @@
                                                 <action selector="loginAction:" destination="-1" eventType="touchUpInside" id="vhi-91-fjM"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YdM-GY-RsC">
-                                            <rect key="frame" x="347" y="190" width="120" height="30"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="120" id="EHI-Vi-0rj"/>
-                                                <constraint firstAttribute="height" constant="30" id="HBU-1K-X4p"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="15"/>
-                                            <state key="normal" title="Forgot password?">
-                                                <color key="titleColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="forgotPasswordAction:" destination="-1" eventType="touchUpInside" id="8bu-GM-GSy"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -194,7 +180,6 @@
                                         <constraint firstItem="ICW-A7-Q3E" firstAttribute="height" secondItem="i7l-7H-KAr" secondAttribute="height" id="D1X-rh-O3N"/>
                                         <constraint firstAttribute="trailing" secondItem="JLe-Us-ytB" secondAttribute="trailing" id="EaF-ai-lw2"/>
                                         <constraint firstItem="YiU-3l-e5x" firstAttribute="top" secondItem="NxC-0c-a7a" secondAttribute="top" id="HNF-HX-t4r"/>
-                                        <constraint firstItem="YdM-GY-RsC" firstAttribute="trailing" secondItem="ICW-A7-Q3E" secondAttribute="trailing" id="PoU-Hv-PVf"/>
                                         <constraint firstItem="ICW-A7-Q3E" firstAttribute="trailing" secondItem="JLe-Us-ytB" secondAttribute="trailing" id="TRN-NJ-GKW"/>
                                         <constraint firstItem="3i9-nt-l1p" firstAttribute="centerY" secondItem="ICW-A7-Q3E" secondAttribute="centerY" id="ZYQ-cb-Hu4"/>
                                         <constraint firstItem="YiU-3l-e5x" firstAttribute="leading" secondItem="NxC-0c-a7a" secondAttribute="leading" id="a4h-t2-rlK"/>
@@ -205,20 +190,11 @@
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="leading" secondItem="NxC-0c-a7a" secondAttribute="leading" id="hAP-Bk-JQb"/>
                                         <constraint firstItem="i7l-7H-KAr" firstAttribute="leading" secondItem="JLe-Us-ytB" secondAttribute="leading" id="okl-PE-lpe"/>
                                         <constraint firstItem="JLe-Us-ytB" firstAttribute="top" secondItem="YiU-3l-e5x" secondAttribute="bottom" constant="20" id="pKR-lN-vag"/>
-                                        <constraint firstItem="YdM-GY-RsC" firstAttribute="top" secondItem="ICW-A7-Q3E" secondAttribute="bottom" constant="15" id="z9N-qR-u2c">
-                                            <variation key="heightClass=compact-widthClass=compact" constant="0.0"/>
-                                        </constraint>
                                         <constraint firstItem="ICW-A7-Q3E" firstAttribute="top" secondItem="i7l-7H-KAr" secondAttribute="top" id="zyR-hk-Yd6"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
                                             <exclude reference="h71-8g-2DP"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=compact-widthClass=compact">
-                                        <mask key="constraints">
-                                            <exclude reference="PoU-Hv-PVf"/>
-                                            <exclude reference="z9N-qR-u2c"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=regular">
