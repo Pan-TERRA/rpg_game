@@ -43,6 +43,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
   // State
 @property (nonatomic, assign, readwrite) RPGFriendsListState activeState;
 @property (nonatomic, assign, readwrite) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, assign, readwrite) IBOutlet UILabel *emptyFriendListLabel;
 
 @end
 
@@ -121,6 +122,7 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
 - (void)fetchFriends
 {
   [self setViewToWaitingForServerResponseState];
+  
   fetchFriendsCompletionHandler handler = ^void(RPGStatusCode statusCode, NSArray *friendsList)
   {
     switch (statusCode)
@@ -249,6 +251,11 @@ typedef void (^fetchFriendsCompletionHandler)(RPGStatusCode, NSArray<NSDictionar
 - (void)needUpdateFriendsList:(RPGFriendsTableViewController *)friendsTableViewController
 {
   [self fetchFriends];
+}
+
+- (void)friendsListIsEmpty:(BOOL)aFlag friendTableViewController:(RPGFriendsTableViewController *)friendTableViewController
+{
+  self.emptyFriendListLabel.hidden = !aFlag;
 }
 
 #pragma mark - Accessors

@@ -11,6 +11,7 @@
             <connections>
                 <outlet property="activityIndicator" destination="pCu-Z4-41y" id="Szh-rF-Ffa"/>
                 <outlet property="allFriendButton" destination="a38-10-RY4" id="hp1-Xp-ORd"/>
+                <outlet property="emptyFriendListLabel" destination="ktS-Uc-wzL" id="1mC-wu-xwV"/>
                 <outlet property="incomingRequestsButton" destination="L84-1V-gfN" id="24m-5m-UbG"/>
                 <outlet property="onlineFriendButton" destination="RGX-SC-SGC" id="UUH-XK-ihR"/>
                 <outlet property="outgoingRequestsButton" destination="NGL-dg-Gm8" id="IoS-Qf-JFv"/>
@@ -122,6 +123,15 @@
                     <rect key="frame" x="282" y="281" width="37" height="37"/>
                     <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                 </activityIndicatorView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Friends list is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktS-Uc-wzL">
+                    <rect key="frame" x="220" y="289" width="160" height="22"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="25"/>
+                    </variation>
+                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="0l3-hm-9vy"/>
@@ -135,7 +145,9 @@
                 <constraint firstItem="pCu-Z4-41y" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Jdv-aH-4T0"/>
                 <constraint firstAttribute="trailing" secondItem="svW-5R-EA5" secondAttribute="trailing" constant="8" id="To9-rr-axK"/>
                 <constraint firstItem="o08-zB-S8G" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="U7R-MY-HM6"/>
+                <constraint firstItem="ktS-Uc-wzL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="W4r-NR-gVA"/>
                 <constraint firstAttribute="bottom" secondItem="4UH-fg-Yhn" secondAttribute="bottom" constant="8" id="XsE-Mw-PPO"/>
+                <constraint firstItem="ktS-Uc-wzL" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yb6-7r-gbf"/>
                 <constraint firstItem="4UH-fg-Yhn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="Zww-Hz-NMy"/>
                 <constraint firstItem="HUA-nR-0TJ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="bLs-Q5-K1a"/>
                 <constraint firstAttribute="bottom" secondItem="svW-5R-EA5" secondAttribute="bottom" constant="8" id="cUy-bk-OlI"/>

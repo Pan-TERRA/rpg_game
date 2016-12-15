@@ -18,6 +18,7 @@
 @property (nonatomic, assign, readonly) RPGFriendsListState activeState;
 
 - (void)needUpdateFriendsList:(RPGFriendsTableViewController *)friendsTableViewController;
+- (void)friendsListIsEmpty:(BOOL)aFlag friendTableViewController:(RPGFriendsTableViewController *)friendTableViewController;
 
 @end
 

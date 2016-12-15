@@ -116,6 +116,16 @@ static CGFloat const sRPGFriendsTableViewControllerRowHeight = 115.0;
       break;
     }
   }
+  
+  if (numberOfRow == 0)
+  {
+    [self.delegate friendsListIsEmpty:YES friendTableViewController:self];
+  }
+  else
+  {
+    [self.delegate friendsListIsEmpty:NO friendTableViewController:self];
+  }
+  
   return numberOfRow;
 }
 
