@@ -245,38 +245,42 @@ static NSUInteger const kRPGQuestTableViewControllerIncomingQuestCellHeight = 10
 
 - (void)tableView:(UITableView *)aTableView didSelectRowAtIndexPath:(NSIndexPath *)anIndexPath
 {
-  RPGQuest *quest = nil;
-  NSInteger index = anIndexPath.row;
-  
-  switch (self.questListState)
+  if (!(self.questType == kRPGQuestTypeDuel
+        && self.questListState == kRPGQuestListTakeQuest))
   {
-    case kRPGQuestListTakeQuest:
+    RPGQuest *quest = nil;
+    NSInteger index = anIndexPath.row;
+    
+    switch (self.questListState)
     {
-      quest = self.takeQuestsMutableArray[index];
-      break;
+      case kRPGQuestListTakeQuest:
+      {
+        quest = self.takeQuestsMutableArray[index];
+        break;
+      }
+        
+      case kRPGQuestListInProgressQuest:
+      {
+        quest = self.inProgressQuestsMutableArray[index];
+        break;
+      }
+        
+      case kRPGQuestListDoneQuest:
+      {
+        quest = self.doneQuestsMutableArray[index];
+        break;
+      }
+        
+      default:
+      {
+        break;
+      }
     }
-      
-    case kRPGQuestListInProgressQuest:
+    
+    if (quest != nil)
     {
-      quest = self.inProgressQuestsMutableArray[index];
-      break;
+      [self.delegate showQuestViewWithQuest:quest];
     }
-      
-    case kRPGQuestListDoneQuest:
-    {
-      quest = self.doneQuestsMutableArray[index];
-      break;
-    }
-      
-    default:
-    {
-      break;
-    }
-  }
-  
-  if (quest != nil)
-  {
-    [self.delegate showQuestViewWithQuest:quest];
   }
 }
 
