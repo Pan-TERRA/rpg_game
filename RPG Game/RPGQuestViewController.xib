@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestViewController">
+            <connections>
+                <outlet property="bodyContainer" destination="usk-EK-IUP" id="R87-b3-HVI"/>
+                <outlet property="buttonContainer" destination="VrL-iM-XQj" id="vT6-Ml-ndS"/>
+                <outlet property="headerContainer" destination="WWs-qF-gcS" id="cfF-Mx-Nmu"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="table_item_bg" translatesAutoresizingMaskIntoConstraints="NO" id="PaD-1H-DSR">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wt5-ti-Qz1" userLabel="Top Resizable Container">
+                    <rect key="frame" x="55" y="0.0" width="626" height="25"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WWs-qF-gcS" userLabel="Header Container">
+                    <rect key="frame" x="55" y="25" width="626" height="35"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="CSf-e2-LYH">
+                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                        </constraint>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="usk-EK-IUP">
+                    <rect key="frame" x="55" y="70" width="626" height="265"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="V5d-3s-yMa" appends="YES" id="r6K-Sk-fha"/>
+                    </connections>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SLW-hy-czC" userLabel="Bottom Resizable Container">
+                    <rect key="frame" x="55" y="385" width="626" height="29"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VrL-iM-XQj" userLabel="Button Container">
+                    <rect key="frame" x="55" y="345" width="626" height="40"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="z4v-wW-Z3Z">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="WWs-qF-gcS" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9G8-ao-g6a"/>
+                <constraint firstItem="VrL-iM-XQj" firstAttribute="width" secondItem="WWs-qF-gcS" secondAttribute="width" id="A1F-fp-VNp"/>
+                <constraint firstItem="usk-EK-IUP" firstAttribute="leading" secondItem="WWs-qF-gcS" secondAttribute="leading" id="CCJ-cu-8I0"/>
+                <constraint firstItem="wt5-ti-Qz1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Ebh-MO-5es"/>
+                <constraint firstAttribute="bottom" secondItem="SLW-hy-czC" secondAttribute="bottom" id="I3L-xl-nFK"/>
+                <constraint firstItem="wt5-ti-Qz1" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IE4-PH-qFE"/>
+                <constraint firstItem="WWs-qF-gcS" firstAttribute="top" secondItem="wt5-ti-Qz1" secondAttribute="bottom" id="Irs-A3-rnz"/>
+                <constraint firstItem="PaD-1H-DSR" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Kjv-3l-fdm"/>
+                <constraint firstAttribute="bottom" secondItem="PaD-1H-DSR" secondAttribute="bottom" id="Ld5-VM-tgi"/>
+                <constraint firstItem="PaD-1H-DSR" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="O6v-Yu-eVc"/>
+                <constraint firstItem="WWs-qF-gcS" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="c7h-ak-tS7"/>
+                <constraint firstItem="SLW-hy-czC" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dhs-Bd-vMD"/>
+                <constraint firstItem="SLW-hy-czC" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.07" id="h7r-W6-Qpq"/>
+                <constraint firstAttribute="trailing" secondItem="PaD-1H-DSR" secondAttribute="trailing" id="hXg-JP-CHq"/>
+                <constraint firstItem="VrL-iM-XQj" firstAttribute="leading" secondItem="WWs-qF-gcS" secondAttribute="leading" id="hf2-ah-Lbn"/>
+                <constraint firstItem="VrL-iM-XQj" firstAttribute="top" secondItem="usk-EK-IUP" secondAttribute="bottom" constant="10" id="hfu-Gg-h2H"/>
+                <constraint firstItem="WWs-qF-gcS" firstAttribute="width" secondItem="wt5-ti-Qz1" secondAttribute="width" id="hot-Hv-Nrd"/>
+                <constraint firstItem="wt5-ti-Qz1" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.06" id="kQw-0n-xQn"/>
+                <constraint firstItem="SLW-hy-czC" firstAttribute="top" secondItem="VrL-iM-XQj" secondAttribute="bottom" id="lcG-hN-p9i"/>
+                <constraint firstItem="usk-EK-IUP" firstAttribute="top" secondItem="WWs-qF-gcS" secondAttribute="bottom" constant="10" id="mDD-dX-lNT"/>
+                <constraint firstItem="SLW-hy-czC" firstAttribute="width" secondItem="wt5-ti-Qz1" secondAttribute="width" id="n1D-Dk-Ty6"/>
+                <constraint firstItem="usk-EK-IUP" firstAttribute="width" secondItem="WWs-qF-gcS" secondAttribute="width" id="xeW-l7-6MV"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+        </view>
+        <tapGestureRecognizer id="V5d-3s-yMa">
+            <connections>
+                <action selector="handleTapGesture:" destination="-1" id="Eb3-Wm-P0E"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="table_item_bg" width="551" height="150"/>
+    </resources>
+</document>

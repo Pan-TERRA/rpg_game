@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>8</key>
+	<dict>
+		<key>duration</key>
+		<integer>1</integer>
+		<key>description</key>
+		<string>Removes all negative effects from personage</string>
+		<key>name</key>
+		<string>Protection</string>
+		<key>imageName</key>
+		<string>skill_effect_8</string>
+	</dict>
+	<key>7</key>
+	<dict>
+		<key>duration</key>
+		<integer>1</integer>
+		<key>description</key>
+		<string>Prevent enemy from moving</string>
+		<key>name</key>
+		<string>Stun</string>
+		<key>imageName</key>
+		<string>skill_effect_7</string>
+	</dict>
+	<key>6</key>
+	<dict>
+		<key>duration</key>
+		<integer>2</integer>
+		<key>description</key>
+		<string>Heals personage over time</string>
+		<key>name</key>
+		<string>Healing</string>
+		<key>imageName</key>
+		<string>skill_effect_6</string>
+	</dict>
+	<key>5</key>
+	<dict>
+		<key>duration</key>
+		<integer>2</integer>
+		<key>description</key>
+		<string>Deals damage over time</string>
+		<key>name</key>
+		<string>Continious Damage</string>
+		<key>imageName</key>
+		<string>skill_effect_5</string>
+	</dict>
+	<key>4</key>
+	<dict>
+		<key>duration</key>
+		<integer>3</integer>
+		<key>description</key>
+		<string>Decreases defence of the enemy</string>
+		<key>name</key>
+		<string>Defence Break</string>
+		<key>imageName</key>
+		<string>skill_effect_4</string>
+	</dict>
+	<key>3</key>
+	<dict>
+		<key>duration</key>
+		<integer>3</integer>
+		<key>description</key>
+		<string>Decreases attack power of the enemy</string>
+		<key>name</key>
+		<string>Attack Break</string>
+		<key>imageName</key>
+		<string>skill_effect_3</string>
+	</dict>
+	<key>2</key>
+	<dict>
+		<key>duration</key>
+		<integer>3</integer>
+		<key>description</key>
+		<string>Increases defence of the personage</string>
+		<key>name</key>
+		<string>Increase Defence</string>
+		<key>imageName</key>
+		<string>skill_effect_2</string>
+	</dict>
+	<key>1</key>
+	<dict>
+		<key>duration</key>
+		<integer>3</integer>
+		<key>description</key>
+		<string>Increases attack power of the personage</string>
+		<key>name</key>
+		<string>Increase Attack</string>
+		<key>imageName</key>
+		<string>skill_effect_1</string>
+	</dict>
+</dict>
+</plist>

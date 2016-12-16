@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGWaitingViewController">
+            <connections>
+                <outlet property="messageLabel" destination="ngF-nc-JZ9" id="pQm-tx-Eto"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhI-bc-UU4" userLabel="Modal View Container">
+                    <rect key="frame" x="150" y="229" width="300" height="143"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Label Item Dark Brown" translatesAutoresizingMaskIntoConstraints="NO" id="Kaf-ti-pp5" userLabel="Modal View Background">
+                            <rect key="frame" x="0.0" y="0.0" width="300" height="143"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ngF-nc-JZ9">
+                            <rect key="frame" x="100" y="25" width="101" height="33"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="28"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqS-XL-gYU">
+                            <rect key="frame" x="100" y="78" width="100" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="100" id="6z4-mD-Sq5"/>
+                                <constraint firstAttribute="height" constant="40" id="BXf-N1-MGH"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                            <state key="normal" title="Cancel" backgroundImage="main_button_inactive">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="back:" destination="-1" eventType="touchUpInside" id="0H7-Eg-Vev"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="300" id="EkK-rf-cva"/>
+                        <constraint firstAttribute="trailing" secondItem="Kaf-ti-pp5" secondAttribute="trailing" id="Go4-aN-3aE"/>
+                        <constraint firstAttribute="bottom" secondItem="TqS-XL-gYU" secondAttribute="bottom" constant="25" id="RAd-XJ-JxC"/>
+                        <constraint firstItem="ngF-nc-JZ9" firstAttribute="centerX" secondItem="RhI-bc-UU4" secondAttribute="centerX" id="amy-wt-aRM"/>
+                        <constraint firstItem="TqS-XL-gYU" firstAttribute="centerX" secondItem="RhI-bc-UU4" secondAttribute="centerX" id="bc1-Ry-v3u"/>
+                        <constraint firstItem="Kaf-ti-pp5" firstAttribute="leading" secondItem="RhI-bc-UU4" secondAttribute="leading" id="cUh-Fg-usz"/>
+                        <constraint firstItem="ngF-nc-JZ9" firstAttribute="top" secondItem="RhI-bc-UU4" secondAttribute="top" constant="25" id="f9t-YA-inR"/>
+                        <constraint firstItem="TqS-XL-gYU" firstAttribute="top" secondItem="ngF-nc-JZ9" secondAttribute="bottom" constant="20" id="ja5-xb-HsW"/>
+                        <constraint firstAttribute="bottom" secondItem="Kaf-ti-pp5" secondAttribute="bottom" id="m9i-67-hL3"/>
+                        <constraint firstItem="Kaf-ti-pp5" firstAttribute="top" secondItem="RhI-bc-UU4" secondAttribute="top" id="vYa-l7-9CD"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="RhI-bc-UU4" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WR1-pv-qbJ"/>
+                <constraint firstItem="RhI-bc-UU4" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="ZJm-FO-jh6"/>
+            </constraints>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="color" keyPath="backgroundColor">
+                    <color key="value" white="0.20000000000000001" alpha="0.69999999999999996" colorSpace="calibratedWhite"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+        </view>
+    </objects>
+    <resources>
+        <image name="Label Item Dark Brown" width="268" height="50"/>
+        <image name="main_button_inactive" width="275" height="137"/>
+    </resources>
+</document>

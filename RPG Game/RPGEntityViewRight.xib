@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGEntityViewController">
+            <connections>
+                <outlet property="entityHPBar" destination="ajv-bF-Rht" id="CIo-og-W8E"/>
+                <outlet property="entityHPLabel" destination="95B-p6-Tr4" id="Ivw-Oy-VWF"/>
+                <outlet property="entityLevelLabel" destination="cWJ-Rp-vYW" id="a9a-0i-5q1"/>
+                <outlet property="entityLevelView" destination="aKR-dE-V5K" id="sjw-bG-fih"/>
+                <outlet property="entityNickName" destination="8sg-Do-ttx" id="P7G-vb-uXq"/>
+                <outlet property="skillsEffectsCollectionView" destination="doW-3W-Glt" id="Clf-wx-Nru"/>
+                <outlet property="view" destination="iN0-l3-epB" id="YTv-E1-V65"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="220" height="113"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Player 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sg-Do-ttx" userLabel="Opponent Nick Name">
+                    <rect key="frame" x="127" y="0.0" width="93" height="31"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="27"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="29"/>
+                    </variation>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UJb-Hi-6Nd" userLabel="Opponent HP bar">
+                    <rect key="frame" x="44" y="31" width="176" height="40"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bar_right" translatesAutoresizingMaskIntoConstraints="NO" id="oFJ-bN-afo">
+                            <rect key="frame" x="0.0" y="0.0" width="176" height="40"/>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMM-mq-loq" userLabel="Progress Bar">
+                            <rect key="frame" x="20" y="8" width="109" height="24"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ajv-bF-Rht" customClass="RPGProgressBarView">
+                                    <rect key="frame" x="0.0" y="0.0" width="109" height="24"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="align">
+                                            <integer key="value" value="0"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="ajv-bF-Rht" firstAttribute="top" secondItem="QMM-mq-loq" secondAttribute="top" id="9br-jZ-Bz7"/>
+                                <constraint firstItem="ajv-bF-Rht" firstAttribute="leading" secondItem="QMM-mq-loq" secondAttribute="leading" id="IAp-YZ-zWu"/>
+                                <constraint firstAttribute="bottom" secondItem="ajv-bF-Rht" secondAttribute="bottom" id="Pba-tA-rv2"/>
+                                <constraint firstAttribute="trailing" secondItem="ajv-bF-Rht" secondAttribute="trailing" id="Yy5-jd-LXy"/>
+                            </constraints>
+                        </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100/100" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95B-p6-Tr4">
+                            <rect key="frame" x="63" y="10" width="56" height="20"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="17"/>
+                            <color key="textColor" red="1" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                            <variation key="heightClass=regular-widthClass=regular">
+                                <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                            </variation>
+                        </label>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hp_icon" translatesAutoresizingMaskIntoConstraints="NO" id="cPV-Pr-TZg" userLabel="bar_icon">
+                            <rect key="frame" x="144" y="8" width="24" height="24"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="cPV-Pr-TZg" secondAttribute="height" multiplier="1:1" id="avl-EG-WUu"/>
+                            </constraints>
+                        </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aKR-dE-V5K" userLabel="Level View">
+                            <rect key="frame" x="136" y="25" width="15" height="15"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWJ-Rp-vYW">
+                                    <rect key="frame" x="1" y="-1" width="14" height="17"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="14"/>
+                                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="16"/>
+                                    </variation>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="1" green="0.90128232279999998" blue="0.27193265329999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="cWJ-Rp-vYW" firstAttribute="centerX" secondItem="aKR-dE-V5K" secondAttribute="centerX" id="Cbc-Gg-Mfj"/>
+                                <constraint firstItem="cWJ-Rp-vYW" firstAttribute="centerY" secondItem="aKR-dE-V5K" secondAttribute="centerY" id="EKz-YV-kzv"/>
+                                <constraint firstAttribute="width" secondItem="aKR-dE-V5K" secondAttribute="height" multiplier="1:1" id="xXU-ic-29A"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="oFJ-bN-afo" secondAttribute="trailing" id="0fo-E6-4GE"/>
+                        <constraint firstAttribute="height" constant="40" id="7cy-22-HVm">
+                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                        </constraint>
+                        <constraint firstItem="aKR-dE-V5K" firstAttribute="bottom" secondItem="cPV-Pr-TZg" secondAttribute="bottom" constant="8" id="C9V-Ob-TeZ"/>
+                        <constraint firstItem="cPV-Pr-TZg" firstAttribute="leading" secondItem="QMM-mq-loq" secondAttribute="trailing" constant="15" id="GxA-cq-E7r"/>
+                        <constraint firstItem="aKR-dE-V5K" firstAttribute="height" secondItem="UJb-Hi-6Nd" secondAttribute="height" multiplier="0.38" id="HSK-Fy-qvP"/>
+                        <constraint firstItem="cPV-Pr-TZg" firstAttribute="height" secondItem="QMM-mq-loq" secondAttribute="height" id="KlX-j6-Xki"/>
+                        <constraint firstAttribute="trailing" secondItem="cPV-Pr-TZg" secondAttribute="trailing" constant="8" id="P5k-GH-pTA">
+                            <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                        </constraint>
+                        <constraint firstItem="QMM-mq-loq" firstAttribute="leading" secondItem="UJb-Hi-6Nd" secondAttribute="leading" constant="20" id="PtX-aS-m2s"/>
+                        <constraint firstItem="ajv-bF-Rht" firstAttribute="height" secondItem="UJb-Hi-6Nd" secondAttribute="height" multiplier="0.75" id="Srd-IV-yWH"/>
+                        <constraint firstItem="oFJ-bN-afo" firstAttribute="leading" secondItem="UJb-Hi-6Nd" secondAttribute="leading" id="SuW-gU-DIB"/>
+                        <constraint firstAttribute="width" secondItem="UJb-Hi-6Nd" secondAttribute="height" multiplier="22:5" id="aOc-td-hbs"/>
+                        <constraint firstItem="aKR-dE-V5K" firstAttribute="leading" secondItem="cPV-Pr-TZg" secondAttribute="leading" constant="-8" id="dje-Yr-wfJ"/>
+                        <constraint firstAttribute="bottom" secondItem="oFJ-bN-afo" secondAttribute="bottom" id="ib7-7O-RMG"/>
+                        <constraint firstItem="cPV-Pr-TZg" firstAttribute="height" secondItem="UJb-Hi-6Nd" secondAttribute="height" multiplier="0.6" id="jtS-UR-MGD"/>
+                        <constraint firstItem="QMM-mq-loq" firstAttribute="centerY" secondItem="UJb-Hi-6Nd" secondAttribute="centerY" id="l4A-aY-8QO"/>
+                        <constraint firstItem="95B-p6-Tr4" firstAttribute="centerY" secondItem="QMM-mq-loq" secondAttribute="centerY" id="o2G-Xf-S82"/>
+                        <constraint firstItem="cPV-Pr-TZg" firstAttribute="centerY" secondItem="UJb-Hi-6Nd" secondAttribute="centerY" id="of8-pF-2cd"/>
+                        <constraint firstItem="95B-p6-Tr4" firstAttribute="trailing" secondItem="QMM-mq-loq" secondAttribute="trailing" constant="-10" id="pxG-L8-kPk"/>
+                        <constraint firstItem="oFJ-bN-afo" firstAttribute="top" secondItem="UJb-Hi-6Nd" secondAttribute="top" id="y0q-pJ-tpf"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="Srd-IV-yWH"/>
+                        </mask>
+                    </variation>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="doW-3W-Glt">
+                    <rect key="frame" x="62" y="71" width="158" height="26"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="doW-3W-Glt" secondAttribute="height" multiplier="6:1" id="SvS-at-2E6"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="n32-Nx-In0">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="fn0-R1-Dfr"/>
+                        <outlet property="delegate" destination="-1" id="FZr-Ot-3Y4"/>
+                        <outletCollection property="gestureRecognizers" destination="MXz-Yf-SUL" appends="YES" id="oKT-Jf-Zzd"/>
+                    </connections>
+                </collectionView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="UJb-Hi-6Nd" firstAttribute="top" secondItem="8sg-Do-ttx" secondAttribute="bottom" id="0y2-55-PUG"/>
+                <constraint firstItem="doW-3W-Glt" firstAttribute="trailing" secondItem="UJb-Hi-6Nd" secondAttribute="trailing" id="1tb-u6-fEz"/>
+                <constraint firstItem="doW-3W-Glt" firstAttribute="top" secondItem="UJb-Hi-6Nd" secondAttribute="bottom" id="TfS-NJ-irG"/>
+                <constraint firstAttribute="trailing" secondItem="8sg-Do-ttx" secondAttribute="trailing" id="WKO-BQ-HJo"/>
+                <constraint firstItem="8sg-Do-ttx" firstAttribute="trailing" secondItem="UJb-Hi-6Nd" secondAttribute="trailing" id="XO7-u4-f7K"/>
+                <constraint firstItem="8sg-Do-ttx" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Yk1-P5-jkc"/>
+                <constraint firstItem="doW-3W-Glt" firstAttribute="width" secondItem="UJb-Hi-6Nd" secondAttribute="width" multiplier="0.9" id="vNV-si-vrx"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="25" y="238.5"/>
+        </view>
+        <tapGestureRecognizer id="MXz-Yf-SUL">
+            <connections>
+                <action selector="handleTapGesture:" destination="-1" id="CfP-N9-vLt"/>
+            </connections>
+        </tapGestureRecognizer>
+    </objects>
+    <resources>
+        <image name="bar_right" width="519" height="124"/>
+        <image name="hp_icon" width="40" height="40"/>
+    </resources>
+</document>

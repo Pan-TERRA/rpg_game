@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestListViewController">
+            <connections>
+                <outlet property="activityIndicator" destination="haj-qR-g3v" id="dNB-zM-vDd"/>
+                <outlet property="doneQuestListButton" destination="L4V-zu-eOI" id="XTX-oa-pbp"/>
+                <outlet property="inProgressQuestListButton" destination="Cjb-T6-vMT" id="XEB-Ei-MEL"/>
+                <outlet property="messageLabel" destination="R80-Hi-Pm3" id="CqU-l3-fbL"/>
+                <outlet property="reviewQuestButton" destination="Rp1-Zn-0ou" id="6hu-j8-h1x"/>
+                <outlet property="tableView" destination="u7D-Ey-t6y" id="kgl-KM-wXn"/>
+                <outlet property="takeQuestListButton" destination="Sly-hB-P6D" id="epa-tM-DP4"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Menu Background" translatesAutoresizingMaskIntoConstraints="NO" id="k3T-zf-arz" userLabel="Quest List Background">
+                    <rect key="frame" x="0.0" y="0.0" width="736" height="414"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5tF-mW-v2f">
+                    <rect key="frame" x="681" y="359" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="5tF-mW-v2f" secondAttribute="height" multiplier="1:1" id="cRp-9B-Nlh"/>
+                        <constraint firstAttribute="height" constant="40" id="vW7-CZ-8P1">
+                            <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                        </constraint>
+                    </constraints>
+                    <state key="normal" backgroundImage="back_icon_inactive"/>
+                    <connections>
+                        <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="l89-rY-6WR"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xu-Ph-Wpt" userLabel="Table Control Container">
+                    <rect key="frame" x="110" y="10" width="516" height="65"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Sly-hB-P6D">
+                            <rect key="frame" x="-9" y="0.0" width="122" height="65"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Take Quests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="1ap-WZ-CYY"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Rp1-Zn-0ou">
+                            <rect key="frame" x="403" y="0.0" width="122" height="65"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Review Quests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="uFM-1w-FZH"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="L4V-zu-eOI">
+                            <rect key="frame" x="268" y="0.0" width="122" height="65"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="Done Quests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="RrI-gD-jp4"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Cjb-T6-vMT">
+                            <rect key="frame" x="126" y="0.0" width="122" height="65"/>
+                            <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="18"/>
+                            <inset key="contentEdgeInsets" minX="3" minY="3" maxX="3" maxY="3"/>
+                            <state key="normal" title="In progress Quests">
+                                <color key="titleColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="viewStateButtonOnClick:" destination="-1" eventType="touchUpInside" id="wJ9-P0-iyS"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="0.8:4" id="BI0-5O-hON"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="2.9:4" id="DIU-xt-Xve"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="7.2:4" id="LQo-8a-Kjc"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerX" secondItem="7xu-Ph-Wpt" secondAttribute="centerX" multiplier="5.1:4" id="SUL-uV-7sz"/>
+                        <constraint firstAttribute="height" constant="65" id="UDW-IE-AcB"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="width" secondItem="L4V-zu-eOI" secondAttribute="width" id="Y8F-jo-zBq"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="YDG-Ds-8jc"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="height" secondItem="Cjb-T6-vMT" secondAttribute="height" id="aqE-3Y-aln"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="width" secondItem="7xu-Ph-Wpt" secondAttribute="width" multiplier="0.235" id="c2G-iB-GRl"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="width" secondItem="Sly-hB-P6D" secondAttribute="width" id="daz-Lo-QPb"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="height" secondItem="L4V-zu-eOI" secondAttribute="height" id="e2p-xW-aWu"/>
+                        <constraint firstItem="Cjb-T6-vMT" firstAttribute="height" secondItem="Sly-hB-P6D" secondAttribute="height" id="frX-Ph-R6y"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="kq3-1s-5LP"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="log-QO-hvL"/>
+                        <constraint firstItem="Sly-hB-P6D" firstAttribute="height" secondItem="7xu-Ph-Wpt" secondAttribute="height" id="mm5-S5-Fex"/>
+                        <constraint firstItem="L4V-zu-eOI" firstAttribute="width" secondItem="Cjb-T6-vMT" secondAttribute="width" id="y2I-AI-O06"/>
+                        <constraint firstItem="Rp1-Zn-0ou" firstAttribute="centerY" secondItem="7xu-Ph-Wpt" secondAttribute="centerY" id="zAT-7a-k7H"/>
+                    </constraints>
+                </view>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="haj-qR-g3v">
+                    <rect key="frame" x="348" y="187" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="haj-qR-g3v" secondAttribute="height" multiplier="1:1" id="COr-5N-s3J"/>
+                        <constraint firstAttribute="width" constant="40" id="a1G-8K-HOY"/>
+                    </constraints>
+                </activityIndicatorView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="u7D-Ey-t6y">
+                    <rect key="frame" x="55" y="85" width="626" height="269"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </tableView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quest list is empty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R80-Hi-Pm3">
+                    <rect key="frame" x="295" y="196" width="147" height="22"/>
+                    <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="19"/>
+                    <color key="textColor" red="0.4079727803" green="0.2119861069" blue="0.20364340789999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                    <variation key="heightClass=regular-widthClass=regular">
+                        <fontDescription key="fontDescription" name="Cochin" family="Cochin" pointSize="25"/>
+                    </variation>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="0.35763221150000002" green="0.32512930420000002" blue="0.26062445880000001" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Bi-oE-ZxA"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.85" id="74q-CS-hmo"/>
+                <constraint firstAttribute="bottom" secondItem="5tF-mW-v2f" secondAttribute="bottom" constant="15" id="9PY-fB-QAB">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="9sD-de-yoT"/>
+                <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="CjS-j8-Vbk"/>
+                <constraint firstItem="k3T-zf-arz" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="E8X-U2-51Y"/>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="Gks-gW-m2n"/>
+                <constraint firstAttribute="trailing" secondItem="k3T-zf-arz" secondAttribute="trailing" id="QfU-8N-kln"/>
+                <constraint firstItem="haj-qR-g3v" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Yjh-1Q-Afj"/>
+                <constraint firstItem="R80-Hi-Pm3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Ypa-xb-unG"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="top" secondItem="7xu-Ph-Wpt" secondAttribute="bottom" constant="10" id="k2c-eA-8bl"/>
+                <constraint firstAttribute="trailing" secondItem="5tF-mW-v2f" secondAttribute="trailing" constant="15" id="pP6-qO-mer">
+                    <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="k3T-zf-arz" secondAttribute="bottom" id="r4E-ve-Skk"/>
+                <constraint firstItem="haj-qR-g3v" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="swj-mT-RbD"/>
+                <constraint firstItem="7xu-Ph-Wpt" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.7" id="ugz-09-8i4"/>
+                <constraint firstItem="u7D-Ey-t6y" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="x8V-kO-MPp"/>
+                <constraint firstItem="5tF-mW-v2f" firstAttribute="top" secondItem="u7D-Ey-t6y" secondAttribute="bottom" constant="5" id="zDn-da-R3F"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Menu Background" width="501" height="310"/>
+        <image name="back_icon_inactive" width="40" height="40"/>
+    </resources>
+</document>

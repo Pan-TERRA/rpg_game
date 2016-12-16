@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RPGQuestProofImageViewController">
+            <connections>
+                <outlet property="bottomImageViewConstraint" destination="Eyb-Ty-2Li" id="GEu-3q-aNi"/>
+                <outlet property="leadingImageViewConstraint" destination="b6i-9F-8e0" id="uPn-Qr-nrW"/>
+                <outlet property="proofImageView" destination="7RI-nE-XDX" id="Njr-7c-JsJ"/>
+                <outlet property="topImageViewConstraint" destination="qQE-CN-Qlt" id="NwW-go-lsQ"/>
+                <outlet property="trailingImageViewConstraint" destination="vJ1-Ek-wBj" id="t92-GI-knl"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="7RI-nE-XDX">
+                    <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
+                </imageView>
+                <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V1y-z2-CQS">
+                    <rect key="frame" x="0.0" y="250" width="568" height="70"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HfM-cv-yLh">
+                            <rect key="frame" x="478" y="20" width="70" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="70" id="Vhm-JG-6uh"/>
+                                <constraint firstAttribute="height" constant="30" id="XNG-fi-KbF"/>
+                            </constraints>
+                            <state key="normal" title="Back">
+                                <color key="titleColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            </state>
+                            <connections>
+                                <action selector="backButtonOnClicked:" destination="-1" eventType="touchUpInside" id="lVz-Lj-YIk"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="HfM-cv-yLh" secondAttribute="bottom" constant="20" id="16H-Rj-ToM"/>
+                        <constraint firstAttribute="trailing" secondItem="HfM-cv-yLh" secondAttribute="trailing" constant="20" id="izc-vY-SZO"/>
+                        <constraint firstAttribute="height" constant="70" id="z5d-Eu-Hn5"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="7RI-nE-XDX" secondAttribute="bottom" id="Eyb-Ty-2Li"/>
+                <constraint firstAttribute="trailing" secondItem="V1y-z2-CQS" secondAttribute="trailing" id="H9G-Wh-Zff"/>
+                <constraint firstItem="V1y-z2-CQS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="NTw-dN-cCK"/>
+                <constraint firstItem="7RI-nE-XDX" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="b6i-9F-8e0"/>
+                <constraint firstAttribute="bottom" secondItem="V1y-z2-CQS" secondAttribute="bottom" id="mk3-NF-sSI"/>
+                <constraint firstItem="7RI-nE-XDX" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qQE-CN-Qlt"/>
+                <constraint firstAttribute="trailing" secondItem="7RI-nE-XDX" secondAttribute="trailing" id="vJ1-Ek-wBj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+        </view>
+    </objects>
+</document>
